@@ -12,9 +12,8 @@
   * www.slack.com
   * Create a slack account.
   * We will use this for communications between the group outside of work hours. Hell, even during.
-* **AT THIS POINT EMAIL ME THE FOLLOWING**
+* **AT THIS POINT USE SLACK AND MESSAGE ME THE FOLLOWING**
   * Github username
-  * The email I receive this from will be the one I invite you to slack with!
 * [GIT](https://git-scm.com/downloads)
 * [Enthuware](http://www.enthuware.com/)
   * Download and setup enthuware for 1Z0-808 JA+ V8
