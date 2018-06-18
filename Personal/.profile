@@ -8,7 +8,8 @@ VVVVVVVVVVVVVVVVVVVVVVVVVVV
     vvvv  |  ~  | vvvv
           |_____|
   |                     |
-  |__   __veggies__   __|
+  |_&   __veggies__   ^_|
   | |   |         |   | |  
--- There's vegetables on the dinner table.
+"There's vegetables on the dinner table."--&
+"Where's the door?" --^
 
