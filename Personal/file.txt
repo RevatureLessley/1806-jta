@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 I is in your file, changin your stuffs
 Random file
 with random
 stuff
-
-
-Please break the things this time.
-=======
-MERGE CONFLICT
->>>>>>> 12ac2a4e279478efedb5eecb96b749fc98f589ea
