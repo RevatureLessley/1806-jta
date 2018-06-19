@@ -34,7 +34,12 @@ public class Driver {
 		s = (short)l;
 		l = s;
 		
+		c = (char)s;
+		c = (char)i;
+		c = (char)b;
 		
+		f = (float)d;
+		d = f;
 		
 	}
 
