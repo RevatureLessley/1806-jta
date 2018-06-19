@@ -20,5 +20,13 @@ public class Account
 
 	public String getName() {
 		return Name;
+	}
+
+	public String getuName() {
+		return uName;
+	}
+
+	public String getuPass() {
+		return uPass;
 	}	
 }

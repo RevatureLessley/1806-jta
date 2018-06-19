@@ -73,7 +73,7 @@ public class Launch
 {
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
-	ArrayList<Player> players = new ArrayList();
+	ArrayList<Player> players = new ArrayList<Player>();
 	public static void main (String[] args)
 	{
 		Launch pgm = new Launch();
@@ -110,8 +110,16 @@ public class Launch
 	
 	public void login(Launch pgm)
 	{
+		Player log = null;
 		System.out.print("Input Username: ");
 		String tempUname = pgm.in.next();
+		for(Player p: pgm.players)
+		{
+			if(p.getuName().equals(tempUname))
+			{
+				
+			}
+		}
 	}
 	
 	public void newAccount(Launch pgm)

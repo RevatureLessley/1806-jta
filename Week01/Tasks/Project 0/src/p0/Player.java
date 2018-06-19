@@ -1,6 +1,5 @@
 package p0;
 
-//making a small change to test if it's updating properly
 public class Player extends Account
 {
 	private int accountBalance;
