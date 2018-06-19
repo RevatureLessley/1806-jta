@@ -4,36 +4,40 @@ public class Item {
 
     protected String name;
     protected int value;
+    protected boolean cannotSell;
     protected String description;
 
     public Item(String name, int value, String description) {
 	this.name = name;
 	this.value = value;
 	this.description = description;
+	this.cannotSell = false;
+    }
+
+    public Item(String name, int value, String description, boolean canSell) {
+	this.name = name;
+	this.value = value;
+	this.description = description;
+	this.cannotSell = canSell;
     }
 
     public String getName() {
-
 	return this.name;
     }
 
     public void setName(String name) {
-
 	this.name = name;
     }
 
     public int getValue() {
-
 	return this.value;
     }
 
     public void setValue(int value) {
-
 	this.value = value;
     }
 
     public String getDescription() {
-
 	return this.description;
     }
 
@@ -43,5 +47,10 @@ public class Item {
     
     public String use() {
 	return "Nothing happened.\n";
+    }
+
+    @Override
+    public String toString() {
+	return "_";
     }
 }

@@ -9,4 +9,9 @@ public class NoItem extends Item {
     public NoItem() {
 	super("@", 0, "This is not an item.");
     }
+
+    @Override
+    public String toString() {
+	return "@";
+    }
 }

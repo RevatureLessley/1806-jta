@@ -1,10 +1,13 @@
 package projectzero.entities;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import projectzero.entities.Inventory;
 import projectzero.entities.StockItem;
 import projectzero.entities.NoItem;
+
+import projectzero.utilities.Printing;
 
 public class VendingMachine {
 
@@ -97,5 +100,35 @@ public class VendingMachine {
 
 	return this.adminName;
     }
+
+    public Inventory getInventory() {
+	return this.inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+	this.inventory = inventory;
+    }
     
+   @Override
+   public String toString() {
+       String machineName = Printing.paddedString(this.vendingMachineName, 20);
+       String adminName = Printing.paddedString(this.adminName, 20);
+       ArrayList<String> itemIcons = new ArrayList<String>();
+
+       for (StockItem stockItem : this.getInventory().getInventory().values()) {
+	   String itemIcon = stockItem.getItem().toString();
+	   itemIcons.add(Printing.paddedString(itemIcon, 3));
+       }
+       
+       String printMachine = "=====================================\n"
+	                   + "=======[" + machineName +  "]========\n"
+	                   + "=======[" + adminName +    "]========\n"
+	                   + "=====================================\n"
+	   + "========    A   B   C   D   =========\n";
+       
+       for (int i = 1; i < 6; i++) {
+	   printMachine += "======== " + i + "  " +  "=========\n";
+	   }
+       return printMachine;
+   }
 }
