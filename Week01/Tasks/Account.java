@@ -13,4 +13,8 @@ public /*abstract*/ class Account {
 	public void addAttribute(AccountAttribute aa) {
 		attributes.add(aa);
 	}
+
+	public void print(){
+		attributes.stream().forEach(a->a.print());
+	}
 }

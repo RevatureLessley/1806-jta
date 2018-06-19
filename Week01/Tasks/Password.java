@@ -8,8 +8,9 @@ public class Password extends AccountAttribute {
 		super(a);
 		password = String.valueOf(console.readPassword("password: "));
 	}
-
-	public String get() {
-		return password;
+	
+	@Override
+	public void print() {
+		System.out.println(password);
 	}
 }

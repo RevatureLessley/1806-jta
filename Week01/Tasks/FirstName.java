@@ -7,8 +7,9 @@ public class FirstName extends AccountAttribute {
 		super(a);
 		firstname = console.readLine("firstname: ");
 	}
-
-	public String get() {
-		return firstname;
+	
+	@Override
+	public void print() {
+		System.out.println(firstname);
 	}
 }

@@ -8,7 +8,8 @@ public class Username extends AccountAttribute {
 		username = console.readLine("username: ");
 	}
 
-	public String get() {
-		return username;
+	@Override
+	public void print() {
+		System.out.println(username);
 	}
 }

@@ -6,4 +6,6 @@ public abstract class AccountAttribute {
 	AccountAttribute(Account a) {
 		a.addAttribute(this);
 	}
+
+	abstract void print();
 }
