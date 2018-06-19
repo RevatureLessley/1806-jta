@@ -5,9 +5,6 @@ public class FirstName extends AccountAttribute {
 
 	FirstName(Account a) {
 		super(a);
-	}
-
-	public void askUser() {
 		firstname = console.readLine("firstname: ");
 	}
 

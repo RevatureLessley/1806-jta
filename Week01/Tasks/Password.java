@@ -6,9 +6,6 @@ public class Password extends AccountAttribute {
 
 	Password(Account a) {
 		super(a);
-	}
-
-	public void askUser() {
 		password = String.valueOf(console.readPassword("password: "));
 	}
 
