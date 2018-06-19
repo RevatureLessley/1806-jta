@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Username extends AccountDetails {
+public class Username extends AccountAttribute {
 	private String username;
 
 	Username() {

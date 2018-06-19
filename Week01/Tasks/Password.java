@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Password extends AccountDetails {
+public class Password extends AccountAttribute {
 	// This class needs to be secured.
 	private String password;
 	Password() {
