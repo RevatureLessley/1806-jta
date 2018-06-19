@@ -1,0 +1,47 @@
+package projectzero.entities;
+
+public class Item {
+
+    private String name;
+    private int value;
+    private String description;
+
+    public Item(String name, int value, String description) {
+	this.name = name;
+	this.value = value;
+	this.description = description;
+    }
+
+    public String getName() {
+
+	return this.name;
+    }
+
+    public void setName(String name) {
+
+	this.name = name;
+    }
+
+    public int getValue() {
+
+	return this.value;
+    }
+
+    public void setValue(int value) {
+
+	this.value = value;
+    }
+
+    public String getDescription() {
+
+	return this.description;
+    }
+
+    public void setDescription(String description) {
+	this.description = description;
+    }
+    
+    public String use() {
+	return "Nothing happened.\n";
+    }
+}

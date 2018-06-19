@@ -1,0 +1,5 @@
+package projectzero.entities;
+
+public class NoItem {
+
+}
