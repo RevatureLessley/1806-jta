@@ -1,4 +1,4 @@
-package com.revature.day1.varscopes;
+package com.revature.day2.varscopes;
 
 //DESIGN PATTERN
 /*
@@ -36,8 +36,11 @@ public class Person {
 	//Upon invoking 'new' keyword on this class, we create an instance of it (IE an object) which created
 	//by first calling the following method.
 	//Constructors must match the class name in casing, as well as have NO return type.
-	public Person(){
-		
+	public Person(String name, int age){
+		this.name = name;
+		this.age = age;
+		personCount++; //++ increments by 1
+		//personCount = personCount + 1
 	}
 	
 	public void setName(String name){
