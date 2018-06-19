@@ -1,9 +1,10 @@
 public class Project0{
 	public static void main(String args[]){
-		Username u = new Username();
-		Password p = new Password();
-		FirstName f = new FirstName();
-		LastName l = new LastName();
+		Account a = new Account();
+		Username u = new Username(a);
+		Password p = new Password(a);
+		FirstName f = new FirstName(a);
+		LastName l = new LastName(a);
 		System.out.println(u.get());
 		System.out.println(p.get());
 		System.out.println(f.get());

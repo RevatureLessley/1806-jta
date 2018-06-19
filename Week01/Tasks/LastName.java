@@ -3,7 +3,11 @@ import java.io.*;
 public class LastName extends AccountAttribute {
 	private String lastname;
 
-	LastName() {
+	LastName(Account a){
+		super(a);
+	}
+
+	public void askUser() {
 		lastname = console.readLine("lastname: ");
 	}
 

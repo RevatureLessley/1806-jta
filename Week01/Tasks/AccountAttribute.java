@@ -1,7 +1,9 @@
 import java.io.*;
 
-public abstract class AccountAttribute {
+public class AccountAttribute {
 	protected static Console console = System.console();
 	
-	AccountAttribute() {};
+	AccountAttribute(Account a){
+		a.addAttribute(this);
+	};
 }

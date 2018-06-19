@@ -1,8 +1,7 @@
 import java.util.*;
 
-public abstract class Account {
+public /*abstract*/ class Account {
 	ArrayList<AccountAttribute> attributes = new ArrayList<AccountAttribute>();
-	
 
 	Account() {};
 
