@@ -31,6 +31,21 @@ task fatJar(type: Jar) {
      with jar
 }
 
+test {
+     include 'projectzero/**'
+     
+     testLogging.showStandardStreams = true
+
+     beforeTest {
+     	descriptor -> logger.lifecycle("Running test: " + descriptor)
+     }
+
+     onOutput {
+     	descriptor, event -> logger.lifecycle
+	("Test:" + descriptor + " produced standard out/err: " + event.message )
+     }
+}
+
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
