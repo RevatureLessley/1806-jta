@@ -108,6 +108,14 @@ public class VendingMachine {
     public void setInventory(Inventory inventory) {
 	this.inventory = inventory;
     }
+
+    public String getMessage() {
+	return this.message;
+    }
+
+    public void setMessage(String message) {
+	this.message = message;
+    }
     
    @Override
    public String toString() {
@@ -117,18 +125,36 @@ public class VendingMachine {
 
        for (StockItem stockItem : this.getInventory().getInventory().values()) {
 	   String itemIcon = stockItem.getItem().toString();
-	   itemIcons.add(Printing.paddedString(itemIcon, 3));
+	   itemIcons.add(Printing.paddedString(itemIcon, 4));
        }
        
-       String printMachine = "=====================================\n"
-	                   + "=======[" + machineName +  "]========\n"
-	                   + "=======[" + adminName +    "]========\n"
-	                   + "=====================================\n"
-	   + "========    A   B   C   D   =========\n";
+       StringBuffer printMachine = new StringBuffer(new String(
+	                     "=========================\n"
+	                   + "=[" + machineName +  "]==\n"
+	                   + "=[" + adminName +    "]==\n"
+	                   + "=========================\n"
+			     + "==    A   B   C   D   ===\n"));
        
-       for (int i = 1; i < 6; i++) {
-	   printMachine += "======== " + i + "  " +  "=========\n";
+       for (int i = 1, j = 0; i < 6; i++, j += 4) {
+	   
+	   printMachine.append("== " + i + " ");
+
+	   for (int k = j; k < j + 4; k++) {
+	       printMachine.append(itemIcons.get(k));
 	   }
-       return printMachine;
+	   
+	   printMachine.append(" ===\n");
+	   }
+
+       printMachine.append("=========================\n"
+			 + "=========================\n"
+	                 + "=======[        ]========\n"
+			 + "=========================\n"
+			 + "=========================\n"
+			 + "=========================\n\n");
+       
+       printMachine.append(Printing.columnLengthLimitedString(this.getMessage(), 36));
+       
+       return printMachine.toString();
    }
 }
