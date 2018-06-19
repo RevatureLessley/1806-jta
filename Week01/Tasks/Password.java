@@ -3,10 +3,22 @@ import java.io.*;
 public class Password extends AccountAttribute {
 	// This class needs to be secured.
 	private String password;
+	private String p;
+	private String q;
 
 	Password(Account a) {
 		super(a);
-		password = String.valueOf(console.readPassword("password: "));
+		
+		do{
+			getPassword();
+		}while(!p.equals(q));
+
+		password = p;
+	}
+
+	private void getPassword(){
+		p = String.valueOf(console.readPassword("password: "));
+		q = String.valueOf(console.readPassword("confirm password: "));
 	}
 	
 	@Override
