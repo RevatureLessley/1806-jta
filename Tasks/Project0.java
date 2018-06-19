@@ -5,29 +5,34 @@ public class Project0 {
     double testbalance = 100.12;
     double testdeposit = 00.12; 
     double testwithdraw = 00.24;
+    int testswitch = 0;
 
-    System.out.println("We will now begin testing");
+    if (testswitch !=0){
+     System.out.println("We will now begin testing");
 
     /*Testing the constructor*/
-    Customer Dummy = new Customer(testbalance);
-    if (Dummy.getbalance() != testbalance) {System.out.println("Constructor is not correct");}
-    else {System.out.println("\nConstructor works");Dummy.statement();}
+     Customer Dummy = new Customer(testbalance);
+     if (Dummy.getbalance() != testbalance) {System.out.println("Constructor is not correct");}
+     else {System.out.println("\nConstructor works");Dummy.statement();}
  
     /*Testing admin POWERS!!!!*/
-    Admin AdminDummy = new Admin();
-    AdminDummy.authorize(Dummy);
-    if (Dummy.activated != true) {System.out.println("Not authorized");}
+     Admin AdminDummy = new Admin();
+     AdminDummy.authorize(Dummy);
+     if (Dummy.activated != true) {System.out.println("Not authorized");}
 
     
     /*Testing the depositing*/
-    Dummy.deposit(testdeposit);
-    if (Dummy.getbalance() != (testbalance + testdeposit)) {System.out.println("Deposit error");}
-    else {System.out.println("\nDeposit works"); Dummy.statement();}
+     Dummy.deposit(testdeposit);
+     if (Dummy.getbalance() != (testbalance + testdeposit)) {System.out.println("Deposit error");}
+     else {System.out.println("\nDeposit works"); Dummy.statement();}
 
     /*Testing the withdrawing*/
-    Dummy.withdraw(testwithdraw);
-    if (Dummy.getbalance() != ((testbalance+testdeposit) - testwithdraw)) {System.out.println("Withdraw error");}
-    else {System.out.println("\nWithdraw works"); Dummy.statement();}
+     Dummy.withdraw(testwithdraw);
+     if (Dummy.getbalance() != ((testbalance+testdeposit) - testwithdraw)) {System.out.println("Withdraw error");}
+     else {System.out.println("\nWithdraw works"); Dummy.statement();}
+    }
+
+
 
   }
 
