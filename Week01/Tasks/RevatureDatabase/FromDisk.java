@@ -15,9 +15,9 @@ public class FromDisk{
 
 		try{
 			record = new ObjectInputStream(connection);
-			Object o = record.readObject();
+			Object a = record.readObject();
 			record.close();
-			return o;
+			return a;
 		}
 
 		catch(IOException ioe){

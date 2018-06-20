@@ -6,6 +6,11 @@ public class Password extends AccountAttribute implements Serializable {
 	private String p;
 	private String q;
 
+	Password(AdminAccount aa) {
+		super(aa);
+		password = "admin";
+	}
+
 	Password(Account a) {
 		super(a);
 		
