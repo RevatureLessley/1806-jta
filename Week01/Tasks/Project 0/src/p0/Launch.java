@@ -111,20 +111,68 @@ public class Launch
 	public void login(Launch pgm)
 	{
 		Player log = null;
-		System.out.print("Input Username: ");
-		String tempUname = pgm.in.next();
-		for(Player p: pgm.players)
+		boolean successU = false;
+		boolean successP = false;
+		while(!successP)
 		{
-			if(p.getuName().equals(tempUname))
+			System.out.print("Input Username (-1 to return to main menu): ");
+			String tempUname = pgm.in.next();
+			for(Player p: pgm.players)
 			{
-				
+				successP = false;
+				successU = false;
+				if(p.getuName().equals(tempUname))
+				{
+					successU = true;
+					System.out.print("Input Password: ");
+					String tempPword = pgm.in.next();
+					if(p.getuPass().equals(tempPword))
+					{
+						p.menu();
+						successP = true;
+						break;
+					}
+					else
+					{
+						System.out.println("Password Incorrect, restarting login.");
+						break;
+					}
+				}
+			}
+			if(tempUname.equals(-1))
+			{
+				break;
+			}
+			else if (!successU)
+			{
+				System.out.println("Not a valid username, would you like to \n"
+						+ "1. Make a new account or \n"
+						+ "2. Attempt to sign in again");
+				int selection = pgm.in.nextInt();
+				boolean valid = false;
+				while(!valid)
+				{
+					switch (selection){
+					case 1: newAccount(pgm);
+							valid = true;
+							successP = true;
+							break;
+					case 2: valid = true;
+							break;
+					default: System.out.println("Not a valid selction, would you like to \n"
+							+ "1. Make a new account or \n"
+							+ "2. Attempt to sign in again");
+							selection = pgm.in.nextInt();
+					}
+				}
 			}
 		}
 	}
 	
 	public void newAccount(Launch pgm)
 	{
-		
+		System.out.println("Not implimented yet (New Account)");
+		System.out.println();
 	}
 	
 	public void buildArrays(Launch pgm)
