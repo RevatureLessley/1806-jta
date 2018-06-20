@@ -8,6 +8,7 @@ public class Driver {
 		Driver d = new Driver();
 		d.moveAll(dog, bat);
 		d.covariance();
+		
 	}
 	
 	public void moveAll(AnimalActions ...animals){
@@ -43,5 +44,16 @@ public class Driver {
 		a = new A();
 		//c = (C)a;
 		//c.method1();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
