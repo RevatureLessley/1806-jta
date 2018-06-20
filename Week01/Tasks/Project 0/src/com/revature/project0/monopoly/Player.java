@@ -16,6 +16,9 @@ public class Player {
         this.location = 0;
     }
 
+    public void move(int distance){
+        this.location = (this.location + distance) % 40;    //NOTE: Hardcoded 40 squares on board.
+    }
 
     /* Getters and Setters */
     public String getName() {
