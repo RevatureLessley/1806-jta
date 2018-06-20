@@ -4,7 +4,17 @@ import RevatureDatabase.*;
 public class RevatureBank implements ConsoleReference{
 	
 	public static void main(String args[]){
-		String hasAccount = console.ReadLine("Welcome to RevatureBank. Do you have an account?(y/n)");
+		System.out.println("Welcome to RevatureBank.");
+		String hasAccount;
+		boolean y;
+		boolean n;
+		
+		do{
+			hasAccount = console.readLine("Do you have an account?(y/n):");
+			y = hasAccount.equals("y");
+			n = hasAccount.equals("n");
+		}while(!(y || n));
+
 		/*
 		Account a = new Account();
 		try{
