@@ -15,7 +15,7 @@ public class Account {
 	}
 	
 	public double getBalance() {
-		return 0;
+		return balance;
 	}
 	
 	public String getName() {
@@ -30,4 +30,9 @@ public class Account {
 		balance -= amount;
 	}
 	
+	@Override
+	public String toString() {
+		String s = name + " [" + accountType + "] bal: " + balance;  
+		return s;
+	}
 }
