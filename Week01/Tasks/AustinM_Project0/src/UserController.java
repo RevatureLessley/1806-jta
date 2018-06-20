@@ -13,16 +13,32 @@ public class UserController {
 	private HashMap<String, User> users;
 	private LinkedList<User> unvalidatedUsers;
 
+	public UserController() {
+		users = new HashMap<String, User>();
+		unvalidatedUsers = new LinkedList<User>();
+		User admin = addUser("Admin","pass123");
+		validateNewUser(admin);
+	}
+	
 	public User getUser(String name) {
-		return null;
+		return users.get(name);
 	}
 
 	public boolean checkUsernameAvailable(String name) {
-		return false;
+		return !users.containsKey(name);
 	}
 
 	public User addUser(String name, String password) {
-		return null;
+		User user = new User(name, password);
+		users.put(name, user);
+		unvalidatedUsers.add(user);
+		
+		return user;
+	}
+	
+	public void validateNewUser(User user) {
+		user.validateNewUser();
+		unvalidatedUsers.remove(user);	
 	}
 
 	public void banUser() {

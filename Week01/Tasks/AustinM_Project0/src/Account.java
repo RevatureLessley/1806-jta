@@ -5,8 +5,8 @@
  */
 public class Account {
 
-	public String getBalance() {
-		return "";
+	public int getBalance() {
+		return 0;
 	}
 	
 	public void deposit(double amount) {
