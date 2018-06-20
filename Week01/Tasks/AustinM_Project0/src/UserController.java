@@ -1,5 +1,5 @@
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * @author Austin Molina
@@ -11,12 +11,13 @@ import java.util.LinkedList;
 public class UserController {
 
 	private HashMap<String, User> users;
-	private LinkedList<User> unvalidatedUsers;
+	private ArrayList<User> unvalidatedUsers;
 
 	public UserController() {
 		users = new HashMap<String, User>();
-		unvalidatedUsers = new LinkedList<User>();
+		unvalidatedUsers = new ArrayList<User>();
 		User admin = addUser("Admin","pass123");
+		admin.setAdmin(true);
 		validateNewUser(admin);
 	}
 	
@@ -40,9 +41,23 @@ public class UserController {
 		user.validateNewUser();
 		unvalidatedUsers.remove(user);	
 	}
-
-	public void banUser() {
+	
+	public int getWaitUserCount() {
+		return unvalidatedUsers.size();
+	}
+	
+	public User getWaitUser(int i) {
+		return unvalidatedUsers.get(i);
+	}
+	
+	public String[] getWaitUserNames() {
+		String[] names = new String[unvalidatedUsers.size()];
+		int i = 0;
 		
+		for(User u : unvalidatedUsers) {
+			names[i++] = u.getName();
+		}
 		
+		return names;
 	}
 }

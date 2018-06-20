@@ -9,6 +9,9 @@ public class User {
 
 	private ArrayList<Account> accounts;
 	private String name;
+	
+	
+
 	private String password;
 	private boolean validated = false;
 	private boolean admin = false;
@@ -22,8 +25,11 @@ public class User {
 		
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void validateNewUser() {
-		System.out.println(name + " validated");
 		validated = true;
 	}
 	
@@ -43,6 +49,17 @@ public class User {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public void addAccount(String name, int type) {
+		Account account = new Account(name, type);
+		
+		
+	}
+
+	public String[] getAccountNames() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
