@@ -43,6 +43,25 @@ public class Person {
 		//personCount = personCount + 1
 	}
 	
+
+	
+	/*
+	 * CONSTRUCTORS
+	 * Default Constructor
+	 * -A default constructor is a constructor with
+	 * NO arguments. The default constructor is only
+	 * provided automatically in a situation where you have no
+	 * constructors at all.
+	 * -The exact moment you write ANY constructor at all, the JVM no longer
+	 * provides a default constructor. This is why you can get away with
+	 * Obj o = new Obj() without error if Obj doesnt have a constructor defined.
+	 * But it FAILS if you have a constructor with a parameter.
+	 * 
+	 * NO-ARGS CONSTRUCTOR
+	 * -Simply a constructor that takes no arguments.
+	 */
+	
+	
 	public void setName(String name){
 		//Inside any methods belongs the METHOD scope.
 		//Any variables or obejcts created within this scope will exist ONLY within the method.
