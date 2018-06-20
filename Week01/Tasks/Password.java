@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Password extends AccountAttribute {
+public class Password extends AccountAttribute implements Serializable {
 	// This class needs to be secured.
 	private String password;
 	private String p;

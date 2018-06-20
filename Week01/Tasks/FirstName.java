@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class FirstName extends AccountAttribute {
+public class FirstName extends AccountAttribute implements Serializable{
 	private String firstname;
 
 	FirstName(Account a) {
