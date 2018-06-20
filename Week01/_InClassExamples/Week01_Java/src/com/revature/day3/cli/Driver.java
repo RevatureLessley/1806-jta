@@ -28,7 +28,7 @@ public class Driver {
 		 * (The brave way)
 		 * 1. Navigate to your src folder
 		 * 2. Invoke the java compiler for your project
-		 * 2.5. e.g. javac package/package/file.java
+		 * 2.5. e.g. javac package\package\file.java
 		 * 3. next execute the application using 'java'
 		 * 3.5 e.g. java package.package.file arg1 arg2 arg3 argetc
 		 */
