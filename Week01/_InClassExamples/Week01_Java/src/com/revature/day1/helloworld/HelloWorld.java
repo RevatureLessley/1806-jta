@@ -1,4 +1,7 @@
 package com.revature.day1.helloworld;
+
+import com.revature.day3.pillars.AnimalActions;
+
 //The first line of any java file, will be package structure.
 //(Exception for when you use the default package [don't do this])
 /*
@@ -24,10 +27,12 @@ package com.revature.day1.helloworld;
 public class HelloWorld {
 	public static void main(String args[]){
 		System.out.println("Hello World.");
+		
 	}
 	/*
 	 * Shortcut for System.out.println():
 	 * 	-syso + ctrl + 'space'
 	 * 	-sysout + ctrl + 'space'
 	 */
+	
 }
