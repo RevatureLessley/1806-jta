@@ -11,15 +11,18 @@ public class Account implements Serializable {
 		new LastName(this);
  	};
 
- 	public void addAttribute(AccountAttribute aa) {
-  		attributes.add(aa);
+ 	public void addAttribute(String field, AccountAttribute aa) {
+  		attributes.put(field, aa);
  	}
 
 	public Integer getID(){
-
+		Integer index = attributes.get("Username").getID() + 
+				attributes.get("Password").getID();
+		return index.hashCode();
 	}
 
  	public void print(){
-  		attributes.stream().forEach(a->a.print());
+		for(AccountAttribute aa : attributes.values())
+			aa.print();
  	}
 }

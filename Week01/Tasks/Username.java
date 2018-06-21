@@ -6,15 +6,22 @@ public class Username extends AccountAttribute implements Serializable {
 	Username(AdminAccount aa) {
 		super(aa);
 		username = "admin";
+		aa.addAttribute("Username", this);
 	}
 	
 	Username(Account a) {
 		super(a);
-		username = console.readLine("username: ");
+		username = console.readLine("Username: ");
+		a.addAttribute("Username", this);
 	}
 
 	@Override
 	public void print() {
-		System.out.println(username);
+		System.out.println("Username: " + username);
+	}
+
+	@Override
+	public Integer getID() {
+		return username.hashCode();
 	}
 }

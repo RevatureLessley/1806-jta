@@ -3,14 +3,37 @@ import java.util.*;
 import RevatureDatabase.*;
 
 public class RevatureBank implements ConsoleReference{
-	
-	private HashMap<Integer, Account> accounts = new HashMap<Integer, Account>(); 
+	public static RevatureBank entrance = new RevatureBank();
+	private final String STORAGE = "PersistentStore.txt";
+	private HashMap<Integer, Account> accounts;
+
+	private RevatureBank() {
+		try {
+			FromDisk fd = new FromDisk(STORAGE);
+			accounts = (HashMap<Integer, Account>) fd.read();
+			fd.close();
+		}
+
+		catch(FileNotFoundException fnfe) {
+			accounts = new HashMap<>();
+		}
+
+		catch(IOException ioe) {
+			System.err.println("Closing persistent storage failed!");
+			ioe.printStackTrace();
+		}
+	}
 
 	private void createAccount(){
 		Account a = new Account();
+		accounts.put(a.getID(), a);
 	}
 
-	public static void main(String args[]){
+	private void signIn() {
+	
+	}
+
+	public void enter() {
 		System.out.println("Welcome to RevatureBank.");
 		String hasAccount;
 		boolean y;
@@ -22,26 +45,31 @@ public class RevatureBank implements ConsoleReference{
 			n = hasAccount.equals("n");
 		}while(!(y || n));
 
-		/*
-		Account a = new Account();
-		try{
-			ToDisk td = new ToDisk("PersistentStore.txt");
-			td.write(a);
+		if(y) signIn();
+		else createAccount();
+	}
+
+	public void exit() {
+		try {
+			ToDisk td = new ToDisk(STORAGE);
+			td.write(accounts);
 			td.close();
-			FromDisk fd = new FromDisk("PersistentStore.txt");
-			a = (Account)fd.read();
-			td.close();
-			a.print();
-		}
-		catch(FileNotFoundException fnfe){
-			System.out.println("Connection to persisent storage failed!");
-			fnfe.getMessage();
 		}
 
-		catch(IOException ioe){
-			System.out.println("Closing persistent storage failed!");
-			ioe.getMessage();
+		catch(FileNotFoundException fnfe) {
+			System.err.println("Connection to persistent storage failed!");
+			fnfe.printStackTrace();
 		}
-		*/
+
+		catch(IOException ioe) {
+			System.err.println("Closing persistent storage failed!");
+			ioe.printStackTrace();
+		}
+
+	}
+
+	public void printAccounts() {
+		for(Account a: accounts.values())
+			a.print();
 	}
 }

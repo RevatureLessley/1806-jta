@@ -3,6 +3,13 @@ import RevatureDatabase.*;
 
 public class Project0{
 	public static void main(String args[]){
+		RevatureBank bank = RevatureBank.entrance;
+		bank.enter();
+		System.out.println("--------------------------");
+		bank.printAccounts();
+		System.out.println("--------------------------");
+		bank.exit();
+		/*
 		Account a = new Account();
 		try{
 			ToDisk td = new ToDisk("PersistentStore.txt");
@@ -21,6 +28,7 @@ public class Project0{
 		catch(IOException ioe){
 			System.out.println("Closing persistent storage failed!");
 			ioe.getMessage();
-		}	
+		}
+		*/
 	}
 }
