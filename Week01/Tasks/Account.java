@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Account implements Serializable {
+public abstract class Account implements Serializable {
 	HashMap<String, AccountAttribute> attributes = new HashMap<>();
 
  	Account() {}
