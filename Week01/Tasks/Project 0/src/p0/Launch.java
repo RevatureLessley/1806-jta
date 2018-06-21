@@ -1,5 +1,8 @@
 package p0;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -74,11 +77,16 @@ public class Launch
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
 	ArrayList<Player> players = new ArrayList<Player>();
+	ArrayList<Account> Active;
+	ArrayList<Account> Waiting;
+	final String VERSION_NUM = "0.1";
+	
 	public static void main (String[] args)
 	{
 		Launch pgm = new Launch();
-		pgm.buildArrays(pgm);
-		pgm.mainMenu(pgm);
+		pgm.load(pgm);
+		//pgm.mainMenu(pgm);
+		
 	}
 	
 	public void mainMenu(Launch pgm)
@@ -117,18 +125,18 @@ public class Launch
 		{
 			System.out.print("Input Username (-1 to return to main menu): ");
 			String tempUname = pgm.in.next();
-			for(Player p: pgm.players)
+			for(Account a: pgm.Active)
 			{
 				successP = false;
 				successU = false;
-				if(p.getuName().equals(tempUname))
+				if(a.getuName().equals(tempUname))
 				{
 					successU = true;
 					System.out.print("Input Password: ");
 					String tempPword = pgm.in.next();
-					if(p.getuPass().equals(tempPword))
+					if(a.getuPass().equals(tempPword))
 					{
-						p.menu();
+						a.menu();
 						successP = true;
 						break;
 					}
@@ -175,12 +183,68 @@ public class Launch
 		System.out.println();
 	}
 	
-	public void buildArrays(Launch pgm)
+	public void load(Launch pgm)
 	{
-		pgm.players.add(new Player("Salara Elris1", "uname1", "pass", 100, 100, 100, pgm));
-		pgm.players.add(new Player("Salara Elris2", "uname2", "pass", 100, 100, 100, pgm));
-		pgm.players.add(new Player("Salara Elris3", "uname3", "pass", 100, 100, 100, pgm));
-		pgm.players.add(new Player("Salara Elris4", "uname4", "pass", 100, 100, 100, pgm));
-		pgm.players.add(new Player("Salara Elris5", "uname5", "pass", 100, 100, 100, pgm));
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("Active.ser"));
+			oos.writeObject(pgm.Active);
+			
+		}
+		catch(IOException e)
+		{
+			System.out.println("There wasn't a vailid user list, starting new world list... \n");
+			pgm.generateWorld(pgm);
+		}
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("Waiting.ser"));
+			oos.writeObject(pgm.Waiting);
+
+			System.out.println("Successfully loaded Active accounts");
+		}
+		catch(IOException e)
+		{
+		}
+		if(pgm.Active == null)
+		{
+			System.out.println("World not available, generating new world.");
+			pgm.generateWorld(pgm);
+		}
+		
 	}
+	
+	public void save(Launch pgm)
+	{
+		
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("Active.ser"));
+			oos.writeObject(pgm.Active); //Serialize
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("Waiting.ser"));
+			oos.writeObject(pgm.Waiting); //Serialize
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public void generateWorld(Launch pgm)
+	{
+		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM);
+		System.out.print("Please choose a user name for the administrator: ");
+		String uName = pgm.in.next();
+		System.out.print("Now choose a password for the administator account: ");
+		String pWord = pgm.in.next();
+		System.out.println("This has been a test to make sure this works at this point.");
+	}
+
 }

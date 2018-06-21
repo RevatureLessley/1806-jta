@@ -6,6 +6,7 @@ public abstract class Account
 	protected String uPass;
 	protected String Name;
 	protected Launch pgm;
+	protected boolean accountFlagged = false;
 	
 	public Account()
 	{
@@ -31,6 +32,12 @@ public abstract class Account
 	public String getuPass() {
 		return uPass;
 	}	
+	
+	public boolean getFlagged()
+	{
+		return accountFlagged;
+	}
+	
 	public abstract void menu();
 	public void logout()
 	{

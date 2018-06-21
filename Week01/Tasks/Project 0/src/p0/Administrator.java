@@ -4,6 +4,11 @@ public class Administrator extends Account {
 
 	private Launch pgm;
 	private boolean worldFlagged;
+	
+	public Administrator(String name, String uname, String pword, Launch pgm)
+	{
+		super(name, uname, pword, pgm);
+	}
 
 	public void manageActive()
 	{

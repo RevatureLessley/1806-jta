@@ -7,7 +7,6 @@ public class Player extends Account
 	private int personalBalance;
 	private boolean hasLoan = true;
 	private boolean hasBank = true;
-	private boolean accountFlagged = false;
 	
 	public Player(String name, String uName, String pword, int aBal, int pBal, int lBal, Launch pgm)
 	{
