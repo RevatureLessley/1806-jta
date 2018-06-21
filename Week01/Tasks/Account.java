@@ -20,4 +20,8 @@ public abstract class Account implements Serializable {
 		for(AccountAttribute aa : attributes.values())
 			aa.print();
  	}
+
+	public void signIn(){
+
+	}
 }

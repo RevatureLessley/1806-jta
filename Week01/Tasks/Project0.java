@@ -1,14 +1,23 @@
 import java.io.*;
 import RevatureDatabase.*;
 
-public class Project0{
+public class Project0 implements ConsoleReference{
 	public static void main(String args[]){
-		RevatureBank bank = RevatureBank.entrance;
-		bank.enter();
-		System.out.println("--------------------------");
-		bank.printAccounts();
-		System.out.println("--------------------------");
-		bank.exit();
+
+		if(console == null) {
+			System.err.print("Thank you for choosing RevatureBank. ");
+			System.err.print("Please note that this is a console application. ");
+			System.err.println("Please exit out of your IDE, including 'git bash', and open your command prompt.");
+		}
+
+		else {
+			RevatureBank bank = RevatureBank.entrance;
+			bank.enter();
+			System.out.println("--------------------------");
+			bank.printAccounts();
+			System.out.println("--------------------------");
+			bank.exit();
+		}
 		/*
 		Account a = new Account();
 		try{

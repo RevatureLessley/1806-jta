@@ -14,14 +14,20 @@ public class Password extends AccountAttribute implements Serializable {
 
 	Password(UserAccount ua) {
 		super(ua);
+		password = askUser();
+		ua.addAttribute("Password", this);
+	}
+
+	@Override
+	public String askUser() {
+		String s;
 
 		do{
 			getPassword();
 		}while(!p.equals(q));
 
-		password = p;
-		ua.addAttribute("Password", this);
-	}
+		return p;
+	}	
 
 	private void getPassword(){
 		p = String.valueOf(console.readPassword("Password: "));

@@ -11,8 +11,13 @@ public class FirstName extends AccountAttribute implements Serializable{
 	
 	FirstName(UserAccount ua) {
 		super(ua);
-		firstname = console.readLine("Firstname: ");
+		firstname = askUser();
 		ua.addAttribute("Firstname", this);
+	}
+
+	@Override
+	public String askUser() {
+		return console.readLine("Firstname: ");
 	}
 	
 	@Override
