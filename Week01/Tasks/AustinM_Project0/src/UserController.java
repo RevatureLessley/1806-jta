@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,8 +9,9 @@ import java.util.HashMap;
  * 
  *        Maintains collection of users.
  */
-public class UserController {
+public class UserController implements Serializable{
 
+	private static final long serialVersionUID = -195953297393512306L;
 	private HashMap<String, User> users;
 	private ArrayList<User> unvalidatedUsers;
 
@@ -59,5 +61,30 @@ public class UserController {
 		}
 		
 		return names;
+	}
+
+	public String summarizeAllUsers() {
+
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2;
+		
+		for(User u : users.values()) {
+			sb2 =new StringBuilder();
+			sb2.append(u.getName());
+			if(u.isAdmin())
+				sb2.append("(A)");
+			else if(!u.isValidated())
+				sb2.append("(!)");
+			
+			while(sb2.length() < 15)
+				sb2.append(" ");
+			
+			sb2.append(Account.formatCurrency(u.totalBalance()));
+			sb2.append('\n');
+			
+			sb1.append(sb2.toString());
+		}
+		
+		return sb1.toString();
 	}
 }
