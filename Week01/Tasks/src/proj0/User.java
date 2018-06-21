@@ -40,6 +40,17 @@ public class User implements Serializable{
 	}
 	
 	/**
+	 * This method takes in a string inputs and checks if it matches with the user's
+	 * password, return true if it does and false otherwise
+	 * @param pass(String)
+	 * @return boolean
+	 */
+	public boolean confirmPassword(String pass) {
+		if(pass.equals(this.pass)) return true;
+		return false;
+	}
+	
+	/**
 	 * Overridden toString method which returns user info
 	 * @return String
 	 */

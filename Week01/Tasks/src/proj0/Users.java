@@ -8,10 +8,20 @@ public class Users {
 	
 	
 	public void addUser(User user) {
-		//this.users.add(user);
+		users.put(user.getUserid(), user);
 	}
 	
+
 	public void removeUser(User user) {
-		//this.users.remove(user);
+		users.remove(user.getUserid());
+	}
+	
+	//Getters and Setters
+	public HashMap<String, User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(HashMap<String, User> users) {
+		this.users = users;
 	}
 }
