@@ -9,10 +9,10 @@ public class FirstName extends AccountAttribute implements Serializable{
 		aa.addAttribute("Firstname", this);
 	}
 	
-	FirstName(Account a) {
-		super(a);
+	FirstName(UserAccount ua) {
+		super(ua);
 		firstname = console.readLine("Firstname: ");
-		a.addAttribute("Firstname", this);
+		ua.addAttribute("Firstname", this);
 	}
 	
 	@Override

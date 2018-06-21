@@ -12,15 +12,15 @@ public class Password extends AccountAttribute implements Serializable {
 		aa.addAttribute("Password", this);
 	}
 
-	Password(Account a) {
-		super(a);
+	Password(UserAccount ua) {
+		super(ua);
 
 		do{
 			getPassword();
 		}while(!p.equals(q));
 
 		password = p;
-		a.addAttribute("Password", this);
+		ua.addAttribute("Password", this);
 	}
 
 	private void getPassword(){

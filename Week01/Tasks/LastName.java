@@ -9,10 +9,10 @@ public class LastName extends AccountAttribute implements Serializable{
 		aa.addAttribute("Lastname", this);
 	}
 
-	LastName(Account a) {
-		super(a);
+	LastName(UserAccount ua) {
+		super(ua);
 		lastname = console.readLine("lastname: ");
-		a.addAttribute("Lastname", this);
+		ua.addAttribute("Lastname", this);
 	}
 	
 	@Override

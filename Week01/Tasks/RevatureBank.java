@@ -16,6 +16,8 @@ public class RevatureBank implements ConsoleReference{
 
 		catch(FileNotFoundException fnfe) {
 			accounts = new HashMap<>();
+			AdminAccount aa = AdminAccount.admin;
+			accounts.put(aa.getID(), aa);
 		}
 
 		catch(IOException ioe) {
@@ -25,7 +27,7 @@ public class RevatureBank implements ConsoleReference{
 	}
 
 	private void createAccount(){
-		Account a = new Account();
+		UserAccount a = new UserAccount();
 		accounts.put(a.getID(), a);
 	}
 

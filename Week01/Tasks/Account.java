@@ -4,12 +4,7 @@ import java.util.*;
 public class Account implements Serializable {
 	HashMap<String, AccountAttribute> attributes = new HashMap<>();
 
- 	Account(){
- 		new Username(this);
- 		new Password(this);
- 		new FirstName(this);
-		new LastName(this);
- 	};
+ 	Account() {}
 
  	public void addAttribute(String field, AccountAttribute aa) {
   		attributes.put(field, aa);
