@@ -7,6 +7,10 @@ public class Login {
 	boolean isNameCorrect = false;
 	boolean isPasswordCorrect = false;
 	boolean isApproved = false;
+	String storedName = "Chris";
+	String storedPassword = "Password";
+	String name;
+	String password;
 	
 	Scanner sc = new Scanner(System.in);
 	
