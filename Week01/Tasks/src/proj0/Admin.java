@@ -1,5 +1,5 @@
 package proj0;
 
-public class Admin {
+public class Admin extends User{
 
 }
