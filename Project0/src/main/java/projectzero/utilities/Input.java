@@ -4,7 +4,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuffer;
 
+import projectzero.utilities.Printing;
+    
 public class Input {
+    
     private final Scanner scanner;
     private ArrayList<String> history;
     private int historyRecordCapacity;
@@ -55,21 +58,5 @@ public class Input {
     }
     
     public static void main(String[] args) {
-	Input input = new Input();
-	String userInput = "";
-
-	shell:
-	while ((userInput = input.next()) != "close") {
-	    switch(userInput) {
-		default:
-		    System.out.println(userInput);
-		    break;
-	        case "history":
-		    input.printHistory();
-		    break;
-	        case "exit":
-		    break shell;
-	    }
-	}
     }
 }
