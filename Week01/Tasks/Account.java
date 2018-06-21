@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public abstract class Account implements Serializable {
+public abstract class Account implements ConsoleReference, Serializable {
 	HashMap<String, AccountAttribute> attributes = new HashMap<>();
 
  	Account() {}
@@ -21,10 +21,11 @@ public abstract class Account implements Serializable {
 			aa.print();
  	}
 
-	public void signIn(){
+	public static Integer signIn(){
 		Integer username = console.readLine("Username: ").hashCode();
-		Integer password = String.valueOf(console.readPassword("Password: ")).hasCode();
-		String index = username + password;
-		
+		Integer password = String.valueOf(console.readPassword("Password: ")).hashCode();
+		Integer index = username + password;
+
+		return index.hashCode();	
 	}
 }

@@ -27,28 +27,28 @@ public class RevatureBank implements ConsoleReference{
 	}
 
 	private void createAccount(){
+		System.out.println("Please create an account.");
 		UserAccount a = new UserAccount();
 		accounts.put(a.getID(), a);
+		signIn();
 	}
 
 	private void signIn() {
-	
+		System.out.println("Please sign into your account.");
+		Account a = accounts.get(Account.signIn());
+		
+		if(a == null)
+		{
+			System.err.println("Incorrect Username or Password.");
+			welcome();
+		}
+		else
+			System.out.println("Welcome to your account.");
 	}
 
 	public void enter() {
 		System.out.println("Welcome to RevatureBank.");
-		String hasAccount;
-		boolean y;
-		boolean n;
-		
-		do{
-			hasAccount = console.readLine("Do you have an account?(y/n):");
-			y = hasAccount.equals("y");
-			n = hasAccount.equals("n");
-		}while(!(y || n));
-
-		if(y) signIn();
-		else createAccount();
+		welcome();
 	}
 
 	public void exit() {
@@ -73,5 +73,20 @@ public class RevatureBank implements ConsoleReference{
 	public void printAccounts() {
 		for(Account a: accounts.values())
 			a.print();
+	}
+
+	private void welcome() {
+		String hasAccount;
+		boolean y;
+		boolean n;
+		
+		do{
+			hasAccount = console.readLine("Do you have an account?(y/n):");
+			y = hasAccount.equals("y");
+			n = hasAccount.equals("n");
+		}while(!(y || n));
+
+		if(y) signIn();
+		else createAccount();
 	}
 }

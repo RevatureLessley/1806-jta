@@ -17,7 +17,7 @@ public class LastName extends AccountAttribute implements Serializable{
 
 	@Override
 	public String askUser() {
-		return console.readLine("lastname: ");
+		return console.readLine("Lastname: ");
 	}
 	
 	@Override
