@@ -16,7 +16,7 @@ public class loginPrompt{
 		Users users = this.retrieveUsers();
 		String username = console.readLine("Username: ");
 		User user = users.getUsers().get(username);
-		this.checkPassword(user);
+		this.checkPassword(user,username);
 		
 		
 		//System.out.print(username + " " + password);
@@ -36,8 +36,15 @@ public class loginPrompt{
 		}
 		return u;
 	}
-	
-	public void checkPassword(User user) {
+	/**
+	 * This method checks if a valid password is entered for an existing order
+	 * If the user does not exist, then a new user is created
+	 * @param user
+	 * user data containing their info
+	 * @param username
+	 * username to be cheked or created
+	 */
+	public void checkPassword(User user,String username) {
 		if (user != null){
 			boolean passaccepted = false;
 			while(!passaccepted) {
@@ -47,12 +54,39 @@ public class loginPrompt{
 			}
 			
 		}else {
-			
+			System.out.println("User not found, enter '0' to create an account or '1' to "
+					+ "enter a different username.");
+			String input = console.readLine(": ");
+			if(input.equals("0")) this.createUser(username);
+			else{
+				this.inputLogin();
+			}
 		}
 	}
-	
-	public void createUser() {
-		
+	/**
+	 * 
+	 * @param username
+	 * username to be created
+	 * @return User
+	 * returns a new User
+	 */
+	public User createUser(String username) {
+		boolean checkpass = false;
+		String password = null;
+		while(!checkpass) {
+			String newpass = new String(console.readPassword("Create Password: "));
+			String confirmpass = new String(console.readPassword("Create Password: "));
+			checkpass = newpass.equals(confirmpass);
+			if(checkpass) {
+				password = newpass;
+				break;
+			}
+			System.out.println("Passwords do not match");
+		}
+		String fname = new String(console.readLine("First Name: "));
+		String lname = new String(console.readLine("Last Name: "));
+		User user = new User(username,password,fname,lname);
+		return user;
 	}
 	
 }

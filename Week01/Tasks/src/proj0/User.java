@@ -13,10 +13,8 @@ public class User implements Serializable{
 	private transient String pass;
 	private String fname;
 	private String lname;
-	private String email;
 	private int balance;
 	private transient boolean auth;
-	private transient boolean adm;
 	
 
 	/**
@@ -40,10 +38,11 @@ public class User implements Serializable{
 	}
 	
 	/**
-	 * This method takes in a string inputs and checks if it matches with the user's
-	 * password, return true if it does and false otherwise
-	 * @param pass(String)
+	 * This method takes in a string inputs and checks if it matches with the user's password
+	 * @param pass
+	 * password to be checked
 	 * @return boolean
+	 * returns true if passwords match and false otherwise
 	 */
 	public boolean confirmPassword(String pass) {
 		if(pass.equals(this.pass)) return true;
@@ -53,27 +52,16 @@ public class User implements Serializable{
 	/**
 	 * Overridden toString method which returns user info
 	 * @return String
+	 * prints the user info excluding their password
 	 */
 	@Override
 	public String toString() {
-		return "User [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ","
-				+ " email=" + email + ", balance="
-				+ balance + "]";
+		return "User [userid=" + userid + ", fname=" + fname + ", lname=" + lname +
+				", balance=" + balance + "]";
 	}
 
 	//Getters and Setters
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setAdm(boolean adm) {
-		this.adm = adm;
-	}
 	
 	public String getUserid() {
 		return userid;
