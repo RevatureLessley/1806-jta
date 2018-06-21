@@ -8,26 +8,28 @@ public class customer implements java.io.Serializable {
     private boolean activated = false; 
     private String first_name = "First Name";
     private String last_name = "Last Name";
-    private StringBuffer ss_number = new StringBuffer("numbers");
+    private String ss_number = "numbers";
+    private StringBuffer password = new StringBuffer();
 
     
     /*Constructor takes in one double variable to set the balance*/
-    public customer(String f_name, String l_name, String ss_num){
-      first_name = f_name;
-      last_name = l_name; 
-      ss_number = new StringBuffer(ss_num);
+    public customer(String f_name, String l_name, String ss_num, StringBuffer newpass){
+      this.first_name = f_name;
+      this.last_name = l_name; 
+      this.ss_number = ss_num;
+      this.password = newpass;
     }
     
     
     
 //=================SOCIAL SECURITY EDITORS===============
     //returns the social security number
-	public StringBuffer getSs_number() {
+	public String getSs_number() {
 		return ss_number;
 	}
 
     //sets the social security number
-	public void setSs_number(StringBuffer ss_number) {
+	public void setSs_number(String ss_number) {
 		this.ss_number = ss_number;
 	}
 //=================NAME EDITORS==========================
@@ -73,4 +75,22 @@ public class customer implements java.io.Serializable {
     public void withdraw (float withdrawamount){
       this.balance = balance - withdrawamount;
     }
+
+
+
+
+//================PASSWORD EDITORS=====================
+
+	public StringBuffer getPassword() {
+		return password;
+	}
+
+	public void setPassword(StringBuffer password) {
+		this.password = password;
+	}
+
+
+
+
+
 }

@@ -90,3 +90,30 @@ public class Project0 {
      if (Dummy.getbalance() != ((testbalance+testdeposit) - testwithdraw)) {System.out.println("Withdraw error");}
      else {System.out.println("\nWithdraw works"); Dummy.statement();}
     }*/
+
+
+
+		/*
+		customer dummy = new customer("fname","lname","socialsecuritynumber","passwordpassword");
+		data_storage creator = new data_storage();
+		
+		
+		//Testing account creation
+		//dummy.statement();
+		creator.create_client(dummy);
+		
+		//Testing account opening
+		customer dummy_copy = new customer("WRONG","WRONG","WRONG","passwordpassword");
+		creator.open_account(dummy_copy, "fname", "lname", "socialsecuritynumber","passwordpassword");
+		//dummy_copy.statement(); //Should output fname lname and 0.00
+		
+		System.out.println("==============================");
+		
+		//Testing account closing
+		dummy_copy.deposit(100.10f);
+		//dummy_copy.statement();//Balance increases by 100.10
+		creator.close_account(dummy_copy);
+		creator.open_account(dummy, "fname", "lname", "socialsecuritynumber" , "passwordpassword");
+		//dummy.statement();//Should output fname lname and 100.10
+		//MainMenu startmenu = new MainMenu(); 
+		//startmenu.start_menu();*/
