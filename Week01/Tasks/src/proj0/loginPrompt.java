@@ -1,7 +1,10 @@
 package proj0;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Console;
 
 public class loginPrompt{
@@ -16,10 +19,14 @@ public class loginPrompt{
 		Users users = this.retrieveUsers();
 		String username = console.readLine("Username: ");
 		User user = users.getUsers().get(username);
-		this.checkPassword(user,username);
+		user = this.checkPassword(user,username);
+		if (user == null) return;
+		if (!user.isAuth()) {
+			System.out.println("Your account is not approved yet, please wait 0 or more years");
+			return;
+		}
 		
 		
-		//System.out.print(username + " " + password);
 	}
 	/**
 	 * This method is used to retrieve previously stored user data
@@ -36,15 +43,30 @@ public class loginPrompt{
 		}
 		return u;
 	}
+
+	/**
+	 * Uses serialization to store user data
+	 * @param users
+	 * class that contains hash map with all of the users
+	 */
+	public void storeUsers(Users users) {
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("users.ser"));
+			oos.writeObject(users); //Serialize
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * This method checks if a valid password is entered for an existing order
 	 * If the user does not exist, then a new user is created
 	 * @param user
 	 * user data containing their info
 	 * @param username
-	 * username to be cheked or created
+	 * username to be checked or created
 	 */
-	public void checkPassword(User user,String username) {
+	public User checkPassword(User user,String username) {
 		if (user != null){
 			boolean passaccepted = false;
 			while(!passaccepted) {
@@ -57,11 +79,12 @@ public class loginPrompt{
 			System.out.println("User not found, enter '0' to create an account or '1' to "
 					+ "enter a different username.");
 			String input = console.readLine(": ");
-			if(input.equals("0")) this.createUser(username);
+			if(input.equals("0")) user = this.createUser(username);
 			else{
-				this.inputLogin();
+				return null;
 			}
 		}
+		return user;
 	}
 	/**
 	 * 
