@@ -7,16 +7,14 @@ public class Player extends Account
 	private int personalBalance;
 	private boolean hasLoan = true;
 	private boolean hasBank = true;
-	private Launch pgm;
 	private boolean accountFlagged = false;
 	
 	public Player(String name, String uName, String pword, int aBal, int pBal, int lBal, Launch pgm)
 	{
-		super(name, uName,pword);
+		super(name, uName,pword,pgm);
 		this.accountBalance = aBal;
 		this.personalBalance = pBal;
 		this.loanBalance =lBal;
-		this.pgm = pgm;
 	}
 	
 	public void withdraw()
@@ -194,6 +192,7 @@ public class Player extends Account
 		}
 	}
 	
+	@Override
 	public void menu()
 	{
 		int selection = 0;
@@ -252,29 +251,29 @@ public class Player extends Account
 			selection = pgm.in.nextInt();
 			switch (selection) {
 			case 1: this.bet();
-			break;
+					break;
 			case 2: if(hasLoan)
-				this.payLoan();
-			else
-				this.loanApp();
-			break;
+						this.payLoan();
+					else
+						this.loanApp();
+					break;
 			case 3: if(hasBank)
-				withdraw();
-			else
-				bankApp();
-			break;
+						withdraw();
+					else
+						bankApp();
+					break;
 			case 4: if(hasBank)
 						deposit();
 					else
 						System.out.println("That is currently unavailable, please try again.");
-			break;
+					break;
 			case 5: logout();
 			break;
 			case 6: if(!accountFlagged)
 						deleteAcc();
 					else
 						saveAcc();
-			break;
+					break;
 			}
 		}
 	}
