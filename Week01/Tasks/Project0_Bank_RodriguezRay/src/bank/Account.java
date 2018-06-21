@@ -7,22 +7,21 @@ public  class Account {
 	String lName;
 	String userName;
 	String password;
+	boolean approved;
 	
 	public Account(String accType, String fName, String lName, String userName, String password) {
+		super();
 		this.accType = accType;
 		this.fName = fName;
 		this.lName = lName;
 		this.userName = userName;
 		this.password = password;
+		approved = false;
 	}
 	
 	public Account(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
-	}
-	
-	public void Logout() {
-		
 	}
 	
 	public void DisplayAccDetails() {
