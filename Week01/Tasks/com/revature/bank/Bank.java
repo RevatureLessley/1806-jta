@@ -5,6 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * Lets a normal user login, logout, 
+ * deposit and withdraw from their account.
+ * <br>Lets an admin login, logout,
+ * and approve accounts. 
+ * @author Logan
+ */
 public class Bank {
 	private ArrayList<Account> accs = null;
 	private int activeAccount = 999;
@@ -29,7 +36,7 @@ public class Bank {
 			String newUsername = bufferedReader.readLine();
 			System.out.println("What password would you like to use?: ");
 			String newPassword = bufferedReader.readLine();
-			Account newAccount = new Account(newUsername, newPassword, accountsAmount, 0, USER);
+			Account newAccount = new Account(newUsername, newPassword, accountsAmount, 0, USER, false);
 			accs.add(newAccount);
 		} 
 		catch (IOException e) 
@@ -46,7 +53,7 @@ public class Bank {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		try
 		{
-			String registered = bufferedReader.readLine().toLowerCase();
+			registered = bufferedReader.readLine().toLowerCase();
 			if ( registered.equals("no") )
 			{
 				System.out.println("Please register an account.");
@@ -83,7 +90,7 @@ public class Bank {
 			enteredAccountName = bufferedReader.readLine();
 			for ( int i = 0; i < accs.size(); i++ )
 			{
-				if ( accs.get(i).getUserName().equals(enteredAccountName))
+				if ( accs.get(i).getUserName().equals(enteredAccountName) )
 				{
 					activeAccount = i;
 				}
@@ -94,7 +101,7 @@ public class Bank {
 				enteredAccountName = bufferedReader.readLine();
 				for (counter = 0; counter < accs.size(); counter++ )
 				{
-					if ( accs.get(counter).getUserName().equals(enteredAccountName))
+					if ( accs.get(counter).getUserName().equals(enteredAccountName) )
 					{
 						activeAccount = counter;
 						System.out.println("Correct account name.");
@@ -128,8 +135,17 @@ public class Bank {
 				}
 			}
 			
-			System.out.println("Successfully logged in.");
-			askUserInput(accs.get(activeAccount));
+			if ( accs.get(activeAccount).getApproved() == true )
+			{
+				System.out.println("Successfully logged in.");
+				askUserInput(accs.get(activeAccount));
+			}
+			else
+			{
+				System.out.println("Your account is not activated.");
+				System.out.println("Please wait until an admin activates your account. Thank you.\n");
+				login();
+			}
 		} 
 		catch (IOException e1) 
 		{
@@ -139,7 +155,7 @@ public class Bank {
 	
 	public void adminLogin()
 	{
-		
+		// TODO: let admin login and view pending accounts and approve them
 	}
 	
 	public void askUserInput(Account account) 
@@ -256,8 +272,8 @@ public class Bank {
 	public static void main(String[] args)
 	{
 		ArrayList<Account> accs = new ArrayList<>();
-		Account a1 = new Account("Logan", "Brewer", 1, 0, ADMIN);
-		Account a2 = new Account("Test", "Guy", 2, 100, USER);
+		Account a1 = new Account("Logan", "Brewer", 1, 0, ADMIN, true);
+		Account a2 = new Account("Test", "Guy", 2, 100, USER, true);
 		accs.add(a1);
 		accs.add(a2);
 		

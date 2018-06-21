@@ -2,6 +2,19 @@ package com.revature.bank;
 
 import java.io.Serializable;
 
+/**
+ * Account class is responsible for holding information
+ * that relates to a person who owns an account at the bank.
+ * <br>Fields:
+ * <br>- userName(String)
+ * <br>- password(String)
+ * <br>- accountNumber(int)
+ * <br>- accountValue(int)
+ * <br>- accountType(int)
+ * <br>- approved(boolean)
+ * 
+ * @author Logan Brewer
+ */
 public class Account implements Serializable
 {
 	private static final long serialVersionUID = 2022586512565322588L;
@@ -10,8 +23,9 @@ public class Account implements Serializable
 	private int accountNumber;
 	private int accountValue;
 	private int accountType;
+	private boolean approved;
 	
-	public Account(String userName, String password, int accountNumber, int accountValue, int accountType) 
+	public Account(String userName, String password, int accountNumber, int accountValue, int accountType, boolean approved) 
 	{
 		super();
 		this.userName = userName;
@@ -19,6 +33,7 @@ public class Account implements Serializable
 		this.accountNumber = accountNumber;
 		this.accountValue = accountValue;
 		this.accountType = accountType;
+		this.approved = approved;
 	}
 
 	public String getUserName() 
@@ -70,10 +85,50 @@ public class Account implements Serializable
 	{
 		this.accountType = accountType;
 	}
+	
+	public boolean getApproved()
+	{
+		return approved;
+	}
+	
+	public void setApproved(boolean approved)
+	{
+		this.approved = approved;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (accountNumber != other.accountNumber)
+			return false;
+		if (accountType != other.accountType)
+			return false;
+		if (accountValue != other.accountValue)
+			return false;
+		if (approved != other.approved)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Account [userName=" + userName + ", password=" + password + ", accountNumber=" + accountNumber
-				+ ", accountValue=" + accountValue + ", accountType=" + accountType + "]";
+				+ ", accountValue=" + accountValue + ", accountType=" + accountType + ", approved= " + approved + "]";
 	}
 }
