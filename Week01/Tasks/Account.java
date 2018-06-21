@@ -22,6 +22,9 @@ public abstract class Account implements Serializable {
  	}
 
 	public void signIn(){
-
+		Integer username = console.readLine("Username: ").hashCode();
+		Integer password = String.valueOf(console.readPassword("Password: ")).hasCode();
+		String index = username + password;
+		
 	}
 }
