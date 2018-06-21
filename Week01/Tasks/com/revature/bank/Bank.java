@@ -44,6 +44,7 @@ public class Bank {
 			e.printStackTrace();
 		}
 		System.out.println("Thank you for registering, now please login.\n");
+		login();
 	}
 	
 	public void login()
