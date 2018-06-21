@@ -1,8 +1,15 @@
 import java.io.*;
+import java.util.*;
 import RevatureDatabase.*;
 
 public class RevatureBank implements ConsoleReference{
 	
+	private HashMap<Integer, Account> accounts = new HashMap<Integer, Account>(); 
+
+	private void createAccount(){
+		Account a = new Account();
+	}
+
 	public static void main(String args[]){
 		System.out.println("Welcome to RevatureBank.");
 		String hasAccount;

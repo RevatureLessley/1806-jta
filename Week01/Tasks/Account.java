@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Account implements Serializable {
-	ArrayList<AccountAttribute> attributes = new ArrayList<AccountAttribute>();
+	HashMap<String, AccountAttribute> attributes = new HashMap<>();
 
  	Account(){
  		new Username(this);
@@ -14,6 +14,10 @@ public class Account implements Serializable {
  	public void addAttribute(AccountAttribute aa) {
   		attributes.add(aa);
  	}
+
+	public Integer getID(){
+
+	}
 
  	public void print(){
   		attributes.stream().forEach(a->a.print());
