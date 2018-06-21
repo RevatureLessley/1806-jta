@@ -16,7 +16,8 @@ public class loginPrompt{
 	* @return None
 	*/
 	public void inputLogin(){
-		Users users = this.retrieveUsers();
+		//Users users = this.retrieveUsers();
+		Users users = new Users();
 		String username = console.readLine("Username: ");
 		User user = users.getUsers().get(username);
 		user = this.checkPassword(user,username);
@@ -25,7 +26,7 @@ public class loginPrompt{
 			System.out.println("Your account is not approved yet, please wait 0 or more years");
 			return;
 		}
-		
+		user.toString();
 		
 	}
 	/**
@@ -38,6 +39,7 @@ public class loginPrompt{
 			ObjectInputStream ois = new ObjectInputStream(
 					new FileInputStream("users.ser"));
 			u = (Users)ois.readObject();
+			ois.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,6 +56,7 @@ public class loginPrompt{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("users.ser"));
 			oos.writeObject(users); //Serialize
+			oos.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
