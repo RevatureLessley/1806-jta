@@ -153,7 +153,7 @@ public class VendingMachine {
 			 + "=========================\n"
 			 + "=========================\n\n");
        
-       printMachine.append(Printing.columnLengthLimitedString(this.getMessage(), 36));
+       printMachine.append(Printing.rowLengthLimitedString(this.getMessage(), 36));
        
        return printMachine.toString();
    }

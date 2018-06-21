@@ -53,7 +53,6 @@ public class Input {
 	this.add(input);
 	return input;
     }
-
     
     public static void main(String[] args) {
 	Input input = new Input();

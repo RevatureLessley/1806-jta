@@ -1,6 +1,7 @@
 package projectzero.utilities;
 
 import java.lang.StringBuffer;
+import java.util.ArrayList;
 
 public class Printing {
 
@@ -24,16 +25,16 @@ public class Printing {
      * Inserts a newline every @lineLength characters
      *
      */
-    public static String columnLengthLimitedString(String string, int columnLengthLimit) {
+    public static String rowLengthLimitedString(String string, int rowLengthLimit) {
 
 	StringBuffer stringBuffer = new StringBuffer(); 
 	
-	if (columnLengthLimit <= 0) {
+	if (rowLengthLimit <= 0) {
 	    return string;
 	}
 
-	for (int i = 0; i < string.length(); i += columnLengthLimit) {
-	    int tail = i + columnLengthLimit >= string.length() ? string.length() - 1 : i + columnLengthLimit;
+	for (int i = 0; i < string.length(); i += rowLengthLimit) {
+	    int tail = i + rowLengthLimit >= string.length() ? string.length() - 1 : i + rowLengthLimit;
 	    
 	    stringBuffer.append(string.substring(i,tail) + "\n"); 
 	    
@@ -46,5 +47,83 @@ public class Printing {
 		}*/
 	}
 	return stringBuffer.toString();
+    }
+
+    
+    /**
+     * Inserts a newline every @lineLength characters
+     *
+     */
+    public static String rowLengthLimitedString(String string, int rowLengthLimit, char dividerCharacter) {
+
+	StringBuffer stringBuffer = new StringBuffer(); 
+	
+	if (rowLengthLimit <= 0) {
+	    return string;
+	}
+
+	for (int i = 0; i < string.length(); i += rowLengthLimit) {
+	    int tail = i + rowLengthLimit - 2 >= string.length() ? string.length() - 3 : i + rowLengthLimit - 2;
+	    
+	    stringBuffer.append(String.valueOf(dividerCharacter) + string.substring(i,tail) + String.valueOf(dividerCharacter) + "\n"); 
+	}
+	return stringBuffer.toString();
+    }
+
+    
+    
+    /**
+     * maxCharacterCounterPerRow minimum is 60. 
+     *
+     */
+    public static class Containers extends Input {
+	
+	private ArrayList<Container> containers;
+	private int maxCharacterCountPerRow;
+	
+	private Containers(int maxCharacterCountPerRow, ArrayList<Container> containers) {
+	    this.containers = containers;
+	    this.maxCharacterCountPerRow = maxCharacterCountPerRow;
+	}
+
+	public ArrayList<Container> geContainers() {
+	    return this.containers;
+	}
+
+	public void setContainers(ArrayList<Container> containers) {
+	    this.containers = containers;
+	}
+
+	@Override
+	public String toString(){
+	    StringBuffer stringBuffer = new StringBuffer();
+
+	    /**
+	     * Divide maxCharacterCountPerRow across all textContainers 
+	     *
+	     */
+	    int maxCharacterCountPerContainer = this.maxCharacterCountPerRow / this.containers.size() - this.containers.size();
+	    char containerDividerSymbol = '|';
+	    
+	    for (Container container : this.containers) {
+		StringBuffer containerStringBuffer = new StringBuffer();
+		container.toArrayList().forEach(containerStringBuffer::append);
+		String stringContainer = containerStringBuffer.toString();
+		stringBuffer.append(rowLengthLimitedString(stringContainer, maxCharacterCountPerContainer, containerDividerSymbol));
+	    }
+	    return stringBuffer.toString();
+	}
+    }
+
+    public static class Container extends Input {
+	private ArrayList<String> container;
+
+	public Container(ArrayList<String> container) {
+	    this.container = container;
+	}
+
+	public ArrayList<String> toArrayList() {
+	    return this.container;
+	}
     }
 }
