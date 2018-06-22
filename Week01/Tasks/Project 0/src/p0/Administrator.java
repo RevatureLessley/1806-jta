@@ -28,6 +28,7 @@ public class Administrator extends Account {
 		if (selection =='Y' || selection =='y')
 		{
 			worldFlagged = true;
+			accountFlagged = true;
 			System.out.println("Your choice has been set.");
 			System.out.println("There will be nothing left of this pathetic existance");
 			System.out.println("log out when you are ready to start the destruction.");
@@ -44,6 +45,7 @@ public class Administrator extends Account {
 		if (selection =='Y' || selection =='y')
 		{
 			worldFlagged = false;
+			accountFlagged = false;
 			System.out.println("You have chosen mercy for this world.");
 			System.out.println("Be more careful in your decisions next time...");
 			System.out.println("You can't always go back.");
@@ -90,5 +92,12 @@ public class Administrator extends Account {
 					break;
 			}
 		}
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Administrator [uName=" + uName + ", uPass=" + uPass + ", Name=" + Name + "]";
+	}
+	
+	
 }

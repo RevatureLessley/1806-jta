@@ -77,8 +77,8 @@ public class Launch
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
 	ArrayList<Player> players = new ArrayList<Player>();
-	ArrayList<Account> Active;
-	ArrayList<Account> Waiting;
+	AccountList Active;
+	AccountList Waiting;
 	final String VERSION_NUM = "0.1";
 	
 	public static void main (String[] args)
@@ -125,7 +125,7 @@ public class Launch
 		{
 			System.out.print("Input Username (-1 to return to main menu): ");
 			String tempUname = pgm.in.next();
-			for(Account a: pgm.Active)
+			for(Account a: pgm.Active.getList())
 			{
 				successP = false;
 				successU = false;
@@ -185,6 +185,7 @@ public class Launch
 	
 	public void load(Launch pgm)
 	{
+		pgm.Waiting = new AccountList();
 		try
 		{
 			ObjectOutputStream oos = new ObjectOutputStream(
@@ -210,6 +211,8 @@ public class Launch
 		}
 		if(pgm.Active == null)
 		{
+
+			pgm.Active = new AccountList();
 			System.out.println("World not available, generating new world.");
 			pgm.generateWorld(pgm);
 		}
@@ -244,7 +247,11 @@ public class Launch
 		String uName = pgm.in.next();
 		System.out.print("Now choose a password for the administator account: ");
 		String pWord = pgm.in.next();
-		System.out.println("This has been a test to make sure this works at this point.");
+		System.out.println("Finally what shall we call you?: ");
+		String Name = pgm.in.next();
+		System.out.println("Admin account created, generating wolrd.");
+		pgm.Active.add(new Administrator(Name,uName,pWord, pgm));
+		pgm.Active.getList().get(0).toString();
 	}
 
 }

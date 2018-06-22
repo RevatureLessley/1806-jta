@@ -21,6 +21,16 @@ public class AccountList implements Serializable
 		save = list;
 	}
 	
+	public ArrayList<Account> getList()
+	{
+		return save;
+	}
+	
+	public void add(Account a)
+	{
+		save.add(a);
+	}
+	
 	public void updateList()
 	{
 		ArrayList<Account> temp = new ArrayList<Account>();
