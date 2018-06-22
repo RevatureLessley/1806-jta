@@ -42,44 +42,11 @@ public class Driver {
 				unAppUsers.put(uName, u);
 				
 				if(!u.isApproved()) {
+					System.out.println("Thank you for registering.");
 					System.out.println("An administrator will approve your account");
-					break;
-				}
-					
-				
-				System.out.println("Congratulations you have created a new account");
-				System.out.println("Your current balance is $" + u.getUserBalance());
-				System.out.println();
-				
-				
-				while(true) {
-					System.out.println("Please select from the following commands:");
-					System.out.println("'Deposit' 'Withdraw' 'Balance' 'Logout'");
-					
-					String command = in.nextLine().toLowerCase();
-					if(command.equals("deposit")) {
-						System.out.print("How much would you like to deposit? $");
-						int amount = Integer.parseInt(in.nextLine());
-						System.out.println("Balance after deposit $" + u.getAccount().deposit(amount));
-					}
-					else if(command.equals("withdraw")) {
-						System.out.print("How much would you like to withdraw? $");
-						int amount = Integer.parseInt(in.nextLine());
-						System.out.println("Balance after withdrawal $" + u.getAccount().withdrawal(amount));
-					}
-					else if(command.equals("balance")) {
-						System.out.println("Current balance $" + u.getUserBalance());
-					}
-					else if(command.equals("logout")) {
-						finished = true;
-						break;
-					}
-					else {
-						System.out.println("Not a valid command");
-					}
 					System.out.println();
-				}						
-				
+					break;
+				}			
 			}
 			else if(input.toLowerCase().equals("login")) {
 				System.out.print("Please enter username: ");
@@ -110,23 +77,43 @@ public class Driver {
 						pass = in.nextLine();
 					}
 					while(true) {
-						System.out.println("Accounts awating approval " + unAppUsers.size());
-						System.out.println("To approve users, type 'Approve'");
+						int unAppUserSize = unAppUsers.size();
+						System.out.println("Accounts awating approval " + unAppUserSize);
+						System.out.println("To approve users, type 'Approve'. To logout, type 'logout'");
 						
 						String command = in.nextLine().toLowerCase();
 						if(command.equals("approve") && !unAppUsers.isEmpty()) {
+							System.out.println("Accounts awaiting approval:");
 							for(String userName: unAppUsers.keySet()) {
-								System.out.println(userName);
+								System.out.println(userName);								
 							}
+							System.out.println();
+							System.out.println("Select User to Approve");
+							String user = in.nextLine();
+							if(unAppUsers.containsKey(user)){
+								unAppUsers.get(user).setApproved(true);
+								unAppUsers.remove(user);
+								System.out.println(user + " Approved");
+								System.out.println();
+							}								
+						}
+						else if(command.equals("logout")) {
+							System.out.println();
+							break;
+						}
+						else {
+							System.out.println("Command not recognized.");
 						}
 					}
+					break;
 				}
 				else {
 					System.out.println("Sorry your account has not been approved");
+					System.out.println();
 					break;
 					}
 				User u = users.get(uName);				
-				System.out.println("Welcome back");
+				System.out.println("Welcome");
 				System.out.println("Your balance is $" + u.getUserBalance());
 				
 				System.out.println();
