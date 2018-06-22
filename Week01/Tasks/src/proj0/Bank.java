@@ -50,7 +50,8 @@ public class Bank{
 				}
 				break;
 			case "goodbye":
-				return;
+				this.removeUser(users);
+				break;
 		}
 		this.options(user,users);
 	}
@@ -95,6 +96,15 @@ public class Bank{
 		else {
 			System.out.println("User successfully approved");
 			user.setAuth(true);
+		}
+	}
+	public void removeUser(Users users) {
+		String username = LoginPrompt.console.readLine(": ");
+		User user = users.getUsers().get(username);
+		if(user == null) System.out.println("User does not exist");
+		else {
+			System.out.println("User successfully removed");
+			users.removeUser(user);
 		}
 	}
 }

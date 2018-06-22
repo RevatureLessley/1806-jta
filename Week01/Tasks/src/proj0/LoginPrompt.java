@@ -84,7 +84,7 @@ public class LoginPrompt{
 			
 		}else {
 			System.out.println("User not found, enter '0' to create an account or '1' to "
-					+ "enter a different username.");
+					+ "exit.");
 			String input = console.readLine(": ");
 			if(input.equals("0")) user = this.createUser(username);
 			else{
