@@ -7,6 +7,7 @@ public  class Account {
 	String lName;
 	String userName;
 	String password;
+	boolean banned;
 	boolean approved;
 	
 	public Account(String accType, String fName, String lName, String userName, String password) {
@@ -17,6 +18,7 @@ public  class Account {
 		this.userName = userName;
 		this.password = password;
 		approved = false;
+		accNum++;
 	}
 	
 	public Account(String userName, String password) {
@@ -25,7 +27,7 @@ public  class Account {
 	}
 	
 	public void DisplayAccDetails() {
-		System.out.format("%-20s\t%-20s", fName, lName);
+		System.out.format("|%-15d|%-10s|%-20s|%-20s|", accNum, accType, fName, lName);
 	}
 	
 	public void UpdateAccountDetails() {

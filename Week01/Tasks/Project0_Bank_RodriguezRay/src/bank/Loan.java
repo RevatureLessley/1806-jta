@@ -20,8 +20,7 @@ public class Loan {
 	}
 	
 	public void DisplayLoanDetails() {
-		System.out.format("%-12s %-30s %s %s %s", );
-		System.out.format("Loan ID: %-4d\nLoan Amount: %-30f\nInterest Rate: %-12f\nAPR: %-12f\nLoan Term: %-4d\nApproved: %b\n"
+		System.out.format("%-12d|%-15f|%-14f|%-12f|%-12d|%-9b\n\n"
 						 , id, loanAmount, interestRate, apr, loanTerm, approved);
 	}
 }

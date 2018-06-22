@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Driver {
-	public static Scanner reader = new Scanner(System.in);;
+	public static Scanner reader = new Scanner(System.in);
+	String nextLine;
 	List<UserAccount> userAccounts = new ArrayList<UserAccount>();
 	UserAccount loggedIn;
-	int mOpt = 0;
-	int aOpt = 0;
+	int mOpt = 7;
+	int aOpt = 7;
 	
 	public static void main(String[] args) {
 		UserAccount acc = new UserAccount("user", "Ray", "Rodriguez", "rrod", "cards", 2000);
@@ -24,7 +25,7 @@ public class Driver {
 	
 	public void accountMenu() {
 		do {
-			System.out.println("Please Choose an option 1-2: \n");
+			System.out.println("Please Choose an option 1-6: \n");
 			System.out.println("1: Check Balance\n"
 							 + "2: Withdraw\n"
 							 + "3: Deposit\n"
@@ -32,8 +33,14 @@ public class Driver {
 							 + "5: Apply for loan\n"
 							 + "6: Display Loan(s) Details\n"
 							 + "0: Logout\n");
-			aOpt = Integer.parseInt(reader.nextLine());
-			System.out.println();
+			
+			nextLine = reader.nextLine();
+			if (isNumeric(nextLine)) {
+				aOpt = Integer.parseInt(nextLine);
+				System.out.println();
+			} else {
+				System.out.println("Option not recognized.\n");
+			}
 			
 			switch(aOpt) {
 			case 1:
@@ -91,8 +98,14 @@ public class Driver {
 			System.out.println("1: Login\n"
 							 + "2: Sign up\n"
 							 + "0: Exit App\n");
-			mOpt = Integer.parseInt(reader.nextLine());
-			System.out.println();
+
+			nextLine = reader.nextLine();
+			if (isNumeric(nextLine)) {
+				mOpt = Integer.parseInt(nextLine);
+				System.out.println();
+			} else {
+				System.out.println("Option not recognized.\n");
+			}
 			
 			switch(mOpt) {
 			case 1:
@@ -161,5 +174,8 @@ public class Driver {
 		System.out.println(un + " signed up\n");
 	}
 
-
+	public static boolean isNumeric(String str)
+	{
+	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+	}
 }
