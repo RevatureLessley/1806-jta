@@ -13,8 +13,8 @@ public class Bank {
 	{
 		new User("chris", "password", 9999, true, true),
 		new User("carol", "kitty", 356, false, true),
-		new User("jack", "secretpassword", 1500, false, false)
-		new User("admin", "password", 0, true, true);
+		new User("jack", "secretpassword", 1500, false, false),
+		new User("admin", "password", 0, true, true)
 	};
 	
 	
@@ -96,7 +96,7 @@ public class Bank {
 					{
 						if(users[i].isAdmin())
 						{
-							// go to admin "screen"
+							adminScreen();
 						}
 						else
 						{
@@ -126,11 +126,24 @@ public class Bank {
 	}
 	
 	
+	void adminScreen()
+	{
+		System.out.println("Hello adminstrator!");
+		System.out.println("Let's see if you have to approve anyone's account today!");
+		// Iterate through the users array and see if any are not yet approved and then approve them if they aren't
+		// Well, I guess you don't HAVE to approve them but there really isn't a reason not to
+		
+		adminCheckUsers();
+	}
 	
 	
 	
 	
 	
+	
+	///////////////////////////////////////
+	// Helper Functions
+	///////////////////////////////////////
 	
 	public void enterName()
 	{
@@ -143,7 +156,57 @@ public class Bank {
 		System.out.println("Please Enter Password:");
 		password = BankMain.sc.nextLine();
 	}
+	
+	private void adminCheckUsers()
+	{
+		for (int i = 0; i < users.length; i++)
+		{
+			if(!users[i].isApproved())
+			{
+				System.out.println(users[i].getName() + " is not yet approved. Approve them? y/n");
+				if(BankMain.sc.nextLine().equals("y"))
+				{
+					users[i].setApproved(true);
+					System.out.println(users[i].getName()+ " has been approved!");
+				}
+				else if(BankMain.sc.nextLine().equals("n"))
+				{
+					System.out.println("I mean.....alright then. Your call. Just sayin' that maybe you should reconsider.");
+				}
+			}
+			else
+			{
+				continue;
+			}
+		}
+		endOfAdmin();
+	}
+	
 
+	public void endOfAdmin()
+	{
+		System.out.println("No other users to approve");
+		while(true)
+		{
+			System.out.println("Would you like to:");
+			System.out.println("[check] the list again");
+			System.out.println("or");
+			System.out.println("[exit] back to the beginning? Maybe to show the rest of your project?");
+			answer = BankMain.sc.nextLine();
+			if(!answer.equals("check") && !answer.equals("exit"))
+			{
+				System.out.println("Siiiiiiiiigh. Obviously your options are the words in the brackets. Try again");
+			}
+			else if(answer.equals("check"))
+			{
+				adminCheckUsers();
+			}
+			else if(answer.equals("exit"))
+			{
+				firstScreen();
+			}
+		}
+	}
 
 	
 	
