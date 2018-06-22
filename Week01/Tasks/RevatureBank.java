@@ -46,8 +46,7 @@ public class RevatureBank implements ConsoleReference{
 			welcome();
 		}
 		else
-			System.out.println("Welcome to your account.");
-			//a.enter();
+			a.enter();
 	}
 
 	public void enter() {

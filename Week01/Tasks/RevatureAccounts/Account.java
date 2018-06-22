@@ -6,8 +6,8 @@ import Tasks.*;
 import Tasks.RevatureAccounts.AccountAttributes.*;
 
 public abstract class Account implements ConsoleReference, Serializable {
-	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();
 	protected AccountStatus status;
+	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();
 
  	public Account() {}
 
@@ -15,7 +15,7 @@ public abstract class Account implements ConsoleReference, Serializable {
   		attributes.put(field, aa);
  	}
 
-	// abstract public void enter();
+	abstract public void enter();
 
 	public Integer getID(){
 		Integer index = attributes.get("Username").getID() + 

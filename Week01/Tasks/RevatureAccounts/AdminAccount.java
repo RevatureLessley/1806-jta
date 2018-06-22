@@ -15,8 +15,8 @@ public class AdminAccount extends Account implements Serializable {
   status = AccountStatus.APPROVED;
  }
 
-// @Override
-// public void enter() {
+ @Override
+ public void enter() {
   
-// }
+ }
 }
