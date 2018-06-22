@@ -10,6 +10,7 @@ public class customer implements java.io.Serializable {
     private String last_name = "Last Name";
     private String ss_number = "numbers";
     private StringBuffer password = new StringBuffer();
+    private boolean admin = false;
 
     
     /*Constructor takes in one double variable to set the balance*/
@@ -76,7 +77,15 @@ public class customer implements java.io.Serializable {
       this.balance = balance - withdrawamount;
     }
 
-
+    /*Set the balance*/
+    public void setBalance(float amount) {
+    	this.balance = amount;
+    }
+    
+    /*Returns the balance*/
+    public float getBalance() {
+    	return balance;
+    	}
 
 
 //================PASSWORD EDITORS=====================
@@ -89,6 +98,42 @@ public class customer implements java.io.Serializable {
 		this.password = password;
 	}
 
+
+
+	
+	
+	
+//===============Activation editors accessible only by ADMIN==========
+	public boolean isActivated() {
+		return activated;
+	}
+
+
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+	
+//==============Check to see if you are an admin=======================
+
+
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+
+
+	public void setAdmin(String admin_password) {
+		if(admin_password.equals("password1")) {
+		System.out.println("Correct you are now registered as an admin");
+		this.admin = true;
+		}
+		else {System.out.println("Wrong password you are not set as an admin");}
+	}
+	public void setAdmin(boolean setter) {
+		this.admin = setter;
+	}
 
 
 
