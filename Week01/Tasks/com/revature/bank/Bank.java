@@ -16,7 +16,7 @@ public class Bank {
 	private ArrayList<Account> accs = null;
 	private int activeAccount = 999;
 	private int counter;
-	private static int accountsAmount = 2;
+	private static int accountsAmount = 3;
 	private String registered;
 	private static final int USER = 0;
 	private static final int ADMIN = 1;
@@ -157,6 +157,75 @@ public class Bank {
 	public void adminLogin()
 	{
 		// TODO: let admin login and view pending accounts and approve them
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		try 
+		{
+			System.out.println("Please enter your username: ");
+			String enteredAccountName;
+			enteredAccountName = bufferedReader.readLine();
+			for ( int i = 0; i < accs.size(); i++ )
+			{
+				if ( accs.get(i).getUserName().equals(enteredAccountName) )
+				{
+					activeAccount = i;
+				}
+			}
+			while ( activeAccount == 999 )
+			{
+				System.out.println("Not a valid user account. Try again.");
+				enteredAccountName = bufferedReader.readLine();
+				for (counter = 0; counter < accs.size(); counter++ )
+				{
+					if ( accs.get(counter).getUserName().equals(enteredAccountName) )
+					{
+						activeAccount = counter;
+						System.out.println("Correct account name.");
+						break;
+					}
+				}
+			}
+			
+			System.out.println("Please enter your password: ");
+			String enteredPassword;
+			
+			enteredPassword = bufferedReader.readLine();
+			while(true)
+			{
+				if ( accs.get(activeAccount).getPassword().equals(enteredPassword) )
+				{
+					break;		
+				}
+				else
+				{
+					while(true)
+					{
+						System.out.println("That password does not exist. Try again.");
+						enteredPassword = bufferedReader.readLine();
+						if ( accs.get(activeAccount).getPassword().equals(enteredPassword) )
+						{
+							break;
+						}
+						
+					}
+				}
+			}
+			
+			if ( accs.get(activeAccount).getApproved() == true )
+			{
+				System.out.println("Successfully logged in.");
+				askAdminInput(accs.get(activeAccount));
+			}
+			else
+			{
+				System.out.println("Your account is not activated.");
+				System.out.println("Please wait until an admin activates your account. Thank you.\n");
+				login();
+			}
+		}
+		catch (IOException e1) 
+		{
+			e1.printStackTrace();
+		}	
 	}
 	
 	public void askUserInput(Account account) 
@@ -221,6 +290,49 @@ public class Bank {
 		}
 	}
 	
+	public void askAdminInput(Account account)
+	{
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Accounts left to approve: ");
+		try
+		{
+			for ( int i = 0; i < accs.size(); i++ )
+			{
+				if ( accs.get(i).getApproved() == false )
+				{
+					System.out.println("AccountName: " + accs.get(i).getUserName());
+					System.out.println("Do you want to approve this account? (yes/no): ");
+					while(true)
+					{
+						String enteredAnswer = bufferedReader.readLine().toLowerCase();
+						if ( enteredAnswer.equals("yes") )
+						{
+							accs.get(i).setApproved(true);
+							System.out.println("AccountName: " + accs.get(i).getUserName() + " has been approved.\n");
+							break;
+						}
+						else if ( enteredAnswer.equals("no"))
+						{
+							System.out.println("AccountName: " + accs.get(i).getUserName() + " has been NOT been approved.\n");
+							break;
+						}
+						else
+						{
+							System.out.println("Please type \"yes\" or \"no\".");
+						}
+					}
+				}
+			}
+			System.out.println("Done going through all accounts.");
+			System.out.println("Logging you out, switch to user account to perform transactions.\n");
+			login();
+		}
+		catch ( IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public void userWithdraw(int withdrawAmount, Account account)
 	{
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -273,8 +385,9 @@ public class Bank {
 	public static void main(String[] args)
 	{
 		ArrayList<Account> accs = new ArrayList<>();
-		Account a1 = new Account("Logan", "Brewer", 1, 0, ADMIN, true);
-		Account a2 = new Account("Test", "Guy", 2, 100, USER, true);
+		Account a1 = new Account("Logan", "Admin", 1, 0, ADMIN, true);
+		Account a1 = new Account("Logan", "User", 2, 0, ADMIN, true);
+		Account a2 = new Account("Test", "Guy", 3, 100, USER, true);
 		accs.add(a1);
 		accs.add(a2);
 		
