@@ -12,6 +12,7 @@ public class Bank{
 		Users users = lp.retrieveUsers();
 		User user = lp.enterLogin(users);
 		if (user == null) return;
+		
 		Bank bank = new Bank();
 		bank.options(user,users);
 		lp.storeUsers(users);
@@ -30,15 +31,12 @@ public class Bank{
 		switch(input) {
 			case "0":
 				System.out.println(user.getBalance());
-				input = "options";
 				break;
 			case "1":
 				this.deposit(user);
-				input = "options";
 				break;
 			case "2":
 				this.withdraw(user);
-				input = "options";
 				break;
 			case "3":
 				return;
@@ -73,7 +71,21 @@ public class Bank{
 	}
 	
 	public void withdraw(User user) {
-		
+		if(user.getBalance() == 0) {
+			System.out.println("Sorry, you're broke");
+			return;
+		}
+		System.out.println("How much would you like to withdraw?");
+		String amount = LoginPrompt.console.readLine(": ");
+		double d = Double.parseDouble(amount);
+		amount = new DecimalFormat("##.##").format(d);
+		d = Double.parseDouble(amount);
+		if (d > user.getBalance()) { 
+			System.out.println("Insufficient Funds");
+			return;
+		}
+		user.setBalance(user.getBalance() - d);
+		System.out.println("Current balance: " + user.getBalance());
 	}
 	
 	public void approveUser(Users users) {

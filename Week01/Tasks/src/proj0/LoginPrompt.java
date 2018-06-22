@@ -23,6 +23,7 @@ public class LoginPrompt{
 		if (user == null) return null;
 		users.addUser(user);
 		this.storeUsers(users);
+		System.out.println(user.toString());
 		if (!user.isAuth()) {
 			System.out.println("Your account is not approved yet, please wait 0 or more years");
 			return null;
@@ -89,7 +90,6 @@ public class LoginPrompt{
 			else{
 				return null;
 			}
-			System.out.println(user.toString());
 		}
 		return user;
 	}
