@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Lets a normal user login, logout, 
@@ -47,6 +47,7 @@ public class Bank
 			String newPassword = bufferedReader.readLine();
 			Account newAccount = new Account(newUsername, newPassword, accountsAmount, 0, USER, false);
 			accs.add(newAccount);
+			writeAccountsFile(accs);
 		} 
 		catch (IOException e) 
 		{
@@ -149,7 +150,7 @@ public class Bank
 			
 			if ( accs.get(activeAccount).getApproved() == true )
 			{
-				System.out.println("Successfully logged in.");
+				System.out.println("Successfully logged in.\n");
 				askUserInput(accs.get(activeAccount));
 			}
 			else
@@ -168,7 +169,6 @@ public class Bank
 	
 	public void adminLogin()
 	{
-		// TODO: let admin login and view pending accounts and approve them
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		try 
 		{
@@ -224,7 +224,7 @@ public class Bank
 			
 			if ( accs.get(activeAccount).getApproved() == true )
 			{
-				System.out.println("Successfully logged in.");
+				System.out.println("Successfully logged in.\n");
 				askAdminInput(accs.get(activeAccount));
 			}
 			else
@@ -388,6 +388,7 @@ public class Bank
 			account.setAccountValue(account.getAccountValue() - withdrawAmount);
 		}
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
+		writeAccountsFile(accs);
 	}
 	
 	
@@ -396,10 +397,11 @@ public class Bank
 		System.out.println("Amount in the account before deposit: $" + account.getAccountValue());
 		account.setAccountValue(account.getAccountValue() + depositAmount);
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
+		writeAccountsFile(accs);
 	}
 	
 	
-	public void writeAccountsFile()
+	public void writeAccountsFile(ArrayList<Account> accs)
 	{
 		try
 		{
@@ -423,7 +425,6 @@ public class Bank
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 			accs = (ArrayList<Account>) objectInputStream.readObject();
 			objectInputStream.close();
-			readAccountsFile();
 		}
 		catch(FileNotFoundException e)
 		{
@@ -446,8 +447,8 @@ public class Bank
 		accs.add(a1);
 		
 		Bank testBank = new Bank(accs);
-		testBank.writeAccountsFile();
-		testBank.readAccountsFile();
+		//testBank.writeAccountsFile(accs);
+		testBank.login();
 	}
 	
 }
