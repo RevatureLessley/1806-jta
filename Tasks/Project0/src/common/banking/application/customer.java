@@ -55,85 +55,82 @@ public class customer implements java.io.Serializable {
 	}
 //=================BALANCE EDITORS=======================
     /*Get the balance*/
-    public double getbalance (){
-      return balance; 
-    }
+    public double getbalance ()
+    {return balance;}
 
 	/*Print out the balance*/
-    public void statement (){
+    /**Prints out the account information NAME and LAST NAME and BALANCE*/
+    public void statement ()
+    {
       System.out.println("Hello "+ first_name + " " + last_name);
       System.out.println("Balance is: ");
       System.out.printf("%.2f",balance);
-      
+      System.out.println(""); 
     }
 
     /*Deposit some munnies*/
-    public void deposit (float depositamount){
-      this.balance = balance + depositamount;
-    }
+    /**Adds the amount given to the balance*/
+    public void deposit (float depositamount)
+    {this.balance = balance + depositamount;}
 
     /*Take sum munnies*/
-    public void withdraw (float withdrawamount){
-      this.balance = balance - withdrawamount;
-    }
+    /**Substracts the amount given to the balance*/
+    public void withdraw (float withdrawamount)
+    {this.balance = balance - withdrawamount;}
 
     /*Set the balance*/
-    public void setBalance(float amount) {
-    	this.balance = amount;
-    }
+    /**Sets the balance to a set amount*/
+    public void setBalance(float amount) 
+    {this.balance = amount;}
     
     /*Returns the balance*/
-    public float getBalance() {
-    	return balance;
-    	}
+    /**Returns the amount given*/
+    public float getBalance() 
+    {return balance;}
 
 
 //================PASSWORD EDITORS=====================
 
-	public StringBuffer getPassword() {
-		return password;
-	}
+	public StringBuffer getPassword() 
+	{return password;}
 
-	public void setPassword(StringBuffer password) {
-		this.password = password;
-	}
+	public void setPassword(StringBuffer password) 
+	{this.password = password;}
 
 
-
-	
-	
-	
 //===============Activation editors accessible only by ADMIN==========
-	public boolean isActivated() {
-		return activated;
-	}
+	//Checks to see if the account is activated
+	public boolean isActivated() 
+	{return activated;}
 
-
-
-	public void setActivated(boolean activated) {
-		this.activated = activated;
-	}
+	//Activates the account to either true or false
+	/**Activates or deactivates the account*/
+	public void setActivated(boolean activated) 
+	{this.activated = activated;}
 	
 //==============Check to see if you are an admin=======================
 
+	public boolean isAdmin() 
+	{return admin;}
 
-
-	public boolean isAdmin() {
-		return admin;
-	}
-
-
-
-	public void setAdmin(String admin_password) {
-		if(admin_password.equals("password1")) {
+	/**If the parameter given is a string
+	 * it checks to see if the password is correct
+	 * and sets the account as an admin and activates it
+	 * this is done at the login menu*/
+	public void setAdmin(String admin_password) 
+	{
+		if(admin_password.equals("password1")) 
+		{
 		System.out.println("Correct you are now registered as an admin");
 		this.admin = true;
 		}
 		else {System.out.println("Wrong password you are not set as an admin");}
 	}
-	public void setAdmin(boolean setter) {
-		this.admin = setter;
-	}
+	
+	/**If the parameter given is a boolean
+	 * Sets the admin as either true or false */
+	public void setAdmin(boolean setter) 
+	{this.admin = setter;}
 
 
 
