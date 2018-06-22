@@ -1,9 +1,15 @@
 package com.revature.bank;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Lets a normal user login, logout, 
@@ -12,7 +18,8 @@ import java.util.ArrayList;
  * and approve accounts. 
  * @author Logan
  */
-public class Bank {
+public class Bank 
+{
 	private ArrayList<Account> accs = null;
 	private int activeAccount = 999;
 	private int counter;
@@ -21,10 +28,12 @@ public class Bank {
 	private static final int USER = 0;
 	private static final int ADMIN = 1;
 	
+	
 	public Bank(ArrayList<Account> accs)
 	{
 		this.accs = accs;
 	}
+	
 	
 	public void register()
 	{
@@ -46,6 +55,7 @@ public class Bank {
 		System.out.println("Thank you for registering, now please login.\n");
 		login();
 	}
+	
 	
 	public void login()
 	{
@@ -80,6 +90,7 @@ public class Bank {
 		}
 		
 	}
+	
 	
 	public void userLogin()
 	{
@@ -153,6 +164,7 @@ public class Bank {
 			e1.printStackTrace();
 		}	
 	}
+	
 	
 	public void adminLogin()
 	{
@@ -228,6 +240,7 @@ public class Bank {
 		}	
 	}
 	
+	
 	public void askUserInput(Account account) 
 	{
 		while(true)
@@ -290,6 +303,7 @@ public class Bank {
 		}
 	}
 	
+	
 	public void askAdminInput(Account account)
 	{
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -333,6 +347,7 @@ public class Bank {
 		}
 	}
 	
+	
 	public void userWithdraw(int withdrawAmount, Account account)
 	{
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -375,6 +390,7 @@ public class Bank {
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 	}
 	
+	
 	public void userDeposit(int depositAmount, Account account)
 	{
 		System.out.println("Amount in the account before deposit: $" + account.getAccountValue());
@@ -382,16 +398,56 @@ public class Bank {
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 	}
 	
+	
+	public void writeAccountsFile()
+	{
+		try
+		{
+			FileOutputStream fileOutputStream = new FileOutputStream("accountsFile.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
+			oos.writeObject(accs);
+			oos.close();
+		}
+		catch ( IOException e )
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void readAccountsFile()
+	{
+		try
+		{
+			FileInputStream fileInputStream = new FileInputStream("accountsFile.txt");
+			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+			accs = (ArrayList<Account>) objectInputStream.readObject();
+			objectInputStream.close();
+			readAccountsFile();
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch(IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		catch(ClassNotFoundException e2)
+		{
+			e2.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args)
 	{
 		ArrayList<Account> accs = new ArrayList<>();
 		Account a1 = new Account("Logan", "Admin", 1, 0, ADMIN, true);
-		Account a1 = new Account("Logan", "User", 2, 0, ADMIN, true);
-		Account a2 = new Account("Test", "Guy", 3, 100, USER, true);
 		accs.add(a1);
-		accs.add(a2);
 		
 		Bank testBank = new Bank(accs);
-		testBank.login();
+		testBank.writeAccountsFile();
+		testBank.readAccountsFile();
 	}
+	
 }
