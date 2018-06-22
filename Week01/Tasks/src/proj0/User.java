@@ -10,11 +10,11 @@ public class User implements Serializable{
 	
 	//stores the user info (userid,pass,fname,lastname,balance,authentication)
 	private String userid;
-	private transient String pass;
+	private String pass;
 	private String fname;
 	private String lname;
 	private int balance;
-	private transient boolean auth;
+	private boolean auth;
 	
 
 	/**

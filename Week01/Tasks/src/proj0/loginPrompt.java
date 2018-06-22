@@ -16,17 +16,20 @@ public class loginPrompt{
 	* @return None
 	*/
 	public void inputLogin(){
-		//Users users = this.retrieveUsers();
-		Users users = new Users();
+		//Users users = new Users();
+		Users users = this.retrieveUsers();
 		String username = console.readLine("Username: ");
 		User user = users.getUsers().get(username);
 		user = this.checkPassword(user,username);
 		if (user == null) return;
+		users.addUser(user);
+		this.storeUsers(users);
 		if (!user.isAuth()) {
 			System.out.println("Your account is not approved yet, please wait 0 or more years");
 			return;
 		}
-		user.toString();
+
+		System.out.println("end");
 		
 	}
 	/**
@@ -86,6 +89,7 @@ public class loginPrompt{
 			else{
 				return null;
 			}
+			System.out.println(user.toString());
 		}
 		return user;
 	}
@@ -101,7 +105,7 @@ public class loginPrompt{
 		String password = null;
 		while(!checkpass) {
 			String newpass = new String(console.readPassword("Create Password: "));
-			String confirmpass = new String(console.readPassword("Create Password: "));
+			String confirmpass = new String(console.readPassword("Confirm Password: "));
 			checkpass = newpass.equals(confirmpass);
 			if(checkpass) {
 				password = newpass;

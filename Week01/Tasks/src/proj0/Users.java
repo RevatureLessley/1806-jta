@@ -24,7 +24,7 @@ public class Users implements Serializable{
 	 * User to put into the hash map
 	 */
 	public void addUser(User user) {
-		users.put(user.getUserid(), user);
+		this.users.put(user.getUserid(), user);
 	}
 	
 	/**
