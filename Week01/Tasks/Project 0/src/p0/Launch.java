@@ -1,11 +1,15 @@
 package p0;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import org.apache.log4j.Logger;
 
 /*
  * Functionality
@@ -74,6 +78,7 @@ import java.util.Scanner;
 
 public class Launch 
 {
+	final static Logger logger = Logger.getLogger(Launch.class);
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
 	ArrayList<Player> players = new ArrayList<Player>();
@@ -85,8 +90,19 @@ public class Launch
 	{
 		Launch pgm = new Launch();
 		pgm.load(pgm);
-		//pgm.mainMenu(pgm);
+		pgm.mainMenu(pgm);
+		pgm.save(pgm);
 		
+	}
+	
+	public void logStuff(String message)
+	{
+		logger.trace(message);
+		logger.debug(message);
+		logger.info(message);
+		logger.warn(message);
+		logger.error(message);
+		logger.fatal(message);
 	}
 	
 	public void mainMenu(Launch pgm)
@@ -136,6 +152,7 @@ public class Launch
 					String tempPword = pgm.in.next();
 					if(a.getuPass().equals(tempPword))
 					{
+						a.setPgm(pgm);
 						a.menu();
 						successP = true;
 						break;
@@ -147,7 +164,7 @@ public class Launch
 					}
 				}
 			}
-			if(tempUname.equals(-1))
+			if(tempUname.equals("-1"))
 			{
 				break;
 			}
@@ -185,12 +202,13 @@ public class Launch
 	
 	public void load(Launch pgm)
 	{
+		pgm.Active = new AccountList();
 		pgm.Waiting = new AccountList();
 		try
 		{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("Active.ser"));
-			oos.writeObject(pgm.Active);
+			ObjectInputStream ois = new ObjectInputStream(
+										new FileInputStream("Active.ser"));
+			pgm.Active = (AccountList) ois.readObject();
 			
 		}
 		catch(IOException e)
@@ -198,18 +216,26 @@ public class Launch
 			System.out.println("There wasn't a vailid user list, starting new world list... \n");
 			pgm.generateWorld(pgm);
 		}
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 		try
 		{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("Waiting.ser"));
-			oos.writeObject(pgm.Waiting);
+			ObjectInputStream ois = new ObjectInputStream(
+										new FileInputStream("Waiting.ser"));
+			pgm.Waiting = (AccountList) ois.readObject();
 
-			System.out.println("Successfully loaded Active accounts");
+			System.out.println("Successfully loaded Waiting accounts");
 		}
 		catch(IOException e)
 		{
 		}
-		if(pgm.Active == null)
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		if(pgm.Active.getList().size() == 0)
 		{
 
 			pgm.Active = new AccountList();
@@ -237,6 +263,8 @@ public class Launch
 			e.printStackTrace();
 		}
 		
+		System.out.println("Successfully Saved");
+		
 		
 	}
 
@@ -249,9 +277,8 @@ public class Launch
 		String pWord = pgm.in.next();
 		System.out.println("Finally what shall we call you?: ");
 		String Name = pgm.in.next();
-		System.out.println("Admin account created, generating wolrd.");
+		System.out.println("Admin account created, generating world.");
 		pgm.Active.add(new Administrator(Name,uName,pWord, pgm));
-		pgm.Active.getList().get(0).toString();
 	}
 
 }

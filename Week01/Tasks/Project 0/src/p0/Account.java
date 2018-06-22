@@ -1,11 +1,13 @@
 package p0;
 
-public abstract class Account 
+import java.io.Serializable;
+
+public abstract class Account implements Serializable
 {
 	protected String uName;
 	protected String uPass;
 	protected String Name;
-	protected Launch pgm;
+	protected transient Launch pgm;
 	protected boolean accountFlagged = false;
 	
 	public Account()
@@ -18,6 +20,11 @@ public abstract class Account
 		this.Name = name;
 		this.uName = uname;
 		this.uPass = pword;
+		this.pgm = pgm;
+	}
+	
+	public void setPgm(Launch pgm)
+	{
 		this.pgm = pgm;
 	}
 
@@ -39,6 +46,7 @@ public abstract class Account
 	}
 	
 	public abstract void menu();
+	
 	public void logout()
 	{
 		System.out.println("Farewell " + this.Name + " we hope to see you again soon.");

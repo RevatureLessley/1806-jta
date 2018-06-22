@@ -2,7 +2,6 @@ package p0;
 
 public class Administrator extends Account {
 
-	private Launch pgm;
 	private boolean worldFlagged;
 	
 	public Administrator(String name, String uname, String pword, Launch pgm)
@@ -12,6 +11,28 @@ public class Administrator extends Account {
 
 	public void manageActive()
 	{
+		int selection = 0;
+		while(selection != -1)
+		{
+			int count = 1;
+
+			for(Account a: pgm.Active.getList())
+			{
+				System.out.println(count + ". " + a.getuName());
+			}
+			System.out.print("\n Select an account to manage or -1 to exit: ");
+			selection = pgm.in.nextInt();
+			
+			Account temp = pgm.Active.getList().get(selection);
+			int selection2 = 0;
+			count = 1;
+			while(selection2 !=-1)
+			{
+				System.out.println("Accou");
+				System.out.println(count + ". ");
+			}
+		}
+		
 		
 	}
 	
@@ -59,7 +80,7 @@ public class Administrator extends Account {
 	{
 		int selection = 0;
 		System.out.println("Welcome Admin " + this.Name + "\n");
-		while(selection != 5)
+		while(selection != 4)
 		{
 			System.out.println("What would you like to do today?");
 			int count = 1;
@@ -89,6 +110,8 @@ public class Administrator extends Account {
 						saveWorld();
 					else
 						deleteWorld();
+					break;
+			case 4: logout();
 					break;
 			}
 		}
