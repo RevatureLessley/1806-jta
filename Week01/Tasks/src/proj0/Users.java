@@ -11,11 +11,15 @@ public class Users implements Serializable{
 	
 	private HashMap<String, User> users;
 	
+	/**
+	 * Setup the Hashmap which contains the users
+	 */
 	public Users() {
-		Admin adm = new Admin("account","password","Andrew","Hwang");
-		adm.setAuth(true);
+		//Use commented out lines the first time this is run
+		//Admin adm = new Admin("account","password","Andrew","Hwang");
+		//adm.setAuth(true);
 		this.users = new HashMap();
-		this.users.put("account",adm);
+		//this.users.put("account",adm);
 	}
 	
 	/**

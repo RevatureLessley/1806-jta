@@ -7,8 +7,9 @@ public class Bank{
 		authorize,goodbye;
 	}
 	public static void main(String args[]){
-		LoginPrompt lp = new LoginPrompt();
+		//setup users hashmap for the first time
 		//Users users = new Users();
+		LoginPrompt lp = new LoginPrompt();
 		Users users = lp.retrieveUsers();
 		User user = lp.enterLogin(users);
 		if (user == null) return;
@@ -18,8 +19,14 @@ public class Bank{
 		lp.storeUsers(users);
 	}
 	
+	/**
+	 * This presents the option screen to the user and takes in user input
+	 * @param user
+	 * Currently logged in user
+	 * @param users
+	 * Hashmap containing the users
+	 */
 	public void options(User user,Users users) {
-		
 		System.out.println(
 				"'0' Show balance \n"
 				+ "'1' Deposit \n"
@@ -52,10 +59,18 @@ public class Bank{
 			case "goodbye":
 				this.removeUser(users);
 				break;
+			default:
+				System.out.println("Invalid Command");
+				break;
 		}
 		this.options(user,users);
 	}
 	
+	/**
+	 * Deposits into the user's account
+	 * @param user
+	 * User that is depositing
+	 */
 	public void deposit(User user) {
 		System.out.println("How much would you like to deposit?");
 		String amount = LoginPrompt.console.readLine(": ");
@@ -71,6 +86,11 @@ public class Bank{
 		
 	}
 	
+	/**
+	 * Withdraws from the user's account
+	 * @param user
+	 * User that is withdrawing
+	 */
 	public void withdraw(User user) {
 		if(user.getBalance() == 0) {
 			System.out.println("Sorry, you're broke");
@@ -89,6 +109,11 @@ public class Bank{
 		System.out.println("Current balance: " + user.getBalance());
 	}
 	
+	/**
+	 * Approves a user's account, method can only be accessed by the admin
+	 * @param users
+	 * Hashmap where users are stored
+	 */
 	public void approveUser(Users users) {
 		String username = LoginPrompt.console.readLine(": ");
 		User user = users.getUsers().get(username);
@@ -98,6 +123,12 @@ public class Bank{
 			user.setAuth(true);
 		}
 	}
+	
+	/**
+	 * Removes a user's account, method can only be accessed by the admin
+	 * @param users
+	 * Hashmap where users are stored
+	 */
 	public void removeUser(Users users) {
 		String username = LoginPrompt.console.readLine(": ");
 		User user = users.getUsers().get(username);
