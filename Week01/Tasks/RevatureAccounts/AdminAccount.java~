@@ -1,3 +1,5 @@
+package RevatureAccounts;
+
 import java.io.*;
 import java.util.*;
 
@@ -9,5 +11,11 @@ public class AdminAccount extends Account implements Serializable {
 		new Password(this);
 		new FirstName(this);
 		new LastName(this);
+		status = AccountStatus.APPROVED;
+	}
+
+	@Override
+	public void enter() {
+		
 	}
 }

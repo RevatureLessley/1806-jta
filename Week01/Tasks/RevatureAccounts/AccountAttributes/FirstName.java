@@ -1,15 +1,18 @@
+package Tasks.RevatureAccounts.AccountAttributes;;
+
 import java.io.*;
+import Tasks.RevatureAccounts.*;
 
 public class FirstName extends AccountAttribute implements Serializable{
 	private String firstname;
 	
-	FirstName(AdminAccount aa) {
+	public FirstName(AdminAccount aa) {
 		super(aa);
 		firstname = "admin";
 		aa.addAttribute("Firstname", this);
 	}
 	
-	FirstName(UserAccount ua) {
+	public FirstName(UserAccount ua) {
 		super(ua);
 		firstname = askUser();
 		ua.addAttribute("Firstname", this);

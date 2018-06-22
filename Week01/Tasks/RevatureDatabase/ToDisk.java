@@ -1,4 +1,4 @@
-package RevatureDatabase;
+package Tasks.RevatureDatabase;
 
 import java.io.*;
 

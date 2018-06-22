@@ -1,15 +1,18 @@
+package Tasks.RevatureAccounts.AccountAttributes;;
+
 import java.io.*;
+import Tasks.RevatureAccounts.*;
 
 public class Username extends AccountAttribute implements Serializable {
 	private String username;
 	
-	Username(AdminAccount aa) {
+	public Username(AdminAccount aa) {
 		super(aa);
 		username = "admin";
 		aa.addAttribute("Username", this);
 	}
 	
-	Username(UserAccount ua) {
+	public Username(UserAccount ua) {
 		super(ua);
 		username = askUser();
 		ua.addAttribute("Username", this);

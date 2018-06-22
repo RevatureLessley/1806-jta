@@ -1,14 +1,21 @@
+package Tasks.RevatureAccounts;
+
 import java.io.*;
 import java.util.*;
+import Tasks.*;
+import Tasks.RevatureAccounts.AccountAttributes.*;
 
 public abstract class Account implements ConsoleReference, Serializable {
-	HashMap<String, AccountAttribute> attributes = new HashMap<>();
+	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();
+	protected AccountStatus status;
 
- 	Account() {}
+ 	public Account() {}
 
  	public void addAttribute(String field, AccountAttribute aa) {
   		attributes.put(field, aa);
  	}
+
+	// abstract public void enter();
 
 	public Integer getID(){
 		Integer index = attributes.get("Username").getID() + 

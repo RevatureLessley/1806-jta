@@ -1,10 +1,13 @@
+package Tasks;
+
 import java.io.*;
 import java.util.*;
-import RevatureDatabase.*;
+import Tasks.RevatureAccounts.*;
+import Tasks.RevatureDatabase.*;
 
 public class RevatureBank implements ConsoleReference{
 	public static RevatureBank entrance = new RevatureBank();
-	private final String STORAGE = "PersistentStore.txt";
+	private final String STORAGE = "Tasks/RevatureDatabase/PersistentStore.txt";
 	private HashMap<Integer, Account> accounts;
 
 	private RevatureBank() {
@@ -44,6 +47,7 @@ public class RevatureBank implements ConsoleReference{
 		}
 		else
 			System.out.println("Welcome to your account.");
+			//a.enter();
 	}
 
 	public void enter() {

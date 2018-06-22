@@ -1,4 +1,7 @@
+package Tasks.RevatureAccounts.AccountAttributes;;
+
 import java.io.*;
+import Tasks.RevatureAccounts.*;
 
 public class Password extends AccountAttribute implements Serializable {
 	// This class needs to be secured.
@@ -6,13 +9,13 @@ public class Password extends AccountAttribute implements Serializable {
 	private String p;
 	private String q;
 
-	Password(AdminAccount aa) {
+	public Password(AdminAccount aa) {
 		super(aa);
 		password = "admin";
 		aa.addAttribute("Password", this);
 	}
 
-	Password(UserAccount ua) {
+	public Password(UserAccount ua) {
 		super(ua);
 		password = askUser();
 		ua.addAttribute("Password", this);
