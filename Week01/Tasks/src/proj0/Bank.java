@@ -31,14 +31,17 @@ public class Bank{
 			case "0":
 				System.out.println(user.getBalance());
 				input = "options";
-			case "1":
-				this.deposit(user,input);
-				input = "options";
-			case "2":
-				this.withdraw(user,input);
-				input = "options";
-			case "3":
 				break;
+			case "1":
+				this.deposit(user);
+				input = "options";
+				break;
+			case "2":
+				this.withdraw(user);
+				input = "options";
+				break;
+			case "3":
+				return;
 			case "authorize":
 				if(user instanceof Admin) {
 					this.approveUser(users);
@@ -47,19 +50,14 @@ public class Bank{
 					System.out.println("Only the Admin can approve users");
 					input = "options";
 				}
+				break;
 			case "goodbye":
-				
-			case "options":
-				System.out.println(
-						"'0' Show balance \n"
-						+ "'1' Deposit \n"
-						+ "'2' Withdraw \n"
-						+ "'3' Exit");
-				input = LoginPrompt.console.readLine(": ");
+				return;
 		}
+		this.options(user,users);
 	}
 	
-	public void deposit(User user,String input) {
+	public void deposit(User user) {
 		System.out.println("How much would you like to deposit?");
 		String amount = LoginPrompt.console.readLine(": ");
 		double d = Double.parseDouble(amount);
@@ -74,7 +72,7 @@ public class Bank{
 		
 	}
 	
-	public void withdraw(User user,String input) {
+	public void withdraw(User user) {
 		
 	}
 	
