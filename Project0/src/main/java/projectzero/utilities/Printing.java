@@ -6,6 +6,23 @@ import java.util.HashMap;
 
 public class Printing {
 
+    public static String leftPadString(String string, int maxLength, char padCharacter) {
+	if (string == null) {
+	    return "";
+	} else if (String.valueOf(padCharacter) == null) {
+	    return string;
+	}
+	else if (maxLength < 0) {
+	    return string;
+	} else if (string.length() >= maxLength) {
+	    return string;
+	} else {
+	    int difference = maxLength - string.length();
+	    String pad = new String(new char[difference]).replace("\0", String.valueOf(padCharacter));
+	    return pad + string;
+	}
+    }
+    
     public static String paddedString(String string, int maxLength) {
 
 	if (string.length() >= maxLength) {
@@ -50,6 +67,14 @@ public class Printing {
 	return stringBuffer.toString();
     }
 
+    /**
+     * Removes newlines from an input string.
+     * @param string String to remove newlines from.
+     * @return returns a string without newlines.
+     */
+    public static String removeNewlines(String string) {
+	return string.replaceAll("\n", "");
+    }
     
     /**
      * Inserts a newline every @lineLength characters

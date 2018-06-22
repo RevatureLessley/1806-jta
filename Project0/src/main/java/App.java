@@ -26,7 +26,7 @@ public class App {
 	Container textOutput = new Container(new ArrayList<String>());
 	String userInput = "";
 	HashMap<String, Container> consoleContentMap = new HashMap<String, Container>();
-	NamedContainers consoleContainer = new NamedContainers(120, consoleContentMap);
+	NamedContainers consoleContainer = new NamedContainers(200, consoleContentMap);
 	
 	// Add content to consoleContentMap
 	consoleContentMap.put("input", textInput);

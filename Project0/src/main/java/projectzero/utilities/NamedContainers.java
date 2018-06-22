@@ -40,13 +40,19 @@ public class NamedContainers extends Containers {
 	*/
        int maxCharacterCountPerContainer = this.getMaxCharacterCountPerRow() / this.namedContainers.size() - this.namedContainers.size();
        char containerDividerSymbol = '|';
+       String toString = "";
        
        for (Container container : this.getNamedContainerValues()) {
 	   StringBuffer containerStringBuffer = new StringBuffer();
 	   container.toArrayList().forEach(containerStringBuffer::append);
 	   String stringContainer = containerStringBuffer.toString();
-	   stringBuffer.append(Printing.rowLengthLimitedString(stringContainer, maxCharacterCountPerContainer, containerDividerSymbol));
        }
+
+       // todo:
+       for (int i = 0; i < stringBuffer.toString().toCharArray().length; i++) {
+	   stringBuffer.append(containerDividerSymbol);
+       }
+       
        return stringBuffer.toString();
    }
 
