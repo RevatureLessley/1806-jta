@@ -1,10 +1,14 @@
 package com.revature.project0.monopoly;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import com.revature.project0.monopoly.Board.BoardPiece;
+//import com.revature.project0.monopoly.Board.BoardPiece;
 
+/**
+ * This class represents the Monopoly Board and all the information that the Board should care about
+ */
 public class Board {
 
     private final Color PURPLE = new Color(87, 0, 127);
@@ -22,6 +26,11 @@ public class Board {
         TOPHAT, THIMBLE, IRON, BOOT, BATTLESHIP, RACECAR, DOG, WHEELBARROW
     }
 
+    /**
+     * This method will return the enum type representation of the string passed in, provided it matches
+     * @param piece the String representation of the enum type BoardPiece
+     * @return the enum type itself (BoardPiece) or null if @param piece is not one of the enum values
+     */
     public BoardPiece selectPiece(String piece){
         switch (piece.toLowerCase()){
             case "tophat": return BoardPiece.TOPHAT;
@@ -36,6 +45,11 @@ public class Board {
         }
     }
 
+    /**
+     * This function will initialize the Monopoly Game Board. It creates BoardSquare Objects for each square on a typical
+     * Monopoly board and places them in an array for indexing.
+     * Each BoardSquare contains data such as name, color, buying price, etc.
+     */
     public void initBoard() {
         squares = new BoardSquare[]{
                 new BoardSquare("GO", null, -1, null),
@@ -47,16 +61,16 @@ public class Board {
                 new BoardSquare("Oriental Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
                 new BoardSquare("Chance", null, -1, null),
                 new BoardSquare("Vermont Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
-                new BoardSquare("Connecticut Avenue", CYAN, 120, new int[]{8,40,100,300,450}),
+                new BoardSquare("Connecticut Avenue", CYAN, 120, new int[]{8,40,100,300,450,600}),
                 new BoardSquare("Jail", null, -1, null),
-                new BoardSquare("St. Charles Place", MAHOGANY, 140, new int[]{10,50,150,450,625}),
+                new BoardSquare("St. Charles Place", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
                 new BoardSquare("Electric Company", null, 150, null),
-                new BoardSquare("States Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625}),
+                new BoardSquare("States Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
                 new BoardSquare("Virginia Avenue", MAHOGANY, 160, new int[]{12,60,180,500,700,900}),
                 new BoardSquare("Pennsylvania Railroad", null, 200, new int[]{25,50,100,200}),
-                new BoardSquare("St. James Place", ORANGE, 180, new int[]{14,70,200,550,750}),
+                new BoardSquare("St. James Place", ORANGE, 180, new int[]{14,70,200,550,750,950}),
                 new BoardSquare("Community Chest", null, -1, null),
-                new BoardSquare("Tennessee Avenue", ORANGE, 180, new int[]{14,70,200,550,750}),
+                new BoardSquare("Tennessee Avenue", ORANGE, 180, new int[]{14,70,200,550,750, 950}),
                 new BoardSquare("New York Avenue", ORANGE, 200, new int[]{16,80,220,600,800,1000}),
                 new BoardSquare("Free Parking", null, -1, null),
                 new BoardSquare("Kentucky Avenue", RED, 220, new int[]{18,90,250,700,875,1050}),
@@ -81,7 +95,20 @@ public class Board {
         };
     }
 
+    /**
+     * This function draws the Monopoly Board, using the System.out.print() family.
+     * It uses the player list to decide how many and where to place the players.
+     * @param pList the list of players playing on this board.
+     */
     public void drawBoard(ArrayList<Player> pList) {
+        //Clear Screen  //TODO: When you uncomment this, make sure that *nothing* gets erased before the user sees it.
+//        try {
+//            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+//        }
+//        catch(IOException e){e.printStackTrace();}
+//        catch(InterruptedException e) {e.printStackTrace();}
+
+        //Draw
         String[] cells = new String[40];
         for (int i = 0; i < 40; i++) {
             if ( (i >= 10 && i <= 20) || i == 1 || i == 29 ) cells[i] = "_";
@@ -136,6 +163,21 @@ public class Board {
 
     }
 
+    /**
+     * Finds all BoardSquares of a single Color
+     * @param color the color of the BoardSquare's
+     * @return a BoardSquare[3], which may or may not contain null at index [2].
+     */
+    public BoardSquare[] getAllSquaresOfColor(Color color){
+        if (color == null) return null; //NOTE: null *is* a valid Color on the board, but it would generate ArrayIndexOutOfBoundsException
+        BoardSquare[] array = new BoardSquare[3];
+        int i = 0;
+        for(BoardSquare square : squares){
+            if (square.getColor() == color) array[i++] = square;
+        }
+        return array;
+    }
+
     private int convert1(int index){
         return (index - 10) * 2;
     }
@@ -146,14 +188,27 @@ public class Board {
     public BoardSquare getBoardSquare(int index){
         return squares[index];
     }
+
+    /**
+     * This class represents a single tile on a standard Monopoly Board, containing information about:
+     * Property Color
+     * Tile Name
+     * Buy Price (variable based on how developed the property is)
+     * Visit Price (ditto)
+     * Property Owner
+     * Number of Exansions (Houses 1,2,3,4 or Hotel)
+     */
     public class BoardSquare {
+        private final int MAX_EXPANSIONS = 5;
+
         private Color color;    //null if no color
         private String name;
         private int buyPrice;   // -1 if cannot be bought
         private int[] visitPrices;    //{nothing, 1 house, 2, 3, 4, hotel}
         private Player owner;
         private int expansions;
-        //TODO effect?
+        private int mortgageValue;
+        private int mortgageCost;
 
         private BoardSquare(String name, Color color, int buyPrice, int[] visitPrices) {
             this.name = name;
@@ -162,6 +217,25 @@ public class Board {
             this.visitPrices = visitPrices;
             this.owner = null;
             this.expansions = 0;
+            this.mortgageValue = (int)(buyPrice / 2.0f);
+            this.mortgageCost = mortgageValue;
+        }
+
+        //TODO: refactor the logic in this method, get rid of hardcode, get rid of Board reference
+        public int calculateRent(Board board, int diceSum){
+            if (this.name.contains("Railroad") || this.name.equals("Short Line")){  //is a railroad
+                return visitPrices[owner.getRailRoadCount()];
+            }
+            else if (this.name.equals("Water Works") || this.name.equals("Electric Company")){  //it a Utility
+                int count = owner.getUtilityCount();
+                return (count == 1) ? 4 * diceSum : 10 * diceSum;   //Guarenteed that count is 1 or 2
+            }
+            int rent = visitPrices[expansions];
+            if (expansions > 0) return rent;
+            else {
+                if (owner.ownsBlock(board, this)) rent *= 2;
+                return rent;
+            }
         }
 
         public Color getColor() {
@@ -174,20 +248,33 @@ public class Board {
 
         public int getBuyPrice() {
             if (owner == null) return buyPrice;
-            else{
-                if (color == PURPLE) return 50;
+            else{   //expansion prices
+                if (color == PURPLE || color == CYAN) return 50;
                 else if (color == ORANGE || color == MAHOGANY) return 100;
                 else if (color == RED || color == YELLOW) return 150;
                 else if (color == GREEN || color == BLUE) return 200;
                 else{
                     System.err.println("Board.getBuyPrice() encountered something unexpected");
+                    System.err.println("Color: " + color.toString());
                     return -1;
                 }
             }
         }
 
+        public int getOriginalBuyPrice(){
+            return buyPrice;
+        }
+
+        public int getBuyBackPrice(){
+            return mortgageCost;
+        }
+
+//        public void addInterest(){
+//            mortgageCost = (int)(mortgageCost / 10.0f) + mortgageCost;
+//        }
+
         public int getVisitPrice() {
-            return visitPrices[0];
+            return visitPrices[expansions];
         }
 
         public Player getOwner() {
@@ -204,6 +291,14 @@ public class Board {
 
         public void setExpansions(int value){
             this.expansions = value;
+        }
+
+        public int getExpansionsRemaining(){
+            return MAX_EXPANSIONS - expansions;
+        }
+
+        public int getMortgageValue(){
+            return this.mortgageValue + (int)((getBuyPrice() * expansions) / 2.0f);
         }
 
     }
