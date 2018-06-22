@@ -7,31 +7,30 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Console;
 
-public class loginPrompt{
+public class LoginPrompt{
 	
 	static Console console = System.console();
 	/**
 	* Prompts the user for their login info and either asks for their password or
 	* creates a new account if the account doesn't exist yet
+	* 
 	* @return None
 	*/
-	public void inputLogin(){
-		//Users users = new Users();
-		Users users = this.retrieveUsers();
+	public User enterLogin(Users users){
 		String username = console.readLine("Username: ");
 		User user = users.getUsers().get(username);
 		user = this.checkPassword(user,username);
-		if (user == null) return;
+		if (user == null) return null;
 		users.addUser(user);
 		this.storeUsers(users);
 		if (!user.isAuth()) {
 			System.out.println("Your account is not approved yet, please wait 0 or more years");
-			return;
+			return null;
 		}
-
-		System.out.println("end");
+		return user;
 		
 	}
+	
 	/**
 	 * This method is used to retrieve previously stored user data
 	 * @return Users
@@ -64,6 +63,7 @@ public class loginPrompt{
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * This method checks if a valid password is entered for an existing order
 	 * If the user does not exist, then a new user is created
@@ -93,6 +93,7 @@ public class loginPrompt{
 		}
 		return user;
 	}
+	
 	/**
 	 * 
 	 * @param username

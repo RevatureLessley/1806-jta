@@ -20,8 +20,5 @@ public class Admin extends User {
 		super(userid, pass, fname, lname);
 	}
 	
-	public void approveUser(User user) {
-		
-	}
 	
 }
