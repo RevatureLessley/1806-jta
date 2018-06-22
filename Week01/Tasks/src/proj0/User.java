@@ -13,7 +13,7 @@ public class User implements Serializable{
 	private String pass;
 	private String fname;
 	private String lname;
-	private int balance;
+	private double balance;
 	private boolean auth;
 	
 
@@ -95,11 +95,11 @@ public class User implements Serializable{
 		this.lname = lname;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 

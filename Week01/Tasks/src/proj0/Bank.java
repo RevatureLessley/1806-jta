@@ -1,11 +1,14 @@
 package proj0;
 
+import java.text.DecimalFormat;
+
 public class Bank{
 	public enum Userinput{
 		authorize,goodbye;
 	}
 	public static void main(String args[]){
 		LoginPrompt lp = new LoginPrompt();
+		//Users users = new Users();
 		Users users = lp.retrieveUsers();
 		User user = lp.enterLogin(users);
 		if (user == null) return;
@@ -27,10 +30,13 @@ public class Bank{
 		switch(input) {
 			case "0":
 				System.out.println(user.getBalance());
+				input = "options";
 			case "1":
-				this.deposit();
+				this.deposit(user,input);
+				input = "options";
 			case "2":
-				this.withdraw();
+				this.withdraw(user,input);
+				input = "options";
 			case "3":
 				break;
 			case "authorize":
@@ -42,7 +48,7 @@ public class Bank{
 					input = "options";
 				}
 			case "goodbye":
-				this.deposit();
+				
 			case "options":
 				System.out.println(
 						"'0' Show balance \n"
@@ -53,11 +59,22 @@ public class Bank{
 		}
 	}
 	
-	public void deposit() {
+	public void deposit(User user,String input) {
+		System.out.println("How much would you like to deposit?");
+		String amount = LoginPrompt.console.readLine(": ");
+		double d = Double.parseDouble(amount);
+		amount = new DecimalFormat("##.##").format(d);
+		d = Double.parseDouble(amount);
+		if (d <= 0) { 
+			System.out.println("Invalid amount");
+			return;
+		}
+		user.setBalance(user.getBalance() + d);
+		System.out.println("Current balance: " + user.getBalance());
 		
 	}
 	
-	public void withdraw() {
+	public void withdraw(User user,String input) {
 		
 	}
 	
