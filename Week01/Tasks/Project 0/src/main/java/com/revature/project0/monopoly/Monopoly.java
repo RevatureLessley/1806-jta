@@ -1,5 +1,8 @@
 package com.revature.project0.monopoly;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /*  TODO List:
@@ -22,7 +25,7 @@ public class Monopoly {
 
     public static void main(String[] args){
         scanner = new Scanner(System.in);
-        accContainer = new AccountContainer();
+        //accContainer = new AccountContainer();
         playerList = new ArrayList<>();
         availablePieces = new ArrayList<>();
 
@@ -319,6 +322,13 @@ public class Monopoly {
     }
 
     private static void login(){
+        try {
+            accContainer = AccountContainerSerializer.deserialize();
+        }
+        catch (IOException e){
+            System.err.println(e.getClass() + ": File not found, Dont be stupid.");
+            accContainer = new AccountContainer();
+        }
         String line;
         do {
             System.out.println("Please enter your account credentials.");
@@ -348,6 +358,8 @@ public class Monopoly {
             }
         } while (line.equals("t"));
 
+        //TODO: remove this
+        //AccountContainerSerializer.serialize(accContainer);
     }
 
     /**

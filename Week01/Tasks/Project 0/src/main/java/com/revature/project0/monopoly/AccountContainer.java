@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * POJO for holding accounts. This class will be serializable to store game states.
  */
 public class AccountContainer implements Serializable {
+
+    private static final long serialVersionUID = -577617069418873278L;
     private ArrayList<Account> accountList;
 
     public AccountContainer(){

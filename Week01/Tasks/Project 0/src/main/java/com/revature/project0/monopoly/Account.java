@@ -1,6 +1,9 @@
 package com.revature.project0.monopoly;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
+    private static final long serialVersionUID = -8736423435075813281L;
     private String username;
     private String password;
 
@@ -16,5 +19,6 @@ public class Account {
     public String getUsername(){
         return username;
     }
+
 
 }
