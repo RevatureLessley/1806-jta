@@ -6,13 +6,24 @@ import java.util.HashMap;
 
 public class Printing {
 
+    /**
+     * Returns a String that is padded with repeated characters @padCharacter 
+     * to the left of @param string. If the @string is null this function returns
+     * an empty String. If the @param padCharacter is null this function
+     *  returns @param string. If @param maxLength is less than zero or
+     * if @param is greater or equal to the length of the string itself this
+     * function returns @param string.
+     *
+     * @param string String to pad
+     * @param maxLength maximum length of the string value.
+     * @param padCharacter repeating character to pad with.
+     */
     public static String leftPadString(String string, int maxLength, char padCharacter) {
 	if (string == null) {
 	    return "";
 	} else if (String.valueOf(padCharacter) == null) {
 	    return string;
-	}
-	else if (maxLength < 0) {
+	} else if (maxLength < 0) {
 	    return string;
 	} else if (string.length() >= maxLength) {
 	    return string;
@@ -20,6 +31,35 @@ public class Printing {
 	    int difference = maxLength - string.length();
 	    String pad = new String(new char[difference]).replace("\0", String.valueOf(padCharacter));
 	    return pad + string;
+	}
+    }
+
+    
+    /**
+     * Returns a String that is padded with repeated characters @padCharacter 
+     * to the right of @param string. If the @string is null this function returns
+     * an empty String. If the @param padCharacter is null this function
+     *  returns @param string. If @param maxLength is less than zero or
+     * if @param is greater or equal to the length of the string itself this
+     * function returns @param string.
+     *
+     * @param string String to pad
+     * @param maxLength maximum length of the string value.
+     * @param padCharacter repeating character to pad with.
+     */
+    public static String rightPadString(String string, int maxLength, char padCharacter) {
+	if (string == null) {
+	    return "";
+	} else if (String.valueOf(padCharacter) == null) {
+	    return string;
+	} else if (maxLength < 0) {
+	    return string;
+	} else if (string.length() >= maxLength) {
+	    return string;
+	} else {
+	    int difference = maxLength - string.length();
+	    String pad = new String(new char[difference]).replace("\0", String.valueOf(padCharacter));
+	    return string + pad;
 	}
     }
     
@@ -32,9 +72,11 @@ public class Printing {
 	int difference = maxLength - string.length();
 	int leftPadLength = difference / 2;
 	int rightPadLength = difference % 2 != 0 ? (difference / 2) + 1 : leftPadLength;
-	stringBuffer.append(new String(new char[leftPadLength]).replace("\0", " "));
+	//stringBuffer.append(new String(new char[leftPadLength]).replace("\0", " "));
+	stringBuffer.append(leftPadString("", leftPadLength, ' '));
 	stringBuffer.append(string);
-	stringBuffer.append(new String(new char[rightPadLength]).replace("\0", " "));
+	//stringBuffer.append(new String(new char[rightPadLength]).replace("\0", " "));
+	stringBuffer.append(rightPadString("", rightPadLength, ' '));
 
 	return stringBuffer.toString();
     }
