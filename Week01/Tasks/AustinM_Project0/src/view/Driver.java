@@ -1,16 +1,17 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+package view;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
+import controller.AccountController;
+import controller.MasterController;
+import controller.UserController;
+import model.Account;
+import model.User;
 
 public class Driver {
 
-	private static final String USER_DATA_FILE = "userdata.dat";
-
 	private UserController userController;
+	private AccountController accountController;
 	private Phase phase = Phase.Initialize;
 	private User activeUser;
 	private Account activeAccount;
@@ -63,13 +64,13 @@ public class Driver {
 		}
 
 		scanner.close();
-		d.writeData();
+		MasterController.shutdown();
 	}
 
 	private Phase executeInitPhase() {
 
-		if (!readData())
-			userController = new UserController();
+		userController = MasterController.getUserController();
+		accountController = MasterController.getAccountController();
 
 		return Phase.Login;
 	}
@@ -96,11 +97,11 @@ public class Driver {
 				if (logVal == 1) {
 					activeUser = user;
 					return Phase.UserControl;
-				}else if (logVal == -1) {
+				} else if (logVal == -1) {
 					System.out.println("Please wait for an Administrator to validate your account.");
 					enterWait();
 					return phase;
-				}else {
+				} else {
 					System.out.println("Invalid password");
 					enterWait();
 					return phase;
@@ -122,8 +123,7 @@ public class Driver {
 			String password = scanner.nextLine();
 
 			userController.addUser(name, password);
-			System.out.println(
-					"User profile was created for '" + name + "' - an admin will validate your account shortly");
+			System.out.println("Hello, " + name + ". Welcome to The Westward Banking Service");
 			enterWait();
 			return phase;
 
@@ -157,6 +157,13 @@ public class Driver {
 		return null;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for opening a user account.
+	 * The user selects the type of account to create. A name is generated for the
+	 * account, the account is created, then added to the accountController object.
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeUserOpenAccount() {
 
 		System.out.println("Select an account type ");
@@ -165,22 +172,32 @@ public class Driver {
 
 		if (input == 1 || input == 2) {
 			String name = Account.getTypeName(input);
-			Account a = activeUser.addAccount(name, input);
-			
-			System.out.println("Account '" + name + "' successfully created.\nWould you like to access this account now?");
-			printOptions(true, "Yes", "No");
-			input = getOption();
-			
-			if(input == 0) {
-				activeAccount = a;
-				phase = Phase.AccountControl;
+
+			Account a = new Account(activeUser, name, input);
+			activeUser.addAccount(a);
+			accountController.addNewAccount(a);
+
+			if (activeUser.isAdmin()) {
+				System.out.println("Account '" + name + "' was created and is now ready for use.");
+			} else {
+				System.out.println(
+						"Account '" + name + "' was created.\nPlease wait for an Admin to validate the new account.");
 			}
-			
+
+			enterWait();
 		}
 
 		return Phase.UserControl;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for selecting a user
+	 * Account. Lists all accounts created by the users, including the status of the
+	 * accounts. Accounts that have not been validated are shown, but the user
+	 * cannot enter the account menu for not-validated accounts
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeUserSelectAccount() {
 		System.out.println("Select an account");
 		String[] acctNames = activeUser.getAccountNames();
@@ -198,16 +215,29 @@ public class Driver {
 
 		if (a != null) {
 			activeAccount = a;
-			return Phase.AccountControl;
+			if (a.isValidated())
+				return Phase.AccountControl;
+			else {
+				System.out.println("Apologies, this account has not yet been validated.");
+				enterWait();
+				return phase;
+			}
 		}
 
 		return null;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Account actions
+	 * <p>
+	 * Options: Withdraw, Deposit, Back
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeAccountPhase() {
 		printHeader(activeAccount.toString(), "");
 
-		printOptions(true, "Withdraw", "Deposit", "Exit");
+		printOptions(true, "Withdraw", "Deposit", "Back");
 		int input = getOption();
 
 		if (input == 1) {
@@ -229,13 +259,21 @@ public class Driver {
 
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Admin main menu
+	 * <p>
+	 * Admin Main Options: Validate, Show all Users, Grant Privileges, go to User
+	 * main menu, Free system, Logout
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeAdminPhase() {
 
-		int numWaiting = userController.getWaitUserCount();
+		int numWaiting = accountController.getWaitAccountCount();
 
 		printHeader("Good evening, Sir " + activeUser.getName(), "How may I serve you today?");
-		printOptions(true, "Validate Users: " + numWaiting + " waiting", "ban user", "Grant Admin Priveleges",
-				"User Menu", "Show All Users", "Logout");
+		printOptions(true, "Validate Accounts: " + numWaiting + " waiting", "Show All Users", "Grant Admin Priveleges",
+				"User Menu", "Free System Data", "Logout");
 		int input = getOption();
 
 		if (input == 1) {
@@ -248,8 +286,11 @@ public class Driver {
 				return executeValidate();
 
 		} else if (input == 2) {
-			// ban
-			// TODO
+			clearConsole();
+			printHeader("Here is the list of all users. I hope it is to your liking.");
+			System.out.println(userController.summarizeAllUsers());
+			enterWait();
+			return phase;
 		} else if (input == 3) {
 			// grant priveleges
 			// TODO
@@ -258,11 +299,16 @@ public class Driver {
 			// user menu
 			return executeUserPhase();
 		} else if (input == 5) {
-			clearConsole();
-			printHeader("Here is the list of all users. I hope it is to your liking.");
-			System.out.println(userController.summarizeAllUsers());
-			enterWait();
-			return phase;
+			System.out.println(
+					"Are you sure you would like to free data?\nThis will delete all users and user accounts.");
+			printOptions(true, "Yes", "No");
+			int input2 = getOption();
+
+			if (input2 == 1) {
+				MasterController.setFreeData();
+				return Phase.Terminate;
+			} else
+				return phase;
 
 		} else {
 			return Phase.Login;
@@ -271,14 +317,22 @@ public class Driver {
 		return null;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Account Validation
+	 * <p>
+	 * Select User Account <br>
+	 * Approve or Deny Account
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeValidate() {
 
-		String[] names = userController.getWaitUserNames();
-		System.out.println("Select a waiting user");
+		String[] names = accountController.getWaitAccountNames();
+		System.out.println("Please select and account to modify");
 		printOptions(false, names);
 		int waitIndex = getOption() - 1;
 
-		if (waitIndex < 0 || waitIndex >= userController.getWaitUserCount()) {
+		if (waitIndex < 0 || waitIndex >= accountController.getWaitAccountCount()) {
 			return null;
 		} else {
 
@@ -288,9 +342,9 @@ public class Driver {
 
 			if (input == 1) {
 				// approve
-				User user = userController.getWaitUser(waitIndex);
-				userController.validateNewUser(user);
-				System.out.println(names[waitIndex] + "'s user profile has been approved.");
+				Account acct = accountController.getWaitAccount(waitIndex);
+				accountController.validateAccount(acct);
+				System.out.println(names[waitIndex] + "'s user account has been approved.");
 				enterWait();
 				return Phase.UserControl;
 			} else if (input == 0) {
@@ -304,9 +358,15 @@ public class Driver {
 
 		System.out.println("no user selected");
 		enterWait();
+
 		return phase;
 	}
 
+	/**
+	 * Prints strings that appear within a nicely formatted ascii window
+	 * 
+	 * @param strings
+	 */
 	private void printHeader(String... strings) {
 		clearConsole();
 		int w = WIN_W - 2;
@@ -335,16 +395,16 @@ public class Driver {
 
 	}
 
-	private static void resizeConsole() {
-		try {
-			new ProcessBuilder("cmd", "/c", "mode con cols=" + WIN_W + " lines=" + WIN_H).inheritIO().start().waitFor();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * Prints an array of strings each proceeded by an integer. The Strings a
+	 * formatted for readability and numbered for user input. This command typically
+	 * proceeds the getOption() method
+	 * 
+	 * @param hasCancel
+	 *            when true, the last string is assigned the option value of 0
+	 * @param options
+	 *            an array of strings to print as options
+	 */
 	private void printOptions(boolean hasCancel, String... options) {
 
 		for (int i = 0; i < options.length; i++) {
@@ -356,6 +416,14 @@ public class Driver {
 
 	}
 
+	/**
+	 * Gets the next line of user input from System Input Stream and parses as an
+	 * Integer.
+	 * <p>
+	 * Invalid input is converted to -1
+	 * 
+	 * @return integer from the command line
+	 */
 	private int getOption() {
 		int input;
 
@@ -368,6 +436,14 @@ public class Driver {
 		return input;
 	}
 
+	/**
+	 * Gets the next line of user input from System Input Stream and parses as a
+	 * Double.
+	 * <p>
+	 * Invalid input is converted to 0.0
+	 * 
+	 * @return double from the command line
+	 */
 	private double getDouble() {
 		double input;
 
@@ -380,6 +456,10 @@ public class Driver {
 		return input;
 	}
 
+	/**
+	 * Runs a system process to clear the console. The command is specific to
+	 * Windows machines
+	 */
 	private void clearConsole() {
 		if (!doClear)
 			return;
@@ -393,61 +473,36 @@ public class Driver {
 		}
 	}
 
+	/**
+	 * Runs a system process to resize the console. The command is specific to
+	 * Windows machines
+	 */
+	private static void resizeConsole() {
+		try {
+			new ProcessBuilder("cmd", "/c", "mode con cols=" + WIN_W + " lines=" + WIN_H).inheritIO().start().waitFor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Creates a prompt for the user to press the 'Enter' key. The process is
+	 * temporarily paused until a line of input can be read. Any additional line
+	 * input is ignored.
+	 */
 	private void enterWait() {
 		System.out.println("(press 'Enter' to continue)");
 		scanner.nextLine();
 	}
 
-	private void writeData() {
-
-		ObjectOutputStream oos = null;
-
-		try {
-			oos = new ObjectOutputStream(new FileOutputStream(USER_DATA_FILE));
-			oos.writeObject(userController);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			if (oos != null)
-				oos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private boolean readData() {
-
-		ObjectInputStream ois = null;
-		boolean result = false;
-
-		try {
-			ois = new ObjectInputStream(new FileInputStream(USER_DATA_FILE));
-			userController = (UserController) ois.readObject();
-			result = true;
-		} catch (FileNotFoundException e) {
-			System.out.println("no previous user data");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			if (ois != null)
-				ois.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-
-	}
-
+	/**
+	 * 
+	 * @author Austin
+	 *
+	 *         Enumeration used to represent the major phases of the program
+	 */
 	private enum Phase {
 		Initialize, Login, UserControl, AccountControl, Terminate
 	}

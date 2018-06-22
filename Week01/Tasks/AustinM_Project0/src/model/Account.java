@@ -1,3 +1,4 @@
+package model;
 import java.io.Serializable;
 import java.text.NumberFormat;
 
@@ -12,10 +13,21 @@ public class Account implements Serializable {
 	private String name;
 	private double balance;
 	private int accountType = 0;
+	private boolean validated;
+	private User owner;
 
-	public Account(String name, int type) {
+	public boolean isValidated() {
+		return validated;
+	}
+
+	public void setValidated(boolean validated) {
+		this.validated = validated;
+	}
+
+	public Account(User owner, String name, int type) {
 		this.name = name;
 		this.accountType = type;
+		this.owner = owner;
 	}
 
 	public double getBalance() {
@@ -24,6 +36,10 @@ public class Account implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getOwnerName() {
+		return owner.getName();
 	}
 
 	public void deposit(double amount) {
@@ -56,5 +72,9 @@ public class Account implements Serializable {
 			return "checking";
 		}
 
+	}
+
+	public User getOwner() {
+		return owner;
 	}
 }
