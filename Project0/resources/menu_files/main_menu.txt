@@ -1,0 +1,6 @@
+Menu:
+
+1. Login
+2. Quit
+
+Select an option:
