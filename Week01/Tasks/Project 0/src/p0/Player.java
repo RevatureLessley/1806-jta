@@ -5,12 +5,12 @@ public class Player extends Account
 	private int accountBalance;
 	private int loanBalance;
 	private int personalBalance;
-	private boolean hasLoan = true;
+	private boolean hasLoan = false;
 	private boolean hasBank = true;
 	
 	public Player(String name, String uName, String pword, int aBal, int pBal, int lBal, Launch pgm)
 	{
-		super(name, uName,pword,pgm);
+		super(name, uName,pword, 1,pgm);
 		this.accountBalance = aBal;
 		this.personalBalance = pBal;
 		this.loanBalance =lBal;
@@ -141,12 +141,6 @@ public class Player extends Account
 			
 	}
 	
-	public void logout()
-	{
-		System.out.println("Farewell " + this.Name + " we hope to see you again soon.");
-		System.out.println();
-	}
-	
 	public void deleteAcc()
 	{
 		System.out.println("You have chosen to dissable your account...");
@@ -179,6 +173,16 @@ public class Player extends Account
 		}
 	}
 	
+	public int getbBalance()
+	{
+		return accountBalance;
+	}
+	
+	public int getlBalance()
+	{
+		return loanBalance;
+	}
+
 	public void incrementTime()
 	{
 		if(accountBalance >0)

@@ -9,43 +9,91 @@ public class AccountList implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 874709771452301087L;
-	ArrayList<Account> save = new ArrayList<Account>();
+	private ArrayList<Player> activeSave = new ArrayList<Player>();
+	private ArrayList<Player> waitingSave = new ArrayList<Player>();
+	private Banker banker;
+	private Administrator admin;
+	private Loaner loaner;
+	private boolean worldFlagged = false;
 	
 	public AccountList()
 	{
 		super();
 	}
 	
-	public AccountList(ArrayList<Account> list)
+	public AccountList(ArrayList<Player> list, Administrator a, Banker b, Loaner l)
 	{
-		save = list;
+		activeSave = list;
+		admin = a;
+		banker = b;
+		loaner = l;
 	}
 	
-	public ArrayList<Account> getList()
+	public ArrayList<Player> getList()
 	{
-		return save;
+		return activeSave;
 	}
 	
-	public void add(Account a)
-	{
-		save.add(a);
+	public Banker getBanker() {
+		return banker;
 	}
+
+	public void setBanker(Banker banker) {
+		this.banker = banker;
+	}
+
+	public Administrator getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administrator admin) {
+		this.admin = admin;
+	}
+
+	public Loaner getLoaner() {
+		return loaner;
+	}
+
+	public void setLoaner(Loaner loaner) {
+		this.loaner = loaner;
+	}
+
+	public void add(Player a)
+	{
+		activeSave.add(a);
+	}
+	
+	public void setWorldFlagged(boolean set)
+	{
+		worldFlagged = set;
+	}
+	
+	public boolean getWorldFlagged()
+	{
+		return worldFlagged;
+	}
+	
 	
 	public void updateList()
 	{
-		ArrayList<Account> temp = new ArrayList<Account>();
-		for(Account a: save)
+		ArrayList<Player> temp = new ArrayList<Player>();
+		if(!worldFlagged)
 		{
-			if(!a.getFlagged())
+			for(Player p: activeSave)
 			{
-				temp.add(a);
+				if(!p.getFlagged())
+				{
+					temp.add(p);
+				}
+			}
+			activeSave.clear();
+			for(Player p:temp)
+			{
+				activeSave.add(p);
 			}
 		}
-		save.clear();
-		for(Account a:temp)
-		{
-			save.add(a);
-		}
+		else
+			activeSave.clear();
 	}
 	
 }

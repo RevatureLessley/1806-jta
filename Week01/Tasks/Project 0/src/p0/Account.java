@@ -9,17 +9,19 @@ public abstract class Account implements Serializable
 	protected String Name;
 	protected transient Launch pgm;
 	protected boolean accountFlagged = false;
+	protected int accountType; //0=Administrator, 1= Player, 2= Baker, 3= Loaner
 	
 	public Account()
 	{
 		
 	}
 	
-	public Account(String name, String uname, String pword, Launch pgm)
+	public Account(String name, String uname, String pword, int aT, Launch pgm)
 	{
 		this.Name = name;
 		this.uName = uname;
 		this.uPass = pword;
+		this.accountType = aT;
 		this.pgm = pgm;
 	}
 	
@@ -43,6 +45,11 @@ public abstract class Account implements Serializable
 	public boolean getFlagged()
 	{
 		return accountFlagged;
+	}
+
+	public int getAccountType()
+	{
+		return accountType;
 	}
 	
 	public abstract void menu();

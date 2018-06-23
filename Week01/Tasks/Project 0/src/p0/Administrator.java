@@ -6,7 +6,7 @@ public class Administrator extends Account {
 	
 	public Administrator(String name, String uname, String pword, Launch pgm)
 	{
-		super(name, uname, pword, pgm);
+		super(name, uname, pword, 0, pgm);
 	}
 
 	public void manageActive()
@@ -22,18 +22,23 @@ public class Administrator extends Account {
 			}
 			System.out.print("\n Select an account to manage or -1 to exit: ");
 			selection = pgm.in.nextInt();
-			
-			Account temp = pgm.Active.getList().get(selection);
-			int selection2 = 0;
-			count = 1;
-			while(selection2 !=-1)
+			if(pgm.Active.getList().get(selection).getAccountType() == 1)
 			{
-				System.out.println("Accou");
-				System.out.println(count + ". ");
+				Player temp = (Player)pgm.Active.getList().get(selection);
+				int selection2 = 0;
+				count = 1;
+				while(selection2 !=-1)
+				{
+					System.out.println("Account info");
+					System.out.println("User Name: " + temp.getuName());
+					System.out.println("Player Name: " + temp.getName());
+					System.out.println("Bank Balance: " + temp.getbBalance());
+					System.out.println("Loan Balance: " + temp.getlBalance());
+					System.out.println("");
+					System.out.println(count + ". Shut down account");
+				}
 			}
 		}
-		
-		
 	}
 	
 	public void manageWaiting()
@@ -48,8 +53,7 @@ public class Administrator extends Account {
 		char selection = pgm.in.next().charAt(0);
 		if (selection =='Y' || selection =='y')
 		{
-			worldFlagged = true;
-			accountFlagged = true;
+			pgm.Active.setWorldFlagged(true);
 			System.out.println("Your choice has been set.");
 			System.out.println("There will be nothing left of this pathetic existance");
 			System.out.println("log out when you are ready to start the destruction.");
@@ -65,8 +69,7 @@ public class Administrator extends Account {
 		char selection = pgm.in.next().charAt(0);
 		if (selection =='Y' || selection =='y')
 		{
-			worldFlagged = false;
-			accountFlagged = false;
+			pgm.Active.setWorldFlagged(false);
 			System.out.println("You have chosen mercy for this world.");
 			System.out.println("Be more careful in your decisions next time...");
 			System.out.println("You can't always go back.");
@@ -106,7 +109,7 @@ public class Administrator extends Account {
 					break;
 			case 2: manageWaiting();
 					break;
-			case 3: if(worldFlagged)
+			case 3: if(pgm.Active.getWorldFlagged())
 						saveWorld();
 					else
 						deleteWorld();
@@ -121,6 +124,4 @@ public class Administrator extends Account {
 	public String toString() {
 		return "Administrator [uName=" + uName + ", uPass=" + uPass + ", Name=" + Name + "]";
 	}
-	
-	
 }

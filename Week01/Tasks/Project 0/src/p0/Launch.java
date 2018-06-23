@@ -81,17 +81,14 @@ public class Launch
 	final static Logger logger = Logger.getLogger(Launch.class);
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
-	ArrayList<Player> players = new ArrayList<Player>();
 	AccountList Active;
-	AccountList Waiting;
+	WaitingList Waiting;
 	final String VERSION_NUM = "0.1";
 	
 	public static void main (String[] args)
 	{
 		Launch pgm = new Launch();
-		pgm.load(pgm);
 		pgm.mainMenu(pgm);
-		pgm.save(pgm);
 		
 	}
 	
@@ -108,8 +105,11 @@ public class Launch
 	public void mainMenu(Launch pgm)
 	{
 		boolean cont = true;
+		pgm.in.reset();
 		while(cont)
 		{
+			pgm.dumpIn(pgm);
+			pgm.load(pgm);
 			System.out.println("Welcome to the Aeva Areana Simulator");
 			System.out.println("Please select an option");
 			System.out.println();
@@ -129,6 +129,7 @@ public class Launch
 					break;
 			default:System.out.println("That is not a valid selection, please select again");
 			}
+			pgm.save(pgm);
 		}
 	}
 	
@@ -141,26 +142,35 @@ public class Launch
 		{
 			System.out.print("Input Username (-1 to return to main menu): ");
 			String tempUname = pgm.in.next();
-			for(Account a: pgm.Active.getList())
+			successP = false;
+			successU = false;
+			if(pgm.Active.getAdmin().getuName().equals(tempUname))
 			{
-				successP = false;
-				successU = false;
-				if(a.getuName().equals(tempUname))
+
+				successU = true;
+				successP = pWordTest(pgm.Active.getAdmin(), pgm); 
+			}
+			else if(pgm.Active.getBanker().getuName().equals(tempUname))
+			{
+
+				successU = true;
+				successP = pWordTest(pgm.Active.getBanker(), pgm); 
+			}
+			else if(pgm.Active.getLoaner().getuName().equals(tempUname))
+			{
+
+				successU = true;
+				successP = pWordTest(pgm.Active.getLoaner(), pgm); 
+			}
+			else 
+			{
+				for(Account a: pgm.Active.getList())
 				{
-					successU = true;
-					System.out.print("Input Password: ");
-					String tempPword = pgm.in.next();
-					if(a.getuPass().equals(tempPword))
+
+					if(a.getuName().equals(tempUname))
 					{
-						a.setPgm(pgm);
-						a.menu();
-						successP = true;
-						break;
-					}
-					else
-					{
-						System.out.println("Password Incorrect, restarting login.");
-						break;
+						successU = true;
+						successP = pWordTest(a, pgm); 
 					}
 				}
 			}
@@ -194,21 +204,36 @@ public class Launch
 		}
 	}
 	
-	public void newAccount(Launch pgm)
+	public boolean pWordTest(Account a, Launch pgm)
 	{
-		System.out.println("Not implimented yet (New Account)");
-		System.out.println();
+		System.out.print("Input Password: ");
+		String tempPword = pgm.in.next();
+		if(a.getuPass().equals(tempPword))
+		{
+			a.setPgm(pgm);
+			a.menu();
+			return true;
+		}
+		else
+		{
+			System.out.println("Password Incorrect, restarting login.");
+			return false;
+		}
 	}
 	
 	public void load(Launch pgm)
 	{
-		pgm.Active = new AccountList();
-		pgm.Waiting = new AccountList();
+		if(pgm.Active == null)
+		{
+			pgm.Active = new AccountList();
+			pgm.Waiting = new WaitingList();
+		}
 		try
 		{
 			ObjectInputStream ois = new ObjectInputStream(
 										new FileInputStream("Active.ser"));
 			pgm.Active = (AccountList) ois.readObject();
+			ois.close();
 			
 		}
 		catch(IOException e)
@@ -224,9 +249,8 @@ public class Launch
 		{
 			ObjectInputStream ois = new ObjectInputStream(
 										new FileInputStream("Waiting.ser"));
-			pgm.Waiting = (AccountList) ois.readObject();
-
-			System.out.println("Successfully loaded Waiting accounts");
+			pgm.Waiting = (WaitingList) ois.readObject();
+			ois.close();
 		}
 		catch(IOException e)
 		{
@@ -235,11 +259,11 @@ public class Launch
 		{
 			e.printStackTrace();
 		}
-		if(pgm.Active.getList().size() == 0)
+		if(pgm.Active.getAdmin() == null)
 		{
 
 			pgm.Active = new AccountList();
-			System.out.println("World not available, generating new world.");
+			System.out.println("World not available, generating new world. \n");
 			pgm.generateWorld(pgm);
 		}
 		
@@ -247,18 +271,21 @@ public class Launch
 	
 	public void save(Launch pgm)
 	{
+		pgm.Active.updateList();
 		
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("Active.ser"));
-			oos.writeObject(pgm.Active); //Serialize
+			oos.writeObject(pgm.Active);
+			oos.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("Waiting.ser"));
-			oos.writeObject(pgm.Waiting); //Serialize
+			oos.writeObject(pgm.Waiting); 
+			oos.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -268,17 +295,57 @@ public class Launch
 		
 	}
 
+	public void newAccount(Launch pgm)
+	{
+		pgm.dumpIn(pgm);
+		System.out.print("Please choose a user name for the account: ");
+		String uName = pgm.in.nextLine();
+		System.out.print("Now choose a password for the account: ");
+		String pWord = pgm.in.nextLine();
+		System.out.println("What shall we call you?: ");
+		String Name = pgm.in.nextLine();
+		
+		pgm.Waiting.add(new Player(Name, uName, pWord, 100, 0, 0, pgm));
+		
+	}
+	
 	public void generateWorld(Launch pgm)
 	{
-		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM);
+
+		pgm.dumpIn(pgm);
+		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM + "\n");
 		System.out.print("Please choose a user name for the administrator: ");
-		String uName = pgm.in.next();
+		String uName = pgm.in.nextLine();
 		System.out.print("Now choose a password for the administator account: ");
-		String pWord = pgm.in.next();
-		System.out.println("Finally what shall we call you?: ");
-		String Name = pgm.in.next();
-		System.out.println("Admin account created, generating world.");
-		pgm.Active.add(new Administrator(Name,uName,pWord, pgm));
+		String pWord = pgm.in.nextLine();
+		System.out.println("Finally what shall we call the administrator?: ");
+		String Name = pgm.in.nextLine();
+		Administrator tempA =new Administrator(Name,uName,pWord, pgm);
+
+		System.out.print("Please choose a user name for the banker: ");
+		uName = pgm.in.nextLine();
+		System.out.print("Now choose a password for the banker account: ");
+		pWord = pgm.in.nextLine();
+		System.out.println("Finally what shall we call the banker?: ");
+		Name = pgm.in.nextLine();
+		Banker tempB =new Banker(Name,uName,pWord, pgm);
+
+		System.out.print("Please choose a user name for the loaner: ");
+		uName = pgm.in.nextLine();
+		System.out.print("Now choose a password for the loaner account: ");
+		pWord = pgm.in.nextLine();
+		System.out.println("Finally what shall we call the loaner?: ");
+		Name = pgm.in.nextLine();
+		Loaner tempL =new Loaner(Name,uName,pWord, pgm);
+		
+		System.out.println("Accounts created, generating world.");
+		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
+	public void dumpIn(Launch pgm)
+	{
+		if(pgm.in.hasNextLine()) {
+			String dump = pgm.in.nextLine();
+		}
+	}
 }
