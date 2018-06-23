@@ -3,9 +3,7 @@ package proj0;
 import java.text.DecimalFormat;
 
 public class Bank{
-	public enum Userinput{
-		authorize,goodbye;
-	}
+
 	public static void main(String args[]){
 		//setup users hashmap for the first time
 		//Users users = new Users();
