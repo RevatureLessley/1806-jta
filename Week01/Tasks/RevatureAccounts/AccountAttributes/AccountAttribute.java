@@ -14,7 +14,7 @@ public abstract class AccountAttribute implements ConsoleReference, Serializable
 	abstract public String askUser();
 
 	public void deposit() {}
-
+	
 	public <E> E get() {
 		return null;
 	}
@@ -22,4 +22,6 @@ public abstract class AccountAttribute implements ConsoleReference, Serializable
  	abstract public void print();
 
 	abstract public Integer getID();
+	
+	public void withdraw() {}
 }

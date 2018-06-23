@@ -32,7 +32,7 @@ public class UserAccount extends Account implements Serializable {
 		attributes.get("Balance").deposit();
 	}
 
-	private void makeWithdrawal() {
-		System.out.println("Withdrawing.");
+	private void makeWithdrawal() {	
+		attributes.get("Balance").withdraw();
 	}
 }
