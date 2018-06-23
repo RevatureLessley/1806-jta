@@ -1,14 +1,19 @@
 package bank;
 
-public  class Account {
-	static int accNum = 10000;
+import java.io.Serializable;
+
+public  class Account implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6620672985645695111L;
+	static int accNumCnt = 1000;
+	int accNum;
 	String accType;
 	String fName;
 	String lName;
 	String userName;
 	String password;
-	boolean banned;
-	boolean approved;
 	
 	public Account(String accType, String fName, String lName, String userName, String password) {
 		super();
@@ -17,8 +22,8 @@ public  class Account {
 		this.lName = lName;
 		this.userName = userName;
 		this.password = password;
-		approved = false;
-		accNum++;
+		accNum = accNumCnt;
+		accNumCnt++;
 	}
 	
 	public Account(String userName, String password) {
@@ -26,8 +31,12 @@ public  class Account {
 		this.password = password;
 	}
 	
+	public Account() {
+		super();
+	}
+	
 	public void DisplayAccDetails() {
-		System.out.format("|%-15d|%-10s|%-20s|%-20s|", accNum, accType, fName, lName);
+		System.out.format("|%-15d|%-12s|%-20s|%-20s|", accNum, accType, fName, lName);
 	}
 	
 	public void UpdateAccountDetails() {
@@ -35,7 +44,7 @@ public  class Account {
 	}
 	
 	public boolean isEquivalent(Account obj) {
-		if (this.userName.equals(obj))
+		if (this.userName.equals(obj.userName))
 			return true;
 		return false;
 	}

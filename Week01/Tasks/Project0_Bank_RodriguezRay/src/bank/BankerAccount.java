@@ -3,19 +3,20 @@ package bank;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
-public class AdminAccount extends Account implements Serializable{
+public class BankerAccount extends Account implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5819807580931107845L;
 
-	public AdminAccount(String accType, String fName, String lName, String userName, String password) {
+	public BankerAccount(String accType, String fName, String lName, String userName, String password) {
 		super(accType, fName, lName, userName, password);
 		
 	}
 	
-	public AdminAccount() {
+	public BankerAccount() {
 		super();
 	}
 
@@ -26,37 +27,35 @@ public class AdminAccount extends Account implements Serializable{
 	 * @param users list of the user accounts
 	 * @param reader global reader to prompt the user
 	 */
-	public void ApproveUsers(List<UserAccount> users, Scanner reader) {
+	public void ApproveUserLoans(List<UserAccount> users, Scanner reader) {
 		DisplayUsers(users);
 		
-		System.out.println("Please enter the Account Numbers to approve: ");
-		String input = reader.nextLine();
-		String[] accNumbers = input.split(" ");
-		for (String s : accNumbers){
-			for (UserAccount user : users) {
-				if (user.getAccNumber() == Integer.parseInt(s))
-					user.approved = true;
-			}
+		System.out.println("Please enter the Account Number to view loans: ");
+		int key = Integer.parseInt(reader.nextLine());
+		
+		UserAccount selected = null;
+		
+		for (UserAccount user : users) {
+			if (user.getAccNumber() == key)
+				selected = user;
 		}
-	}
-	
-	/**
-	 * This method will allow the admin to view all acounts, and enter user account numbers in a string separated
-	 * by spacing to select the users to ban, once banned user accounts will not be allowed to login
-	 * 
-	 * @param users list of the user accounts
-	 * @param reader global reader to prompt the user
-	 */
-	public void BanUsers(List<UserAccount> users, Scanner reader) {
-		DisplayUsers(users);
 		
-		System.out.println("Please enter the Account Numbers to ban: ");
+		if (selected != null)
+			selected.DisplayLoansDetails();
+		else {
+			System.out.println("User not found");
+			Driver.logger.error("User not found");
+			return;
+		}
+		
+		System.out.println("Please enter loan ids to approve: ");
 		String input = reader.nextLine();
-		String[] accNumbers = input.split(" ");
-		for (String s : accNumbers){
-			for (UserAccount user : users) {
-				if (user.getAccNumber() == Integer.parseInt(s))
-					user.banned = true;
+		String[] loanIDs = input.split(" ");
+		for(String s : loanIDs) {
+			for (Loan l : selected.getLoans()) {
+				if (l.id == Integer.parseInt(s)) {
+					l.approved = true;
+				}
 			}
 		}
 	}

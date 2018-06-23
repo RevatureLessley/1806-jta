@@ -1,6 +1,13 @@
 package bank;
 
-public class Loan {
+import java.io.Serializable;
+
+public class Loan implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6042356402305866178L;
+	
 	public static int id = 1000;
 	float interestRate;
 	float apr;
