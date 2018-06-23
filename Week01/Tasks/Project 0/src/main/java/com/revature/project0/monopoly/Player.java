@@ -3,9 +3,10 @@ package com.revature.project0.monopoly;
 import com.revature.project0.monopoly.Board.BoardPiece;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.*;
 
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private BoardPiece piece;

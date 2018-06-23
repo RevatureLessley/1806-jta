@@ -1,20 +1,22 @@
 package com.revature.project0.monopoly;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 /*  TODO List:
     TODO: Buying and Selling of property between players
     TODO: Restrict developing of properties so that at any given time, min number of expansions +1 = max number of expansions
+    TODO: Don't allow duplicate players to log in
+    TODO: serialize the accounts at some point. I don't think you ever do that
  */
 
 public class Monopoly {
+
     private static boolean DEBUG = false;
     private static AccountContainer accContainer;
     private static ArrayList<Player> playerList;
     private static ArrayList<Board.BoardPiece> availablePieces;
+    private static ArrayList<Account> loggedInPlayers;
     private static Scanner scanner;
 
     private static Board board;
@@ -27,19 +29,53 @@ public class Monopoly {
         scanner = new Scanner(System.in);
         //accContainer = new AccountContainer();
         playerList = new ArrayList<>();
+        loggedInPlayers = new ArrayList<>();
         availablePieces = new ArrayList<>();
 
         System.out.println("Welcome to Monopoly!\n");
+        getAccountList();
+        System.out.println("Please enter your account credentials:");
         login();
+        GameState gs = null;
+        try { gs = GameStateSerializer.deserialize(); }
+        catch (FileNotFoundException e){System.err.println("Caught!");}
+        if (gs != null){
+            String line = null;
+            do {
+                String msg = "Would you like to start a new game (A), or resume your previous game (B)?";
+                System.out.println(msg);
+                line = waitForValidInput(msg, "a", "b");
+                if (line.equals("b")) {
+                    createExistingGame(gs);
+                    if (scanner != null) scanner.close();   //clean up resources
+                    return; //In other words, don't create a new game
+                } else {
+                    System.out.println("WARNING! Creating a new game will overwrite your old game. Are you sure you wish to continue? Yes (Y), No (N)");
+                    line = waitForValidInput("Are you sure you wish to continue? (Y), No (N)", "y", "n");
+                }
+            } while (line.equals("n"));
+        }
 
         String msg = "How many players will be playing this game? (1-8)";
         System.out.println(msg);
         String line = waitForValidInput(msg, "1", "2", "3", "4", "5", "6", "7", "8");
         createNewGame(Integer.parseInt(line));
+        if (scanner != null) scanner.close();   //clean up resources
+    }
+
+    private static void createExistingGame(GameState gs){
+        playerList = gs.getPlayers();
+        board = gs.getBoard();
+        jackpot = gs.getJackpotValue();
+
+        waitForOtherPlayers(playerList.size());
+
+        //board.drawBoard(playerList);
+        beginPlaying();
     }
 
     /**
-     * This method initializes a new Monopoly Game
+     * This method initializes a new Monopoly GameState
      */
     private static void createNewGame(int numPlayers){
         board = new Board();
@@ -47,30 +83,47 @@ public class Monopoly {
 
         jackpot = JACKPOT_BASE_VALUE;
 
+        waitForOtherPlayers(numPlayers);
+        System.out.println();
         availablePieces.addAll(Arrays.asList(Board.BoardPiece.values()));
-        for (int i = 1; i <= numPlayers; i++) {
-            System.out.println("Player "+i+"'s Name: ");
-            String playerName = scanner.nextLine();
-            if (playerName.equals("DEBUG")){
-                System.out.println("Debug mode activated.");
-                DEBUG = true;
-                playerName = "Administrator";
-            }
-            System.out.println("Choose your playing piece:\nAvailable pieces: ");
+        for (Account account : loggedInPlayers){
+            System.out.println(account.getUsername() + ", pick your playing piece:\nAvailable pieces: ");
             System.out.println(availablePieces.toString());
             Board.BoardPiece playerPiece;
-            while ((playerPiece = board.selectPiece(scanner.nextLine())) == null) { //BUG: player can still select from full list, even if another player has that piece
+            while ((playerPiece = board.selectPiece(scanner.nextLine())) == null ) { //BUG: player can still select from full list, even if another player has that piece
                 System.out.println("Invalid piece, choose again:");
                 System.out.println(availablePieces.toString());
             }
-            playerList.add(new Player(playerName, playerPiece));
+            playerList.add(new Player(account.getUsername(), playerPiece));
             availablePieces.remove(playerPiece);
         }
+
         //draw the board with the player pieces on it
-        board.drawBoard(playerList);
+        //board.drawBoard(playerList);
         beginPlaying(); //game loop is contained in this method, so this method returns when the game is over.
 
-        if (scanner != null) scanner.close();
+    }
+
+    private static void waitForOtherPlayers(int num){
+        String line;
+        do {
+            Account admin = loggedInPlayers.get(0);
+            loggedInPlayers = new ArrayList<>();
+            loggedInPlayers.add(admin);
+            while (loggedInPlayers.size() < num) {
+                System.out.println("Waiting for other players to join...");
+                System.out.printf("Player %d login: \n", loggedInPlayers.size()+1);
+                login();
+            }
+
+            System.out.println();
+            int i = 1;
+            for (Account acc : loggedInPlayers) {
+                System.out.println("Player " + i++ + ": " + acc.getUsername());
+            }
+            System.out.printf("%s, Do you approve of these players? Yes (Y), No (N)", admin.getUsername());
+            line = waitForValidInput("Do you approve of these players? Yes (Y), No (N)", "y", "n");
+        } while (line.equals("n"));
     }
 
     /**
@@ -93,12 +146,14 @@ public class Monopoly {
                 int doublesCount = 0;
                 player.printInfo();
                 do{
-                    String msg = "What would you like to do? Roll (R), Mortgage (M), Buy a Property back from the Bank (B), Expand a Property (E)";
+                    board.drawBoard(playerList);
+                    String msg = "What would you like to do? Roll (R), Mortgage (M), Buy a Property back from the Bank (B), Expand a Property (E), Leave the Game (L)";
                     System.out.println(msg);
-                    String line = waitForValidInput(msg, "r", "m", "b", "e");
+                    String line = waitForValidInput(msg, "r", "m", "b", "e", "l");
                     while (!line.equals("r")) {
                         if (line.equals("m")) player.mortgage(0);
                         else if(line.equals("b")) player.unMortgage();
+                        else if(line.equals("l")) leaveAndSuspendGame(player);
                         else {  //line.equals(e)
                             if (player.getUnMortgagedProperties().size() == 0) System.out.println("You don't have any properties to develop.");
                             else {
@@ -164,7 +219,7 @@ public class Monopoly {
                         line = waitForValidInput(msg, "y", "n");
                         if (line.equals("y")) player.isInJail = false;
                     }
-                    board.drawBoard(playerList);
+
                     int[] roll = Dice.roll();
                     System.out.printf("You rolled a %d and a %d, for a total of %d!\n", roll[0], roll[1], roll[0]+roll[1]);
                     if (roll[0] == roll[1]){
@@ -203,6 +258,7 @@ public class Monopoly {
                     }
                     if (!player.isInJail) player.move(roll[0] + roll[1]);
 
+                    board.drawBoard(playerList);
                     System.out.printf("You landed on %s! ", board.getBoardSquare(player.getLocation()).getName());
                     if (!handleSquareEvent(player, roll[0] + roll[1])) break;
                     if (player.isInJail) doubles = false;   //prevent extra turn
@@ -321,7 +377,7 @@ public class Monopoly {
         }
     }
 
-    private static void login(){
+    private static void getAccountList(){
         try {
             accContainer = AccountContainerSerializer.deserialize();
         }
@@ -329,19 +385,21 @@ public class Monopoly {
             System.err.println(e.getClass() + ": File not found, Dont be stupid.");
             accContainer = new AccountContainer();
         }
+    }
 
+    private static void login(){
         String line;
         do {
-            System.out.println("Please enter your account credentials.");
             System.out.print("Username: ");
             String username = scanner.nextLine();
-            System.out.println();   //because last one was a print()
+            //System.out.println();   //because last one was a print()
             System.out.print("Password: ");
             String password = scanner.nextLine();
-            System.out.println();   //because last one was a print()
-            if (accContainer.findAccount(username, password) != null) {
+            //System.out.println();   //because last one was a print()
+            Account acc;
+            if ((acc = accContainer.findAccount(username, password)) != null) {
                 System.out.printf("Logged in as %s.\n", username);
-                //TODO: list paused games?
+                loggedInPlayers.add(acc);
                 break;
             }
             else{
@@ -349,16 +407,25 @@ public class Monopoly {
                 System.out.println(msg);
                 line = waitForValidInput(msg, "t", "c");
                 if (line.equals("c")){
-                    accContainer.addAccount(new Account(username, password));
+                    acc = new Account(username, password);
+                    accContainer.addAccount(acc);
                     System.out.println("Account created.");
                     System.out.printf("Logged in as %s\n", username);
+                    loggedInPlayers.add(acc);
                     break;
                 }
                 //else, loop.
             }
         } while (line.equals("t"));
-        //TODO: remove this
-        AccountContainerSerializer.serialize(accContainer);
+    }
+
+    private static void leaveAndSuspendGame(Player player){
+        System.out.printf("Sorry everyone, %s has decided to leave the game. Come back later!\n", player.getName());
+        //Save the game state
+        GameState gs = new GameState();
+        gs.setGameState(playerList, board, jackpot);
+        GameStateSerializer.serialize(gs);
+        //TODO: enter loop to fill their spot, or just shut down and force a new instance?
     }
 
     /**
@@ -368,7 +435,12 @@ public class Monopoly {
      * @return  String the valid input of user
      */
     static String waitForValidInput(String msg, String...options){
-        String line = scanner.nextLine().toLowerCase();
+        String line = scanner.nextLine();
+        if (line.equals("DEBUG")){
+            System.out.println("Debug mode activated.");
+            DEBUG = true;
+        }
+        line = line.toLowerCase();
         while (!Arrays.asList(options).contains(line)) {
             System.out.println("Invalid option. " + msg);
             line = scanner.nextLine().toLowerCase();

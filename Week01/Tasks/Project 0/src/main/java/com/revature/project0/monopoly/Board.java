@@ -2,6 +2,7 @@ package com.revature.project0.monopoly;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //import com.revature.project0.monopoly.Board.BoardPiece;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 /**
  * This class represents the Monopoly Board and all the information that the Board should care about
  */
-public class Board {
+public class Board implements Serializable {
 
     private final Color PURPLE = new Color(87, 0, 127);
     private final Color CYAN = Color.CYAN;
@@ -46,7 +47,7 @@ public class Board {
     }
 
     /**
-     * This function will initialize the Monopoly Game Board. It creates BoardSquare Objects for each square on a typical
+     * This function will initialize the Monopoly GameState Board. It creates BoardSquare Objects for each square on a typical
      * Monopoly board and places them in an array for indexing.
      * Each BoardSquare contains data such as name, color, buying price, etc.
      */
@@ -198,7 +199,7 @@ public class Board {
      * Property Owner
      * Number of Exansions (Houses 1,2,3,4 or Hotel)
      */
-    public class BoardSquare {
+    public class BoardSquare implements Serializable{
         private final int MAX_EXPANSIONS = 5;
 
         private Color color;    //null if no color
