@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public abstract class FileManager<T> implements Serializable {
-
+	private T t = null;
 	/**
 	 * 
 	 */
@@ -19,11 +19,11 @@ public abstract class FileManager<T> implements Serializable {
 	FileInputStream fis;	
 	ObjectOutputStream oos;
 	ObjectInputStream ois;
-	String fileName;
+	private static String fileName;
 	
 	public FileManager(String fileName) {
 		super();
-		this.fileName = fileName;
+		FileManager.fileName = fileName;
 	}
 	
 	void crossTheStreams() throws FileNotFoundException, IOException {
@@ -39,20 +39,19 @@ public abstract class FileManager<T> implements Serializable {
 		ois.close();
 	}
 	
-	void writeObject(T t){
+	void writeObject(T obj){
 		try {
 			crossTheStreams();
-			oos.writeObject(t);
+			oos.writeObject(obj);
 			closeTheStreams();
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); } 
 		catch (IOException e) { e.printStackTrace(); } 
 	}
 	T readObject(){
-		T t = null;
 		try {
 			crossTheStreams();
-			t = (T)ois.readObject();
+			if(ois.available() > 0) t = (T)ois.readObject();
 			closeTheStreams();
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); } 

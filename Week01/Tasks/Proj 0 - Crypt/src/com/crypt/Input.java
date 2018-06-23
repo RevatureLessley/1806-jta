@@ -4,13 +4,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Input {
-	
-	static Scanner scan = new Scanner(System.in);
+	private static Scanner scan = new Scanner(System.in);
 	
 	private static String scan() {
 		String output = scan.nextLine();
 		return output;
 	}
+	
+
 	
 	public static byte getInputByte() {
 		try {
@@ -35,7 +36,7 @@ public class Input {
 	public static byte showMenu(String prescript,String[] responses) {//input, Response
 		System.out.println(prescript);
 		System.out.println("Please choose one of the following to continue:");
-		Integer i = 0;
+		Integer i = 1;
 		for(String s : responses) { System.out.println("(" + i.toString() + ")" + s); i++; }
 		return getInputByte();
 	}
