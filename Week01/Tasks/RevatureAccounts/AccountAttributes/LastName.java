@@ -24,6 +24,11 @@ public class LastName extends AccountAttribute implements Serializable{
 	}
 	
 	@Override
+	public String get() {
+		return lastname;
+	}
+	
+	@Override
 	public void print() {
 		System.out.println("Lastname: " + lastname);
 	}

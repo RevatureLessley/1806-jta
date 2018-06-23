@@ -22,6 +22,11 @@ public class FirstName extends AccountAttribute implements Serializable{
 	public String askUser() {
 		return console.readLine("Firstname: ");
 	}
+
+	@Override
+	public String get() {
+		return firstname;
+	}
 	
 	@Override
 	public void print() {

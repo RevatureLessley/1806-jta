@@ -22,7 +22,12 @@ public class Username extends AccountAttribute implements Serializable {
 	public String askUser() {
 		return console.readLine("Username: ");
 	}
-
+	
+	@Override
+	public String get() {
+		return username;
+	}
+	
 	@Override
 	public void print() {
 		System.out.println("Username: " + username);

@@ -11,19 +11,28 @@ public class UserAccount extends Account implements Serializable {
 		new Password(this);
 		new FirstName(this);
 		new LastName(this); 
+		new Balance(this); 
 		status = AccountStatus.PENDING;
+		actions.add((Runnable & Serializable)() -> makeDeposit());
+		actions.add((Runnable & Serializable)() -> makeWithdrawal());
 	}
 
 	@Override
 	public void enter() {
-		//String firstname = attributes.get("Firstname");
-		System.out.println("Hi, welcome to your account.");
+		String firstname = attributes.get("Firstname").get();
+		System.out.println("Hi " + firstname + ", welcome to your account.");
 		System.out.println("What would you like to do?");
-		System.out.println("Signout           [1]:");
-		System.out.println("Make a Deposit    [2]:");
-		System.out.println("Make a Withdrawal [3]:");
-		String action = console.readLine("> "); // NOTE: Check this!!!
-		UserAccountActions uaa[] = UserAccountActions.values();
-		uaa[1].display();
+		System.out.println("Signout           [0]:");
+		System.out.println("Make a Deposit    [1]:");
+		System.out.println("Make a Withdrawal [2]:");
+		actions.get(askUser("[0-2]")).run();
+	}
+
+	private void makeDeposit() {
+		attributes.get("Balance").deposit();
+	}
+
+	private void makeWithdrawal() {
+		System.out.println("Withdrawing.");
 	}
 }
