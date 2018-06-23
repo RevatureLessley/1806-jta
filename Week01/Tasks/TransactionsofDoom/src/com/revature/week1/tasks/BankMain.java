@@ -15,7 +15,7 @@ public class BankMain {
 		//chris.EnterNameAndPassword();
 		
 		Bank bank = new Bank();
-		bank.firstScreen();
+		bank.initialSetup();
 		
 	}
 	
