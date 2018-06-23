@@ -20,6 +20,7 @@ public class ToDisk{
 
 		catch(IOException ioe){
 			System.err.println("Writing to persistent storage failed!");
+			ioe.printStackTrace();
 		}
 	}
 

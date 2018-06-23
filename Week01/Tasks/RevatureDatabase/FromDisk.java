@@ -22,10 +22,12 @@ public class FromDisk{
 
 		catch(IOException ioe){
 			System.err.println("Reading from persistent storage failed!");
+			ioe.printStackTrace();
 		}
 
 		catch(ClassNotFoundException cnfe){
 			System.err.println("Data in persistent storage corrupted!");
+			cnfe.printStackTrace();
 		}
 		
 		return null;
