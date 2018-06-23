@@ -325,10 +325,11 @@ public class Monopoly {
         try {
             accContainer = AccountContainerSerializer.deserialize();
         }
-        catch (IOException e){
+        catch (FileNotFoundException e){
             System.err.println(e.getClass() + ": File not found, Dont be stupid.");
             accContainer = new AccountContainer();
         }
+
         String line;
         do {
             System.out.println("Please enter your account credentials.");
@@ -339,8 +340,7 @@ public class Monopoly {
             String password = scanner.nextLine();
             System.out.println();   //because last one was a print()
             if (accContainer.findAccount(username, password) != null) {
-                System.out.printf("Logged in as %s\n", username);
-                System.err.println("TODO");
+                System.out.printf("Logged in as %s.\n", username);
                 //TODO: list paused games?
                 break;
             }
@@ -357,9 +357,8 @@ public class Monopoly {
                 //else, loop.
             }
         } while (line.equals("t"));
-
         //TODO: remove this
-        //AccountContainerSerializer.serialize(accContainer);
+        AccountContainerSerializer.serialize(accContainer);
     }
 
     /**

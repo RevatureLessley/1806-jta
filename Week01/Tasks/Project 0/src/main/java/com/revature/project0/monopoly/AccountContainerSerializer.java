@@ -6,16 +6,18 @@ public class AccountContainerSerializer implements Serializable{
     private static AccountContainer cont = null;
     private final static String FILENAME = "AccountContainer.ser";
 
-    public static AccountContainer deserialize() throws IOException{
+    public static AccountContainer deserialize() throws FileNotFoundException{
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
             cont = (AccountContainer) ois.readObject();
             ois.close();
         }
         catch (ClassNotFoundException e){ e.printStackTrace();}
-        //catch (FileNotFoundException e){throw e;}
+        catch (FileNotFoundException e){throw e;}
         catch (IOException e) { e.printStackTrace(); }
         //TODO: modify these catches to be more informative
+
+        //System.out.println("Deserializing class: "+cont.getClass()+"\n"+cont.toString());
         return cont;
 
     }
@@ -28,5 +30,8 @@ public class AccountContainerSerializer implements Serializable{
         }
         catch (IOException e){e.printStackTrace();}
 
+        //System.out.println("Serializing class: "+container.getClass()+"\n"+container.toString());
+
     }
+
 }

@@ -20,5 +20,7 @@ public class Account implements Serializable {
         return username;
     }
 
-
+    public String toString(){
+        return "username: " + username + " | password: "+ password;
+    }
 }

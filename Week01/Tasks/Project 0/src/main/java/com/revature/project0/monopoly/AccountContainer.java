@@ -25,4 +25,10 @@ public class AccountContainer implements Serializable {
         }
         return null;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for(Account a : accountList) sb.append(a.toString() + "\n");
+        return sb.toString();
+    }
 }
