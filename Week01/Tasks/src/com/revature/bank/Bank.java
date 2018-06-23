@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  */
 public class Bank 
 {
-	private ArrayList<Account> accs = null;
+	private static ArrayList<Account> accs = null;
 	private int activeAccount = 999;
 	private int counter;
 	private static int accountsAmount = 3;
@@ -323,6 +324,7 @@ public class Bank
 						{
 							accs.get(i).setApproved(true);
 							System.out.println("AccountName: " + accs.get(i).getUserName() + " has been approved.\n");
+							writeAccountsFile(accs);
 							break;
 						}
 						else if ( enteredAnswer.equals("no"))
@@ -365,6 +367,7 @@ public class Bank
 					if ( withdrawAmount >= 0 && withdrawAmount <= account.getAccountValue() )
 					{
 						account.setAccountValue(account.getAccountValue() - withdrawAmount);
+						writeAccountsFile(accs);
 						break;
 					}
 					else
@@ -386,6 +389,7 @@ public class Bank
 		else
 		{
 			account.setAccountValue(account.getAccountValue() - withdrawAmount);
+			writeAccountsFile(accs);
 		}
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 		writeAccountsFile(accs);
@@ -417,8 +421,10 @@ public class Bank
 	}
 	
 	
-	public void readAccountsFile()
+	public static ArrayList<Account> readAccountsFile()
 	{
+//		Account adminAcc = new Account("Logan", "Brewer", 1, 0, ADMIN, true);
+//		accs.add(adminAcc);
 		try
 		{
 			FileInputStream fileInputStream = new FileInputStream("accountsFile.txt");
@@ -438,17 +444,67 @@ public class Bank
 		{
 			e2.printStackTrace();
 		}
+		return accs;
 	}
 	
 	public static void main(String[] args)
 	{
-		ArrayList<Account> accs = new ArrayList<>();
-		Account a1 = new Account("Logan", "Admin", 1, 0, ADMIN, true);
-		accs.add(a1);
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader("accountsFile.txt"));
+			if ( br.readLine() == null )
+			{
+				ArrayList<Account> accs = new ArrayList<>();
+				Account a1 = new Account("Logan", "Brewer", 1, 0, ADMIN, true);
+				accs.add(a1);
+				try
+				{
+					FileOutputStream fileOutputStream = new FileOutputStream("accountsFile.txt");
+					ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
+					oos.writeObject(accs);
+					oos.close();
+					Bank testBank = new Bank(accs);
+					testBank.login();
+				}
+				catch ( IOException e )
+				{
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				try
+				{
+					FileInputStream fileInputStream = new FileInputStream("accountsFile.txt");
+					ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+					accs = (ArrayList<Account>) objectInputStream.readObject();
+					objectInputStream.close();
+					Bank testBank = new Bank(accs);
+					testBank.login();
+				}
+				catch(FileNotFoundException e)
+				{
+					e.printStackTrace();
+				}
+				catch(IOException e1)
+				{
+					e1.printStackTrace();
+				}
+				catch(ClassNotFoundException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		}
+		catch( IOException e)
+		{
+			e.printStackTrace();
+		}
 		
-		Bank testBank = new Bank(accs);
-		//testBank.writeAccountsFile(accs);
-		testBank.login();
+		//Bank testBank = new Bank(accs);
+
+		//testBank.readAccountsFile();
+		//testBank.login();
 	}
 	
 }
