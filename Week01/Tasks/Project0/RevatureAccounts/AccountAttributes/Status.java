@@ -1,31 +1,13 @@
-package Project0.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import Project0.RevatureAccounts.*;
 
 public class Status extends AccountAttribute implements Serializable {
-	/*public enum States {
-		APPROVED() {
-			public void display(Account a) {
-				a.approved();
-			}
-		}, 
-	
-		DENIED() {
-			public void display(Account a) { 
-				a.denied();
-			}
-		}, 
-	
-		PENDING() {
-			public void display(Account a) {
-				a.pending();
-			}
-		};
-
-		public abstract void display(Account a);
-	};
-*/
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1583445065455260161L;
 	private AccountStatus status;
 	
 	public Status(AdminAccount aa) {
@@ -55,6 +37,7 @@ public class Status extends AccountAttribute implements Serializable {
 		status.display(a);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public AccountStatus get() {
 		return status;

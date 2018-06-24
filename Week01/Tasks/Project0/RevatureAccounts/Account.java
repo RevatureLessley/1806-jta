@@ -7,6 +7,10 @@ import Project0.*;
 import Project0.RevatureAccounts.AccountAttributes.*;
 
 public abstract class Account implements ConsoleReference, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6559073408113950663L;
 	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();
 	protected ArrayList<Runnable> actions = new ArrayList<>();
 	

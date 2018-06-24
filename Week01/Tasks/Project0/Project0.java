@@ -1,7 +1,5 @@
 package Project0;
 
-import java.io.*;
-
 public class Project0 implements ConsoleReference{
 	public static void main(String args[]){
 

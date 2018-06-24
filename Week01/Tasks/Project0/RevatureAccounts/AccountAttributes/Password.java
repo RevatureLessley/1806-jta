@@ -1,10 +1,14 @@
-package Project0.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import Project0.RevatureAccounts.*;
 
 public class Password extends AccountAttribute implements Serializable {
 	// This class needs to be secured.
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1240459302631947705L;
 	private String password;
 	private String p;
 	private String q;
@@ -23,7 +27,6 @@ public class Password extends AccountAttribute implements Serializable {
 
 	@Override
 	public String askUser() {
-		String s;
 
 		do{
 			getPassword();

@@ -6,6 +6,10 @@ import Project0.*;
 import Project0.RevatureAccounts.AccountAttributes.*;
 
 public class AdminAccount extends Account implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5458354599822173954L;
 	/* 
 	 * unapprovedAccounts is Unserializable. No worries since we must collect all 
 	 * unapproved accounts every time the admin signs in anyways.

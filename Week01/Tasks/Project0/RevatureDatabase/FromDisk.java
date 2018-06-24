@@ -1,7 +1,6 @@
 package Project0.RevatureDatabase;
 
 import java.io.*;
-import java.lang.*;
 
 public class FromDisk{
 	private FileInputStream connection;

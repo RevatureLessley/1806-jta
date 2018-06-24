@@ -1,9 +1,13 @@
-package Project0.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import Project0.RevatureAccounts.*;
 
 public class LastName extends AccountAttribute implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4784336663257381167L;
 	private String lastname;
 	
 	public LastName(AdminAccount aa) {
@@ -23,6 +27,7 @@ public class LastName extends AccountAttribute implements Serializable{
 		return console.readLine("Lastname: ");
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public String get() {
 		return lastname;

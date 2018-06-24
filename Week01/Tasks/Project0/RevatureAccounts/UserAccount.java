@@ -1,12 +1,16 @@
 package Project0.RevatureAccounts;
 
 import java.io.*;
-import java.util.*;
 import Project0.RevatureAccounts.AccountAttributes.*;
 
 public class UserAccount extends Account implements Serializable {
 
- 	public UserAccount() {
+ 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1329930768642177273L;
+
+	public UserAccount() {
 		new Username(this);
 		new Password(this);
 		new FirstName(this);

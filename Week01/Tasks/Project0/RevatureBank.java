@@ -11,6 +11,7 @@ public class RevatureBank implements ConsoleReference{
 	private final String STORAGE = "./Project0/RevatureDatabase/PersistentStore.txt";
 	private static HashMap<Integer, Account> accounts;
 
+	@SuppressWarnings("unchecked")
 	private RevatureBank() {
 		try {
 			FromDisk fd = new FromDisk(STORAGE);

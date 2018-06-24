@@ -7,6 +7,10 @@ import java.util.*;
 import Project0.RevatureAccounts.*;
 
 public class Balance extends AccountAttribute implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5263664987376027348L;
 	private BigDecimal balance;
 	
 	public Balance(UserAccount ua) {
@@ -45,6 +49,7 @@ public class Balance extends AccountAttribute implements Serializable {
 		return new BigDecimal(num.toString());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public BigDecimal get() {
 		return balance;
