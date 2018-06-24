@@ -3,14 +3,14 @@ package proj0;
 import java.io.Serializable;
 import java.util.HashMap;
 
+
 public class Users implements Serializable{
-	/**
-	 * SerialUID for Users
-	 */
+	
+	//SerialUID for Users
 	private static final long serialVersionUID = -178098286672692870L;
 	
 	private HashMap<String, User> users;
-	
+
 	/**
 	 * Setup the Hashmap which contains the users
 	 */
@@ -18,7 +18,9 @@ public class Users implements Serializable{
 		//Use commented out lines the first time this is run
 		//Admin adm = new Admin("account","password","Andrew","Hwang");
 		//adm.setAuth(true);
+		
 		this.users = new HashMap();
+		
 		//this.users.put("account",adm);
 	}
 	

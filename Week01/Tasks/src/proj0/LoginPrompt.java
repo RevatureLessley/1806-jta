@@ -6,10 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Console;
+import org.apache.log4j.Logger;
 
 public class LoginPrompt{
+	//logger for loginprompt
+	static final Logger logger = Logger.getLogger(LoginPrompt.class);
 	
+	//console for user input
 	static Console console = System.console();
+	
 	/**
 	* Prompts the user for their login info and either asks for their password or
 	* creates a new account if the account doesn't exist yet
@@ -117,6 +122,7 @@ public class LoginPrompt{
 		String fname = new String(console.readLine("First Name: "));
 		String lname = new String(console.readLine("Last Name: "));
 		User user = new User(username,password,fname,lname);
+		logger.info(user.toString() + " Created an account");
 		return user;
 	}
 	

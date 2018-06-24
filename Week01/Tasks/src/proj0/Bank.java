@@ -2,9 +2,15 @@ package proj0;
 
 import java.text.DecimalFormat;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 public class Bank{
 
+	static final Logger logger = Logger.getLogger(Bank.class);
+	
 	public static void main(String args[]){
+		PropertyConfigurator.configure("/Users/auhwang/Documents/Revature/Repo/"
+				+ "Week01/Tasks/src/log4j.properties");
 		//setup users hashmap for the first time
 		//Users users = new Users();
 		LoginPrompt lp = new LoginPrompt();
@@ -81,6 +87,7 @@ public class Bank{
 		}
 		user.setBalance(user.getBalance() + d);
 		System.out.println("Current balance: " + user.getBalance());
+		logger.info(user.getUserid() + " Deposited " + d);
 		
 	}
 	
@@ -105,6 +112,7 @@ public class Bank{
 		}
 		user.setBalance(user.getBalance() - d);
 		System.out.println("Current balance: " + user.getBalance());
+		logger.info(user.getUserid() + " Withdrew " + d);
 	}
 	
 	/**
@@ -119,6 +127,7 @@ public class Bank{
 		else {
 			System.out.println("User successfully approved");
 			user.setAuth(true);
+			logger.info(user.getUserid() + " Approved");
 		}
 	}
 	
@@ -134,6 +143,7 @@ public class Bank{
 		else {
 			System.out.println("User successfully removed");
 			users.removeUser(user);
+			logger.info(user.getUserid() + " Removed");
 		}
 	}
 }
