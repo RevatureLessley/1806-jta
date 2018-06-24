@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  */
 public class Bank 
 {
+	final static Logger logger = Logger.getLogger(Bank.class);
 	private static ArrayList<Account> accs = null;
 	private int activeAccount = 999;
 	private int counter;
@@ -33,6 +35,7 @@ public class Bank
 	public Bank(ArrayList<Account> accs)
 	{
 		this.accs = accs;
+		logger.info("Initializing Bank with existing accounts.");
 	}
 	
 	
@@ -42,6 +45,7 @@ public class Bank
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		try 
 		{
+			logger.info("Registering a new user.");
 			System.out.println("What username would you like to use?: ");
 			String newUsername = bufferedReader.readLine();
 			System.out.println("What password would you like to use?: ");
@@ -107,6 +111,7 @@ public class Bank
 				if ( accs.get(i).getUserName().equals(enteredAccountName) )
 				{
 					activeAccount = i;
+					break;
 				}
 			}
 			while ( activeAccount == 999 )
@@ -152,10 +157,12 @@ public class Bank
 			if ( accs.get(activeAccount).getApproved() == true )
 			{
 				System.out.println("Successfully logged in.\n");
+				logger.info("Normal user successfully logged in.");
 				askUserInput(accs.get(activeAccount));
 			}
 			else
 			{
+				logger.info("Normal user succesfully logged in but account needs approval.");
 				System.out.println("Your account is not activated.");
 				System.out.println("Please wait until an admin activates your account. Thank you.\n");
 				login();
@@ -181,6 +188,7 @@ public class Bank
 				if ( accs.get(i).getUserName().equals(enteredAccountName) )
 				{
 					activeAccount = i;
+					break;
 				}
 			}
 			while ( activeAccount == 999 )
@@ -226,10 +234,12 @@ public class Bank
 			if ( accs.get(activeAccount).getApproved() == true )
 			{
 				System.out.println("Successfully logged in.\n");
+				logger.info("Admin successfully logged in.");
 				askAdminInput(accs.get(activeAccount));
 			}
 			else
 			{
+				logger.info("Admin succesfully logged in but account needs approval.");
 				System.out.println("Your account is not activated.");
 				System.out.println("Please wait until an admin activates your account. Thank you.\n");
 				login();
@@ -266,6 +276,7 @@ public class Bank
 				}
 				else if ( userOption.equals("logout") )
 				{
+					logger.info("Logging out of users account.");
 					System.out.println("You have been logged out.\n");
 					login();
 				}
@@ -273,7 +284,8 @@ public class Bank
 				{
 					while ( true )
 					{
-						System.out.println("Not a valid command, enter \"deposit\" or \"withdraw\": ");
+						logger.info("User entered incorrect input.");
+						System.out.println("Not a valid command, enter \"deposit\" or \"withdraw\" or \"logout\": ");
 						userOption = bufferedReader.readLine().toLowerCase();
 						if ( userOption.equals("withdraw") )
 						{
@@ -322,6 +334,7 @@ public class Bank
 						String enteredAnswer = bufferedReader.readLine().toLowerCase();
 						if ( enteredAnswer.equals("yes") )
 						{
+							logger.info("Admin approved account: " + accs.get(i) + ".");
 							accs.get(i).setApproved(true);
 							System.out.println("AccountName: " + accs.get(i).getUserName() + " has been approved.\n");
 							writeAccountsFile(accs);
@@ -329,7 +342,8 @@ public class Bank
 						}
 						else if ( enteredAnswer.equals("no"))
 						{
-							System.out.println("AccountName: " + accs.get(i).getUserName() + " has been NOT been approved.\n");
+							logger.info("Admin DID NOT approve account: " + accs.get(i) + ".");
+							System.out.println("AccountName: " + accs.get(i).getUserName() + " has NOT been approved.\n");
 							break;
 						}
 						else
@@ -341,6 +355,7 @@ public class Bank
 			}
 			System.out.println("Done going through all accounts.");
 			System.out.println("Logging you out, switch to user account to perform transactions.\n");
+			logger.info("Admin finished going through accounts to approve, now logging out.");
 			login();
 		}
 		catch ( IOException e)
@@ -357,6 +372,7 @@ public class Bank
 		float finalAmount = account.getAccountValue() - withdrawAmount;
 		if ( finalAmount < 0 )
 		{
+			logger.info("User tried to withdraw too much.");
 			System.out.println("You cannot withdraw that much.");
 			System.out.println("Please enter an amount between 0 and " + account.getAccountValue() + ".");
 			while(true)
@@ -366,6 +382,7 @@ public class Bank
 					withdrawAmount = Integer.parseInt(bufferedReader.readLine());
 					if ( withdrawAmount >= 0 && withdrawAmount <= account.getAccountValue() )
 					{
+						logger.info("User withdrew: " + withdrawAmount + " dollars from their account.");
 						account.setAccountValue(account.getAccountValue() - withdrawAmount);
 						writeAccountsFile(accs);
 						break;
@@ -388,9 +405,11 @@ public class Bank
 		}
 		else
 		{
+			logger.info("User withdrew: " + withdrawAmount + " dollars from their account.");
 			account.setAccountValue(account.getAccountValue() - withdrawAmount);
 			writeAccountsFile(accs);
 		}
+		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 		writeAccountsFile(accs);
 	}
@@ -400,6 +419,7 @@ public class Bank
 	{
 		System.out.println("Amount in the account before deposit: $" + account.getAccountValue());
 		account.setAccountValue(account.getAccountValue() + depositAmount);
+		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 		writeAccountsFile(accs);
 	}
@@ -409,6 +429,7 @@ public class Bank
 	{
 		try
 		{
+			logger.info("Writing existing ArrayList of Accounts to accountsFile.txt");
 			FileOutputStream fileOutputStream = new FileOutputStream("accountsFile.txt");
 			ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
 			oos.writeObject(accs);
@@ -427,6 +448,7 @@ public class Bank
 //		accs.add(adminAcc);
 		try
 		{
+			logger.info("Reading from accountsFile.txt ");
 			FileInputStream fileInputStream = new FileInputStream("accountsFile.txt");
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 			accs = (ArrayList<Account>) objectInputStream.readObject();
@@ -454,6 +476,7 @@ public class Bank
 			BufferedReader br = new BufferedReader(new FileReader("accountsFile.txt"));
 			if ( br.readLine() == null )
 			{
+				logger.info("First time running the app, adding 1 admin account to accountsFile.txt.");
 				ArrayList<Account> accs = new ArrayList<>();
 				Account a1 = new Account("Logan", "Brewer", 1, 0, ADMIN, true);
 				accs.add(a1);
@@ -473,6 +496,7 @@ public class Bank
 			}
 			else
 			{
+				logger.info("App has been run before, initializing with accounts from accountsFile.txt.");
 				try
 				{
 					FileInputStream fileInputStream = new FileInputStream("accountsFile.txt");
@@ -500,11 +524,6 @@ public class Bank
 		{
 			e.printStackTrace();
 		}
-		
-		//Bank testBank = new Bank(accs);
-
-		//testBank.readAccountsFile();
-		//testBank.login();
 	}
 	
 }

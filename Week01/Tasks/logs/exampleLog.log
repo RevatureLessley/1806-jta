@@ -1,0 +1,25 @@
+2018-06-22 14:06:55 TRACE Driver:11 - logger configured properly
+2018-06-22 14:06:55 DEBUG Driver:12 - logger configured properly
+2018-06-22 14:06:55 INFO  Driver:13 - logger configured properly
+2018-06-22 14:06:55 WARN  Driver:14 - logger configured properly
+2018-06-22 14:06:55 ERROR Driver:15 - logger configured properly
+2018-06-22 14:06:55 FATAL Driver:16 - logger configured properly
+2018-06-23 19:46:39 INFO  Bank:38 - Initializing Bank with existing accounts.
+2018-06-23 19:46:52 INFO  Bank:48 - Registering a new user.
+2018-06-23 19:47:05 INFO  Account:39 - New account initialized
+2018-06-23 19:58:39 INFO  Bank:499 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-23 19:58:39 INFO  Bank:38 - Initializing Bank with existing accounts.
+2018-06-23 19:59:10 INFO  Bank:499 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-23 19:59:10 INFO  Bank:38 - Initializing Bank with existing accounts.
+2018-06-23 19:59:24 INFO  Bank:160 - Normal user successfully logged in.
+2018-06-23 19:59:39 INFO  Bank:279 - Logging out of users account.
+2018-06-23 19:59:45 INFO  Bank:165 - Normal user succesfully logged in but account needs approval.
+2018-06-23 20:00:03 INFO  Bank:237 - Admin successfully logged in.
+2018-06-23 20:00:05 INFO  Bank:337 - Admin approved account: Account [userName=user2, password=user2, accountNumber=4, accountValue=0, accountType=0, approved= false].
+2018-06-23 20:00:05 INFO  Account:105 - Set approved to: true.
+2018-06-23 20:00:05 INFO  Bank:432 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-23 20:00:05 INFO  Bank:358 - Admin finished going through accounts to approve, now logging out.
+2018-06-23 20:00:17 INFO  Bank:160 - Normal user successfully logged in.
+2018-06-23 20:00:20 INFO  Account:83 - Set account value to: 50.
+2018-06-23 20:00:20 INFO  Bank:422 - User now has: 50dollars from their account.
+2018-06-23 20:00:20 INFO  Bank:432 - Writing existing ArrayList of Accounts to accountsFile.txt

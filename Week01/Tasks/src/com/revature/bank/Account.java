@@ -1,6 +1,7 @@
 package com.revature.bank;
 
 import java.io.Serializable;
+import org.apache.log4j.Logger;
 
 /**
  * Account class is responsible for holding information
@@ -17,6 +18,7 @@ import java.io.Serializable;
  */
 public class Account implements Serializable
 {
+	final static Logger logger = Logger.getLogger(Account.class);
 	private static final long serialVersionUID = 2022586512565322588L;
 	private String userName;
 	private String password;
@@ -34,6 +36,7 @@ public class Account implements Serializable
 		this.accountValue = accountValue;
 		this.accountType = accountType;
 		this.approved = approved;
+		logger.info("New account initialized");
 	}
 
 	public String getUserName() 
@@ -44,6 +47,7 @@ public class Account implements Serializable
 	public void setUserName(String userName) 
 	{
 		this.userName = userName;
+		logger.info("Set account name to: " + userName + ".");
 	}
 
 	public String getPassword() 
@@ -54,6 +58,7 @@ public class Account implements Serializable
 	public void setPassword(String password) 
 	{
 		this.password = password;
+		logger.info("Set account password to: " + password + ".");
 	}
 
 	public int getAccountNumber() 
@@ -64,6 +69,7 @@ public class Account implements Serializable
 	public void setAccountNumber(int accountNumber) 
 	{
 		this.accountNumber = accountNumber;
+		logger.info("Set account number to: " + accountNumber + ".");
 	}
 
 	public int getAccountValue() 
@@ -74,6 +80,7 @@ public class Account implements Serializable
 	public void setAccountValue(int accountValue) 
 	{
 		this.accountValue = accountValue;
+		logger.info("Set account value to: " + accountValue + ".");
 	}
 	
 	public int getAccountType()
@@ -84,6 +91,7 @@ public class Account implements Serializable
 	public void setAccountType(int accountType)
 	{
 		this.accountType = accountType;
+		logger.info("Set account type to: " + accountType + ".");
 	}
 	
 	public boolean getApproved()
@@ -94,6 +102,7 @@ public class Account implements Serializable
 	public void setApproved(boolean approved)
 	{
 		this.approved = approved;
+		logger.info("Set approved to: " + approved + ".");
 	}
 
 	@Override
