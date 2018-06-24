@@ -48,7 +48,7 @@ public class App {
     		String name;
     		String password;
     		
-    		vend = new VendingMachine("Feral Vending Machine", "No Owner", "An arbitrary forest in Northern New England. This vending machine is comfortably tucked under a rocky alcove. 1368 A.D.");
+    		vend = new VendingMachine("Feral Vending Machine", "No Owner", "" ,"An arbitrary forest in Northern New England. This vending machine is comfortably tucked under a rocky alcove. 1368 A.D.");
     		System.out.println(vend.toString());
     		System.out.println(app.getGreeting());
     		System.out.println("You are Admin. You have no choice. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
@@ -69,8 +69,8 @@ public class App {
     		
     		Admin admin = new Admin(name, password, aboutMe);
     		vend.setAdminName(admin.getName());
-    		System.out.println("Admin name:" + admin.getName());
-    		System.out.println(vend.getVendingMachineName() + " " + vend.getVendingMachineId());
+    		// System.out.println("Admin name:" + admin.getName());
+    		// System.out.println(vend.getVendingMachineName() + " " + vend.getVendingMachineId());
     		
     		vendingMachineList = new VendingMachineList();
     		vendingMachineList.addVendingMachine(vend);
@@ -91,9 +91,9 @@ public class App {
 			}
     		
     		activeUser = admin;
-    		System.out.println("User: " + activeUser.getName());
-    		System.out.println("User location: " + activeUser.getLocation() );
-    		System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineName());
+    		// System.out.println("User: " + activeUser.getName());
+    		// System.out.println("User location: " + activeUser.getLocation() );
+    		
     	
     	} else {
     		// Save is present
@@ -117,9 +117,9 @@ public class App {
     		}
     		
     		activeUser = loginSuccess;
-    		System.out.println("User: " + activeUser.getName());
-    		System.out.println("User location: " + activeUser.getLocation() );
-    		System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineName());
+    		// System.out.println("User: " + activeUser.getName());
+    		// System.out.println("User location: " + activeUser.getLocation() );
+    		// System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineName());
     		
     	}
     
@@ -127,7 +127,7 @@ public class App {
 		vendingMachineList = save.getVendingMachineList();
 		userList = save.getUserList();
     	vend = vendingMachineList.getVendingMachine(activeUser.getLocation());
-		System.out.println("vend login" + activeUser.getLocation() + "list size "+ vendingMachineList.size() );
+		// System.out.println("vend login" + activeUser.getLocation() + "list size "+ vendingMachineList.size() );
 		Container textInput = new Container(new ArrayList<String>());
 		Container staticContent = new Container(new ArrayList<String>());
 		//Container textOutput = new Container(new ArrayList<String>());
@@ -140,20 +140,25 @@ public class App {
 					// textInput.add("=>" + userInput);
 					// User Info
 					// Inventory
+					System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
 					System.out.println(vend.toString());
 					System.out.println(vend.getVendingMachineName() + ": Do Something (enter help for options)!");
+				
+				case "balance":
+					System.out.println("You have " + activeUser.getCash() + " units left to spend. Good for you.");
 				case "login":
 					break;
 				case "help":
 					System.out.println(vend.toString());
 					System.out.println(vend.getVendingMachineName() + " says ...");
 					System.out.println("Available commands are ..");
-					System.out.println();
-					System.out.println("login -- ");
-					System.out.println("history -- ");
-					System.out.println("help -- ");
-					System.out.println("exit -- ");
-					System.out.println("status -- ");
+					System.out.println("balance -- Check your remaining balance.");
+					System.out.println("login -- Login to another account.");
+					System.out.println("history -- Review your 20 most previous queries.");
+					System.out.println("help -- See this menu.");
+					System.out.println("exit -- Exit the application.");
+					System.out.println("status -- Check your status effects.");
+					System.out.println(": Do Something (enter help for options)!");
 					break;
 		        case "history":
 		        	input.printHistory();
@@ -165,12 +170,14 @@ public class App {
 		        		save.setUserList(userList);
 		        		save.setVendingMachineList(vendingMachineList);
 						save.writeToFile(SAVE_FILE_NAME);
+						System.out.println("Saved!");
 					} catch (IOException e) {
 						System.out.println("Failed to save!");
 						e.printStackTrace();
 					}
 		        	break;
 		        case "status":
+		        	activeUser.getStatus();
 		        	break;
 		    }
 		}
