@@ -7,9 +7,29 @@ import Tasks.*;
 import Tasks.RevatureAccounts.AccountAttributes.*;
 
 public abstract class Account implements ConsoleReference, Serializable {
-	protected AccountStatus status;
 	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();
 	protected ArrayList<Runnable> actions = new ArrayList<>();
+	/*protected enum States {
+		APPROVED() {
+			public void display(Account a) {
+				a.approved();
+			}
+		}, 
+	
+		DENIED() {
+			public void display(Account a) { 
+				a.denied();
+			}
+		}, 
+	
+		PENDING() {
+			public void display(Account a) {
+				a.pending();
+			}
+		};
+
+		public abstract void display(Account a);
+	};*/
 
  	public Account() {
 		actions.add((Runnable & Serializable)() -> signOut());
@@ -18,6 +38,10 @@ public abstract class Account implements ConsoleReference, Serializable {
  	public void addAttribute(String field, AccountAttribute aa) {
   		attributes.put(field, aa);
  	}
+
+	public void approved() {
+		System.err.println("Account.approved() was incorreectly called or is not overridden.");
+	}
 
 	protected Integer askUser(String regex) {
 		Pattern p = Pattern.compile(regex);
@@ -32,6 +56,11 @@ public abstract class Account implements ConsoleReference, Serializable {
 		return Integer.valueOf(action);
 	}
 
+	public void denied() {
+		System.err.println("Account.denied() was incorreectly called or is not overridden.");
+	}
+
+
 	abstract public void enter();
 
 	public Integer getID(){
@@ -39,6 +68,11 @@ public abstract class Account implements ConsoleReference, Serializable {
 				attributes.get("Password").getID();
 		return index.hashCode();
 	}
+
+	public void pending() {
+		System.err.println("Account.pending() was incorreectly called or is not overridden.");
+	}
+
 
  	public void print(){
 		for(AccountAttribute aa : attributes.values())

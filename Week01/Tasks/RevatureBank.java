@@ -33,7 +33,7 @@ public class RevatureBank implements ConsoleReference{
 		System.out.println("Please create an account.");
 		UserAccount a = new UserAccount();
 		accounts.put(a.getID(), a);
-		signIn();
+		a.pending();
 	}
 
 	private void signIn() {

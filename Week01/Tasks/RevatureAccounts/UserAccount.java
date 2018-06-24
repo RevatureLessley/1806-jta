@@ -11,14 +11,14 @@ public class UserAccount extends Account implements Serializable {
 		new Password(this);
 		new FirstName(this);
 		new LastName(this); 
-		new Balance(this); 
-		status = AccountStatus.PENDING;
+		new Balance(this);
+		new Status(this);
 		actions.add((Runnable & Serializable)() -> makeDeposit());
 		actions.add((Runnable & Serializable)() -> makeWithdrawal());
 	}
 
 	@Override
-	public void enter() {
+	public void approved() {
 		String firstname = attributes.get("Firstname").get();
 		System.out.println("Hi " + firstname + ", welcome to your account.");
 		System.out.println("What would you like to do?");
@@ -28,6 +28,19 @@ public class UserAccount extends Account implements Serializable {
 		actions.get(askUser("[0-2]")).run();
 	}
 
+	@Override
+	public void denied() {	
+		String firstname = attributes.get("Firstname").get();
+		System.out.print("Hi " + firstname + ", " );
+		System.out.print("unfortunately your account has been denied by the admin. ");
+		System.out.println("We apologize for the inconvenience.");
+	}
+
+	@Override
+	public void enter() {
+		attributes.get("Status").display(this);
+	}
+
 	private void makeDeposit() {
 		attributes.get("Balance").deposit();
 	}
@@ -35,4 +48,13 @@ public class UserAccount extends Account implements Serializable {
 	private void makeWithdrawal() {	
 		attributes.get("Balance").withdraw();
 	}
+
+	@Override
+	public void pending() {	
+		String firstname = attributes.get("Firstname").get();
+		System.out.print("Hi " + firstname + ", thank you for creating an account. " );
+		System.out.print("Your account is awaiting approval from the admin. ");
+		System.out.println("We apologize for the inconvenience.");
+	}
+
 }
