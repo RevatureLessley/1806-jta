@@ -40,7 +40,7 @@ public abstract class Account implements ConsoleReference, Serializable {
  	}
 
 	public void approved() {
-		System.err.println("Account.approved() was incorreectly called or is not overridden.");
+		System.err.println("Account.approved() was incorrectly called or is not overridden.");
 	}
 
 	protected Integer askUser(String regex) {
@@ -57,7 +57,7 @@ public abstract class Account implements ConsoleReference, Serializable {
 	}
 
 	public void denied() {
-		System.err.println("Account.denied() was incorreectly called or is not overridden.");
+		System.err.println("Account.denied() was incorrectly called or is not overridden.");
 	}
 
 
@@ -70,7 +70,7 @@ public abstract class Account implements ConsoleReference, Serializable {
 	}
 
 	public void pending() {
-		System.err.println("Account.pending() was incorreectly called or is not overridden.");
+		System.err.println("Account.pending() was incorrectly called or is not overridden.");
 	}
 
 
