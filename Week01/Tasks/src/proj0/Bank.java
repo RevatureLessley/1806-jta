@@ -1,5 +1,6 @@
 package proj0;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 import org.apache.log4j.Logger;
@@ -9,8 +10,10 @@ public class Bank{
 	static final Logger logger = Logger.getLogger(Bank.class);
 	
 	public static void main(String args[]){
-		PropertyConfigurator.configure("/Users/auhwang/Documents/Revature/Repo/"
-				+ "Week01/Tasks/src/log4j.properties");
+		//configure log4j properties file
+		String basePath = new File("").getAbsolutePath();
+		PropertyConfigurator.configure(basePath + "/log4j.properties");
+		
 		//setup users hashmap for the first time
 		//Users users = new Users();
 		LoginPrompt lp = new LoginPrompt();
