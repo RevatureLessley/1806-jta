@@ -1,15 +1,31 @@
 package com.revature.project0.monopoly;
 
-import java.io.FileNotFoundException;
-import java.util.*;
-
-/*  TODO List:
-    TODO: Buying and Selling of property between players
-    TODO: Restrict developing of properties so that at any given time, min number of expansions +1 = max number of expansions
-    TODO: Don't allow duplicate players to log in
-    TODO: serialize the accounts at some point. I don't think you ever do that
+/*
+ * @Author Eric Sundberg
+ * 6/18/18
+ * This project simulates the Monopoly game by Hasbro, restricted to console output.
+ * On top of that, game data will persist if the application is exited naturally, and players
+ * may create accounts for themselves (actually they're required to).
+ * Known Bugs: Players may choose already chosen game pieces (but this has no effect on gameplay)
  */
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+/*
+    TODO List:
+    TODO: Buying and Selling of property between players
+    TODO: Restrict developing of properties so that at any given time, min number of expansions +1 = max number of expansions
+*/
+
+/**
+ * This class simulates the Monopoly game and houses the main method.
+ * It handles all the game logic and cooridinates with the Account
+ * class (through it's AccountContainer object)
+ */
 public class Monopoly {
 
     private static boolean DEBUG = false;
@@ -24,7 +40,13 @@ public class Monopoly {
     private static final int JACKPOT_BASE_VALUE = 500;
     private static int jackpot;
 
+    private static boolean doOnce;
 
+
+    /**
+     * Main method.
+     * @param args command line arguments
+     */
     public static void main(String[] args){
         scanner = new Scanner(System.in);
         //accContainer = new AccountContainer();
@@ -38,9 +60,9 @@ public class Monopoly {
         login();
         GameState gs = null;
         try { gs = GameStateSerializer.deserialize(); }
-        catch (FileNotFoundException e){System.err.println("Caught!");}
+        catch (FileNotFoundException e){System.out.println("No prior game data exists, creating new game.");}
         if (gs != null){
-            String line = null;
+            String line;
             do {
                 String msg = "Would you like to start a new game (A), or resume your previous game (B)?";
                 System.out.println(msg);
@@ -63,6 +85,11 @@ public class Monopoly {
         if (scanner != null) scanner.close();   //clean up resources
     }
 
+    /**
+     * This method will retrieve the instance of GameState of the saved game, and then start playing it.
+     * It uses serialization to accomplish this.
+     * @param gs the GameState will all the metadata of the saved game.
+     */
     private static void createExistingGame(GameState gs){
         playerList = gs.getPlayers();
         board = gs.getBoard();
@@ -70,12 +97,12 @@ public class Monopoly {
 
         waitForOtherPlayers(playerList.size());
 
-        //board.drawBoard(playerList);
-        beginPlaying();
+        doOnce = true;  //so that we correctly start on the correct player's turn in the next method
+        beginPlaying(gs.getPlayerTurn());
     }
 
     /**
-     * This method initializes a new Monopoly GameState
+     * This method initializes a new Monopoly Game.
      */
     private static void createNewGame(int numPlayers){
         board = new Board();
@@ -100,10 +127,15 @@ public class Monopoly {
 
         //draw the board with the player pieces on it
         //board.drawBoard(playerList);
-        beginPlaying(); //game loop is contained in this method, so this method returns when the game is over.
+        beginPlaying(1); //game loop is contained in this method, so this method returns when the game is over.
 
     }
 
+    /**
+     * This method will loop until the specfied number of players for the game have logged in to play.
+     * Player 1 is always the admin, who gets to decide if the other players are allowed.
+     * @param num the number of players playing.
+     */
     private static void waitForOtherPlayers(int num){
         String line;
         do {
@@ -121,28 +153,37 @@ public class Monopoly {
             for (Account acc : loggedInPlayers) {
                 System.out.println("Player " + i++ + ": " + acc.getUsername());
             }
-            System.out.printf("%s, Do you approve of these players? Yes (Y), No (N)", admin.getUsername());
+            System.out.printf("%s, Do you approve of these players? Yes (Y), No (N)", admin.getUsername()); //NOTE: this will be different for networking
             line = waitForValidInput("Do you approve of these players? Yes (Y), No (N)", "y", "n");
         } while (line.equals("n"));
+        System.out.println();
     }
 
     /**
      * This method simulates gameplay of Monopoly, running in an infinite loop until a player is declared the winner.
      */
-    private static void beginPlaying(){
+    private static void beginPlaying(int turn){
+        //NOTE: Serialization doesn't technically belong here, but its a good place to stick it in the
+        //      flow of the program execution, because it's guarenteed to be done being useful at this point.
+        AccountContainerSerializer.serialize(accContainer);
+
         while(true){    //game loop
             for (int i = 0; i < playerList.size(); i++){
+                if (doOnce){
+                    doOnce = false; //with no hope to ever be true again.
+                    i = turn-1; //offset to transform Player num -> array index
+                }
                 Player player = playerList.get(i);
                 //Win condition
                 if (playerList.size() == 1){
                     System.out.println(player.getName() + " wins!");
                     return;
                 }
-                //add interest to mortgages per turn    //TODO: This could be desired.
-                //for (Board.BoardSquare square : player.getMortgagedProperties()) square.addInterest();
+                //add interest to mortgages per turn    //NOTE: Not in original game rules.
+                for (Board.BoardSquare square : player.getMortgagedProperties()) square.addInterest();
 
                 System.out.printf("Player %d's turn.\n", i+1);
-                boolean doubles = false;
+                boolean doubles;    // = false;
                 int doublesCount = 0;
                 player.printInfo();
                 do{
@@ -151,63 +192,73 @@ public class Monopoly {
                     System.out.println(msg);
                     String line = waitForValidInput(msg, "r", "m", "b", "e", "l");
                     while (!line.equals("r")) {
-                        if (line.equals("m")) player.mortgage(0);
-                        else if(line.equals("b")) player.unMortgage();
-                        else if(line.equals("l")) leaveAndSuspendGame(player);
-                        else {  //line.equals(e)
-                            if (player.getUnMortgagedProperties().size() == 0) System.out.println("You don't have any properties to develop.");
-                            else {
-                                int count = 0;
-                                StringBuilder sb = new StringBuilder();
-                                String[] validInputs = new String[player.getUnMortgagedProperties().size()];
-                                for(Board.BoardSquare property : player.getUnMortgagedProperties()){
-                                    sb.append(property.getName() + " ("+ ++count +"), ");
-                                    validInputs[count-1] = "" + count;
-                                }
-                                sb.delete(sb.length() - 2, sb.length());    //delete ', '
-                                System.out.println("Choose a property: " + sb.toString());
-                                line = waitForValidInput(sb.toString(), validInputs);
+                        switch (line){
+                            case "m":
+                                player.mortgage(0);
+                            break;
+                            case "b":
+                                player.unMortgage();
+                            break;
+                            case "l":
+                                leaveAndSuspendGame(player);
+                                return;
+                            //break;    //handled by return;
+                            default:    //"e"
+                                if (player.getUnMortgagedProperties().size() == 0) System.out.println("You don't have any properties to develop.");
+                                else {
+                                    int count = 0;
+                                    StringBuilder sb = new StringBuilder();
+                                    String[] validInputs = new String[player.getUnMortgagedProperties().size()];
+                                    for(Board.BoardSquare property : player.getUnMortgagedProperties()){
+                                        sb.append(property.getName()).append(" (").append(++count).append("), ");
+                                        validInputs[count-1] = "" + count;
+                                    }
+                                    sb.delete(sb.length() - 2, sb.length());    //delete ', '
+                                    System.out.println("Choose a property: " + sb.toString());
+                                    line = waitForValidInput(sb.toString(), validInputs);
 
-                                //get the property user selected
-                                Board.BoardSquare square = ((Board.BoardSquare)player.getUnMortgagedProperties().toArray()[Integer.parseInt(line)-1]);
-                                if (!player.ownsBlock(board, square)){
-                                    System.out.println("You may not expand upon this property until you own all properties in its group.");  //TODO: Specifiy which properties are missing
-                                }
-                                else{
-                                    System.out.printf("%s has %d expansions remaining.\n", square.getName(), square.getExpansionsRemaining());
-                                    if (square.getExpansionsRemaining() > 0){
-                                        System.out.println("You currently have: $" + player.getMoney());
-                                        boolean stillCompletingTransaction = true;
-                                        while(stillCompletingTransaction) {
-                                            System.out.printf("How many expansions would you like to buy? Each one costs: $%d\n", square.getBuyPrice());
-                                            validInputs = new String[square.getExpansionsRemaining()+1];    //at least 0 is an option
-                                            for (int j = 0; j < validInputs.length; j++) {
-                                                validInputs[j] = "" + (j);
-                                            }
-                                            System.out.println(Arrays.asList(validInputs).toString());
-                                            line = waitForValidInput("How many expansions would you like to buy? Each one costs: $" + square.getBuyPrice(), validInputs);
-                                            int totalCost = square.getBuyPrice() * Integer.parseInt(line);
-                                            if (line.equals("0")){
-                                                System.out.println("Transaction Canceled.");
-                                                stillCompletingTransaction = false;
-                                            }
-                                            else if (totalCost > player.getMoney()) {
-                                                System.out.printf("You do not have enough money to make this purchase. (Cost: $%d)\n", totalCost);
-                                            }
-                                            else
-                                            {
-                                                player.setMoney(player.getMoney() - totalCost);
-                                                System.out.println("Expansions purchased.");
-                                                square.setExpansions(square.getExpansions()+Integer.parseInt(line));
-                                                System.out.printf("Visitors to %s will now have to pay $%d\n", square.getName(), square.getVisitPrice());
-                                                stillCompletingTransaction = false;
+                                    //get the property user selected
+                                    Board.BoardSquare square = ((Board.BoardSquare)player.getUnMortgagedProperties().toArray()[Integer.parseInt(line)-1]);
+                                    if (!player.ownsBlock(board, square)){
+                                        System.out.println("You may not expand upon this property until you own all properties in its group.");  //TODO: Specifiy which properties are missing
+                                    }
+                                    else{
+                                        System.out.printf("%s has %d expansions remaining.\n", square.getName(), square.getExpansionsRemaining());
+                                        if (square.getExpansionsRemaining() > 0){
+                                            System.out.println("You currently have: $" + player.getMoney());
+                                            boolean stillCompletingTransaction = true;
+                                            while(stillCompletingTransaction) {
+                                                System.out.printf("How many expansions would you like to buy? Each one costs: $%d\n", square.getBuyPrice());
+                                                validInputs = new String[square.getExpansionsRemaining()+1];    //at least 0 is an option
+                                                for (int j = 0; j < validInputs.length; j++) {
+                                                    validInputs[j] = "" + (j);
+                                                }
+                                                System.out.println(Arrays.asList(validInputs).toString());
+                                                line = waitForValidInput("How many expansions would you like to buy? Each one costs: $" + square.getBuyPrice(), validInputs);
+                                                int totalCost = square.getBuyPrice() * Integer.parseInt(line);
+                                                if (line.equals("0")){
+                                                    System.out.println("Transaction Canceled.");
+                                                    stillCompletingTransaction = false;
+                                                }
+                                                else if (totalCost > player.getMoney()) {
+                                                    System.out.printf("You do not have enough money to make this purchase. (Cost: $%d)\n", totalCost);
+                                                }
+                                                else
+                                                {
+                                                    player.setMoney(player.getMoney() - totalCost);
+                                                    System.out.println("Expansions purchased.");
+                                                    square.setExpansions(square.getExpansions()+Integer.parseInt(line));
+                                                    System.out.printf("Visitors to %s will now have to pay $%d\n", square.getName(), square.getVisitPrice());
+                                                    stillCompletingTransaction = false;
+                                                }
                                             }
                                         }
-                                    }
 
+                                    }
                                 }
-                            }
-                        }
+                            break;  //optional
+                        }   //end switch
+
                         System.out.println("It is still your turn.");
                         System.out.println(msg);
                         line = waitForValidInput(msg, "r", "m", "e", "b");
@@ -269,19 +320,29 @@ public class Monopoly {
             }
         }   //end game loop
     }
-    //NOTE: do I really need to pass a reference to the dice sum?
+
+    /**
+     * This event will look up (switch statement) the square the player landed on and trigger an event to happen based
+     * on that square.
+     * @param player the player who landed on the square.
+     * @param diceSum the sum of the dice roll. Used for Utilty rent.
+     * @return true if player was able to pay rent, false if the player has to declare bankruptcy.
+     */
+    //NOTE: do I really need to pass a reference to the dice sum? Such a tiny thing to be placed on the parameter list.
     private static boolean handleSquareEvent(Player player, int diceSum){
         Board.BoardSquare square = board.getBoardSquare(player.getLocation());
         String line;
         switch(square.getName()) {
             case "GO":
-                ;   //implemented in Player.move() (condition does not require stopping on square)
+                //implemented in Player.move() (condition does not require stopping on square)
             break;  //end GO case
             case "Community Chest":
                 System.err.println("Not implemented yet.");
+                System.out.println("\n");
             break;  //end Community Chest case
             case "Chance":
                 System.err.println("Not implemented yet.");
+                System.out.println("\n");
             break;  //end Chance case
             case "Income Tax":
                 String msg = "Do you want to pay 10% of your total worth (A), or the flat rate of $200 (B)?";
@@ -348,7 +409,6 @@ public class Monopoly {
                             if (line.equals("y")) {   //if player confirms yes
                                 player.setMoney(player.getMoney() - square.getBuyPrice());
                                 System.out.printf("%s bought %s!\n", player.getName(), square.getName());
-                                square.setOwner(player);
                                 player.boughtProperty(square, false);
                             }
                         }
@@ -359,6 +419,14 @@ public class Monopoly {
         return true;
     }
 
+    /**
+     * This method is called when the player owes money to a player or the Bank (null) and steps them through the process
+     * of liquidating their assets to get the money to cover the debt.
+     * @param player the player owing money
+     * @param debt the amonunt of money player needs to pay
+     * @param otherPlayer the player to whom the debt is being paid. This value is null if it is the Bank.
+     * @return true if the player was able to pay the debt, or false if the player has no way to pay the debt and must declare bankruptcy.
+     */
     private static boolean owesMoney(Player player, int debt, Player otherPlayer){
         if (player.getMoney() >= debt){ //if the player can pay their debt
             if (otherPlayer != null) otherPlayer.setMoney(otherPlayer.getMoney() + debt);
@@ -377,16 +445,24 @@ public class Monopoly {
         }
     }
 
+    /**
+     * Deserializes the Account List.
+     */
     private static void getAccountList(){
         try {
             accContainer = AccountContainerSerializer.deserialize();
         }
         catch (FileNotFoundException e){
-            System.err.println(e.getClass() + ": File not found, Dont be stupid.");
+            System.out.println("Account List not found, generating new one.");
             accContainer = new AccountContainer();
         }
     }
 
+    /**
+     * This method handles player login. It walks the user through the steps of typing in their username and password.
+     * If their combo is not recognized by the Account List, then the user is presented with the option to save what they
+     * typed as a new account or to try again.
+     */
     private static void login(){
         String line;
         do {
@@ -398,9 +474,15 @@ public class Monopoly {
             //System.out.println();   //because last one was a print()
             Account acc;
             if ((acc = accContainer.findAccount(username, password)) != null) {
-                System.out.printf("Logged in as %s.\n", username);
-                loggedInPlayers.add(acc);
-                break;
+                if (!loggedInPlayers.contains(acc)){
+                    System.out.printf("Logged in as %s.\n", username);
+                    loggedInPlayers.add(acc);
+                    break;
+                }
+                else {
+                    System.out.println("You are already logged in as Player " + (loggedInPlayers.indexOf(acc)+1) + ".");
+                    line = "t"; //hacking it so that it loops.
+                }
             }
             else{
                 String msg = "The username or password you entered was not recognized. Would you like to try again (T) or create this account (C)?";
@@ -419,13 +501,19 @@ public class Monopoly {
         } while (line.equals("t"));
     }
 
+    /**
+     * This method handles a player leaving the game. Doing so will end the game (for now)
+     * @param player the player leaving the game.
+     */
     private static void leaveAndSuspendGame(Player player){
         System.out.printf("Sorry everyone, %s has decided to leave the game. Come back later!\n", player.getName());
         //Save the game state
         GameState gs = new GameState();
-        gs.setGameState(playerList, board, jackpot);
+        gs.setGameState(playerList, board, playerList.indexOf(player)+1, jackpot);
         GameStateSerializer.serialize(gs);
         //TODO: enter loop to fill their spot, or just shut down and force a new instance?
+        //It's easier for now to just shut down.
+        //NOTE: Handled in calling method.
     }
 
     /**
@@ -448,9 +536,17 @@ public class Monopoly {
         return line;
     }
 
+    /**
+     * Inner class representing a classic six-sided die.
+     */
     private static class Dice{
 
         private static Random r = new Random();
+
+        /**
+         * Handles rolling of the dice. If DEBUG mode is enabled, then it allows the user to enter the value of each die.
+         * @return a size-2 array of the dice rolls. roll[0] is the first die and roll[1] is the second die.
+         */
         private static int[] roll(){
 
             if (!DEBUG) return new int[] {r.nextInt(6)+1, r.nextInt(6)+1};

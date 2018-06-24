@@ -1,11 +1,25 @@
 package com.revature.project0.monopoly;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-public class GameStateSerializer {
+/**
+ * This class handles the serializing and deserializing of the GameState class.
+ */
+class GameStateSerializer {
     private static GameState gs = null;
-    private static final String FILENAME = "GameState.ser";
-    public static GameState deserialize() throws FileNotFoundException {
+    private static final String FILENAME = "src/main/resources/GameState.ser";
+
+    /**
+     * This method deserializes the data for the GameState and returns it.
+     * @return the GameState object recovered from the serialization
+     * @throws FileNotFoundException if there is no file containing the GameState info.
+     */
+    static GameState deserialize() throws FileNotFoundException {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
             gs = (GameState) ois.readObject();
@@ -21,7 +35,11 @@ public class GameStateSerializer {
 
     }
 
-    public static void serialize(GameState gameState){
+    /**
+     * This method handles the serializing of the GameState, to be recovered at a later time.
+     * @param gameState the GameState being saved
+     */
+    static void serialize(GameState gameState){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME));
             oos.writeObject(gameState);

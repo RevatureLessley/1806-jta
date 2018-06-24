@@ -1,12 +1,26 @@
 package com.revature.project0.monopoly;
 
-import java.io.*;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
-public class AccountContainerSerializer implements Serializable{
+
+/**
+ * This class handles the serializing of the Accounts via the AccountContainer
+ */
+class AccountContainerSerializer {
     private static AccountContainer cont = null;
-    private final static String FILENAME = "AccountContainer.ser";
+    private final static String FILENAME = "src/main/resources/AccountContainer.ser";
 
-    public static AccountContainer deserialize() throws FileNotFoundException{
+    /**
+     * This method deserializes the AccountContainer and returns it.
+     * @return the AccountContainer containing the list of Accounts
+     * @throws FileNotFoundException if there is no file containing the serialized data.
+     */
+    static AccountContainer deserialize() throws FileNotFoundException{
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME));
             cont = (AccountContainer) ois.readObject();
@@ -22,7 +36,11 @@ public class AccountContainerSerializer implements Serializable{
 
     }
 
-    public static void serialize(AccountContainer container){
+    /**
+     * This method handles the serializing of the Accounts via the AccountContainer
+     * @param container the AccountContainer (containing Accounts) to be serialized.
+     */
+    static void serialize(AccountContainer container){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME));
             oos.writeObject(container);

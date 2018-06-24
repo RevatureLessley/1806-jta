@@ -1,17 +1,16 @@
 package com.revature.project0.monopoly;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-//import com.revature.project0.monopoly.Board.BoardPiece;
 
 /**
  * This class represents the Monopoly Board and all the information that the Board should care about
  */
 public class Board implements Serializable {
 
+    private static final long serialVersionUID = 3114123156991142900L;
     private final Color PURPLE = new Color(87, 0, 127);
     private final Color CYAN = Color.CYAN;
     private final Color MAHOGANY = new Color(127,35,63);
@@ -21,7 +20,7 @@ public class Board implements Serializable {
     private final Color GREEN = new Color(0,181,98);
     private final Color BLUE = new Color(0,38,133);
 
-    BoardSquare[] squares;
+    private BoardSquare[] squares;
 
     public enum BoardPiece{
         TOPHAT, THIMBLE, IRON, BOOT, BATTLESHIP, RACECAR, DOG, WHEELBARROW
@@ -32,7 +31,7 @@ public class Board implements Serializable {
      * @param piece the String representation of the enum type BoardPiece
      * @return the enum type itself (BoardPiece) or null if @param piece is not one of the enum values
      */
-    public BoardPiece selectPiece(String piece){
+    BoardPiece selectPiece(String piece){
         switch (piece.toLowerCase()){
             case "tophat": return BoardPiece.TOPHAT;
             case "thimble": return BoardPiece.THIMBLE;
@@ -51,7 +50,7 @@ public class Board implements Serializable {
      * Monopoly board and places them in an array for indexing.
      * Each BoardSquare contains data such as name, color, buying price, etc.
      */
-    public void initBoard() {
+    void initBoard() {
         squares = new BoardSquare[]{
                 new BoardSquare("GO", null, -1, null),
                 new BoardSquare("Mediterranean Avenue", PURPLE, 60, new int[]{2,10,30,90,160,250}),
@@ -101,7 +100,7 @@ public class Board implements Serializable {
      * It uses the player list to decide how many and where to place the players.
      * @param pList the list of players playing on this board.
      */
-    public void drawBoard(ArrayList<Player> pList) {
+    void drawBoard(ArrayList<Player> pList) {
         //Clear Screen  //TODO: When you uncomment this, make sure that *nothing* gets erased before the user sees it.
 //        try {
 //            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -158,8 +157,8 @@ public class Board implements Serializable {
         System.out.printf("%"+spaces+"s|_ _ _ _ _ _ _ _ _|%s\n", cells[1], cells[29]);
         System.out.printf("%"+spaces+"s|%s %s %s %s %s %s %s %s %s|%s\n", cells[0], cells[39], cells[38], cells[37], cells[36], cells[35], cells[34], cells[33], cells[32], cells[31], cells[30]);
 
-        for(int i = 0; i < extraBottomLines.length; i++){
-            if (!extraBottomLines[i].equals(String.format("%-21s", ""))) System.out.println(extraBottomLines[i]);
+        for(String s : extraBottomLines) {
+            if (!s.equals(String.format("%-21s", ""))) System.out.println(s);
         }
 
     }
@@ -169,7 +168,7 @@ public class Board implements Serializable {
      * @param color the color of the BoardSquare's
      * @return a BoardSquare[3], which may or may not contain null at index [2].
      */
-    public BoardSquare[] getAllSquaresOfColor(Color color){
+    BoardSquare[] getAllSquaresOfColor(Color color){
         if (color == null) return null; //NOTE: null *is* a valid Color on the board, but it would generate ArrayIndexOutOfBoundsException
         BoardSquare[] array = new BoardSquare[3];
         int i = 0;
@@ -186,7 +185,7 @@ public class Board implements Serializable {
         return (40 - index) * 2;
     }
 
-    public BoardSquare getBoardSquare(int index){
+    BoardSquare getBoardSquare(int index){
         return squares[index];
     }
 
@@ -199,7 +198,8 @@ public class Board implements Serializable {
      * Property Owner
      * Number of Exansions (Houses 1,2,3,4 or Hotel)
      */
-    public class BoardSquare implements Serializable{
+    class BoardSquare implements Serializable{
+        private static final long serialVersionUID = 6340183481971574039L;
         private final int MAX_EXPANSIONS = 5;
 
         private Color color;    //null if no color
@@ -223,7 +223,7 @@ public class Board implements Serializable {
         }
 
         //TODO: refactor the logic in this method, get rid of hardcode, get rid of Board reference
-        public int calculateRent(Board board, int diceSum){
+        int calculateRent(Board board, int diceSum){
             if (this.name.contains("Railroad") || this.name.equals("Short Line")){  //is a railroad
                 return visitPrices[owner.getRailRoadCount()];
             }
@@ -239,15 +239,19 @@ public class Board implements Serializable {
             }
         }
 
-        public Color getColor() {
+        Color getColor() {
             return color;
         }
 
-        public String getName() {
+        String getName() {
             return name;
         }
 
-        public int getBuyPrice() {
+        /**
+         * This function gets the price of buying the base property or an expansion thereof.
+         * @return the base cost of the property if no one owns it, or the cost of expanding one time if it is owned.
+         */
+        int getBuyPrice() {
             if (owner == null) return buyPrice;
             else{   //expansion prices
                 if (color == PURPLE || color == CYAN) return 50;
@@ -262,45 +266,44 @@ public class Board implements Serializable {
             }
         }
 
-        public int getOriginalBuyPrice(){
+        int getOriginalBuyPrice(){
             return buyPrice;
         }
 
-        public int getBuyBackPrice(){
+        int getBuyBackPrice(){
             return mortgageCost;
         }
 
-//        public void addInterest(){
-//            mortgageCost = (int)(mortgageCost / 10.0f) + mortgageCost;
-//        }
+        void addInterest(){
+            mortgageCost = (int)(mortgageCost / 10.0f) + mortgageCost;
+        }
 
-        public int getVisitPrice() {
+        int getVisitPrice() {
             return visitPrices[expansions];
         }
 
-        public Player getOwner() {
+        Player getOwner() {
             return owner;
         }
 
-        public void setOwner(Player owner){
+        void setOwner(Player owner){
             this.owner = owner;
         }
 
-        public int getExpansions(){
+        int getExpansions(){
             return this.expansions;
         }
 
-        public void setExpansions(int value){
+        void setExpansions(int value){
             this.expansions = value;
         }
 
-        public int getExpansionsRemaining(){
+        int getExpansionsRemaining(){
             return MAX_EXPANSIONS - expansions;
         }
 
-        public int getMortgageValue(){
+        int getMortgageValue(){
             return this.mortgageValue + (int)((getBuyPrice() * expansions) / 2.0f);
         }
-
     }
 }

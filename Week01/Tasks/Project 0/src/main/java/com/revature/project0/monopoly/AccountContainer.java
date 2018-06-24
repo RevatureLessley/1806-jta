@@ -4,22 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * POJO for holding accounts. This class will be serializable to store game states.
+ * POJO for holding accounts. This class will be serializable to store Account information for all the players.
  */
 public class AccountContainer implements Serializable {
 
-    private static final long serialVersionUID = -577617069418873278L;
+    private static final long serialVersionUID = 3992351913256300598L;
     private ArrayList<Account> accountList;
 
+    /**
+     * no-arg constructor; initializes Object fields.
+     */
     public AccountContainer(){
         accountList = new ArrayList<>();
     }
 
-    public void addAccount(Account acc){
+    /**
+     * This method adds an account to the ArrayList of accounts maintained by this class.
+     * @param acc the Account to be added to the list.
+     */
+    void addAccount(Account acc){
         accountList.add(acc);
     }
 
-    public Account findAccount(String accountName, String password){
+    /**
+     * This method will find and return the account specified by it's username and password. NOTE: Duplicates are
+     * theoretically not allowed in this List.
+     * @param accountName the username of the Account
+     * @param password the password of the Account
+     * @return the Account matching the two parameters, or null if no match was found.
+     */
+    Account findAccount(String accountName, String password){
         for(Account acc : accountList){
             if (acc.getUsername().equals(accountName) && acc.getPassword().equals(password)) return acc;
         }
@@ -28,7 +42,7 @@ public class AccountContainer implements Serializable {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        for(Account a : accountList) sb.append(a.toString() + "\n");
+        for(Account a : accountList) sb.append(a.toString()).append("\n");
         return sb.toString();
     }
 }

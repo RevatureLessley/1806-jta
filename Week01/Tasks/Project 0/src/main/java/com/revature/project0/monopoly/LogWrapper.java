@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
  * the class initiating the log, instead of creating a Logger instance per class.
  */
 public class LogWrapper {
-    private static Logger logger;
     public enum Severity {
         FATAL, ERROR, WARN, INFO, DEBUG, TRACE
     }
@@ -19,8 +18,8 @@ public class LogWrapper {
      * @param message the message to be printed to the log
      * @param level the severity level of the log, can be one of: FATAL, ERROR, WARN, INFO, DEBUG, TRACE
      */
-    public static void log(Class callingClass, String message, Severity level){
-        logger = Logger.getLogger(callingClass);    //TODO: Efficiency? Is there a method to simply change the Class type?
+    static void log(Class callingClass, String message, Severity level){
+        Logger logger = Logger.getLogger(callingClass);    //TODO: Efficiency? Is there a method to simply change the Class type?
         switch (level){
             case FATAL: logger.fatal(message); break;
             case ERROR: logger.error(message); break;
@@ -37,7 +36,7 @@ public class LogWrapper {
      * @param callingClass the class initiating the log call
      * @param message the message to be printed to the log
      */
-    public static void log(Class callingClass, String message){
+    static void log(Class callingClass, String message){
         log(callingClass, message, Severity.INFO);
     }
 

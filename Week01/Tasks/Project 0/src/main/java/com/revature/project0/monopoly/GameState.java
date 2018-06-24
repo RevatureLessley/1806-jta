@@ -8,27 +8,34 @@ import java.util.ArrayList;
  *
  */
 public class GameState implements Serializable {
-    private static final long serialVersionUID = -3534440685637555427L;
+
+    private static final long serialVersionUID = 5079595583497469998L;
     private ArrayList<Player> playerList;
     private Board board;
     private int jackpotValue;
+    private int playerTurn;
 
-    public void setGameState(ArrayList<Player> playersList, Board board, int jackpotValue){
+    void setGameState(ArrayList<Player> playersList, Board board, int playerTurn, int jackpotValue){
         this.playerList = playersList;
         this.board = board;
+        this.playerTurn = playerTurn;
         this.jackpotValue = jackpotValue;
     }
 
-    public ArrayList<Player> getPlayers(){
+    ArrayList<Player> getPlayers(){
         return playerList;
     }
 
-    public Board getBoard(){
+    Board getBoard(){
         return board;
     }
 
-    public int getJackpotValue(){
+    int getJackpotValue(){
         return jackpotValue;
+    }
+
+    int getPlayerTurn(){
+        return playerTurn;
     }
 
 }
