@@ -22,9 +22,9 @@ public class UserAccount extends Account implements Serializable {
 		String firstname = attributes.get("Firstname").get();
 		System.out.println("Hi " + firstname + ", welcome to your account.");
 		System.out.println("What would you like to do?");
-		System.out.println("Signout           [0]:");
-		System.out.println("Make a Deposit    [1]:");
-		System.out.println("Make a Withdrawal [2]:");
+		System.out.println("[0]:\tSignout");
+		System.out.println("[1]:\tMake a Deposit");
+		System.out.println("[2]:\tMake a Withdrawal");
 		actions.get(askUser("[0-2]")).run();
 	}
 

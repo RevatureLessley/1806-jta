@@ -1,24 +1,24 @@
 package Tasks.RevatureAccounts;
-/*
+
 public enum AccountStatus {
-	APPROVED {
-		public void approved() {
-			a.approved();
-		}
-	}, 
+		APPROVED() {
+			public void display(Account a) {
+				a.approved();
+			}
+		}, 
 	
-	DENIED {
-		public void denied() { 
-			a.denied();
-		}
-	}, 
+		DENIED() {
+			public void display(Account a) { 
+				a.denied();
+			}
+		}, 
 	
-	PENDING {
-		public void pending() {
-			a.pending();
-		}
+		PENDING() {
+			public void display(Account a) {
+				a.pending();
+			}
+		};
+
+		public abstract void display(Account a);
 	};
 
-	Account a;
-}
-*/

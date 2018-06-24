@@ -2,13 +2,14 @@ package Tasks;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.*;
 import Tasks.RevatureAccounts.*;
 import Tasks.RevatureDatabase.*;
 
 public class RevatureBank implements ConsoleReference{
 	public static RevatureBank entrance = new RevatureBank();
 	private final String STORAGE = "Tasks/RevatureDatabase/PersistentStore.txt";
-	private HashMap<Integer, Account> accounts;
+	private static HashMap<Integer, Account> accounts;
 
 	private RevatureBank() {
 		try {
@@ -27,6 +28,17 @@ public class RevatureBank implements ConsoleReference{
 			System.err.println("Closing persistent storage failed!");
 			ioe.printStackTrace();
 		}
+	}
+
+	public static boolean accountExists(String s) {
+		long n = accounts.values().stream()
+			 	 .filter(a -> a.getUsername().compareTo(s) == 0).count();
+		boolean exists = n > 0;
+
+		if(exists) 
+			System.out.println("Username already exists!");
+		
+		return exists;
 	}
 
 	private void createAccount(){
@@ -73,11 +85,17 @@ public class RevatureBank implements ConsoleReference{
 
 	}
 
-	public void printAccounts() {
-		for(Account a: accounts.values())
-			a.print();
+	public static List<Map.Entry<Integer, Account>> getUnapprovedAccounts() {
+		return accounts.entrySet().stream()
+			       .filter(e -> e.getValue().getStatus() == AccountStatus.DENIED || 
+					    e.getValue().getStatus() == AccountStatus.PENDING)
+			       .collect(Collectors.toList());
 	}
 
+	public void printAccounts() {
+		accounts.values().stream().forEach(a -> a.print());
+	}
+	
 	private void welcome() {
 		String hasAccount;
 		boolean y;

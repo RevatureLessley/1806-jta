@@ -4,7 +4,7 @@ import java.io.*;
 import Tasks.RevatureAccounts.*;
 
 public class Status extends AccountAttribute implements Serializable {
-	private enum States {
+	/*public enum States {
 		APPROVED() {
 			public void display(Account a) {
 				a.approved();
@@ -25,18 +25,18 @@ public class Status extends AccountAttribute implements Serializable {
 
 		public abstract void display(Account a);
 	};
-
-	private States status;
+*/
+	private AccountStatus status;
 	
 	public Status(AdminAccount aa) {
 		super(aa);
-		status = States.APPROVED;
+		status = AccountStatus.APPROVED;
 		aa.addAttribute("Status", this);
 	}
 	
 	public Status(UserAccount ua) {
 		super(ua);
-		status = States.PENDING;
+		status = AccountStatus.PENDING;
 		ua.addAttribute("Status", this);
 	}
 
@@ -46,7 +46,7 @@ public class Status extends AccountAttribute implements Serializable {
 	}
 
 	@Override
-	public States get() {
+	public AccountStatus get() {
 		return status;
 	}
 	

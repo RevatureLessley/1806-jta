@@ -1,10 +1,12 @@
 package Tasks.RevatureAccounts.AccountAttributes;;
 
 import java.io.*;
+import Tasks.*;
 import Tasks.RevatureAccounts.*;
 
 public class Username extends AccountAttribute implements Serializable {
 	private String username;
+	private String u;
 	
 	public Username(AdminAccount aa) {
 		super(aa);
@@ -20,7 +22,15 @@ public class Username extends AccountAttribute implements Serializable {
 
 	@Override
 	public String askUser() {
-		return console.readLine("Username: ");
+		do{
+			getUsername();
+		} while(RevatureBank.accountExists(u));
+
+		return u;
+	}
+
+	public void getUsername() {
+		u = console.readLine("Username: ");
 	}
 	
 	@Override
@@ -30,7 +40,7 @@ public class Username extends AccountAttribute implements Serializable {
 	
 	@Override
 	public void print() {
-		System.out.println("Username: " + username);
+		System.out.print("Username: " + username);
 	}
 
 	@Override

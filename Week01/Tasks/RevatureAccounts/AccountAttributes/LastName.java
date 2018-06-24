@@ -30,7 +30,7 @@ public class LastName extends AccountAttribute implements Serializable{
 	
 	@Override
 	public void print() {
-		System.out.println("Lastname: " + lastname);
+		System.out.print("Lastname: " + lastname);
 	}
 
 	@Override 
