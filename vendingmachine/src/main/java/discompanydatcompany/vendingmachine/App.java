@@ -3,8 +3,10 @@ package discompanydatcompany.vendingmachine;
 import java.util.HashMap;
 
 import discompanydatcompany.vendingmachine.entities.Admin;
+import discompanydatcompany.vendingmachine.entities.BottledWater;
 import discompanydatcompany.vendingmachine.entities.Gum;
 import discompanydatcompany.vendingmachine.entities.Item;
+import discompanydatcompany.vendingmachine.entities.Snack;
 import discompanydatcompany.vendingmachine.entities.StockItem;
 import discompanydatcompany.vendingmachine.entities.User;
 import discompanydatcompany.vendingmachine.entities.UserList;
@@ -58,16 +60,16 @@ public class App {
     		System.out.println("What's your name -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
     		do {
-    			name = input.passNext();
+    			name = String.valueOf(input.passNext());
     		} while(name == null || name == "");
     		
     		System.out.println("Tell me something about yourself. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
-    		String aboutMe = input.passNext();
+    		String aboutMe = String.valueOf(input.passNext());
     		
     		System.out.println("Enter a password and tell me no lies. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
     		do {
-    			password = input.passNext();
+    			password = String.valueOf(input.passNext());
     		} while (password == null || password == "");
     		
     		Admin admin = new Admin(name, password, aboutMe);
@@ -114,8 +116,8 @@ public class App {
     		
     		while(loginSuccess == null) {
     			System.out.println("Enter username");
-    			username = input.passNext();
-    			password = input.passNext();
+    			username = String.valueOf(input.passNext());
+    			password = String.valueOf(input.passNext());
     			loginSuccess = userList.getUserCredentials(username, password);
     		}
     		
@@ -138,6 +140,7 @@ public class App {
 		//System.out.println(consoleContainer.toString());
 		shell:
 		while ((userInput = input.next()) != "close") {
+			String location;
 			System.out.println("Location" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
 			System.out.println(vend.toString());
 			System.out.println(activeUser.toString());
@@ -152,6 +155,17 @@ public class App {
 					System.out.println("You have " + activeUser.getCash() + " units left to spend. Good for you.");
 					break;
 				case "buy":
+		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
+		        	location = String.valueOf(input.passNext());
+		        	StockItem stockItem = vend.getInventory().getStockItemAt(location);
+		        	if (stockItem != null) {
+		        		int cost = stockItem.getQuote(1);
+		        		if (activeUser.getCash() > cost) {
+		        			activeUser.addItem(stockItem);
+		        			activeUser.setCash(-1 * cost);
+		        			stockItem.takeFromStock(1);
+		        		}
+		        	}
 					break;
 				case "login":
 					System.out.println("Command not implemented");
@@ -160,11 +174,15 @@ public class App {
 					System.out.println(vend.getVendingMachineName() + " says ...");
 					System.out.println("Available commands are ..");
 					System.out.println("balance -- Check your remaining balance.");
+					System.out.println("buy -- purchase an item from the vending machine.");
 					System.out.println("login -- Login to another account.");
+					System.out.println("exit -- Exit the application.");
 					System.out.println("history -- Review your 20 most previous queries.");
 					System.out.println("help -- See this menu.");
-					System.out.println("exit -- Exit the application.");
+					System.out.println("rename -- rename the vending machine");
 					System.out.println("status -- Check your status effects.");
+					System.out.println("stock -- add gum, water, and snacks to the vending machine.");
+					System.out.println("use -- use an item from your inventory");
 					System.out.println(": Do Something (enter help for options)!");
 					break;
 		        case "history":
@@ -172,6 +190,9 @@ public class App {
 		        	break;
 		        case "exit":
 		        	break shell;
+		        case "rename":
+		        	System.out.println("Enter a new name for the vending machine");
+		        	vend.setVendingMachineName(String.valueOf(input.passNext()));
 		        case "save":
 		        	try {
 		        		save.setUserList(userList);
@@ -187,17 +208,33 @@ public class App {
 		        	activeUser.getStatus();
 		        	break;
 		        case "stock":
-		        	System.out.println("Enter an item. Like gum");
+		        	System.out.println("Enter an item. Like gum, water or snacks.");
 		        	String item = String.valueOf(input.passNext());
 		        	System.out.println("Enter the quantity to add greater than zero please!");
 		        	int quantity = Integer.valueOf(input.passNext());
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
-		        	String location = String.valueOf(input.passNext());
+		        	location = String.valueOf(input.passNext());
 		        	switch (item) {
 		        		case "gum":
 		        			Item gum = new Gum();
 		        			StockItem moreGum = new StockItem(gum, quantity);
 		        			vend.getInventory().put(location, moreGum);
+		        		case "water":
+		        			Item water = new BottledWater();
+		        			StockItem moreWater = new StockItem(water, quantity);
+		        			vend.getInventory().put(location, moreWater);
+		        		case "snacks":
+		        			Item snacks= new Snack();
+		        			StockItem moreSnacks = new StockItem(snacks, quantity);
+		        			vend.getInventory().put(location, moreSnacks);
+		        	}
+		        	break;
+		        case "use":
+		        	System.out.println("Use an item from your inventory.");
+		        	System.out.println("Enter a number 1 through 5.");
+		        	int selection = Integer.valueOf(input.passNext());
+		        	if (selection  > 0 && selection < 6) {
+		        		activeUser.useItem(selection);
 		        	}
 		        	break;
 		    }

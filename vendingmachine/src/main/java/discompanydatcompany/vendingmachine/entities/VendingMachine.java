@@ -12,7 +12,7 @@ import discompanydatcompany.vendingmachine.utilities.Printing;
 
 public class VendingMachine implements Serializable {
 
-    private final String vendingMachineName;
+    private String vendingMachineName;
     private String adminName;
     private String adminUUID;
     private String message;
@@ -122,6 +122,10 @@ public class VendingMachine implements Serializable {
     public String getVendingMachineName() {
 
 	return this.vendingMachineName;
+    }
+    
+    public void setVendingMachineName(String name) {
+    	this.vendingMachineName = name;
     }
 
     /**

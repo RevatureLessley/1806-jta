@@ -47,23 +47,22 @@ public class StockItem implements Serializable {
      * @param quantity
      * @return int number of items taken from stock. 
      */
-    public int takeFromStock(int quantity) {
+    public int takeFromStock(int quantity) {	
+		if (this.stockCount == 0) {
 	
-	if (this.stockCount == 0) {
-
-	    return 0;
-
-	} else if (quantity > this.stockCount) {
-
-	    int allRemaining = this.stockCount;
-
-	    this.stockCount = 0;
-	    return allRemaining;
-	} else {
-
-	    this.stockCount -= quantity;
-	    return quantity;
-	}
+		    return 0;
+	
+		} else if (quantity > this.stockCount) {
+	
+		    int allRemaining = this.stockCount;
+	
+		    this.stockCount = 0;
+		    return allRemaining;
+		} else {
+	
+		    this.stockCount -= quantity;
+		    return quantity;
+		}
     }
 
     /**
@@ -73,12 +72,12 @@ public class StockItem implements Serializable {
      * @param int new
      */
     public int addToStock(int quantity) {
-	if (quantity <= 0) {
-	    return this.stockCount;
-	} else {
-	    this.stockCount += quantity;
-	    return this.stockCount;
-	}
+		if (quantity <= 0) {
+		    return this.stockCount;
+		} else {
+		    this.stockCount += quantity;
+		    return this.stockCount;
+		}
     }
 
     /**
@@ -87,8 +86,7 @@ public class StockItem implements Serializable {
      * @return int the new stock count.
      */
     public int getItemValue() {
-
-	return this.item.getValue();
+    	return this.item.getValue();
     }
 
     /**
@@ -98,11 +96,10 @@ public class StockItem implements Serializable {
      * @return int price quote.
      */
     public int getQuote(int quantity) {
-
-	if (quantity < 0) {
-	    return 0;
-	} else {
-	    return quantity * this.getItemValue();
-	}
+		if (quantity < 0) {
+		    return 0;
+		} else {
+		    return quantity * this.getItemValue();
+		}
     }
 }
