@@ -40,4 +40,22 @@ public class LogWrapper {
         log(callingClass, message, Severity.INFO);
     }
 
+    /**
+     * This method is specifically for logging exceptions, which will use the ERROR severity level.
+     * @param callingClass The class calling the Logger
+     * @param e the Exception being thrown
+     */
+    static void log(Class callingClass, Exception e){
+        Logger logger = Logger.getLogger(callingClass);
+        StringBuilder sb = new StringBuilder();
+        sb.append(e.getClass().getSimpleName()).append(" encountered: \"").append(e.getMessage()).append("\"\n");
+        for (StackTraceElement element : e.getStackTrace()){
+            if (!"java.base".equals(element.getModuleName())) {
+                sb.append(String.format("%25s","at: (")).append(element.getFileName());
+                sb.append(":").append(element.getLineNumber());
+                sb.append(") in ").append(element.getMethodName()).append("()\n");
+            }
+        }
+        logger.error(sb.toString());
+    }
 }

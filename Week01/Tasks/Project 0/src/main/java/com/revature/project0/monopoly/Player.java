@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+
 
 /**
  * This class represents one of the players playing Monopoly. It stores data such as their name, what piece they chose
@@ -39,6 +41,7 @@ public class Player implements Serializable {
         this.location = 0;
         this.isInJail = false;
         properties = new HashMap<>();
+        LogWrapper.log(this.getClass(), "Player created: " + this, DEBUG);
     }
 
     /**
@@ -53,6 +56,7 @@ public class Player implements Serializable {
             System.out.println(this.name + " passed Go, collecting $200.");
         }
         this.location = (this.location + distance) % 40;
+        LogWrapper.log(this.getClass(), this.getName() + " moved to tile" + this.location);
     }
 
     void printInfo(){
@@ -93,58 +97,6 @@ public class Player implements Serializable {
         else return "";
     }
 
-    /* Getters and Setters */
-    String getName() {
-        return name;
-    }
-
-    void setName(String name) {
-        this.name = name;
-    }
-
-    BoardPiece getPiece() {
-        return piece;
-    }
-
-    void setPiece(BoardPiece piece) {
-        this.piece = piece;
-    }
-
-    int getMoney() {
-        return money;
-    }
-
-    void setMoney(int money) {
-        this.money = money;
-    }
-
-    int getLocation() {
-        return location;
-    }
-
-    void setLocation(int location) {
-        this.location = location;
-    }
-
-    Set<Board.BoardSquare> getOwnedProperties(){
-        return properties.keySet();
-    }
-
-    HashSet<Board.BoardSquare> getUnMortgagedProperties(){
-        HashSet<Board.BoardSquare> set = new HashSet<>();
-        for(Board.BoardSquare s : properties.keySet()){
-            if (!properties.get(s)) set.add(s);
-        }
-        return set;
-    }
-
-    HashSet<Board.BoardSquare> getMortgagedProperties(){
-        HashSet<Board.BoardSquare> set = new HashSet<>();
-        for(Board.BoardSquare s : properties.keySet()){
-            if (properties.get(s)) set.add(s);
-        }
-        return set;
-    }
 
     /**
      * This function changes the BoardSquare's Mortgage flag to true and pays the player its value
@@ -153,6 +105,7 @@ public class Player implements Serializable {
     private void mortgageProperty(Board.BoardSquare property){
         properties.replace(property, true);
         money += property.getMortgageValue();
+        LogWrapper.log(this.getClass(), "Property \"" + property.getName() + "\" was mortgaged for $"+property.getMortgageValue());
     }
 
     /**
@@ -165,6 +118,7 @@ public class Player implements Serializable {
         else {
             properties.replace(property, false);
             money -= (int)(property.getBuyBackPrice() * 1.1f);
+            LogWrapper.log(this.getClass(), "Property \"" + property.getName() + "\" was successfully bought back.");
             return true;
         }
     }
@@ -177,6 +131,7 @@ public class Player implements Serializable {
     void boughtProperty(Board.BoardSquare property, boolean isMortgaged){
         properties.put(property, isMortgaged);
         property.setOwner(this);
+        LogWrapper.log(this.getClass(), "Property \"" + property.getName() + "\" was bought for $"+property.getMortgageValue());
     }
 
     /**
@@ -187,6 +142,7 @@ public class Player implements Serializable {
         for (Board.BoardSquare property : properties.keySet()){
             if (property.getName().contains("Railroad") || property.getName().equals("Short Line")) count++;
         }
+        LogWrapper.log(this.getClass(), "Returning count value: " + count, DEBUG);
         return count;
     }
 
@@ -198,6 +154,7 @@ public class Player implements Serializable {
         for (Board.BoardSquare property : properties.keySet()){
             if (property.getName().equals("Water Works") || property.getName().equals("Electric Company")) count++;
         }
+        LogWrapper.log(this.getClass(), "Returning count value: " + count, DEBUG);
         return count;
     }
 
@@ -226,6 +183,7 @@ public class Player implements Serializable {
      */
     boolean owesMoney(int debt, Player otherPlayer){
         if (!mortgage(debt)){
+            LogWrapper.log(this.getClass(), "Player " + this.getName() + " is bankrupt");
             //Player is out of money and must leave the game.
             System.out.println(name + " is declaring bankruptcy!");
             //otherPlayer.setMoney(otherPlayer.getMoney() + debt);
@@ -251,6 +209,7 @@ public class Player implements Serializable {
             return false;
         }
         do {
+            LogWrapper.log(this.getClass(), "User entered mortgage loop");
             System.out.printf("You have $%d, and you owe $%d. Select a property to mortgage:\n", this.getMoney(), amount);
             int count = 0;
             StringBuilder sb = new StringBuilder();
@@ -310,6 +269,60 @@ public class Player implements Serializable {
         }
     }
 
+    /* Getters and Setters */
+    String getName() {
+        return name;
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    BoardPiece getPiece() {
+        return piece;
+    }
+
+    void setPiece(BoardPiece piece) {
+        this.piece = piece;
+    }
+
+    int getMoney() {
+        return money;
+    }
+
+    void setMoney(int money) {
+        this.money = money;
+    }
+
+    int getLocation() {
+        return location;
+    }
+
+    void setLocation(int location) {
+        this.location = location;
+    }
+
+    Set<Board.BoardSquare> getOwnedProperties(){
+        return properties.keySet();
+    }
+
+    HashSet<Board.BoardSquare> getUnMortgagedProperties(){
+        HashSet<Board.BoardSquare> set = new HashSet<>();
+        for(Board.BoardSquare s : properties.keySet()){
+            if (!properties.get(s)) set.add(s);
+        }
+        return set;
+    }
+
+    HashSet<Board.BoardSquare> getMortgagedProperties(){
+        HashSet<Board.BoardSquare> set = new HashSet<>();
+        for(Board.BoardSquare s : properties.keySet()){
+            if (properties.get(s)) set.add(s);
+        }
+        return set;
+    }
+
+
 
     /**
      * This method sums the total worth of the player, adding up their cash, the value of all their properties, and any
@@ -323,6 +336,7 @@ public class Player implements Serializable {
             sum += (property.getBuyPrice() * property.getExpansions()); //cost of expansions
             sum += property.getOriginalBuyPrice();  //cost of property
         }
+        LogWrapper.log(this.getClass(), this.name+" is worth " + sum);
         return sum;
     }
 

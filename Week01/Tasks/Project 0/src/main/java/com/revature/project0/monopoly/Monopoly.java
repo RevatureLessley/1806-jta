@@ -9,11 +9,15 @@ package com.revature.project0.monopoly;
  * Known Bugs: Players may choose already chosen game pieces (but this has no effect on gameplay)
  */
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import static com.revature.project0.monopoly.LogWrapper.Severity.*;
 
 /*
     TODO List:
@@ -43,24 +47,43 @@ public class Monopoly {
     private static boolean doOnce;
 
 
+    private static void testFunction(){
+
+        try{
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Something.ser"));
+            ois.readObject();
+            ois.close();
+        }
+        catch(Exception e){
+            LogWrapper.log(Monopoly.class, e);
+       }
+
+        System.exit(0);
+    }
+
     /**
      * Main method.
      * @param args command line arguments
      */
     public static void main(String[] args){
+        //testFunction();   //TODO: remove this call and the method itself
+
         scanner = new Scanner(System.in);
         //accContainer = new AccountContainer();
         playerList = new ArrayList<>();
         loggedInPlayers = new ArrayList<>();
         availablePieces = new ArrayList<>();
-
+        LogWrapper.log(Monopoly.class, "Instance Variables initialized.");
         System.out.println("Welcome to Monopoly!\n");
         getAccountList();
         System.out.println("Please enter your account credentials:");
         login();
         GameState gs = null;
         try { gs = GameStateSerializer.deserialize(); }
-        catch (FileNotFoundException e){System.out.println("No prior game data exists, creating new game.");}
+        catch (FileNotFoundException e){
+            System.out.println("No prior game data exists, creating new game.");
+            LogWrapper.log(Monopoly.class, e);
+        }
         if (gs != null){
             String line;
             do {
@@ -91,6 +114,7 @@ public class Monopoly {
      * @param gs the GameState will all the metadata of the saved game.
      */
     private static void createExistingGame(GameState gs){
+        LogWrapper.log(Monopoly.class, "Using an existing Monopoly Game");
         playerList = gs.getPlayers();
         board = gs.getBoard();
         jackpot = gs.getJackpotValue();
@@ -105,6 +129,7 @@ public class Monopoly {
      * This method initializes a new Monopoly Game.
      */
     private static void createNewGame(int numPlayers){
+        LogWrapper.log(Monopoly.class, "Creating new Monopoly Game");
         board = new Board();
         board.initBoard();
 
@@ -142,6 +167,7 @@ public class Monopoly {
             Account admin = loggedInPlayers.get(0);
             loggedInPlayers = new ArrayList<>();
             loggedInPlayers.add(admin);
+            LogWrapper.log(Monopoly.class, "Looping until all players are logged in");
             while (loggedInPlayers.size() < num) {
                 System.out.println("Waiting for other players to join...");
                 System.out.printf("Player %d login: \n", loggedInPlayers.size()+1);
@@ -166,7 +192,7 @@ public class Monopoly {
         //NOTE: Serialization doesn't technically belong here, but its a good place to stick it in the
         //      flow of the program execution, because it's guarenteed to be done being useful at this point.
         AccountContainerSerializer.serialize(accContainer);
-
+        LogWrapper.log(Monopoly.class, "Beginning game simulation");
         while(true){    //game loop
             for (int i = 0; i < playerList.size(); i++){
                 if (doOnce){
@@ -177,6 +203,7 @@ public class Monopoly {
                 //Win condition
                 if (playerList.size() == 1){
                     System.out.println(player.getName() + " wins!");
+                    LogWrapper.log(Monopoly.class, "Ending game simulation");
                     return;
                 }
                 //add interest to mortgages per turn    //NOTE: Not in original game rules.
@@ -219,6 +246,7 @@ public class Monopoly {
 
                                     //get the property user selected
                                     Board.BoardSquare square = ((Board.BoardSquare)player.getUnMortgagedProperties().toArray()[Integer.parseInt(line)-1]);
+                                    LogWrapper.log(Monopoly.class, "User is developing property \"" +square.getName()+ "\"");
                                     if (!player.ownsBlock(board, square)){
                                         System.out.println("You may not expand upon this property until you own all properties in its group.");  //TODO: Specifiy which properties are missing
                                     }
@@ -264,6 +292,7 @@ public class Monopoly {
                         line = waitForValidInput(msg, "r", "m", "e", "b");
                     }
                     //Roll was selected
+                    LogWrapper.log(Monopoly.class, "User is rolling dice");
                     if (player.isInJail) {
                         msg = "Before you roll, would you like to pay $50 to get out now? Yes (Y), No (N)";
                         System.out.println(msg);
@@ -272,6 +301,7 @@ public class Monopoly {
                     }
 
                     int[] roll = Dice.roll();
+                    LogWrapper.log(Monopoly.class, "Roll values: " +roll[0]+", "+roll[1]+". Sum: "+(roll[0] + roll[1]));
                     System.out.printf("You rolled a %d and a %d, for a total of %d!\n", roll[0], roll[1], roll[0]+roll[1]);
                     if (roll[0] == roll[1]){
                         if (!player.isInJail) {
@@ -331,6 +361,7 @@ public class Monopoly {
     //NOTE: do I really need to pass a reference to the dice sum? Such a tiny thing to be placed on the parameter list.
     private static boolean handleSquareEvent(Player player, int diceSum){
         Board.BoardSquare square = board.getBoardSquare(player.getLocation());
+        LogWrapper.log(Monopoly.class, "Simulating "+square.getName()+"'s event");
         String line;
         switch(square.getName()) {
             case "GO":
@@ -428,6 +459,7 @@ public class Monopoly {
      * @return true if the player was able to pay the debt, or false if the player has no way to pay the debt and must declare bankruptcy.
      */
     private static boolean owesMoney(Player player, int debt, Player otherPlayer){
+        LogWrapper.log(Monopoly.class, "Initiating Debt cycle");
         if (player.getMoney() >= debt){ //if the player can pay their debt
             if (otherPlayer != null) otherPlayer.setMoney(otherPlayer.getMoney() + debt);
          player.setMoney(player.getMoney() - debt);
@@ -438,7 +470,7 @@ public class Monopoly {
                 playerList.remove(player);
                 return false;
             } else {    //previous method said you have enough money now. But this should do it
-                System.out.println("Recursion!");
+                LogWrapper.log(Monopoly.class, "Recursing", LogWrapper.Severity.DEBUG);
                 return owesMoney(player, debt, otherPlayer);
                 //return true;
             }
@@ -453,6 +485,7 @@ public class Monopoly {
             accContainer = AccountContainerSerializer.deserialize();
         }
         catch (FileNotFoundException e){
+            LogWrapper.log(Monopoly.class, e);
             System.out.println("Account List not found, generating new one.");
             accContainer = new AccountContainer();
         }
@@ -465,6 +498,7 @@ public class Monopoly {
      */
     private static void login(){
         String line;
+        LogWrapper.log(Monopoly.class, "Acquiring user credentials");
         do {
             System.out.print("Username: ");
             String username = scanner.nextLine();
@@ -475,6 +509,7 @@ public class Monopoly {
             Account acc;
             if ((acc = accContainer.findAccount(username, password)) != null) {
                 if (!loggedInPlayers.contains(acc)){
+                    LogWrapper.log(Monopoly.class, "Successful Login: " + username);
                     System.out.printf("Logged in as %s.\n", username);
                     loggedInPlayers.add(acc);
                     break;
@@ -492,6 +527,7 @@ public class Monopoly {
                     acc = new Account(username, password);
                     accContainer.addAccount(acc);
                     System.out.println("Account created.");
+                    LogWrapper.log(Monopoly.class, "Successful Login: " + username);
                     System.out.printf("Logged in as %s\n", username);
                     loggedInPlayers.add(acc);
                     break;
@@ -514,6 +550,7 @@ public class Monopoly {
         //TODO: enter loop to fill their spot, or just shut down and force a new instance?
         //It's easier for now to just shut down.
         //NOTE: Handled in calling method.
+        LogWrapper.log(Monopoly.class, "Ending game simulation");
     }
 
     /**
@@ -523,9 +560,12 @@ public class Monopoly {
      * @return  String the valid input of user
      */
     static String waitForValidInput(String msg, String...options){
+        LogWrapper.log(Monopoly.class, "Requesting user input");
         String line = scanner.nextLine();
+        LogWrapper.log(Monopoly.class, "User entered: \"" + line + "\"");
         if (line.equals("DEBUG")){
             System.out.println("Debug mode activated.");
+            LogWrapper.log(Monopoly.class,"Debug mode activated");
             DEBUG = true;
         }
         line = line.toLowerCase();
@@ -533,6 +573,7 @@ public class Monopoly {
             System.out.println("Invalid option. " + msg);
             line = scanner.nextLine().toLowerCase();
         }
+        LogWrapper.log(Monopoly.class, "Returning valid input: \"" + line + "\"");
         return line;
     }
 

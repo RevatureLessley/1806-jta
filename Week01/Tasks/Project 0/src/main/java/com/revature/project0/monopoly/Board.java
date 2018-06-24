@@ -3,6 +3,10 @@ package com.revature.project0.monopoly;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+import static com.revature.project0.monopoly.LogWrapper.Severity.WARN;
 
 
 /**
@@ -93,6 +97,7 @@ public class Board implements Serializable {
                 new BoardSquare("Luxury Tax", null, -1, null),
                 new BoardSquare("Boardwalk", BLUE, 400, new int[]{50,200,600,1400,1700,2000})
         };
+        LogWrapper.log(this.getClass(), "Game board initialized");
     }
 
     /**
@@ -160,7 +165,7 @@ public class Board implements Serializable {
         for(String s : extraBottomLines) {
             if (!s.equals(String.format("%-21s", ""))) System.out.println(s);
         }
-
+        LogWrapper.log(this.getClass(), "Board drawn");
     }
 
     /**
@@ -175,6 +180,7 @@ public class Board implements Serializable {
         for(BoardSquare square : squares){
             if (square.getColor() == color) array[i++] = square;
         }
+        LogWrapper.log(this.getClass(), "Returning BoardSquare[]:" + Arrays.toString(array), DEBUG);
         return array;
     }
 
@@ -220,6 +226,7 @@ public class Board implements Serializable {
             this.expansions = 0;
             this.mortgageValue = (int)(buyPrice / 2.0f);
             this.mortgageCost = mortgageValue;
+            LogWrapper.log(this.getClass(), "BoardSquare created.", DEBUG);
         }
 
         //TODO: refactor the logic in this method, get rid of hardcode, get rid of Board reference
@@ -235,6 +242,7 @@ public class Board implements Serializable {
             if (expansions > 0) return rent;
             else {
                 if (owner.ownsBlock(board, this)) rent *= 2;
+                LogWrapper.log(this.getClass(), "Returning rent value: "+ rent, DEBUG);
                 return rent;
             }
         }
@@ -252,18 +260,22 @@ public class Board implements Serializable {
          * @return the base cost of the property if no one owns it, or the cost of expanding one time if it is owned.
          */
         int getBuyPrice() {
-            if (owner == null) return buyPrice;
+            int price;
+            if (owner == null) price = buyPrice;
             else{   //expansion prices
-                if (color == PURPLE || color == CYAN) return 50;
-                else if (color == ORANGE || color == MAHOGANY) return 100;
-                else if (color == RED || color == YELLOW) return 150;
-                else if (color == GREEN || color == BLUE) return 200;
+                if (color == PURPLE || color == CYAN) price = 50;
+                else if (color == ORANGE || color == MAHOGANY) price = 100;
+                else if (color == RED || color == YELLOW) price = 150;
+                else if (color == GREEN || color == BLUE) price = 200;
                 else{
-                    System.err.println("Board.getBuyPrice() encountered something unexpected");
-                    System.err.println("Color: " + color.toString());
-                    return -1;
+                    LogWrapper.log(this.getClass(), "Board.getBuyPrice() encountered something unexpected: Color: " + color.toString(), WARN);
+                    //System.err.println("Board.getBuyPrice() encountered something unexpected");
+                    //System.err.println("Color: " + color.toString());
+                    price = -1;
                 }
             }
+            LogWrapper.log(this.getClass(), "Returning price value: " + price, DEBUG);
+            return price;
         }
 
         int getOriginalBuyPrice(){

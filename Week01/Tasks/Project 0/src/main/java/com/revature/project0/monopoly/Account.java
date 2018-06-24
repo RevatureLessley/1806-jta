@@ -20,6 +20,7 @@ public class Account implements Serializable {
     public Account(String username, String password){
         this.password = password;
         this.username = username;
+        LogWrapper.log(this.getClass(), "Account created: " + this.toString(), LogWrapper.Severity.DEBUG);
     }
 
     String getPassword(){

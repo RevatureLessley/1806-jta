@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+
 
 /**
  * This class handles the serializing of the Accounts via the AccountContainer
@@ -26,11 +28,12 @@ class AccountContainerSerializer {
             cont = (AccountContainer) ois.readObject();
             ois.close();
         }
-        catch (ClassNotFoundException e){ e.printStackTrace();}
+        catch (ClassNotFoundException e){ LogWrapper.log(AccountContainerSerializer.class, e);}
         catch (FileNotFoundException e){throw e;}
-        catch (IOException e) { e.printStackTrace(); }
+        catch (IOException e) { LogWrapper.log(AccountContainerSerializer.class, e); }
         //TODO: modify these catches to be more informative
 
+        LogWrapper.log(AccountContainerSerializer.class, "Returning AccountContainer " + cont, DEBUG);
         //System.out.println("Deserializing class: "+cont.getClass()+"\n"+cont.toString());
         return cont;
 
@@ -46,7 +49,8 @@ class AccountContainerSerializer {
             oos.writeObject(container);
             oos.close();
         }
-        catch (IOException e){e.printStackTrace();}
+        catch (IOException e){LogWrapper.log(AccountContainerSerializer.class, e);}
+        LogWrapper.log(AccountContainerSerializer.class, "AccountContainer serialized.", DEBUG);
 
         //System.out.println("Serializing class: "+container.getClass()+"\n"+container.toString());
 

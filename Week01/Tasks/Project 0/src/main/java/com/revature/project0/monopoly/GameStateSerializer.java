@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+
 /**
  * This class handles the serializing and deserializing of the GameState class.
  */
@@ -25,12 +27,12 @@ class GameStateSerializer {
             gs = (GameState) ois.readObject();
             ois.close();
         }
-        catch (ClassNotFoundException e){ e.printStackTrace();}
+        catch (ClassNotFoundException e){ LogWrapper.log(GameStateSerializer.class, e);}
         catch (FileNotFoundException e){throw e;}
-        catch (IOException e) { e.printStackTrace(); }
-        //TODO: modify these catches to be more informative
+        catch (IOException e) { LogWrapper.log(GameStateSerializer.class, e); }
 
         //System.out.println("Deserializing class: "+gs.getClass()+"\n"+gs.toString());
+        LogWrapper.log(GameStateSerializer.class, "Returning GameState: " + gs, DEBUG);
         return gs;
 
     }
@@ -48,7 +50,7 @@ class GameStateSerializer {
         catch (IOException e){e.printStackTrace();}
 
         //System.out.println("Serializing class: "+gameState.getClass()+"\n"+gameState.toString());
-
+        LogWrapper.log(GameStateSerializer.class, "GameState serialized.", DEBUG);
     }
 
 }

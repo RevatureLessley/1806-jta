@@ -3,6 +3,8 @@ package com.revature.project0.monopoly;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+
 /**
  *  This POJO class keeps track of the game state when the game is being suspended, and is able to serialize that info.
  *
@@ -20,6 +22,7 @@ public class GameState implements Serializable {
         this.board = board;
         this.playerTurn = playerTurn;
         this.jackpotValue = jackpotValue;
+        LogWrapper.log(this.getClass(), "GameState set.", DEBUG);
     }
 
     ArrayList<Player> getPlayers(){
