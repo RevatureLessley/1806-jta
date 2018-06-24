@@ -11,7 +11,7 @@ public class NewAccount2 implements Serializable{
 	private static final long serialVersionUID = -4982115429345360237L;
 	private static String fName2;
 	private static String lName2;
-	private static String accountNummber2;
+	
 	
 	
 	static Scanner in = new Scanner(System.in);
@@ -28,22 +28,17 @@ public class NewAccount2 implements Serializable{
 	public void setlName2(String lName2) {
 		this.lName2 = lName2;
 	}
-	public static String getaccountNummber2() {
-		return accountNummber2;
-	}
-	public void setaccountNummber2(String accountNummber2) {
-		this.accountNummber2 = accountNummber2;
-	}
+	
 	@Override
 	public String toString() {
-		return " [First Name =" + fName2 + ", Last Name =" + lName2 + ", Account Nummber =" + accountNummber2 + "]";
+		return " [First Name =" + fName2 + ", Last Name =" + lName2 + "]";
 	}
 	
-	public NewAccount2(String fName2, String lName2, String accountNummber2) {
+	public NewAccount2(String fName2, String lName2) {
 		super();
 		this.fName2 = fName2;
 		this.lName2 = lName2;
-		this.accountNummber2 = accountNummber2;
+		
 	}
 	public NewAccount2() {
 		super();
@@ -57,10 +52,7 @@ public class NewAccount2 implements Serializable{
 		System.out.println("What is your last name");
 		lName2 = in.next();
 		//System.out.println(lName2);
-		System.out.println("What is your Account Nummber");
-		accountNummber2 = in.next();
-		//System.out.println(accountNummber2);
-		System.out.println("Test over");
+
 	}
 	
 	

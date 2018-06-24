@@ -10,7 +10,7 @@ public class TransUnion2 implements Serializable{
 	 */
 	private static final long serialVersionUID = -1484758735113820656L;
 
-	private String union;
+	private static String union;
 	private NewAccount2[] newAccount2;
 	
 
@@ -42,7 +42,7 @@ public class TransUnion2 implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "RyantureTransUnion [" + " Account " + Arrays.toString(newAccount2) + "]";
+		return "RyantureTransUnion [" + " Account#2 " + Arrays.toString(newAccount2) + "]";
 	}
 	
 	
