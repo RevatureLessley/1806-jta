@@ -1,9 +1,10 @@
-package projectzero.utilities;
+package discompanydatcompany.vendingmachine.utilities;
 
 import java.util.HashMap;
-import java.util.ArrayList;
 
-import projectzero.utilities.Printing;
+import discompanydatcompany.vendingmachine.utilities.Printing;
+
+import java.util.ArrayList;
 
 public class NamedContainers extends Containers {
 

@@ -1,9 +1,9 @@
-package projectzero.utilities;
+package discompanydatcompany.vendingmachine.utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import projectzero.utilities.Container;
+import discompanydatcompany.vendingmachine.utilities.Container;
 
 /**
  * maxCharacterCounterPerRow minimum is 60. 

@@ -1,20 +1,23 @@
-package projectzero.entities;
+package discompanydatcompany.vendingmachine.entities;
 
 import java.util.HashMap;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
-import projectzero.entities.Inventory;
-import projectzero.entities.StockItem;
-import projectzero.entities.NoItem;
+import discompanydatcompany.vendingmachine.entities.Inventory;
+import discompanydatcompany.vendingmachine.entities.NoItem;
+import discompanydatcompany.vendingmachine.entities.StockItem;
+import discompanydatcompany.vendingmachine.utilities.Printing;
 
-import projectzero.utilities.Printing;
-
-public class VendingMachine {
+public class VendingMachine implements Serializable {
 
     private final String vendingMachineName;
-    private final String adminName;
+    private String adminName;
+    private String adminUUID;
     private String message;
     private Inventory inventory;
+    private String vendingMachineId;
 
     /**
      * Instantiates a vending machine object.
@@ -22,12 +25,14 @@ public class VendingMachine {
      * @param vendingMachineName vending machine name
      * @param adminName vending machine owner's name
      */
-    public VendingMachine(String vendingMachineName, String adminName) {
+    public VendingMachine(String vendingMachineName, String adminName, String adminUUID) {
 	
-	this.vendingMachineName = vendingMachineName;
-	this.adminName = adminName;
-	this.message = "An empty vending machine.";
-	this.inventory = VendingMachine.buildEmptyInventory();
+		this.vendingMachineName = vendingMachineName;
+		this.adminName = adminName;
+		this.adminUUID = adminUUID;
+		this.message = "An empty vending machine.";
+		this.inventory = VendingMachine.buildEmptyInventory();
+	    this.vendingMachineId = String.valueOf(UUID.randomUUID());
     }
 
     /**
@@ -39,11 +44,14 @@ public class VendingMachine {
      */
     public VendingMachine(String vendingMachineName,
 			  String adminName,
+			  String adminUUID,
 			  String message) {
-	this.vendingMachineName = vendingMachineName;
-	this.adminName = adminName;
-	this.message = message;
-	this.inventory = VendingMachine.buildEmptyInventory();
+		this.vendingMachineName = vendingMachineName;
+		this.adminName = adminName;
+		this.adminUUID = adminUUID;
+		this.message = message;
+		this.inventory = VendingMachine.buildEmptyInventory();
+		this.vendingMachineId = String.valueOf(UUID.randomUUID());
     }
 
     /**
@@ -52,10 +60,35 @@ public class VendingMachine {
      */
     public VendingMachine(String vendingMachineName,
 			  String adminName,
+			  String adminUUID,
 			  Inventory inventory) {
-	this.vendingMachineName = vendingMachineName;
-	this.adminName = adminName;
-	this.inventory = inventory;
+		this.vendingMachineName = vendingMachineName;
+		this.adminName = adminName;
+		this.adminUUID = adminUUID;
+		this.message = "";
+		this.inventory = inventory;
+		this.vendingMachineId = String.valueOf(UUID.randomUUID());
+    }
+    
+    /**
+     * Instantiates a vending machine object.
+     *
+     * @param vendingMachineName vending machine name
+     * @param adminName vending machine owner's name
+     * @param message vending machine's welcome message
+     */
+    public VendingMachine(String vendingMachineName,
+			  String adminName,
+			  String adminUUID,
+			  String message,
+			  Inventory inventory,
+			  String vendingMachineId) {
+		this.vendingMachineName = vendingMachineName;
+		this.adminName = adminName;
+		this.adminUUID = adminUUID;
+		this.message = message;
+		this.inventory = inventory;
+		this.vendingMachineId = vendingMachineId;
     }
     
     /**
@@ -71,10 +104,10 @@ public class VendingMachine {
 
 	for (String column : columns) {
 	    for (String row: rows) {
-		String key = column + row;
-		Item noItem = new NoItem();
-		StockItem stockItem = new StockItem(noItem, 0);
-		inventory.put(key, stockItem);
+			String key = column + row;
+			Item noItem = new NoItem();
+			StockItem stockItem = new StockItem(noItem, 0);
+			inventory.put(key, stockItem);
 	    }
 	} 
 
@@ -97,20 +130,78 @@ public class VendingMachine {
      * @return this.adminName the owner's name of the vending machine.
      */
     public String getAdminName() {
-
-	return this.adminName;
+    	return this.adminName;
     }
-
+    
+    public void setAdminName(String adminName) {
+    	this.adminName = adminName;
+    }
+    
     public Inventory getInventory() {
-	return this.inventory;
+    	return this.inventory;
     }
 
     public void setInventory(Inventory inventory) {
-	this.inventory = inventory;
+    	this.inventory = inventory;
     }
 
     public String getMessage() {
-	return this.message;
+    	return this.message;
+    }
+    
+    public String getVendingMachineId() {
+    	return this.vendingMachineId;
+    }
+    
+    public void setVendingMachineId(String vendingMachineId) {
+    	this.vendingMachineId= vendingMachineId;
+    }
+    
+    public String modifyStock(String key, StockItem stockItem) {
+    	String result = "";
+    	if (!this.inventory.getInventory().containsKey(key)) {
+    		result = "Enter a combination A-D, 1-5.\nExamples: A1, D5, C2. ";
+    	} else {
+    		this.inventory.getInventory().put(key, stockItem);
+    		result = "A quantity of " + stockItem.getStockCount() + " " + stockItem.getItem().getName()
+    				+ " have been added to the vending machine name " + this.getVendingMachineName();
+    	}
+    	return result;
+    }
+    
+    public String modifyStock(String key, int toAddOrRemove) {
+    	String result = "";
+    	
+    	if (!this.inventory.getInventory().containsKey(key)) {
+    		result = "Enter a combination A-D, 1-5.\nExamples: A1, D5, C2. ";
+    	} else if (this.inventory.getInventory().get(key).getItem() instanceof NoItem) {
+    		result = "There is no item stocked at " + key;
+    	} else {
+    		StockItem stockItem = this.inventory.getInventory().get(key);
+    		int stockDifference = stockItem.getStockCount() + toAddOrRemove;
+    		
+    		// If the stock Difference is negative
+    		if (stockDifference < 0) {
+    			result = "Removing that many " + stockItem.getItem().getName() + "'s yields a negative value.";
+    		} else if (stockDifference == 0) {
+    			result = "All " + stockItem.getItem().getName() + "'s were removed.";
+    			Item item = new NoItem();
+    			stockItem = new StockItem(item, 1);
+    			this.inventory.put(key, stockItem);
+    		} else {
+    			if (toAddOrRemove >= 0) {
+    				result = stockItem.addToStock(toAddOrRemove) + " " + stockItem.getItem().getName()
+    						+ "(s) was added.";
+    			} else {
+    				result = stockItem.takeFromStock(toAddOrRemove) + " " + stockItem.getItem().getName()
+    						+ "(s) was removed.";
+    			}
+    		result = "A quantity of " + stockItem.getStockCount() + " " + stockItem.getItem().getName()
+    				+ " have been added to the vending machine name " + this.getVendingMachineName();
+    		}
+    	}
+    	
+    	return result;
     }
 
     public void setMessage(String message) {

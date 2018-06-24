@@ -1,4 +1,4 @@
-package projectzero.utilities;
+package discompanydatcompany.vendingmachine.utilities;
 
 import java.lang.StringBuffer;
 import java.util.ArrayList;
