@@ -18,11 +18,15 @@ public abstract class Account implements ConsoleReference, Serializable {
   		attributes.put(field, aa);
  	}
 
+	public void approve() {
+		attributes.get("Status").approve();
+	}
+
 	public void approved() {
 		System.err.println("Account.approved() was incorrectly called or is not overridden.");
 	}
 
-	protected Integer askUser(String regex) {
+	protected String askUser(String regex) {
 		Pattern p = Pattern.compile(regex);
 		String action;
 		Matcher m;
@@ -32,8 +36,13 @@ public abstract class Account implements ConsoleReference, Serializable {
 			m = p.matcher(action);
 		} while(!m.matches());
 
-		return Integer.valueOf(action);
+		return action;
 	}
+
+	public void deny() {
+		attributes.get("Status").deny();
+	}
+
 
 	public void denied() {
 		System.err.println("Account.denied() was incorrectly called or is not overridden.");
@@ -63,6 +72,8 @@ public abstract class Account implements ConsoleReference, Serializable {
 
 
  	public void print(){
+		attributes.get("Status").print();
+		System.out.print(" | ");
 		attributes.get("Username").print();
 		System.out.print(" | ");
 		attributes.get("Firstname").print();

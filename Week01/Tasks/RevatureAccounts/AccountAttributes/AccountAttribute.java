@@ -11,10 +11,14 @@ public abstract class AccountAttribute implements ConsoleReference, Serializable
  	
 	public AccountAttribute(UserAccount ua) {}
 
+	public void approve() {}
+	
 	public String askUser() {
 		return null;
 	}
 
+	public void deny () {}
+	
 	public void deposit() {}
 	
 	public void display(Account a) {}

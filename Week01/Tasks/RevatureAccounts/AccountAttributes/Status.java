@@ -39,6 +39,16 @@ public class Status extends AccountAttribute implements Serializable {
 		status = AccountStatus.PENDING;
 		ua.addAttribute("Status", this);
 	}
+	
+	@Override
+	public void approve() {
+		status = AccountStatus.APPROVED;
+	}
+	
+	@Override
+	public void deny() {
+		status = AccountStatus.DENIED;
+	}
 
 	@Override
 	public void display(Account a) {
@@ -52,7 +62,7 @@ public class Status extends AccountAttribute implements Serializable {
 	
 	@Override
 	public void print() {
-		System.out.println("Status: " + status);
+		System.out.print("Status: " + status);
 	}
 
 	@Override

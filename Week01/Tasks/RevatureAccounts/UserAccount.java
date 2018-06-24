@@ -19,13 +19,19 @@ public class UserAccount extends Account implements Serializable {
 
 	@Override
 	public void approved() {
-		String firstname = attributes.get("Firstname").get();
-		System.out.println("Hi " + firstname + ", welcome to your account.");
-		System.out.println("What would you like to do?");
-		System.out.println("[0]:\tSignout");
-		System.out.println("[1]:\tMake a Deposit");
-		System.out.println("[2]:\tMake a Withdrawal");
-		actions.get(askUser("[0-2]")).run();
+		Integer action;
+
+		do {
+			String firstname = attributes.get("Firstname").get();
+			System.out.println("Hi " + firstname + ", welcome to your account.");
+			System.out.println("What would you like to do?");
+			System.out.println("[0]:\tSignout");
+			System.out.println("[1]:\tMake a Deposit");
+			System.out.println("[2]:\tMake a Withdrawal");
+			String input = askUser("[0-2]");
+			action = Integer.valueOf(input);
+			actions.get(action).run();
+		} while(action.compareTo(0) != 0);
 	}
 
 	@Override
