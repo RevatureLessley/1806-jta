@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class BankMenu extends SecondMenu{
 	private static int adminPassword = 118034;
 	private static double revatureTransUnion = 1_000_000;
-	
+	private static int i = 0;
 	public BankMenu(){
 		
 	}
@@ -51,7 +51,7 @@ public class BankMenu extends SecondMenu{
 		
 		
 		
-		int i = 0;
+		
 		intro();
 		
 		do {
@@ -79,7 +79,6 @@ public class BankMenu extends SecondMenu{
 					SecondMenu.showSecondMenu();
 				else { 
 					System.out.println("Inasdvaled entry returning to manin menu"+ "\n");
-					menu();
 				}
 			}else if(temp == 3){
 				System.out.println("PLease enter your password");
@@ -89,12 +88,12 @@ public class BankMenu extends SecondMenu{
 			}else {
 				
 				System.out.println("Invaled entry returning to manin menu"+ "\n");
-				menu();
 			}
 		
 			menu();
 			break;
 		case 2:
+			
 			System.out.println(" Thanks for choseing Revature TransUnion.");
 			if(i == 0){
 				SecondMenu.temp = 1;
@@ -107,7 +106,7 @@ public class BankMenu extends SecondMenu{
 				System.out.println("This is your new account");
 				System.out.println(union);
 				System.out.println("Your account number is 1");
-				System.out.println("Your account password is 135");
+				System.out.println("Your account password is 134");
 				System.out.println("What is your opening balance: ");
 				SecondMenu.balance = in.nextDouble();
 				System.out.println("Please remember you info and do not share it");
@@ -115,8 +114,9 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 0;
 				}
-	
+				menu();
 			}else if (i == 1) {
+				SecondMenu.temp = 2;
 				i++;
 				NewAccount2.userInfor2();
 				System.out.println("Admin is checking you account info PLease stand by.....");
@@ -134,7 +134,9 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 1;
 				}
-			}else if(i == 3){
+				menu();
+			}else if(i == 2){
+				SecondMenu.temp = 3;
 				i++;
 				NewAccount3.userInfor3();
 				System.out.println("Admin is checking you account info PLease stand by.....");
@@ -144,18 +146,19 @@ public class BankMenu extends SecondMenu{
 				System.out.println("This is your new account");
 				System.out.println(union3);
 				System.out.println("Your account number is 3");
-				System.out.println("Your account password is 135");
+				System.out.println("Your account password is 136");
 				System.out.println("What is your opening balance: ");
-				SecondMenu.balance2 = in.nextDouble();
+				SecondMenu.balance3 = in.nextDouble();
 				System.out.println("Please remember you info and do not share it");
 				}else {
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 2;
 				}
-			}else {		
-				intro();
+				menu();
+			}else {
+				System.out.println("Contact Adnin back servers are out of sapce");
+				menu();
 			}
-			intro();
 			break;
 		case 3:
 			
