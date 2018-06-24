@@ -6,16 +6,17 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class BankMenu extends SecondMenu{
-	private static int adminPassword;
+	private static int adminPassword = 118034;
+	private static double revatureTransUnion = 1_000_000;
 	
-	
-	public BankMenu(String cn, String an){
-		super(cn, an);
+	public BankMenu(){
+		
 	}
 	
 	public static void menu() {
 		Scanner in = new Scanner(System.in);
 		int firstChoice =  0;
+		
 		
 		NewAccount[] test = {
 				new NewAccount(NewAccount.getFname(),NewAccount.getlName())		
@@ -88,10 +89,10 @@ public class BankMenu extends SecondMenu{
 			}else {
 				
 				System.out.println("Invaled entry returning to manin menu"+ "\n");
-				SecondMenu.showSecondMenu();
+				menu();
 			}
 		
-			SecondMenu.showSecondMenu();
+			menu();
 			break;
 		case 2:
 			System.out.println(" Thanks for choseing Revature TransUnion.");
@@ -124,7 +125,7 @@ public class BankMenu extends SecondMenu{
 				if(adminPassword == 118034) {
 				System.out.println("This is your new account");
 				System.out.println(union2);
-				System.out.println("Your account number is 1");
+				System.out.println("Your account number is 2");
 				System.out.println("Your account password is 135");
 				System.out.println("What is your opening balance: ");
 				SecondMenu.balance2 = in.nextDouble();
@@ -142,7 +143,7 @@ public class BankMenu extends SecondMenu{
 				if(adminPassword == 118034) {
 				System.out.println("This is your new account");
 				System.out.println(union3);
-				System.out.println("Your account number is 1");
+				System.out.println("Your account number is 3");
 				System.out.println("Your account password is 135");
 				System.out.println("What is your opening balance: ");
 				SecondMenu.balance2 = in.nextDouble();
@@ -157,11 +158,13 @@ public class BankMenu extends SecondMenu{
 			intro();
 			break;
 		case 3:
+			
+			
 			System.out.println(" Hello Admin please enter you password. ");
 			adminPassword = in.nextInt();
 			if(adminPassword == 118034) {
 			System.out.println("What would you like to do Today boss");
-			System.out.println("=========================================");
+			System.out.println("How Much money does Revature TransUnionhave Press 0");
 			System.out.println("Press 1 to see all accounts on the Server");
 			int menu2 = in.nextInt();
 			switch(menu2){
@@ -169,26 +172,16 @@ public class BankMenu extends SecondMenu{
 				System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
 				break; 
 			case 0:
-//				System.out.println("Witch account do you want to cancel?");
-//				int cancel = in.nextInt();
-//				if(cancel == 1) {
-//					union = (),"BAN");										
-//					menu();
-//				}else if (cancel ==2) {
-//					union2 = null;
-//					menu();
-//				}else {
-//					System.out.println("Nothing canceled abborting...");
-//					menu();
-//					
-//				}
-				System.out.println(union);
-				System.out.println(union2);	
+				
+				System.out.println("We currentle have: " );
+				System.out.println(SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3));
+				menu();
 				break;
 			case 1:
 				System.out.println("All acounts");
 				System.out.println(union);
 				System.out.println(union2);
+				System.out.println(union3);
 				menu();
 				break;	
 				}
