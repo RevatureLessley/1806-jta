@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Account {
+public class Account implements Serializable {
 	private int balance;
 	
 	public Account() {
