@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @SuppressWarnings("serial")
-public class GamblingMatch implements Serializable{
+public class Gambling implements Serializable{
 
 	private ArrayList<User> Users = new ArrayList<User>(0);
 	private String path;
 	static Scanner userInput;
 	
-	public GamblingMatch readGame() {
-			GamblingMatch game = null;
+	public Gambling readGame() {
+			Gambling game = null;
 		try {
 			FileInputStream fIn = new FileInputStream(path);
 			ObjectInputStream in = new ObjectInputStream(fIn);
-			game = (GamblingMatch) in.readObject();
+			game = (Gambling) in.readObject();
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class GamblingMatch implements Serializable{
 		return game;
 	}
 	
-	public void writeGame(GamblingMatch game) {
+	public void writeGame(Gambling game) {
 		try {
 			FileOutputStream fOut = new FileOutputStream(path);
 			ObjectOutputStream out = new ObjectOutputStream(fOut);
@@ -41,7 +41,7 @@ public class GamblingMatch implements Serializable{
 		} 
 	}
 	
-	public GamblingMatch(String path) {
+	public Gambling(String path) {
 		super();
 		Users.add(new User("admin","securepassword",0));
 		userInput = new Scanner(System.in);
@@ -75,16 +75,102 @@ public class GamblingMatch implements Serializable{
 	public void loggedIn(int userNumber) {
 		User curUser = Users.get(userNumber);
 		System.out.println(curUser);
+	outer:
 		while(true) {
+			System.out.println("Please choose an option:");
 			
 			if (curUser.getRole()==0) {
-			// admin menu
-				
+				 // admin
+				 System.out.print("	1: gamble\n	2: print balance\n	3: deposit\n	4: withdraw\n	5: approve an account\n	anything else: go back to start\n");
 			} else {
-			// normie menu	
-				
+				 System.out.print("	1: gamble\n	2: print balance\n	3: deposit\n	4: withdraw\n	anything else: go back to start\n");
+			}
+			String input = userInput.nextLine();
+			switch(input) {
+				case "1":
+					gamble(curUser);
+					break;
+					
+				case "2":
+					System.out.println("Your balance is: $" + curUser.getBalance());
+					break;
+					
+				case "3":
+					while(true) {
+						System.out.println("Your balance is: $" + curUser.getBalance());	
+						System.out.println("Enter an amount to deposit, it will be ronded to two decimal points:");
+						input = userInput.nextLine();	
+					double deposit = 0;
+						try {
+						deposit = (double)Math.round(Double.parseDouble((input)) * 100d) / 100d;
+						if (deposit <= 0) {
+							System.out.println("Please enter a positive value.");
+							continue;
+						}
+						} catch (Exception e){
+							System.out.println("Please enter a double. ");
+							continue;
+						}
+						curUser.setBalance(curUser.getBalance()+deposit);
+						System.out.println("You just deposited $" + deposit + ", your balance is now $" + curUser.getBalance());
+					break;
+					}
+					
+				case "4":
+					while(true) {
+						System.out.println("Your balance is: $" + curUser.getBalance());
+						System.out.println("Enter an amount to withdraw, it will be rounded to two decimal points:");
+						input = userInput.nextLine();	
+						double withdrawal = 0;
+							try {
+								withdrawal = (double)Math.round(Double.parseDouble((input)) * 100d) / 100d;
+								
+								if (withdrawal <= 0) {
+									System.out.println("Please enter a positive value.");
+									continue;
+								} else if (withdrawal > curUser.getBalance()) {
+									System.out.println("You don't have that much.");
+									continue;
+								}
+							} catch (Exception e){
+								System.out.println("Please enter a double. ");
+								continue;
+							}
+							curUser.setBalance(curUser.getBalance()-withdrawal);
+							System.out.println("You just withdrew $" + withdrawal + ", your balance is now $" + curUser.getBalance());
+						break;
+						}
+					
+				case "5":
+					if (curUser.getRole()==0) {
+						while(true) {
+							System.out.println("Enter the username of the account to approve: ");
+							input = userInput.nextLine();
+							int approvingUserNum = userExists(input);
+							if (approvingUserNum==-1) {
+								System.out.println("That user does not exist. Try again?\n	1: yes\n	anything else: no");
+							} else {
+								Users.get(approvingUserNum).setRole(1);
+								System.out.println("User approved. Approve another?\n	1: yes\n	anything else: no");
+							}
+							input = userInput.nextLine();
+							if (input=="1") continue;
+							else break;
+						}
+						break;
+					}
+					else break outer;
+					
+				default: break outer;
+			
 			}
 		}
+		start();
+	}
+	
+	public void gamble(User curUser) {
+		System.out.println("gambling");
+		curUser.setBalance(curUser.getBalance()+1);
 	}
 	
 	public void login() {
@@ -139,7 +225,7 @@ public class GamblingMatch implements Serializable{
 	}
 
 	public static void main(String[] args) {
-		GamblingMatch g = new GamblingMatch("game.ser");
+		Gambling g = new Gambling("game.ser");
 		/*g.Users.add(new User("aa","asdf",1));
 		g.Users.add(new User("ac","qwer",2));
 		g.Users.add(new User("ba","ily",1));

@@ -11,7 +11,8 @@ public class User implements java.io.Serializable {
 		return balance;
 	}
 	public void setBalance(double balance) {
-		this.balance = balance;
+		// round to two decimal points
+		this.balance = (double)Math.round(balance * 100d) / 100d;
 	}
 	public int getRole() {
 		return role;
@@ -39,7 +40,7 @@ public class User implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "User [accountName=" + accountName + ", password=" + password + ", role=" + role + ", balance=" + balance
+		return "User [accountName=" + accountName + ", password=" + password + ", role=" + role + ", balance=$" + balance
 				+ "]";
 	}
 
