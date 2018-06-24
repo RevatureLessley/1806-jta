@@ -1,7 +1,7 @@
-package Tasks.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;;
 
 import java.io.*;
-import Tasks.RevatureAccounts.*;
+import Project0.RevatureAccounts.*;
 
 public class Status extends AccountAttribute implements Serializable {
 	/*public enum States {

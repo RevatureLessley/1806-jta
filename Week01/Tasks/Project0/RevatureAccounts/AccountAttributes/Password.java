@@ -1,7 +1,7 @@
-package Tasks.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;;
 
 import java.io.*;
-import Tasks.RevatureAccounts.*;
+import Project0.RevatureAccounts.*;
 
 public class Password extends AccountAttribute implements Serializable {
 	// This class needs to be secured.

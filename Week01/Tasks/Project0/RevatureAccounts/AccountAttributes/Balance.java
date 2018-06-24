@@ -1,10 +1,10 @@
-package Tasks.RevatureAccounts.AccountAttributes;
+package Project0.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import java.math.*;
 import java.text.*;
 import java.util.*;
-import Tasks.RevatureAccounts.*;
+import Project0.RevatureAccounts.*;
 
 public class Balance extends AccountAttribute implements Serializable {
 	private BigDecimal balance;

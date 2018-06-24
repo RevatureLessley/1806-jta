@@ -1,10 +1,10 @@
-package Tasks.RevatureAccounts;
+package Project0.RevatureAccounts;
 
 import java.io.*;
 import java.util.*;
 import java.util.regex.*;
-import Tasks.*;
-import Tasks.RevatureAccounts.AccountAttributes.*;
+import Project0.*;
+import Project0.RevatureAccounts.AccountAttributes.*;
 
 public abstract class Account implements ConsoleReference, Serializable {
 	protected HashMap<String, AccountAttribute> attributes = new HashMap<>();

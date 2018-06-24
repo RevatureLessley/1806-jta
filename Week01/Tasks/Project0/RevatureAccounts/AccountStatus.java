@@ -1,4 +1,4 @@
-package Tasks.RevatureAccounts;
+package Project0.RevatureAccounts;
 
 public enum AccountStatus {
 		APPROVED() {

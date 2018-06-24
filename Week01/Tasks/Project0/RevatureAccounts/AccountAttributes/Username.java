@@ -1,8 +1,8 @@
-package Tasks.RevatureAccounts.AccountAttributes;;
+package Project0.RevatureAccounts.AccountAttributes;;
 
 import java.io.*;
-import Tasks.*;
-import Tasks.RevatureAccounts.*;
+import Project0.*;
+import Project0.RevatureAccounts.*;
 
 public class Username extends AccountAttribute implements Serializable {
 	private String username;

@@ -1,9 +1,9 @@
-package Tasks.RevatureAccounts.AccountAttributes;
+package Project0.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import java.math.*;
-import Tasks.*;
-import Tasks.RevatureAccounts.*;
+import Project0.*;
+import Project0.RevatureAccounts.*;
 
 public abstract class AccountAttribute implements ConsoleReference, Serializable{
  	

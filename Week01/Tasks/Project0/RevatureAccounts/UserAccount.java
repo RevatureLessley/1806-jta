@@ -1,8 +1,8 @@
-package Tasks.RevatureAccounts;
+package Project0.RevatureAccounts;
 
 import java.io.*;
 import java.util.*;
-import Tasks.RevatureAccounts.AccountAttributes.*;
+import Project0.RevatureAccounts.AccountAttributes.*;
 
 public class UserAccount extends Account implements Serializable {
 
