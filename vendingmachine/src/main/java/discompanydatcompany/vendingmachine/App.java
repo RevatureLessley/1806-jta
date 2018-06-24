@@ -3,6 +3,9 @@ package discompanydatcompany.vendingmachine;
 import java.util.HashMap;
 
 import discompanydatcompany.vendingmachine.entities.Admin;
+import discompanydatcompany.vendingmachine.entities.Gum;
+import discompanydatcompany.vendingmachine.entities.Item;
+import discompanydatcompany.vendingmachine.entities.StockItem;
 import discompanydatcompany.vendingmachine.entities.User;
 import discompanydatcompany.vendingmachine.entities.UserList;
 import discompanydatcompany.vendingmachine.entities.VendingMachine;
@@ -135,21 +138,25 @@ public class App {
 		//System.out.println(consoleContainer.toString());
 		shell:
 		while ((userInput = input.next()) != "close") {
+			System.out.println("Location" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
+			System.out.println(vend.toString());
+			System.out.println(activeUser.toString());
 		    switch(userInput) {
 				default:
 					// textInput.add("=>" + userInput);
 					// User Info
 					// Inventory
-					System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
-					System.out.println(vend.toString());
 					System.out.println(vend.getVendingMachineName() + ": Do Something (enter help for options)!");
-				
+					break;
 				case "balance":
 					System.out.println("You have " + activeUser.getCash() + " units left to spend. Good for you.");
+					break;
+				case "buy":
+					break;
 				case "login":
+					System.out.println("Command not implemented");
 					break;
 				case "help":
-					System.out.println(vend.toString());
 					System.out.println(vend.getVendingMachineName() + " says ...");
 					System.out.println("Available commands are ..");
 					System.out.println("balance -- Check your remaining balance.");
@@ -178,6 +185,20 @@ public class App {
 		        	break;
 		        case "status":
 		        	activeUser.getStatus();
+		        	break;
+		        case "stock":
+		        	System.out.println("Enter an item. Like gum");
+		        	String item = String.valueOf(input.passNext());
+		        	System.out.println("Enter the quantity to add greater than zero please!");
+		        	int quantity = Integer.valueOf(input.passNext());
+		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
+		        	String location = String.valueOf(input.passNext());
+		        	switch (item) {
+		        		case "gum":
+		        			Item gum = new Gum();
+		        			StockItem moreGum = new StockItem(gum, quantity);
+		        			vend.getInventory().put(location, moreGum);
+		        	}
 		        	break;
 		    }
 		}

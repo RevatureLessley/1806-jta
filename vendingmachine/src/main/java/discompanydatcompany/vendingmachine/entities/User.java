@@ -200,7 +200,7 @@ public class User implements Serializable {
     
     @Override 
     public String toString() {
-    	StringBuffer stringBuffer = new StringBuffer("{ user: " + this.name + "items: ");
+    	StringBuffer stringBuffer = new StringBuffer("{ USER: " + this.name + " " + "ITEMS: ");
     	
     	for (int i = 0; i < 5; i++) {
     		String key = String.valueOf(i);
@@ -208,7 +208,7 @@ public class User implements Serializable {
     		
     		String slotNumber = " [" + String.valueOf(i + 1) + "]";
     		String itemName = currentItem.getName();
-    		stringBuffer.append(slotNumber + currentItem);
+    		stringBuffer.append(slotNumber + itemName);
     	}
     	
     	stringBuffer.append(" }");

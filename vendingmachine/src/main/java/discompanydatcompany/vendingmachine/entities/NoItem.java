@@ -9,7 +9,7 @@ public class NoItem extends Item implements Serializable {
     }
 
     public NoItem() {
-	super("@", 0, "This is not an item.");
+	super("No Item", 0, "This is not an item.");
     }
 
     @Override

@@ -1,20 +1,20 @@
 package discompanydatcompany.vendingmachine.entities;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import discompanydatcompany.vendingmachine.entities.Item;
 import discompanydatcompany.vendingmachine.entities.StockItem;
 
 public class Inventory implements Serializable {
 
-    private HashMap<String, StockItem> inventory;
+    private TreeMap<String, StockItem> inventory;
     
     public Inventory() {
-    	this.inventory = new HashMap<String, StockItem>();
+    	this.inventory = new TreeMap<String, StockItem>();
     }
 
-    public Inventory(HashMap<String, StockItem> inventory) {
+    public Inventory(TreeMap<String, StockItem> inventory) {
     	this.inventory = inventory;
     }
 
@@ -32,11 +32,11 @@ public class Inventory implements Serializable {
 		return isSuccess;
     }
 
-    public HashMap<String, StockItem> getInventory() {
+    public TreeMap<String, StockItem> getInventory() {
     	return this.inventory;
     }
 
-    public void setInventory(HashMap<String, StockItem> inventory) {
+    public void setInventory(TreeMap<String, StockItem> inventory) {
     	this.inventory = inventory;
     }
     
