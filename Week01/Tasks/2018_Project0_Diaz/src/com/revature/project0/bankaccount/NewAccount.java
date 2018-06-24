@@ -9,8 +9,11 @@ public class NewAccount implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4982115429345360237L;
-	public static String fName;
+	private static String fName;
 	private static String lName;
+	private static String address;
+	private static String phone;
+	
 
 	
 	static Scanner in = new Scanner(System.in);
@@ -27,15 +30,28 @@ public class NewAccount implements Serializable{
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
+	public static String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public static String getPhone() {
+		return phone;
+	}
+	public  void setPhone(String phone) {
+		this.phone = phone;
+	}
 	@Override
 	public String toString() {
-		return " [First Name =" + fName + ", Last Name =" + lName + "]";
+		return "First Name =" + fName + ", Last Name =" + lName + "Address = " + address + "Home Phone = " + phone + "]";
 	}
-	
-	public NewAccount(String fname, String lname) {
+	public NewAccount(String fname, String lname, String address, String phone) {
 		super();
 		this.fName = fname;
 		this.lName = lname;
+		this.address = address;
+		this.phone = phone;
 	}
 	public NewAccount() {
 		super();
@@ -43,14 +59,16 @@ public class NewAccount implements Serializable{
 	}
 	
 	public static void userInfor() {
-		System.out.println("What is your first name");
-		fName = in.next();
-		
-		//System.out.println(fName);
-		System.out.println("What is your last name");
-		lName = in.next();
-		//System.out.println(lName);
 		System.out.println("=========================");
+		System.out.println("What is your first name ");
+		fName = in.next();
+		System.out.println("What is your last name ");
+		lName = in.next();
+		System.out.println("What is you Home address ");
+		address = in.next();
+		System.out.println("What is your up todate phone# ");
+		phone = in.next();
+		System.out.println("=========================" + "\n");
 
 	}
 	

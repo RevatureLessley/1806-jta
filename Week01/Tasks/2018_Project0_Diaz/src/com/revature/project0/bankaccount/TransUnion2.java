@@ -42,7 +42,7 @@ public class TransUnion2 implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "RyantureTransUnion [" + " Account#2 " + Arrays.toString(newAccount2) + "]";
+		return "RyantureTransUnion [Account#2] " + "\n" + Arrays.toString(newAccount2) + "]";
 	}
 	
 	

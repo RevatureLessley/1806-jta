@@ -15,7 +15,8 @@ public class NewAccount3 implements Serializable{
 
 	public static String fName3;
 	private static String lName3;
-
+	private static String address3;
+	private static String phone3;
 	
 	static Scanner in = new Scanner(System.in);
 	
@@ -30,6 +31,18 @@ public class NewAccount3 implements Serializable{
 	}
 	public void setlName3(String lName3) {
 		this.lName3 = lName3;
+	}
+	public static String getAddress() {
+		return address3;
+	}
+	public void setAddress(String address) {
+		this.address3 = address;
+	}
+	public static String getPhone() {
+		return phone3;
+	}
+	public  void setPhone(String phone) {
+		this.phone3 = phone;
 	}
 	@Override
 	public String toString() {
@@ -47,14 +60,16 @@ public class NewAccount3 implements Serializable{
 	}
 	
 	public static void userInfor3() {
+		System.out.println("=========================");
 		System.out.println("What is your first name");
 		fName3 = in.next();
-		
-		//System.out.println(fName3);
 		System.out.println("What is your last name");
 		lName3 = in.next();
-		//System.out.println(lName3);
-		System.out.println("=========================");
+		System.out.println("What is you Home address ");
+		address3 = in.next();
+		System.out.println("What is your up todate phone# ");
+		phone3 = in.next();
+		System.out.println("=========================" + "\n");
 
 	}
 	

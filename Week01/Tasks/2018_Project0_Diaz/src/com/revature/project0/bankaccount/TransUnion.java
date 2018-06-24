@@ -41,7 +41,7 @@ public class TransUnion implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "RyantureTransUnion [" + " Account#1 " + Arrays.toString(newAccount) + "]";
+		return "RyantureTransUnion [Account#1] " + "\n" + Arrays.toString(newAccount) + "]";
 	}
 	
 	

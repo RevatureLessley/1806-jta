@@ -11,7 +11,8 @@ public class NewAccount2 implements Serializable{
 	private static final long serialVersionUID = -4982115429345360237L;
 	private static String fName2;
 	private static String lName2;
-	
+	private static String address2;
+	private static String phone2;
 	
 	
 	static Scanner in = new Scanner(System.in);
@@ -28,7 +29,18 @@ public class NewAccount2 implements Serializable{
 	public void setlName2(String lName2) {
 		this.lName2 = lName2;
 	}
-	
+	public static String getAddress() {
+		return address2;
+	}
+	public void setAddress(String address) {
+		this.address2 = address;
+	}
+	public static String getPhone() {
+		return phone2;
+	}
+	public  void setPhone(String phone) {
+		this.phone2 = phone;
+	}
 	@Override
 	public String toString() {
 		return " [First Name =" + fName2 + ", Last Name =" + lName2 + "]";
@@ -46,12 +58,16 @@ public class NewAccount2 implements Serializable{
 	}
 	
 	public static void userInfor2() {
+		System.out.println("=========================");
 		System.out.println("What is your first name");
 		fName2 = in.next();
-		//System.out.println(fName2);
 		System.out.println("What is your last name");
 		lName2 = in.next();
-		//System.out.println(lName2);
+		System.out.println("What is you Home address ");
+		address2 = in.next();
+		System.out.println("What is your up todate phone# ");
+		phone2 = in.next();
+		System.out.println("=========================" + "\n");
 
 	}
 	

@@ -10,7 +10,6 @@ public class Driver {
 		Scanner in = new Scanner(System.in);
 		
 		BankMenu.menu();
-		
 	}
 	
 	

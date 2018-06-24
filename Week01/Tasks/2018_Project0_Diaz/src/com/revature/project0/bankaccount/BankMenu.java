@@ -19,7 +19,7 @@ public class BankMenu extends SecondMenu{
 		
 		
 		NewAccount[] test = {
-				new NewAccount(NewAccount.getFname(),NewAccount.getlName())		
+				new NewAccount(NewAccount.getFname(),NewAccount.getlName(),NewAccount.getAddress(),NewAccount.getPhone())		
 				};
 		NewAccount2[] test2 = {
 				new NewAccount2(NewAccount2.getfName2(),NewAccount2.getlName2())
@@ -163,7 +163,7 @@ public class BankMenu extends SecondMenu{
 		case 3:
 			
 			
-			System.out.println(" Hello Admin please enter you password. ");
+			System.out.println("=====Hello Admin please enter you password=====");
 			adminPassword = in.nextInt();
 			if(adminPassword == 118034) {
 			System.out.println("What would you like to do Today boss");
