@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class BankMenu extends SecondMenu{
+	final static Logger logger = Logger.getLogger(BankMenu.class);
+	
 	private static int adminPassword = 118034;
 	private static double revatureTransUnion = 1_000_000;
 	private static int i = 0;
@@ -13,7 +17,7 @@ public class BankMenu extends SecondMenu{
 		
 	}
 	
-	public static void menu() {
+	public static void menu(int j) {
 		Scanner in = new Scanner(System.in);
 		int firstChoice =  0;
 		
@@ -29,18 +33,20 @@ public class BankMenu extends SecondMenu{
 		};
 		
 		TransUnion union = new TransUnion("RyantureTransUnion",test);
+		logger.debug(test);
 		TransUnion2 union2 = new TransUnion2("RyantureTransUnion",test2);
+		logger.debug(test2);
 		TransUnion3 union3 = new TransUnion3("RyantureTransUnion",test3);
+		logger.debug(test3);
 		
 		
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("TransUnion.ser"));
+										new FileOutputStream("TransUnion.txt"));
 			oos.writeObject(union); 
 		}catch(IOException e){
 			e.printStackTrace();
-		}
-		
+		}	
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("TransUnion2.ser"));
@@ -48,21 +54,25 @@ public class BankMenu extends SecondMenu{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
-		
-		
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(
+										new FileOutputStream("TransUnion3.ser"));
+			oos.writeObject(union3); 
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		
 		intro();
-		
 		do {
-		
 		firstChoice = in.nextInt();
 		switch(firstChoice){
 		default: 
-			System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
+			System.err.println(" Invalid entry please try again later. Pleaese try agan. ");
+			logger.error(null);
 			break; 
 		case 0:
-			System.out.println(" Please come again.");
+			System.out.println("     Please come again.");
+			logger.error(null);
 			break;
 		case 1:
 			System.out.println(" What is you Account Number?");
@@ -70,8 +80,9 @@ public class BankMenu extends SecondMenu{
 			if( temp == 1) {
 				System.out.println("PLease enter your password");
 				int password = in.nextInt();
-				if(password == 134) 
+				if(password == 134) {
 					SecondMenu.showSecondMenu();
+				}
 			}else if(temp == 2) {
 				System.out.println("PLease enter your password");
 				int password2 = in.nextInt();
@@ -87,10 +98,10 @@ public class BankMenu extends SecondMenu{
 					SecondMenu.showSecondMenu();
 			}else {
 				
-				System.out.println("Invaled entry returning to manin menu"+ "\n");
+				System.err.println("Invaled entry returning to manin menu"+ "\n");
 			}
 		
-			menu();
+			menu(1);
 			break;
 		case 2:
 			
@@ -114,7 +125,7 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 0;
 				}
-				menu();
+				menu(1);
 			}else if (i == 1) {
 				SecondMenu.temp = 2;
 				i++;
@@ -134,7 +145,7 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 1;
 				}
-				menu();
+				menu(1);
 			}else if(i == 2){
 				SecondMenu.temp = 3;
 				i++;
@@ -151,13 +162,14 @@ public class BankMenu extends SecondMenu{
 				SecondMenu.balance3 = in.nextDouble();
 				System.out.println("Please remember you info and do not share it");
 				}else {
-					System.out.println("You have not been aproved, try agin at a latter date");
+					System.err.println("You have not been aproved, try agin at a latter date");
 					i = 2;
 				}
-				menu();
+				menu(1);
 			}else {
-				System.out.println("Contact Adnin back servers are out of sapce");
-				menu();
+				System.err.println("Contact Adnin back servers are out of sapce");
+				logger.error(null);
+				menu(1);
 			}
 			break;
 		case 3:
@@ -166,9 +178,9 @@ public class BankMenu extends SecondMenu{
 			System.out.println("=====Hello Admin please enter you password=====");
 			adminPassword = in.nextInt();
 			if(adminPassword == 118034) {
-			System.out.println("What would you like to do Today boss");
-			System.out.println("How Much money does Revature TransUnionhave Press 0");
-			System.out.println("Press 1 to see all accounts on the Server");
+			System.out.println("====What would you like to do Today boss====");
+			System.out.println("Press 0		How Much money does Revature TransUnionhave ");
+			System.out.println("Press 1 	To see all accounts on the Server");
 			int menu2 = in.nextInt();
 			switch(menu2){
 			default: 
@@ -178,19 +190,21 @@ public class BankMenu extends SecondMenu{
 				
 				System.out.println("We currentle have: " );
 				System.out.println(SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3));
-				menu();
+				System.out.println("\n");
+				menu(1);
 				break;
 			case 1:
 				System.out.println("All acounts");
-				System.out.println(union);
-				System.out.println(union2);
-				System.out.println(union3);
-				menu();
+				System.out.println(union+"[Balance = "+balance+"]");
+				System.out.println(union2+"[Balance = "+balance2+"]");
+				System.out.println(union3+"[Balance = "+balance3+"]");
+				menu(1);
 				break;	
 				}
 			}else {
-				System.out.println("Access Denied!!!!!");
-				menu();
+				System.err.println("Access Denied!!!!!");
+				logger.error(null);
+				menu(1);
 			}
 			break;
 		}
@@ -198,7 +212,7 @@ public class BankMenu extends SecondMenu{
 		
 		}while(firstChoice != 0);
 		
-		System.out.println("END OF EXECUTION");
+		System.out.println("    END OF EXECUTION");
 		
 	}
 	

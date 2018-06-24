@@ -1,0 +1,126 @@
+2018-06-24 12:36:30 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:38:58 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:39:31 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:40:06 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:40:46 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:41:47 DEBUG root:13 - Log4j console appender configuration is successful !!
+2018-06-24 12:53:05 TRACE Driver:14 - Hello World!
+2018-06-24 12:53:05 DEBUG Driver:15 - How are you today?
+2018-06-24 12:53:05 INFO  Driver:16 - I am fine.
+2018-06-24 12:53:05 ERROR Driver:17 - I am programming.
+2018-06-24 12:53:05 WARN  Driver:18 - I love programming.
+2018-06-24 12:53:05 FATAL Driver:19 - I am now dead. I should have been a movie star.
+2018-06-24 12:57:47 INFO  BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 12:58:02 INFO  BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@4d405ef7
+2018-06-24 13:00:32 INFO  BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:00:32 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:00:32 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:01:06 INFO  BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:01:06 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:01:06 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:01:13 INFO  BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@2e817b38
+2018-06-24 13:01:13 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@c4437c4
+2018-06-24 13:01:13 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@3f91beef
+2018-06-24 13:02:58 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:02:58 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:02:58 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:03:06 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@2e817b38
+2018-06-24 13:03:06 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@c4437c4
+2018-06-24 13:03:06 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@3f91beef
+2018-06-24 13:03:42 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@5d099f62
+2018-06-24 13:03:42 INFO  BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@37f8bb67
+2018-06-24 13:03:42 INFO  BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@49c2faae
+2018-06-24 13:05:18 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:05:18 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:05:18 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:05:24 ERROR BankMenu:70 - 
+2018-06-24 13:09:08 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:09:08 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:09:08 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:17:13 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:17:13 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:17:13 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:17:43 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:17:43 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:17:43 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:18:11 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:18:11 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:18:11 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:21:38 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:21:38 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:21:38 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:22:01 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:22:01 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:22:01 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:22:24 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7daf6ecc
+2018-06-24 13:22:24 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@2e5d6d97
+2018-06-24 13:22:24 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@238e0d81
+2018-06-24 13:22:41 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@6267c3bb
+2018-06-24 13:22:41 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@533ddba
+2018-06-24 13:22:41 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@246b179d
+2018-06-24 13:22:54 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@306a30c7
+2018-06-24 13:22:54 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@b81eda8
+2018-06-24 13:22:54 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@68de145
+2018-06-24 13:28:30 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:28:30 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:28:30 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:34:40 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:34:40 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:34:40 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:34:44 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:34:44 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:34:44 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:35:01 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7daf6ecc
+2018-06-24 13:35:01 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@2e5d6d97
+2018-06-24 13:35:01 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@238e0d81
+2018-06-24 13:35:22 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@6267c3bb
+2018-06-24 13:35:22 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@533ddba
+2018-06-24 13:35:22 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@246b179d
+2018-06-24 13:35:44 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@306a30c7
+2018-06-24 13:35:44 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@b81eda8
+2018-06-24 13:35:44 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@68de145
+2018-06-24 13:36:04 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@1a86f2f1
+2018-06-24 13:36:04 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@799f7e29
+2018-06-24 13:36:04 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@4b85612c
+2018-06-24 13:38:19 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:38:19 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:38:19 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:38:32 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:38:32 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:38:32 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:38:48 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7daf6ecc
+2018-06-24 13:38:48 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@2e5d6d97
+2018-06-24 13:38:48 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@238e0d81
+2018-06-24 13:39:00 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@6267c3bb
+2018-06-24 13:39:00 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@533ddba
+2018-06-24 13:39:00 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@246b179d
+2018-06-24 13:42:51 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:42:51 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:42:51 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:43:06 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:43:06 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:43:06 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:43:18 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7daf6ecc
+2018-06-24 13:43:18 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@2e5d6d97
+2018-06-24 13:43:18 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@238e0d81
+2018-06-24 13:43:29 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@6267c3bb
+2018-06-24 13:43:29 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@533ddba
+2018-06-24 13:43:29 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@246b179d
+2018-06-24 13:44:01 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@306a30c7
+2018-06-24 13:44:01 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@b81eda8
+2018-06-24 13:44:01 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@68de145
+2018-06-24 13:45:01 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@1a86f2f1
+2018-06-24 13:45:01 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@799f7e29
+2018-06-24 13:45:01 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@4b85612c
+2018-06-24 13:46:11 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:46:11 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:46:11 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:46:20 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:46:20 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:46:20 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d
+2018-06-24 13:46:46 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@7cd84586
+2018-06-24 13:46:46 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@66a29884
+2018-06-24 13:46:46 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@cc34f4d
+2018-06-24 13:46:51 DEBUG BankMenu:36 - [Lcom.revature.project0.bankaccount.NewAccount;@49c2faae
+2018-06-24 13:46:51 DEBUG BankMenu:38 - [Lcom.revature.project0.bankaccount.NewAccount2;@20ad9418
+2018-06-24 13:46:51 DEBUG BankMenu:40 - [Lcom.revature.project0.bankaccount.NewAccount3;@439f5b3d

@@ -35,24 +35,26 @@ public class NewAccount3 implements Serializable{
 	public static String getAddress() {
 		return address3;
 	}
-	public void setAddress(String address) {
-		this.address3 = address;
+	public void setAddress(String addres3s) {
+		this.address3 = address3;
 	}
 	public static String getPhone() {
 		return phone3;
 	}
-	public  void setPhone(String phone) {
-		this.phone3 = phone;
+	public  void setPhone(String phone3) {
+		this.phone3 = phone3;
 	}
 	@Override
 	public String toString() {
-		return " [First Name =" + fName3 + ", Last Name =" + lName3 + "]";
+		return " [First Name =" + fName3 + ", Last Name =" + lName3 +  "Address = " + address3 + "Home Phone = " + phone3;
 	}
 	
 	public NewAccount3(String fName3, String lName3) {
 		super();
 		this.fName3 = fName3;
 		this.lName3 = lName3;
+		this.address3 = address3;
+		this.phone3 = phone3;
 	}
 	public NewAccount3() {
 		super();

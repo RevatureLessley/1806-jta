@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthStyle;
 
+import org.apache.log4j.Logger;
+
 public class SecondMenu {
+	final static Logger logger = Logger.getLogger(SecondMenu.class);
 	public static double balance;
 	public static double balance2;
 	public static double balance3;
@@ -138,10 +141,11 @@ public class SecondMenu {
 		switch(secondChoice){
 		default: 
 			System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
+			logger.error(null);
 			break; 
 		case 0:
 			System.out.println(" Please come again.");
-			BankMenu.menu();
+			BankMenu.menu(1);
 			break;
 		case 1:
 			System.out.println(" How much would you like to deposit?");
@@ -187,8 +191,10 @@ public class SecondMenu {
 					withdraw(dc2);
 					System.out.println("You Withdraw: " + dc2 + "");
 					}
-				}else
-					System.out.println("Insuffcient funds");			
+				}else {
+					System.out.println("Insuffcient funds");	
+					logger.error(null);
+				}
 				showSecondMenu();	
 			break;
 		case 3:
@@ -304,6 +310,7 @@ public class SecondMenu {
 						showSecondMenu();
 					}else {
 						System.err.println("YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						logger.error(null);
 						showSecondMenu();
 					}
 				}else
@@ -325,6 +332,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 3) {
@@ -334,6 +342,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else {
@@ -348,6 +357,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 3) {
@@ -357,6 +367,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else {
@@ -371,6 +382,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 1) {
@@ -380,6 +392,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
+							logger.error(null);
 							showSecondMenu();
 						}
 					}else {
@@ -401,15 +414,15 @@ public class SecondMenu {
 		System.out.println("");
 		System.out.println("      Please select one of the following ");
 		System.out.println("");
-		System.out.println("      To Log In 	   press 1 ");		
-		System.out.println("      To create an account press 2");		
-		System.out.println("      If you are an admin  press 3");
-		System.out.println("      If you want to exit  press 0" + "\n");
+		System.out.println("      To Log In 	   	press 1 ");		
+		System.out.println("      To create an account 	press 2");		
+		System.out.println("      If you are an admin  	press 3");
+		System.out.println("      If you want to exit  	press 0" + "\n");
 	}
 	
 	public static void intro2() {
 		System.out.println("\n");
-		System.out.println("=============Hello=============");
+		System.out.println("=====================Hello=====================");
 		System.out.println("");
 		System.out.println("     Please select one of the following ");
 		System.out.println("");
