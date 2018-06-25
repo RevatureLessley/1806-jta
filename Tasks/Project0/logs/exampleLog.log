@@ -13,3 +13,23 @@
 2018-06-23 16:48:27 INFO  Banking:21 - Exited out of menu successfully!
 2018-06-23 16:56:59 INFO  Main_Menu:39 - Entering Login menu
 2018-06-23 16:58:47 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:52:02 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:52:09 INFO  Main_Menu:157 - Entering start menu
+2018-06-25 13:52:09 INFO  Main_Menu:165 - Account was tested true for admin
+2018-06-25 13:52:09 INFO  Main_Menu:237 - Admin menu activated
+2018-06-25 13:52:18 INFO  Main_Menu:259 - Input 1 Read for admin menu
+2018-06-25 13:52:27 INFO  Main_Menu:277 - Input 3 Read for admin menu
+2018-06-25 13:52:27 INFO  Banking:23 - Exited out of menu successfully!
+2018-06-25 13:52:27 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:52:31 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:52:57 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:52:58 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:53:32 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:53:33 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:54:00 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:54:01 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:54:11 INFO  Main_Menu:157 - Entering start menu
+2018-06-25 13:54:11 INFO  Banking:26 - Quitting the application
+2018-06-25 13:55:42 INFO  Main_Menu:39 - Entering Login menu
+2018-06-25 13:55:44 INFO  Main_Menu:111 - Input 3 for login menu
+2018-06-25 13:55:49 INFO  Main_Menu:111 - Input 3 for login menu

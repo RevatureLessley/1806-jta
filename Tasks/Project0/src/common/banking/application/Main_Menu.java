@@ -80,6 +80,7 @@ public class Main_Menu {
 			}
 				
 			if (INPUT == 2) {
+				if(Banking.TURNON == 1)logger.info("Input 2 for login menu");
 				System.out.println("Welcome to account creation please enter your first name:");
 				CLIENT.setFirst_name(COMMAND.next());
 				System.out.println("Please enter your last name");
@@ -107,9 +108,11 @@ public class Main_Menu {
 			}
 			
 			if (INPUT == 3) {
+				if(Banking.TURNON == 1)logger.info("Input 3 for login menu");
 				System.out.println("Goodbye . . .");
 				//COMMAND.close();
 				Banking.exit = true;
+				break;
 			}
 			
 			if (INPUT == 4) {
@@ -154,17 +157,17 @@ public class Main_Menu {
 	{
 		if(Banking.TURNON == 1)logger.info("Entering start menu");
 		if(Banking.exit ==true) {System.out.println("Quitting Application...");}
-		else if(!CLIENT.isActivated()){
+		else if(!CLIENT.isActivated() & Banking.exit== false){
 			if(Banking.TURNON == 1)logger.info("Account is not activated display error message");
 			System.out.println("Your account is not activated. Please have an admin activate it");
 		}
 		
-		else if(CLIENT.isAdmin()) {
+		else if(CLIENT.isAdmin() & Banking.exit== false) {
 			if(Banking.TURNON == 1)logger.info("Account was tested true for admin");
 			admin_menu(CLIENT);
 		}
 		
-		else if(!CLIENT.isAdmin()){
+		else if(!CLIENT.isAdmin() & Banking.exit== false){
 			if(Banking.TURNON == 1)logger.info("Account was tested false for admin");
 			customer_menu(CLIENT);
 		}
@@ -240,6 +243,7 @@ public class Main_Menu {
 				{
 				//Checks if user input is correct
 				while (!COMMAND.hasNextInt()) {
+					if(Banking.TURNON == 1)logger.info("Command not recognized");
 					System.out.println("Command not recognized please enter a valid command");
 					System.out.println(WELCOM_MENU);
 					COMMAND.nextLine();
@@ -303,6 +307,7 @@ public class Main_Menu {
 	/**This is the method the admin menu calls on
 	 * to activate an account*/
 	public void authorize_account() {
+		if(Banking.TURNON == 1)logger.info("Authorizing Account");
 		System.out.println("Please enter the first name of the account . . ");
 		String fname = COMMAND.next();
 		System.out.println("Please enter the last name of the account . . ");
