@@ -40,7 +40,7 @@ public final class AccountController implements Serializable {
 	 * @param account
 	 */
 	public void validateAccount(Account account) {
-		account.setValidated(true);
+		account.validate();
 		unvalidatedAccounts.remove(account);
 		validatedAccounts.add(account);
 
@@ -81,13 +81,20 @@ public final class AccountController implements Serializable {
 
 		if (account.getOwner().isAdmin()) {
 			validatedAccounts.add(account);
-			account.setValidated(true);
+			account.validate();
 		} else
 			unvalidatedAccounts.add(account);
 
 		return account;
 	}
 
+	/**
+	 * Creates and adds a new LoanAccount to the list of all accounts. If the
+	 * account belongs to an admin, it is automatically validated. Also sets borrow
+	 * and target account values to be used once the account has been validated
+	 * 
+	 * @param account
+	 */
 	public Account addNewLoan(User user, double borrow, Account a) {
 		String name = Account.getTypeName(Account.LOAN) + " " + getNextNumber();
 		Account account = new LoanAccount(user, name, Account.LOAN, borrow, a);
@@ -97,7 +104,7 @@ public final class AccountController implements Serializable {
 
 		if (account.getOwner().isAdmin()) {
 			validatedAccounts.add(account);
-			account.setValidated(true);
+			account.validate();
 		} else
 			unvalidatedAccounts.add(account);
 
@@ -106,7 +113,7 @@ public final class AccountController implements Serializable {
 	}
 
 	/**
-	 * Builds an array of accounts waiting to be validated. He account name is
+	 * Builds an array of accounts waiting to be validated. The account name is
 	 * proceeded by the name of the user associated with the account
 	 * 
 	 * @return
@@ -156,13 +163,19 @@ public final class AccountController implements Serializable {
 			a.applyInterest(days);
 		}
 	}
-	
+
+	/**
+	 * Remove an account from the controller. Also removes the account from its
+	 * owner
+	 * 
+	 * @param a
+	 */
 	public void removeAccount(Account a) {
-		if(unvalidatedAccounts.contains(a))
+		if (unvalidatedAccounts.contains(a))
 			unvalidatedAccounts.remove(a);
-		else if(validatedAccounts.contains(a))
+		else if (validatedAccounts.contains(a))
 			validatedAccounts.remove(a);
-		
+
 		a.getOwner().removeAccount(a);
 	}
 

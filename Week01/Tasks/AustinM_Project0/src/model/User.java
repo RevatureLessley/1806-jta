@@ -149,6 +149,13 @@ public class User implements Serializable {
 		return total;
 	}
 
+	/**
+	 * Checks whether the username is long enough. Usernames also cannot contain any
+	 * spaces.
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static boolean checkUsernameValid(String name) {
 
 		if (name.length() < 4)
@@ -159,6 +166,12 @@ public class User implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Checks whether the password is long enough.
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static boolean checkPasswordValid(String password) {
 		if (password.length() < 6)
 			return false;

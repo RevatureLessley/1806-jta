@@ -126,6 +126,16 @@ public class Driver {
 		return null;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Reguster menu
+	 * <p>
+	 * Prompts Enter username and enter password. Uses the userController and User
+	 * to check whether the input is legal.
+	 * <p>
+	 * If all input is valid, uses the userController to create a new user instance
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeRegisterPhase() {
 
 		System.out.println(
@@ -138,7 +148,7 @@ public class Driver {
 			System.out.print("Enter username: ");
 			name = scanner.nextLine();
 
-			if (name.equals("\\x") || name.equals("\\c)")) {
+			if (name.equals("\\x") || name.equals("\\c")) {
 				return phase;
 			} else if (!User.checkUsernameValid(name)) {
 				System.out.println("username '" + name + "' is not valid");
@@ -172,6 +182,14 @@ public class Driver {
 		return phase;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Login menu
+	 * <p>
+	 * Prompts Enter username and enter password. Uses the userController and User
+	 * to check whether the input is legal.
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
 	private Phase executeLoginPhase() {
 		System.out.print("Enter username: ");
 		String name = scanner.nextLine();
@@ -270,6 +288,14 @@ public class Driver {
 		return Phase.UserControl;
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Loan request menu
+	 * <p>
+	 * Select an amount to borrow, choose a target account
+	 * 
+	 * @return next major program phase to execute in the main loop, returns null in
+	 *         the event of invalid input
+	 */
 	private Phase executeLoanRequest() {
 		if (activeUser.getAccountNames().length <= 0) {
 			System.out.println("You must have at least one account to take out a loan");
@@ -403,6 +429,13 @@ public class Driver {
 
 	}
 
+	/**
+	 * Execution phase which prompts and processes input for Loan menu
+	 * <p>
+	 * Options: make payment
+	 * 
+	 * @return next major program phase is always UserControl
+	 */
 	private Phase executeLoanPhase() {
 		printHeader(activeAccount.toString(), "");
 

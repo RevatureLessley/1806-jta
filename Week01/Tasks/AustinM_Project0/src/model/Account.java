@@ -38,8 +38,8 @@ public class Account implements Serializable {
 	 * 
 	 * @param validated
 	 */
-	public void setValidated(boolean validated) {
-		this.validated = validated;
+	public void validate() {
+		this.validated = true;
 
 	}
 
@@ -152,13 +152,16 @@ public class Account implements Serializable {
 		return owner;
 	}
 
+	/**
+	 * 
+	 * @param accountType
+	 * @return interest rate based on the accountType
+	 */
 	private static double getInterestRate(int accountType) {
 		switch (accountType) {
-		case 2:
-			// return "savings";
+		case Account.SAVINGS:
 			return 0.05;
-		case 3:
-			// return "loan";
+		case Account.LOAN:
 			return 0.10;
 		default:
 			// return "checking";
@@ -179,6 +182,10 @@ public class Account implements Serializable {
 		balance = balance * Math.pow((1 + r / 365.0), periods);
 	}
 
+	/**
+	 * 
+	 * @return accountType
+	 */
 	public int getType() {
 		return accountType;
 	}

@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import controller.MasterController;
 
-public class LoanAccount extends Account implements Serializable{
+public class LoanAccount extends Account implements Serializable {
 
 	private Account toAccount;
 	private double borrow;
@@ -19,15 +19,20 @@ public class LoanAccount extends Account implements Serializable{
 		this.borrow = borrow;
 	}
 
+	/**
+	 * Marks the account as validated. This action also deposits the amount
+	 * requested for the loan into the target account and sets the initial balance
+	 * of the loan.
+	 */
 	@Override
-	public void setValidated(boolean validated) {
+	public void validate() {
 
-		if (!this.isValidated() && validated == true) {
+		if (!this.isValidated()) {
 			toAccount.deposit(borrow);
 			this.withdraw(borrow);
 		}
 
-		super.setValidated(validated);
+		super.validate();
 	}
 
 	@Override
