@@ -1,0 +1,31 @@
+2018-06-25 13:00:17 INFO  Bank:585 - First time running the app, adding 1 admin account to accountsFile.txt.
+2018-06-25 13:00:17 INFO  Account:40 - New account initialized
+2018-06-25 13:00:17 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:00:23 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:00:23 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:44:37 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-25 13:44:37 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:44:43 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:44:43 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:44:44 INFO  Bank:78 - Registering a new user.
+2018-06-25 13:44:50 INFO  Account:40 - New account initialized
+2018-06-25 13:44:50 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:44:56 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:45:03 INFO  Bank:415 - Admin approved account: Account [userName=Test, password=Test, accountNumber=4, accountValue=0, accountType=0, approved= false].
+2018-06-25 13:45:03 INFO  Account:106 - Set approved to: true.
+2018-06-25 13:45:03 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:45:03 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:45:10 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-25 13:45:12 INFO  Account:84 - Set account value to: 50.
+2018-06-25 13:45:12 INFO  Bank:512 - User now has: 50 dollars from their account.
+2018-06-25 13:45:12 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:45:14 INFO  Bank:351 - Logging out of users account.
+2018-06-25 13:48:10 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-25 13:48:10 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:48:15 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-25 13:48:18 INFO  Bank:493 - User withdrew: 1 dollars from their account.
+2018-06-25 13:48:18 INFO  Account:84 - Set account value to: 49.
+2018-06-25 13:48:18 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:48:18 INFO  Bank:497 - User now has: 49 dollars from their account.
+2018-06-25 13:48:18 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:48:20 INFO  Bank:351 - Logging out of users account.

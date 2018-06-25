@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.revature.bank.Bank;
+
 public class BankTest 
 {
 	private static final int ADMIN = 1;

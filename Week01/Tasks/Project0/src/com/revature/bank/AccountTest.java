@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.revature.day5.junit.Arithmetic;
+import com.revature.bank.Account;
 
 public class AccountTest 
 {

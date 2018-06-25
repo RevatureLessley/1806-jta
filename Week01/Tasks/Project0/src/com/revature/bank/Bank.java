@@ -57,7 +57,7 @@ public class Bank
 	private static final int ADMIN = 1;
 	
 	
-	public Bank(ArrayList<Account> accs)
+	public Bank( ArrayList<Account> accs )
 	{
 		this.accs = accs;
 		logger.info("Initializing Bank with existing accounts.");
@@ -72,7 +72,7 @@ public class Bank
 	public void register()
 	{
 		accountsAmount++;
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try 
 		{
 			logger.info("Registering a new user.");
@@ -102,7 +102,7 @@ public class Bank
 	{
 		activeAccount = 999;
 		System.out.println("Welcome to the bank, do you have an account? (Yes/No): ");
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try
 		{
 			while(true)
@@ -118,7 +118,7 @@ public class Bank
 					System.out.println("Are you a normal user(0) or an admin(1)?: ");
 					while(true)
 					{
-						enteredAccountType = Integer.parseInt(bufferedReader.readLine());
+						enteredAccountType = Integer.parseInt( bufferedReader.readLine() );
 						if ( enteredAccountType == 0 ) 
 						{
 							userLogin();
@@ -154,7 +154,7 @@ public class Bank
 	 */
 	public void userLogin()
 	{
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try 
 		{
 			System.out.println("Please enter your username: ");
@@ -242,7 +242,7 @@ public class Bank
 	 */
 	public void adminLogin()
 	{
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try 
 		{
 			System.out.println("Please enter your username: ");
@@ -328,7 +328,7 @@ public class Bank
 	{
 		while(true)
 		{
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 			System.out.println("What would you like to do?(Deposit, Withdraw, Logout): ");
 			String userOption;
 			try 
