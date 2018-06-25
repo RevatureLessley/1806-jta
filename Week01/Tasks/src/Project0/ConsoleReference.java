@@ -7,5 +7,9 @@ import java.io.*;
  * RevatureBank.
  */
 public interface ConsoleReference{
+	/**
+	 * console will be null when the application runs anywhere besides the 
+	 * command line.
+	 */
 	Console console = System.console();
 }
