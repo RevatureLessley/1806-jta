@@ -10,39 +10,45 @@ import org.junit.Test;
 
 public class UnitTests {
 	
+	GeneralMethods generalMethods = null;
+	UserMethods userMethods = null;
 	Bank bank = null;
 	User user = null;
 
 	@Before
 	public void setUp() throws Exception {
 		bank = new Bank();
+		userMethods = new UserMethods();
+		generalMethods = new GeneralMethods();
 		user = new User("Test", "User", "test@user.com", "test", 1, true, BigDecimal.valueOf(10), 1234567890);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		bank = null;
+		generalMethods = null;
 		user = null;
+		userMethods = null;
 	}
 
 	@Test
 	public void userEntersInvalidCardNumberShouldReturnFalse() {
-		assertFalse(bank.validCardNumber(13134));
+		assertFalse(generalMethods.validCardNumber(13134));
 	}
 	
 	@Test
 	public void userEntersValidCardNumberShouldReturnTrue() {
-		assertTrue(bank.validCardNumber(1234567890));
+		assertTrue(generalMethods.validCardNumber(1234567890));
 	}
 	
 	@Test
 	public void userTriesToWithdrawMoreMoneyThanItHasShouldReturnFalse() {
-		assertFalse(bank.enoughMoneyToWithdraw(user, BigDecimal.valueOf(100)));
+		assertFalse(userMethods.enoughMoneyToWithdraw(user, BigDecimal.valueOf(100)));
 	}
 	
 	@Test
 	public void userTriesToWithdrawMoneyThatItHasShouldReturnTrue() {
-		assertTrue(bank.enoughMoneyToWithdraw(user, BigDecimal.valueOf(5)));
+		assertTrue(userMethods.enoughMoneyToWithdraw(user, BigDecimal.valueOf(5)));
 	}
 
 }

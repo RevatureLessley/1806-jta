@@ -2,3 +2,55 @@
 2018-06-25 10:48:51 INFO  root:369 - Card number is invalid.
 2018-06-25 11:45:13 INFO  root:379 - Card number is valid.
 2018-06-25 11:45:13 INFO  root:382 - Card number is invalid.
+2018-06-25 13:19:37 INFO  root:143 - Card number is valid.
+2018-06-25 13:19:37 INFO  root:146 - Card number is invalid.
+2018-06-25 13:20:22 INFO  root:143 - Card number is valid.
+2018-06-25 13:20:22 INFO  root:146 - Card number is invalid.
+2018-06-25 13:20:35 INFO  root:16 - Starting program
+2018-06-25 13:20:35 INFO  root:39 - Displaying initial menu.
+2018-06-25 13:20:47 INFO  root:16 - Starting program
+2018-06-25 13:20:47 INFO  root:39 - Displaying initial menu.
+2018-06-25 13:21:05 INFO  root:75 - Beginning of login method
+2018-06-25 13:21:21 INFO  root:114 - Deserializing users.
+2018-06-25 13:21:21 INFO  root:92 - User has logged in succesfully.
+2018-06-25 13:21:21 INFO  root:88 - Displaying administrator menu.
+2018-06-25 13:21:32 INFO  root:17 - Beginning of approveUser method.
+2018-06-25 13:21:32 INFO  root:114 - Deserializing users.
+2018-06-25 13:21:32 INFO  root:155 - Beginning of method that serializes users
+2018-06-25 13:21:32 INFO  root:167 - Users serialized succesfully.
+2018-06-25 13:21:32 INFO  root:56 - There are no users waiting to be approved.
+2018-06-25 13:21:51 INFO  root:115 - Printing users.
+2018-06-25 13:23:02 INFO  root:16 - Starting program
+2018-06-25 13:23:02 INFO  root:39 - Displaying initial menu.
+2018-06-25 13:23:05 INFO  root:18 - End of program.
+2018-06-25 13:30:40 INFO  root:16 - Starting program
+2018-06-25 13:30:40 INFO  root:39 - Displaying initial menu.
+2018-06-25 13:30:43 INFO  root:75 - Beginning of login method
+2018-06-25 13:30:51 INFO  root:114 - Deserializing users.
+2018-06-25 13:30:51 INFO  root:92 - User has logged in succesfully.
+2018-06-25 13:30:51 INFO  root:88 - Displaying administrator menu.
+2018-06-25 13:30:56 INFO  root:115 - Printing users.
+2018-06-25 13:31:20 INFO  root:12 - Beginning of method to register an user.
+2018-06-25 13:31:36 INFO  root:114 - Deserializing users.
+2018-06-25 13:31:36 INFO  root:155 - Beginning of method that serializes users
+2018-06-25 13:31:36 INFO  root:167 - Users serialized succesfully.
+2018-06-25 13:31:36 INFO  root:52 - Created user account.
+2018-06-25 13:32:04 INFO  root:75 - Beginning of login method
+2018-06-25 13:32:16 INFO  root:114 - Deserializing users.
+2018-06-25 13:32:19 INFO  root:75 - Beginning of login method
+2018-06-25 13:32:24 INFO  root:114 - Deserializing users.
+2018-06-25 13:32:25 INFO  root:75 - Beginning of login method
+2018-06-25 13:32:33 INFO  root:114 - Deserializing users.
+2018-06-25 13:32:33 INFO  root:88 - User has not been approved yet.
+2018-06-25 13:32:47 INFO  root:75 - Beginning of login method
+2018-06-25 13:32:54 INFO  root:114 - Deserializing users.
+2018-06-25 13:32:54 INFO  root:92 - User has logged in succesfully.
+2018-06-25 13:32:54 INFO  root:88 - Displaying administrator menu.
+2018-06-25 13:33:46 INFO  root:17 - Beginning of approveUser method.
+2018-06-25 13:33:46 INFO  root:114 - Deserializing users.
+2018-06-25 13:33:53 INFO  root:40 - User has been approved.
+2018-06-25 13:33:53 INFO  root:155 - Beginning of method that serializes users
+2018-06-25 13:33:53 INFO  root:167 - Users serialized succesfully.
+2018-06-25 13:33:53 INFO  root:56 - There are no users waiting to be approved.
+2018-06-25 13:34:05 INFO  root:115 - Printing users.
+2018-06-25 13:34:18 INFO  root:18 - End of program.
