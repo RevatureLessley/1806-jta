@@ -559,3 +559,11 @@
 2018-06-25 14:53:14 INFO  MasterController:105 - MasterController written to file
 2018-06-25 14:53:16 INFO  AccountController:152 - Applying interest; 2 compounding periods to all validated accounts
 2018-06-25 14:53:56 INFO  MasterController:105 - MasterController written to file
+2018-06-25 15:08:55 ERROR MasterController:141 - Trying to read data; IO exception
+2018-06-25 15:08:55 INFO  MasterController:33 - New MasterController created
+2018-06-25 15:08:55 INFO  UserController:60 - New user Admin created.
+2018-06-25 15:09:13 INFO  MasterController:83 - Freeing previously written data
+2018-06-25 15:09:40 INFO  MasterController:138 - No previous data found
+2018-06-25 15:09:40 INFO  MasterController:33 - New MasterController created
+2018-06-25 15:09:40 INFO  UserController:60 - New user Admin created.
+2018-06-25 15:09:42 INFO  MasterController:105 - MasterController written to file

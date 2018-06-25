@@ -13,15 +13,13 @@ public class LoanAccount extends Account implements Serializable {
 	private static Logger logger = Logger.getLogger(LoanAccount.class);
 
 	/**
-	 * 
-	 * @param owner
-	 * @param name
-	 * @param type
-	 * @param borrow
-	 * @param toAccount
+	 * @param owner user that "owns" the account
+	 * @param name of account
+	 * @param borrow initial negative balance; amount to add to target account
+	 * @param toAccount target to place new finances
 	 */
-	public LoanAccount(User owner, String name, int type, double borrow, Account toAccount) {
-		super(owner, name, type);
+	public LoanAccount(User owner, String name, double borrow, Account toAccount) {
+		super(owner, name, Account.LOAN);
 
 		this.toAccount = toAccount;
 		this.borrow = borrow;
@@ -64,6 +62,9 @@ public class LoanAccount extends Account implements Serializable {
 		}
 	}
 
+	/**
+	 * Returns basic information on the status of the loan as a String
+	 */
 	@Override
 	public String toString() {
 		if (this.isValidated())

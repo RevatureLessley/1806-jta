@@ -97,7 +97,7 @@ public final class AccountController implements Serializable {
 	 */
 	public Account addNewLoan(User user, double borrow, Account a) {
 		String name = Account.getTypeName(Account.LOAN) + " " + getNextNumber();
-		Account account = new LoanAccount(user, name, Account.LOAN, borrow, a);
+		Account account = new LoanAccount(user, name, borrow, a);
 		user.addAccount(account);
 
 		logger.info("New account " + name + " created for user " + user.getName());
