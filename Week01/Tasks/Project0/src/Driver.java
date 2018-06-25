@@ -13,7 +13,12 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 /**
- * The Driver class is the class from which the application will run.
+ * The Driver class is the class from which the application will run. A user will be able to 
+ * register and create an account. After which, an administrator will need to login and approve
+ * the user. After the user is approved, they will be able to login and deposit and withdraw. 
+ * When a user logs out, the application will close and will need to be restarted to login the 
+ * next user. 
+ * 
  * @author Vladimir Bukhalo
  *
  */
@@ -26,10 +31,13 @@ public class Driver {
 	private static List<Map<String, User>> list; 
 
 	/**
-	 * The main() method is responsible for initializing fields calling methods for the application to run.
+	 * The main() method is responsible for initializing fields 
+	 * and calling methods for the application to run.
+	 * 
 	 * @param args String array passed in if running application from the command line.
 	 */
 	public static void main(String[] args) {		
+		//This list will hold users and unapproved users and will be serialized.
 		list = new ArrayList<>();
 		
 		File f = new File("users.ser");
@@ -67,15 +75,15 @@ public class Driver {
 			String input = in.nextLine().toLowerCase();
 			while(!(input.equals("register") || input.equals("login"))) {
 				System.out.println("Invalid command. To login type 'login'. To register type 'register' ");
-				input = in.nextLine().toLowerCase();
+				input = in.nextLine();
 			}
 			
-			if(input.toLowerCase().equals("register")){
+			if(input.toLowerCase().trim().equals("register")){
 				register();
 				break;
 					
 			}
-			else if(input.toLowerCase().equals("login")) {
+			else if(input.toLowerCase().trim().equals("login")) {
 				System.out.print("Please enter username: ");
 				String uName = in.nextLine();
 				
@@ -89,6 +97,8 @@ public class Driver {
 					String pass = in.nextLine();
 					
 					while(!pass.equals(users.get(uName).getPassword())) {
+						logger.info(uName + " entered wrong password.");
+						
 						System.out.println("Sorry wrong password. Please try again");
 						System.out.print("Please enter password: ");
 						pass = in.nextLine();
@@ -105,10 +115,14 @@ public class Driver {
 					String pass = in.nextLine();
 					
 					while(!pass.equals(users.get(uName).getPassword())) {
+						logger.info(uName + " entered the wrong password");
+						
 						System.out.println("Sorry wrong password. Please try again");
 						System.out.print("Please enter password: ");
 						pass = in.nextLine();
 					}
+					
+					logger.info(uName + " successfully logged in");
 					
 					User admin = users.get(uName);
 					System.out.println("Welcome");
@@ -123,11 +137,13 @@ public class Driver {
 								+  "Select from the following commands");		
 						System.out.println("'Deposit' 'Withdraw' 'Balance' 'Logout'");
 						
-						String command = in.nextLine().toLowerCase();
+						String command = in.nextLine().toLowerCase().trim();
 						activeAdmin = adminMenu(command, admin);
 					}
 					break;
 				}
+				
+				logger.info(uName + " successfully logged in");
 				
 				User u = users.get(uName);				
 				System.out.println("Welcome");
@@ -141,7 +157,7 @@ public class Driver {
 					System.out.println("Please select from the following commands:");
 					System.out.println("'Deposit' 'Withdraw' 'Balance' 'Logout'");
 					
-					String command = in.nextLine().toLowerCase();
+					String command = in.nextLine().toLowerCase().trim();
 					activeUser = userMenu(command, u);
 					
 					}	
@@ -183,6 +199,7 @@ public class Driver {
 		User u = new User(uName,pass,acc,false,false);
 		users.put(u.getUserName(),u);
 		unAppUsers.put(uName, u);
+		
 		logger.info(u.getUserName() + " registered for new account");
 		
 		System.out.println("Thank you for registering.");
@@ -192,7 +209,8 @@ public class Driver {
 
 	/**
 	 * The userMenu() method will allow a user to deposit, withdraw, get balance and logout
-	 * of their account.
+	 * of their account. If the user chooses to logout, the application will close.
+	 * 
 	 * @param command The action taken by the user.
 	 * @param u The user for which action is to be performed.
 	 * @return Returns false if the user logs out, otherwise returns true.
@@ -203,14 +221,16 @@ public class Driver {
 		try {
 			if(command.equals("deposit")) {
 				System.out.print("How much would you like to deposit? $");
-				int amount = Integer.parseInt(in.nextLine());
+				int amount = Integer.parseInt(in.nextLine().trim());
 				System.out.println("Balance after deposit $" + u.getAccount().deposit(amount));
+				
 				logger.info(u.getUserName() + " deposited $" + amount);
 			}
 			else if(command.equals("withdraw")) {
 				System.out.print("How much would you like to withdraw? $");
-				int amount = Integer.parseInt(in.nextLine());
+				int amount = Integer.parseInt(in.nextLine().trim());
 				System.out.println("Balance after withdrawal $" + u.getAccount().withdrawal(amount));
+				
 				logger.info(u.getUserName() + " withdrew $" + amount);
 			}
 			else if(command.equals("balance")) {
@@ -218,7 +238,8 @@ public class Driver {
 			}
 			else if(command.equals("logout")) {
 				active = false;
-				logger.info(u.getUserName() + " logged out");
+				
+				logger.info(u.getUserName() + " successfully logged out");
 			}
 			else {
 				System.out.println("Not a valid command");
@@ -226,6 +247,7 @@ public class Driver {
 		}
 		catch(NumberFormatException e) {
 			System.out.println("Invalid input. Please try again.");
+			
 			logger.error(u.getUserName() + " entered invalid amount");
 		}
 		System.out.println();
@@ -234,8 +256,10 @@ public class Driver {
 	
 	/**
 	 * The adminMenu is the menu presented to an administrator. In addition to providing 
-	 * options to deposit, withdraw and get balance, administrators can also choose to approve
-	 * user accounts.
+	 * options to deposit, withdraw, get balance, and logout, 
+	 * administrators can also choose to approve user accounts.
+	 * If the administrator logs out, the application will close.
+	 * 
 	 * @param command The command chosen by the administrator.
 	 * @param u The user for which the action is to be performed.
 	 * @return Returns false if the user logs out, otherwise returns true.
@@ -301,9 +325,6 @@ public class Driver {
 		}
 		return users;
 		
-	}
-
-		
-	
+	}	
 
 }
