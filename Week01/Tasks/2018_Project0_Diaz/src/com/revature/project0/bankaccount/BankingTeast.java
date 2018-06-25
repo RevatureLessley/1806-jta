@@ -18,12 +18,8 @@ class BankingTeast {
 	}
 	@Test
 	public void addToBank() {
-		assertEquals(150, SecondMenu.addToBank(10, 30,50,60));
+		assertEquals(150, SecondMenu.addToBank(10,30,50,60));
 	}	
-	@Test
-	public void addToBank2() {
-		assertEquals(19000, SecondMenu.addToBank(1000,1000,5000,12000));
-	}
 	@Test
 	public void loanIntrest() {
 		assertEquals(150, SecondMenu.loanIntrest(100, 0.5));

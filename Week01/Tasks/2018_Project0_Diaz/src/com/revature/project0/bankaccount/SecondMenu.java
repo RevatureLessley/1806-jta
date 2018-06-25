@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class SecondMenu {
 	final static int adminPassword = 118034; // admin password s not completely set up need to fix
+	final static int secrPassword = 203065; // admin password s not completely set up need to fix
 	final static Logger logger = Logger.getLogger(SecondMenu.class);
 	public static double balance;
 	public static double balance2;
@@ -18,12 +19,12 @@ public class SecondMenu {
 	private static double receipt;
 	private static double receipt2;
 	private static double receipt3;
-	private static double loan;
-	private static double loan2;
-	private static double loan3;
-	private static double pay1;
-	private static double pay2;
-	private static double pay3;
+	public static double loan;
+	public static double loan2;
+	public static double loan3;
+	public static double pay1;
+	public static double pay2;
+	public static double pay3;
 	public static double temp;
 	
 	// all of these above is due to me having to hard code the amount of account that i have i plan to get ride of this at a latter time
@@ -83,7 +84,7 @@ public class SecondMenu {
 	 * @param d
 	 * @return
 	 */
-	public static double addToBank(double a,double b, double c,double d ){		
+	public static double addToBank(double a,double b, double c,double d){		
 		return (a+ b + c + d);
 	}
 	/**
@@ -181,7 +182,7 @@ public class SecondMenu {
 			BankMenu.menu();
 			break;
 		case 1://case 1 sets up deposit with if statments
-			System.out.println(" How much would you like to deposit?");
+			System.out.println("How much would you like to deposit?");
 			System.out.println("====================================");
 			if(temp ==1) {
 				double dc = in.nextDouble();
@@ -203,7 +204,7 @@ public class SecondMenu {
 				break;
 			}
 		case 2: // case 2 sets up customer withdraw
-			System.out.println(" How much do you want to Withdraw ");
+			System.out.println("How much do you want to Withdraw ");
 			System.out.println("====================================");
 			double dc2 = in.nextDouble();
 			if(temp ==1) {
@@ -232,30 +233,33 @@ public class SecondMenu {
 			break;
 		case 3:// case 3 sets up checks balance and account info
 			if(temp ==1) {
-				System.out.println(" Your Balance is:  " + (balance ) + "$");	
+				System.out.println("====================================");
+				System.out.println("Your Balance is:  " + "$" +(balance - pay1 ));	
 				System.out.println("You also owe the bank " + (loanIntrest(loan,0.20) - pay1));
 				showSecondMenu();
 				break;
 			}else if(temp == 2) {
-				System.out.println(" Your Balance is:  " + (balance2 ) + "$");
+				System.out.println("====================================");
+				System.out.println(" Your Balance is:  " + "$" + (balance2 - pay2 ));
 				System.out.println("You also owe the bank " + (loanIntrest(loan2,0.20) - pay2));
 				showSecondMenu();
 				break;
 			}else if(temp == 3) {
-				System.out.println(" Your Balance is:  " + (balance3 ) + "$");
+				System.out.println("====================================");
+				System.out.println(" Your Balance is:  " + "$" + (balance3 - pay3));
 				System.out.println("You also owe the bank  " + (loanIntrest(loan3,0.20) - pay3));
 				showSecondMenu();
 				break;
 			}
-		case 4:// case 4 sets up initial loan agreement 
-			System.out.println("How much would you like for a loan? ");
-			loan = in.nextDouble();
-			System.out.println("PLease stand by for admin password ");
-			int adminPassword = in.nextInt();
-			if(adminPassword == 118034) {
-				if(temp ==1) {
+		case 4:// case 4 sets up initial loan agreement 			
+			if(temp ==1) {
+				System.out.println("How much would you like for a loan? ");
+				loan = in.nextDouble();
+				System.out.println("PLease stand by for admin password ");
+				int password = in.nextInt();
+				if(password == adminPassword) {
 					System.out.println("You are aproved for a loan with a one time intrest charge at 20% " + "\n"
-							+ "Do you except press 1 for yes and 2 for no");
+								+ "Do you except press 1 for yes and 2 for no");
 					int accept = in.nextInt();
 					if(accept == 1) {
 						balance = balance + loan;
@@ -263,56 +267,77 @@ public class SecondMenu {
 						System.out.println("Your new balance is: " + "$" + balance);	
 						System.out.println("You now owe the bank  $" + (loanIntrest(loan,0.20)));
 					}else {
-						System.out.println("sorry we could not help you");						
+						System.out.println("sorry we could not help you");
+						loan = 0;
 					}
 				}	
 					showSecondMenu();					
 				}else if(temp == 2) {
-					System.out.println("You are aproved for a loan with a one time intrest charge at 20% " + "\n"
-							+ "Do you except press 1 for yes and 2 for no");
-					int accept = in.nextInt();
-					if(accept == 1) {
-						balance2 = balance2 + loan2;
-						loanIntrest(loan2,0.20);
-						System.out.println("Your new balance is: " + "$" +balance2 );
-						System.out.println("You now owe the bank  $" + (loanIntrest(loan2,0.20)));
-					}else {
-						System.out.println("sorry we could not help you");						
+					System.out.println("How much would you like for a loan? ");
+					loan2 = in.nextDouble();
+					System.out.println("PLease stand by for admin password ");
+					int password = in.nextInt();
+					if(password == adminPassword) {
+						System.out.println("You are aproved for a loan with a one time intrest charge at 20% " + "\n"
+								+ "Do you except press 1 for yes and 2 for no");
+						int accept = in.nextInt();
+						if(accept == 1) {
+							balance2 = balance2 + loan2;
+							loanIntrest(loan2,0.20);
+							System.out.println("Your new balance is: " + "$" +balance2 );
+							System.out.println("You now owe the bank  $" + (loanIntrest(loan2,0.20)));
+						}else {
+							System.out.println("sorry we could not help you");
+							loan2 = 0;
+						}
 					}
+					showSecondMenu();
 				}else if(temp == 3) {
-					System.out.println("You are aproved for a loan with a one time intrest charge at 20% " + "\n"
-							+ "Do you except press 1 for yes and 2 for no");
-					int accept = in.nextInt();
-					if(accept == 1) {
-						balance3 = balance3 + loan;
-						loanIntrest(loan3,0.20);
-						System.out.println("Your new balance is: " + "$" + balance3);
-						System.out.println("You now owe the bank  $" + (loanIntrest(loan3,0.20)));
-					}else {
-						System.out.println("sorry we could not help you");						
+					System.out.println("How much would you like for a loan? ");
+					loan3 = in.nextDouble();
+					System.out.println("PLease stand by for admin password ");
+					int password = in.nextInt();
+					if(password == adminPassword) {
+						System.out.println("You are aproved for a loan with a one time intrest charge at 20% " + "\n"
+								+ "Do you except press 1 for yes and 2 for no");
+						int accept = in.nextInt();
+						if(accept == 1) {
+							balance3 = balance3 + loan3;
+							loanIntrest(loan3,0.20);
+							System.out.println("Your new balance is: " + "$" + balance3);
+							System.out.println("You now owe the bank  $" + (loanIntrest(loan3,0.20)));
+						}else {
+							System.out.println("sorry we could not help you");	
+							loan3 = 0;
+						}
 					}
+					showSecondMenu();
 			}else {
 				System.out.println("we can not approve you for a loan at this time please try at a latter date ");
 				showSecondMenu();
 			}break;
 		case 5: // case 5 sets up loan pay back
 			if(temp ==1) {
-				System.out.println("Yoa owe the bank " + loanIntrest(loan,0.20));
-				System.out.println("how much will you pay off today?");
+				System.out.println("You owe the bank " + loanIntrest(loan,0.20));
+				System.out.println("How much will you pay off today?");
 				pay1 = in.nextDouble();
 				System.out.println("You want to pay " + pay1 + " press 1 for yes and 2 for no");
 				int accept = in.nextInt();
-				if(accept == 1) {
-					if(pay1 <= balance) {
+				if(accept <= 1) {
+					if(pay1 <= balance) {						
 						System.out.println("Thanks Your new balance is " + (balance - pay1) );
 						System.out.println("You owe the back " + (loanIntrest(loan,0.20) - pay1));
 						showSecondMenu();
 					}else {
 						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						pay1 = 0;
 						showSecondMenu();
 					}
-				}else
+				}else {
+					System.out.println("Nothing happened exintg to your menu");
+					pay1 = 0;
 					showSecondMenu();
+				}
 			}else if(temp ==2) {
 				System.out.println("Yoa owe the bank " + loanIntrest(loan2,0.20));
 				System.out.println("how much will you pay off today?");
@@ -326,10 +351,15 @@ public class SecondMenu {
 						showSecondMenu();
 					}else {
 						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						pay2 = 0;
 						showSecondMenu();
 					}					
-				}
+				}else {
+					System.out.println("Nothing happened exintg to your menu");
+					pay2 = 0;
 					showSecondMenu();
+				}
+					
 			}else if(temp ==3) {
 				System.out.println("You owe the bank " + loanIntrest(loan3,0.20));
 				System.out.println("how much will you pay off today?");
@@ -343,11 +373,14 @@ public class SecondMenu {
 						showSecondMenu();
 					}else {
 						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
-						logger.error(null);
+						pay3 = 0;
 						showSecondMenu();
 					}
-				}else
+				}else {
+					System.out.println("Nothing happened exintg to your menu");
+					pay3 = 0;
 					showSecondMenu();
+				}
 			}
 		case 6:// case 6 sets up transfer in and out
 			System.out.println("What is tha account number you would like to transfer to?");

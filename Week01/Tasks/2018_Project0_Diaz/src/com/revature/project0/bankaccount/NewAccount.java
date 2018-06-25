@@ -49,7 +49,7 @@ public class NewAccount implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "First Name =" + fName + ", Last Name =" + lName + "Address = " + address + "Home Phone = " + phone ;
+		return " First Name = " + fName + ", Last Name = " + lName + " Address = " + address + " Home Phone = " + phone ;
 	}
 	public NewAccount(String fname, String lname, String address, String phone) {
 		super();

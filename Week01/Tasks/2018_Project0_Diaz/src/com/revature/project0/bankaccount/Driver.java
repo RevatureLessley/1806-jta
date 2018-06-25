@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 /**
- * Class Diver starts the application
+ * Class1 Diver starts the application
  * @author Zachary Diaz
  *
  */

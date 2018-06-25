@@ -32,10 +32,10 @@ public class BankMenu extends SecondMenu{
 				new NewAccount(NewAccount.getFname(),NewAccount.getlName(),NewAccount.getAddress(),NewAccount.getPhone())		
 				};
 		NewAccount2[] test2 = {
-				new NewAccount2(NewAccount2.getfName2(),NewAccount2.getlName2())
+				new NewAccount2(NewAccount2.getfName2(),NewAccount2.getlName2(),NewAccount2.getAddress2(),NewAccount2.getPhone2())
 		};
 		NewAccount3[] test3 = {
-				new NewAccount3(NewAccount3.getfName3(),NewAccount3.getlName3())
+				new NewAccount3(NewAccount3.getfName3(),NewAccount3.getlName3(),NewAccount3.getAddress3(),NewAccount3.getPhone3())
 		};
 		
 		TransUnion union = new TransUnion("RyantureTransUnion",test);
@@ -73,7 +73,7 @@ public class BankMenu extends SecondMenu{
 		firstChoice = in.nextInt();
 		switch(firstChoice){
 		default: // default case
-			System.err.println(" Invalid entry please try again later. Pleaese try agan. ");
+			System.err.println("Invalid entry please try again later. Pleaese try agan. ");
 			logger.error(null);
 			break; 
 		case 0:// case 0 logs out of application for some reason i have to exit three times to complete get out of application 
@@ -81,7 +81,7 @@ public class BankMenu extends SecondMenu{
 			logger.error(null);
 			break;
 		case 1:// case 1 logs into account must know account info that is displayed when creating the account
-			System.out.println(" What is you Account Number?");
+			System.out.println("What is you Account Number?");
 			temp = in.nextInt();
 			if( temp == 1) {
 				System.out.println("PLease enter your password");
@@ -89,21 +89,29 @@ public class BankMenu extends SecondMenu{
 				if(password == 134) {
 					SecondMenu.showSecondMenu();
 				}
+				else {
+					System.err.println("Invaled entry returning to manin menu"+ "\n");
+					logger.debug(password);
+				}
 			}else if(temp == 2) {
 				System.out.println("PLease enter your password");
-				int password2 = in.nextInt();
-				if(password2 == 135) 
+				int password = in.nextInt();
+				if(password == 135) 
 					SecondMenu.showSecondMenu();
 				else { 
-					System.out.println("Inasdvaled entry returning to manin menu"+ "\n");
+					System.out.println("Invaled entry returning to manin menu"+ "\n");
+					logger.debug(password);
 				}
 			}else if(temp == 3){
 				System.out.println("PLease enter your password");
 				int password = in.nextInt();
 				if(password == 136) 
 					SecondMenu.showSecondMenu();
+				else {
+					System.err.println("Invaled entry returning to manin menu"+ "\n");
+					logger.debug(password);
+				}
 			}else {
-				
 				System.err.println("Invaled entry returning to manin menu"+ "\n");
 			}
 		
@@ -185,7 +193,8 @@ public class BankMenu extends SecondMenu{
 						System.out.println("=============What would you like to do Today boss=============");
 						System.out.println("Press 0		How Much money does Revature TransUnionhave ");
 						System.out.println("Press 1 	To see all accounts on the Server");
-						System.out.println("Press 2  	To log out");
+						System.out.println("Press 2  	To see all password");
+						System.out.println("Press 3  	To log out");
 						int menu2 = in.nextInt();
 						switch(menu2){// this case statement needs to moved if i get time
 						default: 
@@ -193,7 +202,11 @@ public class BankMenu extends SecondMenu{
 							break; 
 						case 0:
 							System.out.println("We currentle have: " );
-							System.out.println(SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3));
+							System.out.println("Account 1 has a laon for " + (loan - pay1));
+							System.out.println("Account 2 has a laon for " + (loan2 - pay2));
+							System.out.println("Account 3 has a laon for " + (loan3 - pay3));
+							SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3);
+							System.out.println(revatureTransUnion - (loan - pay1) - (loan2 - pay2) - (loan3 - pay3));
 							System.out.println("\n");
 							break;
 						case 1:
@@ -203,11 +216,22 @@ public class BankMenu extends SecondMenu{
 							System.out.println(union3+"[Balance = "+balance3+"]");
 							System.out.println("\n");
 							break;	
-						case 2:
+						case 3:
 							System.out.println("Good bye Boss");
 							System.out.println("\n");
 							menu();
 							break;	
+						case 2:
+							System.out.println("Please use securty password ");
+							int password1 = in.nextInt();
+							if(password1 == secrPassword) {
+								System.out.println("All Passwords for the bank");
+								System.out.println("The admine password is: " + adminPassword);
+								System.out.println("Account 1 password is 134");
+								System.out.println("Account 2 password is 135");
+								System.out.println("Account 3 password is 136");
+							}else
+								System.err.println("Invaled entry");
 						}
 					}while(z == 0);
 					

@@ -32,13 +32,13 @@ public class NewAccount3 implements Serializable{
 	public void setlName3(String lName3) {
 		this.lName3 = lName3;
 	}
-	public static String getAddress() {
+	public static String getAddress3() {
 		return address3;
 	}
-	public void setAddress(String addres3s) {
+	public void setAddress(String addres3) {
 		this.address3 = address3;
 	}
-	public static String getPhone() {
+	public static String getPhone3() {
 		return phone3;
 	}
 	public  void setPhone(String phone3) {
@@ -46,10 +46,10 @@ public class NewAccount3 implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return " [First Name =" + fName3 + ", Last Name =" + lName3 +  "Address = " + address3 + "Home Phone = " + phone3;
+		return " [First Name = " + fName3 + ", Last Name = " + lName3 +  " Address = " + address3 + " Home Phone = " + phone3;
 	}
 	
-	public NewAccount3(String fName3, String lName3) {
+	public NewAccount3(String fName3, String lName3, String address3, String phone3) {
 		super();
 		this.fName3 = fName3;
 		this.lName3 = lName3;
