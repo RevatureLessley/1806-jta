@@ -219,14 +219,17 @@ public class App {
 		        			Item gum = new Gum();
 		        			StockItem moreGum = new StockItem(gum, quantity);
 		        			vend.getInventory().put(location, moreGum);
+		        			break;
 		        		case "water":
 		        			Item water = new BottledWater();
 		        			StockItem moreWater = new StockItem(water, quantity);
 		        			vend.getInventory().put(location, moreWater);
+		        			break;
 		        		case "snacks":
 		        			Item snacks= new Snack();
 		        			StockItem moreSnacks = new StockItem(snacks, quantity);
 		        			vend.getInventory().put(location, moreSnacks);
+		        			break;
 		        	}
 		        	break;
 		        case "use":
