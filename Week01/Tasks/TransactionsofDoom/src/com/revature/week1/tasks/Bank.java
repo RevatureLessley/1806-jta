@@ -119,12 +119,19 @@ public void initialSetup()
 		}
 	}
 	
+	/**
+	 * This function will iterate through the list of names until it finds one that matches the input to match it up with the proper password
+	 * if it does not find one, it will send you back to the start screen
+	 * It will then check and see if the use is an admin or just a regular user
+	 */
 	public void Login()
 	{	
 		enterName();
+		isNameCorrect = false;
 		
 		for (int i = 0; i < users.size(); i++)
 		{
+			//System.out.println("name checked" + i + isNameCorrect);
 			if(users.get(i).getName().toLowerCase().equals(name.toLowerCase()))
 			{
 				isNameCorrect = true;
@@ -148,13 +155,14 @@ public void initialSetup()
 						firstScreen();
 					}
 				}
-				break;	
+				//break;	
 			}
-			else
+			else if(!isNameCorrect)
 			{
 				continue;
+				//System.out.println("Sorry, your name was not found in our database");
 			}
-			System.out.println("Sorry, your name is not in our database.");
+			//System.out.println("Sorry, your name is not in our database.");
 		}
 		
 		if(!isNameCorrect)
@@ -198,6 +206,9 @@ public void initialSetup()
 	// Extracted Functions
 	///////////////////////////////////////
 	
+	/**
+	 * Sets up variables for a new User, then adds it to the users ArrayList
+	 */
 	private void setupNewUser()
 	{
 		BankMain.logger.info("Attempting to create a new user");
@@ -208,6 +219,9 @@ public void initialSetup()
 		System.out.println("Now what would you like to be your password?");
 		newPassword = sc.nextLine();
 		System.out.println("And how much are you depositing to start?");
+		
+		 // This part is just to verify that they only enter numerical values
+		 
 		while(true)
 		{
 			answer = sc.nextLine();
@@ -222,6 +236,7 @@ public void initialSetup()
 				System.out.println("Please enter a valid numerical amount.");
 			}
 		}
+		// Helper function to add the user to the users ArrayList
 		addUser();
 		
 		try{
@@ -230,7 +245,7 @@ public void initialSetup()
 			oos.close();
 		}catch(IOException e){
 			e.printStackTrace();
-			System.out.println("Yep did it great!");
+			//System.out.println("Yep did it great!");
 		}
 		System.out.println("Thank you! You will have access as soon as an adminstrator approves your account!");
 		System.out.println("Have a nice day!");
@@ -261,6 +276,10 @@ public void initialSetup()
 		}
 		adminFinalScreen();
 	}
+	/**
+	 * just allows an admin to switch the isApproved bool to true
+	 * @param user
+	 */
 	private void adminApproveUser(User user)
 	{
 		System.out.println(user.getName() + " is not yet approved. Approve them? y/n");
@@ -312,6 +331,10 @@ public void initialSetup()
 		}
 	}
 
+	/**
+	 * This "screen" allows the user to pick an action they would like to take
+	 * @param user
+	 */
 	private void userWelcomeScreen(User user)
 	{
 		System.out.println("Welcome " + user.getName() + "!");
@@ -350,7 +373,7 @@ public void initialSetup()
 			}
 			else
 			{
-				if(!Pattern.matches("[a-zA-Z]+", answer))
+				if(!Pattern.matches("[a-zA-Z]+", answer)) // Verifies that the input is a numerical value
 				{	
 					BankMain.logger.info(user.getName() + ": withdraw attempted.");
 					userWithdrawAndDisplayNewBalance(user);
