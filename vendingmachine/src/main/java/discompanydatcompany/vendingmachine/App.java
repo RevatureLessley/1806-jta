@@ -2,6 +2,9 @@ package discompanydatcompany.vendingmachine;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import discompanydatcompany.vendingmachine.entities.Admin;
 import discompanydatcompany.vendingmachine.entities.BottledWater;
 import discompanydatcompany.vendingmachine.entities.Gum;
@@ -21,8 +24,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class App {
+	private static Logger logger = LogManager.getLogger();
 	public static final String SAVE_FILE_NAME = "DATSAV";
     private boolean isSaveFilePresent = false;
+    
     
     public String getGreeting() {
         return "\"Hello world.\" -- Feral Vending Machine (No Owner)";
