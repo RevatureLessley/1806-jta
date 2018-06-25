@@ -18,6 +18,11 @@ public class StockItem implements Serializable {
 	this.item = item;
 	this.stockCount = initialInventoryCount;
     }
+    
+    public StockItem() {
+    	this.item = new NoItem();
+    	this.stockCount = 1;
+    }
 
     /**
      * Get the Item of the StockItem object.
