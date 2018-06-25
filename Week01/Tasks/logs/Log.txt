@@ -1,0 +1,7 @@
+2018-06-25 01:54:18 INFO  root:47 - Project0/RevatureBank.java: Creating admin account.
+2018-06-25 01:55:50 INFO  root:47 - Project0/RevatureBank.java: Creating admin account.
+2018-06-25 01:55:50 INFO  root:76 - Project0/RevatureBank.java: User tried to create an existing username.
+2018-06-25 01:58:28 INFO  root:47 - Project0/RevatureBank.java: Creating admin account.
+2018-06-25 01:58:28 INFO  root:76 - Project0/RevatureBank.java: User tried to create an existing username.
+2018-06-25 02:01:51 INFO  root:47 - Project0/RevatureBank.java: Creating admin account.
+2018-06-25 02:01:51 INFO  root:76 - Project0/RevatureBank.java: User tried to create an existing username.
