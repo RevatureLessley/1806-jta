@@ -9,19 +9,17 @@ public abstract class Account implements Serializable
 	protected String Name;
 	protected transient Launch pgm;
 	protected boolean accountFlagged = false;
-	protected int accountType; //0=Administrator, 1= Player, 2= Baker, 3= Loaner
 	
 	public Account()
 	{
 		
 	}
 	
-	public Account(String name, String uname, String pword, int aT, Launch pgm)
+	public Account(String name, String uname, String pword, Launch pgm)
 	{
 		this.Name = name;
 		this.uName = uname;
 		this.uPass = pword;
-		this.accountType = aT;
 		this.pgm = pgm;
 	}
 	
@@ -42,17 +40,64 @@ public abstract class Account implements Serializable
 		return uPass;
 	}	
 	
+	public void setFlagged(boolean flag)
+	{
+		accountFlagged = flag;
+	}
+	
 	public boolean getFlagged()
 	{
 		return accountFlagged;
 	}
-
-	public int getAccountType()
+	public abstract void menu();
+	
+	public void deleteAcc()
 	{
-		return accountType;
+		System.out.println("You have chosen to dissable your account...");
+		System.out.print("Are you sure this is what you want to do? Y/N:");
+		char selection = pgm.in.next().charAt(0);
+		if (selection =='Y' || selection =='y')
+		{
+			accountFlagged = true;
+			System.out.println("Thank you for your stay with Aeva Arena.");
+			System.out.println("Your account has been flagged for deletion");
+			System.out.println("and will be destroyed upon next logout.");
+			pgm.in.nextLine();
+			pgm.in.nextLine();
+		}
+		else if(selection == 'N' || selection == 'n')
+		{
+			System.out.println("I'll take it this was just an accident then.");
+		}
+		else 
+		{
+			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
+		}
 	}
 	
-	public abstract void menu();
+	public void saveAcc()
+	{
+		System.out.println("You have chosen to keep your account...");
+		System.out.print("Are you sure this is what you want to do? Y/N:");
+		char selection = pgm.in.next().charAt(0);
+		if (selection =='Y' || selection =='y')
+		{
+			accountFlagged = false;
+			System.out.println("Thank you for choosing to stay with Aeva Arena.");
+			System.out.println("We have removed your deletion status");
+			System.out.println("We are glad to have you back.");
+			pgm.in.nextLine();
+			pgm.in.nextLine();
+		}
+		else if(selection == 'N' || selection == 'n')
+		{
+			System.out.println("Sticking to your decision despite second thoughts, at least you are sure.");
+		}
+		else 
+		{
+			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
+		}
+	}
 	
 	public void logout()
 	{

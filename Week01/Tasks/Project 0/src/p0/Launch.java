@@ -11,70 +11,6 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-/*
- * Functionality
- * 
- * Setup
- * 	Check for accounts
- * 	if DB exist
- * 		Build array of Account Objects
- * 	else
- * 		Create new Admin
- * 		Build generic member list
- * 
- * Section 1
- * 	1. Login
- * 	2. Request Account
- * 	3. Quit
- * 
- * Account Verification
- * 	Ask for User name
- * 	Ask for Password
- * 	Determine if valid login
- * 	Determine account type
- * 		If password is wrong but User name is correct loop back to password input
- * 		If User name isn't found prompt for account sign up or back to user name
- * 
- * Activities Menu (standard user)
- * 	Welcome (Player Name)
- * 	Account balance
- * 	On hand balance
- * 	Status
- * 	1. Withdraw/Get account
- * 	2. Deposit/ N/A
- * 	3. Fight in Arena
- * 	4. Bet in Arena
- * 	5. Beg for loan/Pay on loan
- * 	7. Logout
- * 
- * Activities Menu (Banker)
- * 	Welcome (Banker Name)
- * 	# of accounts awaiting approval
- * 	# of overdrawn accounts
- * 	time since last charge
- * 	1. Review accounts for approval
- * 	2. Check accounts
- * 	3. Charge service tax
- * 	
- * Activities Menu (Loan Shark)
- * 	Welcome (Loan Name)
- * 	Available money
- * 	# of active loans
- * 	# of $ owed
- * 	1. Review loans for approval
- * 	2. Check accounts
- * 	3. Charge interest (All)
- * 	4. Charge interest (Directed)
- * 
- * Activities Menu (Administrator)
- * 	Welcome (Admin Name)
- * 	# of accounts awaiting approval
- * 	1. Approve new players
- * 	2. Approve new Bankers
- * 	3. Approve new Loaners
- * 	4. Hire new fighters
- * 	5. Reset the world
- */
 
 public class Launch 
 {
@@ -106,10 +42,13 @@ public class Launch
 	{
 		boolean cont = true;
 		pgm.in.reset();
+
+		System.out.println("Game loaded, press Enter to continue...");
 		while(cont)
 		{
-			pgm.dumpIn(pgm);
+			
 			pgm.load(pgm);
+			pgm.dumpIn(pgm);
 			System.out.println("Welcome to the Aeva Areana Simulator");
 			System.out.println("Please select an option");
 			System.out.println();
@@ -180,24 +119,37 @@ public class Launch
 			}
 			else if (!successU)
 			{
-				System.out.println("Not a valid username, would you like to \n"
-						+ "1. Make a new account or \n"
-						+ "2. Attempt to sign in again");
-				int selection = pgm.in.nextInt();
-				boolean valid = false;
-				while(!valid)
+				boolean test = false;
+				for(Player p: pgm.Waiting.getList())
 				{
-					switch (selection){
-					case 1: newAccount(pgm);
-							valid = true;
-							successP = true;
-							break;
-					case 2: valid = true;
-							break;
-					default: System.out.println("Not a valid selction, would you like to \n"
+					if(p.getuName().equals(tempUname))
+						test = true;
+				}
+				if(test)
+				{
+					System.out.println("That username is for a waiting account, please try again.");
+				}
+				else
+				{
+					System.out.println("Not a valid username, would you like to \n"
 							+ "1. Make a new account or \n"
 							+ "2. Attempt to sign in again");
-							selection = pgm.in.nextInt();
+					int selection = pgm.in.nextInt();
+					boolean valid = false;
+					while(!valid)
+					{
+						switch (selection){
+						case 1: newAccount(pgm);
+						valid = true;
+						successP = true;
+						break;
+						case 2: valid = true;
+						break;
+						default: System.out.println("Not a valid selction, would you like to \n"
+								+ "1. Make a new account or \n"
+								+ "2. Attempt to sign in again");
+						selection = pgm.in.nextInt();
+						}
 					}
 				}
 			}
@@ -272,7 +224,7 @@ public class Launch
 	public void save(Launch pgm)
 	{
 		pgm.Active.updateList();
-		
+		pgm.Waiting.updateList();
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("Active.ser"));
@@ -291,8 +243,6 @@ public class Launch
 		}
 		
 		System.out.println("Successfully Saved");
-		
-		
 	}
 
 	public void newAccount(Launch pgm)

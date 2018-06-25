@@ -1,16 +1,20 @@
 package p0;
 
-public class Player extends Account
+import java.io.Serializable;
+
+public class Player extends Account implements Serializable
 {
 	private int accountBalance;
+	private double bankInterest = 1.10;
 	private int loanBalance;
+	private double loanInterest = 1.30;
 	private int personalBalance;
 	private boolean hasLoan = false;
-	private boolean hasBank = true;
+	private boolean loanWaiting = false;
 	
 	public Player(String name, String uName, String pword, int aBal, int pBal, int lBal, Launch pgm)
 	{
-		super(name, uName,pword, 1,pgm);
+		super(name, uName,pword,pgm);
 		this.accountBalance = aBal;
 		this.personalBalance = pBal;
 		this.loanBalance =lBal;
@@ -53,12 +57,10 @@ public class Player extends Account
 			accountBalance += ammount;
 			personalBalance -= ammount;
 		}
-	}
-	
-	public void bankApp()
-	{
-		System.out.println("Bank Application comming soon.");
-		System.out.println();
+		else
+		{
+			System.out.println("Improper ammount, come back to try again.");
+		}
 	}
 	
 	public void bet()
@@ -111,6 +113,11 @@ public class Player extends Account
 
 		System.out.println("Loan Application comming soon.");
 		System.out.println();
+		
+		System.out.print("How much money would you like to borrow: ");
+		loanBalance = pgm.in.nextInt();
+		loanWaiting = true;
+		System.out.println("\n Your loan application has been submitted for approval");
 	}
 	
 	public void payLoan()
@@ -141,43 +148,30 @@ public class Player extends Account
 			
 	}
 	
-	public void deleteAcc()
+	public boolean getHasLoan()
 	{
-		System.out.println("You have chosen to dissable your account...");
-		System.out.print("Are you sure this is what you want to do? Y/N:");
-		char selection = pgm.in.next().charAt(0);
-		if (selection =='Y' || selection =='y')
-		{
-			accountFlagged = true;
-			System.out.println("Thank you for your stay with Aeva Arena.");
-			System.out.println("Your account has been flagged for deletion");
-			System.out.println("and will be destroyed upon next logout.");
-			pgm.in.nextLine();
-			pgm.in.nextLine();
-		}
+		return hasLoan;
 	}
 	
-	public void saveAcc()
+	public boolean getLoanWaiting()
 	{
-		System.out.println("You have chosen to keep your account...");
-		System.out.print("Are you sure this is what you want to do? Y/N:");
-		char selection = pgm.in.next().charAt(0);
-		if (selection =='Y' || selection =='y')
-		{
-			accountFlagged = false;
-			System.out.println("Thank you for choosing to stay with Aeva Arena.");
-			System.out.println("We have removed your deletion status");
-			System.out.println("We are glad to have you back.");
-			pgm.in.nextLine();
-			pgm.in.nextLine();
-		}
+		return loanWaiting;
 	}
 	
+	public void setLoanWaiting(boolean s)
+	{
+		loanWaiting = s;
+	}
+
 	public int getbBalance()
 	{
 		return accountBalance;
 	}
-	
+
+	public void setHasLoan(boolean s)
+	{
+		hasLoan = s;
+	}
 	public int getlBalance()
 	{
 		return loanBalance;
@@ -187,11 +181,11 @@ public class Player extends Account
 	{
 		if(accountBalance >0)
 		{
-			accountBalance = (int)(accountBalance * 1.1);
+			accountBalance = (int)(accountBalance * pgm.Active.getBanker().getInterest());
 		}
 		if(loanBalance > 0) 
 		{
-			loanBalance = (int)(loanBalance * 1.3);
+			loanBalance = (int)(loanBalance * pgm.Active.getLoaner().getInterest());
 		}
 	}
 	
@@ -204,8 +198,7 @@ public class Player extends Account
 		{
 
 			System.out.println("Gold: " + personalBalance);
-			if(hasBank)
-				System.out.println("Bank balance: " + accountBalance);
+			System.out.println("Bank balance: " + accountBalance);
 			if(hasLoan)
 				System.out.println("Loan balance: " + loanBalance);
 			int count = 1;
@@ -223,20 +216,10 @@ public class Player extends Account
 				System.out.println(count + ". Apply for loan");
 				count++;
 			}
-			if(hasBank)
-			{
-				System.out.println(count + ". Withdraw");
-				count++;
-				System.out.println(count + ". Deposit");
-				count++;
-			}
-			else
-			{
-				System.out.println(count + ". Apply for bank account");
-				count++;
-				System.out.println(count + ". Option Unavailable");
-				count++;
-			}
+			System.out.println(count + ". Withdraw");
+			count++;
+			System.out.println(count + ". Deposit");
+			count++;
 			System.out.println(count + ". Logout");
 			count++;
 			if(accountFlagged)
@@ -249,8 +232,6 @@ public class Player extends Account
 				System.out.println(count + ". Close account");
 				count++;
 			}
-
-			System.out.println("More functionality comming");
 			selection = pgm.in.nextInt();
 			switch (selection) {
 			case 1: this.bet();
@@ -260,15 +241,9 @@ public class Player extends Account
 					else
 						this.loanApp();
 					break;
-			case 3: if(hasBank)
-						withdraw();
-					else
-						bankApp();
+			case 3: withdraw();
 					break;
-			case 4: if(hasBank)
-						deposit();
-					else
-						System.out.println("That is currently unavailable, please try again.");
+			case 4: deposit();
 					break;
 			case 5: logout();
 			break;
