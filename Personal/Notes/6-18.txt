@@ -1,0 +1,73 @@
+itssupport@uta.edu
+hr@revature.com -- direct deposit
+housing@revature.com
+
+Version Control
+---------------
+Git
+	commit --> saves code in repository
+	rollback --> returning code to previous state
+
+git clone <url>
+|
+git init
+git remote add origin <url>
+git pull origin master
+
+master------------------------------------->
+	\				/
+	 \			       /
+	feature------------------------
+		\		/
+		 \             /
+		subfeature-----
+
+git checkout -b <branch>
+
+git config --global user.email
+git config --global user.email "email"
+git config --global user.name
+git config --global user.name "name" 
+
+cd "EnvironmentVariableName"
+
+Java
+----
+Fast, secure, reliable programming language.
+Portability is one of the key aspects.
+	Java apps run similarily on different platforms.
+	Write Once, Run Anywhere.
+	Achieved using Java bytecode.
+JDK (Java Development Kit)
+	provides compiler, debugger, libraries, javadocs
+	JRE (Java Runtime Environment)
+		provides libraries for assisting JVM in executing apps.
+		JVM (Java Virtual Machine)
+			executes Java applications.
+
+Project 0 Requirements
+----------------------
+Console application
+Takes user input
+Must have transactions
+	withdrawal/deposit options
+	show balance after actions
+	data persistent through files
+Accounts
+	user create accounts and login/out
+	Accounts approves by admins
+
+Tech Requirements
+-----------------
+At least 3 JUnit tests
+Log4J logging
+JavaDocs commented
+
+Stretch Goals
+-------------
+alerts
+loans with interest
+more roles besides admin/user
+password encryption
+Updatable account details
+Ban users

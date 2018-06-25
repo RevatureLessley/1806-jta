@@ -1,0 +1,174 @@
+Do not use default package.
+
+Packages are collections of folders that sort/organize classes.
+Plays role in which classes can access others depending on package location.
+
+Design Pattern is a tried and true approach/method for achieving a desired functionality/structure
+
+POJO (Plain Old Java Object) a design pattern that simply creates a class that contains data.
+
+Static variables are the first things to be created.
+
+Scopes
+------
+Static
+Instance	(Global)
+Method
+Loop		(Local)
+
+Reference = Assignment/Object
+
+Classes are blueprints for objects that structure states/functionalities.
+Objects are instants of classes and are runtime entities than can be altered and maintain state changes.
+
+Access Modifiers
+----------------
+-private
+-default
+--no distinctive access modifier, restricted to within package
+-protected
+-public
+
+Non-Access Modifiers
+--------------------
+-static
+-final
+-abstract
+-synchronized
+--limits to one threat
+-transient
+--withheld from serialization
+-native
+--no method body, implemented outside of Java
+-strictfp
+-- all methods in class
+-- floating points conform to IEEE
+-volatile
+--variable must be accessed in heap not stack, important for multiple threads.
+
+Primitive datatypes are not objects, reserved in memory for n amounts. Thus java is not 100% object-oriented.
+
+int i = 32768;				
+short s = 32767;			
+long l = 20;			// L optional, _ for readability
+float f = 5.5f;			// f needed
+double d = 10.10;		
+byte b = 80;			
+char c = 'r';			// unsigned
+boolean bool;			// cannot cast
+	
+Two kinds of casting in Java:
+-Explicit
+--Specifically write what datatype you want
+-Implicit
+--Java automatically does it.
+	
+//Explicit Casting
+s = (short)i;
+i = (int)l;
+s = (short)l;
+c = (char)s;
+c = (char)i;
+c = (char)b;
+f = (float)d;
+	
+//Implicit Casting
+i = s;
+l = i;
+l = s;
+d = f;
+
+Control statements are blocks of code that can control application flow.
+
+Postfix i++ use the variable then increment
+Prefix ++i increment then use variable
+
+for(;;) infinite loop
+
+String is a final class so it cannot be inherited, its also immutable.
+
+Stack
+-----
+local variables
+object/method references
+each thread has own stack
+stack overflow error
+
+Heap
+----
+instance variables
+objects
+string pool
+out of memeory error
+
+new String() makes a string outside the string pool
+s4 = s4.intern() makes s4 points to the string already in the string pool
++= makes a new object thus jumping out the string pool
+
+== is a comparator that checks if two resources are identical.
+.equals() is a method inherited by Object used to check values. In the Object class, it behaves like ==.
+
+When strings change frequently there will be a lot of memory overhead. StringBuilder and StringBuffer are mutable strings for efficiency. They wrap around the string class. StringBuffer is ThreadSafe while StringBuilder is not. ThreadSafe means there can be only one thread interacting with a resource at a time.
+
+		  Throwable
+	 	   /	\
+	          /	 \
+	         /        \
+	        /          \
+	       /	    \
+              /		     \	
+             /		      \	
+            /		       \
+ 	   /		        \	
+          /		         \	
+         /		          \
+        /		     	   \
+       /			    \	
+      /		                     \
+     /		     		      \
+    /		     		       \						
+Error					Exception
+OutOfMemory				/	\
+StackOverflow			       /       	 \
+	      			      /		  \
+	     			     /		   \
+	    			    /		    \
+           			   /		     \	
+          			  /		      \	
+         			 /		       \
+ 				/		        \	
+			IOException			RunTimeException
+			FileNotFoundException		Divide by Zero
+							ArrayOutOfBounds
+							NullPointerException
+							ClassCastException
+
+Exceptions are unexpected actions that happen at runtime. Errors are not recoverable in reason.
+RunTimeErrorExeptions and its children are unchecked. Other Exceptions are checked. Checked Exceptions can be determined at compile time and must be handled.
+
+finally block will not execute only when the application crashes with error or System.exit(0);
+try needs a catch or a finally
+
+Ducking an exception is propagating it.
+Customized exceptions are classes that extends the Exception family.
+
+Any object can be garbage collected if one of the following are met:
+-Reference points to null.
+  Object o = new Object();
+  Object o = null;
+-Method creating object ends
+  method(){
+    Object o = new Object()
+  }
+-Object reassigned
+  Object o = new Object();
+  o = new Object();
+
+.finalize() is called by the garbage collector before the garbage is collected, can be used to see if something is collected.
+
+protected void finalize() throws Throwable{	
+	System.out.println("Collected");
+	super.finalize()
+}
+
+System.gc() requests garbage collection.

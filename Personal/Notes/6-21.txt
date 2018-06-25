@@ -1,0 +1,94 @@
+Collections
+-----------
+Collections is the utility class for interacting with collections.
+Collection is the interface that houses most Collection classes.
+
+ 	     	     	Iterable(Interface)
+					|
+		     	Collection(interface)
+                       /		|\
+		      /			| \
+                     /			|  \
+		    /   		|   \
+                   /			|    \
+                  /			|     \
+                 /			|      \
+                /			|       \
+               /			|        \
+              /				|         \
+             /				|          \
+            /				|           \
+           /				|            \
+          /				|             \
+         /				|              \
+        /				|               \
+       /				|                \
+      /					|                 \
+     /					|                  \
+    /					|                   \
+   /					|                    \
+  /					|	              \
+ /	    	    			|	       	       \	
+/					|			\
+Set(Interface)	 		List(Interface)	 		Queue(Interface)
+|	      \			       \			/
+|              \		    	\	               /
+|               \                    	 \                    /
+|                \                    	  \                  /
+|                 \                    	   \                /
+|                  \                        \              /
+|	            \			     \            /
+|	             \			      \	         /
+|	      	      \			       \	/
+|	       	       \		    	\      /
+|			\	     		LinkedList
+SortedSet(Interface) 	HashSet	ArrayList			PriorityQueue
+|			Vector
+TreeSet
+
+
+  Object
+ /     \
+/	\
+Arrays	Collections
+
+
+Map(Interface)
+	   \
+	    \
+	     \
+	      \
+	       \
+		\
+HashMap		SortedMap(Interface)
+HashTable	   |
+LinkedHashMap	TreeMap
+
+Maps are not iterable.
+
+collection is a term for data structures. Collection is the API for collections. Collections is the utility for interacting with collections. Lists have no default type enforcement. Generics enforce a type for a collection or dynamically (parametric polymorphism).
+
+Methods of List
+	-add
+	-remove
+	-get
+	-set
+	-listIterator, can iterate both back and forth
+
+Iterable offers us iterators, which are cursors for a collection. NoSuchElementException thrown after the last element. Vectors are ThreadSafe but LinkedLists are not. Arraylists grow by 50% while Vectors double in size. Sets auto sorts on hash codes.
+
+Methods of Queue					
+	-offer (add), inserts an element			
+	-poll  (remove), removes and returns the first item.	
+	-peek  (element), returns the first item.			
+
+The queue methods have counterparts of those of Lists that do not throw exceptions.
+
+Comparable Interface specifies the compareTo method that defines the natural way in which how a class should be sorted. Comparator Interface specifies the compare method that designates a class that sorts objects in some way.
+
+Maps are collections of key/value pairs. More specifically, a combination of a keyset and entry values. Maps are not a poart of the Collection API.
+
+Hashtable vs HashMap
+	-Hashtables do not accept null keys or values.
+	-Hashtables are synchronized while HashMaps are not.
+	-Hashtables are a legacy class, which is an old class that has a newer replacement but still has use so are not deprecated.

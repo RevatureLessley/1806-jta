@@ -1,0 +1,84 @@
+Overloading defines multiple methods with the same name but with different parameters. Return types and access modifiers do not matter.
+
+varargs allows a dynamic amount of parameters.
+
+// nums is an array, must be the last parameter
+public int addition(int ... nums) {
+	int result = 0;
+
+	for(int i: nums)
+		result += i;
+
+	return result;
+}
+
+public class Something {
+	// final on field enforces constant, convention suggests all caps and underscores in naming.
+	public final int SOME_NUMBER = 200;
+	// final on method prevents overriding
+	public final void method2() {
+		
+	}
+}  
+
+// Classes can only have final and abstract non-access modifiers.
+// Final on  class prevents inheriting.
+public final class FinalSomething {
+
+}
+
+OOP Pillars
+-----------
+Abstraction
+	-Reduce code complexity
+	-Reduce redundant code
+Encapsulation
+	-Hiding internal module data
+	-Restrict access to necessary fields
+	-access modifiers
+Inheritance
+	-Inheriting functionality and properties from superclasses
+	-Alter functionality as subclasses get more specific
+Polymorphism
+	-Offers multiple forms of components to be referenced by
+	-Achieved through overloading, overriding, covariance
+		--Covariance: B inherits from A, A a = new B() is allowed, B b = new A() is not allowed since B may have stuff A doesn't have
+
+Interfaces enforce actions of classes by providing a contract. Java 8 allows interfaces can have fields that are implicitly static and final. Java 8 also allows static method implementations. The default keyword signifies an implementation in inferfaces. This allows interfaces to be used with lambdas.
+
+Interfaces Vs Abstract Classes
+	-Both can have concrete/abstract methods
+	-Both cannot be instantiated.
+	-Interfaces are used for required actions while abstract classes provide some base functionality.
+	-Classes are extended while interfaces are implemented.
+	-At most one class can be extended whereas as many interfaces can be implemented.
+
+Casting a parent class to a Child class causes a ClassCastException. C inherits from A, A a2 = new C() results in a2 having C's method implementations and retaining A's instance variables (variable shadowing).
+
+Overriding method signatures must match but access modifiers can be made less restrictive.
+
+Constructors
+------------
+Default constructors are no-args constructors that are automatically provided when no other constructors are not provided.
+
+Directories starting with forward slashes / specify absolute paths. Otherwise the path is relative. Eclipse relative paths start in the project folder.
+
+Pascal Casing is captializing every letter in a word, used for naming classes. Camel Casing is starting with a lower case letter then the first letter of following words are capitalized.
+
+FileInputStream and FileOutputStream are able to read and write data one byte at a time so are limited to ASCII. Java tries to close streams but programmers are responsible. -1 indicates EOF.
+
+FileReader and FileWriter are able to read and write one character at a time which doubles efficiency.
+
+BufferedReader and BufferedWriter allows programmers to decide how much to read and write at a time. By default, they work at the String level.
+
+A scanner is a class used to parse strings. It's more commonly used for user input in console applications. It delimits by spaces by default. System.in takes user input.
+
+Serialization is converting an object into a bytecode representation. Serializable is a marker interface, which is an interface without methods. It only marks an object serializable. Cloneable is also a marker interface. A serialVersionUID prevents another application from deserializing an object. transient replaces all values with the default in serialization.
+
+A comparator is an operator that compares. & and | do not short-circuit. && and || short-circuits.
+
+A wrapper class is an object representation of a primitive value, giving us callable methods. 
+
+Autoboxing is the implicit conversion of a primitive value into its wrapper class. Autounboxing is the reverse.
+
+args holds command line arguments for applications.

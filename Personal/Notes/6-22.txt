@@ -1,0 +1,92 @@
+utahousing@revature.com
+
+Logging
+-------
+-Documentation of steps an application takes.
+-Notes points of failures and their possible reasons.
+
+Logger
+------
+The tool that marks a point in execution and logs it.
+
+Appender
+--------
+Decides how the log will be saves/displayed.
+
+Layout
+------
+Formatting log data.
+
+All
+---
+
+Trace - most specific, logging nearly every action
+
+Debug - more specific log
+
+Info - typical log storing key actions.
+
+Warning - action with risk of Error/Fatal.
+
+Error - something goes wrong that may effect application.
+
+Fatal - system crash without recovery.
+
+None
+
+
+Junit is a testing tool for unit tests, which are the most micro level of testing whose goal is to test every single method in the application. BeforeClass methods set up the global environment for the tests. AfterClass methods perform a global tear down of all test data. Before methods set up the environment for each individual test. Aefore methods tear down the environment for each individual test. Test methods specifies tests.
+
+A static import brings in an entire class and its namespace.
+
+Assert methods:
+-asssertEquals
+-assertNotEquals
+-
+
+Should an exception be desired, you can configure a test to pass using @Test(expected = exception.class) configuration. (timeout=milliseconds) tests for a methods time.
+
+Singleton design pattern provides a single instance of a class shared throughout the application. The instance should never be replaced or recreated.
+
+The factory design pattern abtracts the creation of a specific object type of a class. Its useful for complex class.
+
+Multithreading
+--------------
+Multiple executions in an application running concurrently using time splicing. Priorities go from 1 - 10, with 5 the default.
+
+Two ways to create Java threads. A thread is a single flow of execution. 
+Implementing the runnable interface or extending the thread class. Both cases require the run() method that contains the tasks your threads will run when they start. Most developers implement Runnable since they can extend other classes. Extend Thread to override its base methods but those are already efficient. One creates a thread instance and pass it to our class that implements Runnable and call start() to fork.
+
+Thread States
+-------------
+New - thread creation
+Runnable - Thread.start()
+Waiting - Thread.wait()
+Timed_Waiting - Thread.wait(millis)
+Blocked - 
+Terminated - end execution
+
+Synchronized(ThreadSafe) means no more than one thread can access a certain resource. Synchronization risks deadlock which is when two or more threads are requesting each other resources but not giving them up until they get one another. Livelock is when a thread cannot continue unless another thread takes its resource but other threads want to give their resources too. Deadlock and livelock lead to starvation in which two or more threads are blocked and will never be unblocked.
+
+Producers 
+---------
+-fill the queue but does not overflow it.
+-after every production, checksize and sleep if full.
+-otherwise notify production. 
+
+Consumers
+---------
+-empty the queue but should not take when empty. 
+-after every consumption, checksize and sleeps if zero.
+-otherwise notify(wake another thread) and consume.
+
+Thread Methods
+--------------
+-sleep: wait the thread that can be interrupted.
+-wait: wait the thread that can't be interrupted.
+-notify: wake some sleeping thread.
+-notifyAll: Wake all sleeping threads.
+-isDaemon: checks if thread runs after the main thread ends.
+-join: a thread ends execution and merges with another thread.
+-isAlive: check if thread is finished.
+-start: starts a thread.
