@@ -18,7 +18,31 @@ import org.apache.log4j.Logger;
  * deposit and withdraw from their account.
  * <br>Lets an admin login, logout,
  * and approve accounts. 
- * @author Logan
+ * <br>Fields:
+ * <br>logger(Logger)
+ * <br>accs(ArrayList<Account>)
+ * <br>activeAccount(int)
+ * <br>counter(int)
+ * <br>accountsAmount(int)
+ * <br>registered(String)
+ * <br>USER(int)
+ * <br>ADMIN(int)
+ * <br>
+ * <br>Methods:
+ * <br>public Bank(ArrayList<Account>)
+ * <br>public void register()
+ * <br>public void login()
+ * <br>public void userLogin()
+ * <br>public void adminLogin()
+ * <br>public void askUserInput(Account)
+ * <br>public void askAdminInput(Account)
+ * <br>public void userWithdraw(int, Account)
+ * <br>public void userDeposit(int, Account)
+ * <br>public void writeAccountsFile(ArrayList<Account>)
+ * <br>public ArrayList<Account> readAccountsFile()
+ * 
+ * 
+ * @author Logan Brewer
  */
 public class Bank 
 {
