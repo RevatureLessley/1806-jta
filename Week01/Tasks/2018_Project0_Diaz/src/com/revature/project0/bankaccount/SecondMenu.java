@@ -2,7 +2,7 @@ package com.revature.project0.bankaccount;
 
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 /**
  * 
  * In Second Menu it has the bulk of the methods that make the bank work such as deposit, balance, withdraw and introuductin menus
@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 public class SecondMenu {
 	final static int adminPassword = 118034; // admin password s not completely set up need to fix
 	final static int secrPassword = 203065; // admin password s not completely set up need to fix
-	final static Logger logger = Logger.getLogger(SecondMenu.class);
+	//final static Logger logger = Logger.getLogger(SecondMenu.class);
 	public static double balance;
 	public static double balance2;
 	public static double balance3;
@@ -175,7 +175,7 @@ public class SecondMenu {
 		switch(secondChoice){
 		default: // default sets up an invalid entry
 			System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
-			logger.error(null);
+			//logger.error(null);
 			break; 
 		case 0:// case 0 exits to main menu
 			System.out.println(" Please come again.");
@@ -227,7 +227,7 @@ public class SecondMenu {
 					}
 				}else {
 					System.out.println("Insuffcient funds");	
-					logger.error(null);
+					//logger.error(null);
 				}
 				showSecondMenu();	
 			break;
@@ -398,7 +398,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 3) {
@@ -408,7 +408,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else {
@@ -423,7 +423,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 3) {
@@ -433,7 +433,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else {
@@ -448,7 +448,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else if(transfer == 1) {
@@ -458,7 +458,7 @@ public class SecondMenu {
 							showSecondMenu();
 						}else {
 							System.err.println("Insuffeciant Funds!!!!!!");
-							logger.error(null);
+							//logger.error(null);
 							showSecondMenu();
 						}
 					}else {

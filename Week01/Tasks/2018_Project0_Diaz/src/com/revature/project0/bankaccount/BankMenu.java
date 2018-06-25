@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 /**
  * Class BankMenu sets up the first menu to take usser input and it extends
  * SecondMenu to grab the information form the Supper Class
@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class BankMenu extends SecondMenu{
 	
-	final static Logger logger = Logger.getLogger(BankMenu.class);
+	//final static Logger logger = Logger.getLogger(BankMenu.class);
 	private static double revatureTransUnion = 1_000_000;// The starting amount the bank has in its vault
 	private static int i = 0;// sets up a count for the number of accounts that is currently set 
 	Scanner in = new Scanner(System.in);// useer input
@@ -39,11 +39,11 @@ public class BankMenu extends SecondMenu{
 		};
 		
 		TransUnion union = new TransUnion("RyantureTransUnion",test);
-		logger.debug(test);
+		//logger.debug(test);
 		TransUnion2 union2 = new TransUnion2("RyantureTransUnion",test2);
-		logger.debug(test2);
+		//logger.debug(test2);
 		TransUnion3 union3 = new TransUnion3("RyantureTransUnion",test3);
-		logger.debug(test3);
+		//logger.debug(test3);
 		
 		
 		try{	// all try catch methods here help serilize the information into arrays 
@@ -74,11 +74,11 @@ public class BankMenu extends SecondMenu{
 		switch(firstChoice){
 		default: // default case
 			System.err.println("Invalid entry please try again later. Pleaese try agan. ");
-			logger.error(null);
+			//logger.error(null);
 			break; 
 		case 0:// case 0 logs out of application for some reason i have to exit three times to complete get out of application 
 			System.out.println("     Please come again.");
-			logger.error(null);
+			//logger.error(null);
 			break;
 		case 1:// case 1 logs into account must know account info that is displayed when creating the account
 			System.out.println("What is you Account Number?");
@@ -91,7 +91,7 @@ public class BankMenu extends SecondMenu{
 				}
 				else {
 					System.err.println("Invaled entry returning to manin menu"+ "\n");
-					logger.debug(password);
+				//	logger.debug(password);
 				}
 			}else if(temp == 2) {
 				System.out.println("PLease enter your password");
@@ -100,7 +100,7 @@ public class BankMenu extends SecondMenu{
 					SecondMenu.showSecondMenu();
 				else { 
 					System.out.println("Invaled entry returning to manin menu"+ "\n");
-					logger.debug(password);
+					//logger.debug(password);
 				}
 			}else if(temp == 3){
 				System.out.println("PLease enter your password");
@@ -109,7 +109,7 @@ public class BankMenu extends SecondMenu{
 					SecondMenu.showSecondMenu();
 				else {
 					System.err.println("Invaled entry returning to manin menu"+ "\n");
-					logger.debug(password);
+					//logger.debug(password);
 				}
 			}else {
 				System.err.println("Invaled entry returning to manin menu"+ "\n");
@@ -179,7 +179,7 @@ public class BankMenu extends SecondMenu{
 				menu();
 			}else {// since at this point there is already three accounts created and the bank can only have 3 accounts right know alerts the admin
 				System.err.println("Contact Adnin back servers are out of sapce");
-				logger.error(null);
+				//logger.error(null);
 				menu();
 			}
 			break;
@@ -237,7 +237,7 @@ public class BankMenu extends SecondMenu{
 					
 				}else {
 					System.err.println("Access Denied!!!!!");
-					logger.error(null);
+					//logger.error(null);
 					menu();
 				}
 					
