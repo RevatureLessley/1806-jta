@@ -50,7 +50,7 @@ public final class MasterController implements Serializable {
 
 		return masterController;
 	}
-
+	
 	/**
 	 * Gets the static instance of UserController
 	 */
@@ -81,8 +81,11 @@ public final class MasterController implements Serializable {
 			try {
 				Files.delete(new File(USER_DATA_FILE).toPath());
 				logger.info("Freeing previously written data");
+				
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.info("No previously written data exists");
+			}finally {
+				masterController = null;
 			}
 		} else {
 			writeData();
@@ -132,7 +135,6 @@ public final class MasterController implements Serializable {
 			masterController = (MasterController) ois.readObject();
 			result = true;
 		} catch (FileNotFoundException e) {
-			System.out.println("no previous user data");
 			logger.info("No previous data found");
 		} catch (IOException e) {
 			e.printStackTrace();

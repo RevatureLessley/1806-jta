@@ -128,22 +128,20 @@ public class Driver {
 
 		System.out
 				.println("Usernames may not include any spaces and must be at least 4 characters. Type '\\c' to cancel");
-		System.out.print("Enter username: ");
-
+	
 		String name = null;
 		boolean valid = false;
 
 		while (!valid) {
+			System.out.print("Enter username: ");
 			name = scanner.nextLine();
 
 			if (name.equals("\\x") || name.equals("\\c)")) {
 				return phase;
 			} else if (!User.checkUsernameValid(name)) {
 				System.out.println("username '" + name + "' is not valid");
-				enterWait();
 			} else if (!userController.checkUsernameAvailable(name)) {
 				System.out.println("username '" + name + "' is unavailable");
-				enterWait();
 			} else {
 				valid = true;
 			}
@@ -154,7 +152,6 @@ public class Driver {
 		System.out.println("Passwords must be at least 6 characters long");
 
 		while (!valid) {
-
 			System.out.print("Enter password: ");
 			password = scanner.nextLine();
 
@@ -162,7 +159,6 @@ public class Driver {
 				valid = true;
 			} else {
 				System.out.println("username '" + name + "' is not valid");
-				enterWait();
 			}
 
 		}
