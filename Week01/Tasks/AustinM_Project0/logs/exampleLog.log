@@ -528,3 +528,34 @@
 2018-06-25 11:47:08 INFO  UserController:60 - New user Admin created.
 2018-06-25 11:49:24 INFO  MasterController:105 - MasterController written to file
 2018-06-25 11:49:28 INFO  AccountController:152 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 11:50:27 INFO  AccountController:152 - Applying interest; 3 compounding periods to all validated accounts
+2018-06-25 11:55:49 INFO  AccountController:152 - Applying interest; 8 compounding periods to all validated accounts
+2018-06-25 11:56:16 INFO  UserController:60 - New user Ausmo created.
+2018-06-25 11:56:27 INFO  User:72 - Account checking 0 added to Ausmo's account list
+2018-06-25 11:56:27 INFO  AccountController:80 - New account checking 0 created for user Ausmo
+2018-06-25 11:56:31 INFO  User:72 - Account savings 1 added to Ausmo's account list
+2018-06-25 11:56:31 INFO  AccountController:80 - New account savings 1 created for user Ausmo
+2018-06-25 11:58:03 INFO  AccountController:47 - Account checking 0 belonging to Ausmo has been validated.
+2018-06-25 11:58:06 INFO  AccountController:47 - Account savings 1 belonging to Ausmo has been validated.
+2018-06-25 11:58:11 INFO  MasterController:105 - MasterController written to file
+2018-06-25 13:34:59 INFO  AccountController:152 - Applying interest; 99 compounding periods to all validated accounts
+2018-06-25 13:48:35 INFO  AccountController:152 - Applying interest; 112 compounding periods to all validated accounts
+2018-06-25 13:51:14 INFO  AccountController:152 - Applying interest; 115 compounding periods to all validated accounts
+2018-06-25 13:53:06 INFO  AccountController:152 - Applying interest; 117 compounding periods to all validated accounts
+2018-06-25 14:12:47 INFO  AccountController:152 - Applying interest; 136 compounding periods to all validated accounts
+2018-06-25 14:14:23 INFO  AccountController:152 - Applying interest; 138 compounding periods to all validated accounts
+2018-06-25 14:48:50 INFO  AccountController:152 - Applying interest; 173 compounding periods to all validated accounts
+2018-06-25 14:49:05 INFO  MasterController:105 - MasterController written to file
+2018-06-25 14:50:58 INFO  AccountController:152 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 14:51:01 INFO  MasterController:105 - MasterController written to file
+2018-06-25 14:51:57 INFO  User:72 - Account checking 2 added to Admin's account list
+2018-06-25 14:51:57 INFO  AccountController:80 - New account checking 2 created for user Admin
+2018-06-25 14:52:36 INFO  Account:91 - Deposit of $5,000.00 made to Ausmo's checking 0. Final balance: $5,000.00
+2018-06-25 14:52:50 INFO  Account:91 - Deposit of $4,000.00 made to Ausmo's savings 1. Final balance: $4,000.00
+2018-06-25 14:53:02 INFO  User:72 - Account loan 3 added to Ausmo's account list
+2018-06-25 14:53:02 INFO  AccountController:103 - New account loan 3 created for user Ausmo
+2018-06-25 14:53:02 INFO  Account:91 - Deposit of $2,000.00 made to Ausmo's checking 0. Final balance: $7,000.00
+2018-06-25 14:53:02 INFO  Account:102 - Withdrawal of $2,000.00 made from Ausmo's loan 3. Final balance: ($2,000.00)
+2018-06-25 14:53:14 INFO  MasterController:105 - MasterController written to file
+2018-06-25 14:53:16 INFO  AccountController:152 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 14:53:56 INFO  MasterController:105 - MasterController written to file

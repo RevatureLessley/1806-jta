@@ -12,6 +12,14 @@ public class LoanAccount extends Account implements Serializable {
 	private double borrow;
 	private static Logger logger = Logger.getLogger(LoanAccount.class);
 
+	/**
+	 * 
+	 * @param owner
+	 * @param name
+	 * @param type
+	 * @param borrow
+	 * @param toAccount
+	 */
 	public LoanAccount(User owner, String name, int type, double borrow, Account toAccount) {
 		super(owner, name, type);
 
@@ -35,6 +43,11 @@ public class LoanAccount extends Account implements Serializable {
 		super.validate();
 	}
 
+	/**
+	 * Modifies the balance in the account by adding a given amount. If the balance
+	 * ends up greater than or equal to 0, then the accountController is told to
+	 * nullify the loanAccount.
+	 */
 	@Override
 	public void deposit(double amount) {
 		balance += amount;
