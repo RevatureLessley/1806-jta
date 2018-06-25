@@ -7,11 +7,18 @@ public class Banker extends Account implements Serializable
 
 	private double interestRate = 1.10;
 	
+	/**
+	 * Constructor used for the banker class, does little more than call the super constructor
+	 * since there are no more variables than required for a generic account on creation.
+	 */
 	public Banker(String name, String uname, String pword, Launch pgm)
 	{
 		super(name, uname, pword, pgm);
 	}
 	
+	/**
+	 * Displays all active players and their current bank account balances
+	 */
 	public void viewActive()
 	{
 		int count = 1;
@@ -23,6 +30,10 @@ public class Banker extends Account implements Serializable
 		pgm.dumpIn(pgm);
 	}
 	
+	/**
+	 * Displays current interest rate and asks banker for a new offer, storing that as the interest
+	 * rate for all player accounts.
+	 */
 	public void adjustInterestRates()
 	{
 		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
@@ -37,6 +48,9 @@ public class Banker extends Account implements Serializable
 		return interestRate;
 	}
 	
+	/**
+	 * method shared by each Account extender, view comment on parent class for explination.
+	 */
 	@Override
 	public void menu() {
 		int selection = 0;

@@ -1,10 +1,12 @@
 package p0;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -28,16 +30,6 @@ public class Launch
 		
 	}
 	
-	public void logStuff(String message)
-	{
-		logger.trace(message);
-		logger.debug(message);
-		logger.info(message);
-		logger.warn(message);
-		logger.error(message);
-		logger.fatal(message);
-	}
-	
 	/**
 	 * The main launch menu for the program
 	 * refreshes account list every time it is entered and updates saved list every time it ends
@@ -53,7 +45,6 @@ public class Launch
 		System.out.println("Game loaded, press Enter to continue...");
 		while(cont)
 		{
-			
 			pgm.load(pgm);
 			pgm.dumpIn(pgm);
 			System.out.println("Welcome to the Aeva Areana Simulator");
@@ -75,7 +66,21 @@ public class Launch
 					break;
 			default:System.out.println("That is not a valid selection, please select again");
 			}
+
 			pgm.save(pgm);
+			if(Waiting.getWorldFlagged() && Active.getWorldFlagged())
+			{
+				try {
+				Files.delete(new File("Active.ser").toPath());
+				Files.delete(new File("Waiting.ser").toPath());
+				cont = false;
+				break;
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	
@@ -88,7 +93,6 @@ public class Launch
 	 */
 	public void login(Launch pgm)
 	{
-		Player log = null;
 		boolean successU = false;
 		boolean successP = false;
 		while(!successP)
@@ -222,7 +226,7 @@ public class Launch
 		}
 		catch(ClassNotFoundException e)
 		{
-			e.printStackTrace();
+			logger.error("Complete crash, ActiveList class missing");
 		}
 		try
 		{
@@ -233,10 +237,11 @@ public class Launch
 		}
 		catch(IOException e)
 		{
+			System.out.println("Couldn't load waiting list");
 		}
 		catch(ClassNotFoundException e)
 		{
-			e.printStackTrace();
+			logger.error("Complete crash, WaitingList class missing");
 		}
 		if(pgm.Active.getAdmin() == null)
 		{
@@ -262,16 +267,19 @@ public class Launch
 										new FileOutputStream("Active.ser"));
 			oos.writeObject(pgm.Active);
 			oos.close();
-		}catch(IOException e){
-			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			logger.error("Complications writing methods to file.");
 		}
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("Waiting.ser"));
 			oos.writeObject(pgm.Waiting); 
 			oos.close();
-		}catch(IOException e){
-			e.printStackTrace();
+		}
+		catch(IOException e)
+		{
 		}
 		
 		System.out.println("Successfully Saved");
@@ -293,7 +301,6 @@ public class Launch
 		String Name = pgm.in.nextLine();
 		
 		pgm.Waiting.add(new Player(Name, uName, pWord, 100, 0, 0, pgm));
-		
 	}
 	
 	/**
@@ -343,7 +350,7 @@ public class Launch
 	public void dumpIn(Launch pgm)
 	{
 		if(pgm.in.hasNextLine()) {
-			String dump = pgm.in.nextLine();
+			pgm.in.nextLine();
 		}
 	}
 }

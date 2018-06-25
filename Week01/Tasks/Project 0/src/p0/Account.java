@@ -56,8 +56,16 @@ public abstract class Account implements Serializable
 	{
 		return accountFlagged;
 	}
+	
+	/**
+	 * Abstract method to represent the default selection menu for each account.
+	 */
 	public abstract void menu();
 	
+	/**
+	 * Give the player the ability to flag their account to be deleted upon the next time they
+	 * log out, removing the given player account from the list of saved accounts in AccountList
+	 */
 	public void deleteAcc()
 	{
 		System.out.println("You have chosen to dissable your account...");
@@ -82,6 +90,10 @@ public abstract class Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Gives the player the ability to reverse the decision to delete their account if they 
+	 * change their mind before logging out.
+	 */
 	public void saveAcc()
 	{
 		System.out.println("You have chosen to keep your account...");

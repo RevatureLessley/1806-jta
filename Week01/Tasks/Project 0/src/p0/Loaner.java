@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Loaner extends Account implements Serializable
 {
-	private int balance;
+	private int balance = 10000;
 	private double interestRate = 1.30;
 	private ArrayList<Player> waiting = new ArrayList();
 	private ArrayList<Player> active = new ArrayList();
@@ -15,6 +15,9 @@ public class Loaner extends Account implements Serializable
 		super(name, uname, pword, pgm);
 	}
 	
+	/**
+	 * Displays all players with an active loan and how much that loan's worth is.
+	 */
 	public void manageActiveLoans()
 	{
 		int selection = 0;
@@ -26,48 +29,27 @@ public class Loaner extends Account implements Serializable
 				int count = 1;
 				for(Player p: active)
 				{
-					if(p.getLoanWaiting())
+					if(p.getHasLoan())
 					{
-						System.out.println(count + ". " + p.getuName());
+						System.out.println(count + ". " + p.getuName() + ", " + p.getlBalance());
 						count++;
 					}
 				}
-				System.out.print("\n" + "Select an account to manage or -1 to exit: ");
-				selection = pgm.in.nextInt();
-				if(selection !=-1)
-				{
-					Player temp = (Player)active.get(selection-1);
-					int selection2 = 0;
-					count = 1;
-					System.out.println("Account info");
-					System.out.println("User Name: " + temp.getuName());
-					System.out.println("Loan Ammount: " + temp.getlBalance());
-					System.out.println("");
-					System.out.println(count + ". Approve account");
-					count++;
-					System.out.println(count + ". Decline account");
-					count++;
-					System.out.println(count + ". Decide later");
-					selection2 = pgm.in.nextInt();
-					switch (selection2)
-					{
-					case 1: temp.setLoanWaiting(false);
-					temp.setHasLoan(true);
-					break;
-					case 2: temp.setLoanWaiting(false);
-					case 3: break;
-					default: System.out.println("Invalid choice, try again.");
-					}
-				}
+				pgm.in.next();
 			}
 			else
 			{
-				System.out.println("No waiting accounts at this moment.");
+				System.out.println("No waiting accounts at this moment. \n");
 				selection = -1;
 			}
 			pgm.save(pgm);
 		}
 	}
+	
+	/**
+	 * Displays all players with a pending loan and the value of the loan, allowing the loaner
+	 * to approve or decline the loan amount.
+	 */
 	public void manageWaitingLoans()
 	{
 		int selection = 0;
@@ -105,8 +87,9 @@ public class Loaner extends Account implements Serializable
 					switch (selection2)
 					{
 					case 1: temp.setLoanWaiting(false);
-					temp.setHasLoan(true);
-					break;
+							temp.setHasLoan(true);
+							balance -= temp.getlBalance();
+							break;
 					case 2: temp.setLoanWaiting(false);
 					case 3: break;
 					default: System.out.println("Invalid choice, try again.");
@@ -122,6 +105,10 @@ public class Loaner extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Pings for a scan of all player accounts, adding those with waiting loans to the waiting
+	 * list and those with active loans to the active list.
+	 */
 	public void updateLists()
 	{
 		active = new ArrayList();
@@ -139,6 +126,10 @@ public class Loaner extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Allows the Loaner to adjust the ammount of interest charged each time a player's 
+	 * time increments.
+	 */
 	public void adjustInterestRates()
 	{
 		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
@@ -153,6 +144,9 @@ public class Loaner extends Account implements Serializable
 		return interestRate;
 	}
 	
+	/**
+	 * method shared by each Account extender, view comment on parent class for explination.
+	 */
 	@Override
 	public void menu() {
 		int selection = 0;

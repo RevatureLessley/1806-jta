@@ -5,13 +5,18 @@ import java.io.Serializable;
 public class Player extends Account implements Serializable
 {
 	private int accountBalance;
-	private double bankInterest = 1.10;
 	private int loanBalance;
-	private double loanInterest = 1.30;
 	private int personalBalance;
 	private boolean hasLoan = false;
 	private boolean loanWaiting = false;
 	
+	/**
+	 * Constructor class for the Player object, uses the super constructor to store 
+	 * more general Account information such as name, uName, and pword.
+	 * @param aBal the amount of money the player has on hand
+	 * @param pBal the amount of money in the players back account
+	 * @param lBal the value of the players loan
+	 */
 	public Player(String name, String uName, String pword, int aBal, int pBal, int lBal, Launch pgm)
 	{
 		super(name, uName,pword,pgm);
@@ -20,6 +25,10 @@ public class Player extends Account implements Serializable
 		this.loanBalance =lBal;
 	}
 	
+	/**
+	 * Informs the user about their on hand balance and bank balance, allowing them to take money
+	 * from their bank into their personal balance
+	 */
 	public void withdraw()
 	{
 		System.out.println("You have chosen to withdraw gold.");
@@ -46,7 +55,11 @@ public class Player extends Account implements Serializable
 		}
 			
 	}
-	
+
+	/**
+	 * Informs the user about their on hand balance and bank balance, allowing them to take money
+	 * from their personal balance and put it into their bank
+	 */
 	public void deposit()
 	{
 		System.out.println("You have chosen to deposit gold.");
@@ -63,6 +76,11 @@ public class Player extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Player makes a bet on a randomly generated fight, if they win their bet is doubled and 
+	 * returned to them, if they lose then the money is kept and they are sent back to their 
+	 * personal menu
+	 */
 	public void bet()
 	{	
 		//TODO: improve how the computer selects winning, losing and odds.
@@ -108,6 +126,10 @@ public class Player extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Player sets themselves as a waiting candidate for a loan to be approved by the 
+	 * Loaner account and make a request for how much of a loan they are giving.
+	 */
 	public void loanApp()
 	{
 		System.out.print("How much money would you like to borrow: ");
@@ -116,6 +138,11 @@ public class Player extends Account implements Serializable
 		System.out.println("\n Your loan application has been submitted for approval");
 	}
 	
+	/**
+	 * Player selects a given amount from their personal holdings to pay towards their loan,
+	 * if the paid amount exceeds the remaining loan balance then the loan is closed out and 
+	 * no longer charges the player interest.
+	 */
 	public void payLoan()
 	{
 		System.out.println("You have chosen to pay on your loan.");
@@ -144,6 +171,10 @@ public class Player extends Account implements Serializable
 			
 	}
 	
+	/**
+	 * method is called any time that interest should be applied, it increments both the 
+	 * bank and loan balances by set amounts and sets the users balances to reflect such.
+	 */
 	public void incrementTime()
 	{
 		if(accountBalance >0)
@@ -156,6 +187,9 @@ public class Player extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * method shared by each Account extender, view comment on parent class for explanation.
+	 */
 	@Override
 	public void menu()
 	{
@@ -223,6 +257,9 @@ public class Player extends Account implements Serializable
 		}
 	}
 
+	/*
+	 * General getters/setters bellow this point
+	 */
 	public boolean getHasLoan()
 	{
 		return hasLoan;

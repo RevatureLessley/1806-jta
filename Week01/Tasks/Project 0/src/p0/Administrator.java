@@ -5,13 +5,17 @@ import java.io.Serializable;
 public class Administrator extends Account implements Serializable
 {
 
-	private boolean worldFlagged;
+	private boolean worldFlagged = false;
 	
 	public Administrator(String name, String uname, String pword, Launch pgm)
 	{
 		super(name, uname, pword, pgm);
 	}
 
+	/**
+	 * Method to print out the currently active player accounts and give
+	 * administrative actions to take on one of their selection
+	 */
 	public void manageActive()
 	{
 		int selection = 0;
@@ -55,6 +59,10 @@ public class Administrator extends Account implements Serializable
 		}
 	}
 	
+	/**
+	 * Method to print out the list of player accounts waiting approval
+	 * Admin can approve, deny or delay their decision on the account
+	 */
 	public void manageWaiting()
 	{
 		int selection = 0;
@@ -102,7 +110,10 @@ public class Administrator extends Account implements Serializable
 			pgm.save(pgm);
 		}
 	}
-	
+	/** 
+	 * Gives the administrator the option to mark the database to be completely erased
+	 * making a full restart for the game.
+	 */
 	public void deleteWorld()
 	{
 		System.out.println("You have chosen to erase this world...");
@@ -127,7 +138,10 @@ public class Administrator extends Account implements Serializable
 			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
 		}
 	}
-	
+	/** 
+	 * Gives the administrator the ability to revert their decision and keep the database
+	 * rather than deleting on next logout.
+	 */
 	public void saveWorld()
 	{
 		System.out.println("So you want to save the world...");
@@ -152,7 +166,10 @@ public class Administrator extends Account implements Serializable
 			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
 		}
 	}
-
+	
+	/**
+	 * method shared by each Account extender, view comment on parent class for explination.
+	 */
 	@Override
 	public void menu()
 	{

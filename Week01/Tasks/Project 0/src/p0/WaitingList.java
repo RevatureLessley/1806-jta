@@ -6,7 +6,9 @@ import java.io.Serializable;
 public class WaitingList implements Serializable
 {
 	/**
-	 * 
+	 * Serializable container class for accounts that are waiting.
+	 * Separate from ActiveList class since a second copy of Admin,
+	 * Banker and Loaner were not needed.
 	 */
 	private static final long serialVersionUID = 874709771452301087L;
 	private ArrayList<Player> save = new ArrayList<Player>();
@@ -36,7 +38,6 @@ public class WaitingList implements Serializable
 	{
 		return worldFlagged;
 	}
-	
 	
 	public void updateList()
 	{
