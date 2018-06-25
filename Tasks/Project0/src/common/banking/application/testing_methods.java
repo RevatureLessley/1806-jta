@@ -13,7 +13,7 @@ public class testing_methods {
 	customer client = new customer("First", "Last", "0", new StringBuffer("password"));
 	
 	@Test
-	public void balanceCheck() {
+	public void activatedCheck() {
 		assertEquals(false, client.isActivated());
 	}
 
@@ -27,5 +27,15 @@ public class testing_methods {
 		assertEquals("Last", client.getLast_name());
 	}
 	
+	@Before
+	public void depositCheckSetup() {
+		client.deposit(500);
+	}
+	
+	@Test
+	public void depositCheck() {
 
+		assertEquals(500,(int)client.getBalance());
+	}
+	
 }
