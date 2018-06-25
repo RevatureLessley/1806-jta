@@ -66,7 +66,7 @@ public class StockItem implements Serializable {
 		} else {
 	
 		    this.stockCount -= quantity;
-		    return quantity;
+		    return this.stockCount;
 		}
     }
 

@@ -16,7 +16,7 @@ public class Input {
     private int histIndexPointer;
     
     public Input() {
-		this.scanner = new Scanner(System.in);
+		this.scanner = new Scanner(System.in).useDelimiter("\n");
 		this.history = new ArrayList<String>();
 		this.historyRecordCapacity = 20;
 		this.histIndexPointer = 0;
@@ -54,7 +54,7 @@ public class Input {
     }
 
     public String next() {
-		String input = this.scanner.nextLine();
+		String input = this.scanner.next();
 		this.add(input);
 		return input;
     }

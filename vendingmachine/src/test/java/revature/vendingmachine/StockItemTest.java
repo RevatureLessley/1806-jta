@@ -74,8 +74,9 @@ public class StockItemTest extends TestCase {
 		int stockCount = 20;
 		
 		StockItem stockItem = new StockItem(noItem, stockCount);
+		int remaining = stockItem.takeFromStock(1);
 		
-		if (stockItem.takeFromStock(1) == 19) {
+		if (stockItem.getStockCount() == 19 && remaining == 19) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);
