@@ -63,6 +63,8 @@ public class Account implements Serializable {
 		//TODO: Encrypt based on encryption specified by user
 		
 		items.add(fileName);
+		System.out.println("Deposited " + fileName + "." 
+							+ "\nQuatity of items stored: " + items.size());
 		transactionHistory.add("Deposited " + fileName);
 	}
 
