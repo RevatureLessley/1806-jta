@@ -161,17 +161,15 @@ public class UserInterface
         Account newAccount = accountInput(false);
 
         if(SuperUser.validate(newAccount)) {
-            superAdminMenu();
+            currentAccount = newAccount;
             statusLogger.logMessage("SuperUser has taken command");
+            superAdminMenu();
         }
         else
         {
             System.err.println("Login error. Username or password is not correct");
             login();
         }
-
-        //Check if admin account exists, if it does, login to special menu. If not, ask them to try again
-        //If not logged in properly 3 times, kick them out.
     }
 
     public void superAdminMenu()
@@ -311,7 +309,7 @@ public class UserInterface
         accountsRecord.addAccount(newAccount);
         System.err.println("Your account must be approved");
 
-        statusLogger.logMessage(currentAccount.getUsername() + "has registered, waiting approval");
+        statusLogger.logMessage(newAccount.getUsername() + "has registered, waiting approval");
 
 
         mainMenu();

@@ -1,0 +1,15 @@
+2018-06-25 17:09:20 INFO  root:9 - SuperUser has taken command
+2018-06-25 17:09:35 INFO  root:9 - superuser has logged out
+2018-06-25 17:09:35 INFO  root:9 - Saving accounts and writing file
+2018-06-25 17:10:40 INFO  root:9 - SuperUser has taken command
+2018-06-25 17:10:52 INFO  root:9 - superuser has logged out
+2018-06-25 17:10:52 INFO  root:9 - Saving accounts and writing file
+2018-06-25 17:11:01 INFO  root:9 - user1has registered, waiting approval
+2018-06-25 17:11:28 INFO  root:9 - admin1has logged in
+2018-06-25 17:11:39 INFO  root:9 - admin1 has logged out
+2018-06-25 17:11:40 INFO  root:9 - Saving accounts and writing file
+2018-06-25 17:11:46 INFO  root:9 - user1has logged in
+2018-06-25 17:11:51 INFO  root:9 - user1has deposited $1000000.0
+2018-06-25 17:11:57 INFO  root:9 - user1 withdrew $1.0
+2018-06-25 17:12:00 INFO  root:9 - user1 has logged out
+2018-06-25 17:12:00 INFO  root:9 - Saving accounts and writing file
