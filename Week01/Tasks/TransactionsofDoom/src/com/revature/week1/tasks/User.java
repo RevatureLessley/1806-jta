@@ -5,7 +5,6 @@
 
 
 package com.revature.week1.tasks;
-
 import java.io.Serializable;
 //Use this class to store the person's info
 

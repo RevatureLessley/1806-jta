@@ -1,38 +1,50 @@
 package com.revature.week1.tasks;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-public class Bank {
+import org.apache.log4j.Logger;
+public class Bank implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2699783004032967902L;
 	// These are for creating a new User. Me and Admin are enough administrators.
 	// We like to have total control. Not unlike a dictatorship.d
 	String newName;
 	String newPassword;
 	float newbalance;
-	boolean newisAdmin = false;   // I am aware of naming conventions, but I'm considering new as a modifier and not part of the actual name of the boolean
+	boolean newisAdmin = false;   // I am aware of naming conventions, but I'm considering 'new' as a modifier and not part of the actual name of the boolean
 	boolean newisApproved = false; // Ditto
-	
-	
 	
 	String answer;
 	float newBalance;
+	Logger logger = BankMain.logger;
 	
 	private boolean isNameCorrect = false;
 	private boolean isPasswordCorrect = false;
 	private String name;
 	private String password;
-	Scanner sc = BankMain.sc;
+	public transient static Scanner sc = new Scanner(System.in);
 	//Set up User array. May make this an ArrayList in the future and allow the user to add themselves.
 	private ArrayList<User> users = new ArrayList<>();
 	
-		
 	
 	
-	
-	
-	
-	
+
+
+	///////////////////////////////////////
+	// Getters/Setters, Constructor
+	///////////////////////////////////////
+	@Override
+	public String toString()
+	{
+		return "Bank [users=" + users + "]";
+	}
 	public boolean isNameCorrect()
 	{
 		return isNameCorrect;
@@ -60,16 +72,24 @@ public class Bank {
 		this.users = users;
 	}
 	
-	
-	public void initialSetup()
+	public Bank(ArrayList<User> users)
 	{
-		// Note to self: User( "name", "password", balance, isAdmin, isApproved)
-				// These users are here largely for testing, but also so that I have an administrator to approve people
-				users.add(new User("chris", "password", 9999, true, true));
-				users.add(new User("carol", "kitty", 356, false, true));
-				users.add(new User("jack", "secretpassword", 1500, false, false));
-				users.add(new User("admin", "password", 0, true, true));
-				firstScreen();
+		super();
+		this.users = users;
+	}
+	
+
+	///////////////////////////////////////
+	// Functionality
+	///////////////////////////////////////
+	
+/**
+ * Just testing out the java Docs.
+ * This function just calls the first "screen" of the app	
+ */
+public void initialSetup()
+	{			
+		firstScreen();
 	}
 	
 	void firstScreen()
@@ -103,7 +123,6 @@ public class Bank {
 	{	
 		enterName();
 		
-		// For now all the checks are going here, but soon I will move most of this out of the 'for' loop. 
 		for (int i = 0; i < users.size(); i++)
 		{
 			if(users.get(i).getName().toLowerCase().equals(name.toLowerCase()))
@@ -135,6 +154,7 @@ public class Bank {
 			{
 				continue;
 			}
+			System.out.println("Sorry, your name is not in our database.");
 		}
 		
 		if(!isNameCorrect)
@@ -171,16 +191,16 @@ public class Bank {
 	private void addUser()
 	{
 		users.add(new User(newName, newPassword, newBalance, newisAdmin, newisApproved));
+		BankMain.logger.info("User created sucessfully!");
 	}
 	
 	///////////////////////////////////////
 	// Extracted Functions
 	///////////////////////////////////////
 	
-	
-	
 	private void setupNewUser()
 	{
+		BankMain.logger.info("Attempting to create a new user");
 		//System.out.println("Sorry, but we are not taking new clients at this time.");
 		System.out.println("Great! Let's get you set up!");
 		System.out.println("First, what is your name?");
@@ -203,8 +223,19 @@ public class Bank {
 			}
 		}
 		addUser();
+		
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
+			oos.writeObject(this); //Serialize
+			oos.close();
+		}catch(IOException e){
+			e.printStackTrace();
+			System.out.println("Yep did it great!");
+		}
 		System.out.println("Thank you! You will have access as soon as an adminstrator approves your account!");
 		System.out.println("Have a nice day!");
+		
+		
 	}
 	private void adminWelcomeScreen()
 	{
@@ -233,18 +264,28 @@ public class Bank {
 	private void adminApproveUser(User user)
 	{
 		System.out.println(user.getName() + " is not yet approved. Approve them? y/n");
-		if(BankMain.sc.nextLine().equals("y"))
+		if(sc.nextLine().equals("y"))
 		{
 			user.setApproved(true);
 			System.out.println(user.getName()+ " has been approved!");
 		}
-		else if(BankMain.sc.nextLine().equals("n"))
+		else if(sc.nextLine().equals("n"))
 		{
 			System.out.println("I mean.....alright then. Your call. Just sayin' that maybe you should reconsider.");
 		}
+		
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
+			oos.writeObject(this); //Serialize
+			oos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-
 	public void adminFinalScreen()
 	{
 		System.out.println("No other users to approve");
@@ -275,7 +316,7 @@ public class Bank {
 	{
 		System.out.println("Welcome " + user.getName() + "!");
 		System.out.println("What would you like to do today?");
-		System.out.println("\n [W]ithdraw, [D]eposit, or [C]heck balance?");
+		System.out.println("\n [W]ithdraw, [D]eposit, [C]heck balance or [Exit]?");
 		
 		answer = sc.nextLine();
 		
@@ -290,6 +331,10 @@ public class Bank {
 		if(answer.toLowerCase().equals("c"))
 		{
 			userCheckBalance(user);
+		}
+		if(answer.toLowerCase().equals("exit"))
+		{
+			firstScreen();
 		}
 	}
 	private void userWithdrawalScreen(User user)
@@ -307,6 +352,7 @@ public class Bank {
 			{
 				if(!Pattern.matches("[a-zA-Z]+", answer))
 				{	
+					BankMain.logger.info(user.getName() + ": withdraw attempted.");
 					userWithdrawAndDisplayNewBalance(user);
 					break;
 				}
@@ -327,7 +373,19 @@ public class Bank {
 		newBalance = user.getBalance() - Integer.parseInt(answer);
 		user.setBalance(newBalance);
 		System.out.println("Total Remaining: " + user.getBalance());
+		BankMain.logger.info(user.getName() + " withdrew " + answer);
 		//userWelcomeScreen(user);
+		
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
+			oos.writeObject(this); //Serialize
+			oos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}	
 	private void userDepositScreen(User user)
 	{
@@ -344,6 +402,7 @@ public class Bank {
 			{
 				if(!Pattern.matches("[a-zA-Z]+", answer))
 				{	
+					BankMain.logger.info(user.getName() + ": deposit attempted.");
 					userDepositAndDisplayNewBalance(user);
 					break;
 				}
@@ -363,13 +422,29 @@ public class Bank {
 		newBalance = user.getBalance() + Integer.parseInt(answer);
 		user.setBalance(newBalance);
 		System.out.println("Total Remaining: " + user.getBalance());
-		//userWelcomeScreen(user);
+		BankMain.logger.info(user.getName() + " deposited " + answer);
+		
+		try
+		{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
+			oos.writeObject(this); //Serialize
+			oos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
-	private void userCheckBalance(User user)
+	/**
+	 * This just returns the current user's balance in the console.
+	 * @param user
+	 * @return
+	 */
+	public float userCheckBalance(User user)
 	{
 		System.out.println(user.getBalance());
 		userWelcomeScreen(user);
+		return user.getBalance();
 	}
-
 
 }
