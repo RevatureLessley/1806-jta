@@ -1,5 +1,8 @@
 package view;
+
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import controller.AccountController;
@@ -20,14 +23,22 @@ public class Driver {
 
 	private static final int WIN_W = 100, WIN_H = 26;
 
+	/**
+	 * Main method of execution; calls other methods depending on the execution
+	 * phase of the program. During the initialization phase, any existing data is
+	 * read. The main loop is broken when the phase has been set to Terminate.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
-		resizeConsole();
+		List<String> al = Arrays.asList(args);
 
-		if (args.length > 0) {
-			if (args[0].equals("noclear"))
-				doClear = false;
-		}
+		if (al.contains("noclear"))
+			doClear = false;
+
+		resizeConsole();
+		clearConsole();
 
 		Driver d = new Driver();
 
@@ -36,13 +47,12 @@ public class Driver {
 
 		while (d.phase != Phase.Terminate) {
 
-			// d.clearConsole();
-
+			// Execute main phase
 			if (d.phase == Phase.Initialize) {
 				newPhase = d.executeInitPhase();
 
 			} else if (d.phase == Phase.Login) {
-				newPhase = d.executeLoginPhase();
+				newPhase = d.executeMainPhase();
 
 			} else if (d.phase == Phase.UserControl) {
 				if (d.activeUser.isAdmin())
@@ -54,19 +64,28 @@ public class Driver {
 				newPhase = d.executeAccountPhase();
 			}
 
+			// set phase for next iteration
 			if (newPhase != null)
 				d.phase = newPhase;
 			else {
+				// default message for invalid input
 				System.out.println("Invalid Input");
 				d.enterWait();
 			}
 
 		}
 
+		clearConsole();
 		scanner.close();
 		MasterController.shutdown();
 	}
 
+	/**
+	 * Initialization phase which obtains the userController and accountController
+	 * from the MasterController
+	 * 
+	 * @return Login phase
+	 */
 	private Phase executeInitPhase() {
 
 		userController = MasterController.getUserController();
@@ -75,85 +94,145 @@ public class Driver {
 		return Phase.Login;
 	}
 
-	private Phase executeLoginPhase() {
+	/**
+	 * Execution phase which prompts and processes input for the Login phase. Users
+	 * may also choose to register new user profiles at this phase
+	 * <p>
+	 * Options: Login, Register, Exit
+	 * 
+	 * @return next major program phase to execute in the main loop
+	 */
+	private Phase executeMainPhase() {
 		printHeader("Welcome to the Westward Banking Service", "Now is the time to consume");
-		printOptions(true, "Login", "Register", "Quit");
+		printOptions(true, "Login", "Register", "Exit");
+		activeUser = null;
+
 		int input = getOption();
 
 		if (input == 1) {
-			// Login
-			System.out.print("enter username: ");
-			String name = scanner.nextLine();
-			System.out.print("enter password: ");
-			String password = scanner.nextLine();
-
-			User user = userController.getUser(name);
-			if (user == null) {
-				System.out.println("Invalid username");
-				enterWait();
-				return phase;
-			} else {
-				int logVal = user.validateLogin(password);
-				if (logVal == 1) {
-					activeUser = user;
-					return Phase.UserControl;
-				} else if (logVal == -1) {
-					System.out.println("Please wait for an Administrator to validate your account.");
-					enterWait();
-					return phase;
-				} else {
-					System.out.println("Invalid password");
-					enterWait();
-					return phase;
-				}
-
-			}
+			return executeLoginPhase();
 
 		} else if (input == 2) {
-			// Register
-			System.out.print("enter username: ");
-			String name = scanner.nextLine();
-
-			if (!userController.checkUsernameAvailable(name)) {
-				System.out.println("username '" + name + "' is unavailable");
-				return phase;
-			}
-
-			System.out.print("enter password: ");
-			String password = scanner.nextLine();
-
-			userController.addUser(name, password);
-			System.out.println("Hello, " + name + ". Welcome to The Westward Banking Service");
-			enterWait();
-			return phase;
+			return executeRegisterPhase();
 
 		} else if (input == 0) {
+			// Exit
 			return Phase.Terminate;
 		}
 
+		// invalid input
 		return null;
 	}
 
+	private Phase executeRegisterPhase() {
+
+		System.out
+				.println("Usernames may not include any spaces and must be at least 4 characters. Type '\\c' to cancel");
+		System.out.print("Enter username: ");
+
+		String name = null;
+		boolean valid = false;
+
+		while (!valid) {
+			name = scanner.nextLine();
+
+			if (name.equals("\\x") || name.equals("\\c)")) {
+				return phase;
+			} else if (!User.checkUsernameValid(name)) {
+				System.out.println("username '" + name + "' is not valid");
+				enterWait();
+			} else if (!userController.checkUsernameAvailable(name)) {
+				System.out.println("username '" + name + "' is unavailable");
+				enterWait();
+			} else {
+				valid = true;
+			}
+		}
+
+		valid = false;
+		String password = null;
+		System.out.println("Passwords must be at least 6 characters long");
+
+		while (!valid) {
+
+			System.out.print("Enter password: ");
+			password = scanner.nextLine();
+
+			if (User.checkPasswordValid(password)) {
+				valid = true;
+			} else {
+				System.out.println("username '" + name + "' is not valid");
+				enterWait();
+			}
+
+		}
+
+		userController.addUser(name, password);
+		System.out.println("Hello, " + name + ". Welcome to The Westward Banking Service");
+		enterWait();
+
+		return phase;
+	}
+
+	private Phase executeLoginPhase() {
+		System.out.print("Enter username: ");
+		String name = scanner.nextLine();
+		System.out.print("Enter password: ");
+		String password = scanner.nextLine();
+
+		User user = userController.getUser(name);
+		if (user == null) {
+			System.out.println("Invalid username");
+			enterWait();
+			return phase;
+		} else {
+			int logVal = user.validateLogin(password);
+			if (logVal == 1) {
+				activeUser = user;
+				return Phase.UserControl;
+			} else {
+				System.out.println("Invalid password");
+				enterWait();
+				return phase;
+			}
+
+		}
+	}
+
+	/**
+	 * Execution phase which prompts and processes input for standard (non-admin)
+	 * users
+	 * <p>
+	 * Options: Account Summary, Select Account, Open New Account, Logout
+	 * 
+	 * @return next major program phase to execute in the main loop, returns null in
+	 *         the event of invalid input
+	 */
 	private Phase executeUserPhase() {
 
 		printHeader("Welcome, " + activeUser.getName() + ".",
 				"Your total balance: " + Account.formatCurrency(activeUser.totalBalance()));
 
-		printOptions(true, "Account Summary", "Select Account", "Open New Account", "Logout");
+		printOptions(true, "Accounts Summary", "Select Account", "Open New Account", "Logout");
 		int input = getOption();
 
 		if (input == 1) {
+			// Accounts Summary
 			System.out.println(activeUser.accountSummary());
 			enterWait();
 			return phase;
 		} else if (input == 2) {
+			// Select an Account
 			return executeUserSelectAccount();
 		} else if (input == 3) {
+			// Open new Account
 			return executeUserOpenAccount();
 		} else if (input == 0) {
+			// Logout (return to Login phase)
 			return Phase.Login;
 		}
 
+		// invalid input
 		return null;
 	}
 
@@ -161,6 +240,8 @@ public class Driver {
 	 * Execution phase which prompts and processes input for opening a user account.
 	 * The user selects the type of account to create. A name is generated for the
 	 * account, the account is created, then added to the accountController object.
+	 * <p>
+	 * invalid input is ignored; process continues to the User menu
 	 * 
 	 * @return next major program phase to execute in the main loop
 	 */
@@ -171,11 +252,9 @@ public class Driver {
 		int input = getOption();
 
 		if (input == 1 || input == 2) {
-			String name = Account.getTypeName(input);
 
-			Account a = new Account(activeUser, name, input);
-			activeUser.addAccount(a);
-			accountController.addNewAccount(a);
+			Account a = accountController.addNewAccount(activeUser, input);
+			String name = a.getName();
 
 			if (activeUser.isAdmin()) {
 				System.out.println("Account '" + name + "' was created and is now ready for use.");
@@ -196,7 +275,8 @@ public class Driver {
 	 * accounts. Accounts that have not been validated are shown, but the user
 	 * cannot enter the account menu for not-validated accounts
 	 * 
-	 * @return next major program phase to execute in the main loop
+	 * @return next major program phase to execute in the main loop, returns null in
+	 *         the event of invalid input
 	 */
 	private Phase executeUserSelectAccount() {
 		System.out.println("Select an account");
@@ -214,6 +294,7 @@ public class Driver {
 		Account a = activeUser.getAccount(input - 1);
 
 		if (a != null) {
+			// selected an existing account
 			activeAccount = a;
 			if (a.isValidated())
 				return Phase.AccountControl;
@@ -241,17 +322,21 @@ public class Driver {
 		int input = getOption();
 
 		if (input == 1) {
+			// withdraw
 			System.out.print("withdraw amount: ");
 			double amt = getDouble();
 
 			activeAccount.withdraw(amt);
 
 		} else if (input == 2) {
+			// deposit
 			System.out.print("deposit amount: ");
 			double amt = getDouble();
 
 			activeAccount.deposit(amt);
 		} else if (input == 0) {
+			// back
+			activeAccount = null;
 			return Phase.UserControl;
 		}
 
@@ -265,7 +350,8 @@ public class Driver {
 	 * Admin Main Options: Validate, Show all Users, Grant Privileges, go to User
 	 * main menu, Free system, Logout
 	 * 
-	 * @return next major program phase to execute in the main loop
+	 * @return next major program phase to execute in the main loop, returns null in
+	 *         the event of invalid input
 	 */
 	private Phase executeAdminPhase() {
 
@@ -310,7 +396,7 @@ public class Driver {
 			} else
 				return phase;
 
-		} else {
+		} else if (input == 0) {
 			return Phase.Login;
 		}
 
@@ -323,7 +409,8 @@ public class Driver {
 	 * Select User Account <br>
 	 * Approve or Deny Account
 	 * 
-	 * @return next major program phase to execute in the main loop
+	 * @return next major program phase to execute in the main loop, will return the
+	 *         current phase in the event of invalid input
 	 */
 	private Phase executeValidate() {
 
@@ -363,14 +450,16 @@ public class Driver {
 	}
 
 	/**
-	 * Prints strings that appear within a nicely formatted ascii window
+	 * Prints strings that appear within a nicely formatted ascii window. Also makes
+	 * a call {@link #clearConsole()} so that the header appears at the top of the
+	 * console window.
 	 * 
 	 * @param strings
 	 */
 	private void printHeader(String... strings) {
 		clearConsole();
 		int w = WIN_W - 2;
-		String header, border;
+		String border;
 		StringBuilder sb = new StringBuilder("+");
 
 		for (int i = 0; i < w; i++)
@@ -398,7 +487,7 @@ public class Driver {
 	/**
 	 * Prints an array of strings each proceeded by an integer. The Strings a
 	 * formatted for readability and numbered for user input. This command typically
-	 * proceeds the getOption() method
+	 * proceeds the {@link #getOption()} method
 	 * 
 	 * @param hasCancel
 	 *            when true, the last string is assigned the option value of 0
@@ -460,7 +549,7 @@ public class Driver {
 	 * Runs a system process to clear the console. The command is specific to
 	 * Windows machines
 	 */
-	private void clearConsole() {
+	private static void clearConsole() {
 		if (!doClear)
 			return;
 

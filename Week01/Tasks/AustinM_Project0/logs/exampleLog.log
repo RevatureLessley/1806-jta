@@ -1,0 +1,20 @@
+2018-06-24 20:43:18 INFO  MasterController:83 - Freeing previously written data
+2018-06-24 20:49:19 INFO  MasterController:136 - No previous data found
+2018-06-24 20:49:19 INFO  MasterController:33 - New MasterController created
+2018-06-24 20:49:19 INFO  UserController:60 - New user Admin created.
+2018-06-24 20:49:43 INFO  MasterController:136 - No previous data found
+2018-06-24 20:49:43 INFO  MasterController:33 - New MasterController created
+2018-06-24 20:49:43 INFO  UserController:60 - New user Admin created.
+2018-06-24 20:51:23 INFO  MasterController:136 - No previous data found
+2018-06-24 20:51:23 INFO  MasterController:33 - New MasterController created
+2018-06-24 20:51:23 INFO  UserController:60 - New user Admin created.
+2018-06-24 20:51:53 INFO  UserController:60 - New user Ausmo created.
+2018-06-24 20:51:58 INFO  MasterController:102 - MasterController written to file
+2018-06-24 20:53:37 INFO  User:72 - Account checking 0 added to Ausmo's account list
+2018-06-24 20:53:37 INFO  AccountController:71 - New account checking 0 created for user Ausmo
+2018-06-24 20:53:47 INFO  User:72 - Account savings 1 added to Ausmo's account list
+2018-06-24 20:53:47 INFO  AccountController:71 - New account savings 1 created for user Ausmo
+2018-06-24 20:54:06 INFO  AccountController:39 - Account checking 0 belonging to Ausmo has been validated.
+2018-06-24 20:54:14 INFO  AccountController:39 - Account savings 1 belonging to Ausmo has been validated.
+2018-06-24 20:54:23 INFO  MasterController:102 - MasterController written to file
+2018-06-24 21:37:32 INFO  MasterController:102 - MasterController written to file
