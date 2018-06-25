@@ -1,7 +1,10 @@
 package p0;
 
-@SuppressWarnings("serial")
 public class User implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final String accountName;
 	private String password;
 	private int role;
@@ -26,11 +29,7 @@ public class User implements java.io.Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public User() {
-		accountName = null;
-	}
-	
+
 	public User(String accountName,  String password, int role) {
 		this.accountName = accountName;
 		this.password = password;

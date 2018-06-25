@@ -1,0 +1,188 @@
+2018-06-25 13:59:12 INFO  Gambling:67 - constructing game object
+2018-06-25 14:26:59 INFO  Gambling:67 - constructing game object
+2018-06-25 14:26:59 INFO  Gambling:67 - constructing game object
+2018-06-25 14:26:59 INFO  Gambling:67 - constructing game object
+2018-06-25 14:28:40 INFO  Gambling:66 - constructing game object
+2018-06-25 14:28:40 INFO  Gambling:66 - constructing game object
+2018-06-25 14:28:40 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:08 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:08 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:08 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:19 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:19 INFO  Gambling:66 - constructing game object
+2018-06-25 14:30:19 INFO  Gambling:66 - constructing game object
+2018-06-25 14:32:58 INFO  Gambling:66 - constructing game object
+2018-06-25 14:32:58 INFO  Gambling:66 - constructing game object
+2018-06-25 14:32:58 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:27 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:27 INFO  Gambling:93 - checking users for imnotreal
+2018-06-25 14:33:27 INFO  Gambling:99 - imnotreal not found
+2018-06-25 14:33:27 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:27 INFO  Gambling:93 - checking users for asdftest
+2018-06-25 14:33:27 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:42 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:42 INFO  Gambling:93 - checking users for imnotreal
+2018-06-25 14:33:42 INFO  Gambling:99 - imnotreal not found
+2018-06-25 14:33:42 INFO  Gambling:66 - constructing game object
+2018-06-25 14:33:42 INFO  Gambling:93 - checking users for asdftest
+2018-06-25 14:33:42 INFO  Gambling:66 - constructing game object
+2018-06-25 14:34:25 INFO  Gambling:66 - constructing game object
+2018-06-25 14:34:25 INFO  Gambling:93 - checking users for imnotreal
+2018-06-25 14:34:25 INFO  Gambling:99 - imnotreal not found
+2018-06-25 14:34:25 INFO  Gambling:66 - constructing game object
+2018-06-25 14:34:25 INFO  Gambling:93 - checking users for asdftest
+2018-06-25 14:34:25 INFO  Gambling:66 - constructing game object
+2018-06-25 14:38:38 INFO  Gambling:66 - constructing game object
+2018-06-25 14:38:38 INFO  Gambling:93 - checking users for imnotreal
+2018-06-25 14:38:38 INFO  Gambling:99 - imnotreal not found
+2018-06-25 14:38:38 INFO  Gambling:66 - constructing game object
+2018-06-25 14:38:38 INFO  Gambling:93 - checking users for asdftest
+2018-06-25 14:38:38 INFO  Gambling:66 - constructing game object
+2018-06-25 14:40:17 INFO  Gambling:66 - constructing game object
+2018-06-25 14:40:17 INFO  Gambling:25 - reading in a game file
+2018-06-25 14:40:56 INFO  Gambling:66 - constructing game object
+2018-06-25 14:40:56 INFO  Gambling:25 - reading in a game file
+2018-06-25 14:41:32 INFO  Gambling:70 - constructing game object
+2018-06-25 14:41:32 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:41:42 INFO  Gambling:70 - constructing game object
+2018-06-25 14:41:42 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:43:30 INFO  Gambling:70 - constructing game object
+2018-06-25 14:43:30 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:43:30 INFO  Gambling:111 - entered start menu
+2018-06-25 14:44:36 INFO  Gambling:70 - constructing game object
+2018-06-25 14:44:36 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:44:53 INFO  Gambling:70 - constructing game object
+2018-06-25 14:44:53 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:44:53 INFO  Gambling:111 - entered start menu
+2018-06-25 14:45:02 INFO  Gambling:70 - constructing game object
+2018-06-25 14:45:02 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:45:02 INFO  Gambling:111 - entered start menu
+2018-06-25 14:46:03 INFO  Gambling:69 - constructing game object
+2018-06-25 14:46:03 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:46:03 INFO  Gambling:110 - entered start menu
+2018-06-25 14:46:41 INFO  Gambling:69 - constructing game object
+2018-06-25 14:46:41 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:46:41 INFO  Gambling:331 - File not found, a new file will be created
+2018-06-25 14:46:41 INFO  Gambling:110 - entered start menu
+2018-06-25 14:46:45 INFO  Gambling:302 - attempting to create a new user
+2018-06-25 14:46:47 INFO  Gambling:96 - checking users for asdf
+2018-06-25 14:46:47 INFO  Gambling:102 - asdf not found
+2018-06-25 14:46:57 INFO  Gambling:272 - attempting to login
+2018-06-25 14:46:58 INFO  Gambling:96 - checking users for admin
+2018-06-25 14:47:02 INFO  Gambling:130 - adminlogged in succesfully, choosing next action
+2018-06-25 14:47:09 INFO  Gambling:96 - checking users for asdf
+2018-06-25 14:47:14 INFO  Gambling:110 - entered start menu
+2018-06-25 14:47:23 INFO  Gambling:272 - attempting to login
+2018-06-25 14:47:26 INFO  Gambling:96 - checking users for asdf
+2018-06-25 14:47:29 INFO  Gambling:130 - asdflogged in succesfully, choosing next action
+2018-06-25 14:49:11 INFO  Gambling:110 - entered start menu
+2018-06-25 14:50:45 INFO  Gambling:51 - writing a game file
+2018-06-25 14:50:45 INFO  Gambling:60 - write finished
+2018-06-25 14:51:12 INFO  Gambling:69 - constructing game object
+2018-06-25 14:51:12 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:51:12 INFO  Gambling:43 - read finished
+2018-06-25 14:51:12 INFO  Gambling:110 - entered start menu
+2018-06-25 14:51:21 INFO  Gambling:51 - writing a game file
+2018-06-25 14:51:21 INFO  Gambling:60 - write finished
+2018-06-25 14:55:40 INFO  Gambling:69 - constructing game object
+2018-06-25 14:55:40 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:55:40 INFO  Gambling:43 - read finished
+2018-06-25 14:55:40 INFO  Gambling:110 - entered start menu
+2018-06-25 14:55:54 INFO  Gambling:304 - attempting to create a new user
+2018-06-25 14:55:56 INFO  Gambling:96 - checking users for a
+2018-06-25 14:55:56 INFO  Gambling:102 - a not found
+2018-06-25 14:56:01 INFO  Gambling:274 - attempting to login
+2018-06-25 14:56:04 INFO  Gambling:96 - checking users for admin
+2018-06-25 14:56:07 INFO  Gambling:130 - adminlogged in succesfully, choosing next action
+2018-06-25 14:56:10 INFO  Gambling:96 - checking users for a
+2018-06-25 14:56:14 INFO  Gambling:110 - entered start menu
+2018-06-25 14:56:16 INFO  Gambling:304 - attempting to create a new user
+2018-06-25 14:56:17 INFO  Gambling:96 - checking users for a=w
+2018-06-25 14:56:17 INFO  Gambling:102 - a=w not found
+2018-06-25 14:56:22 INFO  Gambling:96 - checking users for ajwoiej
+2018-06-25 14:56:22 INFO  Gambling:102 - ajwoiej not found
+2018-06-25 14:56:26 INFO  Gambling:274 - attempting to login
+2018-06-25 14:56:27 INFO  Gambling:96 - checking users for a
+2018-06-25 14:56:27 INFO  Gambling:130 - alogged in succesfully, choosing next action
+2018-06-25 14:57:58 INFO  Gambling:110 - entered start menu
+2018-06-25 14:58:03 INFO  Gambling:51 - writing a game file
+2018-06-25 14:58:03 INFO  Gambling:60 - write finished
+2018-06-25 14:58:23 INFO  Gambling:69 - constructing game object
+2018-06-25 14:58:23 INFO  Gambling:29 - reading in a game file
+2018-06-25 14:58:23 INFO  Gambling:43 - read finished
+2018-06-25 14:58:23 INFO  Gambling:110 - entered start menu
+2018-06-25 15:02:29 INFO  Gambling:274 - attempting to login
+2018-06-25 15:02:30 INFO  Gambling:96 - checking users for a
+2018-06-25 15:02:31 INFO  Gambling:130 - alogged in succesfully, choosing next action
+2018-06-25 15:02:38 INFO  Gambling:110 - entered start menu
+2018-06-25 15:02:42 INFO  Gambling:51 - writing a game file
+2018-06-25 15:02:42 INFO  Gambling:60 - write finished
+2018-06-25 15:04:35 INFO  Gambling:69 - constructing game object
+2018-06-25 15:04:35 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:04:36 INFO  Gambling:43 - read finished
+2018-06-25 15:04:36 INFO  Gambling:110 - entered start menu
+2018-06-25 15:04:37 INFO  Gambling:274 - attempting to login
+2018-06-25 15:04:38 INFO  Gambling:96 - checking users for a
+2018-06-25 15:04:39 INFO  Gambling:130 - alogged in succesfully, choosing next action
+2018-06-25 15:04:43 INFO  Gambling:110 - entered start menu
+2018-06-25 15:04:57 INFO  Gambling:51 - writing a game file
+2018-06-25 15:04:57 INFO  Gambling:60 - write finished
+2018-06-25 15:06:17 INFO  Gambling:69 - constructing game object
+2018-06-25 15:06:17 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:06:17 INFO  Gambling:43 - read finished
+2018-06-25 15:06:17 INFO  Gambling:110 - entered start menu
+2018-06-25 15:06:21 INFO  Gambling:273 - attempting to login
+2018-06-25 15:06:21 INFO  Gambling:96 - checking users for a
+2018-06-25 15:06:22 INFO  Gambling:129 - alogged in succesfully, choosing next action
+2018-06-25 15:06:28 INFO  Gambling:110 - entered start menu
+2018-06-25 15:06:30 INFO  Gambling:51 - writing a game file
+2018-06-25 15:06:30 INFO  Gambling:60 - write finished
+2018-06-25 15:07:10 INFO  Gambling:69 - constructing game object
+2018-06-25 15:07:10 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:07:10 INFO  Gambling:43 - read finished
+2018-06-25 15:07:10 INFO  Gambling:110 - entered start menu
+2018-06-25 15:07:18 INFO  Gambling:272 - attempting to login
+2018-06-25 15:07:19 INFO  Gambling:96 - checking users for a
+2018-06-25 15:07:19 INFO  Gambling:129 - alogged in succesfully, choosing next action
+2018-06-25 15:07:26 INFO  Gambling:51 - writing a game file
+2018-06-25 15:07:26 INFO  Gambling:60 - write finished
+2018-06-25 15:07:30 INFO  Gambling:69 - constructing game object
+2018-06-25 15:07:30 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:07:30 INFO  Gambling:43 - read finished
+2018-06-25 15:07:30 INFO  Gambling:110 - entered start menu
+2018-06-25 15:07:45 INFO  Gambling:272 - attempting to login
+2018-06-25 15:07:46 INFO  Gambling:96 - checking users for a
+2018-06-25 15:07:46 INFO  Gambling:129 - alogged in succesfully, choosing next action
+2018-06-25 15:07:52 INFO  Gambling:51 - writing a game file
+2018-06-25 15:07:52 INFO  Gambling:60 - write finished
+2018-06-25 15:11:46 INFO  Gambling:69 - constructing game object
+2018-06-25 15:11:46 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:11:46 INFO  Gambling:43 - read finished
+2018-06-25 15:11:46 INFO  Gambling:110 - entered start menu
+2018-06-25 15:11:51 INFO  Gambling:274 - attempting to login
+2018-06-25 15:11:52 INFO  Gambling:96 - checking users for a
+2018-06-25 15:11:53 INFO  Gambling:129 - alogged in succesfully, choosing next action
+2018-06-25 15:15:16 INFO  Gambling:70 - constructing game object
+2018-06-25 15:15:16 INFO  Gambling:30 - reading in a game file
+2018-06-25 15:15:16 INFO  Gambling:44 - read finished
+2018-06-25 15:15:16 INFO  Gambling:111 - entered start menu
+2018-06-25 15:15:23 INFO  Gambling:275 - attempting to login
+2018-06-25 15:15:24 INFO  Gambling:97 - checking users for a
+2018-06-25 15:15:24 INFO  Gambling:130 - alogged in succesfully, choosing next action
+2018-06-25 15:20:47 INFO  Gambling:69 - constructing game object
+2018-06-25 15:20:47 INFO  Gambling:29 - reading in a game file
+2018-06-25 15:20:47 INFO  Gambling:43 - read finished
+2018-06-25 15:20:47 INFO  Gambling:110 - entered start menu
+2018-06-25 15:20:50 INFO  Gambling:294 - attempting to login
+2018-06-25 15:20:55 INFO  Gambling:96 - checking users for admin
+2018-06-25 15:20:58 INFO  Gambling:129 - adminlogged in succesfully, choosing next action
+2018-06-25 15:21:02 INFO  Gambling:96 - checking users for a
+2018-06-25 15:21:07 INFO  Gambling:294 - attempting to login
+2018-06-25 15:21:08 INFO  Gambling:96 - checking users for a
+2018-06-25 15:21:14 INFO  Gambling:294 - attempting to login
+2018-06-25 15:21:15 INFO  Gambling:96 - checking users for admin
+2018-06-25 15:21:19 INFO  Gambling:129 - adminlogged in succesfully, choosing next action
+2018-06-25 15:21:25 INFO  Gambling:96 - checking users for a
+2018-06-25 15:21:30 INFO  Gambling:294 - attempting to login
+2018-06-25 15:21:30 INFO  Gambling:96 - checking users for a
+2018-06-25 15:21:32 INFO  Gambling:129 - alogged in succesfully, choosing next action
