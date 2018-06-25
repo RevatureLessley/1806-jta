@@ -43,6 +43,12 @@ public class AccountsRecord implements Serializable
         return false;
     }
 
+    /**
+     * Checks to see if account actually exists and whether the login attempt is valid
+     * @param enteredAccount
+     * @return true if username and password match
+     * @return false if username and password don't match
+     */
     public boolean checkValidity(Account enteredAccount)
     {
         String username = enteredAccount.getUsername();
@@ -55,6 +61,11 @@ public class AccountsRecord implements Serializable
 
         return false;
     }
+
+    /**
+     * Used to display a list of ALL accounts. Used by admin and SuperUser
+     * @param isSuperAdmin a flag to see if the caller is the SuperAdmin, so that it can list all admins as well
+     */
 
     public void debugAccounts(boolean isSuperAdmin)
     {
@@ -79,6 +90,10 @@ public class AccountsRecord implements Serializable
             }
         }
     }
+
+    /**
+     * Method used to flag all pending accounts as approved.
+     */
 
     public void approveAllAccounts()
     {

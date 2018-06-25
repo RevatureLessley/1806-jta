@@ -12,9 +12,11 @@ public class UserInterface
     Account currentAccount;
     RecordsManager recordsManager;
     AccountsRecord accountsRecord;
+    StatusLogger statusLogger;
 
     public UserInterface()
     {
+        statusLogger = new StatusLogger();
         recordsManager = new RecordsManager();
         accountsRecord = recordsManager.getFile();
     }
@@ -139,6 +141,8 @@ public class UserInterface
         {
             currentAccount = accountsRecord.getAccount(newAccount.getUsername());
 
+            statusLogger.logMessage(currentAccount.getUsername() + "has logged in");
+
             if(currentAccount.isAdmin())
                 adminMenu();
             else
@@ -156,8 +160,10 @@ public class UserInterface
     {
         Account newAccount = accountInput(false);
 
-        if(SuperUser.validate(newAccount))
+        if(SuperUser.validate(newAccount)) {
             superAdminMenu();
+            statusLogger.logMessage("SuperUser has taken command");
+        }
         else
         {
             System.err.println("Login error. Username or password is not correct");
@@ -305,6 +311,9 @@ public class UserInterface
         accountsRecord.addAccount(newAccount);
         System.err.println("Your account must be approved");
 
+        statusLogger.logMessage(currentAccount.getUsername() + "has registered, waiting approval");
+
+
         mainMenu();
     }
 
@@ -334,6 +343,9 @@ public class UserInterface
         currentAccount.withdraw(withdrawalAmount);
         System.out.println("You have withdrawn $" + withdrawalAmount);
 
+        statusLogger.logMessage(currentAccount.getUsername() + " withdrew $" + withdrawalAmount);
+
+
         accountsRecord.updateAccount(currentAccount);
         userMenu();
     }
@@ -359,6 +371,8 @@ public class UserInterface
         currentAccount.deposit(depositAmount);
         System.out.println("You have deposited $" + depositAmount);
 
+        statusLogger.logMessage(currentAccount.getUsername() + "has deposited $" + depositAmount);
+
         accountsRecord.updateAccount(currentAccount);
         userMenu();
     }
@@ -367,15 +381,20 @@ public class UserInterface
     {
         scanner = new Scanner(System.in);
         System.out.println("Enter loan request amount: ");
-        int withdrawalAmount = scanner.nextInt(); //TODO: check for corrent withdrawal amount/userinput
+        int withdrawalAmount = scanner.nextInt();
         System.out.println("You have requested a loan for $" + withdrawalAmount);
-        System.err.println("Your loan request has been denied!"); //TODO: add in loan calc feature
+        System.err.println("Your loan request has been denied!");
         userMenu();
     }
 
     public void logout()
     {
+        statusLogger.logMessage(currentAccount.getUsername() + " has logged out");
         recordsManager.saveFile(accountsRecord);
+        statusLogger.logMessage("Saving accounts and writing file");
+
+
+
         currentAccount = null;
         System.out.println("You have logged out.");
         mainMenu();

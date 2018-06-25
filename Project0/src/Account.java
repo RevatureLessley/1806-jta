@@ -14,6 +14,11 @@ public class Account implements Serializable
 
     private int creditScore;
 
+    /**
+     * Creates a normal user
+     * @param username
+     * @param password
+     */
     public Account(String username, String password)
     {
         this.username = username;
@@ -22,6 +27,13 @@ public class Account implements Serializable
         this.accountBalance = 0;
     }
 
+
+    /**
+     * Creates an admin user
+     * @param username
+     * @param password
+     * @param isAdmin
+     */
     public Account(String username, String password, boolean isAdmin)
     {
         this.username = username;
@@ -73,6 +85,9 @@ public class Account implements Serializable
         this.creditScore = creditScore;
     }
 
+    /**
+     * Prints accounts details when needed
+     */
     public void printAccountDetails()
     {
         System.out.println("Username: " + username);
@@ -81,6 +96,13 @@ public class Account implements Serializable
         System.out.println("Role: " + (isAdmin?"Admin":"User"));
         System.out.println("Account Balance: " + accountBalance);
     }
+
+    /**
+     * Checks if one account is equal to another account
+     * @param enteredAccount
+     * @return true if the accounts are equal
+     * @return false if accounts aren't equal
+     */
 
     public boolean equals(Account enteredAccount)
     {

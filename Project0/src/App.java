@@ -5,7 +5,6 @@ public class App
         UserInterface userInterface = new UserInterface();
 
         userInterface.mainMenu();
-
     }
 
 }
