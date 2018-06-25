@@ -4,11 +4,19 @@ import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
 
+/**
+ * Lastname encapsulates the logic of a last name.
+ */
 public class LastName extends AccountAttribute 
 					  implements LogReference, Serializable{
 	private static final long serialVersionUID = -4784336663257381167L;
 	private String lastname;
 	
+	/**
+	 * This constructor adds an initialized lastname to an AdminAccount.
+	 * 
+	 * @param aa AdminAccount to which this lastname belongs.
+	 */
 	public LastName(AdminAccount aa) {
 		super(aa);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -19,6 +27,11 @@ public class LastName extends AccountAttribute
   	 	 	     	 "LastName.java: Constructed LastName(AdminAccount).");
 	}
 
+	/**
+	 * This constructor adds an initialized lastname to a UserAccount.
+	 * 
+	 * @param ua UserAccount to which this lastname belongs.
+	 */
 	public LastName(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -29,6 +42,9 @@ public class LastName extends AccountAttribute
 	 	 	     	 "LastName.java: Constructed LastName(UserAccount).");
 	}
 
+	/**
+	 * askUser() contains the logic for asking the user for a last name.
+	 */
 	@Override
 	public String askUser() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -55,6 +71,9 @@ public class LastName extends AccountAttribute
     	 	 	 	 "LastName.java: Exiting print().");
 	}
 
+	/**
+	 * @return the lastname ID based of its hashCode.
+	 */
 	@Override 
 	public Integer getID() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 

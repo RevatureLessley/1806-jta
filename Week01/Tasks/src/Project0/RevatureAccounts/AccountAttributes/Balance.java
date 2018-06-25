@@ -7,11 +7,19 @@ import java.util.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
 
+/**
+ * Balance encapsulates the logic of an account balance.
+ */
 public class Balance extends AccountAttribute 
 					 implements LogReference, Serializable {
 	private static final long serialVersionUID = -5263664987376027348L;
 	private BigDecimal balance;
 	
+	/**
+	 * This constructor adds an initialized account balance to a UserAccount.
+	 * 
+	 * @param ua UserAccount to which this account balance belongs.
+	 */
 	public Balance(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -22,6 +30,11 @@ public class Balance extends AccountAttribute
 	 	     	 	 "Balance.java: Constructed Balance(AdminAccount).");
 	}
 
+	/**
+	 * askUser() contains the logic for asking the user for input.
+	 * 
+	 * @return the user input.
+	 */
 	@Override
 	public String askUser() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -31,6 +44,9 @@ public class Balance extends AccountAttribute
 						        "value:\n>");
 	}
 
+	/**
+	 * deposit() contains the logic for making a deposit.
+	 */
 	@Override
 	public void deposit() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -42,6 +58,12 @@ public class Balance extends AccountAttribute
 				 	 "Balance.java: Exiting deposit().");
 	}
 
+	/**
+	 * getAmount() contains the logic for getting a dollar amount from the 
+	 * user.
+	 * 
+	 * @return the dollar amount.
+	 */
 	private BigDecimal getAmount() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
 				 "Balance.java: Entered getAmount().");
@@ -84,6 +106,9 @@ public class Balance extends AccountAttribute
 		 	 	 	 "Balance.java: Exiting print().");
 	}
 
+	/**
+	 * @return the balance ID based of its hashCode.
+	 */
 	@Override
 	public Integer getID() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -92,6 +117,9 @@ public class Balance extends AccountAttribute
 		return balance.hashCode();
 	}
 
+	/**
+	 * deposit() contains the logic for making a withdrawal.
+	 */
 	@Override
 	public void withdraw() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 

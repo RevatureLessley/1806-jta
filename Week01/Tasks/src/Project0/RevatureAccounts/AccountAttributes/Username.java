@@ -4,12 +4,20 @@ import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
 
+/**
+ * Username encapsulates the logic of a username.
+ */
 public class Username extends AccountAttribute 
 					  implements LogReference, Serializable {
 	private static final long serialVersionUID = -3539688509393580418L;
 	private String username;
 	private String u;
 	
+	/**
+	 * This constructor adds an initialized username to an AdminAccount.
+	 * 
+	 * @param aa AdminAccount to which this username belongs.
+	 */
 	public Username(AdminAccount aa) {
 		super(aa);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -20,6 +28,11 @@ public class Username extends AccountAttribute
 	             	 "Username.java: Constructed Username(AdminAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized username to a UserAccount.
+	 * 
+	 * @param ua UserAccount to which this username belongs.
+	 */
 	public Username(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -30,6 +43,9 @@ public class Username extends AccountAttribute
 	             "Username.java: Constructed Username(UserAccount).");
 	}
 
+	/**
+	 * askUser() contains the logic for asking the user for a username.
+	 */
 	@Override
 	public String askUser() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -44,6 +60,9 @@ public class Username extends AccountAttribute
 		return u;
 	}
 
+	/**
+	 * getUsername() contains the logic for getting the username from the user.
+	 */
 	private void getUsername() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
             	 	 "Username.java: Entered getUsername().");
@@ -70,6 +89,9 @@ public class Username extends AccountAttribute
 	 	 		 	 "Username.java: Exiting print().");
 	}
 
+	/**
+	 * @return the username ID based of its hashCode.
+	 */
 	@Override
 	public Integer getID() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 

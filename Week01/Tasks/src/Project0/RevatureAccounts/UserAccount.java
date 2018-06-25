@@ -4,10 +4,17 @@ import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.AccountAttributes.*;
 
+/**
+ * UserAccount encapsulates the logic of a user account.
+ */
 public class UserAccount extends Account 
 						 implements LogReference, Serializable {
 	private static final long serialVersionUID = -1329930768642177273L;
 
+	/**
+	 * This constructor initializes the attributes and actions of a user 
+	 * account.
+	 */
 	public UserAccount() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
                 	 "Constructing UserAccount().");
@@ -23,6 +30,9 @@ public class UserAccount extends Account
            	 		 "Constructed UserAccount().");
 	}
 
+	/**
+	 * approved() displays the options of an APPROVED account.
+	 */
 	@Override
 	public void approved() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
@@ -46,6 +56,9 @@ public class UserAccount extends Account
       	 		 	 "Exiting approved().");
 	}
 
+	/**
+	 * denied() displays a DENIED account.
+	 */
 	@Override
 	public void denied() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
@@ -58,6 +71,9 @@ public class UserAccount extends Account
  	 		 	 	 "Exiting denied().");
 	}
 
+	/**
+	 * enter() chooses the appropriate view of the account to display.
+	 */
 	@Override
 	public void enter() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
@@ -67,6 +83,9 @@ public class UserAccount extends Account
  		 	 	 "Exiting entered().");
 	}
 
+	/**
+	 * makeDeposit() contains the logic for making a deposit.
+	 */
 	private void makeDeposit() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
  		 	 	 	 "Entered makeDeposit().");
@@ -75,6 +94,9 @@ public class UserAccount extends Account
 					 "Exiting makeDeposit().");
 	}
 
+	/**
+	 * makewithDrawal() contains the logic for making a withdrawal.
+	 */
 	private void makeWithdrawal() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 
 	 	 	 	 	 "Entered makeWithdrawal().");
@@ -83,6 +105,9 @@ public class UserAccount extends Account
 	 	 	 	 	 "Exiting makeWithdrawal().");
 	}
 
+	/**
+	 * pending() displays a PENDING account.
+	 */
 	@Override
 	public void pending() {
 		logger.debug("Project0/RevatureAccounts/UserAccount.java: " + 

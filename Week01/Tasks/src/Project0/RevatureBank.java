@@ -6,12 +6,29 @@ import java.util.stream.*;
 import Project0.RevatureAccounts.*;
 import Project0.RevatureDatabase.*;
 
+/**
+ * RevatureBank encapsulates the logic of the entire bank application.
+ */
 public class RevatureBank implements ConsoleReference, LogReference{
+	/**
+	 * entrance contains the singleton instance of RevatureBank.
+	 */
 	public static RevatureBank entrance = new RevatureBank();
+	/**
+	 * STORAGE contains the location of persistent storage.
+	 */
 	private final String STORAGE = 
 			"./Project0/RevatureDatabase/PersistentStore.txt";
+	/**
+	 * accounts contains the list of accounts RevatureBank possesses.
+	 */
 	private static HashMap<Integer, Account> accounts;
 
+	/**
+	 * This constructor reads from persistent storage if it exists. If there is
+	 * no persistent storage, the RevatureBank gets initialized with a single
+	 * admin account.
+	 */
 	@SuppressWarnings("unchecked")
 	private RevatureBank() {
 		logger.debug("Project0/RevatureBank.java: " + 
@@ -41,10 +58,17 @@ public class RevatureBank implements ConsoleReference, LogReference{
 				     "Constructed RevatureBank().");
 	}
 
-	public static boolean accountExists(String s) {
+
+	/**
+	 * accountExists checks if a Username exists.
+	 * 
+	 * @param username
+	 * @return true if the username exists, false otherwise.
+	 */
+	public static boolean accountExists(String username) {
 		logger.debug("Project0/RevatureBank.java: Entered accountExists().");
 		long n = accounts.values().stream()
-			 	 .filter(a -> a.getUsername().compareTo(s) == 0).count();
+			 	 .filter(a -> a.getUsername().compareTo(username) == 0).count();
 		boolean exists = n > 0;
 
 		if(exists) {
@@ -58,6 +82,9 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		return exists;
 	}
 
+	/**
+	 * createAccount() creates a new UserAccount() and adds it to accounts.
+	 */
 	private void createAccount(){
 		logger.debug("Project0/RevatureBank.java: Entered createAccount().");
 		System.out.println("Please create an account.");
@@ -68,6 +95,9 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		logger.info("Project0/RevatureBank.java: New account created.");
 	}
 
+	/**
+	 * signIn() handles the logic of user sign in.
+	 */
 	private void signIn() {
 		logger.debug("Project0/RevatureBank.java: Entered signIn().");
 		System.out.println("Please sign into your account.");
@@ -85,7 +115,10 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		
 		logger.debug("Project0/RevatureBank.java: Exiting signIn().");
 	}
-
+	
+	/**
+	 * enter() displays a welcome message to the user.
+	 */
 	public void enter() {
 		logger.debug("Project0/RevatureBank.java:  Entered enter().");
 		System.out.print("Welcome to RevatureBank. To Login as admin: ");
@@ -94,6 +127,10 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		logger.debug("Project0/RevatureBank.java: Exiting enter().");
 	}
 
+	/**
+	 * exit() leaves RevatureBank after saving account information to 
+	 * persistent storage.
+	 */
 	public void exit() {
 		logger.debug("Project0/RevatureBank.java: Entered exit().");
 		
@@ -118,6 +155,12 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		logger.debug("Project0/RevatureBank.java: Exiting exit().");
 	}
 
+	/**
+	 * getUnapprovedAccounts() filters accounts and collects those that are not
+	 * approved.
+	 * 
+	 * @return a List of accounts that are DENIED and PENDING.
+	 */
 	public static List<Map.Entry<Integer, Account>> getUnapprovedAccounts() {
 		logger.debug("Project0/RevatureBank.java: " + 
 				     "Entered and exiting getUnapprovedAccounts().");
@@ -130,12 +173,19 @@ public class RevatureBank implements ConsoleReference, LogReference{
 			       .collect(Collectors.toList());
 	}
 
+	/**
+	 * printAccounts() prints all accounts in accounts.
+	 */
 	public void printAccounts() {
 		logger.debug("Project0/RevatureBank.java: Entered printAccounts().");
 		accounts.values().stream().forEach(a -> a.print());
 		logger.debug("Project0/RevatureBank.java: Exiting printAccounts().");
 	}
 	
+	/**
+	 * welcome() uses user input to decide whether to create a new account or
+	 * sign into an existing account.
+	 */
 	private void welcome() {
 		logger.debug("Project0/RevatureBank.java: Entered welcome().");
 		String hasAccount;

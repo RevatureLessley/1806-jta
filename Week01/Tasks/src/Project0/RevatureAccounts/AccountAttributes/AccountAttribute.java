@@ -4,6 +4,9 @@ import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
 
+/**
+ * AccountAttribute encapsulates the logic of an account attribute.
+ */
 public abstract class AccountAttribute implements ConsoleReference, 
 												  LogReference, Serializable {
  	
@@ -21,6 +24,11 @@ public abstract class AccountAttribute implements ConsoleReference,
 	 	 	 		 "was incorrectly called or is not overridden.");
 	}
 	
+	/**
+	 * askUser() contains the logic for requesting user input.
+	 * 
+	 * @return the user input
+	 */
 	public String askUser() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
 	 	 	 	 	 "AcountAttributes.java: Entered and exiting withdraw().");
@@ -66,7 +74,10 @@ public abstract class AccountAttribute implements ConsoleReference,
 	}
 
  	abstract public void print();
-
+ 	
+ 	/**
+ 	 * @return attribute is based on its hashCode.
+ 	 */
 	abstract public Integer getID();
 	
 	public void withdraw() {

@@ -3,10 +3,25 @@ package Project0.RevatureDatabase;
 import java.io.*;
 import Project0.*;
 
+/**
+ * FromDisk encapsulates the logic of reading from persistent storage.
+ */
 public class FromDisk implements LogReference {
+	/**
+	 * connection contains a reference to persistent storage.
+	 */
 	private FileInputStream connection;
+	/**
+	 * record contains the data read from persistent storage.
+	 */
 	private ObjectInputStream record;
 
+	/**
+	 * This constructor opens up a connection to persistent storage.
+	 * 
+	 * @param filename name of the persistent storage file.
+	 * @throws FileNotFoundException
+	 */
 	public FromDisk(String filename) throws FileNotFoundException {
 		logger.debug("Project0/RevatureDatabase/FromDisk.java: " + 
 	                 "Constructing FromDisk().");
@@ -44,6 +59,11 @@ public class FromDisk implements LogReference {
 		return null;
 	}
 
+	/**
+	 * close() closes the connection to persistent storage.
+	 * 
+	 * @throws IOException
+	 */
 	public void close() throws IOException {
 		logger.debug("Project0/RevatureDatabase/FromDisk.java: " + 
 					 "Entered close().");

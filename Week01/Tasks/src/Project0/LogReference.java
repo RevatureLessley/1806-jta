@@ -6,8 +6,7 @@ package Project0;
 import org.apache.log4j.*;
 
 /**
- * @author Swilery
- *
+ * LogReference contains the resource for logging used throughout RevatureBank.
  */
 public interface LogReference {
 	final static Logger logger = Logger.getRootLogger();

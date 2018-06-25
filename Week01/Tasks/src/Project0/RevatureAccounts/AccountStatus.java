@@ -2,6 +2,9 @@ package Project0.RevatureAccounts;
 
 import Project0.*;
 
+/**
+ * AdminAccount enumerates all possible statuses an account could be in.
+ */
 public enum AccountStatus implements LogReference{
 		APPROVED() {
 			public void display(Account a) {
@@ -33,6 +36,12 @@ public enum AccountStatus implements LogReference{
 			}
 		};
 
+		/**
+		 * display() chooses the correct view of an account to display
+		 * depending on its status.
+		 * 
+		 * @param a the account to display. 
+		 */
 		public abstract void display(Account a);
 	};
 

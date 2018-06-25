@@ -4,11 +4,19 @@ import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
 
+/**
+ * Status encapsulates the logic of an account status.
+ */
 public class Status extends AccountAttribute 
 					implements LogReference, Serializable {
 	private static final long serialVersionUID = -1583445065455260161L;
 	private AccountStatus status;
 	
+	/**
+	 * This constructor adds an initialized account status to an AdminAccount.
+	 * 
+	 * @param aa AdminAccount to which this status belongs.
+	 */
 	public Status(AdminAccount aa) {
 		super(aa);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -19,6 +27,11 @@ public class Status extends AccountAttribute
             	 	 "Status.java: Constructed Status(AdminAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized account status to a UserAccount.
+	 * 
+	 * @param uaUserAccount to which this status belongs.
+	 */
 	public Status(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -29,6 +42,9 @@ public class Status extends AccountAttribute
        	 	 	     "Status.java: Constructed Status(UserAccount).");
 	}
 	
+	/**
+	 * approve() contains the logic that approves an account.
+	 */
 	@Override
 	public void approve() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -38,6 +54,9 @@ public class Status extends AccountAttribute
   	 	 		 	 "Status.java: Exiting approve().");
 	}
 	
+	/**
+	 * deny() contains the logic that denies an account.
+	 */
 	@Override
 	public void deny() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -47,6 +66,9 @@ public class Status extends AccountAttribute
 	 	 		 	 "Status.java: Exiting deny().");
 	}
 
+	/**
+	 * display() chooses the view of an account to display based on its status.
+	 */
 	@Override
 	public void display(Account a) {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -74,6 +96,9 @@ public class Status extends AccountAttribute
 		 	 	 "Status.java: Exiting print().");
 	}
 
+	/**
+	 * @return the status ID based of its hashCode.
+	 */
 	@Override
 	public Integer getID() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 

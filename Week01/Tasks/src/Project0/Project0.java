@@ -1,6 +1,10 @@
 package Project0;
 
 public class Project0 implements ConsoleReference, LogReference{
+	/**
+	 * main() runs the RevatureBank application.
+	 * @param args unused
+	 */
 	public static void main(String args[]){
 		logger.debug("Project0/Project0.java: " + 
 	                 "Application Started, entered main().");

@@ -3,7 +3,9 @@ package Project0.RevatureAccounts.AccountAttributes;
 import java.io.*;
 import Project0.*;
 import Project0.RevatureAccounts.*;
-
+/**
+ * Password encapsulates the logic of a password.
+ */
 public class Password extends AccountAttribute 
 					  implements LogReference, Serializable {
 	// This class needs to be secured.
@@ -12,6 +14,11 @@ public class Password extends AccountAttribute
 	private String p;
 	private String q;
 
+	/**
+	 * This constructor adds an initialized password to an AdminAccount.
+	 * 
+	 * @param aa AdminAccount to which this password belongs.
+	 */
 	public Password(AdminAccount aa) {
 		super(aa);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -22,6 +29,11 @@ public class Password extends AccountAttribute
        	 	 		 "Password.java: Constructed Password(AdminAccount).");
 	}
 
+	/**
+	 * This constructor adds an initialized password to a UserAccount.
+	 * 
+	 * @param ua UserAccount to which this password belongs.
+	 */
 	public Password(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -32,6 +44,9 @@ public class Password extends AccountAttribute
   	 	 	     	 "Password.java: Constructed Password(UserAccount).");
 	}
 
+	/**
+	 * askUser() contains the logic for asking the user for a password.
+	 */
 	@Override
 	public String askUser() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
@@ -46,6 +61,9 @@ public class Password extends AccountAttribute
 		return p;
 	}	
 
+	/**
+	 * getPassword() contains the logic for getting the password from the user.
+	 */
 	private void getPassword(){
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
 	 	 	     	 "Password.java: Entered getPassword().");
@@ -64,6 +82,9 @@ public class Password extends AccountAttribute
 	     	 	 	 "Password.java: Exiting print().");
 	}
 
+	/**
+	 * @return the password ID based of its hashCode.
+	 */
 	@Override
 	public Integer getID() {
 		logger.debug("Project0/RevatureAccounts/AccountAttributes/" + 
