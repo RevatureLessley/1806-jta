@@ -23,6 +23,8 @@ public class Administrator extends Account implements Serializable
 		{
 			while(selection != -1)
 			{
+				pgm.dumpIn(pgm);
+				pgm.clearScreen();
 				int count = 1;
 				for(Player a: pgm.Active.getList())
 				{
@@ -71,6 +73,8 @@ public class Administrator extends Account implements Serializable
 		{
 			if(pgm.Waiting.getList().size() >0)
 			{
+				pgm.dumpIn(pgm);
+				pgm.clearScreen();
 				int count = 1;
 				for(Player a: pgm.Waiting.getList())
 				{
@@ -107,6 +111,7 @@ public class Administrator extends Account implements Serializable
 				System.out.println("No waiting accounts at this moment.");
 				selection = -1;
 			}
+			pgm.dumpIn(pgm);
 			pgm.save(pgm);
 		}
 	}
@@ -116,6 +121,8 @@ public class Administrator extends Account implements Serializable
 	 */
 	public void deleteWorld()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("You have chosen to erase this world...");
 		System.out.print("Are you sure this is what you want to do? Y/N:");
 		char selection = pgm.in.next().charAt(0);
@@ -144,6 +151,8 @@ public class Administrator extends Account implements Serializable
 	 */
 	public void saveWorld()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("So you want to save the world...");
 		System.out.print("Are you sure this is what you want to do? Y/N:");
 		char selection = pgm.in.next().charAt(0);
@@ -177,6 +186,8 @@ public class Administrator extends Account implements Serializable
 		System.out.println("Welcome Admin " + this.Name + "\n");
 		while(selection != 4)
 		{
+			pgm.dumpIn(pgm);
+			pgm.clearScreen();
 			System.out.println("What would you like to do today?");
 			int count = 1;
 			System.out.println(count + ". Manage active accounts");

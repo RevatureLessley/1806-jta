@@ -31,7 +31,10 @@ public class Player extends Account implements Serializable
 	 */
 	public void withdraw()
 	{
-		System.out.println("You have chosen to withdraw gold.");
+
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
+		System.out.println("You have chosen to withdraw gold. \n");
 		if(accountBalance >0)
 		{
 			System.out.println("You currently have " + accountBalance + " Gold" + "\n" +
@@ -62,6 +65,8 @@ public class Player extends Account implements Serializable
 	 */
 	public void deposit()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("You have chosen to deposit gold.");
 		System.out.println("How much would you like to deposit?");
 		int ammount = pgm.in.nextInt();
@@ -83,6 +88,8 @@ public class Player extends Account implements Serializable
 	 */
 	public void bet()
 	{	
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		//TODO: improve how the computer selects winning, losing and odds.
 		int bet = 0;
 		System.out.print("Welcome to the Arena, how much would you like to bet on today's fight: ");
@@ -132,6 +139,8 @@ public class Player extends Account implements Serializable
 	 */
 	public void loanApp()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.print("How much money would you like to borrow: ");
 		loanBalance = pgm.in.nextInt();
 		loanWaiting = true;
@@ -145,6 +154,8 @@ public class Player extends Account implements Serializable
 	 */
 	public void payLoan()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("You have chosen to pay on your loan.");
 		System.out.println("You have " + personalBalance + " gold, how much would you like to pay?");
 		int ammount = pgm.in.nextInt();
@@ -193,6 +204,8 @@ public class Player extends Account implements Serializable
 	@Override
 	public void menu()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		int selection = 0;
 		System.out.println("Welcome " + this.Name + "\n");
 		while(selection != 5)

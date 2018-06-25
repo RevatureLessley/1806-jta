@@ -68,6 +68,8 @@ public abstract class Account implements Serializable
 	 */
 	public void deleteAcc()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("You have chosen to dissable your account...");
 		System.out.print("Are you sure this is what you want to do? Y/N:");
 		char selection = pgm.in.next().charAt(0);
@@ -96,6 +98,8 @@ public abstract class Account implements Serializable
 	 */
 	public void saveAcc()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("You have chosen to keep your account...");
 		System.out.print("Are you sure this is what you want to do? Y/N:");
 		char selection = pgm.in.next().charAt(0);

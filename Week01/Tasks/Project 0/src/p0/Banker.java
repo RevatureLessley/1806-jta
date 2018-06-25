@@ -21,13 +21,14 @@ public class Banker extends Account implements Serializable
 	 */
 	public void viewActive()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		int count = 1;
 		System.out.println("List of currently active members");
 		for(Player p: pgm.Active.getList())
 		{
 			System.out.println(count + ". " + p.getuName() + " Account Balance: " + p.getbBalance());
 		}
-		pgm.dumpIn(pgm);
 	}
 	
 	/**
@@ -36,6 +37,8 @@ public class Banker extends Account implements Serializable
 	 */
 	public void adjustInterestRates()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
 		System.out.print("What should the new interest rate be?: ");
 		interestRate = pgm.in.nextDouble();
@@ -54,9 +57,11 @@ public class Banker extends Account implements Serializable
 	@Override
 	public void menu() {
 		int selection = 0;
-		System.out.println("Welcome Banker " + this.Name + "\n");
 		while(selection != 3)
 		{
+			pgm.dumpIn(pgm);
+			pgm.clearScreen();
+			System.out.println("Welcome Banker " + this.Name + "\n");
 			System.out.println("What would you like to do today?");
 			int count = 1;
 			System.out.println(count + ". View active accounts");

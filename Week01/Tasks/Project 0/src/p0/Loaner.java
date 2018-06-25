@@ -20,6 +20,8 @@ public class Loaner extends Account implements Serializable
 	 */
 	public void manageActiveLoans()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		int selection = 0;
 		updateLists();
 		while(selection != -1)
@@ -52,6 +54,8 @@ public class Loaner extends Account implements Serializable
 	 */
 	public void manageWaitingLoans()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		int selection = 0;
 		updateLists();
 		while(selection != -1)
@@ -132,6 +136,8 @@ public class Loaner extends Account implements Serializable
 	 */
 	public void adjustInterestRates()
 	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
 		System.out.print("What should the new interest rate be?: ");
 		interestRate = pgm.in.nextDouble();
@@ -148,7 +154,10 @@ public class Loaner extends Account implements Serializable
 	 * method shared by each Account extender, view comment on parent class for explination.
 	 */
 	@Override
-	public void menu() {
+	public void menu() 
+	{
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		int selection = 0;
 		System.out.println("Welcome Loaner " + this.Name + "\n");
 		while(selection != 4)
@@ -165,7 +174,8 @@ public class Loaner extends Account implements Serializable
 			count++;
 			selection = pgm.in.nextInt();
 			
-			switch (selection) {
+			switch (selection) 
+			{
 			case 1: manageActiveLoans();
 					break;
 			case 2: manageWaitingLoans();
@@ -176,6 +186,5 @@ public class Loaner extends Account implements Serializable
 					break;
 			}
 		}
-		
 	}
 }

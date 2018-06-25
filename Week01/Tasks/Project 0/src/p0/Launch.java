@@ -21,7 +21,7 @@ public class Launch
 	Random rng = new Random();
 	AccountList Active;
 	WaitingList Waiting;
-	final String VERSION_NUM = "0.1";
+	final String VERSION_NUM = "1.0";
 	
 	public static void main (String[] args)
 	{
@@ -57,11 +57,14 @@ public class Launch
 
 			int selection = pgm.in.nextInt();
 			switch(selection) {
-			case 1: pgm.login(pgm);
+			case 1: pgm.clearScreen();
+					pgm.login(pgm);
 					break;
-			case 2: pgm.newAccount(pgm);
+			case 2: pgm.clearScreen();
+					pgm.newAccount(pgm);
 					break;
-			case 3: System.out.println("Goodbye user, have a nice day");
+			case 3: pgm.clearScreen();
+					System.out.println("Goodbye user, have a nice day");
 					cont = false;
 					break;
 			default:System.out.println("That is not a valid selection, please select again");
@@ -97,6 +100,7 @@ public class Launch
 		boolean successP = false;
 		while(!successP)
 		{
+			pgm.clearScreen();
 			System.out.print("Input Username (-1 to return to main menu): ");
 			String tempUname = pgm.in.next();
 			successP = false;
@@ -172,6 +176,7 @@ public class Launch
 				}
 			}
 		}
+		pgm.clearScreen();
 	}
 	
 	
@@ -283,6 +288,8 @@ public class Launch
 		}
 		
 		System.out.println("Successfully Saved");
+		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 	}
 	
 	/**
@@ -292,7 +299,9 @@ public class Launch
 	 */
 	public void newAccount(Launch pgm)
 	{
+		
 		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.print("Please choose a user name for the account: ");
 		String uName = pgm.in.nextLine();
 		System.out.print("Now choose a password for the account: ");
@@ -314,6 +323,7 @@ public class Launch
 	{
 
 		pgm.dumpIn(pgm);
+		pgm.clearScreen();
 		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM + "\n");
 		System.out.print("Please choose a user name for the administrator: ");
 		String uName = pgm.in.nextLine();
@@ -349,8 +359,25 @@ public class Launch
 	 */
 	public void dumpIn(Launch pgm)
 	{
+		System.out.println("Press Enter to Continue");
 		if(pgm.in.hasNextLine()) {
 			pgm.in.nextLine();
+		}
+	}
+	
+	public void clearScreen()
+	{
+		try 
+		{
+			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 }
