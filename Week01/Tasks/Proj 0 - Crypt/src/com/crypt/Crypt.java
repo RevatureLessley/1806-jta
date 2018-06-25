@@ -17,13 +17,13 @@ public class Crypt {
 	{private static final long serialVersionUID = 1L;
 	{put("user", (byte) 0); put("admin", (byte) 1);}};
 	static HashMap<String, String> userPassInfo = new HashMap<String, String>();
-	static ArrayList<Account> accounts = new ArrayList<Account>();
+	static HashMap<String, Account> accounts = new HashMap<String, Account>();
 	static UserPassFileManager upfm = new UserPassFileManager("accounts.ser");	
 
 	public static void main(String[] args) {
 		Crypt c = new Crypt();
 		//filling variables from files for persistence
-		ArrayList<Account> al = new ArrayList<Account>(); 
+		HashMap<String, Account> al = new HashMap<String, Account>(); 
 		if(upfm.fileExists())al = upfm.readObject();
 		if(al != null) accounts = al;
 		testAdminExist();
@@ -46,7 +46,8 @@ public class Crypt {
 			login();
 			break;
 		case 2:
-			accounts.add(createAccount());
+			Account a = createAccount();
+			accounts.put(a.getUsername(), a);
 			mainMenu(showMainMenu());
 			break;
 		case 3:
@@ -64,7 +65,14 @@ public class Crypt {
 		//testAdminExist(); //Tests existence of at least one user
 		Account a = userPass(); //Gets user name and password
 		if(testUserPass(a)) //tests user name and password
-		{ if(a.isApproved())loginPass(a);	} //if successful log in and the account has been authorized
+		{ 
+			a = accounts.get(a.getUsername());
+			if(a.isApproved()) { loginPass(a); } 
+			else {
+				System.out.println("This account has yet to be approved.");
+				mainMenu(showMainMenu());
+			}
+		} //if successful log in and the account has been authorized
 		else { loginFail(showLoginFailMenu()); } //if login failed
 	}
 
@@ -88,13 +96,14 @@ public class Crypt {
 	}
 
 	private byte showLoginPassMenu(Account a) {
-		byte b = Input.showMenu("Access Granted", 
-				Input.giveStringArray("Account Options", "Deposit Data", "Withdraw Data"));
-
-		if(a.getRole() == ROLES.get("admin")) System.out.println("(4) Admin Options");
-		System.out.println("(5) Log Out");
-
-		return b;
+		String[] s;
+		if(a.getRole() == ROLES.get("admin")) { 
+			s = new String[] { "Account Options", "Deposit Data", "Withdraw Data", "Admin Options", "Log Out"};  //Displays admin options if admin
+		} else { 
+			s = new String[] { "Account Options", "Deposit Data", "Withdraw Data", "Log Out" };//Not so much
+		}
+		
+		return Input.showMenu("Access Granted", s);
 	}
 
 	private void loginPass(Account a) {
@@ -102,23 +111,24 @@ public class Crypt {
 		case (byte)1://Account Options 
 			//accountOptions();
 			System.out.println("Not currently implemented. Please come back later.");
-		break;
+			loginPass(a);
+			break;
 		case (byte)2://Deposit Data
 			deposit(a);
-		showCurrentItems(showCurrentItemsMenu(), a);
-		loginPass(a);
-		break;
+			showCurrentItems(showCurrentItemsMenu(), a);
+			loginPass(a);
+			break;
 		case (byte)3://Withdraw Data
 			withdraw(a);
-		showCurrentItems(showCurrentItemsMenu(), a);
-		loginPass(a);
-		break;
+			showCurrentItems(showCurrentItemsMenu(), a);
+			loginPass(a);
+			break;
 		case 5://Log out
 			mainMenu(showMainMenu());
 			break;
 		case (byte)4://Administrator Options
 			if(a.getRole() == ROLES.get("admin")) {
-				adminOptions(a);
+				adminOptions(showAdminOptionsMenu(), a);
 				break;
 			}
 		default://incorrect input
@@ -137,23 +147,29 @@ public class Crypt {
 		switch(input) {
 		case 1: //Approve user		
 			HashMap<String, Account> unapprovedAccounts = new HashMap<>();
-			
-			for( Account a2 : accounts) 
+
+			for( Account a2 : accounts.values()) 
 			{ 
 				if(!a2.isApproved()) 
 				{ 
 					unapprovedAccounts.put(a2.getUsername(), a2); 
 				} 
-				approveAccounts(showApproveAccountsMenu(unapprovedAccounts.keySet()), unapprovedAccounts);
-				
 			}
-			
+			if(!unapprovedAccounts.isEmpty())
+				approveAccounts(showApproveAccountsMenu(unapprovedAccounts.keySet()), unapprovedAccounts);
+			else {
+				System.out.println("There are currently no accounts awaiting approval.");
+			}
+			adminOptions(showAdminOptionsMenu(), a);
 			break;
 		case 2://Search accounts
-			break;
+			System.out.println("Not implemented in this version");
+			//break;
 		case 3://Change user account info
-			break;
+			System.out.println("Not implemented in this version");
+			//break;
 		case 4://Return to previous menu
+			loginPass(a);
 			break;
 		default://no matching input
 			noMatch();
@@ -162,25 +178,21 @@ public class Crypt {
 	}
 
 	private void approveAccounts(byte input, HashMap<String, Account> unapprovedAccounts) {
-		System.out.println("(" + (unapprovedAccounts.size() + 1) +") All of the above.");
-		if(input > 0 && input <= unapprovedAccounts.size()) {
-			accounts.get(
-					accounts.indexOf(
-							unapprovedAccounts.keySet().toArray()[input]))
-									.setApproved(true);
-		} else if(input == unapprovedAccounts.size() + 1) {
-			accounts.forEach( a -> a.setApproved(true));
-			for(Account a : accounts) {
-				if(!a.isApproved())a.setApproved(true);
-			}
-		}else {
-			
+		if(input > 0 && input <= unapprovedAccounts.size()) { //Choosing any one particular account to approve
+			accounts.values().toArray(new Account[accounts.values().size()])[input].setApproved(true);
+		} else if(input == unapprovedAccounts.size() + 1) { //Choosing all of the above
+			accounts.values().forEach( a -> a.setApproved(true));
+			//for(Account a : accounts.values()) { if(!a.isApproved())a.setApproved(true); }
+		}else { //No matching input. Reshowing unapproved accounts menu
+			noMatch();
+			approveAccounts(showApproveAccountsMenu(unapprovedAccounts.keySet()), unapprovedAccounts);
 		}
 	}
 
 	private byte showApproveAccountsMenu(Set<String> keySet) {
 		String[] s = new String[keySet.size()]; 
-		s = keySet.toArray(s);
+		s = keySet.toArray(new String[keySet.size() + 1]);
+		s[s.length - 1] = "All of the above.";
 		return Input.showMenu("These accounts are waiting for approval.", s);
 	}
 
@@ -271,11 +283,13 @@ public class Crypt {
 
 	}
 
-
 	private boolean testUserPass(Account a) {
-		if(!userPassInfo.get(a.getUsername()).equals(a.getPassword())) { return false; }
-		else { return true; }
+		if(!userPassInfo.containsKey(a.getUsername())
+				&& 
+				!userPassInfo.get(a.getUsername()).equals(a.getPassword())) 
+		{ return false; } else { return true; }
 	}
+
 
 	private Account createAccount() {
 		Account a = userPass();
@@ -317,15 +331,15 @@ public class Crypt {
 		Account a = new Account();
 
 		System.out.print("Username: ");
-		a.setUsername(Input.getInputString());
+		a.setUsername(Input.getInputString().toLowerCase());
 		System.out.print("Password: ");
 		a.setPassword(Input.getInputString());
 		return a;
 	}
 
 	private static void testAdminExist() {
-		if(accounts.isEmpty() || !accounts.get(0).getUsername().equals("Austin")) 
-		{ accounts.add(new Account("Austin", "bobbert", ROLES.get("admin"))); }
+		if(accounts.isEmpty() || !accounts.keySet().contains("Austin")) 
+		{ accounts.put("austin", new Account("austin", "bobbert", ROLES.get("admin"))); }
 	}
 
 	private void noMatch() { System.out.println("Input did not correspond to "

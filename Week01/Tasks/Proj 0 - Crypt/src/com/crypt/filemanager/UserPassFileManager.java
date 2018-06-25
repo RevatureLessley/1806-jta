@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.crypto.*;
 
-public class UserPassFileManager extends FileManager<ArrayList<Account>> {
+public class UserPassFileManager extends FileManager<HashMap<String, Account>> {
 
 	public UserPassFileManager(String fileName) {
 		super(fileName);
@@ -16,23 +16,23 @@ public class UserPassFileManager extends FileManager<ArrayList<Account>> {
 	}
 
 	@Override
-	public void writeObject(ArrayList<Account> t) {
+	public void writeObject(HashMap<String, Account> t) {
 		//TODO: Make an encryptor class to handle password encryption
 		//Cipher c = Cipher.getInstance("AES");
 		super.writeObject(t);
 	}
 
 	@Override
-	public ArrayList<Account> readObject() {
+	public HashMap<String, Account> readObject() {
 		// TODO Make a Decryptor class to decrypt password.
 		return super.readObject();
 	}
 
-	public HashMap<String, String> fillUserPassInfo(List<Account> accounts) {
+	public HashMap<String, String> fillUserPassInfo(HashMap<String, Account> accounts) {
 		HashMap<String,String> userPassInfo = new HashMap<>();
 		userPassInfo.put("", "");
 		if(accounts.isEmpty())return userPassInfo;
-		for(Account a : accounts) { userPassInfo.put(a.getUsername(), a.getPassword()); }
+		for(Account a : accounts.values()) { userPassInfo.put(a.getUsername(), a.getPassword()); }
 		return userPassInfo;
 	}
 	
