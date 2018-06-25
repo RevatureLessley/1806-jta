@@ -1,4 +1,6 @@
 package com.bank.main;
+
+import org.apache.log4j.Logger;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,13 +14,15 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Bank {
-	
+	final static Logger logger = Logger.getRootLogger();
 	static final Scanner sc = new Scanner(System.in);
 	public static File file = new File("users.ser");
 	
 	public static void main(String[] args) {
 		Bank bank = new Bank();
+		logger.info("Starting program");
 		bank.runProgram();
+		logger.info("End of program.");
 	}
 	
 	/**
@@ -28,8 +32,10 @@ public class Bank {
 	public void runProgram() {
 		// If file containing users does not exist or is empty, create an admin account
 		if(!file.isFile() || file.length() == 0) {
+			logger.info("No users registered.");
 			System.out.println("There are no users registered. You must register"
 					+ "an admin account.");
+			logger.info("Calling register method");
 			register();
 		} 
 		
@@ -44,6 +50,7 @@ public class Bank {
 	 * @param user current user's data, needed to update its information.
 	 */
 	public void adminMenu() {
+		logger.info("Displaying administrator menu.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 if you want to approve users, "
@@ -70,11 +77,12 @@ public class Bank {
 	 * Method only available to administrators, it prints all existing users.
 	 */
 	public void printUsers() {
+		logger.info("Printing users.");
 		System.out.println("==========");
 		Users myUserss = null;
 		try {
 			ObjectInputStream ois = new ObjectInputStream(
-					new FileInputStream("users.ser"));
+					new FileInputStream(file));
 			myUserss = (Users)ois.readObject();
 			ois.close();
 		} catch (EOFException e) {
@@ -93,6 +101,7 @@ public class Bank {
 	 * @param user current user's data, needed to update its information.
 	 */
 	public void userMenu(User user) {
+		logger.info("Displaying menu for regular users.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 if you want to add money to your account, "
@@ -119,6 +128,7 @@ public class Bank {
 	 * Displays the initial menu (login, register, quit).
 	 */
 	public void initialMenu() {
+		logger.info("Displaying initial menu.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 to login, enter 2 to register, 3 to exit the program.");
@@ -154,6 +164,7 @@ public class Bank {
 	 * regular users.
 	 */
 	public void login() {
+		logger.info("Beginning of login method");
 		System.out.println("Enter your email:");
 		String email = sc.next();
 		System.out.println("Enter your password:");
@@ -166,9 +177,11 @@ public class Bank {
 			//System.out.println(newUser.getEmail());
 			if(loginUser.getEmail().equals(email) && loginUser.getPassword().equals(password)) {
 				if (!loginUser.isApproved()) {
+					logger.info("User has not been approved yet.");
 					System.out.println("Your account has not been approved, yet. Please "
 							+ "come back later.");
 				} else {
+					logger.info("User has logged in succesfully.");
 					System.out.println("Logged in successfully");
 					// If user is admin, then approve users
 					if(loginUser.getRole() == 2) {
@@ -190,12 +203,13 @@ public class Bank {
 	 * @return returns an array list containing all the users data
 	 */
 	public ArrayList<User> deserializeUsers(){
+		logger.info("Deserializing users.");
 		Users deserializedUsers = null;
 		
 		// Deserialize Users
 		try {
 			ObjectInputStream ois = new ObjectInputStream(
-					new FileInputStream("users.ser"));
+					new FileInputStream(file));
 			deserializedUsers = (Users)ois.readObject();
 			ois.close();
 		} catch (IOException e) {
@@ -214,6 +228,7 @@ public class Bank {
 	 * users that registered recently.
 	 */
 	public void approveUser() {
+		logger.info("Beginning of approveUser method.");
 		// Deserialize Users
 		 ArrayList<User> existingUsers = deserializeUsers();
 
@@ -236,10 +251,12 @@ public class Bank {
 				switch (choice) {
 				case 1:
 					iterUser.setApproved(true);
+					logger.info("User has been approved.");
 					break;
 
 				case 2:
 					iter.remove();
+					logger.info("User has been rejected.");
 					break;
 					
 				default:
@@ -250,6 +267,7 @@ public class Bank {
 		}
 		serializeUsers(existingUsers);
 		System.out.println("You are done! There are no users waiting to be approved!");
+		logger.info("There are no users waiting to be approved.");
 	}
 	
 	/**
@@ -259,6 +277,7 @@ public class Bank {
 	 * @param user the user that will be updated
 	 */
 	public void addMoney(User user) {
+		logger.info("Beginning of function to add money.");
 		BigDecimal currentBalance = user.getBalance();
 		if(currentBalance == null) {
 			currentBalance = new BigDecimal(0);
@@ -267,18 +286,21 @@ public class Bank {
 		System.out.println("How much money do you want to add?");
 		BigDecimal amount = sc.nextBigDecimal();
 		if (!validCardNumber(user.getCardNumber())) {
+			logger.info("There's not a valid card registered.");
 			int cardNum = 0;
 			do{
 				System.out.println("Please enter a valid card number: ");
 				cardNum = sc.nextInt();
 			} while(!validCardNumber(cardNum));
 			user.setCardNumber(cardNum);
+			logger.info("Set new card number.");
 		}
 		
 		currentBalance = currentBalance.add(amount);
 		user.setBalance(currentBalance);
 		updateUser(user);
 		System.out.println("Your new balance is " + user.getBalance());
+		logger.info("Added money successfully.");
 	}
 	
 	/**
@@ -287,6 +309,7 @@ public class Bank {
 	 * @param user
 	 */
 	public void withdrawMoney(User user) {
+		logger.info("Beginning of function to withdraw money.");
 		BigDecimal currentBalance = user.getBalance();
 		if(currentBalance == null) {
 			currentBalance = new BigDecimal(0);
@@ -294,15 +317,30 @@ public class Bank {
 		System.out.println("Your current balance is " + currentBalance);
 		System.out.println("How much money do you want to withdraw?");
 		BigDecimal amount = sc.nextBigDecimal();
-		if (currentBalance.compareTo(amount) < 0) {
+		if (!enoughMoneyToWithdraw(user, amount)) {
 			System.out.println("You don't have enough funds.");
+			logger.info("User has not enough funds to withdraw money.");
 		} else {
 			currentBalance = currentBalance.subtract(amount);
 			user.setBalance(currentBalance);
 			updateUser(user);
 			System.out.println("Please, take your money.");
 			System.out.println("Your new balance is " + user.getBalance());
+			logger.info("User has withdrawn money successfully.");
 		}
+	}
+	
+	/**
+	 * Checks if an user has enough funds to withdraw the amount requested.
+	 * @param user the user's information to access current balance
+	 * @param amount requested amount to withdraw
+	 * @return true if the user has enough funds, else false
+	 */
+	public boolean enoughMoneyToWithdraw(User user, BigDecimal amount) {
+		if(user.getBalance().compareTo(amount) < 0) {
+			return false;
+		}
+		return true;
 	}
 	
 	/**
@@ -312,6 +350,7 @@ public class Bank {
 	 * @param user the user to be updated
 	 */
 	public void updateUser(User user) {
+		logger.info("Beginning of method to deserialize users.");
 		// Deserialize Users
 		ArrayList<User> existingUsers = deserializeUsers();
 		// Check if user already exists (compare email address)
@@ -325,6 +364,7 @@ public class Bank {
 			}
 		}
 		serializeUsers(existingUsers);
+		logger.info("Users deserialized succesfully.");
 	}
 	
 	/**
@@ -336,8 +376,10 @@ public class Bank {
 		String pattern = "\\d{10}";
 		String numString = Integer.toString(cardNum);
 	    if (numString.matches(pattern)) {
+	    	logger.info("Card number is valid.");
 			return true;
 		}
+	    logger.info("Card number is invalid.");
 		return false;
 	}
 	
@@ -346,10 +388,11 @@ public class Bank {
 	 * @param userList array list containing the users to be serialized.
 	 */
 	public void serializeUsers(ArrayList<User> userList) {
+		logger.info("Beginning of method that serializes users");
 		ObjectOutputStream oos = null;
 		try{
 			oos = new ObjectOutputStream(
-										new FileOutputStream("users.ser"));
+										new FileOutputStream(file));
 			Users users = new Users(userList);
 			// Serialize
 			oos.writeObject(users);
@@ -357,6 +400,7 @@ public class Bank {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+		logger.info("Users serialized succesfully.");
 	}
 	
 	/**
@@ -364,6 +408,7 @@ public class Bank {
 	 * Otherwise it deserializes the data, adds the new data, and finally serializes again.
 	 */
 	public void register() {
+		logger.info("Beginning of method to register an user.");
 		System.out.println("Enter your first name:");
 		String fname = sc.next();
 		System.out.println("Enter your last name:");
@@ -382,6 +427,7 @@ public class Bank {
 			listUsers.add(newUser);
 			// Serialize users
 			serializeUsers(listUsers);
+			logger.info("Created admin account.");
 		}
 		
 		// Otherwise, if file already has users
@@ -402,6 +448,7 @@ public class Bank {
 			serializeUsers(existingUsers); // serialize users
 			System.out.println("Thank you for registering! You have to be approved by an "
 					+ "admin first. Check back later!");
+			logger.info("Created user account.");
 		}
 	}
 
