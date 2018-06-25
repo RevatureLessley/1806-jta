@@ -2,11 +2,15 @@ package com.revature.project0.bankaccount;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthStyle;
-
 import org.apache.log4j.Logger;
-
+/**
+ * 
+ * In Second Menu it has the bulk of the methods that make the bank work such as deposit, balance, withdraw and introuductin menus
+ * @author Zachary Diaz
+ *
+ */
 public class SecondMenu {
+	final static int adminPassword = 118034; // admin password s not completely set up need to fix
 	final static Logger logger = Logger.getLogger(SecondMenu.class);
 	public static double balance;
 	public static double balance2;
@@ -22,15 +26,13 @@ public class SecondMenu {
 	private static double pay3;
 	public static double temp;
 	
-	
-	static String customerName;
-	static String accountNumber;
-	
-
+	// all of these above is due to me having to hard code the amount of account that i have i plan to get ride of this at a latter time
 	public SecondMenu() {
-		
 	}
-
+	/**
+	 * deposit takes the customers money and adds it to there account and then sets up a receipt
+	 * @param dc
+	 */
 	public static void deposit(double dc) {
 		if(temp ==1) {	
 		
@@ -50,7 +52,10 @@ public class SecondMenu {
 			}
 		}
 	}
-	
+	/**
+	 * withdraw lets the customer take money from there account and sets up a receipt
+	 * @param dc
+	 */
 	public static void withdraw(double dc ) {
 		if(temp == 1) {
 			if(dc != 0) {
@@ -70,33 +75,65 @@ public class SecondMenu {
 		}
 		
 	}
-	//////////////////////////////////////////////
+	/**
+	 * addToBank takes all the accounts and add them together and the existing balance of the back and returns the total 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param d
+	 * @return
+	 */
 	public static double addToBank(double a,double b, double c,double d ){		
 		return (a+ b + c + d);
 	}
+	/**
+	 * loanIntrest sets up the loan info for the account user when they need a laon
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double loanIntrest(double a,double b){
 		return( (a * b) + a);
 	}
+	/**
+	 * transferOut sets up a transfer to another account and subtracts form there account balance
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double transferOut(double a,double b){
 		return( a - b);
 	}
+	/**
+	 * transferIn sets up receiving a transfer from another account and adds to there account balance
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static double transferIn(double a,double b){
 		return( a + b);
 	}
-	
-	//////////////////////////////////////
+	/**\
+	 * subFromBank sets up when an account user is withdrawing from there account and takes from both there balance and the banks balance
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public int subFromBank(int a, int b){
 		return a - b;
 	}
-
+	/**
+	 * getReceipt sets up a receipt method. when called outputs what has happen
+	 * @return
+	 */
 	public double getReceipt() {
 		if(temp == 1) {
 			if(receipt > 0){
-				System.out.println("You Deposited " + receipt +  " today.");
+				System.out.println("You Deposited " + receipt +  " today.");			// Deposit
 			}else if(receipt < 0){
-				System.out.println("You Withdraw " + Math.abs(receipt) + " today.");
+				System.out.println("You Withdraw " + Math.abs(receipt) + " today.");	// Withdraw
 			}else {
-				System.out.println("You decided to do nothing today.");
+				System.out.println("You decided to do nothing today.");					//just in case one of the two arnt selected
 			}
 			
 		}else if(temp == 2) {
@@ -119,35 +156,31 @@ public class SecondMenu {
 		
 		return receipt;
 	}
-
-	public void setReceipt(double receipt) {
-		this.receipt = receipt;
-	}
-
+	/**
+	 * returns a balance
+	 * @return
+	 */
 	public double getBalance() {
 		return balance;
 	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	
+	/**
+	 * showSecondMenu sets up the second menu that lets the user do actions such as check balance
+	 */
 	public static void showSecondMenu() {
-		
 		Scanner in = new Scanner(System.in);
 		int secondChoice =  0;
 		intro2();
 		secondChoice = in.nextInt();
 		switch(secondChoice){
-		default: 
+		default: // default sets up an invalid entry
 			System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
 			logger.error(null);
 			break; 
-		case 0:
+		case 0:// case 0 exits to main menu
 			System.out.println(" Please come again.");
-			BankMenu.menu(1);
+			BankMenu.menu();
 			break;
-		case 1:
+		case 1://case 1 sets up deposit with if statments
 			System.out.println(" How much would you like to deposit?");
 			System.out.println("====================================");
 			if(temp ==1) {
@@ -169,25 +202,25 @@ public class SecondMenu {
 				showSecondMenu();
 				break;
 			}
-		case 2:
+		case 2: // case 2 sets up customer withdraw
 			System.out.println(" How much do you want to Withdraw ");
 			System.out.println("====================================");
 			double dc2 = in.nextDouble();
 			if(temp ==1) {
-				if(dc2 < balance) {
+				if(dc2 <= balance) {
 					withdraw(dc2);
 					System.out.println("You Withdraw: " + dc2 + "");
 				}else
 					System.out.println("Insuffcient funds");			
 				showSecondMenu();
 			}else if(temp == 2) {
-				if(dc2 < balance2) {
+				if(dc2 <= balance2) {
 					withdraw(dc2);
 					System.out.println("You Withdraw: " + dc2 + "");
 					}
 				showSecondMenu();
 			}else if(temp == 3) {
-				if(dc2 < balance3) {
+				if(dc2 <= balance3) {
 					withdraw(dc2);
 					System.out.println("You Withdraw: " + dc2 + "");
 					}
@@ -197,7 +230,7 @@ public class SecondMenu {
 				}
 				showSecondMenu();	
 			break;
-		case 3:
+		case 3:// case 3 sets up checks balance and account info
 			if(temp ==1) {
 				System.out.println(" Your Balance is:  " + (balance ) + "$");	
 				System.out.println("You also owe the bank " + (loanIntrest(loan,0.20) - pay1));
@@ -214,7 +247,7 @@ public class SecondMenu {
 				showSecondMenu();
 				break;
 			}
-		case 4:
+		case 4:// case 4 sets up initial loan agreement 
 			System.out.println("How much would you like for a loan? ");
 			loan = in.nextDouble();
 			System.out.println("PLease stand by for admin password ");
@@ -262,7 +295,7 @@ public class SecondMenu {
 				System.out.println("we can not approve you for a loan at this time please try at a latter date ");
 				showSecondMenu();
 			}break;
-		case 5:
+		case 5: // case 5 sets up loan pay back
 			if(temp ==1) {
 				System.out.println("Yoa owe the bank " + loanIntrest(loan,0.20));
 				System.out.println("how much will you pay off today?");
@@ -275,7 +308,7 @@ public class SecondMenu {
 						System.out.println("You owe the back " + (loanIntrest(loan,0.20) - pay1));
 						showSecondMenu();
 					}else {
-						System.err.println("YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
 						showSecondMenu();
 					}
 				}else
@@ -292,7 +325,7 @@ public class SecondMenu {
 						System.out.println("You owe the back " + (loanIntrest(loan2,0.20) - pay2));
 						showSecondMenu();
 					}else {
-						System.err.println("YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
 						showSecondMenu();
 					}					
 				}
@@ -309,14 +342,14 @@ public class SecondMenu {
 						System.out.println("You owe the back " + (loanIntrest(loan3,0.20) - pay3));
 						showSecondMenu();
 					}else {
-						System.err.println("YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
+						System.err.println("Insuficiant Funds:YOU CAN NOT OVER DRAW YOU ACCOUNT!!!!");
 						logger.error(null);
 						showSecondMenu();
 					}
 				}else
 					showSecondMenu();
 			}
-		case 6:
+		case 6:// case 6 sets up transfer in and out
 			System.out.println("What is tha account number you would like to transfer to?");
 			int transfer = in.nextInt();
 			System.out.println("How much do you want to transfer?");
@@ -434,7 +467,7 @@ public class SecondMenu {
 		System.out.println("     Transfer to another account 		press 6");
 		System.out.println("     If you want to exit 			press 0" + "\n");
 	}
-	public static void intro3() {
+	public static void intro3(){
 		
 	}
 

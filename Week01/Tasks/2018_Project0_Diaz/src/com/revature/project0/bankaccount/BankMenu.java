@@ -6,21 +6,27 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
-
+/**
+ * Class BankMenu sets up the first menu to take usser input and it extends
+ * SecondMenu to grab the information form the Supper Class
+ * @author Zachary Diaz
+ *
+ */
 public class BankMenu extends SecondMenu{
+	
 	final static Logger logger = Logger.getLogger(BankMenu.class);
-	
-	private static int adminPassword = 118034;
-	private static double revatureTransUnion = 1_000_000;
-	private static int i = 0;
-	public BankMenu(){
+	private static double revatureTransUnion = 1_000_000;// The starting amount the bank has in its vault
+	private static int i = 0;// sets up a count for the number of accounts that is currently set 
+	Scanner in = new Scanner(System.in);// useer input
+	/**
+	 * menu is to take set up the three accounts ready to be save into an array 
+	 * and then implements the first menu
+	 */
+	public static void menu() {
+		Scanner in = new Scanner(System.in);// useer input
+		int firstChoice =  0; // this int is for the switch statement
 		
-	}
-	
-	public static void menu(int j) {
-		Scanner in = new Scanner(System.in);
-		int firstChoice =  0;
-		
+		//user accounts is only set up for a max of three, have not figured out how to make this easier
 		
 		NewAccount[] test = {
 				new NewAccount(NewAccount.getFname(),NewAccount.getlName(),NewAccount.getAddress(),NewAccount.getPhone())		
@@ -40,7 +46,7 @@ public class BankMenu extends SecondMenu{
 		logger.debug(test3);
 		
 		
-		try{
+		try{	// all try catch methods here help serilize the information into arrays 
 			ObjectOutputStream oos = new ObjectOutputStream(
 										new FileOutputStream("TransUnion.txt"));
 			oos.writeObject(union); 
@@ -62,19 +68,19 @@ public class BankMenu extends SecondMenu{
 			e.printStackTrace();
 		}
 		
-		intro();
-		do {
+		intro();					// intro is at the bottom of SecondMenue class
+		do {						// Do while statement sets up the first switch that will show the menu and its possibilities
 		firstChoice = in.nextInt();
 		switch(firstChoice){
-		default: 
+		default: // default case
 			System.err.println(" Invalid entry please try again later. Pleaese try agan. ");
 			logger.error(null);
 			break; 
-		case 0:
+		case 0:// case 0 logs out of application for some reason i have to exit three times to complete get out of application 
 			System.out.println("     Please come again.");
 			logger.error(null);
 			break;
-		case 1:
+		case 1:// case 1 logs into account must know account info that is displayed when creating the account
 			System.out.println(" What is you Account Number?");
 			temp = in.nextInt();
 			if( temp == 1) {
@@ -101,19 +107,17 @@ public class BankMenu extends SecondMenu{
 				System.err.println("Invaled entry returning to manin menu"+ "\n");
 			}
 		
-			menu(1);
+			menu();
 			break;
-		case 2:
-			
+		case 2:// case 2 is to create account and for it to be approved by the admin			
 			System.out.println(" Thanks for choseing Revature TransUnion.");
-			if(i == 0){
+			if(i == 0){// creates account 1
 				SecondMenu.temp = 1;
 				i++;
 				NewAccount.userInfor();
 				System.out.println("Admin is checking you account info PLease stand by.....");
-				///NEED TO ADD ADMIN INFO
-				adminPassword = in.nextInt();
-				if(adminPassword == 118034) {
+				int password = in.nextInt();
+				if(password == adminPassword) {
 				System.out.println("This is your new account");
 				System.out.println(union);
 				System.out.println("Your account number is 1");
@@ -125,15 +129,15 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 0;
 				}
-				menu(1);
-			}else if (i == 1) {
+				menu();
+			}else if (i == 1) {// creates account 2
 				SecondMenu.temp = 2;
 				i++;
 				NewAccount2.userInfor2();
 				System.out.println("Admin is checking you account info PLease stand by.....");
 				///NEED TO ADD ADMIN INFO
-				adminPassword = in.nextInt();
-				if(adminPassword == 118034) {
+				int password = in.nextInt();
+				if(password == adminPassword) {
 				System.out.println("This is your new account");
 				System.out.println(union2);
 				System.out.println("Your account number is 2");
@@ -145,15 +149,14 @@ public class BankMenu extends SecondMenu{
 					System.out.println("You have not been aproved, try agin at a latter date");
 					i = 1;
 				}
-				menu(1);
-			}else if(i == 2){
+				menu();
+			}else if(i == 2){ //Creates account 3
 				SecondMenu.temp = 3;
 				i++;
 				NewAccount3.userInfor3();
 				System.out.println("Admin is checking you account info PLease stand by.....");
-				///NEED TO ADD ADMIN INFO
-				adminPassword = in.nextInt();
-				if(adminPassword == 118034) {
+				int password = in.nextInt();
+				if(password == adminPassword) {
 				System.out.println("This is your new account");
 				System.out.println(union3);
 				System.out.println("Your account number is 3");
@@ -165,48 +168,58 @@ public class BankMenu extends SecondMenu{
 					System.err.println("You have not been aproved, try agin at a latter date");
 					i = 2;
 				}
-				menu(1);
-			}else {
+				menu();
+			}else {// since at this point there is already three accounts created and the bank can only have 3 accounts right know alerts the admin
 				System.err.println("Contact Adnin back servers are out of sapce");
 				logger.error(null);
-				menu(1);
+				menu();
 			}
 			break;
-		case 3:
-			
-			
-			System.out.println("=====Hello Admin please enter you password=====");
-			adminPassword = in.nextInt();
-			if(adminPassword == 118034) {
-			System.out.println("====What would you like to do Today boss====");
-			System.out.println("Press 0		How Much money does Revature TransUnionhave ");
-			System.out.println("Press 1 	To see all accounts on the Server");
-			int menu2 = in.nextInt();
-			switch(menu2){
-			default: 
-				System.out.println(" Invalid entry please try again later. Pleaese try agan. ");
-				break; 
-			case 0:
-				
-				System.out.println("We currentle have: " );
-				System.out.println(SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3));
-				System.out.println("\n");
-				menu(1);
-				break;
-			case 1:
-				System.out.println("All acounts");
-				System.out.println(union+"[Balance = "+balance+"]");
-				System.out.println(union2+"[Balance = "+balance2+"]");
-				System.out.println(union3+"[Balance = "+balance3+"]");
-				menu(1);
-				break;	
+		case 3:// case allows you into the admin area	
+			intro3();
+			int z = 0;
+			System.out.println("============Hello Admin please enter you password============");
+				int password = in.nextInt();
+				if(password == adminPassword) {
+					do{				
+						System.out.println("=============What would you like to do Today boss=============");
+						System.out.println("Press 0		How Much money does Revature TransUnionhave ");
+						System.out.println("Press 1 	To see all accounts on the Server");
+						System.out.println("Press 2  	To log out");
+						int menu2 = in.nextInt();
+						switch(menu2){// this case statement needs to moved if i get time
+						default: 
+							System.err.println(" Invalid entry please try again later. ");
+							break; 
+						case 0:
+							System.out.println("We currentle have: " );
+							System.out.println(SecondMenu.addToBank(revatureTransUnion,balance, balance2, balance3));
+							System.out.println("\n");
+							break;
+						case 1:
+							System.out.println("All acounts");
+							System.out.println(union+"[Balance = "+balance+"]");
+							System.out.println(union2+"[Balance = "+balance2+"]");
+							System.out.println(union3+"[Balance = "+balance3+"]");
+							System.out.println("\n");
+							break;	
+						case 2:
+							System.out.println("Good bye Boss");
+							System.out.println("\n");
+							menu();
+							break;	
+						}
+					}while(z == 0);
+					
+				}else {
+					System.err.println("Access Denied!!!!!");
+					logger.error(null);
+					menu();
 				}
-			}else {
-				System.err.println("Access Denied!!!!!");
-				logger.error(null);
-				menu(1);
-			}
-			break;
+					
+			
+			
+			
 		}
 		
 		

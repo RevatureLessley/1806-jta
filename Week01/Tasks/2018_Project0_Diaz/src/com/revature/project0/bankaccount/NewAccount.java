@@ -2,7 +2,12 @@ package com.revature.project0.bankaccount;
 
 import java.io.Serializable;
 import java.util.Scanner;
-
+/**
+ * NewAccount sets up account number one and uses Serializable to store the account information 
+ * also uses a toString to ouput the data
+ * @author Zachary Diaz
+ *
+ */
 public class NewAccount implements Serializable{
 	
 	/**
@@ -57,7 +62,9 @@ public class NewAccount implements Serializable{
 		super();
 		
 	}
-	
+	/**
+	 * userInfo is the text menu for taking in the account information 
+	 */
 	public static void userInfor() {
 		System.out.println("=========================");
 		System.out.println("What is your first name ");
