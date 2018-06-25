@@ -31,7 +31,7 @@ public class ModelControllerTest {
 
 		act1 = new Account(user, "act1", 0);
 		act2 = new Account(user, "act2", 0);
-		
+
 		userController = MasterController.getUserController();
 		accountController = MasterController.getAccountController();
 	}
@@ -44,7 +44,7 @@ public class ModelControllerTest {
 
 	@Test
 	public void testAccountController() {
-		
+
 		assertEquals(0, accountController.getNextNumber());
 		assertEquals(1, accountController.getNextNumber());
 
@@ -63,6 +63,25 @@ public class ModelControllerTest {
 	}
 
 	@Test
+	public void testInterest() {
+
+		// admin account never goes on wait
+		Account a = accountController.addNewAccount(admin, 1);
+		a.deposit(5000);
+
+		accountController.applyInterest();
+		assertEquals(5000.0, a.getBalance(), .0001);
+		
+		accountController.applyInterest(365);
+		System.out.println(a.getBalance());
+		
+		
+		assertTrue(5000.0 < a.getBalance());
+
+		System.out.println(a.getBalance());
+	}
+
+	@Test
 	public void testUserController() {
 		assertTrue(userController.checkUsernameAvailable("user"));
 		userController.addUser("user", "xxxxxx");
@@ -71,12 +90,12 @@ public class ModelControllerTest {
 
 	@Test
 	public void testAccount() {
-		
+
 		assertEquals(0.0, act1.getBalance(), 0.0001);
-		
+
 		act1.deposit(500.0);
 		assertEquals(500.0, act1.getBalance(), 0.0001);
-		
+
 		act1.withdraw(750.0);
 		assertEquals(-250.0, act1.getBalance(), 0.0001);
 	}
@@ -88,12 +107,12 @@ public class ModelControllerTest {
 
 		user.addAccount(act1);
 		user.addAccount(act2);
-		
+
 		act1.deposit(500.0);
 		act2.deposit(500.0);
-		
+
 		assertEquals(1000.0, user.totalBalance(), 0.0001);
-		
+
 	}
 
 }

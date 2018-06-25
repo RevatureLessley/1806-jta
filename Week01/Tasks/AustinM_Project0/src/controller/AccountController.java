@@ -1,12 +1,16 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
 import model.Account;
+import model.LoanAccount;
 import model.User;
+import java.time.temporal.ChronoUnit;
 
 public final class AccountController implements Serializable {
 
@@ -16,6 +20,8 @@ public final class AccountController implements Serializable {
 	private int nextAcctNum = 0;
 	private static Logger logger = Logger.getLogger(AccountController.class);
 
+	private LocalDateTime lastInterestDate;
+
 	/**
 	 * AccountController constructor generates two empty lists for validated and
 	 * unvalidated accounts
@@ -23,6 +29,8 @@ public final class AccountController implements Serializable {
 	AccountController() {
 		unvalidatedAccounts = new ArrayList<Account>();
 		validatedAccounts = new ArrayList<Account>();
+
+		lastInterestDate = LocalDateTime.now();
 	}
 
 	/**
@@ -35,8 +43,9 @@ public final class AccountController implements Serializable {
 		account.setValidated(true);
 		unvalidatedAccounts.remove(account);
 		validatedAccounts.add(account);
-		
-		logger.info("Account " + account.getName() + " belonging to " + account.getOwnerName() + " has been validated.");
+
+		logger.info(
+				"Account " + account.getName() + " belonging to " + account.getOwnerName() + " has been validated.");
 	}
 
 	/**
@@ -67,7 +76,7 @@ public final class AccountController implements Serializable {
 		String name = Account.getTypeName(type) + " " + getNextNumber();
 		Account account = new Account(user, name, type);
 		user.addAccount(account);
-		
+
 		logger.info("New account " + name + " created for user " + user.getName());
 
 		if (account.getOwner().isAdmin()) {
@@ -75,8 +84,25 @@ public final class AccountController implements Serializable {
 			account.setValidated(true);
 		} else
 			unvalidatedAccounts.add(account);
-		
+
 		return account;
+	}
+
+	public Account addNewLoan(User user, double borrow, Account a) {
+		String name = Account.getTypeName(Account.LOAN) + " " + getNextNumber();
+		Account account = new LoanAccount(user, name, Account.LOAN, borrow, a);
+		user.addAccount(account);
+
+		logger.info("New account " + name + " created for user " + user.getName());
+
+		if (account.getOwner().isAdmin()) {
+			validatedAccounts.add(account);
+			account.setValidated(true);
+		} else
+			unvalidatedAccounts.add(account);
+
+		return account;
+
 	}
 
 	/**
@@ -104,4 +130,40 @@ public final class AccountController implements Serializable {
 	public int getNextNumber() {
 		return nextAcctNum++;
 	}
+
+	/**
+	 * Calculate the number of days (using minutes for simulation purposes) since
+	 * interest was last applied and apply interest to all validated accounts
+	 */
+	public void applyInterest() {
+		LocalDateTime currDate = LocalDateTime.now();
+		long days = ChronoUnit.MINUTES.between(lastInterestDate, currDate);
+
+		if (days <= 0)
+			return;
+
+		logger.info("Applying interest; " + days + " compounding periods to all validated accounts");
+		applyInterest(days);
+
+		lastInterestDate = currDate;
+	}
+
+	/**
+	 * Apply interest to all validated accounts
+	 */
+	public void applyInterest(long days) {
+		for (Account a : validatedAccounts) {
+			a.applyInterest(days);
+		}
+	}
+	
+	public void removeAccount(Account a) {
+		if(unvalidatedAccounts.contains(a))
+			unvalidatedAccounts.remove(a);
+		else if(validatedAccounts.contains(a))
+			validatedAccounts.remove(a);
+		
+		a.getOwner().removeAccount(a);
+	}
+
 }

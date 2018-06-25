@@ -91,6 +91,8 @@ public class Driver {
 		userController = MasterController.getUserController();
 		accountController = MasterController.getAccountController();
 
+		accountController.applyInterest();
+
 		return Phase.Login;
 	}
 
@@ -126,9 +128,9 @@ public class Driver {
 
 	private Phase executeRegisterPhase() {
 
-		System.out
-				.println("Usernames may not include any spaces and must be at least 4 characters. Type '\\c' to cancel");
-	
+		System.out.println(
+				"Usernames may not include any spaces and must be at least 4 characters. Type '\\c' to cancel");
+
 		String name = null;
 		boolean valid = false;
 
@@ -244,7 +246,7 @@ public class Driver {
 	private Phase executeUserOpenAccount() {
 
 		System.out.println("Select an account type ");
-		printOptions(true, "Checking", "Savings", "Cancel");
+		printOptions(true, "Checking", "Savings", "Loan", "Cancel");
 		int input = getOption();
 
 		if (input == 1 || input == 2) {
@@ -260,9 +262,66 @@ public class Driver {
 			}
 
 			enterWait();
+		} else if (input == 3) {
+
+			return executeLoanRequest();
 		}
 
 		return Phase.UserControl;
+	}
+
+	private Phase executeLoanRequest() {
+		if (activeUser.getAccountNames().length <= 0) {
+			System.out.println("You must have at least one account to take out a loan");
+			enterWait();
+			return phase;
+		}
+
+		printHeader("Welcome, Consumer. Allow us to assist you with your NEW personal loan.");
+		System.out.println("Select an amount to borrow");
+		printOptions(true, "2000", "5000", "10000", "cancel");
+		int in2 = getOption();
+
+		if (in2 <= 0 || in2 > 3) {
+			return phase;
+		}
+
+		double borrow = 0;
+
+		switch (in2) {
+		case 1:
+			borrow = 2000;
+			break;
+		case 2:
+			borrow = 5000;
+			break;
+		default:
+			borrow = 10000;
+		}
+
+		System.out.println("Where would you like us to put these new finances?");
+		printOptions(false, activeUser.getAccountNames());
+		int in3 = getOption() - 1;
+
+		Account a = activeUser.getAccount(in3);
+
+		if (a != null) {
+			if (!a.isValidated())
+				return null;
+
+			if (activeUser.isAdmin())
+				System.out.println("Thank you, Sir. Your loan will go into effect immediately.");
+			else
+				System.out.println(
+						"Thank you for using The Westward Banking Service. An Admin will validate your request promptly.");
+
+			accountController.addNewLoan(activeUser, borrow, a);
+
+			enterWait();
+			return phase.UserControl;
+		}
+
+		return null;
 	}
 
 	/**
@@ -312,6 +371,10 @@ public class Driver {
 	 * @return next major program phase to execute in the main loop
 	 */
 	private Phase executeAccountPhase() {
+
+		if (activeAccount.getType() == Account.LOAN)
+			return executeLoanPhase();
+
 		printHeader(activeAccount.toString(), "");
 
 		printOptions(true, "Withdraw", "Deposit", "Back");
@@ -337,6 +400,28 @@ public class Driver {
 		}
 
 		return phase;
+
+	}
+
+	private Phase executeLoanPhase() {
+		printHeader(activeAccount.toString(), "");
+
+		printOptions(true, "Make Payment", "Back");
+		int input = getOption();
+
+		if (input == 1) {
+			// payment
+			System.out.print("payment amount: ");
+			double amt = getDouble();
+
+			activeAccount.deposit(amt);
+
+		} else if (input == 0) {
+			// back
+			activeAccount = null;
+		}
+
+		return Phase.UserControl;
 
 	}
 
@@ -375,7 +460,18 @@ public class Driver {
 			return phase;
 		} else if (input == 3) {
 			// grant priveleges
-			// TODO
+			System.out.print("Enter a username: ");
+			String name = scanner.nextLine();
+
+			User user = userController.getUser(name);
+
+			if (user == null) {
+				return null;
+			} else {
+				System.out.println(name + " now has admin priveleges.");
+				user.setAdmin(true);
+				return Phase.UserControl;
+			}
 
 		} else if (input == 4) {
 			// user menu
@@ -422,17 +518,18 @@ public class Driver {
 			System.out.println("You have selected: " + names[waitIndex]);
 			printOptions(true, "Approved", "Deny");
 			int input = getOption();
+			Account acct = accountController.getWaitAccount(waitIndex);
 
 			if (input == 1) {
 				// approve
-				Account acct = accountController.getWaitAccount(waitIndex);
 				accountController.validateAccount(acct);
-				System.out.println(names[waitIndex] + "'s user account has been approved.");
+				System.out.println(names[waitIndex] + " has been approved.");
 				enterWait();
 				return Phase.UserControl;
 			} else if (input == 0) {
 				// deny
 				System.out.println(names[waitIndex] + "'s was denied.");
+				accountController.removeAccount(acct);
 				enterWait();
 				return Phase.UserControl;
 			}
@@ -563,6 +660,9 @@ public class Driver {
 	 * Windows machines
 	 */
 	private static void resizeConsole() {
+		if (!doClear)
+			return;
+
 		try {
 			new ProcessBuilder("cmd", "/c", "mode con cols=" + WIN_W + " lines=" + WIN_H).inheritIO().start().waitFor();
 		} catch (IOException e) {

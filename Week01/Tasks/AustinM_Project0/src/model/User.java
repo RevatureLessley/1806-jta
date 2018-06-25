@@ -125,6 +125,16 @@ public class User implements Serializable {
 	}
 
 	/**
+	 * Removes an account from the user's list of owner accounts. This is done when
+	 * a loan has been paid off, or an account is denied.
+	 * 
+	 * @param a
+	 */
+	public void removeAccount(Account a) {
+		accounts.remove(a);
+	}
+
+	/**
 	 * Returns a balance which is the sum of all accounts belonging to the user.
 	 * 
 	 * @return
@@ -152,7 +162,7 @@ public class User implements Serializable {
 	public static boolean checkPasswordValid(String password) {
 		if (password.length() < 6)
 			return false;
-		
+
 		return true;
 	}
 

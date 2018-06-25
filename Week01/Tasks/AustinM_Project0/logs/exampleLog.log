@@ -233,3 +233,247 @@
 2018-06-24 23:47:48 INFO  AccountController:71 - New account checking 3 created for user admin
 2018-06-24 23:47:48 INFO  AccountController:39 - Account checking 2 belonging to user has been validated.
 2018-06-24 23:47:48 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:02 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:02 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:02 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:02 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:03 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:03 INFO  Account:98 - Withdrawal of $750.00 made from user's act1. Final balance: ($250.00)
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:03 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:03 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:03 INFO  User:72 - Account act1 added to user's account list
+2018-06-25 09:46:03 INFO  User:72 - Account act2 added to user's account list
+2018-06-25 09:46:03 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:03 INFO  Account:87 - Deposit of $500.00 made to user's act2. Final balance: $500.00
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:03 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:03 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:03 INFO  UserController:60 - New user user created.
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:03 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:03 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:03 INFO  User:72 - Account checking 0 added to admin's account list
+2018-06-25 09:46:03 INFO  AccountController:78 - New account checking 0 created for user admin
+2018-06-25 09:46:03 INFO  Account:87 - Deposit of $5,000.00 made to admin's checking 0. Final balance: $5,000.00
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:03 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:03 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:03 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:03 INFO  User:72 - Account checking 2 added to user's account list
+2018-06-25 09:46:03 INFO  AccountController:78 - New account checking 2 created for user user
+2018-06-25 09:46:03 INFO  User:72 - Account checking 3 added to admin's account list
+2018-06-25 09:46:03 INFO  AccountController:78 - New account checking 3 created for user admin
+2018-06-25 09:46:03 INFO  AccountController:45 - Account checking 2 belonging to user has been validated.
+2018-06-25 09:46:03 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:22 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:22 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:22 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:22 INFO  Account:98 - Withdrawal of $750.00 made from user's act1. Final balance: ($250.00)
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:22 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:22 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:22 INFO  User:72 - Account act1 added to user's account list
+2018-06-25 09:46:22 INFO  User:72 - Account act2 added to user's account list
+2018-06-25 09:46:22 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:22 INFO  Account:87 - Deposit of $500.00 made to user's act2. Final balance: $500.00
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:22 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:22 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:22 INFO  UserController:60 - New user user created.
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:22 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:22 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:22 INFO  User:72 - Account checking 0 added to admin's account list
+2018-06-25 09:46:22 INFO  AccountController:78 - New account checking 0 created for user admin
+2018-06-25 09:46:22 INFO  Account:87 - Deposit of $5,000.00 made to admin's checking 0. Final balance: $5,000.00
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:22 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:22 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:22 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:22 INFO  User:72 - Account checking 2 added to user's account list
+2018-06-25 09:46:22 INFO  AccountController:78 - New account checking 2 created for user user
+2018-06-25 09:46:22 INFO  User:72 - Account checking 3 added to admin's account list
+2018-06-25 09:46:22 INFO  AccountController:78 - New account checking 3 created for user admin
+2018-06-25 09:46:22 INFO  AccountController:45 - Account checking 2 belonging to user has been validated.
+2018-06-25 09:46:22 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:41 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:41 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:41 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:41 INFO  Account:98 - Withdrawal of $750.00 made from user's act1. Final balance: ($250.00)
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:41 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:41 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:41 INFO  User:72 - Account act1 added to user's account list
+2018-06-25 09:46:41 INFO  User:72 - Account act2 added to user's account list
+2018-06-25 09:46:41 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:46:41 INFO  Account:87 - Deposit of $500.00 made to user's act2. Final balance: $500.00
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:41 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:41 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:41 INFO  UserController:60 - New user user created.
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:41 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:41 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:41 INFO  User:72 - Account checking 0 added to admin's account list
+2018-06-25 09:46:41 INFO  AccountController:78 - New account checking 0 created for user admin
+2018-06-25 09:46:41 INFO  Account:87 - Deposit of $5,000.00 made to admin's checking 0. Final balance: $5,000.00
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:46:41 INFO  MasterController:138 - No previous data found
+2018-06-25 09:46:41 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:46:41 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:46:41 INFO  User:72 - Account checking 2 added to user's account list
+2018-06-25 09:46:41 INFO  AccountController:78 - New account checking 2 created for user user
+2018-06-25 09:46:41 INFO  User:72 - Account checking 3 added to admin's account list
+2018-06-25 09:46:41 INFO  AccountController:78 - New account checking 3 created for user admin
+2018-06-25 09:46:41 INFO  AccountController:45 - Account checking 2 belonging to user has been validated.
+2018-06-25 09:46:41 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:138 - No previous data found
+2018-06-25 09:47:25 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:47:25 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:47:25 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:47:25 INFO  Account:98 - Withdrawal of $750.00 made from user's act1. Final balance: ($250.00)
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:138 - No previous data found
+2018-06-25 09:47:25 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:47:25 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:47:25 INFO  User:72 - Account act1 added to user's account list
+2018-06-25 09:47:25 INFO  User:72 - Account act2 added to user's account list
+2018-06-25 09:47:25 INFO  Account:87 - Deposit of $500.00 made to user's act1. Final balance: $500.00
+2018-06-25 09:47:25 INFO  Account:87 - Deposit of $500.00 made to user's act2. Final balance: $500.00
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:138 - No previous data found
+2018-06-25 09:47:25 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:47:25 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:47:25 INFO  UserController:60 - New user user created.
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:138 - No previous data found
+2018-06-25 09:47:25 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:47:25 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:47:25 INFO  User:72 - Account checking 0 added to admin's account list
+2018-06-25 09:47:25 INFO  AccountController:78 - New account checking 0 created for user admin
+2018-06-25 09:47:25 INFO  Account:87 - Deposit of $5,000.00 made to admin's checking 0. Final balance: $5,000.00
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 09:47:25 INFO  MasterController:138 - No previous data found
+2018-06-25 09:47:25 INFO  MasterController:33 - New MasterController created
+2018-06-25 09:47:25 INFO  UserController:60 - New user Admin created.
+2018-06-25 09:47:25 INFO  User:72 - Account checking 2 added to user's account list
+2018-06-25 09:47:25 INFO  AccountController:78 - New account checking 2 created for user user
+2018-06-25 09:47:25 INFO  User:72 - Account checking 3 added to admin's account list
+2018-06-25 09:47:25 INFO  AccountController:78 - New account checking 3 created for user admin
+2018-06-25 09:47:25 INFO  AccountController:45 - Account checking 2 belonging to user has been validated.
+2018-06-25 09:47:25 INFO  MasterController:86 - No previously written data exists
+2018-06-25 10:31:18 INFO  MasterController:138 - No previous data found
+2018-06-25 10:31:18 INFO  MasterController:33 - New MasterController created
+2018-06-25 10:31:18 INFO  UserController:60 - New user Admin created.
+2018-06-25 10:32:56 INFO  MasterController:138 - No previous data found
+2018-06-25 10:32:56 INFO  MasterController:33 - New MasterController created
+2018-06-25 10:32:56 INFO  UserController:60 - New user Admin created.
+2018-06-25 10:33:12 INFO  MasterController:138 - No previous data found
+2018-06-25 10:33:12 INFO  MasterController:33 - New MasterController created
+2018-06-25 10:33:12 INFO  UserController:60 - New user Admin created.
+2018-06-25 10:34:13 INFO  MasterController:138 - No previous data found
+2018-06-25 10:34:13 INFO  MasterController:33 - New MasterController created
+2018-06-25 10:34:13 INFO  UserController:60 - New user Admin created.
+2018-06-25 10:34:50 INFO  UserController:60 - New user Ausmo created.
+2018-06-25 10:35:15 INFO  User:72 - Account checking 0 added to Ausmo's account list
+2018-06-25 10:35:15 INFO  AccountController:80 - New account checking 0 created for user Ausmo
+2018-06-25 10:35:33 INFO  AccountController:47 - Account checking 0 belonging to Ausmo has been validated.
+2018-06-25 10:36:29 INFO  User:72 - Account checking 1 added to Admin's account list
+2018-06-25 10:36:29 INFO  AccountController:80 - New account checking 1 created for user Admin
+2018-06-25 10:36:43 INFO  Account:91 - Deposit of $200.00 made to Admin's checking 1. Final balance: $200.00
+2018-06-25 10:37:06 INFO  User:72 - Account loan 2 added to Admin's account list
+2018-06-25 10:37:06 INFO  AccountController:96 - New account loan 2 created for user Admin
+2018-06-25 10:37:06 INFO  Account:91 - Deposit of $10,000.00 made to Admin's checking 1. Final balance: $10,200.00
+2018-06-25 10:37:06 INFO  Account:102 - Withdrawal of $10,000.00 made from Admin's loan 2. Final balance: ($10,000.00)
+2018-06-25 10:38:38 INFO  MasterController:105 - MasterController written to file
+2018-06-25 10:38:42 INFO  AccountController:145 - Applying interest; 4 compounding periods to all validated accounts
+2018-06-25 10:39:54 INFO  AccountController:145 - Applying interest; 5 compounding periods to all validated accounts
+2018-06-25 10:40:34 INFO  AccountController:145 - Applying interest; 6 compounding periods to all validated accounts
+2018-06-25 10:41:29 INFO  User:72 - Account loan 3 added to Ausmo's account list
+2018-06-25 10:41:29 INFO  AccountController:96 - New account loan 3 created for user Ausmo
+2018-06-25 10:42:20 INFO  Account:91 - Deposit of $2,000.00 made to Ausmo's checking 0. Final balance: $2,000.00
+2018-06-25 10:42:20 INFO  Account:102 - Withdrawal of $2,000.00 made from Ausmo's loan 3. Final balance: ($2,000.00)
+2018-06-25 10:42:20 INFO  AccountController:47 - Account loan 3 belonging to Ausmo has been validated.
+2018-06-25 10:49:24 INFO  MasterController:105 - MasterController written to file
+2018-06-25 10:59:34 INFO  AccountController:145 - Applying interest; 18 compounding periods to all validated accounts
+2018-06-25 10:59:51 INFO  Account:91 - Deposit of $500.00 made to Ausmo's loan 3. Final balance: ($1,509.89)
+2018-06-25 11:00:43 INFO  Account:91 - Deposit of $1,000.00 made to Admin's loan 2. Final balance: ($9,065.96)
+2018-06-25 11:08:48 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:08:52 ERROR MasterController:141 - Trying to read data; IO exception
+2018-06-25 11:08:52 INFO  MasterController:33 - New MasterController created
+2018-06-25 11:08:52 INFO  UserController:60 - New user Admin created.
+2018-06-25 11:09:24 INFO  MasterController:138 - No previous data found
+2018-06-25 11:09:24 INFO  MasterController:33 - New MasterController created
+2018-06-25 11:09:24 INFO  UserController:60 - New user Admin created.
+2018-06-25 11:10:03 INFO  User:72 - Account savings 0 added to Admin's account list
+2018-06-25 11:10:03 INFO  AccountController:80 - New account savings 0 created for user Admin
+2018-06-25 11:11:55 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:11:58 INFO  AccountController:145 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 11:13:09 INFO  UserController:60 - New user Ausmo created.
+2018-06-25 11:15:21 INFO  User:72 - Account checking 1 added to Ausmo's account list
+2018-06-25 11:15:21 INFO  AccountController:80 - New account checking 1 created for user Ausmo
+2018-06-25 11:15:42 INFO  User:72 - Account savings 2 added to Ausmo's account list
+2018-06-25 11:15:42 INFO  AccountController:80 - New account savings 2 created for user Ausmo
+2018-06-25 11:16:19 INFO  User:72 - Account checking 3 added to Admin's account list
+2018-06-25 11:16:19 INFO  AccountController:80 - New account checking 3 created for user Admin
+2018-06-25 11:16:39 INFO  User:72 - Account loan 4 added to Admin's account list
+2018-06-25 11:16:39 INFO  AccountController:96 - New account loan 4 created for user Admin
+2018-06-25 11:16:39 INFO  Account:91 - Deposit of $10,000.00 made to Admin's checking 3. Final balance: $10,000.00
+2018-06-25 11:16:39 INFO  Account:102 - Withdrawal of $10,000.00 made from Admin's loan 4. Final balance: ($10,000.00)
+2018-06-25 11:17:53 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:18:37 INFO  AccountController:145 - Applying interest; 6 compounding periods to all validated accounts
+2018-06-25 11:19:32 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:20:00 INFO  LoanAccount:43 - Payment of $5,000.00 made to Admin's loan 4. Final balance: ($5,016.45)
+2018-06-25 11:20:53 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:20:57 INFO  AccountController:145 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 11:21:14 INFO  User:72 - Account checking 5 added to Ausmo's account list
+2018-06-25 11:21:14 INFO  AccountController:80 - New account checking 5 created for user Ausmo
+2018-06-25 11:21:37 INFO  Account:91 - Deposit of $5,000.00 made to Ausmo's checking 5. Final balance: $5,000.00
+2018-06-25 11:23:01 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:23:04 INFO  AccountController:145 - Applying interest; 2 compounding periods to all validated accounts
+2018-06-25 11:23:25 INFO  User:72 - Account loan 6 added to Ausmo's account list
+2018-06-25 11:23:25 INFO  AccountController:96 - New account loan 6 created for user Ausmo
+2018-06-25 11:23:25 INFO  Account:91 - Deposit of $5,000.00 made to Ausmo's checking 5. Final balance: $10,000.68
+2018-06-25 11:23:25 INFO  Account:102 - Withdrawal of $5,000.00 made from Ausmo's loan 6. Final balance: ($5,000.00)
+2018-06-25 11:23:51 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:24:24 INFO  User:72 - Account loan 7 added to Ausmo's account list
+2018-06-25 11:24:24 INFO  AccountController:96 - New account loan 7 created for user Ausmo
+2018-06-25 11:24:24 INFO  Account:91 - Deposit of $10,000.00 made to Ausmo's checking 5. Final balance: $20,000.68
+2018-06-25 11:24:24 INFO  Account:102 - Withdrawal of $10,000.00 made from Ausmo's loan 7. Final balance: ($10,000.00)
+2018-06-25 11:24:41 INFO  LoanAccount:39 - Payment of $100,000.00 made to Ausmo's loan 7. account has been paid in full
+2018-06-25 11:24:54 INFO  LoanAccount:39 - Payment of $50.00 made to Ausmo's loan 7. account has been paid in full
+2018-06-25 11:27:34 INFO  MasterController:105 - MasterController written to file
+2018-06-25 11:27:39 INFO  AccountController:145 - Applying interest; 4 compounding periods to all validated accounts
+2018-06-25 11:27:52 INFO  UserController:60 - New user Dylo created.
+2018-06-25 11:28:32 INFO  MasterController:105 - MasterController written to file

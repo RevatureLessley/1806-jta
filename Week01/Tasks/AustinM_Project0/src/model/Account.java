@@ -14,10 +14,14 @@ public class Account implements Serializable {
 
 	private static final long serialVersionUID = 451996026957339012L;
 	private String name;
-	private double balance;
+	protected double balance;
 	private int accountType = 0;
 	private boolean validated;
 	private User owner;
+
+	public static final int CHECKING = 1;
+	public static final int SAVINGS = 2;
+	public static final int LOAN = 3;
 
 	private static Logger logger = Logger.getLogger(Account.class);
 
@@ -37,7 +41,6 @@ public class Account implements Serializable {
 	public void setValidated(boolean validated) {
 		this.validated = validated;
 
-		
 	}
 
 	/**
@@ -133,6 +136,8 @@ public class Account implements Serializable {
 		switch (input) {
 		case 2:
 			return "savings";
+		case 3:
+			return "loan";
 		default:
 			return "checking";
 		}
@@ -145,5 +150,36 @@ public class Account implements Serializable {
 	 */
 	public User getOwner() {
 		return owner;
+	}
+
+	private static double getInterestRate(int accountType) {
+		switch (accountType) {
+		case 2:
+			// return "savings";
+			return 0.05;
+		case 3:
+			// return "loan";
+			return 0.10;
+		default:
+			// return "checking";
+			return 0.025;
+		}
+	}
+
+	/**
+	 * Calculates compounded interest using a rate based on the account's type. The
+	 * interest is added to the account balance
+	 * 
+	 * @param periods
+	 *            of compounding
+	 */
+	public void applyInterest(long periods) {
+		double r = getInterestRate(accountType);
+
+		balance = balance * Math.pow((1 + r / 365.0), periods);
+	}
+
+	public int getType() {
+		return accountType;
 	}
 }
