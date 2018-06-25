@@ -72,18 +72,18 @@ public class Driver {
 		welcome();
 		
 		while(true) {					
-			String input = in.nextLine().toLowerCase();
+			String input = in.nextLine().toLowerCase().trim();
 			while(!(input.equals("register") || input.equals("login"))) {
 				System.out.println("Invalid command. To login type 'login'. To register type 'register' ");
-				input = in.nextLine();
+				input = in.nextLine().toLowerCase().trim();
 			}
 			
-			if(input.toLowerCase().trim().equals("register")){
+			if(input.equals("register")){
 				register();
 				break;
 					
 			}
-			else if(input.toLowerCase().trim().equals("login")) {
+			else if(input.equals("login")) {
 				System.out.print("Please enter username: ");
 				String uName = in.nextLine();
 				
