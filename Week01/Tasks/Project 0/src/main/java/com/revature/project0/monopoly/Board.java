@@ -67,7 +67,7 @@ public class Board implements Serializable {
                 new BoardSquare("Vermont Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
                 new BoardSquare("Connecticut Avenue", CYAN, 120, new int[]{8,40,100,300,450,600}),
                 new BoardSquare("Jail", null, -1, null),
-                new BoardSquare("St. Charles Place", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
+                new BoardSquare("St. Charles Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
                 new BoardSquare("Electric Company", null, 150, null),
                 new BoardSquare("States Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
                 new BoardSquare("Virginia Avenue", MAHOGANY, 160, new int[]{12,60,180,500,700,900}),
@@ -268,7 +268,8 @@ public class Board implements Serializable {
                 else if (color == RED || color == YELLOW) price = 150;
                 else if (color == GREEN || color == BLUE) price = 200;
                 else{
-                    LogWrapper.log(this.getClass(), "Board.getBuyPrice() encountered something unexpected: Color: " + color.toString(), WARN);
+                    String s = (color == null) ? "null" : color.toString();
+                    LogWrapper.log(this.getClass(), "Board.getBuyPrice() encountered something unexpected: Color: " + s, WARN);
                     //System.err.println("Board.getBuyPrice() encountered something unexpected");
                     //System.err.println("Color: " + color.toString());
                     price = -1;

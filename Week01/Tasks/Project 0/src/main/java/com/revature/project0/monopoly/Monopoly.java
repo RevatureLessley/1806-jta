@@ -9,15 +9,14 @@ package com.revature.project0.monopoly;
  * Known Bugs: Players may choose already chosen game pieces (but this has no effect on gameplay)
  */
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import static com.revature.project0.monopoly.LogWrapper.Severity.*;
+import static com.revature.project0.monopoly.CardDeck.CardType.CHANCE;
+import static com.revature.project0.monopoly.CardDeck.CardType.COMMUNITY_CHEST;
 
 /*
     TODO List:
@@ -48,16 +47,16 @@ public class Monopoly {
 
 
     private static void testFunction(){
+        Player player = new Player("Eric", null);
+        player.setMoney(0);
+        System.out.println("Money: $" +player.getMoney());
 
-        try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Something.ser"));
-            ois.readObject();
-            ois.close();
-        }
-        catch(Exception e){
-            LogWrapper.log(Monopoly.class, e);
-       }
+        CardDeck deck = CardDeck.getCards();
+        int a = deck.runCardEvent(player, "Poor Tax");
+        if (a < 0) owesMoney(player, -a, null);
+        System.out.println("Money: $" +player.getMoney());
 
+        System.out.println(a);
         System.exit(0);
     }
 
@@ -182,7 +181,7 @@ public class Monopoly {
             System.out.printf("%s, Do you approve of these players? Yes (Y), No (N)", admin.getUsername()); //NOTE: this will be different for networking
             line = waitForValidInput("Do you approve of these players? Yes (Y), No (N)", "y", "n");
         } while (line.equals("n"));
-        System.out.println();
+        //System.out.println();
     }
 
     /**
@@ -206,8 +205,8 @@ public class Monopoly {
                     LogWrapper.log(Monopoly.class, "Ending game simulation");
                     return;
                 }
-                //add interest to mortgages per turn    //NOTE: Not in original game rules.
-                for (Board.BoardSquare square : player.getMortgagedProperties()) square.addInterest();
+//                //add interest to mortgages per turn    //NOTE: Not in original game rules.
+//                for (Board.BoardSquare square : player.getMortgagedProperties()) square.addInterest();
 
                 System.out.printf("Player %d's turn.\n", i+1);
                 boolean doubles;    // = false;
@@ -246,6 +245,15 @@ public class Monopoly {
 
                                     //get the property user selected
                                     Board.BoardSquare square = ((Board.BoardSquare)player.getUnMortgagedProperties().toArray()[Integer.parseInt(line)-1]);
+                                    if (square.getName().equals("Reading Railroad") ||
+                                            square.getName().equals("Pennsylvania Railroad") ||
+                                            square.getName().equals("B & O Railroad") ||
+                                            square.getName().equals("Short Line") ||
+                                            square.getName().equals("Water Works") ||
+                                            square.getName().equals("Electric Company") ) {
+                                        System.out.println("You are not allowed to expand on " + square.getName());
+                                        break;
+                                    }
                                     LogWrapper.log(Monopoly.class, "User is developing property \"" +square.getName()+ "\"");
                                     if (!player.ownsBlock(board, square)){
                                         System.out.println("You may not expand upon this property until you own all properties in its group.");  //TODO: Specifiy which properties are missing
@@ -289,10 +297,18 @@ public class Monopoly {
 
                         System.out.println("It is still your turn.");
                         System.out.println(msg);
-                        line = waitForValidInput(msg, "r", "m", "e", "b");
+                        line = waitForValidInput(msg, "r", "m", "e", "b", "l");
                     }
                     //Roll was selected
                     LogWrapper.log(Monopoly.class, "User is rolling dice");
+                    if (player.isInJail && player.hasGetOutOfJailCard()){
+                        System.out.println("You have a 'Get out of Jail Free' card. Would you like to use it? Yes (Y), No (N)");
+                        line = waitForValidInput("Would you like to use it? Yes (Y), No (N)", "y","n");
+                        if (line.equals("y")) {
+                            player.isInJail = false;
+                            player.setHasJailCard(false);
+                        }
+                    }
                     if (player.isInJail) {
                         msg = "Before you roll, would you like to pay $50 to get out now? Yes (Y), No (N)";
                         System.out.println(msg);
@@ -343,9 +359,16 @@ public class Monopoly {
                     System.out.printf("You landed on %s! ", board.getBoardSquare(player.getLocation()).getName());
                     if (!handleSquareEvent(player, roll[0] + roll[1])) break;
                     if (player.isInJail) doubles = false;   //prevent extra turn
+                    if (doubles) {
+                        System.out.println("(Press Enter to take your extra turn)");
+                        if (DEBUG) scanner.nextLine();      //to eat the '\n' left over from the nextInt() called in DEBUG mode
+                        scanner.nextLine();
+                        player.printInfo();
+                    }
                 } while (doubles);
                 System.out.printf("End of %s's turn.\n", player.getName());
                 System.out.println("(Press Enter to continue)");
+                //if (DEBUG) scanner.nextLine();      //to eat up the '\n' leftover from the nextInt() call in DEBUG mode
                 scanner.nextLine();
             }
         }   //end game loop
@@ -368,12 +391,31 @@ public class Monopoly {
                 //implemented in Player.move() (condition does not require stopping on square)
             break;  //end GO case
             case "Community Chest":
-                System.err.println("Not implemented yet.");
-                System.out.println("\n");
+                int result;
+                System.out.print("The card says: ");
+                if (!DEBUG) result = CardDeck.getCards().runCardEvent(player, CardDeck.getCards().drawRandomCard(COMMUNITY_CHEST));
+                else {
+                    System.out.print("Enter the index of the card you'd like: ");
+                    result = CardDeck.getCards().runCardEvent(player, CardDeck.getCards().getCardName(scanner.nextInt(), COMMUNITY_CHEST));
+                }
+                if (result < 0) {
+                    if (!owesMoney(player, -result, null)) return false;    //negative result because owesMoney() expects a positve amount
+                }
+                else if (result > 0) player.setMoney(player.getMoney() + result);
+                else /* result == 0 */ board.drawBoard(playerList);
             break;  //end Community Chest case
             case "Chance":
-                System.err.println("Not implemented yet.");
-                System.out.println("\n");
+                System.out.print("The card says: ");
+                if (!DEBUG) result = CardDeck.getCards().runCardEvent(player, CardDeck.getCards().drawRandomCard(CHANCE));
+                else {
+                    System.out.print("Enter the index of the card you'd like: ");
+                    result = CardDeck.getCards().runCardEvent(player, CardDeck.getCards().getCardName(scanner.nextInt(), CHANCE));
+                }
+                if (result < 0) {
+                    if (!owesMoney(player, -result, null)) return false;    //negative result because owesMoney() expects a positve amount
+                }
+                else if (result > 0) player.setMoney(player.getMoney() + result);
+                else /* result == 0 */ board.drawBoard(playerList);
             break;  //end Chance case
             case "Income Tax":
                 String msg = "Do you want to pay 10% of your total worth (A), or the flat rate of $200 (B)?";
@@ -469,7 +511,8 @@ public class Monopoly {
             if (!player.owesMoney(debt, otherPlayer)) { //if they went bankrupt
                 playerList.remove(player);
                 return false;
-            } else {    //previous method said you have enough money now. But this should do it
+            }
+            else {    //if clause said you have enough money now. But this should do it
                 LogWrapper.log(Monopoly.class, "Recursing", LogWrapper.Severity.DEBUG);
                 return owesMoney(player, debt, otherPlayer);
                 //return true;
@@ -575,6 +618,22 @@ public class Monopoly {
         }
         LogWrapper.log(Monopoly.class, "Returning valid input: \"" + line + "\"");
         return line;
+    }
+
+    /**
+     * This method removes a player from the player list because they are bankrupt and no longer playing.
+     * @param player the player being removed
+     */
+    public static void removePlayer(Player player){
+        playerList.remove(player);
+    }
+
+    /**
+     * This method returns the A COPY of the playerlist. You cannot use this method to alter the playerlist directly
+     * @return An ArrayList copy of the player list
+     */
+    public static ArrayList<Player> getPlayerList(){
+        return new ArrayList<>(playerList);
     }
 
     /**

@@ -23,6 +23,7 @@ public class Player implements Serializable {
     private BoardPiece piece;
     private int money;
     private int location;
+    private boolean outOfJailCard;
 
     private HashMap<Board.BoardSquare, Boolean> properties;     //BoardSquare, Boolean <true = mortgaged, false = not mortgaged>
 
@@ -41,6 +42,7 @@ public class Player implements Serializable {
         this.location = 0;
         this.isInJail = false;
         properties = new HashMap<>();
+        outOfJailCard = false;
         LogWrapper.log(this.getClass(), "Player created: " + this, DEBUG);
     }
 
@@ -131,7 +133,7 @@ public class Player implements Serializable {
     void boughtProperty(Board.BoardSquare property, boolean isMortgaged){
         properties.put(property, isMortgaged);
         property.setOwner(this);
-        LogWrapper.log(this.getClass(), "Property \"" + property.getName() + "\" was bought for $"+property.getMortgageValue());
+        LogWrapper.log(this.getClass(), "Property \"" + property.getName() + "\" was bought back.");
     }
 
     /**
@@ -205,7 +207,7 @@ public class Player implements Serializable {
     boolean mortgage(int amount){
         HashSet<Board.BoardSquare> unMortgagedProperties = this.getUnMortgagedProperties();
         if (unMortgagedProperties.size() == 0) {
-            System.out.println("You don't have anything to mortgage.");
+            System.out.println(this.getName()+" doesn't have anything to mortgage.");
             return false;
         }
         do {
@@ -300,6 +302,14 @@ public class Player implements Serializable {
 
     void setLocation(int location) {
         this.location = location;
+    }
+
+    boolean hasGetOutOfJailCard(){
+        return outOfJailCard;
+    }
+
+    void setHasJailCard(boolean value){
+        outOfJailCard = value;
     }
 
     Set<Board.BoardSquare> getOwnedProperties(){

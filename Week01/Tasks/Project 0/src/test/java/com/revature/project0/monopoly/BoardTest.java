@@ -90,4 +90,20 @@ public class BoardTest {
         assertEquals(18, test.calculateRent(board, 3));
         assertEquals(18, test.getVisitPrice());
     }
+
+    @Test
+    public void addInterestTest(){
+        final int INDEX = 39;
+        final float INTEREST = 1.1f;
+        Board.BoardSquare square = board.getBoardSquare(INDEX);
+        int value = square.getBuyBackPrice();
+        Player testPlayer = new Player("", null);
+        testPlayer.boughtProperty(square, true);
+        assertEquals(value, square.getBuyBackPrice());
+        for (int i = 0; i < 100; i++){
+            square.addInterest();
+            value = (int)(value * INTEREST);
+            assertEquals(value, square.getBuyBackPrice());
+        }
+    }
 }
