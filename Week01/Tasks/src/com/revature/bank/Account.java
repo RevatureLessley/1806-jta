@@ -4,6 +4,7 @@ import java.io.Serializable;
 import org.apache.log4j.Logger;
 
 /**
+ * POJO<br>
  * Account class is responsible for holding information
  * that relates to a person who owns an account at the bank.
  * <br>Fields:
