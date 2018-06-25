@@ -208,10 +208,20 @@ public class VendingMachine implements Serializable {
     	return result;
     }
 
+    /**
+     * Modifies the vending machine's message value
+     * 
+     * @param message
+     */
     public void setMessage(String message) {
 	this.message = message;
     }
-
+    
+    /**
+     * returns a toString() equivalent of the VendingMachine object as an ArrayList<String>
+     * 
+     * @return returns a toString() equivalent of the VendingMachine object as an ArrayList<String>
+     */
     public ArrayList<String> toArrayList() {
 	 String machineName = Printing.paddedString(this.vendingMachineName, 20);
        String adminName = Printing.paddedString(this.adminName, 20);
@@ -253,6 +263,7 @@ public class VendingMachine implements Serializable {
        return printMachine;
     }
     
+
    @Override
    public String toString() {
        String machineName = Printing.paddedString(this.vendingMachineName, 20);
