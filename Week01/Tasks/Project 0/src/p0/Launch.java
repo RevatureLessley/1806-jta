@@ -38,6 +38,13 @@ public class Launch
 		logger.fatal(message);
 	}
 	
+	/**
+	 * The main launch menu for the program
+	 * refreshes account list every time it is entered and updates saved list every time it ends
+	 * loops constantly until exited by user input.
+	 * 
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void mainMenu(Launch pgm)
 	{
 		boolean cont = true;
@@ -72,6 +79,13 @@ public class Launch
 		}
 	}
 	
+	
+	/**
+	 * Method to handle the logic and error checking for logging into an account.
+	 * Checks if the provided name belongs to an account and that the password is correct.
+	 * Offers option to create new user if the given name doesn't exist
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void login(Launch pgm)
 	{
 		Player log = null;
@@ -156,6 +170,14 @@ public class Launch
 		}
 	}
 	
+	
+	/**
+	 * A separated password tester, in future iterations will handle encoding and decoding for password
+	 * implementation.
+	 * @param a the account attempting to be tested
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 * @return returns success or failure to login loop
+	 */
 	public boolean pWordTest(Account a, Launch pgm)
 	{
 		System.out.print("Input Password: ");
@@ -173,6 +195,11 @@ public class Launch
 		}
 	}
 	
+	/**
+	 * Loads serialized information to build the AccountList storage class
+	 * Allows for data to remain continuous between runs, is called any time that the database might have changed.
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void load(Launch pgm)
 	{
 		if(pgm.Active == null)
@@ -221,6 +248,11 @@ public class Launch
 		
 	}
 	
+	/**
+	 * Saves serialized information to build the AccountList storage class
+	 * Allows for data to remain continuous between runs, is called any time that the database needs to be secured.
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void save(Launch pgm)
 	{
 		pgm.Active.updateList();
@@ -244,7 +276,12 @@ public class Launch
 		
 		System.out.println("Successfully Saved");
 	}
-
+	
+	/**
+	 * Creates a new waiting account to be approved by the Administrator.
+	 * Collects Username Password and preferred name from the user for the new account.
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void newAccount(Launch pgm)
 	{
 		pgm.dumpIn(pgm);
@@ -252,13 +289,20 @@ public class Launch
 		String uName = pgm.in.nextLine();
 		System.out.print("Now choose a password for the account: ");
 		String pWord = pgm.in.nextLine();
-		System.out.println("What shall we call you?: ");
+		System.out.print("What shall we call you?: ");
 		String Name = pgm.in.nextLine();
 		
 		pgm.Waiting.add(new Player(Name, uName, pWord, 100, 0, 0, pgm));
 		
 	}
 	
+	/**
+	 * Activated whenever there is an error in loading the database
+	 * Collects information for the Administrator, Banker and Loaner accounts
+	 * Sets these accounts as the basis for the world and saves upon exiting to make sure
+	 * the information sticks.
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void generateWorld(Launch pgm)
 	{
 
@@ -292,6 +336,10 @@ public class Launch
 		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
+	/**
+	 * A method to pause text and make sure that System.in is clear before continuing
+	 * @param pgm a copy of the general launch program provided to give variable access to all methods
+	 */
 	public void dumpIn(Launch pgm)
 	{
 		if(pgm.in.hasNextLine()) {

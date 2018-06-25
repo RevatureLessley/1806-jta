@@ -110,10 +110,6 @@ public class Player extends Account implements Serializable
 	
 	public void loanApp()
 	{
-
-		System.out.println("Loan Application comming soon.");
-		System.out.println();
-		
 		System.out.print("How much money would you like to borrow: ");
 		loanBalance = pgm.in.nextInt();
 		loanWaiting = true;
@@ -148,42 +144,13 @@ public class Player extends Account implements Serializable
 			
 	}
 	
-	public boolean getHasLoan()
-	{
-		return hasLoan;
-	}
-	
-	public boolean getLoanWaiting()
-	{
-		return loanWaiting;
-	}
-	
-	public void setLoanWaiting(boolean s)
-	{
-		loanWaiting = s;
-	}
-
-	public int getbBalance()
-	{
-		return accountBalance;
-	}
-
-	public void setHasLoan(boolean s)
-	{
-		hasLoan = s;
-	}
-	public int getlBalance()
-	{
-		return loanBalance;
-	}
-
 	public void incrementTime()
 	{
 		if(accountBalance >0)
 		{
 			accountBalance = (int)(accountBalance * pgm.Active.getBanker().getInterest());
 		}
-		if(loanBalance > 0) 
+		if(loanBalance > 0 && hasLoan) 
 		{
 			loanBalance = (int)(loanBalance * pgm.Active.getLoaner().getInterest());
 		}
@@ -255,4 +222,35 @@ public class Player extends Account implements Serializable
 			}
 		}
 	}
+
+	public boolean getHasLoan()
+	{
+		return hasLoan;
+	}
+	
+	public boolean getLoanWaiting()
+	{
+		return loanWaiting;
+	}
+	
+	public void setLoanWaiting(boolean s)
+	{
+		loanWaiting = s;
+	}
+
+	public int getbBalance()
+	{
+		return accountBalance;
+	}
+
+	public void setHasLoan(boolean s)
+	{
+		hasLoan = s;
+	}
+	
+	public int getlBalance()
+	{
+		return loanBalance;
+	}
+
 }

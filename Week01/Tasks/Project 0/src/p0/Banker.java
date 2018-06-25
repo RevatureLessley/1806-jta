@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Banker extends Account implements Serializable
 {
 
-	private double interestRate;
+	private double interestRate = 1.10;
 	
 	public Banker(String name, String uname, String pword, Launch pgm)
 	{

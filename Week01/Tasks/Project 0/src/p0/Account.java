@@ -12,9 +12,16 @@ public abstract class Account implements Serializable
 	
 	public Account()
 	{
-		
+		super();
 	}
-	
+	/**
+	 * Generic constructor class to be called by children
+	 * 
+	 * @param name What the user is referred to in their own menu
+	 * @param uname The login name that a user uses to gain access to their account
+	 * @param pword The secure word used to authorize access to the account
+	 * @param pgm
+	 */
 	public Account(String name, String uname, String pword, Launch pgm)
 	{
 		this.Name = name;
