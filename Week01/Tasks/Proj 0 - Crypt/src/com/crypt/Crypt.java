@@ -1,5 +1,7 @@
 package com.crypt;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -16,11 +18,17 @@ public class Crypt {
 	static final HashMap<String, Byte> ROLES = new HashMap<String, Byte>()
 	{private static final long serialVersionUID = 1L;
 	{put("user", (byte) 0); put("admin", (byte) 1);}};
+	//Keeps a running list of usernames and passwords
 	static HashMap<String, String> userPassInfo = new HashMap<String, String>();
+	//Stores account data
 	static HashMap<String, Account> accounts = new HashMap<String, Account>();
+	//Saves and loads user pass info
 	static UserPassFileManager upfm = new UserPassFileManager("accounts.ser");	
 
+	final static Logger logger = Logger.getLogger("Crypt.class");
+	
 	public static void main(String[] args) {
+		logger.trace("Main method started");
 		Crypt c = new Crypt();
 		//filling variables from files for persistence
 		HashMap<String, Account> al = new HashMap<String, Account>(); 
@@ -37,6 +45,7 @@ public class Crypt {
 	}
 
 	private byte showMainMenu() { //Shows main menu
+		logger.trace("showed main method");
 		return Input.showMenu("Welcome to Crypt.", 
 				Input.giveStringArray("Log in", "Create an account", "Forgotten password", "Exit")); }
 
@@ -62,6 +71,7 @@ public class Crypt {
 	}
 
 	private void login() {
+		logger.info("login attempted");
 		//testAdminExist(); //Tests existence of at least one user
 		Account a = userPass(); //Gets user name and password
 		if(testUserPass(a)) //tests user name and password
@@ -77,11 +87,13 @@ public class Crypt {
 	}
 
 	private byte showLoginFailMenu() {
+		logger.trace("login fail menu shown" );
 		return Input.showMenu("Username and password do not match.", //calls showMenu and gives prescript
 				Input.giveStringArray("Try again", "Exit to main menu")); //gets string array, prints options
 	}
 
 	private void loginFail(byte input) {
+		logger.trace("login failed");
 		switch(input) {
 		case 1:
 			login();
@@ -96,6 +108,7 @@ public class Crypt {
 	}
 
 	private byte showLoginPassMenu(Account a) {
+		logger.trace("login pass menu shown");
 		String[] s;
 		if(a.getRole() == ROLES.get("admin")) { 
 			s = new String[] { "Account Options", "Deposit Data", "Withdraw Data", "Admin Options", "Log Out"};  //Displays admin options if admin
@@ -107,6 +120,7 @@ public class Crypt {
 	}
 
 	private void loginPass(Account a) {
+		logger.info("login passed");
 		switch(showLoginPassMenu(a)) {
 		case (byte)1://Account Options 
 			//accountOptions();
@@ -139,13 +153,16 @@ public class Crypt {
 	}
 
 	private byte showAdminOptionsMenu() {
+		logger.trace("admin options menu shown");
 		return Input.showMenu("Admin Options.", 
 				Input.giveStringArray("Approve an applying user", "Search accounts", "Change user accounts", "Return to previous menu"));
 	}
 
 	private void adminOptions(byte input, Account a) {
+		logger.info("made it to admin options");
 		switch(input) {
-		case 1: //Approve user		
+		case 1: //Approve user
+			logger.info("attempting user approval");
 			HashMap<String, Account> unapprovedAccounts = new HashMap<>();
 
 			for( Account a2 : accounts.values()) 
@@ -221,10 +238,13 @@ public class Crypt {
 			noMatch();
 			showCurrentItems(showCurrentItemsMenu(), a);
 			break;
-
 		}
 	}
-
+	
+	/**
+	 * WIP: allows for edit of account options
+	 * IE: user name, password, etc.
+	 */
 	private void accountOptions() {
 		System.out.println("The following options are available:\n(1) Edit your username\n(2) Edit your password\n"
 				+ "(3) Change your default seed\n(4) Go back to previous menu");
@@ -250,6 +270,10 @@ public class Crypt {
 		}
 	}
 
+	/**
+	 * calls account deposit and shows deposit menu
+	 * @param a
+	 */
 	private void deposit(Account a) {
 		System.out.println("Enter a filepath to deposit:");
 		String s = Input.getInputString();
@@ -279,10 +303,20 @@ public class Crypt {
 				Input.giveStringArray("NoPadding", "PKCS5Padding"));
 	}
 
+	/**
+	 * calls for the specification from the user on how they would prefer their data to
+	 * be encrypted.
+	 */
 	private void encryptionOptions() {
 
 	}
 
+	/**
+	 * tests to see if username and password are both approved
+	 * and match database entry
+	 * @param a
+	 * @return
+	 */
 	private boolean testUserPass(Account a) {
 		if(!userPassInfo.containsKey(a.getUsername())
 				&& 
@@ -290,7 +324,10 @@ public class Crypt {
 		{ return false; } else { return true; }
 	}
 
-
+	/**
+	 * allows for creation of new users and admins
+	 * @return
+	 */
 	private Account createAccount() {
 		Account a = userPass();
 		for(String username : userPassInfo.keySet()) {
@@ -319,6 +356,10 @@ public class Crypt {
 		return a;
 	}
 
+	/**
+	 * allows user to reset password in case of forgetting
+	 * @return
+	 */
 	private String ForgotPassword() {
 		String input = "";
 		Scanner scan = new Scanner(System.in);
@@ -327,6 +368,10 @@ public class Crypt {
 		return input;
 	}
 
+	/**
+	 * retrieves user name and password
+	 * @return
+	 */
 	private Account userPass() {
 		Account a = new Account();
 
@@ -337,11 +382,17 @@ public class Crypt {
 		return a;
 	}
 
+	/**
+	 * if the user database is empty then fills it with a default admin
+	 */
 	private static void testAdminExist() {
 		if(accounts.isEmpty() || !accounts.keySet().contains("Austin")) 
 		{ accounts.put("austin", new Account("austin", "bobbert", ROLES.get("admin"))); }
 	}
 
+	/**
+	 * if input does not match allowed options
+	 */
 	private void noMatch() { System.out.println("Input did not correspond to "
 			+ "any valid options. Please try again."); }
 }

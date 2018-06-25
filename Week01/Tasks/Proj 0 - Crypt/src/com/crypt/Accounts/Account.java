@@ -34,6 +34,14 @@ public class Account implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
+	
+	/**
+	 * sets username, password, and role. If role is admin then it auto-approves the
+	 * account
+	 * @param usern
+	 * @param pass
+	 * @param rol
+	 */
 	public Account(String usern, String pass, byte rol) {
 		super();
 		this.username = usern;
@@ -42,6 +50,19 @@ public class Account implements Serializable {
 		
 		if(role == 1) approved = true; else approved = false;
 	}
+	
+	/**
+	 * allows for complete instantiation of an account
+	 * @param transactionHistory
+	 * @param uploadedData
+	 * @param filepath
+	 * @param fileName
+	 * @param username
+	 * @param password
+	 * @param role
+	 * @param defaultSeed
+	 * @param generator
+	 */
 	public Account(List<String> transactionHistory, Object uploadedData, String filepath,
 			String fileName, String username, String password, byte role, int defaultSeed, Random generator) {
 		super();
@@ -58,16 +79,24 @@ public class Account implements Serializable {
 	}
 	
 	//Methods
+	
+	/**
+	 * Deposits and *eventually* encrypts source data
+	 */
 	public void deposit(/*byte a, byte b, byte c*/) {
 		//TODO: Create a new folder for specific user repo
 		//TODO: Encrypt based on encryption specified by user
 		
 		items.add(fileName);
-		System.out.println("Deposited " + fileName + "." 
-							+ "\nQuatity of items stored: " + items.size());
+		System.out.println("Deposited " + fileName);
 		transactionHistory.add("Deposited " + fileName);
+		reportBalance();
 	}
 
+	/**
+	 * allows withdrawal and *eventual* decryption of data
+	 * @param index
+	 */
 	public void withdraw(byte index) {
 		//TODO: Decrypt item
 		if(items.isEmpty()) { System.out.println("No items currently stored"); return; }
@@ -76,6 +105,9 @@ public class Account implements Serializable {
 		reportBalance();
 	}
 	
+	/**
+	 * reports current balance.
+	 */
 	public void reportBalance() { System.out.println("You currently have " + items.size() + "items stored."); }
 	//Getters / Setters
 	public ArrayList<String> getRepoContents(){ return items; }
