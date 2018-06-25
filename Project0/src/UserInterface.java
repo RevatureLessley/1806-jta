@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Hashtable;
@@ -27,7 +28,6 @@ public class UserInterface
 
         do {
             scanner  = new Scanner(System.in);
-            System.out.println("Select an option: ");
 
             if(scanner.hasNext() && scanner.hasNextInt())
             {
@@ -46,6 +46,7 @@ public class UserInterface
 
     public Account accountInput(boolean isAdmin)
     {
+        System.out.println("======================================");
         //Set up empty strings to check against in do-while loop
         String username = "";
         String password = "";
@@ -74,27 +75,29 @@ public class UserInterface
             return new Account(username, password, isAdmin);
     }
 
-    public void displayMenu()
+    public void displayLogo()
     {
         try {
-            File file = new File("C:/Users/cb/Documents/Revature/Assignments/Project0/resources/menu_files/main_menu.txt");
+            File file = new File("C:/Users/cb/Documents/Revature/Assignments/Project0/resources/menu_files/monopolylogo.txt");
             FileReader fr = new FileReader(file);
-            char[] a = new char[100];
-            fr.read(a);   // reads the content to the array
+            BufferedReader bufferedReader = new BufferedReader(fr);
 
-            for (char c : a)
-                System.out.print(c);   // prints the characters one by one
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
 
             fr.close();
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            statusLogger.logIssue("Could not find Monopoly logo file");
         }
     }
 
     public void mainMenu()
     {
+        displayLogo();
         System.out.println("==============================\n" +
                 "Menu:\n" +
                 "\n" +
@@ -106,7 +109,9 @@ public class UserInterface
         commandTable = new Hashtable<>();
         commandTable.put(1, this::loginRegister);
         commandTable.put(2, new Runnable() {
-            public void run() { System.out.println("Goodbye!"); }});
+            public void run() {
+                displayLogo();
+                System.out.println("Goodbye!"); }});
 
         userInputInt(commandTable);
 
@@ -115,7 +120,7 @@ public class UserInterface
     {
 
         System.out.println("==============================\n" +
-                "Menu:\n" +
+                "Login Menu:\n" +
                 "\n" +
                 "1. Login\n" +
                 "2. Create new account\n" +
@@ -140,6 +145,11 @@ public class UserInterface
         if(accountsRecord.checkValidity(newAccount))
         {
             currentAccount = accountsRecord.getAccount(newAccount.getUsername());
+
+            if(!currentAccount.isApproved()) {
+                System.err.println("Your account has not yet been approved");
+                mainMenu();
+            }
 
             statusLogger.logMessage(currentAccount.getUsername() + "has logged in");
 
@@ -252,7 +262,7 @@ public class UserInterface
     public void adminMenu()
     {
         System.out.println("=======================\n" +
-                "Menu:\n" +
+                "Admin Menu:\n" +
                 "1. See all user accounts\n" +
                 "2. Approve all pending user accounts\n" +
                 "3. Logout\n" +
@@ -306,18 +316,26 @@ public class UserInterface
     {
         Account newAccount = accountInput(false);
 
-        accountsRecord.addAccount(newAccount);
-        System.err.println("Your account must be approved");
+        if(accountsRecord.contains(newAccount.getUsername()))
+        {
+            System.err.println("Account with that username already exists!");
+            loginRegister();
+        }
+        else
+        {
+            accountsRecord.addAccount(newAccount);
+            System.err.println("Your account must be approved");
 
-        statusLogger.logMessage(newAccount.getUsername() + "has registered, waiting approval");
+            statusLogger.logMessage(newAccount.getUsername() + "has registered, waiting approval");
 
+            mainMenu();
+        }
 
-        mainMenu();
     }
 
     public void withdraw()
     {
-
+        System.out.println("=====================================");
         double withdrawalAmount = -1;
 
         do {
@@ -350,6 +368,7 @@ public class UserInterface
 
     public void deposit()
     {
+        System.out.println("=====================================");
         double depositAmount = -1;
 
         do {
@@ -377,6 +396,7 @@ public class UserInterface
 
     public void getLoan()
     {
+        System.out.println("=====================================");
         scanner = new Scanner(System.in);
         System.out.println("Enter loan request amount: ");
         int withdrawalAmount = scanner.nextInt();
@@ -402,10 +422,18 @@ public class UserInterface
     {
         System.out.println("Here are your account details");
         System.out.println("Menu: \n" +
-                "1. Go Back");
+                "1. View Account Details" +
+                "2. Go Back");
 
         commandTable = new Hashtable<>();
-        commandTable.put(1, this::userMenu);
+        commandTable.put(1, new Runnable() {
+            @Override
+            public void run() {
+                currentAccount.printAccountDetails();
+
+            }
+        });
+        commandTable.put(2, this::userMenu);
 
         userInputInt(commandTable);
 

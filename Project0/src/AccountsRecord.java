@@ -69,7 +69,8 @@ public class AccountsRecord implements Serializable
 
     public void debugAccounts(boolean isSuperAdmin)
     {
-        System.out.println("Displaying all accounts");
+        System.out.println("========================================\n" +
+                "~Displaying all accounts~\n");
         Set<String> keys = accountsStore.keySet();
 
         if(isSuperAdmin)
@@ -89,6 +90,9 @@ public class AccountsRecord implements Serializable
                 System.out.println(key + " | " + "User" + " | " + (tempAccount.isApproved()?"Approved": "PENDING"));
             }
         }
+
+        System.out.println("\n~End of Accounts~\n" +
+                "==========================================");
     }
 
     /**

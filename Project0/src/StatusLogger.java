@@ -8,4 +8,9 @@ public class StatusLogger
     {
         logger.info(message);
     }
+
+    public void logIssue(String message)
+    {
+        logger.error(message);
+    }
 }
