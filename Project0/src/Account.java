@@ -1,12 +1,15 @@
-public class Account
+import java.io.Serializable;
+
+public class Account implements Serializable
 {
 
     private String username;
     private String password;
     private boolean isApproved;
+
     private boolean isAdmin;
 
-    private int accountBalance;
+    private double accountBalance;
 
 
     private int creditScore;
@@ -18,6 +21,7 @@ public class Account
         this.isApproved = false;
         this.accountBalance = 0;
     }
+
     public Account(String username, String password, boolean isAdmin)
     {
         this.username = username;
@@ -31,7 +35,7 @@ public class Account
         return username;
     }
 
-    public String getPassword() {
+    private String getPassword() {
         return password;
     }
 
@@ -43,12 +47,22 @@ public class Account
         isApproved = approved;
     }
 
-    public int getAccountBalance() {
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public double getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
-        this.accountBalance = accountBalance;
+    public void withdraw(double amount)
+    {
+        this.accountBalance -= amount;
+    }
+
+    public void deposit(double amount)
+    {
+        this.accountBalance += amount;
     }
 
     public int getCreditScore() {
@@ -57,5 +71,22 @@ public class Account
 
     public void setCreditScore(int creditScore) {
         this.creditScore = creditScore;
+    }
+
+    public void printAccountDetails()
+    {
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+        System.out.println("Approval Status: " + isApproved);
+        System.out.println("Role: " + (isAdmin?"Admin":"User"));
+        System.out.println("Account Balance: " + accountBalance);
+    }
+
+    public boolean equals(Account enteredAccount)
+    {
+        if(this.password.equals(enteredAccount.getPassword()))
+            return true;
+
+        return false;
     }
 }

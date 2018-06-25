@@ -1,4 +1,4 @@
-Menu:
+UserInterface:
 
 1. Login
 2. Quit

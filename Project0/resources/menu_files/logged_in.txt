@@ -1,4 +1,4 @@
-Menu:
+UserInterface:
 
 1. Withdraw
 2. Deposit

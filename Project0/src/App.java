@@ -2,9 +2,9 @@
 public class App
 {
     public static void main(String[] args) {
-        Menu menu = new Menu();
+        UserInterface userInterface = new UserInterface();
 
-        menu.mainMenu();
+        userInterface.mainMenu();
 
     }
 
