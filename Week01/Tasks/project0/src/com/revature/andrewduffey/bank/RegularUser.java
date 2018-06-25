@@ -2,13 +2,15 @@ package com.revature.andrewduffey.bank;
 
 import org.apache.log4j.Logger;
 
+import java.security.NoSuchAlgorithmException;
+
 public class RegularUser extends User {
     final static Logger logger = Logger.getLogger(RegularUser.class);
     private static final long serialVersionUID = -8360048087474347678L;
 
     private Account account;
 
-    public RegularUser(String username, String password) {
+    public RegularUser(String username, String password) throws NoSuchAlgorithmException {
         super(username, password);
         account = new Account();
     }
@@ -37,7 +39,7 @@ public class RegularUser extends User {
                     System.out.print("Enter an amount to deposit: ");
                     try {
                         amount = Double.parseDouble(App.scanner.nextLine());
-                        account.deposit(amount);
+                        if (account.deposit(amount)) logger.info("User deposited " + amount);
                     } catch (NumberFormatException ex) {
                         logger.warn("User entered invalid number to deposit");
                         System.out.println("Amount entered is not a valid number!");
@@ -51,7 +53,7 @@ public class RegularUser extends User {
                     System.out.print("Enter an amount to withdrawal: ");
                     try {
                         amount = Double.parseDouble(App.scanner.nextLine());
-                        account.withdrawal(amount);
+                        if (account.withdrawal(amount)) logger.info("User withdrew " + amount);
                     } catch (NumberFormatException ex) {
                         logger.warn("User entered invalid number to withdrawal");
                         System.out.println("Amount entered is not a valid number!");

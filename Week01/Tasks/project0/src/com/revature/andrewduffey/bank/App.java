@@ -3,6 +3,7 @@ package com.revature.andrewduffey.bank;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class App {
@@ -43,26 +44,29 @@ public class App {
                 if (!file.exists()) {
                     System.out.println("Still waiting to be approved by an admin");
                 } else {
-                    if (user.isAdmin()) {
-                        logger.info("Admin user logged in");
-                        ((AdminUser)user).prompt();
-                    } else {
-                        logger.info("Regular user logged in");
-                        ((RegularUser)user).prompt();
-                    }
+                    logger.info((user.isAdmin() ? "Admin" : "Regular") + " user logged in");
+                    user.prompt();
                 }
             } else {
                 System.out.println("Username and Password combination is incorrect!");
             }
         } else {
             if (activeUsers() == 0) {
-                logger.info("Admin user created");
-                System.out.println("Admin account created!");
-                User.serialize(new AdminUser(username, password), App.USERS_PATH);
+                try {
+                    User.serialize(new AdminUser(username, password), App.USERS_PATH);
+                    logger.info("Admin user created");
+                    System.out.println("Admin account created!");
+                } catch (NoSuchAlgorithmException ex) {
+                    ex.printStackTrace();
+                }
             } else {
-                logger.info("Regular user created");
-                System.out.println("Account created! Waiting to be approved.");
-                User.serialize(new RegularUser(username, password), App.PENDING_PATH);
+                try {
+                    User.serialize(new RegularUser(username, password), App.PENDING_PATH);
+                    logger.info("Regular user created");
+                    System.out.println("Account created! Waiting to be approved.");
+                } catch (NoSuchAlgorithmException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }

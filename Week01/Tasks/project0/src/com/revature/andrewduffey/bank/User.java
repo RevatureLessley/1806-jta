@@ -1,8 +1,11 @@
 package com.revature.andrewduffey.bank;
 
 import org.apache.log4j.Logger;
+import java.security.MessageDigest;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public abstract class User implements Serializable {
     final static Logger logger = Logger.getLogger(User.class);
@@ -13,9 +16,9 @@ public abstract class User implements Serializable {
     private String password;
     protected boolean admin;
 
-    public User(String username, String password) {
+    public User(String username, String password) throws NoSuchAlgorithmException {
         this.username = username;
-        this.password = password;
+        this.password = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-256").digest(password.getBytes()));
         this.admin = false;
     }
 
@@ -41,7 +44,16 @@ public abstract class User implements Serializable {
      * @return
      */
     public final boolean validatePassword(String password) {
-        boolean result = this.password.equals(password);
+        boolean result = false;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            password = Base64.getEncoder().encodeToString(hash);
+            result = this.password.equals(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
         logger.info("Password entered: " + (result ? "successful" : "unsuccessful"));
         return result;
     }

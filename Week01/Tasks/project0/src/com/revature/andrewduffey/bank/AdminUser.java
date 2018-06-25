@@ -3,12 +3,13 @@ package com.revature.andrewduffey.bank;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 
 public class AdminUser extends User {
     final static Logger logger = Logger.getLogger(AdminUser.class);
     private static final long serialVersionUID = 2105587968682648018L;
 
-    public AdminUser(String username, String password) {
+    public AdminUser(String username, String password) throws NoSuchAlgorithmException {
         super(username, password);
         admin = true;
     }
