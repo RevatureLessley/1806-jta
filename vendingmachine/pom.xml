@@ -5,7 +5,6 @@
   <groupId>discompanydatcompany</groupId>
   <artifactId>vendingmachine</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
   <name>vendingmachine</name>
   <url>http://maven.apache.org</url>
@@ -17,32 +16,116 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.11.0</version>
-    </dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.6.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>1.0.1</version>
+	</dependency>
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-core</artifactId>
+		<version>1.0.1</version>
+	</dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.11</version>
+	    <scope>test</scope>
+	</dependency>
   </dependencies>
-  
   <build>
   	<pluginManagement>
 		<plugins>
+		<!--  
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-shade-plugin</artifactId>
+			<version>3.0.0</version>
+			<configuration>
+				<archive>
+					<manifest>
+						<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
+					</manifest>
+				</archive>
+				<transformers>
+					<transformer implementation="org.apache.maven.plugins.shade.resources.ManifestResourceTransform">
+						<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
+					</transformer>
+				</transformers>
+			</configuration>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>shade</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+				<archive>
+					<manifest>
+				  		<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
+				  	</manifest>
+				</archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>assemble-all</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  	<artifactId>maven-assembly-plugin</artifactId>
+		  	<executions>
+		  		<execution>
+		  			<id>make-assembly</id>
+		  			<phase>package</phase>
+		  			<goals>
+		  				<goal>single</goal>
+		  			</goals>
+		  			<configuration>
+				  		<archive>
+				  			<manifest>
+				  				<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
+				  				<addClasspath>true</addClasspath>
+				  			</manifest>
+				  		</archive>
+				  		<descriptorRefs>
+				  			<descriptorRef>jar-with-dependencies</descriptorRef>
+				  		</descriptorRefs>
+		  			</configuration>
+		  		</execution>
+		  	</executions>
+		  </plugin>
+		  -->
 		  <plugin>
 		  	<groupId>org.apache.maven.plugins</groupId>
 		  	<artifactId>maven-jar-plugin</artifactId>
-		  	<version>2.4</version>
 		  	<configuration>
 		  		<archive>
-		  			<manifest>
-		  				<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
-		  			</manifest>
+			  		<manifest>
+			  			<addClasspath>true</addClasspath>
+			  			<classpathPrefix>libs/</classpathPrefix>
+			  			<mainClass>discompanydatcompany.vendingmachine.App</mainClass>
+			  		</manifest>
 		  		</archive>
 		  	</configuration>
 		  </plugin>

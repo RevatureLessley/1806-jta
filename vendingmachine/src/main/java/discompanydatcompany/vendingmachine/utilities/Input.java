@@ -10,20 +10,18 @@ import java.io.Console;
     
 public class Input {
     
-    private final Scanner scanner;
     private ArrayList<String> history;
     private int historyRecordCapacity;
     private int histIndexPointer;
     
     public Input() {
-		this.scanner = new Scanner(System.in).useDelimiter("\n");
 		this.history = new ArrayList<String>();
 		this.historyRecordCapacity = 20;
 		this.histIndexPointer = 0;
     }
 
-    public Scanner getScanner() {
-    	return this.scanner;
+    public void getScanner() {
+    	return ;
     }
     
     public ArrayList<String> getHistory() {
@@ -44,7 +42,7 @@ public class Input {
      * Add input to history array list. If the history array list exceeds the capacity move the index pointer to the beginning.
      *
      */
-    private void add(String input) {
+    public void add(String input) {
 		if (this.history.size() >= this.historyRecordCapacity) {
 		    this.histIndexPointer = 0;
 		    this.history.set(this.histIndexPointer, input);
@@ -54,14 +52,14 @@ public class Input {
     }
 
     public String next() {
-		String input = this.scanner.next();
+		String input = "";
 		this.add(input);
 		return input;
     }
     
     
-    public String passNext() {
-    	return this.scanner.next();
+    public void passNext() {
+    	return ;
     }
     public static String password() {
     	Console console = System.console();

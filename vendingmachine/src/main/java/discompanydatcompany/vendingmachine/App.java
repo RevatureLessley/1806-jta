@@ -1,14 +1,17 @@
 package discompanydatcompany.vendingmachine;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import discompanydatcompany.vendingmachine.entities.Admin;
 import discompanydatcompany.vendingmachine.entities.BottledWater;
 import discompanydatcompany.vendingmachine.entities.Gum;
 import discompanydatcompany.vendingmachine.entities.Item;
+import discompanydatcompany.vendingmachine.entities.MysteriousPocketPortalMachine;
+import discompanydatcompany.vendingmachine.entities.PocketPortalMachine;
 import discompanydatcompany.vendingmachine.entities.Snack;
 import discompanydatcompany.vendingmachine.entities.StockItem;
 import discompanydatcompany.vendingmachine.entities.User;
@@ -17,6 +20,7 @@ import discompanydatcompany.vendingmachine.entities.VendingMachine;
 import discompanydatcompany.vendingmachine.entities.VendingMachineList;
 import discompanydatcompany.vendingmachine.utilities.Container;
 import discompanydatcompany.vendingmachine.utilities.Input;
+import discompanydatcompany.vendingmachine.utilities.Printing;
 import discompanydatcompany.vendingmachine.utilities.SaveFile;
 
 import java.io.File;
@@ -24,7 +28,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class App {
-	private static Logger logger = LogManager.getLogger();
+	// private static Logger logger = LoggerFactory.getLogger("discompanydatcompany.vendingmachine.App");
+	
+	
 	public static final String SAVE_FILE_NAME = "DATSAV";
     private boolean isSaveFilePresent = false;
     
@@ -34,6 +40,7 @@ public class App {
     }
 
     public static void main(String[] args) {
+    	Scanner scanner = new Scanner(System.in);
     	App app = new App();
     	Input input = new Input();
     	SaveFile save = new SaveFile();
@@ -42,6 +49,7 @@ public class App {
     	UserList userList;
     	User activeUser;
     	
+    	// logger.info("LOGGER");
     	
     	if (new File(SAVE_FILE_NAME).isFile()) {
     		save.loadFromFile(SAVE_FILE_NAME);
@@ -56,7 +64,7 @@ public class App {
     	// No save is present
     	if (!app.isSaveFilePresent) {
     		String name;
-    		String password;
+    		String password = "";
     		
     		vend = new VendingMachine("Feral Vending Machine", "No Owner", "" ,"An arbitrary forest in Northern New England. This vending machine is comfortably tucked under a rocky alcove. 1368 A.D.");
     		System.out.println(vend.toString());
@@ -65,17 +73,17 @@ public class App {
     		System.out.println("What's your name -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
     		do {
-    			name = String.valueOf(input.passNext());
+    			name = scanner.next();
     		} while(name == null || name == "");
     		
     		System.out.println("Tell me something about yourself. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
-    		String aboutMe = String.valueOf(input.passNext());
+    		String aboutMe = scanner.next();
     		
     		System.out.println("Enter a password and tell me no lies. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
-    		do {
-    			password = String.valueOf(input.passNext());
-    		} while (password == null || password == "");
+    		while (password == null || password == "") {
+    			password = scanner.next();
+    		}
     		
     		Admin admin = new Admin(name, password, aboutMe);
     		vend.setAdminName(admin.getName());
@@ -121,8 +129,8 @@ public class App {
     		
     		while(loginSuccess == null) {
     			System.out.println("Enter username");
-    			username = String.valueOf(input.passNext());
-    			password = String.valueOf(input.passNext());
+    			username = scanner.next();
+    			password = scanner.next();
     			loginSuccess = userList.getUserCredentials(username, password);
     		}
     		
@@ -144,11 +152,16 @@ public class App {
 		String userInput = "";
 		//System.out.println(consoleContainer.toString());
 		shell:
-		while ((userInput = input.next()) != "close") {
+		while ((userInput = scanner.next()) != "close") {
 			String location;
+			
+			input.add(userInput);
+			
+			System.out.println(Printing.leftPadString("\n", 19, '\n'));
 			System.out.println("Location" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
 			System.out.println(vend.toString());
 			System.out.println(activeUser.toString());
+			
 		    switch(userInput) {
 				default:
 					// textInput.add("=>" + userInput);
@@ -161,7 +174,7 @@ public class App {
 					break;
 				case "buy":
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
-		        	location = String.valueOf(input.passNext());
+		        	location = scanner.next();
 		        	StockItem stockItem = vend.getInventory().getStockItemAt(location);
 		        	if (stockItem != null) {
 		        		int cost = stockItem.getQuote(1);
@@ -197,7 +210,7 @@ public class App {
 		        	break shell;
 		        case "rename":
 		        	System.out.println("Enter a new name for the vending machine");
-		        	vend.setVendingMachineName(String.valueOf(input.passNext()));
+		        	vend.setVendingMachineName(scanner.next());
 		        case "save":
 		        	try {
 		        		save.setUserList(userList);
@@ -213,12 +226,12 @@ public class App {
 		        	activeUser.getStatus();
 		        	break;
 		        case "stock":
-		        	System.out.println("Enter an item. Like gum, water or snacks.");
-		        	String item = String.valueOf(input.passNext());
+		        	System.out.println("Enter an item. Like gum, water or a snack or teleporter.");
+		        	String item = scanner.next();
 		        	System.out.println("Enter the quantity to add greater than zero please!");
-		        	int quantity = Integer.valueOf(input.passNext());
+		        	int quantity = Integer.valueOf(scanner.next());
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
-		        	location = String.valueOf(input.passNext());
+		        	location = scanner.next();
 		        	switch (item) {
 		        		case "gum":
 		        			Item gum = new Gum();
@@ -231,16 +244,24 @@ public class App {
 		        			vend.getInventory().put(location, moreWater);
 		        			break;
 		        		case "snacks":
-		        			Item snacks= new Snack();
+		        			Item snacks = new Snack();
 		        			StockItem moreSnacks = new StockItem(snacks, quantity);
 		        			vend.getInventory().put(location, moreSnacks);
+		        			break;
+		        		case "teleporter":
+		        			Item teleporter = new MysteriousPocketPortalMachine();
+		        			StockItem moreTeleporters = new StockItem(teleporter, quantity);
+		        			vend.getInventory().put(location, moreTeleporters);
+		        			break;
+		        		default :
+		        			System.out.println("That item does not exist.");
 		        			break;
 		        	}
 		        	break;
 		        case "use":
 		        	System.out.println("Use an item from your inventory.");
 		        	System.out.println("Enter a number 1 through 5.");
-		        	int selection = Integer.valueOf(input.passNext());
+		        	int selection = Integer.valueOf(scanner.next());
 		        	if (selection  > 0 && selection < 6) {
 		        		activeUser.useItem(selection);
 		        	}

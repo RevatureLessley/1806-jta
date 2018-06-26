@@ -9,6 +9,10 @@ public class MysteriousPocketPortalMachine extends PocketPortalMachine implement
 		super(name, 3, description, true, 1);
 	}
 	
+	public MysteriousPocketPortalMachine() {
+		super("Teleported", 3, "A mysterious pocket portal teleporter machine.", true, 1);
+	}
+	
 	public String use() {
 		System.out.println(new String(new char[1000]).replace("\0", String.valueOf((char) (Math.random() * 500))));
 		try {
@@ -19,5 +23,10 @@ public class MysteriousPocketPortalMachine extends PocketPortalMachine implement
 		}
 		System.out.println("Welcome back.");
 		return "You are dazed and confused from having recently used a " + this.name + ".";
+	}
+	
+	@Override
+	public String toString() {
+		return "?";
 	}
 }
