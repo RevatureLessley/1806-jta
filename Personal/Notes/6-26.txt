@@ -1,0 +1,110 @@
+techOnTheNet.com
+
+Monday - 7/2
+------------
+Enthuware - Test 1
+SQL Worksheet
+Project 0 - Part II
+
+Project 0 - Part II
+-------------------
+-Convert data persistent into SQL database.
+-Have at least 1 trigger, 1 stored procedure, 1 user defined function, 4 tables
+
+SQL - Structured Query Language
+	- a language for interacting with databases
+	- creating, updating, reading, deleting data
+	
+PL/SQL - Procedural Langauge SQL is a programmng language, SQL is not.
+
+RDBMS - Relational Database Management System
+	-Oracle 		(PL/SQL)
+	-Microsoft SQL Server	(T/SQL)
+	-PostGres
+	-MySQL
+	-IBM DB2
+	-AWS Aurora
+
+SQL Sublanguages
+	Data Definition language (DDL)
+		CREATE
+		ALTER
+		DROP
+		TRUNCATE
+	Data Manipulation Language (DML)
+		INSERT
+		SELECT
+		UPDATE
+		DELETE
+	Data Query Language (DQL)
+		SELECT
+	Data Control Language (DCL)
+		GRANT
+		REVOKE
+	Transaction Control Langauge (TCL)
+		COMMIT
+		ROLLBACK
+		SAVEPOINT
+		SET_TRANSACTION - Oracle
+		
+ACID is the acronym for the properties of a transaction.
+
+ERD - Entity Relationship Diagram
+
+---------------
+Employee      |
+--------------|
+PK | E_ID     |
+   | F_Name   |
+   | L-Name   |
+FK | Title_ID |
+FK | C_ID     |
+---------------
+		
+--------------
+Company      |
+--------------
+PK | C_ID    |
+   | Name    |
+   | Address |
+   | Phone   |
+--------------
+
+-----------------
+Emp_Contact     |
+-----------------
+PK,FK | E_ID    |
+      | Phone   |
+      | Email   |
+      | Address |
+-----------------
+
+-----------
+Projects  |
+-----------
+PK | P_ID |
+     Name |
+-----------
+
+--------------
+Emp_Pro      |
+--------------
+PK | Join_ID |
+FK | P_ID    |
+FK | E_ID    |
+--------------
+
+Constraints
+-----------
+Primary Key - a unique not null identifier for every record of a table.
+Foreign Key - a reference to another table's unique contraint column, establishing a relationship.
+
+Cardinality
+-----------
+One To One (1:1)
+One To Many (1:M)
+Many To One (M:1)
+Many to Many (M:N)
+
+Multiplicity keeps track of min/max dependencies.
+
