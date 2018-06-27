@@ -1,2 +1,5 @@
 2018-06-23 21:19:53 INFO  LoginPrompt:125 - User [userid=x, fname=x, lname=x, balance=0.0] Created an account
 2018-06-23 21:26:05 INFO  Bank:131 - f Approved
+2018-06-24 15:39:03 INFO  LoginPrompt:125 - User [userid=h, fname=h, lname=h, balance=0.0] Created an account
+2018-06-24 16:18:41 INFO  LoginPrompt:125 - User [userid=r, fname=r, lname=r, balance=0.0] Created an account
+2018-06-25 13:48:42 INFO  LoginPrompt:125 - User [userid=lll, fname=l, lname=l, balance=0.0] Created an account

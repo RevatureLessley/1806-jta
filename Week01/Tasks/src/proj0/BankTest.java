@@ -56,6 +56,8 @@ public class BankTest {
 		users.removeUser(user);
 		assertEquals(users.getUsers().get("testuser"),null);
 	}
+	
+
 
 
 }

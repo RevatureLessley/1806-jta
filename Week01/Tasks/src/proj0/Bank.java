@@ -101,7 +101,7 @@ public class Bank{
 	 */
 	public void withdraw(User user) {
 		if(user.getBalance() == 0) {
-			System.out.println("Sorry, you're broke");
+			System.out.println("Sorry, you're poor");
 			return;
 		}
 		System.out.println("How much would you like to withdraw?");
@@ -117,6 +117,7 @@ public class Bank{
 		System.out.println("Current balance: " + user.getBalance());
 		logger.info(user.getUserid() + " Withdrew " + d);
 	}
+	
 	
 	/**
 	 * Approves a user's account, method can only be accessed by the admin
