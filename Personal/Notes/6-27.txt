@@ -5,3 +5,63 @@ michael.minton@revature.com
 Use 2 apstrophes to write an actual apostrophe in a string.
 Any string in SQL Developer must be surrounded by apostrophes, not quotes.
 Without CASCADE CONSTRAINTS, tables need to be dropped in order.
+
+Referential Integrity is the enforcement of foreign key relations. It prevents a user from inserting a record into a table with a FK that points to a non-existent element. It also prevents a user from deleting a record that anoher table is referencing. We can't drop  a table that another table refereces. This all prevents orphan record that have no parents.
+
+Aliases use quotes over apostrophes.
+
+WHERE filters records individually.
+
+To aggregate data:
+	1. Choose which column that represents different groups.
+	2. In SELECT, apply an aggreagate function to the columns not being grouped.
+	3. HAVING is a conditional that applies to groups of records.
+		WHERE applies first then HAVING.
+
+LIKE searches via pseudo regex. % means 0 to many of any character. _ means exactly 1 of any character.
+
+ROLLBACK cannot go past a COMMIT and DDL.
+
+TRUNCATE removes all data from a table.
+
+Aggregate functions combine multiple records together for one final result.
+	-SUM()
+	-AVG()
+	-MAX()
+	-MIN()
+	-STDDDEV()
+	-VARIANCE()
+	-COUNT()
+	-LAST()
+	-FIRST()
+
+Scalar functions alters the cell for each record of the input. Usually casting and string functions.
+	-LOWER()
+	-UPPER()
+	-ABS()
+	-COS()
+	-SIN()
+	-TAN()
+	-ROUND()
+	-TRUNC()
+	-CONCAT()
+	-LENGTH()
+	-TRIM()
+	-LTRIM()
+	-RTRIM()
+
+Join
+----
+Brings multiple tables together based on matching columns between each other.
+	
+	-INNER JOIN - data in common on join key
+	-LEFT JOIN - data in common on left join key with null values for unjoined data, minimum size of left table
+	-RIGHT JOIN - data in common on right join key with null values for unjoined data, minumum size of right table
+	-FULL OUTER JOIN - data in common on join key with null values for unjoined data, minimum size of max table, same as OUTER JOIN
+	-CROSS JOIN - cartesian product
+	-THETA JOIN - not using the = operator.
+	-EQUIJOIN - comparisons of columns where A = B
+	-SELF JOIN
+	-NATURAL JOIN - joins two tables together via matching column names then removes duplicate columns in the result. You can prefix any other join keyword  with it.
+
+ORDER BY defaults by ascending, adding DESC orders by descending.
