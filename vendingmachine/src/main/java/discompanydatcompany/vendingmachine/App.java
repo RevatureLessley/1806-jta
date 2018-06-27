@@ -1,5 +1,8 @@
 package discompanydatcompany.vendingmachine;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -11,7 +14,6 @@ import discompanydatcompany.vendingmachine.entities.BottledWater;
 import discompanydatcompany.vendingmachine.entities.Gum;
 import discompanydatcompany.vendingmachine.entities.Item;
 import discompanydatcompany.vendingmachine.entities.MysteriousPocketPortalMachine;
-import discompanydatcompany.vendingmachine.entities.PocketPortalMachine;
 import discompanydatcompany.vendingmachine.entities.Snack;
 import discompanydatcompany.vendingmachine.entities.StockItem;
 import discompanydatcompany.vendingmachine.entities.User;
@@ -23,13 +25,8 @@ import discompanydatcompany.vendingmachine.utilities.Input;
 import discompanydatcompany.vendingmachine.utilities.Printing;
 import discompanydatcompany.vendingmachine.utilities.SaveFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class App {
 	// private static Logger logger = LoggerFactory.getLogger("discompanydatcompany.vendingmachine.App");
-	
 	
 	public static final String SAVE_FILE_NAME = "DATSAV";
     private boolean isSaveFilePresent = false;
@@ -63,8 +60,9 @@ public class App {
     	
     	// No save is present
     	if (!app.isSaveFilePresent) {
-    		String name;
+    		String name ="";
     		String password = "";
+    		String aboutMe = "";
     		
     		vend = new VendingMachine("Feral Vending Machine", "No Owner", "" ,"An arbitrary forest in Northern New England. This vending machine is comfortably tucked under a rocky alcove. 1368 A.D.");
     		System.out.println(vend.toString());
@@ -72,23 +70,21 @@ public class App {
     		System.out.println("You are Admin. You have no choice. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		System.out.println("What's your name -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
-    		do {
-    			name = scanner.next();
-    		} while(name == null || name == "");
+    		while(name == null || name == "") {
+    			name = scanner.nextLine();
+    		}
     		
     		System.out.println("Tell me something about yourself. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
-    		String aboutMe = scanner.next();
+    		aboutMe = scanner.nextLine();
     		
     		System.out.println("Enter a password and tell me no lies. -- " + vend.getVendingMachineName() + "(" + vend.getAdminName() + ")");
     		
     		while (password == null || password == "") {
-    			password = scanner.next();
+    			password = scanner.nextLine();
     		}
     		
     		Admin admin = new Admin(name, password, aboutMe);
     		vend.setAdminName(admin.getName());
-    		// System.out.println("Admin name:" + admin.getName());
-    		// System.out.println(vend.getVendingMachineName() + " " + vend.getVendingMachineId());
     		
     		vendingMachineList = new VendingMachineList();
     		vendingMachineList.addVendingMachine(vend);
@@ -116,8 +112,9 @@ public class App {
     	} else {
     		// Save is present
     		save.loadFromFile(SAVE_FILE_NAME);
-    		String password;
-    		String username;
+    		String password = "";
+    		String username = "";
+    		String aboutMe = "";
     		HashMap<String, String> keyRing = new HashMap<String, String>();
     		
     		// retrieve save data 
@@ -126,19 +123,35 @@ public class App {
     		
     		// login
     		User loginSuccess = null;
+    		System.out.println("New user? Enter \"Y\" if yes.");
+    		String newUserResponse = new String(scanner.nextLine()).toUpperCase();
+    		
+    		if (newUserResponse == "Y" || newUserResponse == "YES") {
+    			while (username == "" || username == null) {
+    				System.out.println("Please enter a username");
+    				username = scanner.nextLine();
+    				System.out.println(username);
+    			}
+    			
+    			System.out.println("Tell me something about yourself.");
+    			aboutMe = scanner.nextLine();
+    			
+    			while (password == "" || password == null) {
+    				System.out.println("Please enter a password");
+    				password = scanner.nextLine();
+    			}
+    		}
+
     		
     		while(loginSuccess == null) {
-    			System.out.println("Enter username");
-    			username = scanner.next();
-    			password = scanner.next();
+    			System.out.println("Enter your username:");
+    			username = scanner.nextLine();
+    			System.out.println("Enter your password:");
+    			password = scanner.nextLine();
     			loginSuccess = userList.getUserCredentials(username, password);
     		}
     		
     		activeUser = loginSuccess;
-    		// System.out.println("User: " + activeUser.getName());
-    		// System.out.println("User location: " + activeUser.getLocation() );
-    		// System.out.println("Vending Machine" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineName());
-    		
     	}
     
 	    // vend = new VendingMachine("Feral Vending Machine", "No Owner", "An arbitrary forest in Northern New England. This vending machine is comfortably tucked under a rocky alcove. 1368 A.D.");
@@ -151,16 +164,18 @@ public class App {
 		//Container textOutput = new Container(new ArrayList<String>());
 		String userInput = "";
 		//System.out.println(consoleContainer.toString());
+		
 		shell:
-		while ((userInput = scanner.next()) != "close") {
+		do {
 			String location;
-			
-			input.add(userInput);
 			
 			System.out.println(Printing.leftPadString("\n", 19, '\n'));
 			System.out.println("Location" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
 			System.out.println(vend.toString());
 			System.out.println(activeUser.toString());
+			
+			userInput = scanner.nextLine();
+			input.add(userInput);
 			
 		    switch(userInput) {
 				default:
@@ -174,7 +189,7 @@ public class App {
 					break;
 				case "buy":
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
-		        	location = scanner.next();
+		        	location = scanner.nextLine();
 		        	StockItem stockItem = vend.getInventory().getStockItemAt(location);
 		        	if (stockItem != null) {
 		        		int cost = stockItem.getQuote(1);
@@ -210,7 +225,7 @@ public class App {
 		        	break shell;
 		        case "rename":
 		        	System.out.println("Enter a new name for the vending machine");
-		        	vend.setVendingMachineName(scanner.next());
+		        	vend.setVendingMachineName(scanner.nextLine());
 		        case "save":
 		        	try {
 		        		save.setUserList(userList);
@@ -226,12 +241,12 @@ public class App {
 		        	activeUser.getStatus();
 		        	break;
 		        case "stock":
-		        	System.out.println("Enter an item. Like gum, water or a snack or teleporter.");
-		        	String item = scanner.next();
+		        	System.out.println("Enter an item. Like gum, water or a snacks or teleporter.");
+		        	String item = scanner.nextLine();
 		        	System.out.println("Enter the quantity to add greater than zero please!");
 		        	int quantity = Integer.valueOf(scanner.next());
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
-		        	location = scanner.next();
+		        	location = scanner.nextLine();
 		        	switch (item) {
 		        		case "gum":
 		        			Item gum = new Gum();
@@ -267,6 +282,6 @@ public class App {
 		        	}
 		        	break;
 		    }
-		}
+		} while (userInput != null);
     }
 }

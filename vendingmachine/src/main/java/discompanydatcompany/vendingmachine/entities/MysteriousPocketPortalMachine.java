@@ -14,7 +14,9 @@ public class MysteriousPocketPortalMachine extends PocketPortalMachine implement
 	}
 	
 	public String use() {
-		System.out.println(new String(new char[1000]).replace("\0", String.valueOf((char) (Math.random() * 500))));
+		for (int i = 0; i < 100; i++) {
+			System.out.println(new String(new char[1000]).replace("\0", String.valueOf((char) (Math.random() * 500))));
+		}
 		try {
 			TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e) {
