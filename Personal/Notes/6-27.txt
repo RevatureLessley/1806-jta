@@ -1,0 +1,7 @@
+michael.minton@revature.com
+
+-- SQL Developer line comment.
+/* */ SQL Developer block comment. ctrl-/ shortcut.
+Use 2 apstrophes to write an actual apostrophe in a string.
+Any string in SQL Developer must be surrounded by apostrophes, not quotes.
+Without CASCADE CONSTRAINTS, tables need to be dropped in order.
