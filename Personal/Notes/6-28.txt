@@ -54,3 +54,38 @@ Callable Statements
 -------------------
 -same as prepared statement but used to invoke PL/SQL (functions and stored procedures)
 
+Oracle has an extension called PL/SQL (Procedural Language SQL)
+	- provides tools such as functions, stored procedures, sequences, triggers, exception handling.
+
+A sequence is an object that will maintain a counter. Used with triggers. Use  / to separate transactions and other parts of the script.
+
+A trigger is an object that listens for actions to occur on a specific table in which the trigger is made for. They can react to most CRUD operations except SELECT. BEFORE and AFTER can follow a CRUD. BEGIN END signifies a block for a transaction. 
+-:new is used to represent newly inserted data. :old accesses data prior to insert/update. 
+-SELECT INTO immediately grabs data and assigns it to a location/varible/table.
+-dual is a dummy table used to satisfy syntax when we do not care about the table being referenced.
+
+Stored Procedures are named transactions that are invoked when called.
+CREATE (OR REPLACE) proc_name
+IS
+	//DECLARE variables
+BEGIN
+	//execution or other functions
+[Exception]
+	//exception handling
+END;
+
+Invoked in two ways
+1. Via a transaction block BEGIN proc_name(); END;
+2. Outside transaction block call proc_name();
+
+To access the dbms_output console, View > Dbms_output brings the window where  + selects the current scheme and opens the console.
+
+Procedures define transactions that change data. Parameters in stored procedures:
+	-IN - input
+	-OUT - return
+	-IN OUT - input then output
+Syntax: varname In/OUT/IN OUT
+
+DECLARE declares variables in a transaction block. := assigns variables.
+
+Cursors are like pointers to a table/view. They iterate through entire queries and are used to pass entire queries. PL/SQL offers SYS_RECURSOR that can be passed outside of its procedure's scope. A CURSOR would have died. CURSORS are like streams that you OPEN for queries.
