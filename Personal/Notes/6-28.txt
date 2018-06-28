@@ -3,3 +3,54 @@ A property file aids in making a more dynamic application. As opposed to changin
 Statements are simple SQL queries to be executed. ResultSets are objects that hold query results.
 
 Try with resources will close any created streams within the parenthesis when the try-catch has finished.
+
+JDBC (Java Database Connectivity)
+	Java application
+		|	
+	JDBC API
+		|
+	JDBC Driver Manager
+		|
+	JDBC Driver
+		|
+	Database
+
+Components/Interfaces
+---------------------
+Driver Manager
+	-manages different database drivers
+Driver
+	-interface that handles communication with a specific database
+Connection
+	-object managing an established database communication
+Statement
+	-object that submits SQL statements
+ResultSet
+	-houses statement results
+SQLException
+
+SQL Injection is when a user inputing malicious data in order to compromise a database.
+
+Simple Statement
+----------------
+-general purpose access to the database
+-useful for statements with static queries
+-risks SQL Injection with dynamic queries
+-compiled by SQL
+
+Prepared Statement
+------------------
+-more dynamic
+-parameterized
+-accepts input at runtime
+-prevents SQL Injection
+-precompiled in Java
+-checks if table exists
+-confirms parameter types
+-parses for correct syntax
+-caches for reuse
+
+Callable Statements
+-------------------
+-same as prepared statement but used to invoke PL/SQL (functions and stored procedures)
+
