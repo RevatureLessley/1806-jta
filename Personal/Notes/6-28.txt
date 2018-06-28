@@ -1,0 +1,5 @@
+A property file aids in making a more dynamic application. As opposed to changing code, recompiling, redeploying. 
+
+Statements are simple SQL queries to be executed. ResultSets are objects that hold query results.
+
+Try with resources will close any created streams within the parenthesis when the try-catch has finished.
