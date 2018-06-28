@@ -34,24 +34,15 @@ public class NpcDaoImpl implements NpcDao{
 	public List<Npc> selectAllNpc() {
 		
 		Statement stmt = null; // Simple SQL query to be executed
-		Statement stmtClass = null;
 		ResultSet rs = null; //Object that holds query results
-		ResultSet rsClass = null;
 		List<Npc> npcs = new ArrayList<>();
 		
 		try(Connection conn = Connections.getConnection()){
 			String sql = "SELECT * FROM npc";
-			String sqlClass = "SELECT * FROM job_class";
 			
 			stmt = conn.createStatement();
-			stmtClass = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			rsClass = stmtClass.executeQuery(sqlClass);
-			
-			Map<Integer,String> classes = new HashMap<>();
-			while(rsClass.next()){
-				classes.put(rsClass.getInt(1), rsClass.getString(2));
-			}			
+						
 			
 
 			while(rs.next()){
@@ -62,12 +53,6 @@ public class NpcDaoImpl implements NpcDao{
 						rs.getInt(4),
 						rs.getInt(5)
 						);
-				for(Integer i: classes.keySet()){
-					if(i.equals(npc.getJobClass())){
-						npc.setJobClassString(classes.get(i));
-						break;
-					}
-				}
 				npcs.add(npc);
 			}
 			
@@ -76,8 +61,6 @@ public class NpcDaoImpl implements NpcDao{
 		}finally{
 			close(stmt);
 			close(rs);
-			close(stmtClass);
-			close(rsClass);
 		}
 		
 		return npcs;
