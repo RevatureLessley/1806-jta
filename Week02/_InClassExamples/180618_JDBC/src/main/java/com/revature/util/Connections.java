@@ -45,13 +45,10 @@ public class Connections {
 			String props[] = System.getenv("DBProps").split(";");
 			Class.forName(props[0]);
 			conn = DriverManager.getConnection(props[1],props[2],props[3]);
-			
-			System.out.println("DATABASE CONNECTION SUCCESS!");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("DATABASE CONNECTION FAILED.");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

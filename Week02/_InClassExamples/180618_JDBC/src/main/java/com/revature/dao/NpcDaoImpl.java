@@ -3,13 +3,12 @@ package com.revature.dao;
 import static com.revature.util.CloseStreams.close;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.revature.beans.Npc;
 import com.revature.util.Connections;
@@ -22,7 +21,30 @@ public class NpcDaoImpl implements NpcDao{
 	}
 
 	public Npc selectNpcById(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM npc WHERE npc_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return new Npc(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getInt(3),
+						rs.getInt(4),
+						rs.getInt(5)
+						);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
 		return null;
 	}
 
@@ -71,9 +93,28 @@ public class NpcDaoImpl implements NpcDao{
 		return null;
 	}
 
-	public Integer updateNpcById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer updateNpc(Npc npc) {
+		PreparedStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+			String sql = "Update npc set npc_name = ?,npc_lvl = ?, " +
+						"currency = ?, job_id = ? WHERE npc_id=?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, npc.getName());
+			stmt.setInt(2, npc.getLvl());
+			stmt.setInt(3, npc.getCurrency());
+			stmt.setInt(4, npc.getJobClass());
+			stmt.setInt(5, npc.getId());
+			
+			return stmt.executeUpdate(); //Returns amount rows effected;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}
+		return 0;
 	}
 
 }
