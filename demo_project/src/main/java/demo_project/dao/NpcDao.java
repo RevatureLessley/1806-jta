@@ -9,5 +9,5 @@ public interface NpcDao {
 	public Npc selectNpcById(Integer id);
 	public List<Npc> selectAllNpc();
 	public Integer deleteNpcById(Integer id);
-	public Integer updateNpcById(Integer id);
+	public Integer updateNpc(Npc npc);
 }

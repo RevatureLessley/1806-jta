@@ -36,8 +36,6 @@ public class Connections {
 			
 			Class.forName(props[0]);
 			conn = DriverManager.getConnection(props[1], props[2], props[3]);
-			
-			System.out.println("DATABASE CONNECTION SUCCESS!");
 		}
 		catch(SQLException e) 
 		{

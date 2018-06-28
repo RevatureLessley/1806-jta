@@ -23,6 +23,12 @@ public class Driver
 					npc.getCurrency() +
 					" monies.");
 		}
+		Npc npc = null;
+		System.out.println("===========");
+		System.out.println(npc = ns.getNpcById(3));
+		ns.updateLvlById(3,  npc.getLvl()+1);
+		System.out.println(npc = ns.getNpcById(3));
+		
 //		if(conn!=null) {
 //			conn.close();
 //		}

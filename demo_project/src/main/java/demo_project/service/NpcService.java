@@ -1,6 +1,5 @@
 package demo_project.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import demo_project.beans.JobClass;
@@ -32,5 +31,34 @@ public class NpcService {
 		//getAllNpc (Which wouldn't have jobStringClass set
 		//getAllClasses
 		//SetAllJobStringClasses in this method
+	}
+	
+	public Npc getNpcById(Integer id) {
+		NpcDaoImpl ndi = new NpcDaoImpl();
+		JobClassDao jcd = new JobClassDaoImpl();
+		List<JobClass> jcs = jcd.getAllJobs();
+		Npc npc = ndi.selectNpcById(id);
+		if(npc != null) {
+			for(JobClass jc: jcs) {
+				if(npc.getJobClass().getClass().equals(jc.getId())) {
+					npc.setJobClassString(jc.getName());
+				}
+			}
+		}
+		return npc;
+	}
+	
+	public boolean updateLvlById(Integer id, Integer lvl)
+	{
+		NpcDaoImpl nd = new NpcDaoImpl();
+		Npc npc = nd. selectNpcById(id);
+		
+		if(npc != null) {
+			npc.setLvl(lvl);
+			if(nd.updateNpc(npc) > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
