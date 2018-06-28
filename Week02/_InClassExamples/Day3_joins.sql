@@ -91,3 +91,22 @@ NATURAL INNER JOIN td;
     You may preface any keywork join with natural to apply it. E.G.
     NATURAL LEFT JOIN/ NATURAL FULL OUTER JOIN.
 */
+
+select a.shop_name as "SHOP NAME",
+    e.item_name as "AVAILABLE STOCK", 
+    b.npc_name as "SHOP OWNER",
+    c.job_name as "OWNER CLASS"
+    
+FROM shop a
+RIGHT JOIN npc b
+on a.owner_id = b.npc_id
+LEFT join job_class c
+on b.job_id = c.job_id
+LEFT join shop_2_item d
+on a.shop_id = d.shop_id
+LEFT join item e
+on d.item_id = e.item_id
+ORDER BY a.SHOP_NAME;
+--ORDER BY designates how the results are ordered out the gate.
+--You can add DESC to order it from highest to lowest if you want.
+--It defaults to ASC for lowest to highest.
