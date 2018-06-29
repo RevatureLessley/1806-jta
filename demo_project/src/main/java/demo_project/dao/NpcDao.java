@@ -10,4 +10,5 @@ public interface NpcDao {
 	public List<Npc> selectAllNpc();
 	public Integer deleteNpcById(Integer id);
 	public Integer updateNpc(Npc npc);
+	public boolean insertNpcViaSp(Npc npc);
 }

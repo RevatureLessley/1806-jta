@@ -33,6 +33,14 @@ public class Npc {
 		this.currency = currency;
 		this.jobClass = jobClass;
 	}
+	
+	public Npc( String name, Integer lvl, Integer currency, Integer jobClass) {
+		super();
+		Name = name;
+		this.lvl = lvl;
+		this.currency = currency;
+		this.jobClass = jobClass;
+	}
 
 	public Npc() {
 		super();
