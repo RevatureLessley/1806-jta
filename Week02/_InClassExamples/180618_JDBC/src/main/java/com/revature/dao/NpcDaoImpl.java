@@ -2,6 +2,7 @@ package com.revature.dao;
 
 import static com.revature.util.CloseStreams.close;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,6 +116,30 @@ public class NpcDaoImpl implements NpcDao{
 			close(stmt);
 		}
 		return 0;
+	}
+
+	@Override
+	public Boolean insertNpcViaSp(Npc npc) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call insertIntoNpc(?,?,?,?)}");
+			
+			stmt.setString(1, npc.getName());
+			stmt.setInt(2, npc.getLvl());
+			stmt.setInt(3, npc.getCurrency());
+			stmt.setInt(4, npc.getJobClass());
+
+			
+			return stmt.execute(); //Returns amount rows effected;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
 	}
 
 }
