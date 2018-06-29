@@ -42,7 +42,6 @@ CREATE TABLE job_class (
     job_name varchar2(100) NOT NULL
 );
 
-
 CREATE TABLE npc (
     npc_id number(6) primary key,
     npc_name varchar(100) NOT NULL,
@@ -122,38 +121,4 @@ INSERT INTO shop_2_item VALUES (2,3);
 INSERT INTO shop_2_item VALUES (3,5);
 INSERT INTO shop_2_item VALUES (3,1);
 
-
-/*
-    AGGREGATE FUNCTION
-    -Any function that combines multiple records of data together for one
-    final result.
-    EXAMPLES:
-    -SUM()
-    -AVG()
-    -MAX()
-    -MIN()
-    -STDDEV()
-    -VARIANCE()
-    -COUNT()
-    -LAST()
-    -FIRST()
-    
-    SCALAR FUNCTION
-    -Any function that applies some alteration to the cell for each record
-    of the input.
-    THINK: casting values to other datatypes or simply any String function.
-    -lower()
-    -upper()
-    -ABS()
-    -cos,sin,tan()
-    -round()
-    -trunc()
-    -concat()
-    -length()
-    -trim()
-    -ltrim()
-    -rtrim()
-    
-*/
-
-select * from npc;
+commit;
