@@ -96,7 +96,7 @@ RIGHT JOIN Artist ar
 ON al.ARTISTID = ar.ARTISTID;
 
 --========7.4 CROSS========
-SELECT COUNT (*) FROM Artist
+SELECT * FROM Artist
 CROSS JOIN Album
 ORDER BY Artist.NAME;
 
