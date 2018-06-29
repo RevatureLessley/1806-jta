@@ -1,41 +1,9 @@
---This is a SQL Developer comment!
-/*
-    This is a SQL block comment
-*/
-
-/*
-SUB LANGUAGES
-
-DDL - Data definition Language
--CREATE
--ALTER
--DROP
--TRUNCATE
-DML - Data Manipulation Language
--SELECT
--INSERT
--UPDATE
--DELETE
-TCL - Transaction Contorl Language
--COMMIT
--ROLLBACK
--SAVEPOINT
--SET_TRANSACTIOn
-DCL - Data Control Language
--GRANT
--REVOKE
-DQL
--SELECT
-*/
-
---DDL
+--RYAN's DATABASE BUILDER SCRIPT
 DROP TABLE item CASCADE CONSTRAINTS;
 DROP TABLE shop CASCADE CONSTRAINTS;
 DROP TABLE npc CASCADE CONSTRAINTS;
 DROP TABLE shop_2_item CASCADE CONSTRAINTS;
 DROP TABLE job_class CASCADE CONSTRAINTS;
---CASCADE CONSTRAINTS will remove any constraints from other tables in the event
---droppping a table violates them.
 
 CREATE TABLE job_class (
     job_id number(6) PRIMARY KEY,
@@ -44,11 +12,12 @@ CREATE TABLE job_class (
 
 CREATE TABLE npc (
     npc_id number(6) primary key,
-    npc_name varchar(100) NOT NULL,
-    npc_lvl number(3) NOT NULL,
+    npc_name varchar(100),
+    npc_lvl number(3) DEFAULT 3,
     currency number(6) NOT NULL,
-    job_id number(6),
+    job_id number(6) NOT NULL CHECK (job_id > 0),
     CONSTRAINT fk_job_id FOREIGN KEY (job_id) REFERENCES job_class (job_id)
+    ,CONSTRAINT unique_name UNIQUE (npc_name)
 );
 
 CREATE TABLE shop (
@@ -72,23 +41,6 @@ CREATE TABLE shop_2_item(
     CONSTRAINT fk_shop_id FOREIGN KEY (shop_id) REFERENCES shop (shop_id),
     CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES item (item_id)
 );
-
---DML OLD
---INSERT INTO shop (SHOP_ID, SHOP_NAME, SHOP_OWNER)
---VALUES (1, 'Bobbert''s Wares', 'Bobbert');
-----use 2 apostrophes to write an actual apostrophe in the string
-----Any strings in SQL Developer MUST be surrounded by apostrophes, NOT quotes.
---INSERT INTO shop (SHOP_ID, SHOP_NAME, SHOP_OWNER)
---VALUES (1, 'The Birdcage', 'Salara');
---INSERT INTO shop VALUES (2, 'The Quiet Library', 'KnokcKnock');
-----If you do not explicitly label column names, you will have to provide values
-----for each named column.
-
-
---ALTER with adding columns
---ALTER TABLE shop ADD item1 varchar2(100);
---ALTER TABLE shop ADD item2 varchar2(100);
---ALTER TABLE shop ADD item3 varchar2(100);
 
 --DML NEW
 INSERT INTO job_class VALUES(1, 'Shopkeep');
@@ -120,5 +72,69 @@ INSERT INTO shop_2_item VALUES (2,2);
 INSERT INTO shop_2_item VALUES (2,3);
 INSERT INTO shop_2_item VALUES (3,5);
 INSERT INTO shop_2_item VALUES (3,1);
+
+--PL SQL
+DROP SEQUENCE npc_seq;
+CREATE SEQUENCE npc_seq
+    START WITH 100
+    INCREMENT BY 1;
+    --This sequence will be used to handle the id field for our tables
+    --In order to actually utilize it, we will need to build something that
+    --reacts to situations where an employee inserted. E.G. Triggers
+/ --Use forward slash to separate transactions and other parts of the script.
+
+CREATE OR REPLACE TRIGGER npc_seq_trigger
+BEFORE INSERT ON npc --NOTE: you can use BEFORE or AFTER followed by a CRUD
+FOR EACH ROW --PL/SQL for loop
+BEGIN --This keyword signifies a block for a transaction
+    IF :new.npc_id IS NULL THEN
+        SELECT npc_seq.NEXTVAL INTO :new.npc_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE hello_world_procedure
+IS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Hello World!'); --SQL DEVELOPER equivalent to syso
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertIntoNpc(npcName IN VARCHAR2, 
+                                            npcLvl IN NUMBER,
+                                            npcCurrency IN NUMBER,
+                                            npcJobId IN NUMBER)
+IS
+BEGIN
+    INSERT INTO npc (npc_name, npc_lvl, currency, job_id)
+    VALUES(npcName, npcLvl, npcCurrency, npcJobId);
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE get_class(npcId IN NUMBER, className OUT VARCHAR2)
+IS
+BEGIN
+    SELECT b.JOB_NAME INTO className FROM npc a
+    INNER JOIN JOB_CLASS b
+    ON a.job_id = b.job_id
+    WHERE a.npc_id = npcId;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE get_currency(npcID IN OUT number)
+IS
+BEGIN
+    SELECT currency INTO npcID FROM npc WHERE npc_id = npcID;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE get_all_npc(cursorParam OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN cursorParam FOR --Cursor is like a stream, you OPEN if FOR some QUERY
+    SELECT * FROM npc;
+END;
+/
 
 commit;

@@ -39,3 +39,12 @@ SELECT * FROM tb;
 SELECT * FROM ta
 UNION ALL
 SELECT * FROM tb;
+
+
+select a.job_id from npc a
+inner join npc b
+on a.npc_id = b.npc_id
+UNION
+select a.job_id from npc a
+inner join npc b
+on a.npc_id = b.npc_id;
