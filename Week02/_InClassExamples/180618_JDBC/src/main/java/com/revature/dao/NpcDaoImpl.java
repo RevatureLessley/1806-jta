@@ -132,7 +132,8 @@ public class NpcDaoImpl implements NpcDao{
 			stmt.setInt(4, npc.getJobClass());
 
 			
-			return stmt.execute(); //Returns amount rows effected;
+			stmt.execute(); //Returns amount rows effected;
+			return true;
 			
 		}catch(SQLException e){
 			e.printStackTrace();
