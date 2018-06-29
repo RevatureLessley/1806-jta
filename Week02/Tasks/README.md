@@ -39,7 +39,7 @@ select count(*) from customer;
 select count(*) from employee;
 ```
 
--- https://stackoverflow.com/questions/1799128/oracle-if-table-exists
+[IF EXISTS](https://stackoverflow.com/questions/1799128/oracle-if-table-exists)
 begin
 ```
     execute immediate 'drop sequence ' || genre_sequence;
@@ -61,6 +61,7 @@ increment by 1;
 create or replace trigger genre_seq_trigger
 before insert on genre
 for each row
+```
 begin
     if :new.genreid is null then
         select genre_sequence.NEXTVAL into :new.genreid from dual;
