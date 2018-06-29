@@ -70,3 +70,66 @@ Callable Statement
 ------------------
 stmt = conn.prepareCall("{call proc_name(?,?,...?)}");
 Boolean bool = stmt.execute();
+
+Transaction
+-----------
+-a unit of work on a database.
+-Properties
+	--Atomicity: all or nothing, if at any point of a transaction something goes wrong, abort/rollback the entire transaction.
+	--Consistency: all transactions must allways follow database rules and contraints (referential integrity)
+	--Isolation: concurrent transactions must yield the same results regardless of execution order.
+	--Durability: in the event of a database failure, all committed data are retained, no lost data.
+
+Transaction Isolation Levels
+----------------------------
+			Dirty	Non-Repeatable	Phantom
+READ UNCOMMITED		Yes	Yes		Yes
+READ COMMITED		No	Yes		Yes
+REPEATABLE READS	No	No		Yes
+SERIALIZABLE		No	No		No
+
+READ COMMITED places a read lock on uncommited records. REPEATABLE READS places a write lock on used records in use. SERIALIZABLE places a table lock on a table in use. Oracle defaults to READ COMMITED and does not allow READ UNCOMMITED and REPEATABLE READS.
+
+Dirty Reads: when a transaction works with another one's uncommited data.
+Non-Repeatable Reads: when a transaction works with data that gets updated in the mean time. 
+Phantom Reads: multiple reads from a table yields different record counts throughout a transaction.
+
+ETL (Extract Transform Load)
+	Datawarehouse 
+		-typically a denormalized DB (1-2NF) used for data mining, statistics, making projections.
+		-Datamarts are same as datawarhouses but smaller in size.
+
+Fact Tables contain aggregations based on dimension tables.
+Dimension Tables hold details about a specific entity.
+Star Schemas are trees with the fact table connected to all dimension tables.
+Snowflake Schemas are trees with the fact table connected to dimesion tables that are connected to other dimension tables.
+
+Constraints
+	PRIMARY KEY - not null unique key for identifying each record uniquely.
+	FOREIGN KEY - a key used for referential integrity, it exists only if the value it references exists, if the reference value doesn't exists then its an orphan record.
+	NULL/NOTNULL - enforces whether values are allowed to be null
+	UNIQUE - enforces unique column values
+	DEFAULT - default value for columns.
+	CHECK - extra conditionals applying to data being inserted.
+	
+Views are virtual tables that are created any time a query is run. VIEW objects give shortcuts to these virtual tables.
+
+EXISTS works like IN except intead of looking for a specific value in a collection, EXIST succeeds when at least one record id is returned.
+
+IN vs EXISTS
+	-both are used for conditional checks
+	-EXISTS is inefficient if the outer query is large since each record of the outer query runs EXISTS once.
+	-Nested queries with IN combines them together. Combining queries with low record counts to inner ones with higher record counts will be slower than EXISTS.
+
+INDEX objects in Oracle speeds up data retrieval in large databases. Two types of indexes:
+CLUSTERED - made implicitly for you from the PRIMARY kEY, indexes a table using the values of the column.
+NONCLUSTEED - explicit indexes SQL uses to uniquely identify attributes in a column.
+
+Indexes make insertions/deletions take longer in larger databases but lookups are faster. 
+
+IMPLICIT CURSORS are creates any time a query is executed.
+
+USER DEFINED FUNCTIONS
+	-stored procedures do not have to return, can have any number of IN/OUT parameters, alters using most DML statements, can't be called in mid-query, can call other stored procedures and functions.
+	-functions must return only one resource, can have OUT parameters (not recommended), can't perform DML/DDL, can be called mid-query, can call other functions, can't call stored procedures.
+Don't declare no-arg functions with parenthesis.
