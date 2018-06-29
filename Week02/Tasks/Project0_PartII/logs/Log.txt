@@ -11,3 +11,7 @@
 2018-06-25 15:01:46 INFO  root:47 - Project0/RevatureBank.java: Creating admin account.
 2018-06-25 15:01:46 INFO  root:76 - Project0/RevatureBank.java: User tried to create an existing username.
 2018-06-29 10:17:15 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-06-29 10:26:57 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-06-29 10:47:19 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-06-29 11:12:36 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-06-29 13:05:47 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.

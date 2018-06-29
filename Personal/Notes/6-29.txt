@@ -12,4 +12,61 @@ Joins
 
 Sets
 ----
-- compare entire records to determine what is combines/removed.
+-compare entire records to determine what is combines/removed.
+
+Normalization
+-------------
+-design pattern for databases that reduce redundancy and duplicate data by enforcing strong referential integrity.
+-higher normal forms require lower normal forms.
+0NF: garbage for applications, useful for data warehousing/mining.
+1NF: all data must be atomic, the smallest unit of value, each record must be unique.
+2NF: no partial dependencies, dependencies that are uniquely indetified by at least two columns.
+3NF: no transitive dependencies, keys uniquely identify multiple columns.
+
+Student
+-------
+s_id | building address | room # | FName  | LName  | degree_id | degree_name 	  | class 	  	| teacher
+123    123 dr.		   1	    Bobbert  Bobsen   1		  Math		    Algorithm             Ryan Lessley
+507    456 rd.		   3	    Tod      Todson   2		  Computer Science  British Literature	  Davis
+123    123 dr. 	   	   1	    Bobbert  Bobsen   1		  Math		    Automata		  Benson
+221    123 dr. 	   	   2	    Bobbert  Bobsen   1		  Math		    Automata		  Benson
+
+Student
+-------
+s_id	|	Fname	|	LName	|	d_id	|	a_id
+123		Bob		Bobsen		1		1
+507		Tod		Todson		2		2
+201		Bob		Bobsen		1		3
+
+Degree
+------
+d_id	| 	name
+1		Math
+2		Computer Science
+
+Address
+-------
+a_id	|	Building	|	Room
+1		123 dr.			1
+2		456 rd.			3
+3		123 dr.			2
+
+class
+-----
+c_id	|	name			|	teacher
+1		Algorithm			Ryan
+2		British Literature		Davis
+3		Algoritms			Benson
+
+Student_Class
+-------------
+s_id	|	c-id
+123		1
+123		3
+507		2
+221		3
+
+Callable Statement
+------------------
+stmt = conn.prepareCall("{call proc_name(?,?,...?)}");
+Boolean bool = stmt.execute();
