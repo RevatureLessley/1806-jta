@@ -1,0 +1,15 @@
+Set Operations
+--------------
+UNION - merges two queries together combining unique records beteen the two and excluding duplicates records.
+INTERSECT - show only records in both queries, removing duplicate records.
+MINUS - removes any matching records found in the right query from the left, removing duplicate records.
+UNION ALL - UNION with duplicates.
+EXCEPT - exclusive or
+
+Joins
+-----
+-compare values of specific columns.
+
+Sets
+----
+- compare entire records to determine what is combines/removed.
