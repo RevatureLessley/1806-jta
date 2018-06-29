@@ -71,6 +71,7 @@ end;
 ```
 select * from genre where name = 'House Music';
 ```
+```
 select * from genre where name = 'Country';
 ```
 ```
