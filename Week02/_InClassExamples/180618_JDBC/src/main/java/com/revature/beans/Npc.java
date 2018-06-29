@@ -9,6 +9,13 @@ public class Npc {
 	private String jobClassString;
 	
 	
+	public Npc(String name, Integer lvl, Integer currency, Integer jobClass) {
+		super();
+		this.name = name;
+		this.lvl = lvl;		
+		this.currency = currency;
+		this.jobClass = jobClass;
+	}
 	public Npc(Integer id, String name, Integer lvl, Integer currency, Integer jobClass) {
 		super();
 		this.id = id;
