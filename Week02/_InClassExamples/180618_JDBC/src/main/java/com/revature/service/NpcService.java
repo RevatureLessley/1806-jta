@@ -66,4 +66,8 @@ public class NpcService {
 		
 		return false;
 	}
+	public boolean insertNpc(Npc npc){
+		NpcDao nd = new NpcDaoImpl();
+		return nd.insertNpcViaSp(npc);
+	}
 }

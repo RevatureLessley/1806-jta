@@ -63,7 +63,7 @@ VALUES ('Auto Imcremented Adam', 3, 150, 3);
 INSERT INTO npc (npc_name, npc_lvl, currency, job_id)
 VALUES ('Auto Imcremented Alice', 4, 151, 3);
 select * from npc;
-
+/
 
 --STORED PROCEDURES
 /*
@@ -98,11 +98,12 @@ IS
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Hello World!'); --SQL DEVELOPER equivalent to syso
 END;
+/
 
 BEGIN
     hello_world_procedure();
 END;
-
+/
 /*
     In order to access the dbms_output console, go to view > Dbms_output
     -This brigns up the dbms_output window where you will click the '+'
@@ -150,6 +151,7 @@ BEGIN
     ON a.job_id = b.job_id
     WHERE a.npc_id = npcId;
 END;
+/
 
 DECLARE --Used to declare variables in a transaction blcok
     input number(6);
@@ -159,14 +161,14 @@ BEGIN
     get_class(input, results);
     DBMS_OUTPUT.PUT_LINE(results);
 END;
-
+/
 
 CREATE OR REPLACE PROCEDURE get_currency(npcID IN OUT number)
 IS
 BEGIN
     SELECT currency INTO npcID FROM npc WHERE npc_id = npcID;
 END;
-
+/
 DECLARE
     input number(6);
 BEGIN
@@ -175,7 +177,7 @@ BEGIN
     get_currency(input);
     DBMS_OUTPUT.PUT_LINE(input);
 END;
-
+/
 /*
     CURSORS!
     -A cursor is essentially like a pointer to a table or view.
@@ -215,3 +217,72 @@ BEGIN
                                 || npcCurrency || ' ' || npcJob);
     END LOOP;
 END;
+/*
+    In the above example, we created an EXPLICIT CURSOR. This was the case because we
+    created it specifically. There also exists IMPLICIT CURSORS which are simply the 
+    cursors created any time you execute a query in general. (IE, any SELECT STATEMENT)
+*/
+
+--USER DEFINED FUNCTIONS
+/*
+    The key differences between a function and a stored procedure
+    -A stored procedure does NOT have to return anything
+    -A stored procedure CAN have as many IN/OUT parameters it wants.
+    -A stored procedure can alter the database using most DML statements.
+    -A stored procedure can NOT be called mid query.
+    -A stored procedure can call other stored procedures within it.
+    -A stored procedure can call functions within it.
+    
+    -A function MUST return ONE and only ONE resource.
+    -A function CAN use OUT parameters, but this is highly frowned upon.
+    -A function can NOT perform DML/DDL
+    -A function can be called mid query.
+    -A function can call other functions.
+    -A function can NOT call stored procedures.
+*/
+
+CREATE OR REPLACE FUNCTION get_max_currency --if no parameters, then dont type parenthesis
+RETURN NUMBER
+IS
+    max_cur number(6);
+BEGIN
+    SELECT max(currency) INTO max_cur FROM npc;
+    RETURN max_cur;
+END;
+/
+
+DECLARE 
+    max_cur number;
+BEGIN
+    max_cur := get_max_currency();
+    DBMS_OUTPUT.PUT_LINE(max_cur);
+END;
+/
+
+--EXCEPTION HANDLING
+CREATE OR REPLACE PROCEDURE exceptionExample
+IS
+    CURSOR badCurse is
+        SELECT npc_id FROM npc;
+    npcId number(6);
+BEGIN
+    OPEN badCurse;
+    Loop
+        FETCH badCurse into npcId;
+        EXIT WHEN badCurse%NOTFOUND;
+    End loop;
+    CLOSE badCurse;
+    
+    npcId := (1/0);
+    
+EXCEPTION
+    WHEN invalid_cursor THEN
+        dbms_output.put_line('CURSOR ERROR');
+    WHEN zero_divide THEN
+        dbms_output.put_line('ARITHMETIC ERROR');
+END;
+    
+BEGIN
+    exceptionExample();
+END;
+    
