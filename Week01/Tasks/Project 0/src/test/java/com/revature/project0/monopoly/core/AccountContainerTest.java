@@ -1,5 +1,7 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
+import com.revature.project0.monopoly.core.Account;
+import com.revature.project0.monopoly.core.AccountContainer;
 import org.junit.Before;
 import org.junit.Test;
 

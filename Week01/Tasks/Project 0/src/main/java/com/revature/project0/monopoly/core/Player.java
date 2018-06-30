@@ -1,6 +1,6 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
-import com.revature.project0.monopoly.Board.BoardPiece;
+import com.revature.project0.monopoly.core.Board.BoardPiece;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
 
 
 /**

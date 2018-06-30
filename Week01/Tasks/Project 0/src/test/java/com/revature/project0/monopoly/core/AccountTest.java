@@ -1,4 +1,4 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

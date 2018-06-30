@@ -1,9 +1,9 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
 
 /**
  * POJO for holding accounts. This class will be serializable to store Account information for all the players.

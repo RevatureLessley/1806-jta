@@ -1,12 +1,12 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
-import static com.revature.project0.monopoly.LogWrapper.Severity.WARN;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.WARN;
 
 
 /**

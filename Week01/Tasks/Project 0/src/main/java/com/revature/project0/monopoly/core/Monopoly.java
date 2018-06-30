@@ -1,4 +1,4 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 /*
  * @Author Eric Sundberg
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import static com.revature.project0.monopoly.CardDeck.CardType.CHANCE;
-import static com.revature.project0.monopoly.CardDeck.CardType.COMMUNITY_CHEST;
+import static com.revature.project0.monopoly.core.CardDeck.CardType.CHANCE;
+import static com.revature.project0.monopoly.core.CardDeck.CardType.COMMUNITY_CHEST;
 
 /*
     TODO List:
@@ -47,16 +47,7 @@ public class Monopoly {
 
 
     private static void testFunction(){
-        Player player = new Player("Eric", null);
-        player.setMoney(0);
-        System.out.println("Money: $" +player.getMoney());
 
-        CardDeck deck = CardDeck.getCards();
-        int a = deck.runCardEvent(player, "Poor Tax");
-        if (a < 0) owesMoney(player, -a, null);
-        System.out.println("Money: $" +player.getMoney());
-
-        System.out.println(a);
         System.exit(0);
     }
 

@@ -1,5 +1,7 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
+import com.revature.project0.monopoly.core.Board;
+import com.revature.project0.monopoly.core.Player;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

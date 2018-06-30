@@ -1,4 +1,4 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static com.revature.project0.monopoly.LogWrapper.Severity.DEBUG;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
 
 /**
  * This class handles the serializing and deserializing of the GameState class.

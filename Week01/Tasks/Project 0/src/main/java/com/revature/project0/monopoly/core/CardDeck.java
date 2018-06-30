@@ -1,10 +1,10 @@
-package com.revature.project0.monopoly;
+package com.revature.project0.monopoly.core;
 
 import java.util.HashMap;
 import java.util.Random;
 
-import static com.revature.project0.monopoly.CardDeck.CardType.CHANCE;
-import static com.revature.project0.monopoly.LogWrapper.Severity.ERROR;
+import static com.revature.project0.monopoly.core.CardDeck.CardType.CHANCE;
+import static com.revature.project0.monopoly.core.LogWrapper.Severity.ERROR;
 
 /**
  * This class represents the Chance and Community Chest card deck
