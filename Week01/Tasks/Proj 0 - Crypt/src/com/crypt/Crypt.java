@@ -1,17 +1,15 @@
 package com.crypt;
 
-import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.crypt.Accounts.Account;
-import com.crypt.Accounts.AccountOptions;
 import com.crypt.filemanager.UserPassFileManager;
+import static com.crypt.lambda.LambdaPackage.*;
 
 public class Crypt {
 	//Making a proper enumerator IE: Making a Hash map that I can use to get roles as numbers
@@ -25,8 +23,8 @@ public class Crypt {
 	//Saves and loads user pass info
 	static UserPassFileManager upfm = new UserPassFileManager("accounts.ser");	
 
-	final static Logger logger = Logger.getLogger("Crypt.class");
-	
+	final static Logger logger = Logger.getLogger("Crypt.class");	
+
 	public static void main(String[] args) {
 		logger.trace("Main method started");
 		Crypt c = new Crypt();

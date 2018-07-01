@@ -19,8 +19,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<artifactId>ojdbc7</artifactId>
+			<groupId>com.oracle</groupId>
+			<version>12.1.0</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

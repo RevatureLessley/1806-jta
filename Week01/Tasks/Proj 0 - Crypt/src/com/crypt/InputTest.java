@@ -2,12 +2,16 @@ package com.crypt;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.crypt.util.Connections;
 
 public class InputTest {
 
+	@Test()
+	public void dbConnectionTest() {
+		assertNotNull("CONNECTION FAILED", Connections.getConnection());
+	}
 	@Test()
 	public void byteRead() {//Tests input for bytes
 		assertEquals(20, Input.getInputByte());

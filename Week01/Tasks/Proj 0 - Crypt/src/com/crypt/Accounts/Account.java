@@ -152,7 +152,7 @@ public class Account implements Serializable {
 	public void setDefaultSeed(int defaultSeed) {
 		this.defaultSeed = defaultSeed;
 	}
-	public void generateDefaultSeed() { defaultSeed = (generator.nextInt(10000000) + 10000000 * 2)/4; }
+	public void generateDefaultSeed() { defaultSeed = (generator.nextInt((10000000) + 10000000) * 2)/4; }
 	
 	
 	
