@@ -3,11 +3,6 @@ package main;
 public class Admin extends User {
 
 	/**
-	 * serialUID for Admin
-	 */
-	private static final long serialVersionUID = 7009823248799591097L;
-
-	/**
 	 * default constructor
 	 */
 	public Admin() {

@@ -15,19 +15,19 @@ CREATE TABLE person (
     p_id number(6) PRIMARY KEY,
     FName varchar2(100) NOT NULL,
     LName varchar2(100) NOT NULL,
-    CONSTRAINT fk_p_id FOREIGN KEY (p_id) REFERENCES login(u_id)
+    CONSTRAINT fk_p_id FOREIGN KEY (p_id) REFERENCES login(u_id) ON DELETE CASCADE
 );
 
 CREATE TABLE balance (
     b_id number(6) PRIMARY KEY,
     bal number(8,2) NOT NULL,
-    CONSTRAINT fk_b_id FOREIGN KEY (b_id) REFERENCES login(u_id)
+    CONSTRAINT fk_b_id FOREIGN KEY (b_id) REFERENCES login(u_id) ON DELETE CASCADE
 );
 
 CREATE TABLE auth (
     a_id number(6) PRIMARY KEY,
     is_auth number(2) NOT NULL,
-    CONSTRAINT fk_a_id FOREIGN KEY (a_id) REFERENCES login(u_id)
+    CONSTRAINT fk_a_id FOREIGN KEY (a_id) REFERENCES login(u_id) ON DELETE CASCADE
 );
 
 
@@ -100,5 +100,6 @@ INNER JOIN balance b
 ON p.p_id = b.b_id
 INNER JOIN auth a
 ON b.b_id = a.a_id;
+/
 
 commit;

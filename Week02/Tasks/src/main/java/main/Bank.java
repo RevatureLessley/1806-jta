@@ -16,13 +16,9 @@ public class Bank{
 		if(conn!=null){
 			conn.close();
 		}
-		//setup users hashmap for the first time
-		//Users users = new Users();
 		
 		LoginPrompt lp = new LoginPrompt();
 		
-		//Used for serialization
-		//Users users = lp.retrieveUsers();
 		User user = lp.enterLogin();
 		if (user == null) return;
 		

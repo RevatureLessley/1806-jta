@@ -42,11 +42,9 @@ public class LoginPrompt{
 		User user = this.retrieveUserDB(username);
 		//*user.setAuth(2);
 		//*this.approveUserDB(user);
-		//User user = users.getUsers().get(username);
 		user = this.checkPassword(user,username);
 		if (user == null) return null;
-		//users.addUser(user);
-		//this.storeUsers(users);
+
 		
 		System.out.println(user.toString());
 		if (user.getAuth() == 0) {
@@ -201,38 +199,7 @@ public class LoginPrompt{
 			close(stmt);
 		}
 	}
-	/**
-	 * This method is used to retrieve previously stored user data
-	 * @return Users
-	 */
-	public Users retrieveUsers() {
-		Users u = null;
-		try {
-			ObjectInputStream ois = new ObjectInputStream(
-					new FileInputStream("users.ser"));
-			u = (Users)ois.readObject();
-			ois.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return u;
-	}
 
-	/**
-	 * Uses serialization to store user data
-	 * @param users
-	 * class that contains hash map with all of the users
-	 */
-	public void storeUsers(Users users) {
-		try{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("users.ser"));
-			oos.writeObject(users); //Serialize
-			oos.close();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
 	
 	/**
 	 * This method checks if a valid password is entered for an existing order

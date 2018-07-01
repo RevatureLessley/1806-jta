@@ -5,3 +5,4 @@
 2018-07-01 15:32:21 INFO  LoginPrompt:289 - User [userid=first, fname=first, lname=first, balance=0.0] Created an account
 2018-07-01 15:33:06 INFO  Bank:143 - first Approved
 2018-07-01 15:38:27 INFO  Bank:159 - first Removed
+2018-07-01 17:21:19 INFO  LoginPrompt:257 - User [userid=qwer, fname=qwer, lname=qwer, balance=0.0] Created an account

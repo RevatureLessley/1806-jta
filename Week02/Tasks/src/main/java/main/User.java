@@ -1,12 +1,10 @@
 package main;
 
-import java.io.Serializable;
 
-public class User implements Serializable{
+public class User{
 	/**
 	 * This is the serialUID for User
 	 */
-	private static final long serialVersionUID = 7481145733673760141L;
 	
 	//stores the user info (userid,pass,fname,lastname,balance,authentication)
 	private String userid;
