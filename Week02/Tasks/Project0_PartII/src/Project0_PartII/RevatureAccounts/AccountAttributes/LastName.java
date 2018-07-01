@@ -1,6 +1,5 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
 import java.sql.*;
 
 import Project0_PartII.*;
@@ -9,9 +8,7 @@ import Project0_PartII.RevatureAccounts.*;
 /**
  * Lastname encapsulates the logic of a last name.
  */
-public class LastName extends AccountAttribute 
-					  implements LogReference, Serializable{
-	private static final long serialVersionUID = -4784336663257381167L;
+public class LastName extends AccountAttribute implements LogReference{
 	private String lastname;
 	
 	/**

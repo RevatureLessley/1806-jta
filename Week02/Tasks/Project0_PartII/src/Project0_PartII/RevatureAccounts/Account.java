@@ -1,6 +1,6 @@
 package Project0_PartII.RevatureAccounts;
 
-import java.io.Serializable;
+import java.io.*;
 import java.math.*;
 import java.sql.*;
 import java.util.*;
@@ -12,9 +12,7 @@ import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 /**
  * AdminAccount encapsulates the logic of an account.
  */
-public abstract class Account implements ConsoleReference, LogReference, 
-										 Serializable {
-	private static final long serialVersionUID = -6559073408113950663L;
+public abstract class Account implements ConsoleReference, LogReference {
 	/**
 	 * attributes contains all the fields of an Account.
 	 */
@@ -120,10 +118,16 @@ public abstract class Account implements ConsoleReference, LogReference,
 	abstract public void enter();
 	
 	public BigDecimal getBalance() {
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+ 	 	 	 	 "Entered and exiting getBalance().");
+		
 		return attributes.get("Balance").get();
 	}
 	
 	public String getFirstName() {
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+	 	 	 	 "Entered and exiting getFirstName().");
+		
 		return attributes.get("Firstname").get();
 	}
 
@@ -142,16 +146,22 @@ public abstract class Account implements ConsoleReference, LogReference,
 	}
 	
 	public String getLastName() {
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+	 	 	 	 	 "Entered and exiting getLastName().");
+		
 		return attributes.get("Lastname").get();
 	}
 	
 	public String getPassword() {
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+	 	 	 	 "Entered and exiting getPassword().");
+		
 		return attributes.get("Password").get();
 	}
 	
 	public AccountStatus getStatus() {
 		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
-	 	 	     	 "Entered and exiting getID().");
+	 	 	     	 "Entered and exiting getStatus().");
 		
 		return attributes.get("Status").get();
 	}
@@ -218,9 +228,21 @@ public abstract class Account implements ConsoleReference, LogReference,
 	 	     	 "Exiting signOut().");
 	}
 	
+	/**
+	 * write() writes account attributes to disk.
+	 * 
+	 * @throws SQLException
+	 * @param connection the database connection to write to.
+	 */
 	public void write(Connection connection) throws SQLException {
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+    	 	     	 "Entered write().");
+		
 		for(AccountAttribute aa : attributes.values()) {
 			aa.write(connection, this.getUsername());
 		}
+		
+		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
+   	 	     		 "Exiting write().");
  	}
 }

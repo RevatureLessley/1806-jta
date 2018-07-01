@@ -1,17 +1,13 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
 import java.sql.*;
-
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 
 /**
  * Firstname encapsulates the logic of a first name.
  */
-public class FirstName extends AccountAttribute 
-					implements LogReference, Serializable{
-	private static final long serialVersionUID = -6837510462814822228L;
+public class FirstName extends AccountAttribute implements LogReference {
 	private String firstname;
 	
 	/**
@@ -44,10 +40,24 @@ public class FirstName extends AccountAttribute
 	 	     	 	 "FirstName.java: Constructed FirstName(UserAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized firstname to a UserAccount from the
+	 * database.
+	 * 
+	 * @throws SQLException
+	 * @param ua UserAccount to which this firstname belongs.
+	 * @param rs ResultSet from the database.
+	 */
 	public FirstName(UserAccount ua, ResultSet rs) throws SQLException {
 		super(rs);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	     	 	 "FirstName.java: " + 
+					 "Constructing FirstName(UserAccount, ResultSet).");
 		firstname = rs.getString("firstname");
 		ua.addAttribute("Firstname", this);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	     	 	 "FirstName.java: " + 
+				 "Constructed FirstName(UserAccount, ResultSet).");
 	}	
 
 	/**

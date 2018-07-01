@@ -1,6 +1,5 @@
 package Project0_PartII.RevatureDatabase;
 
-import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
 import Project0_PartII.LogReference;
@@ -13,29 +12,24 @@ public class FromDisk implements LogReference {
 	/**
 	 * connection contains a reference to persistent storage.
 	 */
-//	private FileInputStream connection;
 	private Connection connection;
-	/**
-	 * record contains the data read from persistent storage.
-	 */
-//	private ObjectInputStream record;
-
+	
 	/**
 	 * This constructor opens up a connection to persistent storage.
-	 * 
-	 * @param filename name of the persistent storage file.
-	 * @throws FileNotFoundException
 	 */
-//	public FromDisk(String filename) throws FileNotFoundException {
 	public FromDisk() {
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 	                 "Constructing FromDisk().");
-//		connection = new FileInputStream(filename);
 		connection = DatabaseConnection.connect();
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 		             "Constructed FromDisk().");
 	}
 	
+	/**
+	 * @param username used in hashCode.
+	 * @param password used in hashCode.
+	 * @return hashCode ID based of the username and password.
+	 */
 	private Integer getID(String username, String password) {
 		Integer index = username.hashCode() + 
 						password.hashCode();
@@ -43,7 +37,12 @@ public class FromDisk implements LogReference {
 		return index.hashCode();
 	}
 
-//	public Object read() {
+
+	/**
+	 * read() queries the database.
+	 * 
+	 * @return all accounts in the database.
+	 */
 	public HashMap<Integer, Account> read() {
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 					 "Entered read().");
@@ -53,10 +52,6 @@ public class FromDisk implements LogReference {
 		ResultSet result = null; 
 		
 		try{
-//			record = new ObjectInputStream(connection);
-//			Object a = record.readObject();
-//			record.close();
-//			return a;
 			statement = connection.createStatement();
 			result = statement.executeQuery(sqlSelect); 
 			
@@ -67,20 +62,10 @@ public class FromDisk implements LogReference {
 				as.put(i, ua);
 			}
 		}
-
-//		catch(IOException ioe){
-//			logger.error("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
-//		                 "Reading from persistent storage failed!");
-//			ioe.printStackTrace();
-//		}
-//
-//		catch(ClassNotFoundException cnfe){
-//			logger.error("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
-//		                 "Data in persistent storage corrupted!");
-//			cnfe.printStackTrace();
-//		}
 		
 		catch (SQLException se) {
+			logger.error("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
+					 	 "Querying database failed!.");
 			se.printStackTrace();
 		}
 		
@@ -96,14 +81,11 @@ public class FromDisk implements LogReference {
 
 	/**
 	 * close() closes the connection to persistent storage.
-	 * 
-	 * @throws IOException
 	 */
-//	public void close() throws IOException {
+	
 	public void close() {
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 					 "Entered close().");
-//		connection.close();
 		DatabaseConnection.close(connection);
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 		             "Exiting close().");

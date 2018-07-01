@@ -58,12 +58,25 @@ public enum AccountStatus implements LogReference{
 		 */
 		public abstract void display(Account a);
 		
+		/**
+		 * @return String representation of an AccountStatus.
+		 */
 		public String getString() {
+			logger.debug("Project0_PartII/RevatureAccounts/AccountStatus.java: " + 
+	 	 	 	 	 	 "Entered and exiting getString().");
+			
 			return value;
 		}
 		
+		/**
+		 * @param s the String to convert.
+		 * @return AccountStatus representation of its String.
+		 */
 		public static AccountStatus getValue(String s) {
-				return hm.get(s);
+			logger.debug("Project0_PartII/RevatureAccounts/AccountStatus.java: " + 
+	 	 	 	 	 	 "Entered and exiting getValue().");
+			
+			return hm.get(s);
 		}
 	};
 

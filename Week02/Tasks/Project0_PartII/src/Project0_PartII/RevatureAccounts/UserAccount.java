@@ -8,10 +8,7 @@ import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 /**
  * UserAccount encapsulates the logic of a user account.
  */
-public class UserAccount extends Account 
-						 implements LogReference, Serializable {
-	private static final long serialVersionUID = -1329930768642177273L;
-
+public class UserAccount extends Account implements LogReference {
 	/**
 	 * This constructor initializes the attributes and actions of a user 
 	 * account.
@@ -31,7 +28,16 @@ public class UserAccount extends Account
            	 		 "Constructed UserAccount().");
 	}
 	
+	/**
+	 * This constructor initializes the attributes and actions of a user 
+	 * account from the database.
+	 * 
+	 * @throws SQLException
+	 * @param rs the ResultSet from the database.
+	 */
 	public UserAccount(ResultSet rs) throws SQLException {
+		logger.debug("Project0_PartII/RevatureAccounts/UserAccount.java: " + 
+           	 		 "Constructing UserAccount(Resultset).");
 		new Username(this, rs);
 		new Password(this, rs);
 		new FirstName(this, rs);
@@ -40,6 +46,8 @@ public class UserAccount extends Account
 		new Status(this, rs);
 		actions.add((Runnable & Serializable)() -> makeDeposit());
 		actions.add((Runnable & Serializable)() -> makeWithdrawal());
+		logger.debug("Project0_PartII/RevatureAccounts/UserAccount.java: " + 
+      	 		 	 "Constructed UserAccount(Resultset).");
 	}
 
 	/**

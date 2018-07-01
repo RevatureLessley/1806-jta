@@ -1,18 +1,13 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 /**
  * Password encapsulates the logic of a password.
  */
-public class Password extends AccountAttribute 
-					  implements LogReference, Serializable {
+public class Password extends AccountAttribute implements LogReference {
 	// This class needs to be secured.
-	private static final long serialVersionUID = -1240459302631947705L;
 	private String password;
 	private String p;
 	private String q;
@@ -47,10 +42,24 @@ public class Password extends AccountAttribute
   	 	 	     	 "Password.java: Constructed Password(UserAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized password to a UserAccount from the
+	 * database.
+	 * 
+	 * @throws SQLException
+	 * @param ua UserAccount to which this password belongs.
+	 * @param rs ResultSet from the database.
+	 */
 	public Password(UserAccount ua, ResultSet rs) throws SQLException {
 		super(rs);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+  	 	 	     	 "Password.java: " + 
+					 "Constructing Password(UserAccount, ResultSet).");
 		password = rs.getString("acc_sta_password");
 		ua.addAttribute("Password", this);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	 	     	 "Password.java: " + 
+				 	 "Constructed Password(UserAccount, ResultSet).");
 	}	
 
 	/**
@@ -73,6 +82,9 @@ public class Password extends AccountAttribute
 	@SuppressWarnings("unchecked")
 	@Override
 	public String get() {
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	     	 	 	 "Password.java: Entered and exiting get().");
+		
 		return password;
 	}
 

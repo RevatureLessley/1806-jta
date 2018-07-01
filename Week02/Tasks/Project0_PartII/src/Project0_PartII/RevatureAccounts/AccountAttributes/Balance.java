@@ -1,11 +1,9 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
 import java.util.Locale;
-
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 import Project0_PartII.RevatureDatabase.*;
@@ -13,17 +11,15 @@ import Project0_PartII.RevatureDatabase.*;
 /**
  * Balance encapsulates the logic of an account balance.
  */
-public class Balance extends AccountAttribute 
-					 implements LogReference, Serializable {
-	private static final long serialVersionUID = -5263664987376027348L;
+public class Balance extends AccountAttribute implements LogReference{
 	private BigDecimal balance;
+	private boolean dirty = false;
 	
 	/**
 	 * This constructor adds an initialized account balance to a UserAccount.
 	 * 
 	 * @param ua UserAccount to which this account balance belongs.
 	 */
-	
 	public Balance(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
@@ -34,10 +30,24 @@ public class Balance extends AccountAttribute
 	 	     	 	 "Balance.java: Constructed Balance(AdminAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized account balance to a UserAccount 
+	 * from the database.
+	 * 
+	 * @throws SQLException
+	 * @param ua UserAccount to which this account balance belongs.
+	 * @param rs ResultSet from the database.
+	 */
 	public Balance(UserAccount ua, ResultSet rs) throws SQLException {
 		super(rs);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	     	 	 "Balance.java: "+ 
+					 "Constructing Balance(AdminAccount, ResultSet).");
 		balance = rs.getBigDecimal("acc_dyn_balance");
 		ua.addAttribute("Balance", this);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	     	 	 	 "Balance.java: "+ 
+				 	 "Constructed Balance(AdminAccount, ResultSet).");
 	}	
 
 	/**
@@ -145,6 +155,7 @@ public class Balance extends AccountAttribute
 
 		else {
 			balance = balance.subtract(amount);
+			dirty = true;
 			System.out.println("Transaction approved.");
 
 		}
@@ -154,6 +165,13 @@ public class Balance extends AccountAttribute
 	 	 	 	 "Balance.java: Exiting withdraw().");
 	}
 	
+	/**
+	 * write() updates balance on disk.
+	 * 
+	 * @throws SQLException
+	 * @param connection the database connection to write to.
+	 * @param username the username to which this balance is associated.
+	 */
 	@Override
 	public void write(Connection connection, String username) throws SQLException {
 		if(dirty) {

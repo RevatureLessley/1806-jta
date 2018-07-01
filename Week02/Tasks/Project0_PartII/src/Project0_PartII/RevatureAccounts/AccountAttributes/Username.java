@@ -1,6 +1,5 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
 import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
@@ -8,9 +7,7 @@ import Project0_PartII.RevatureAccounts.*;
 /**
  * Username encapsulates the logic of a username.
  */
-public class Username extends AccountAttribute 
-					  implements LogReference, Serializable {
-	private static final long serialVersionUID = -3539688509393580418L;
+public class Username extends AccountAttribute implements LogReference {
 	private String username;
 	private String u;
 	
@@ -44,10 +41,24 @@ public class Username extends AccountAttribute
 	             "Username.java: Constructed Username(UserAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized username to a UserAccount from the 
+	 * database.
+	 *
+	 * @throws SQLException
+	 * @param ua UserAccount to which this username belongs.
+	 * @param rs ResultSet from the database.
+	 */
 	public Username(UserAccount ua, ResultSet rs) throws SQLException {
 		super(rs);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	             	 "Username.java: " + 
+					 "Constructing Username(UserAccount, ResultSet).");
 		username = rs.getString("acc_sta_username");
 		ua.addAttribute("Username", this);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+            	 	 "Username.java: " + 
+					 "Constructed Username(UserAccount, ResultSet).");
 	}
 
 	/**

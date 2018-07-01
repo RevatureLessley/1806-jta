@@ -258,6 +258,4 @@ BEGIN
 END;
 /
 
-call updateStatus('w', 'DENIED');
-
 COMMIT;

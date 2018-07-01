@@ -1,6 +1,5 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
 import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
@@ -9,10 +8,7 @@ import Project0_PartII.RevatureAccounts.*;
  * AccountAttribute encapsulates the logic of an account attribute.
  */
 public abstract class AccountAttribute implements ConsoleReference, 
-												  LogReference, Serializable {
- 	
-	private static final long serialVersionUID = -1507218302429698089L;
-	protected boolean dirty = false;
+												  LogReference {
 	protected CallableStatement statement = null;
 	protected String sqlUpdate = null;
 	
@@ -95,6 +91,19 @@ public abstract class AccountAttribute implements ConsoleReference,
 	 	 	 	"was incorrectly called or is not overridden.");
 	}
 	
+	/**
+	 * write() updates attributes on disk.
+	 * 
+	 * @throws SQLException
+	 * @param connection the database connection to write to.
+	 * @param username the username to which this attribute is associated.
+	 */
 	public void write(Connection connection, String username) 
-	throws SQLException {}
+	throws SQLException {
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	 	 	 	 "AcountAttributes.java: Entered and exiting write().");
+		logger.error("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	 	 		 "AccountAttributes.java: AccountAttributes.write()" + 
+	 	 	 		 "was incorrectly called or is not overridden.");
+	}
 }

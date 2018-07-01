@@ -1,9 +1,7 @@
 package Project0_PartII;
 
-//import java.io.*;
 import java.util.*;
 import java.util.stream.*;
-
 import Project0_PartII.RevatureAccounts.*;
 import Project0_PartII.RevatureDatabase.*;
 
@@ -16,11 +14,6 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	 */
 	public static RevatureBank entrance = new RevatureBank();
 	/**
-	 * STORAGE contains the location of persistent storage.
-	 */
-//	private final String STORAGE = 
-//			"./Project0_PartII/RevatureDatabase/PersistentStore.txt";
-	/**
 	 * accounts contains the list of accounts RevatureBank possesses.
 	 */
 	private static HashMap<Integer, Account> accounts;
@@ -28,42 +21,19 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	private ToDisk td = new ToDisk();
 
 	/**
-	 * This constructor reads from persistent storage if it exists. If there is
-	 * no persistent storage, the RevatureBank gets initialized with a single
-	 * admin account.
+	 * This constructor reads from persistent storage.
 	 */
-//	@SuppressWarnings("unchecked")
 	private RevatureBank() {
 		logger.debug("Project0/RevatureBank.java: " + 
 					 "Constructing RevatureBank().");
-		
-//		try {
-//			FromDisk fd = new FromDisk(STORAGE);
-			FromDisk fd = new FromDisk();
-			accounts = fd.read();
-			fd.close();
-			AdminAccount aa = AdminAccount.admin;
-			accounts.put(aa.getID(), aa);
-//		}
-
-//		catch(FileNotFoundException fnfe) {
-//			accounts = new HashMap<>();
-//			AdminAccount aa = AdminAccount.admin;
-//			accounts.put(aa.getID(), aa);
-//			logger.info("Project0/RevatureBank.java: " + 
-//			            "Creating admin account.");
-//		}
-
-//		catch(IOException ioe) {
-//			logger.error("Project0/RevatureBank.java: " + 
-//						 "Closing persistent storage failed!");
-//			ioe.printStackTrace();
-//		}
-		
+		FromDisk fd = new FromDisk();
+		accounts = fd.read();
+		fd.close();
+		AdminAccount aa = AdminAccount.admin;
+		accounts.put(aa.getID(), aa);
 		logger.debug("Project0/RevatureBank.java: " + 
 				     "Constructed RevatureBank().");
 	}
-
 
 	/**
 	 * accountExists checks if a Username exists.
@@ -140,26 +110,9 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	 */
 	public void exit() {
 		logger.debug("Project0/RevatureBank.java: Entered exit().");
-		
-//		try {
-//			ToDisk td = new ToDisk(STORAGE);
-			ToDisk td = new ToDisk();
-			td.write(accounts);
-			td.close();
-//		}
-
-//		catch(FileNotFoundException fnfe) {
-//			logger.error("Project0/RevatureBank.java: " + 
-//						 "Connection to persistent storage failed!");
-//			fnfe.printStackTrace();
-//		}
-//
-//		catch(IOException ioe) {
-//			logger.error("Project0/RevatureBank.java: " + 
-//		                 "Closing persistent storage failed!");
-//			ioe.printStackTrace();
-//		}
-		
+		ToDisk td = new ToDisk();
+		td.write(accounts);
+		td.close();
 		logger.debug("Project0/RevatureBank.java: Exiting exit().");
 	}
 

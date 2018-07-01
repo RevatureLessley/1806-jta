@@ -1,21 +1,16 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
-import Project0_PartII.RevatureDatabase.DatabaseConnection;
+import Project0_PartII.RevatureDatabase.*;
 
 /**
  * Status encapsulates the logic of an account status.
  */
-public class Status extends AccountAttribute 
-					implements LogReference, Serializable {
-	private static final long serialVersionUID = -1583445065455260161L;
+public class Status extends AccountAttribute implements LogReference{
 	private AccountStatus status;
+	private boolean dirty = false;
 	
 	/**
 	 * This constructor adds an initialized account status to an AdminAccount.
@@ -35,7 +30,7 @@ public class Status extends AccountAttribute
 	/**
 	 * This constructor adds an initialized account status to a UserAccount.
 	 * 
-	 * @param uaUserAccount to which this status belongs.
+	 * @param ua UserAccount to which this status belongs.
 	 */
 	public Status(UserAccount ua) {
 		super(ua);
@@ -47,10 +42,24 @@ public class Status extends AccountAttribute
        	 	 	     "Status.java: Constructed Status(UserAccount).");
 	}
 	
+	/**
+	 * This constructor adds an initialized account status to a UserAccount 
+	 *  from the database.
+	 * 
+	 * @throws SQLException
+	 * @param ua UserAccount to which this status belongs.
+	 * @param rs ResultSet from the database.
+	 */
 	public Status(UserAccount ua, ResultSet rs) throws SQLException {
 		super(rs);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+       	 	 	     "Status.java: " + 
+					 "Constructing Status(UserAccount, ResultSet).");
 		status = AccountStatus.getValue(rs.getString("code"));
 		ua.addAttribute("Status", this);
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+  	 	 	     	 "Status.java: " + 
+					 "Constructing Status(UserAccount, ResultSet).");
 	}	
 	
 	/**
@@ -120,8 +129,19 @@ public class Status extends AccountAttribute
 		return status.hashCode();
 	}
 	
+	/**
+	 * write() updates status on disk.
+	 * 
+	 * @throws SQLException
+	 * @param connection the database connection to write to.
+	 * @param username the username to which this status is associated.
+	 */
 	@Override
-	public void write(Connection connection, String username) throws SQLException {
+	public void write(Connection connection, String username) 
+	throws SQLException {
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	 	 	 	 "Status.java: Entered write().");
+		
 		if(dirty) {
 			sqlUpdate = "{call updateStatus(?, ?)}";
 			statement = connection.prepareCall(sqlUpdate);
@@ -130,5 +150,8 @@ public class Status extends AccountAttribute
 			statement.execute();
 			DatabaseConnection.close(statement);
 		}
+		
+		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
+	 	 	 	 	 "Status.java: Exiting write().");
 	}
 }

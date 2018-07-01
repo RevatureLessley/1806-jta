@@ -8,17 +8,11 @@ import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 /**
  * AdminAccount encapsulates the logic of an admin account.
  */
-public class AdminAccount extends Account 
-					      implements LogReference, Serializable {
-	private static final long serialVersionUID = -5458354599822173954L;
-	/* 
-	 * unapprovedAccounts is Unserializable. No worries since we must collect
-	 * all unapproved accounts every time the admin signs in anyways.
-	 */
+public class AdminAccount extends Account implements LogReference {
 	/**
 	 * unapprovedAccounts contains all accounts that are DENIED or PENDING.
 	 */
-	private transient ArrayList<Map.Entry<Integer, Account>> 
+	private ArrayList<Map.Entry<Integer, Account>> 
 		unapprovedAccounts;
 	/**
 	 * admin contains the singleton instance of an AdminAccount.
