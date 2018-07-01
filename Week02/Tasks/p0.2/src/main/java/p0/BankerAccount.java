@@ -1,17 +1,18 @@
 package p0;
 
+import p0.beans.Banker;
+
 public class BankerAccount extends AccountClass
 {
-
-	private double interestRate = 1.10;
+	private Banker bAcc;
 	
 	/**
 	 * Constructor used for the banker class, does little more than call the super constructor
 	 * since there are no more variables than required for a generic account on creation.
 	 */
-	public BankerAccount(String name, String uname, String pword, Launcher pgm)
+	public BankerAccount(String name, String uname, String pword, double i)
 	{
-		super(name, uname, pword, pgm);
+		bAcc = new Banker (name, uname, pword, i);
 	}
 	
 	/**
@@ -25,7 +26,7 @@ public class BankerAccount extends AccountClass
 		System.out.println("List of currently active members");
 		for(PlayerAccount p: pgm.Active.getList())
 		{
-			System.out.println(count + ". " + p.getuName() + " Account Balance: " + p.getbBalance());
+			System.out.println(count + ". " + p.getAccountInfo().getuName() + " Account Balance: " + p.getPlayerInfo().getBankBalance());
 		}
 	}
 	
@@ -37,16 +38,11 @@ public class BankerAccount extends AccountClass
 	{
 		pgm.dumpIn(pgm);
 		pgm.clearScreen();
-		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
+		System.out.println("The current interest rate is (Format 00.00 times)" + bAcc.getInterest());
 		System.out.print("What should the new interest rate be?: ");
-		interestRate = pgm.in.nextDouble();
+		bAcc.setInterest(pgm.in.nextDouble());
 		
-		System.out.println("The new interest rate is: " + interestRate);
-	}
-	
-	public double getInterest()
-	{
-		return interestRate;
+		System.out.println("The new interest rate is: " + bAcc.getInterest());
 	}
 	
 	/**
@@ -59,7 +55,7 @@ public class BankerAccount extends AccountClass
 		{
 			pgm.dumpIn(pgm);
 			pgm.clearScreen();
-			System.out.println("Welcome Banker " + this.Name + "\n");
+			System.out.println("Welcome Banker " + getAccountInfo().getName() + "\n");
 			System.out.println("What would you like to do today?");
 			int count = 1;
 			System.out.println(count + ". View active accounts");
@@ -79,7 +75,9 @@ public class BankerAccount extends AccountClass
 					break;
 			}
 		}
-		
 	}
-
+	
+	public Banker getBankInfo() {
+		return bAcc;
+	}
 }

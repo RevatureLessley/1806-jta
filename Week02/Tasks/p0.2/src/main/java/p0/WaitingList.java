@@ -46,7 +46,7 @@ public class WaitingList implements Serializable
 		{
 			for(PlayerAccount p: save)
 			{
-				if(!p.getFlagged())
+				if(!p.getPlayerInfo().isAccountFlagged())
 				{
 					temp.add(p);
 				}

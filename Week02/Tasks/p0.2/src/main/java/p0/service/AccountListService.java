@@ -16,22 +16,18 @@ public class AccountListService {
 	}
 	
 	public ArrayList<PlayerAccount> getPlayerArray(){
-		ald.getPlayerArray();
-		return null;
+		return ald.getPlayerArray();
 	}
 	
 	public AdministratorAccount getAdmin() {
-		ald.getAdmin();
-		return null;
+		return ald.getAdmin();
 	}
 	
 	public BankerAccount getBanker() {
-		ald.getBanker();
-		return null;
+		return ald.getBanker();
 	}
 	
 	public LoanerAccount getLoaner() {
-		ald.getLoaner();
-		return null;
+		return ald.getLoaner();
 	}
 }

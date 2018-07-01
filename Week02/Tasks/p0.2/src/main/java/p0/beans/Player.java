@@ -7,14 +7,15 @@ public class Player {
 	private int accountBalance;
 	private int loanBalance;
 	private int bankBalance;
+	private int AccountID;
 	private boolean hasLoan;
 	private boolean loanWaiting;
-	private boolean accountFlagged = true;
+	private boolean accountFlagged = false;
 	private Account AccountInfo;
 	
-	public Player(int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting,
+	public Player(int id, int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting,
 			String Name, String Uname, String Pword) {
-		super();
+		this.AccountID= id;
 		this.accountBalance = accountBalance;
 		this.loanBalance = loanBalance;
 		this.bankBalance = bankBalance;
@@ -57,6 +58,9 @@ public class Player {
 	}
 	public void setAccountFlagged(boolean accountFlagged) {
 		this.accountFlagged = accountFlagged;
+	}
+	public int getAccountID() {
+		return AccountID;
 	}
 	public Account getAccountInfo() {
 		return AccountInfo;

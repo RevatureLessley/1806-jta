@@ -2,16 +2,16 @@ package p0;
 
 import java.util.ArrayList;
 
+import p0.beans.Account;
+import p0.beans.Loaner;
+
 public class LoanerAccount extends AccountClass
 {
-	private int balance = 10000;
-	private double interestRate = 1.30;
-	private ArrayList<PlayerAccount> waiting = new ArrayList();
-	private ArrayList<PlayerAccount> active = new ArrayList();
+	private Loaner lAcc;
 	
-	public LoanerAccount(String name, String uname, String pword, Launcher pgm)
+	public LoanerAccount(String name, String uname, String pword, int bal, double interest)
 	{
-		super(name, uname, pword, pgm);
+		lAcc = new Loaner(name, uname, pword, bal, interest);
 	}
 	
 	/**
@@ -25,14 +25,13 @@ public class LoanerAccount extends AccountClass
 		updateLists();
 		while(selection != -1)
 		{
-			if(active.size() >0)
+			if(pgm.Active.getList().size() >0)
 			{
-				int count = 1;
 				for(PlayerAccount p: active)
 				{
-					if(p.getHasLoan())
+					if(p.getPlayerInfo().isHasLoan())
 					{
-						System.out.println(count + ". " + p.getuName() + ", " + p.getlBalance());
+						System.out.println(count + ". " + p.getAccountInfo().getuName() + ", " + p.getPlayerInfo().getLoanBalance());
 						count++;
 					}
 				}
@@ -63,9 +62,9 @@ public class LoanerAccount extends AccountClass
 				int count = 1;
 				for(PlayerAccount p: waiting)
 				{
-					if(p.getLoanWaiting())
+					if(p.getPlayerInfo().isLoanWaiting())
 					{
-						System.out.println(count + ". " + p.getuName());
+						System.out.println(count + ". " + p.getAccountInfo().getuName());
 						count++;
 					}
 				}
@@ -77,8 +76,8 @@ public class LoanerAccount extends AccountClass
 					int selection2 = 0;
 					count = 1;
 					System.out.println("Account info");
-					System.out.println("User Name: " + temp.getuName());
-					System.out.println("Loan Ammount: " + temp.getlBalance());
+					System.out.println("User Name: " + temp.getAccountInfo().getuName());
+					System.out.println("Loan Ammount: " + temp.getPlayerInfo().getLoanBalance());
 					System.out.println("");
 					System.out.println(count + ". Approve account");
 					count++;
@@ -88,11 +87,11 @@ public class LoanerAccount extends AccountClass
 					selection2 = pgm.in.nextInt();
 					switch (selection2)
 					{
-					case 1: temp.setLoanWaiting(false);
-							temp.setHasLoan(true);
-							balance -= temp.getlBalance();
+					case 1: temp.getPlayerInfo().setLoanWaiting(false);;
+							temp.getPlayerInfo().setHasLoan(true);
+							balance -= temp.getPlayerInfo().getLoanBalance();
 							break;
-					case 2: temp.setLoanWaiting(false);
+					case 2: temp.getPlayerInfo().setLoanWaiting(false);
 					case 3: break;
 					default: System.out.println("Invalid choice, try again.");
 				}
@@ -116,11 +115,11 @@ public class LoanerAccount extends AccountClass
 		waiting = new ArrayList();
 		for(PlayerAccount p: pgm.Active.getList()) 
 		{
-			if(p.getHasLoan())
+			if(p.getPlayerInfo().isHasLoan())
 			{
 				active.add(p);
 			}
-			if(p.getLoanWaiting()) 
+			if(p.getPlayerInfo().isLoanWaiting()) 
 			{
 				waiting.add(p);
 			}
@@ -156,7 +155,7 @@ public class LoanerAccount extends AccountClass
 		pgm.dumpIn(pgm);
 		pgm.clearScreen();
 		int selection = 0;
-		System.out.println("Welcome Loaner " + this.Name + "\n");
+		System.out.println("Welcome Loaner " + lAcc.getName() + "\n");
 		while(selection != 4)
 		{
 			System.out.println("What would you like to do today?");

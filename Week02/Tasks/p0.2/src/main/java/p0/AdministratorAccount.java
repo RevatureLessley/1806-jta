@@ -1,14 +1,15 @@
 package p0;
 
+import p0.beans.Account;
 
 public class AdministratorAccount extends AccountClass
 {
-
+	private Account aAcc;
 	private boolean worldFlagged = false;
 	
-	public AdministratorAccount(String name, String uname, String pword, Launcher pgm)
+	public AdministratorAccount(String name, String uname, String pword)
 	{
-		super(name, uname, pword, pgm);
+		super(name, uname, pword);
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class AdministratorAccount extends AccountClass
 				int count = 1;
 				for(PlayerAccount a: pgm.Active.getList())
 				{
-					System.out.println(count + ". " + a.getuName());
+					System.out.println(count + ". " + a.getAccountInfo().getuName());
 				}
 				System.out.print("\n Select an account to manage or -1 to exit: ");
 				selection = pgm.in.nextInt();
@@ -40,10 +41,10 @@ public class AdministratorAccount extends AccountClass
 					while(selection2 !=2)
 					{
 						System.out.println("Account info");
-						System.out.println("User Name: " + temp.getuName());
-						System.out.println("Player Name: " + temp.getName());
-						System.out.println("Bank Balance: " + temp.getbBalance());
-						System.out.println("Loan Balance: " + temp.getlBalance());
+						System.out.println("User Name: " + temp.getAccountInfo().getuName());
+						System.out.println("Player Name: " + temp.getAccountInfo().getName());
+						System.out.println("Bank Balance: " + temp.getPlayerInfo().getBankBalance());
+						System.out.println("Loan Balance: " + temp.getPlayerInfo().getLoanBalance());
 						System.out.println("");
 						System.out.println(count + ". Shut down account");
 						count++;
@@ -77,30 +78,28 @@ public class AdministratorAccount extends AccountClass
 				int count = 1;
 				for(PlayerAccount a: pgm.Waiting.getList())
 				{
-					System.out.println(count + ". " + a.getuName());
+					System.out.println(count + ". " + a.getAccountInfo().getuName());
 					count++;
 				}
 				System.out.print("\n Select an account to manage or -1 to exit: ");
 				selection = pgm.in.nextInt();
 				PlayerAccount temp = (PlayerAccount)pgm.Waiting.getList().get(selection-1);
-				int selection2 = 0;
 				count = 1;
 				System.out.println("Account info");
-				System.out.println("User Name: " + temp.getuName());
-				System.out.println("Player Name: " + temp.getName());
+				System.out.println("User Name: " + temp.getAccountInfo().getuName());
+				System.out.println("Player Name: " + temp.getAccountInfo().getName());
 				System.out.println("");
 				System.out.println(count + ". Approve account");
 				count++;
 				System.out.println(count + ". Decline account");
 				count++;
 				System.out.println(count + ". Decide later");
-				int selection3 = pgm.in.nextInt();
-				switch (selection3)
+				int selection2 = pgm.in.nextInt();
+				switch (selection2)
 				{
-				case 1: pgm.Active.add(new PlayerAccount(temp.getName(), temp.getuName(), temp.getuPass(), 100, 100, 0, pgm));
-						temp.setFlagged(true);
+				case 1: //TODO Approve account
 						break;
-				case 2: temp.setFlagged(true);
+				case 2: //TODO Deny account
 				case 3: break;
 				default: System.out.println("Invalid choice, try again.");
 				}
@@ -111,7 +110,6 @@ public class AdministratorAccount extends AccountClass
 				selection = -1;
 			}
 			pgm.dumpIn(pgm);
-			pgm.save(pgm);
 		}
 	}
 	/** 
@@ -182,7 +180,7 @@ public class AdministratorAccount extends AccountClass
 	public void menu()
 	{
 		int selection = 0;
-		System.out.println("Welcome Admin " + this.Name + "\n");
+		System.out.println("Welcome Admin " + aAcc.getName() + "\n");
 		while(selection != 4)
 		{
 			pgm.dumpIn(pgm);
@@ -220,10 +218,5 @@ public class AdministratorAccount extends AccountClass
 					break;
 			}
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "Administrator [uName=" + uName + ", uPass=" + uPass + ", Name=" + Name + "]";
 	}
 }

@@ -39,6 +39,7 @@ CREATE TABLE player(
     player_loan_balance number(10) NOT NULL,
     player_has_loan number(1) NOT NULL,
     player_loan_waiting number(1) NOT NULL,
+    player_account_approved number(1) NOT NULL,
     acc_id number(6),
     CONSTRAINT fk_player_id FOREIGN KEY (acc_id) REFERENCES acc(acc_id)
 );
@@ -50,11 +51,20 @@ CREATE TABLE player_list(
     acc_id number(6),
     CONSTRAINT fk_player_list_id FOREIGN KEY (player_id) REFERENCES player(player_id)
 );
-commit;
+INSERT INTO acc VALUES(1, 'Admin', 'Admin', 'pass');
+INSERT INTO acc VALUES(2, 'Banker', 'Banker', 'pass');
+INSERT INTO acc VALUES(3, 'Loaner', 'Loaner', 'pass');
+INSERT INTO acc VALUES(4, 'Salara Elris', 'Salara', 'pass');
+INSERT INTO admin_acc VALUES(1,1);
+INSERT INTO banker VALUES(1,1.10, 2);
+INSERT INTO loaner VALUES(1,1.30, 3);
+INSERT INTO player VALUES(1,100, 100, 0, 0, 0, 1, 4);
 
-INSERT INTO acc VALUES(1, 'Salara Elris', 'Salara', 'pass');
-INSERT INTO player VALUES(1,100, 100, 0, 0, 0, 1);
 
 SELECT * FROM player
 FULL OUTER JOIN acc
-ON player.acc_id  = acc.acc_id;
+ON player.acc_id  = acc.acc_id
+WHERE player.acc_id >3;
+
+
+commit;

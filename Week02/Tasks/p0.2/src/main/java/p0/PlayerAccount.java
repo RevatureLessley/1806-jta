@@ -13,9 +13,9 @@ public class PlayerAccount extends AccountClass
 	 * @param pBal the amount of money in the players back account
 	 * @param lBal the value of the players loan
 	 */
-	public PlayerAccount(String name, String uName, String pword, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting)
+	public PlayerAccount(int id, String name, String uName, String pword, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting)
 	{
-		pAcc = new Player(aBal,lBal, bBal, hasL, lWaiting, name, uName, pword);
+		pAcc = new Player(id, aBal,lBal, bBal, hasL, lWaiting, name, uName, pword);
 	}
 	
 
@@ -184,11 +184,11 @@ public class PlayerAccount extends AccountClass
 	{
 		if(pAcc.getAccountBalance() >0)
 		{
-			pAcc.setAccountBalance((int)(pAcc.getAccountBalance() * pgm.Active.getBanker().getInterest()));
+			pAcc.setAccountBalance((int)(pAcc.getAccountBalance() * pgm.Active.getBanker().getBankInfo().getInterest()));
 		}
-		if(loanBalance > 0 && hasLoan) 
+		if(pAcc.getLoanBalance() > 0 && pAcc.isHasLoan()) 
 		{
-			loanBalance = (int)(loanBalance * pgm.Active.getLoaner().getInterest());
+			pAcc.setLoanBalance((int)(pAcc.getLoanBalance() * pgm.Active.getLoaner().getInterest())); 
 		}
 	}
 	
@@ -201,20 +201,20 @@ public class PlayerAccount extends AccountClass
 		pgm.dumpIn(pgm);
 		pgm.clearScreen();
 		int selection = 0;
-		System.out.println("Welcome " + this.Name + "\n");
+		System.out.println("Welcome " + pAcc.getAccountInfo().getName()+ "\n");
 		while(selection != 5)
 		{
 
-			System.out.println("Gold: " + personalBalance);
-			System.out.println("Bank balance: " + pAcc.getAccountBalance());
-			if(hasLoan)
-				System.out.println("Loan balance: " + loanBalance);
+			System.out.println("Gold: " + pAcc.getAccountBalance());
+			System.out.println("Bank balance: " + pAcc.getBankBalance());
+			if(pAcc.isHasLoan())
+				System.out.println("Loan balance: " + pAcc.getLoanBalance());
 			int count = 1;
 			System.out.println("What would you like to do today?");
 
 			System.out.println(count + ". Bet on Arena fight");
 			count++;
-			if(hasLoan)
+			if(pAcc.isHasLoan())
 			{
 				System.out.println(count +". Pay on loan");
 				count++;
@@ -230,7 +230,7 @@ public class PlayerAccount extends AccountClass
 			count++;
 			System.out.println(count + ". Logout");
 			count++;
-			if(accountFlagged)
+			if(pAcc.isAccountFlagged())
 			{
 				System.out.println(count + ". Change your mind");
 				count++;
@@ -244,7 +244,7 @@ public class PlayerAccount extends AccountClass
 			switch (selection) {
 			case 1: this.bet();
 					break;
-			case 2: if(hasLoan)
+			case 2: if(pAcc.isHasLoan())
 						this.payLoan();
 					else
 						this.loanApp();
@@ -255,7 +255,7 @@ public class PlayerAccount extends AccountClass
 					break;
 			case 5: logout();
 			break;
-			case 6: if(!accountFlagged)
+			case 6: if(!pAcc.isAccountFlagged())
 						deleteAcc();
 					else
 						saveAcc();
@@ -263,6 +263,7 @@ public class PlayerAccount extends AccountClass
 			}
 		}
 	}
+	
 	public void deleteAcc()
 	{
 		pgm.dumpIn(pgm);
@@ -272,7 +273,7 @@ public class PlayerAccount extends AccountClass
 		char selection = pgm.in.next().charAt(0);
 		if (selection =='Y' || selection =='y')
 		{
-			AccountInfo.setAccountFlagged(true);
+			pAcc.setAccountFlagged(true);
 			System.out.println("Thank you for your stay with Aeva Arena.");
 			System.out.println("Your account has been flagged for deletion");
 			System.out.println("and will be destroyed upon next logout.");
@@ -302,7 +303,7 @@ public class PlayerAccount extends AccountClass
 		char selection = pgm.in.next().charAt(0);
 		if (selection =='Y' || selection =='y')
 		{
-			AccountInfo.setAccountFlagged(false);;
+			pAcc.setAccountFlagged(false);;
 			System.out.println("Thank you for choosing to stay with Aeva Arena.");
 			System.out.println("We have removed your deletion status");
 			System.out.println("We are glad to have you back.");
@@ -319,49 +320,17 @@ public class PlayerAccount extends AccountClass
 		}
 	}
 
+	@Override
+	public void logout() {
+		System.out.println("Farewell " + pAcc.getAccountInfo().getName() + " we hope to see you again soon.");
+		System.out.println();
+	}
+	
 	/*
 	 * General getters/setters bellow this point
 	 */
-	public boolean getHasLoan()
-	{
-		return hasLoan;
-	}
-	
-	public boolean getLoanWaiting()
-	{
-		return loanWaiting;
-	}
-	
-	public void setLoanWaiting(boolean s)
-	{
-		loanWaiting = s;
-	}
 
-	public int getbBalance()
-	{
-		return pAcc.getAccountBalance();
-	}
-
-	public void setHasLoan(boolean s)
-	{
-		hasLoan = s;
-	}
-	
-	public int getlBalance()
-	{
-		return loanBalance;
-	}
-
-	public boolean isAccountActive() {
-		return accountActive;
-	}
-
-	public void setAccountActive(boolean accountActive) {
-		this.accountActive = accountActive;
-	}
-
-
-	public Player getpAcc() {
+	public Player getPlayerInfo() {
 		return pAcc;
 	}
 	

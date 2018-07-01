@@ -1,7 +1,5 @@
 package p0;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,10 +15,13 @@ public class Launcher {
 	AccountList Active;
 	WaitingList Waiting;
 	final String VERSION_NUM = "2.0";
+	AccountListService als = new AccountListService();
 	
 	public static void main (String[] args) throws SQLException{
 		Launcher pgm = new Launcher();
-		pgm.mainMenu(pgm);
+		//pgm.mainMenu(pgm);
+		BankerAccount bank = pgm.als.getBanker();
+		System.out.println(bank.getBankInfo().getAccountInfo().getName());
 	}
 	
 	/**
@@ -83,19 +84,19 @@ public class Launcher {
 			String tempUname = pgm.in.next();
 			successP = false;
 			successU = false;
-			if(pgm.Active.getAdmin().getuName().equals(tempUname))
+			if(pgm.Active.getAdmin().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
 				successP = pWordTest(pgm.Active.getAdmin(), pgm); 
 			}
-			else if(pgm.Active.getBanker().getuName().equals(tempUname))
+			else if(pgm.Active.getBanker().getBankInfo().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
 				successP = pWordTest(pgm.Active.getBanker(), pgm); 
 			}
-			else if(pgm.Active.getLoaner().getuName().equals(tempUname))
+			else if(pgm.Active.getLoaner().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
@@ -106,7 +107,7 @@ public class Launcher {
 				for(AccountClass a: pgm.Active.getList())
 				{
 
-					if(a.getuName().equals(tempUname))
+					if(a.getAccountInfo().getuName().equals(tempUname))
 					{
 						successU = true;
 						successP = pWordTest(a, pgm); 
@@ -120,9 +121,9 @@ public class Launcher {
 			else if (!successU)
 			{
 				boolean test = false;
-				for(Player p: pgm.Waiting.getList())
+				for(PlayerAccount p: pgm.Waiting.getList())
 				{
-					if(p.getuName().equals(tempUname))
+					if(p.getAccountInfo().getuName().equals(tempUname))
 						test = true;
 				}
 				if(test)
@@ -157,6 +158,23 @@ public class Launcher {
 		pgm.clearScreen();
 	}
 	
+	public boolean pWordTest(AccountClass a, Launcher pgm)
+	{
+		System.out.print("Input Password: ");
+		String tempPword = pgm.in.next();
+		if(a.getAccountInfo().getuPass().equals(tempPword))
+		{
+			a.setPgm(pgm);
+			a.menu();
+			return true;
+		}
+		else
+		{
+			System.out.println("Password Incorrect, restarting login.");
+			return false;
+		}
+	}
+	
 	public void newAccount(Launcher pgm) {
 		//TODO make DB safe account creation
 	}
@@ -176,7 +194,7 @@ public class Launcher {
 			Active.setBanker(als.getBanker());
 			Active.setLoaner(als.getLoaner());
 			for(PlayerAccount p : temp) {
-				if(p.isAccountActive()){
+				if(p.getPlayerInfo().isAccountFlagged()){
 					Active.add(p);
 				}
 				else {
@@ -195,36 +213,36 @@ public class Launcher {
 	 */
 	public void generateWorld(Launcher pgm)
 	{
-
-		pgm.dumpIn(pgm);
-		pgm.clearScreen();
-		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM + "\n");
-		System.out.print("Please choose a user name for the administrator: ");
-		String uName = pgm.in.nextLine();
-		System.out.print("Now choose a password for the administator account: ");
-		String pWord = pgm.in.nextLine();
-		System.out.println("Finally what shall we call the administrator?: ");
-		String Name = pgm.in.nextLine();
-		Administrator tempA =new Administrator(Name,uName,pWord, pgm);
-
-		System.out.print("Please choose a user name for the banker: ");
-		uName = pgm.in.nextLine();
-		System.out.print("Now choose a password for the banker account: ");
-		pWord = pgm.in.nextLine();
-		System.out.println("Finally what shall we call the banker?: ");
-		Name = pgm.in.nextLine();
-		Banker tempB =new Banker(Name,uName,pWord, pgm);
-
-		System.out.print("Please choose a user name for the loaner: ");
-		uName = pgm.in.nextLine();
-		System.out.print("Now choose a password for the loaner account: ");
-		pWord = pgm.in.nextLine();
-		System.out.println("Finally what shall we call the loaner?: ");
-		Name = pgm.in.nextLine();
-		Loaner tempL =new Loaner(Name,uName,pWord, pgm);
-		
-		System.out.println("Accounts created, generating world.");
-		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
+//
+//		pgm.dumpIn(pgm);
+//		pgm.clearScreen();
+//		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM + "\n");
+//		System.out.print("Please choose a user name for the administrator: ");
+//		String uName = pgm.in.nextLine();
+//		System.out.print("Now choose a password for the administator account: ");
+//		String pWord = pgm.in.nextLine();
+//		System.out.println("Finally what shall we call the administrator?: ");
+//		String Name = pgm.in.nextLine();
+//		Administrator tempA =new Administrator(Name,uName,pWord, pgm);
+//
+//		System.out.print("Please choose a user name for the banker: ");
+//		uName = pgm.in.nextLine();
+//		System.out.print("Now choose a password for the banker account: ");
+//		pWord = pgm.in.nextLine();
+//		System.out.println("Finally what shall we call the banker?: ");
+//		Name = pgm.in.nextLine();
+//		Banker tempB =new Banker(Name,uName,pWord, pgm);
+//
+//		System.out.print("Please choose a user name for the loaner: ");
+//		uName = pgm.in.nextLine();
+//		System.out.print("Now choose a password for the loaner account: ");
+//		pWord = pgm.in.nextLine();
+//		System.out.println("Finally what shall we call the loaner?: ");
+//		Name = pgm.in.nextLine();
+//		Loaner tempL =new Loaner(Name,uName,pWord, pgm);
+//		
+//		System.out.println("Accounts created, generating world.");
+//		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
 	
