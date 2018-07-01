@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
+import com.revature.service.BanKAccountService;
 /**
  * 
  * In Second Menu it has the bulk of the methods that make the bank work such as deposit, balance, withdraw and introuductin menus
@@ -19,10 +20,11 @@ public class SecondMenu {
 	final static int admidId = 5986;
 	final static int adminPassword = 118034; // admin password s not completely set up need to fix
 	final static int secrPassword = 203065; // admin password s not completely set up need to fix
+	public static int count = 100;
 	
 	public static void switchTwo() {
 		Scanner in = new Scanner(System.in);// useer input
-		intro2();
+		BanKAccountService.intro2();
 		int choice =0;
 		choice = in.nextInt();
 		switch(choice){
@@ -38,6 +40,13 @@ public class SecondMenu {
 			case 2:
 				ShowSecondMenu();
 				switchTwo();
+			case 3:
+				BanKAccountService.tableView();
+				switchTwo();
+			case 4:
+				BanKAccountService.tableView2();
+				switchTwo();
+				
 		}
 	}
 	
@@ -47,8 +56,8 @@ public class SecondMenu {
 		try {
 			Scanner in = new Scanner(System.in);// useer input
 			PreparedStatement ps = null;
-			PreparedStatement ps1 = null;
 			CallableStatement callSt = null;
+			CallableStatement callSt1 = null;
 			Statement stmt = null; 
 			ResultSet rs = null;
 			Connection conn = Connections.getConnection();
@@ -87,7 +96,7 @@ public class SecondMenu {
 			System.out.println("What is the Branch ID for this account: ");
 			int branchId = in.nextInt();
 			System.out.println("Press 1 for Saveing:" + "\n" 
-					+ "Press 2 forfor checking:"+ "\n");
+					+ "Press 2 for checking:"+ "\n");
 			String accounType = in.next();
 			System.out.println("What is the customers opening balance");
 			int balance = in.nextInt();
@@ -97,9 +106,33 @@ public class SecondMenu {
 			ps.setInt(3, balance);
 			ps.executeUpdate();
 			
+			// get result of ACCOUNT id to pass on the JOIN TABLE
+			callSt  = conn.prepareCall(" { ? = call GET_MAX_ID_CUSTOMER}");
+			callSt.registerOutParameter(1,java.sql.Types.VARCHAR);
+			callSt.execute();
+			int result1 = callSt.getInt(1);
+			// get result of customer id to pass on the JOIN TABLE
+			callSt  = conn.prepareCall(" { ? = call GET_MAX_ID_account}");
+			callSt.registerOutParameter(1,java.sql.Types.VARCHAR);
+			callSt.execute();
+			int result12 = callSt.getInt(1);			
+			// set the new id's 
+			int temp = result1 + 1;
+			System.out.println(temp);
+			int temp2 = result12 + 1;
+			System.out.println(temp2);
+			ps = conn.prepareStatement(" CALL INSERTINTOACCOUNT_2_CUSTOMER(?,?)");
+			ps.setInt(1, temp);
+			ps.setInt(2, temp2);
+			ps.executeUpdate();
+
+			
+			
+			
 			
 			System.out.println("REVATURE TRANSUNION New account confirmed as:"
 				+ fName +" "+ lName +" With a starting balance of: " + "$" + balance);
+			
 			
 			
 		} catch (SQLException e) {
@@ -107,46 +140,17 @@ public class SecondMenu {
 		
 			}
 		Scanner in = new Scanner(System.in);// useer input
-		System.out.println("Would you like to stay log y/n");
-		String x = in.next();
-		if(x == "y") {
+		System.out.println("Would you like to stay log press 1 for yes and any thing else to log out");
+		int x = in.nextInt();
+		if(x == 1) {
+			System.out.println("Test");
 			switchTwo();
 		}else 
 			BankMenu.menu();
 		
 	}
 
-	public static void intro() {
-		System.out.println("\n");
-		System.out.println("========Welcome To Revature TransUnion========");
-		System.out.println("");
-		System.out.println("      Please select one of the following ");
-		System.out.println("");
-		System.out.println("      To Log In Admin	   	press 1 ");		
-
-	}
 	
-	public static void intro2() {
-		System.out.println("\n");
-		System.out.println("=====================Hello=====================");
-		System.out.println("");
-		System.out.println("     Please select one of the following ");
-		System.out.println("");
-		System.out.println("     Create new Admin				Press 1");		
-		System.out.println("     Add new accounts to Database		Press 2");		
-//		System.out.println("     Check Balance 				Press 3");
-//		System.out.println("     Too take out a loan 			Press 4");
-//		System.out.println("     Too pay offf a loan 			Press 5");
-//		System.out.println("     Transfer to another account 		press 6");
-		System.out.println("     If you want to exit 			press 0" + "\n");
-	}
-	public static void intro3(){
-		System.out.println("\n");
-		System.out.println("===============================================");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-	}
 
 	
 	

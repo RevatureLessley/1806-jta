@@ -10,13 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-
-import com.revature.beans.NewAccount;
-import com.revature.beans.NewAccount2;
-import com.revature.beans.NewAccount3;
-import com.revature.beans.TransUnion;
-import com.revature.beans.TransUnion2;
-import com.revature.beans.TransUnion3;
 import com.revature.service.BanKAccountService;
 /**
  * Class BankMenu sets up the first menu to take usser input and it extends
@@ -36,47 +29,8 @@ public class BankMenu extends SecondMenu{
 	public static void menu() {
 		Scanner in = new Scanner(System.in);// useer input
 		int firstChoice =  0; // this int is for the switch statement
-		
-		//user accounts is only set up for a max of three, have not figured out how to make this easier
-		
-		NewAccount[] test = {
-				new NewAccount(NewAccount.getFname(),NewAccount.getlName(),NewAccount.getAddress(),NewAccount.getPhone())		
-				};
-		NewAccount2[] test2 = {
-				new NewAccount2(NewAccount2.getfName2(),NewAccount2.getlName2(),NewAccount2.getAddress2(),NewAccount2.getPhone2())
-		};
-		NewAccount3[] test3 = {
-				new NewAccount3(NewAccount3.getfName3(),NewAccount3.getlName3(),NewAccount3.getAddress3(),NewAccount3.getPhone3())
-		};
-		
-		TransUnion union = new TransUnion("RyantureTransUnion",test);
-		TransUnion2 union2 = new TransUnion2("RyantureTransUnion",test2);
-		TransUnion3 union3 = new TransUnion3("RyantureTransUnion",test3);
-		
-		
-		try{	// all try catch methods here help serilize the information into arrays 
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("TransUnion.txt"));
-			oos.writeObject(union); 
-		}catch(IOException e){
-			e.printStackTrace();
-		}	
-		try{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("TransUnion2.ser"));
-			oos.writeObject(union2); 
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		try{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("TransUnion3.ser"));
-			oos.writeObject(union3); 
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		
-		intro();					// intro is at the bottom of SecondMenue class
+			
+		BanKAccountService.intro();					// intro is at the bottom of SecondMenue class
 		do {						// Do while statement sets up the first switch that will show the menu and its possibilities
 			firstChoice = in.nextInt();
 			switch(firstChoice){
