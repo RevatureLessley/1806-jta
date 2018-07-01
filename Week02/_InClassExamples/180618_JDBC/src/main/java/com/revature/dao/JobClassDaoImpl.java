@@ -16,8 +16,8 @@ public class JobClassDaoImpl implements JobClassDao {
 
 	@Override
 	public List<JobClass> getAllJobs() {
-		Statement stmt = null; // Simple SQL query to be executed
-		ResultSet rs = null; //Object that holds query results
+		Statement stmt = null; 
+		ResultSet rs = null; 
 		List<JobClass> jcs = new ArrayList<>();
 		
 		try(Connection conn = Connections.getConnection()){

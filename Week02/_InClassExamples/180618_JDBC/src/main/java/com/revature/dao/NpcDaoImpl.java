@@ -49,6 +49,30 @@ public class NpcDaoImpl implements NpcDao{
 		return null;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * Try-With-Resources will close any streams you create within the
 	 * parenthesis' of the try blockm once the try-catch-finally has

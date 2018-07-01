@@ -20,7 +20,8 @@ public class Npc {
 		super();
 		this.id = id;
 		this.name = name;
-		this.lvl = lvl;		this.currency = currency;
+		this.lvl = lvl;		
+		this.currency = currency;
 		this.jobClass = jobClass;
 	}
 	
