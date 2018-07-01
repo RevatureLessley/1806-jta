@@ -31,7 +31,7 @@ public class FromDisk implements LogReference {
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 	                 "Constructing FromDisk().");
 //		connection = new FileInputStream(filename);
-		connection = DatabaseConnection.connection;
+		connection = DatabaseConnection.connect();
 		logger.debug("Project0_PartII/RevatureDatabase/FromDisk.java: " + 
 		             "Constructed FromDisk().");
 	}
@@ -39,7 +39,7 @@ public class FromDisk implements LogReference {
 	private Integer getID(String username, String password) {
 		Integer index = username.hashCode() + 
 						password.hashCode();
-		System.out.println(index.hashCode());
+
 		return index.hashCode();
 	}
 

@@ -68,7 +68,13 @@ public class Password extends AccountAttribute
 	 	 	     	 "Password.java: Exiting askUser().");
 		
 		return p;
-	}	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String get() {
+		return password;
+	}
 
 	/**
 	 * getPassword() contains the logic for getting the password from the user.

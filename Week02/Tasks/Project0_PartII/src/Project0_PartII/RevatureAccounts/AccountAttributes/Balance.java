@@ -65,7 +65,7 @@ public class Balance extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 				 	 "Balance.java: Exiting deposit().");
 	}
-
+	
 	/**
 	 * getAmount() contains the logic for getting a dollar amount from the 
 	 * user.

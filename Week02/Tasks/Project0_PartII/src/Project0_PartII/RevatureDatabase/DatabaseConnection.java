@@ -4,9 +4,9 @@ import java.io.*;
 import java.sql.*;
 
 public class DatabaseConnection {
-	public static Connection connection = connect();
+	public static Connection connection = null;
 	
-	private static Connection connect() {
+	public static Connection connect() {
 		try {
 			String args[] = System.getenv("DBARGS").split(";");
 			Class.forName(args[0]);

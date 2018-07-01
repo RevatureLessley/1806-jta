@@ -56,7 +56,7 @@ public class AdminAccount extends Account
 					new ArrayList<>(RevatureBank.getUnapprovedAccounts());
 			Integer numUnapproves = unapprovedAccounts.size();
   			System.out.print("Signed in as admin. There are " + numUnapproves + 
-  					         " unapproved accounts.");
+  					         " unapproved accounts. ");
   			System.out.println("What would you like to do?");
   			System.out.println("[0]:\tSignout");
   			System.out.println("[1]:\tApprove Accounts");

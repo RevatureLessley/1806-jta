@@ -115,3 +115,22 @@
 2018-07-01 01:53:47 INFO  root:114 - Project0/RevatureBank.java: User entered incorrect username or password.
 2018-07-01 02:00:57 INFO  root:114 - Project0/RevatureBank.java: User entered incorrect username or password.
 2018-07-01 02:01:12 INFO  root:114 - Project0/RevatureBank.java: User entered incorrect username or password.
+2018-07-01 10:02:59 INFO  root:113 - Project0/RevatureBank.java: User entered incorrect username or password.
+2018-07-01 10:03:11 INFO  root:113 - Project0/RevatureBank.java: User entered incorrect username or password.
+2018-07-01 10:03:32 INFO  root:99 - Project0/RevatureBank.java: New account created.
+2018-07-01 10:07:08 INFO  root:113 - Project0/RevatureBank.java: User entered incorrect username or password.
+2018-07-01 10:09:25 INFO  root:99 - Project0/RevatureBank.java: New account created.
+2018-07-01 10:09:39 INFO  root:113 - Project0/RevatureBank.java: User entered incorrect username or password.
+2018-07-01 11:17:02 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:18:33 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:19:42 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:24:24 INFO  root:82 - Project0/RevatureBank.java: User tried to create an existing username.
+2018-07-01 11:25:30 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:25:56 INFO  root:82 - Project0/RevatureBank.java: User tried to create an existing username.
+2018-07-01 11:26:01 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:26:36 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:32:06 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:32:31 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:32:53 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:39:46 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 11:44:36 INFO  root:102 - Project0/RevatureBank.java: New account created.

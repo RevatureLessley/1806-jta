@@ -1,6 +1,6 @@
 package Project0_PartII;
 
-import java.io.*;
+//import java.io.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -18,12 +18,14 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	/**
 	 * STORAGE contains the location of persistent storage.
 	 */
-	private final String STORAGE = 
-			"./Project0_PartII/RevatureDatabase/PersistentStore.txt";
+//	private final String STORAGE = 
+//			"./Project0_PartII/RevatureDatabase/PersistentStore.txt";
 	/**
 	 * accounts contains the list of accounts RevatureBank possesses.
 	 */
 	private static HashMap<Integer, Account> accounts;
+	
+	private ToDisk td = new ToDisk();
 
 	/**
 	 * This constructor reads from persistent storage if it exists. If there is
@@ -94,6 +96,7 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		System.out.println("Please create an account.");
 		UserAccount a = new UserAccount();
 		accounts.put(a.getID(), a);
+		td.insert(a);
 		a.pending();
 		logger.debug("Project0/RevatureBank.java: Exiting createAccount().");
 		logger.info("Project0/RevatureBank.java: New account created.");
@@ -127,7 +130,6 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		logger.debug("Project0/RevatureBank.java:  Entered enter().");
 		System.out.print("Welcome to RevatureBank. To Login as admin: ");
 		System.out.println("Username - admin, Password - admin.");
-		System.out.println(accounts);
 		welcome();
 		logger.debug("Project0/RevatureBank.java: Exiting enter().");
 	}
@@ -139,23 +141,24 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	public void exit() {
 		logger.debug("Project0/RevatureBank.java: Entered exit().");
 		
-		try {
-			ToDisk td = new ToDisk(STORAGE);
+//		try {
+//			ToDisk td = new ToDisk(STORAGE);
+			ToDisk td = new ToDisk();
 			td.write(accounts);
 			td.close();
-		}
+//		}
 
-		catch(FileNotFoundException fnfe) {
-			logger.error("Project0/RevatureBank.java: " + 
-						 "Connection to persistent storage failed!");
-			fnfe.printStackTrace();
-		}
-
-		catch(IOException ioe) {
-			logger.error("Project0/RevatureBank.java: " + 
-		                 "Closing persistent storage failed!");
-			ioe.printStackTrace();
-		}
+//		catch(FileNotFoundException fnfe) {
+//			logger.error("Project0/RevatureBank.java: " + 
+//						 "Connection to persistent storage failed!");
+//			fnfe.printStackTrace();
+//		}
+//
+//		catch(IOException ioe) {
+//			logger.error("Project0/RevatureBank.java: " + 
+//		                 "Closing persistent storage failed!");
+//			ioe.printStackTrace();
+//		}
 		
 		logger.debug("Project0/RevatureBank.java: Exiting exit().");
 	}

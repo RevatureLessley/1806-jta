@@ -1,13 +1,13 @@
 package Project0_PartII.RevatureAccounts;
 
-import java.io.*;
+import java.io.Serializable;
+import java.math.*;
 //import java.sql.*;
 import java.util.*;
 import java.util.regex.*;
 
-import Project0_PartII.ConsoleReference;
-import Project0_PartII.LogReference;
-import Project0_PartII.RevatureAccounts.AccountAttributes.AccountAttribute;
+import Project0_PartII.*;
+import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 
 /**
  * AdminAccount encapsulates the logic of an account.
@@ -118,6 +118,14 @@ public abstract class Account implements ConsoleReference, LogReference,
 	}
 
 	abstract public void enter();
+	
+	public BigDecimal getBalance() {
+		return attributes.get("Balance").get();
+	}
+	
+	public String getFirstName() {
+		return attributes.get("Firstname").get();
+	}
 
 	/**
 	 * @return hashCode ID based of the username and password.
@@ -131,6 +139,14 @@ public abstract class Account implements ConsoleReference, LogReference,
 	 	 	     	 "Exiting getID().");
 		
 		return index.hashCode();
+	}
+	
+	public String getLastName() {
+		return attributes.get("Lastname").get();
+	}
+	
+	public String getPassword() {
+		return attributes.get("Password").get();
 	}
 	
 	public AccountStatus getStatus() {
@@ -188,7 +204,6 @@ public abstract class Account implements ConsoleReference, LogReference,
 		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
 	 	     	 	 "Exiting signIn().");
 		
-		System.out.println(index.hashCode());
 		return index.hashCode();	
 	}
 

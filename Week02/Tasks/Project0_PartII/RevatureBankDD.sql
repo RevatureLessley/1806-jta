@@ -40,7 +40,8 @@ CREATE TABLE Status (
 
 CREATE OR REPLACE VIEW Account_Join AS
 SELECT * 
-FROM Account_Dynamic, Account_Static
+FROM Account_Dynamic
+INNER JOIN Account_Static ON acc_dyn_id = acc_sta_id
 INNER JOIN Person ON acc_per = per_id
 INNER JOIN Status ON acc_sta = sta_id;
 
