@@ -43,6 +43,7 @@ CREATE TABLE job_class (
 );
 
 
+
 CREATE TABLE npc (
     npc_id number(6) primary key,
     npc_name varchar(100) NOT NULL,

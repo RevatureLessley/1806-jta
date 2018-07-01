@@ -1,10 +1,10 @@
-package discompanydatcompany.vendingmachine.entities;
+package discompanydatcompany.vendingmachine.beans;
 
 import java.io.Serializable;
 import java.util.TreeMap;
 
-import discompanydatcompany.vendingmachine.entities.Item;
-import discompanydatcompany.vendingmachine.entities.StockItem;
+import discompanydatcompany.vendingmachine.beans.Item;
+import discompanydatcompany.vendingmachine.beans.StockItem;
 
 public class Inventory implements Serializable {
 

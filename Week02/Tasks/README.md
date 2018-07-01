@@ -44,8 +44,8 @@ select count(*) from employee;
 ```
 
 [StackOverflow covering IF EXISTS for multiple objects](https://stackoverflow.com/questions/1799128/oracle-if-table-exists)
-begin
 ```
+begin
     execute immediate 'drop sequence ' || genre_sequence;
 exception
     when others then

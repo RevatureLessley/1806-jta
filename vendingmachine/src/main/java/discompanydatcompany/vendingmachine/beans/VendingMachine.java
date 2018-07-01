@@ -1,13 +1,13 @@
-package discompanydatcompany.vendingmachine.entities;
+package discompanydatcompany.vendingmachine.beans;
 
 import java.util.HashMap;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import discompanydatcompany.vendingmachine.entities.Inventory;
-import discompanydatcompany.vendingmachine.entities.NoItem;
-import discompanydatcompany.vendingmachine.entities.StockItem;
+import discompanydatcompany.vendingmachine.beans.Inventory;
+import discompanydatcompany.vendingmachine.beans.NoItem;
+import discompanydatcompany.vendingmachine.beans.StockItem;
 import discompanydatcompany.vendingmachine.utilities.Printing;
 
 public class VendingMachine implements Serializable {

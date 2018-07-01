@@ -8,8 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import discompanydatcompany.vendingmachine.entities.UserList;
-import discompanydatcompany.vendingmachine.entities.VendingMachineList;
+import discompanydatcompany.vendingmachine.beans.UserList;
+import discompanydatcompany.vendingmachine.beans.VendingMachineList;
 
 public class SaveFile implements Serializable {
 	

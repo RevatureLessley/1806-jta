@@ -130,7 +130,7 @@ END;
 CREATE OR REPLACE PROCEDURE insertIntoNpc(npcName IN VARCHAR2, 
                                             npcLvl IN NUMBER,
                                             npcCurrency IN NUMBER,
-                                            npcJobId IN NUMBER)
+                                            npcJobId IN VARCHAR2)
 IS
 BEGIN
     INSERT INTO npc (npc_name, npc_lvl, currency, job_id)

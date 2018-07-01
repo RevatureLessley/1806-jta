@@ -1,4 +1,4 @@
-package discompanydatcompany.vendingmachine.entities;
+package discompanydatcompany.vendingmachine.beans;
 
 import java.io.Serializable;
 import java.util.HashMap;

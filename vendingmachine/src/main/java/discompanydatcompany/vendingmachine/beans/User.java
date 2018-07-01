@@ -1,4 +1,4 @@
-package discompanydatcompany.vendingmachine.entities;
+package discompanydatcompany.vendingmachine.beans;
 
 import java.io.Serializable;
 import java.lang.StringBuffer;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.UUID;
 
-import discompanydatcompany.vendingmachine.entities.Inventory;
-import discompanydatcompany.vendingmachine.entities.NoItem;
+import discompanydatcompany.vendingmachine.beans.Inventory;
+import discompanydatcompany.vendingmachine.beans.NoItem;
 
 public class User implements Serializable {
 
@@ -19,6 +19,7 @@ public class User implements Serializable {
     private HashSet<String> status;
     private int cash;
     private String locationUUID;
+    private boolean enabled;
 
     public User() {
 		this.loginUUID = String.valueOf(UUID.randomUUID());
@@ -29,6 +30,7 @@ public class User implements Serializable {
 		this.status = new HashSet<String>();
 		this.cash = 100;
 		this.locationUUID = "";
+		this.enabled = false;
     }
     
     public User(String name, String password, String aboutMe) {
@@ -40,6 +42,19 @@ public class User implements Serializable {
 		this.status = new HashSet<String>();
 		this.cash = 100;
 		this.locationUUID = "";
+		this.enabled = false;
+    }
+    
+    public User(String name, String password, String aboutMe, boolean enabledFlag) {
+		this.loginUUID = String.valueOf(UUID.randomUUID());
+		this.name = name;
+		this.password = password;
+		this.aboutMe = aboutMe;
+		this.inventory = buildInventory(); 
+		this.status = new HashSet<String>();
+		this.cash = 100;
+		this.locationUUID = "";
+		this.enabled = enabledFlag;
     }
 
     /**
@@ -198,6 +213,26 @@ public class User implements Serializable {
     	this.locationUUID = locationUUID;
     }
     
+    public boolean getEnabled() {
+    	return this.enabled;
+    }
+    
+    public void setEnabled(boolean isEnabled) {
+    	this.enabled = isEnabled;
+    }
+
+    public boolean isEnabled() {
+    	return this.enabled;
+    }
+    
+    public void enableAccount() {
+    	this.enabled = true;
+    }
+    
+    public void disableAccount() {
+    	this.enabled = false;
+    }
+    
     @Override 
     public String toString() {
     	StringBuffer stringBuffer = new StringBuffer("{ USER: " + this.name + " " + "ITEMS: ");
@@ -216,4 +251,3 @@ public class User implements Serializable {
     	return stringBuffer.toString();
     }
 }
-

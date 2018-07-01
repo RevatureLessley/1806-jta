@@ -1,9 +1,9 @@
 package revature.vendingmachine;
 
-import discompanydatcompany.vendingmachine.entities.BottledWater;
-import discompanydatcompany.vendingmachine.entities.Item;
-import discompanydatcompany.vendingmachine.entities.NoItem;
-import discompanydatcompany.vendingmachine.entities.StockItem;
+import discompanydatcompany.vendingmachine.beans.BottledWater;
+import discompanydatcompany.vendingmachine.beans.Item;
+import discompanydatcompany.vendingmachine.beans.NoItem;
+import discompanydatcompany.vendingmachine.beans.StockItem;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

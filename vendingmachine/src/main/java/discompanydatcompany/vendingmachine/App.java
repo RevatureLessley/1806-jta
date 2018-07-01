@@ -1,25 +1,25 @@
 package discompanydatcompany.vendingmachine;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
-
-import discompanydatcompany.vendingmachine.entities.Admin;
-import discompanydatcompany.vendingmachine.entities.BottledWater;
-import discompanydatcompany.vendingmachine.entities.Gum;
-import discompanydatcompany.vendingmachine.entities.Item;
-import discompanydatcompany.vendingmachine.entities.MysteriousPocketPortalMachine;
-import discompanydatcompany.vendingmachine.entities.Snack;
-import discompanydatcompany.vendingmachine.entities.StockItem;
-import discompanydatcompany.vendingmachine.entities.User;
-import discompanydatcompany.vendingmachine.entities.UserList;
-import discompanydatcompany.vendingmachine.entities.VendingMachine;
-import discompanydatcompany.vendingmachine.entities.VendingMachineList;
+import discompanydatcompany.vendingmachine.beans.Admin;
+import discompanydatcompany.vendingmachine.beans.BottledWater;
+import discompanydatcompany.vendingmachine.beans.Gum;
+import discompanydatcompany.vendingmachine.beans.Item;
+import discompanydatcompany.vendingmachine.beans.MysteriousPocketPortalMachine;
+import discompanydatcompany.vendingmachine.beans.Snack;
+import discompanydatcompany.vendingmachine.beans.StockItem;
+import discompanydatcompany.vendingmachine.beans.User;
+import discompanydatcompany.vendingmachine.beans.UserList;
+import discompanydatcompany.vendingmachine.beans.VendingMachine;
+import discompanydatcompany.vendingmachine.beans.VendingMachineList;
 import discompanydatcompany.vendingmachine.utilities.Container;
 import discompanydatcompany.vendingmachine.utilities.Input;
 import discompanydatcompany.vendingmachine.utilities.Printing;
@@ -37,6 +37,7 @@ public class App {
     }
 
     public static void main(String[] args) {
+    	String scannerInput = "";
     	Scanner scanner = new Scanner(System.in);
     	App app = new App();
     	Input input = new Input();
@@ -141,7 +142,6 @@ public class App {
     				password = scanner.nextLine();
     			}
     		}
-
     		
     		while(loginSuccess == null) {
     			System.out.println("Enter your username:");
@@ -184,6 +184,91 @@ public class App {
 					// Inventory
 					System.out.println(vend.getVendingMachineName() + ": Do Something (enter help for options)!");
 					break;
+				case "admin":
+					if (!(activeUser instanceof Admin)) {
+						System.out.println("This user does not have admin. priveleges.");
+					} else {
+						System.out.println("Hi admin! Menu options:");
+						System.out.println("inactive -- view pending/inactive user list.");
+						System.out.println("modify -- modify user. Approve pending.");
+						System.out.println("search -- search for user.");
+						String option = scanner.nextLine();
+						switch(option) {
+							case "pending":
+								System.out.println("The following users are inactive");
+								for (User user : userList.getInactiveUsers()) {
+									System.out.println(user.getName() + " " + user.getLoginUUID());
+								}
+								break;
+							case "modify":
+								System.out.println("Enter user's UUID");
+								String uuid = scanner.nextLine();
+								User user = userList.getUser(uuid);
+								
+								if (user != null) {
+									String activity = user.getEnabled() ? "enabled" : "disabled";
+									System.out.println(user.getName() + " " + user.getLoginUUID());
+									System.out.println("Account active");
+									System.out.println(user.getAboutMe());
+									System.out.println("Account is " + activity + ".");
+								}
+								
+								System.out.println("enable, disable, rename, password");
+								option = scanner.nextLine();
+								
+								switch(option) {
+									case "enable":
+										user.enableAccount();
+										System.out.println("The account " + user.getName() + " was enabled.");
+										break;
+									case "disable":
+										user.disableAccount();
+										System.out.println("The account " + user.getName() + " was disabled");
+										break;
+									case "password":
+										System.out.println("Enter a new password");
+										option = scanner.nextLine();
+										if (option != null && option != "") {
+											user.setPassword(option);
+										} else {
+											System.out.println("Changing the password failed!");
+										}
+									case "rename":
+										System.out.println("Enter a new username:");
+										option = scanner.nextLine();
+										if (option != null && option != "") {
+											user.setName(option);
+										} else {
+											System.out.println("Renaming failed");
+										}
+										break;
+								}
+								
+								modify:
+								while (true) {
+									if (userList.getUser(uuid) == null) {
+										System.out.println("User not found. Try again? (Y/N)");
+										scannerInput = scanner.nextLine();
+										switch (scannerInput.toUpperCase()) {
+											case "Y":
+												break;
+											case "YES":
+												break;
+											default:
+												break modify;
+										}
+									}
+								}
+								break;
+							default:
+								System.out.println("Search for a user by");
+								System.out.println("1 -- UUID");
+								System.out.println("2 -- username");
+								System.out.println("3 -- Vending Machine UUID");
+								break;
+						}
+					}
+					break;
 				case "balance":
 					System.out.println("You have " + activeUser.getCash() + " units left to spend. Good for you.");
 					break;
@@ -206,6 +291,7 @@ public class App {
 				case "help":
 					System.out.println(vend.getVendingMachineName() + " says ...");
 					System.out.println("Available commands are ..");
+					System.out.println("admin -- administrator options.");
 					System.out.println("balance -- Check your remaining balance.");
 					System.out.println("buy -- purchase an item from the vending machine.");
 					System.out.println("login -- Login to another account.");
@@ -216,7 +302,7 @@ public class App {
 					System.out.println("status -- Check your status effects.");
 					System.out.println("stock -- add gum, water, and snacks to the vending machine.");
 					System.out.println("use -- use an item from your inventory");
-					System.out.println(": Do Something (enter help for options)!");
+					System.out.println(":" + activeUser.getName() + ", do Something (enter help for options)!");
 					break;
 		        case "history":
 		        	input.printHistory();
@@ -283,5 +369,87 @@ public class App {
 		        	break;
 		    }
 		} while (userInput != null);
+    }
+    
+    public static List<User> search(Scanner scanner, UserList userList, VendingMachineList vendingMachineList) {
+    	String input = "loop";
+		List<User> users;
+    	
+    	loop:
+    	while (input.equals("loop")) {
+	    	System.out.println("Search for a user by");
+			System.out.println("1 -- UUID");
+			System.out.println("2 -- username");
+			System.out.println("3 -- Vending Machine UUID");
+			System.out.println("Q/q -- quit");
+			
+			input = scanner.nextLine();
+			
+			switch (input.toUpperCase()) {
+			case "1":
+				System.out.println("Enter user's UUID for search:");
+				input = scanner.nextLine();
+				users = userList.userIdStartsWith(input);
+				
+				printSearchResults(users);
+				
+				break;
+			case "2":
+				System.out.println("Enter user's username for search:");
+				input = scanner.nextLine();
+				
+				users = userList.getUserByName(input);
+				
+				printSearchResults(users);
+				
+				break;			
+			case "3":
+				System.out.println("Enter vending machine's UUID for search:");
+				input = scanner.nextLine();
+				
+				users = userList.getUsersAtVendingMachine(input);
+				
+				printSearchResults(users);
+				
+				break;
+				
+			case "Q":
+				return null;
+			default:
+				continue;
+			}
+			
+			yesno:
+			while (true) {
+				System.out.println("Quit?(Y/N)");
+				
+				input = scanner.nextLine();
+				
+				switch (input.toUpperCase()) {
+					case "Y":
+						break yesno;
+					case "N":
+						break loop;
+					default:
+						break;
+				}
+			}
+    	}
+		
+    	return null;
+    }
+    
+    public static void printSearchResults(List<User> users) {
+    	if (users != null && (users.size() > 0)) {
+			System.out.println("Search returned " + users.size() + " user(s).");
+			for (int i = 0; i < users.size(); i++) {
+				if (i % 5 == 0) {
+					System.out.println("  |       name       |    user's login uuid     |    user's location uuid   ");
+				}
+				System.out.println(i + ": " + users.get(i).getName() + " " + users.get(i).getLoginUUID() + " " + users.get(i).getLocation());
+			}
+		} else {
+			System.out.println("User UUID supplied returned no results.");
+		}
     }
 }

@@ -1,8 +1,8 @@
-package discompanydatcompany.vendingmachine.entities;
+package discompanydatcompany.vendingmachine.beans;
 
 import java.io.Serializable;
 
-import discompanydatcompany.vendingmachine.entities.Item;
+import discompanydatcompany.vendingmachine.beans.Item;
 
 public class StockItem implements Serializable {
 
