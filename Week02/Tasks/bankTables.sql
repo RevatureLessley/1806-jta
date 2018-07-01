@@ -49,18 +49,37 @@ BEGIN
 END;
 /
 
+--Stored procedure
 CREATE OR REPLACE PROCEDURE insertNewUser(userName IN VARCHAR2,
                                             userPass IN VARCHAR2,
                                             firstN IN VARCHAR2,
                                             lastN IN VARCHAR2)
 IS
+
 BEGIN
     INSERT INTO login (username,pass_word)
     VALUES(userName,userPass);
     INSERT INTO person (p_id,FName,LName)
     VALUES((SELECT u_id FROM login WHERE username = 'userName'),firstN,lastN);
+    INSERT INTO balance
     commit;
 END;
 /
+
+--User defined function to get user id based on username
+CREATE OR REPLACE FUNCTION get_user_id (user_name IN VARCHAR2)
+RETURN NUMBER
+IS
+    uname NUMBER;
+    
+    cursor c1 is SELECT u_id FROM login WHERE username = user_name;
+BEGIN
+    open c1;
+    fetch c1 into uname;
+
+    RETURN uname;
+END;
+/
+
 
 commit;
