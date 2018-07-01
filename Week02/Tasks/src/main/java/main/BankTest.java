@@ -1,6 +1,7 @@
 package main;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,8 +12,6 @@ import org.junit.Test;
 
 public class BankTest {
 
-	Users users = null;
-	Admin admin = null;
 	User user = null;
 	LoginPrompt lp = null;
 	@BeforeClass
@@ -25,17 +24,16 @@ public class BankTest {
 
 	@Before
 	public void setUp() throws Exception {
-		users = new Users();
-		admin = new Admin("testadmin","testpass","a","b");
 		user = new User("testuser","testpass","c","d");
 		lp = new LoginPrompt();
+		lp.storeUserDB(user);
+		user = lp.retrieveUserDB("testuser");
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		lp.removeUserDB(user);
 		user = null;
-		admin = null;
-		users = null;
 		lp = null;
 	}
 
@@ -46,15 +44,19 @@ public class BankTest {
 	}
 	
 	@Test
-	public void addUserTest() {
-		users.addUser(user);
-		assertEquals(users.getUsers().get("testuser"),user);
+	public void approveUserTest() {
+		user = lp.retrieveUserDB("testuser");
+		user.setAuth(5);
+		lp.approveUserDB(user);
+		assertEquals(lp.retrieveUserDB("testuser").getAuth(),user.getAuth());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
-	public void removeUserTest() {
-		users.addUser(user);
-		users.removeUser(user);
-		assertEquals(users.getUsers().get("testuser"),null);
+	public void updataBalanceTest() {
+		user = lp.retrieveUserDB("testuser");
+		user.setBalance(10);
+		lp.updateBalanceDB(user);
+		assertEquals(lp.retrieveUserDB("testuser").getBalance(),user.getBalance());
 	}
 }
