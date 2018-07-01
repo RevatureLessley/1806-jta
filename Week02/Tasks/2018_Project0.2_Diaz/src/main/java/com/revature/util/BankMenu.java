@@ -17,6 +17,7 @@ import com.revature.beans.NewAccount3;
 import com.revature.beans.TransUnion;
 import com.revature.beans.TransUnion2;
 import com.revature.beans.TransUnion3;
+import com.revature.service.BanKAccountService;
 /**
  * Class BankMenu sets up the first menu to take usser input and it extends
  * SecondMenu to grab the information form the Supper Class
@@ -85,95 +86,23 @@ public class BankMenu extends SecondMenu{
 				case 0:// case 0 logs out of application for some reason i have to exit three times to complete get out of application 
 					System.out.println("     Please come again.");
 					break;
-				case 1:// case 1 logs into account must know account info that is displayed when creating the account
+				case 1:// takes you to the next menu that lets you enter your new database entry
 					System.out.println("       What is you Admin ID?");
 					int a = in.nextInt();
 					if(a == admidId) {
 						System.out.println("       What is you Admin Password?");
 						int b = in.nextInt();
 						if(b == adminPassword) {
-							intro2();
-							int choice =0;
-							choice = in.nextInt();
-							switch(choice){
-								default: 
-									System.err.println("Invalid entry please try again later. Pleaese try agan. ");
-									break; 
-								case 0:
-									System.out.println("     Please come again.");
-									break;
-								case 1://creates new admin
-								
-								case 2:
-									
-									try {
-										PreparedStatement ps = null;
-										PreparedStatement ps1 = null;
-										CallableStatement callSt = null;
-										Statement stmt = null; 
-										ResultSet rs = null;
-										Connection conn = Connections.getConnection();
-										// adding to customer addres table
-										System.out.println("What is the customers street number?");
-										int streetNum = in.nextInt();
-										System.out.println("What is the customers street name?");
-										String strreName = in.next();
-										ps = conn.prepareStatement("CALL INSERTINTOADDRESS(?,?)");
-										ps.setInt(1, streetNum);
-										ps.setString(2, strreName);		
-										ps.executeUpdate();
-										// gettint result of addres id to pass on the customer
-										callSt  = conn.prepareCall(" { ? = call GET_MAX_ADD_ID}");
-										callSt.registerOutParameter(1,java.sql.Types.VARCHAR);
-										callSt.execute();
-										int result = callSt.getInt(1);
-										System.out.println("Addres ID is: " + result );
-										// adding to customer table
-										System.out.println("What is the customers Last Name");
-										String lName = in.next();
-										System.out.println("What is the customers First Name");
-										String fName = in.next();
-										System.out.println("What is the customers password");
-										int password = in.nextInt();
-										ps1 = conn.prepareStatement("CALL INSERTIntoCUSTOMER(?,?,?,?)");
-										ps1.setString(1, lName);
-										ps1.setString(2, fName);
-										ps1.setInt(3, password);
-										ps1.setInt(4, result);
-										ps1.executeUpdate();
-										
-										// Adding to bank account table
-										System.out.println(" Press 1 for REVATURE TRANSUNION TX " + "\n"
-												+ "Press 2 for  REVATURE TRANSUNION FL" + "\n"
-												+ "Press 3 for  REVATURE TRANSUNION VA "+ "\n");
-										System.out.println("What is the Branch ID for this account: ");
-										int branchId = in.nextInt();
-										System.out.println("Press 1 for Saveing:" + "\n" 
-												+ "Press 2 forfor checking:"+ "\n");
-										String accounType = in.next();
-										System.out.println("What is the customers opening balance");
-										int balance = in.nextInt();
-										ps1 = conn.prepareStatement("CALL insertIntoBank(?,?,?)");
-										ps1.setInt(1, branchId);
-										ps1.setString(2, accounType);
-										ps1.setInt(3, balance);
-										ps1.executeUpdate();
-										
-										
-										
-									} catch (SQLException e) {
-										e.printStackTrace();
-									}finally{
-										//close(stmt);
-									
-									}
-									menu();
-							}
+							switchTwo();
+						}else {
+							System.err.println("Invalid entry please try again later. Pleaese try agan. ");
+							BankMenu.menu();	
 						}
 					}else {
-						System.out.println("Invalid entry please try again later. Pleaese try agan. ");
-						menu();				
+						System.err.println("Invalid entry please try again later. Pleaese try agan. ");
+						BankMenu.menu();				
 					}
+					
 					break;
 				case 2:// case 2 is to create account and for it to be approved by the admin			
 					System.out.println(" Thanks for choseing Revature TransUnion.");
