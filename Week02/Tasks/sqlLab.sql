@@ -66,3 +66,25 @@ ALTER TABLE InvoiceLine ADD CONSTRAINT FK_InvoiceLineInvoiceId
     ON DELETE CASCADE;
 
 DELETE FROM Customer WHERE firstname='Robert' AND lastname='Walter';
+
+--7.1
+
+SELECT Customer.FIRSTNAME, Customer.LASTNAME, Invoice.INVOICEID FROM Customer
+INNER JOIN Invoice on Customer.CUSTOMERID = Invoice.CUSTOMERID;
+
+--7.2
+
+SELECT Customer.FIRSTNAME, Customer.LASTNAME, Invoice.INVOICEID, Invoice.TOTAL FROM Customer
+FULL OUTER JOIN Invoice ON Customer.CUSTOMERID = Invoice.CUSTOMERID;
+
+--7.3
+SELECT Artist.NAME, Album.TITLE FROM Album
+RIGHT JOIN Artist ON Album.artistid = Artist.ARTISTID;
+
+--7.4
+SELECT Artist.NAME, Album.TITLE FROM Album
+CROSS JOIN Artist ORDER BY Artist.NAME;
+
+--7.5
+SELECT * FROM Employee a, Employee b
+WHERE a.REPORTSTO=b.REPORTSTO;
