@@ -12,14 +12,13 @@ import java.sql.Statement;
 import java.util.Scanner;
 import com.revature.service.BanKAccountService;
 /**
- * Class BankMenu sets up the first menu to take usser input and it extends
+ * Class BankMenu sets up the first menu to take user input and it extends
  * SecondMenu to grab the information form the Supper Class
  * @author Zachary Diaz
  *
  */
 public class BankMenu extends SecondMenu{
 	
-	private static double revatureTransUnion = 1_000_000;// The starting amount the bank has in its vault
 	private static int i = 0;// sets up a count for the number of accounts that is currently set 
 	Scanner in = new Scanner(System.in);// useer input
 	/**

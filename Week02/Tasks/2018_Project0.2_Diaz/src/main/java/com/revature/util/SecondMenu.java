@@ -9,9 +9,10 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import com.revature.service.BanKAccountService;
+import com.revature.service.Transactions;
 /**
  * 
- * In Second Menu it has the bulk of the methods that make the bank work such as deposit, balance, withdraw and introuductin menus
+ * In Second Menu makes the bank work on moving between menus
  * @author Zachary Diaz
  *
  */
@@ -20,7 +21,6 @@ public class SecondMenu {
 	final static int admidId = 5986;
 	final static int adminPassword = 118034; // admin password s not completely set up need to fix
 	final static int secrPassword = 203065; // admin password s not completely set up need to fix
-	public static int count = 100;
 	
 	public static void switchTwo() {
 		Scanner in = new Scanner(System.in);// useer input
@@ -35,15 +35,15 @@ public class SecondMenu {
 				System.out.println("     Please come again.");
 				BankMenu.menu();
 				break;
-			case 1://creates new admin
-					
-			case 2:
+			case 1://adds to trasaction table in database
+				Transactions.transactions();	
+			case 2://ads new account and customer ifomation to approrate tables
 				ShowSecondMenu();
 				switchTwo();
-			case 3:
+			case 3:// displays the current account info
 				BanKAccountService.tableView();
 				switchTwo();
-			case 4:
+			case 4://dis[alys the current customer info
 				BanKAccountService.tableView2();
 				switchTwo();
 				
@@ -51,7 +51,9 @@ public class SecondMenu {
 	}
 	
 	
-	
+	/**
+	 * ShowSecondMenu creates the new entry into the banking database contains calls, update and inserts
+	 */
 	public static void ShowSecondMenu() {
 		try {
 			Scanner in = new Scanner(System.in);// useer input
@@ -91,8 +93,8 @@ public class SecondMenu {
 			
 			// Adding to bank account table
 			System.out.println("Press 1 for REVATURE TRANSUNION TX " + "\n"
-					+ "Press 2 for  REVATURE TRANSUNION FL" + "\n"
-					+ "Press 3 for  REVATURE TRANSUNION VA "+ "\n");
+					+ "Press 2 for REVATURE TRANSUNION FL" + "\n"
+					+ "Press 3 for REVATURE TRANSUNION VA "+ "\n");
 			System.out.println("What is the Branch ID for this account: ");
 			int branchId = in.nextInt();
 			System.out.println("Press 1 for Saveing:" + "\n" 
@@ -100,12 +102,21 @@ public class SecondMenu {
 			String accounType = in.next();
 			System.out.println("What is the customers opening balance");
 			int balance = in.nextInt();
-			ps = conn.prepareStatement("CALL insertIntoBank(?,?,?)");
+			// get result from tran id to create new one
+			callSt  = conn.prepareCall(" { ? = call GET_MAX_Tran_ID}");
+			callSt.registerOutParameter(1,java.sql.Types.VARCHAR);
+			callSt.execute();
+			int result3 = callSt.getInt(1);
+			int temp3 = result3 +1;
+			ps = conn.prepareStatement("CALL Transations_test(?,null,null)");
+			ps.setInt(1, temp3);
+			ps.executeUpdate();
+			ps = conn.prepareStatement("CALL insertIntoBank(?,?,?,?)");
 			ps.setInt(1, branchId);
 			ps.setString(2, accounType);
 			ps.setInt(3, balance);
+			ps.setInt(4, temp3);
 			ps.executeUpdate();
-			
 			// get result of ACCOUNT id to pass on the JOIN TABLE
 			callSt  = conn.prepareCall(" { ? = call GET_MAX_ID_CUSTOMER}");
 			callSt.registerOutParameter(1,java.sql.Types.VARCHAR);
@@ -118,9 +129,7 @@ public class SecondMenu {
 			int result12 = callSt.getInt(1);			
 			// set the new id's 
 			int temp = result1 + 1;
-			System.out.println(temp);
 			int temp2 = result12 + 1;
-			System.out.println(temp2);
 			ps = conn.prepareStatement(" CALL INSERTINTOACCOUNT_2_CUSTOMER(?,?)");
 			ps.setInt(1, temp);
 			ps.setInt(2, temp2);
@@ -130,8 +139,8 @@ public class SecondMenu {
 			
 			
 			
-			System.out.println("REVATURE TRANSUNION New account confirmed as:"
-				+ fName +" "+ lName +" With a starting balance of: " + "$" + balance);
+			System.out.println("REVATURE TRANSUNION New account confirmed As:"
+				+ fName +" "+ lName +" With a starting balance of: " + "$" + balance+ "\n");
 			
 			
 			
@@ -140,7 +149,7 @@ public class SecondMenu {
 		
 			}
 		Scanner in = new Scanner(System.in);// useer input
-		System.out.println("Would you like to stay log press 1 for yes and any thing else to log out");
+		System.out.println("Would you like to stay log press 1 for yes and any other number to log out");
 		int x = in.nextInt();
 		if(x == 1) {
 			System.out.println("Test");

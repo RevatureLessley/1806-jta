@@ -10,7 +10,11 @@ import java.util.Scanner;
 
 import com.revature.util.Connections;
 import com.revature.util.SecondMenu;
-
+/**
+ * this class sets up the bulk of consul outputs for the users eyes
+ * @author Zachary DIaz
+ *
+ */
 public class BanKAccountService extends SecondMenu{
 	
 	public static void tableView() {
@@ -43,7 +47,6 @@ public class BanKAccountService extends SecondMenu{
 	           int CId = rs.getInt("CUSTOMER_ID");
 	           String lName = rs.getString("CUSTOMER_LNAME");
 	           String fName = rs.getString("CUSTOMER_FNAME");
-	          // String pass = rs.getString("CUSTOMER_PASSWORD");
 	           int adId = rs.getInt("ADRESS_ID");
 	           System.out.println("|"+CId+"   |  "+lName+"  	 |  "+fName+"  	 	|"+adId+"		|" );
 	           System.out.println("----------------------------------------------------------------");
@@ -68,10 +71,10 @@ public class BanKAccountService extends SecondMenu{
 		System.out.println("");
 		System.out.println("     Please select one of the following ");
 		System.out.println("");
-		System.out.println("     Add transaction to Databas			Press 1");		
-		System.out.println("     Add new accounts to Database		Press 2");		
-		System.out.println("     Check current accounts 			Press 3");
-		System.out.println("     Check customer Info 			Press 4");
+		System.out.println("     Add Ttransaction to Databas			Press 1");		
+		System.out.println("     Add New Accounts to Database		Press 2");		
+		System.out.println("     Check Current Accounts 			Press 3");
+		System.out.println("     Check Customer Info 			Press 4");
 //		System.out.println("     Too pay off a loan 			Press 5");
 //		System.out.println("     Transfer to another account 		press 6");
 		System.out.println("     If you want to exit 			press 0" + "\n");
@@ -79,9 +82,11 @@ public class BanKAccountService extends SecondMenu{
 	public static void intro3(){
 		System.out.println("\n");
 		System.out.println("===============================================");
+		System.out.println("      Please select one of the following ");
 		System.out.println("");
-		System.out.println("");
-		System.out.println("");
+		System.out.println("		Press 1:	Deposit");
+		System.out.println("		Press 2:	Withdraw");
+		System.out.println("     	If you want to exit 			press 0" + "\n");
 	}
 	
 }
