@@ -3,7 +3,7 @@
 DROP TABLE login CASCADE CONSTRAINTS;
 DROP TABLE person CASCADE CONSTRAINTS;
 DROP TABLE balance CASCADE CONSTRAINTS;
-DROP TABLE auth_lvl CASCADE CONSTRAINTS;
+DROP TABLE auth CASCADE CONSTRAINTS;
 
 CREATE TABLE login (
     u_id number(6) PRIMARY KEY,
@@ -24,10 +24,9 @@ CREATE TABLE balance (
     CONSTRAINT fk_b_id FOREIGN KEY (b_id) REFERENCES login(u_id)
 );
 
-CREATE TABLE auth_lvl (
+CREATE TABLE auth (
     a_id number(6) PRIMARY KEY,
-    lvl number(2) NOT NULL,
-    lvl_name varchar2(100) NOT NULL,
+    is_auth number(2) NOT NULL,
     CONSTRAINT fk_a_id FOREIGN KEY (a_id) REFERENCES login(u_id)
 );
 
@@ -40,7 +39,7 @@ CREATE SEQUENCE userid_seq
 
 --Create a user id if one doesn't exist already
 CREATE OR REPLACE TRIGGER userid_seq_trigger
-BEFORE INSERT ON  user_id
+BEFORE INSERT ON login
 FOR EACH ROW 
 BEGIN 
     IF :new.u_id IS NULL THEN
@@ -55,13 +54,17 @@ CREATE OR REPLACE PROCEDURE insertNewUser(userName IN VARCHAR2,
                                             firstN IN VARCHAR2,
                                             lastN IN VARCHAR2)
 IS
-
+    userid NUMBER;
 BEGIN
     INSERT INTO login (username,pass_word)
     VALUES(userName,userPass);
+    userid := get_user_id(userName);
     INSERT INTO person (p_id,FName,LName)
-    VALUES((SELECT u_id FROM login WHERE username = 'userName'),firstN,lastN);
-    INSERT INTO balance
+    VALUES(userid,firstN,lastN);
+    INSERT INTO balance (b_id,bal)
+    VALUES(userid,0);
+    INSERT INTO auth (a_id,is_auth)
+    VALUES(userid,0);
     commit;
 END;
 /
