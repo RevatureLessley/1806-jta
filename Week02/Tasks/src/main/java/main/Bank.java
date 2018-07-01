@@ -27,7 +27,7 @@ public class Bank{
 		if (user == null) return;
 		
 		Bank bank = new Bank();
-		bank.options(user,users);
+		bank.options(user,lp);
 		lp.storeUsers(users);
 	}
 	
@@ -38,7 +38,7 @@ public class Bank{
 	 * @param users
 	 * Hashmap containing the users
 	 */
-	public void options(User user,Users users) {
+	public void options(User user,LoginPrompt lp) {
 		System.out.println(
 				"'0' Show balance \n"
 				+ "'1' Deposit \n"
@@ -60,9 +60,9 @@ public class Bank{
 			case "3":
 				return;
 			case "authorize":
-				if(user instanceof Admin) {
+				if(user.getAuth() == 2) {
 					//call update function here
-					this.approveUser(users);
+					this.approveUser(lp);
 					input = "options";
 				}else {
 					System.out.println("Only the Admin can approve users");
@@ -130,13 +130,13 @@ public class Bank{
 	 * @param users
 	 * Hashmap where users are stored
 	 */
-	public void approveUser(Users users) {
+	public void approveUser(LoginPrompt lp) {
 		String username = LoginPrompt.console.readLine(": ");
-		User user = users.getUsers().get(username);
+		User user = lp.retrieveUserDB(username);
 		if(user == null) System.out.println("User does not exist");
 		else {
 			System.out.println("User successfully approved");
-			user.setAuth(true);
+			user.setAuth(1);
 			logger.info(user.getUserid() + " Approved");
 		}
 	}

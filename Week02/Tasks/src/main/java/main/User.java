@@ -15,6 +15,7 @@ public class User implements Serializable{
 	private String lname;
 	private double balance;
 	private int auth;
+	private int primkey;
 	
 
 	/**
@@ -37,13 +38,14 @@ public class User implements Serializable{
 		this.auth = 0;
 	}
 	
-	public User(String userid, String pass, String fname, String lname,double balance,int auth){
+	public User(String userid, String pass, String fname, String lname,double balance,int auth,int primkey){
 		this.userid = userid;
 		this.pass = pass;
 		this.fname = fname;
 		this.lname = lname;
 		this.balance = balance;
 		this.auth = auth;
+		this.primkey = primkey;
 	}
 	
 	/**
@@ -74,6 +76,20 @@ public class User implements Serializable{
 	
 	public String getUserid() {
 		return userid;
+	}
+
+	/**
+	 * @return the primkey
+	 */
+	public int getPrimkey() {
+		return primkey;
+	}
+
+	/**xw
+	 * @param primkey the primkey to set
+	 */
+	public void setPrimkey(int primkey) {
+		this.primkey = primkey;
 	}
 
 	public void setUserid(String userid) {
@@ -112,7 +128,7 @@ public class User implements Serializable{
 		this.balance = balance;
 	}
 
-	public boolean isAuth() {
+	public int getAuth() {
 		return auth;
 	}
 

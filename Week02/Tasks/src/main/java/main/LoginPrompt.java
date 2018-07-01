@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import util.Connections;
+
 import static util.CloseStreams.close;
 
 public class LoginPrompt{
@@ -38,8 +40,9 @@ public class LoginPrompt{
 		if (user == null) return null;
 		//users.addUser(user);
 		//this.storeUsers(users);
+		
 		System.out.println(user.toString());
-		if (!user.isAuth()) {
+		if (user.getAuth() == 0) {
 			System.out.println("Your account is not approved yet, please wait 0 or more years");
 			return null;
 		}
@@ -47,6 +50,15 @@ public class LoginPrompt{
 		
 	}
 
+	/**
+	 * This method retrieves a user from the database based on their username, which
+	 * is inputted into the console
+	 * @param username
+	 * Username of the user to be searched in the database
+	 * @return User
+	 * returns a user object made from the details in the database,  if the user is
+	 * not found then null is returned
+	 */
 	public User retrieveUserDB(String username) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -63,12 +75,13 @@ public class LoginPrompt{
 			
 			while(rs.next()) {
 				return new User(
-						rs.getString(1),
 						rs.getString(2),
 						rs.getString(3),
 						rs.getString(4),
-						rs.getDouble(5),
-						rs.getInt(6));
+						rs.getString(5),
+						rs.getDouble(6),
+						rs.getInt(7),
+						rs.getInt(1));
 			}
 
 		}catch(SQLException e) {
@@ -78,6 +91,25 @@ public class LoginPrompt{
 			close(rs);
 		}
 		return null;
+	}
+	public void storeUserDB(User user) {
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()){
+			stmt = conn.prepareCall("{call insertNewUser(?,?,?,?)}");
+			
+			stmt.setString(1,user.getUserid());
+			stmt.setString(2, user.getPass());
+			stmt.setString(3, user.getFname());
+			stmt.setString(4, user.getLname());
+			
+			stmt.execute(); //rows effected
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
 	}
 	/**
 	 * This method is used to retrieve previously stored user data
@@ -164,6 +196,7 @@ public class LoginPrompt{
 		String fname = new String(console.readLine("First Name: "));
 		String lname = new String(console.readLine("Last Name: "));
 		User user = new User(username,password,fname,lname);
+		this.storeUserDB(user);
 		logger.info(user.toString() + " Created an account");
 		return user;
 	}
