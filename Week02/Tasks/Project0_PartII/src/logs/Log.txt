@@ -134,3 +134,826 @@
 2018-07-01 11:32:53 INFO  root:102 - Project0/RevatureBank.java: New account created.
 2018-07-01 11:39:46 INFO  root:102 - Project0/RevatureBank.java: New account created.
 2018-07-01 11:44:36 INFO  root:102 - Project0/RevatureBank.java: New account created.
+2018-07-01 15:06:07 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:06:08 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:06:08 DEBUG root:37 - Project0/RevatureBank.java: Constructing RevatureBank().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructing FromDisk().
+2018-07-01 15:06:08 DEBUG root:35 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructed FromDisk().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered read().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:06:08 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:06:08 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:06:08 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:06:08 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:92 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting read().
+2018-07-01 15:06:08 DEBUG root:104 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered close().
+2018-07-01 15:06:08 DEBUG root:108 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting close().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:06:08 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:06:08 DEBUG root:33 - Project0_PartII/RevatureAccounts/AdminAccount.java: Constructing AdminAccount().
+2018-07-01 15:06:08 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructing Username(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructed Username(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructing Password(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructed Password(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructing FirstName(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructed FirstName(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructing LastName(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructed LastName(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructing Status(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:06:08 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:06:08 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructed Status(AdminAccount).
+2018-07-01 15:06:08 DEBUG root:41 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting AdminAccount().
+2018-07-01 15:06:08 DEBUG root:134 - Project0_PartII/RevatureAccounts/Account.java: Entered getID().
+2018-07-01 15:06:08 DEBUG root:104 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting getID().
+2018-07-01 15:06:08 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Entered and exiting print().
+2018-07-01 15:06:08 DEBUG root:138 - Project0_PartII/RevatureAccounts/Account.java: Exiting getID().
+2018-07-01 15:06:08 DEBUG root:63 - Project0/RevatureBank.java: Constructed RevatureBank().
+2018-07-01 15:06:08 DEBUG root:130 - Project0/RevatureBank.java:  Entered enter().
+2018-07-01 15:06:08 DEBUG root:198 - Project0/RevatureBank.java: Entered welcome().
+2018-07-01 15:06:10 DEBUG root:109 - Project0/RevatureBank.java: Entered signIn().
+2018-07-01 15:06:10 DEBUG root:198 - Project0_PartII/RevatureAccounts/Account.java: Entered signIn().
+2018-07-01 15:06:16 DEBUG root:204 - Project0_PartII/RevatureAccounts/Account.java: Exiting signIn().
+2018-07-01 15:06:16 DEBUG root:91 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered entered().
+2018-07-01 15:06:16 DEBUG root:85 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered display().
+2018-07-01 15:06:16 DEBUG root:32 - Project0_PartII/RevatureAccounts/AccountStatus.java: Entered PENDING.display().
+2018-07-01 15:06:16 DEBUG root:125 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered pending().
+2018-07-01 15:06:16 DEBUG root:67 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:131 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting pending().
+2018-07-01 15:06:16 DEBUG root:35 - Project0_PartII/RevatureAccounts/AccountStatus.java: Exiting PENDING.display().
+2018-07-01 15:06:16 DEBUG root:88 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting display().
+2018-07-01 15:06:16 DEBUG root:94 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting entered().
+2018-07-01 15:06:16 DEBUG root:123 - Project0/RevatureBank.java: Exiting signIn().
+2018-07-01 15:06:16 DEBUG root:213 - Project0/RevatureBank.java: Exiting welcome().
+2018-07-01 15:06:16 DEBUG root:134 - Project0/RevatureBank.java: Exiting enter().
+2018-07-01 15:06:16 DEBUG root:142 - Project0/RevatureBank.java: Entered exit().
+2018-07-01 15:06:16 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:06:16 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:06:16 DEBUG root:66 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered write().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:06:16 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:06:16 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:32 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-01 15:10:32 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:10:33 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:10:33 DEBUG root:37 - Project0/RevatureBank.java: Constructing RevatureBank().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructing FromDisk().
+2018-07-01 15:10:33 DEBUG root:35 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructed FromDisk().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered read().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:33 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:33 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:33 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:33 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:92 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting read().
+2018-07-01 15:10:33 DEBUG root:104 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered close().
+2018-07-01 15:10:33 DEBUG root:108 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting close().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:33 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:33 DEBUG root:33 - Project0_PartII/RevatureAccounts/AdminAccount.java: Constructing AdminAccount().
+2018-07-01 15:10:33 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructing Username(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructed Username(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructing Password(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructed Password(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructing FirstName(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructed FirstName(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructing LastName(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructed LastName(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructing Status(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:33 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:33 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructed Status(AdminAccount).
+2018-07-01 15:10:33 DEBUG root:41 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting AdminAccount().
+2018-07-01 15:10:33 DEBUG root:134 - Project0_PartII/RevatureAccounts/Account.java: Entered getID().
+2018-07-01 15:10:33 DEBUG root:104 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting getID().
+2018-07-01 15:10:33 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Entered and exiting print().
+2018-07-01 15:10:33 DEBUG root:138 - Project0_PartII/RevatureAccounts/Account.java: Exiting getID().
+2018-07-01 15:10:33 DEBUG root:63 - Project0/RevatureBank.java: Constructed RevatureBank().
+2018-07-01 15:10:33 DEBUG root:130 - Project0/RevatureBank.java:  Entered enter().
+2018-07-01 15:10:33 DEBUG root:198 - Project0/RevatureBank.java: Entered welcome().
+2018-07-01 15:10:36 DEBUG root:109 - Project0/RevatureBank.java: Entered signIn().
+2018-07-01 15:10:36 DEBUG root:198 - Project0_PartII/RevatureAccounts/Account.java: Entered signIn().
+2018-07-01 15:10:44 DEBUG root:204 - Project0_PartII/RevatureAccounts/Account.java: Exiting signIn().
+2018-07-01 15:10:44 DEBUG root:91 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered entered().
+2018-07-01 15:10:44 DEBUG root:87 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered display().
+2018-07-01 15:10:44 DEBUG root:32 - Project0_PartII/RevatureAccounts/AccountStatus.java: Entered PENDING.display().
+2018-07-01 15:10:44 DEBUG root:125 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered pending().
+2018-07-01 15:10:44 DEBUG root:67 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:131 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting pending().
+2018-07-01 15:10:44 DEBUG root:35 - Project0_PartII/RevatureAccounts/AccountStatus.java: Exiting PENDING.display().
+2018-07-01 15:10:44 DEBUG root:90 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting display().
+2018-07-01 15:10:44 DEBUG root:94 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting entered().
+2018-07-01 15:10:44 DEBUG root:123 - Project0/RevatureBank.java: Exiting signIn().
+2018-07-01 15:10:44 DEBUG root:213 - Project0/RevatureBank.java: Exiting welcome().
+2018-07-01 15:10:44 DEBUG root:134 - Project0/RevatureBank.java: Exiting enter().
+2018-07-01 15:10:44 DEBUG root:142 - Project0/RevatureBank.java: Entered exit().
+2018-07-01 15:10:44 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:10:44 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:10:44 DEBUG root:66 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered write().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:10:44 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:10:44 DEBUG root:96 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting write().
+2018-07-01 15:10:44 DEBUG root:107 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered close().
+2018-07-01 15:10:44 DEBUG root:111 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting close().
+2018-07-01 15:10:44 DEBUG root:163 - Project0/RevatureBank.java: Exiting exit().
+2018-07-01 15:10:44 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().
+2018-07-01 15:10:52 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-01 15:10:52 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:10:52 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:10:52 DEBUG root:37 - Project0/RevatureBank.java: Constructing RevatureBank().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructing FromDisk().
+2018-07-01 15:10:52 DEBUG root:35 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructed FromDisk().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered read().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:52 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:52 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:52 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:52 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:92 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting read().
+2018-07-01 15:10:52 DEBUG root:104 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered close().
+2018-07-01 15:10:52 DEBUG root:108 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting close().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:10:52 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:10:52 DEBUG root:33 - Project0_PartII/RevatureAccounts/AdminAccount.java: Constructing AdminAccount().
+2018-07-01 15:10:52 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructing Username(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructed Username(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructing Password(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructed Password(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructing FirstName(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructed FirstName(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructing LastName(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructed LastName(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructing Status(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:10:52 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:10:52 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructed Status(AdminAccount).
+2018-07-01 15:10:52 DEBUG root:41 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting AdminAccount().
+2018-07-01 15:10:52 DEBUG root:134 - Project0_PartII/RevatureAccounts/Account.java: Entered getID().
+2018-07-01 15:10:52 DEBUG root:104 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting getID().
+2018-07-01 15:10:52 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Entered and exiting print().
+2018-07-01 15:10:52 DEBUG root:138 - Project0_PartII/RevatureAccounts/Account.java: Exiting getID().
+2018-07-01 15:10:52 DEBUG root:63 - Project0/RevatureBank.java: Constructed RevatureBank().
+2018-07-01 15:10:52 DEBUG root:130 - Project0/RevatureBank.java:  Entered enter().
+2018-07-01 15:10:52 DEBUG root:198 - Project0/RevatureBank.java: Entered welcome().
+2018-07-01 15:10:54 DEBUG root:109 - Project0/RevatureBank.java: Entered signIn().
+2018-07-01 15:10:54 DEBUG root:198 - Project0_PartII/RevatureAccounts/Account.java: Entered signIn().
+2018-07-01 15:10:57 DEBUG root:204 - Project0_PartII/RevatureAccounts/Account.java: Exiting signIn().
+2018-07-01 15:10:57 DEBUG root:91 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered entered().
+2018-07-01 15:10:57 DEBUG root:87 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered display().
+2018-07-01 15:10:57 DEBUG root:12 - Project0_PartII/RevatureAccounts/AccountStatus.java: Entered APPROVED.display().
+2018-07-01 15:10:57 DEBUG root:50 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered approved().
+2018-07-01 15:10:57 DEBUG root:67 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered and exiting get().
+2018-07-01 15:10:57 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:10:59 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:10:59 DEBUG root:102 - Project0_PartII/RevatureAccounts/UserAccount.java: Entered makeDeposit().
+2018-07-01 15:10:59 DEBUG root:62 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Entered deposit().
+2018-07-01 15:10:59 DEBUG root:79 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Entered getAmount().
+2018-07-01 15:10:59 DEBUG root:50 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Entered and exiting askUser().
+2018-07-01 15:11:08 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Exiting getAmount().
+2018-07-01 15:11:08 DEBUG root:112 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Entered print().
+2018-07-01 15:11:08 DEBUG root:116 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Exiting print().
+2018-07-01 15:11:08 DEBUG root:68 - Project0_PartII/RevatureAccounts/AccountAttributes/Balance.java: Exiting deposit().
+2018-07-01 15:11:08 DEBUG root:105 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting makeDeposit().
+2018-07-01 15:11:08 DEBUG root:67 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered and exiting get().
+2018-07-01 15:11:08 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:11:29 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:11:29 DEBUG root:214 - Project0_PartII/RevatureAccounts/Account.java: Entered signOut().
+2018-07-01 15:11:29 DEBUG root:217 - Project0_PartII/RevatureAccounts/Account.java: Exiting signOut().
+2018-07-01 15:11:29 DEBUG root:67 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting approved().
+2018-07-01 15:11:29 DEBUG root:15 - Project0_PartII/RevatureAccounts/AccountStatus.java: Exiting APPROVED.display().
+2018-07-01 15:11:29 DEBUG root:90 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting display().
+2018-07-01 15:11:29 DEBUG root:94 - Project0_PartII/RevatureAccounts/UserAccount.java: Exiting entered().
+2018-07-01 15:11:29 DEBUG root:123 - Project0/RevatureBank.java: Exiting signIn().
+2018-07-01 15:11:29 DEBUG root:213 - Project0/RevatureBank.java: Exiting welcome().
+2018-07-01 15:11:29 DEBUG root:134 - Project0/RevatureBank.java: Exiting enter().
+2018-07-01 15:11:29 DEBUG root:142 - Project0/RevatureBank.java: Entered exit().
+2018-07-01 15:11:29 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:11:29 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:11:29 DEBUG root:66 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered write().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:11:29 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:11:29 DEBUG root:96 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting write().
+2018-07-01 15:11:29 DEBUG root:107 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered close().
+2018-07-01 15:11:29 DEBUG root:111 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting close().
+2018-07-01 15:11:29 DEBUG root:163 - Project0/RevatureBank.java: Exiting exit().
+2018-07-01 15:11:29 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().
+2018-07-01 15:11:53 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-01 15:11:53 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:11:54 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:11:54 DEBUG root:37 - Project0/RevatureBank.java: Constructing RevatureBank().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructing FromDisk().
+2018-07-01 15:11:54 DEBUG root:35 - Project0_PartII/RevatureDatabase/FromDisk.java: Constructed FromDisk().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered read().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:11:54 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:11:54 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:11:54 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:11:54 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:92 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting read().
+2018-07-01 15:11:54 DEBUG root:104 - Project0_PartII/RevatureDatabase/FromDisk.java: Entered close().
+2018-07-01 15:11:54 DEBUG root:108 - Project0_PartII/RevatureDatabase/FromDisk.java: Exiting close().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/Account.java: Constructing Account().
+2018-07-01 15:11:54 DEBUG root:34 - Project0_PartII/RevatureAccounts/Account.java: Constructed Account().
+2018-07-01 15:11:54 DEBUG root:33 - Project0_PartII/RevatureAccounts/AdminAccount.java: Constructing AdminAccount().
+2018-07-01 15:11:54 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructing Username(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Constructed Username(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructing Password(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Constructed Password(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructing FirstName(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Constructed FirstName(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:24 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructing LastName(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:28 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Constructed LastName(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:27 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructing Status(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:45 - Project0_PartII/RevatureAccounts/Account.java: Entered addAttribute().
+2018-07-01 15:11:54 DEBUG root:48 - Project0_PartII/RevatureAccounts/Account.java: Exiting addAttribute().
+2018-07-01 15:11:54 DEBUG root:31 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Constructed Status(AdminAccount).
+2018-07-01 15:11:54 DEBUG root:41 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting AdminAccount().
+2018-07-01 15:11:54 DEBUG root:134 - Project0_PartII/RevatureAccounts/Account.java: Entered getID().
+2018-07-01 15:11:54 DEBUG root:104 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting getID().
+2018-07-01 15:11:54 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Password.java: Entered and exiting print().
+2018-07-01 15:11:54 DEBUG root:138 - Project0_PartII/RevatureAccounts/Account.java: Exiting getID().
+2018-07-01 15:11:54 DEBUG root:63 - Project0/RevatureBank.java: Constructed RevatureBank().
+2018-07-01 15:11:54 DEBUG root:130 - Project0/RevatureBank.java:  Entered enter().
+2018-07-01 15:11:54 DEBUG root:198 - Project0/RevatureBank.java: Entered welcome().
+2018-07-01 15:12:01 DEBUG root:109 - Project0/RevatureBank.java: Entered signIn().
+2018-07-01 15:12:01 DEBUG root:198 - Project0_PartII/RevatureAccounts/Account.java: Entered signIn().
+2018-07-01 15:12:08 DEBUG root:204 - Project0_PartII/RevatureAccounts/Account.java: Exiting signIn().
+2018-07-01 15:12:08 DEBUG root:50 - Project0_PartII/RevatureAccounts/AdminAccount.java: Entered enter().
+2018-07-01 15:12:08 DEBUG root:173 - Project0/RevatureBank.java: Entered and exiting getUnapprovedAccounts().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:08 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:08 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:12:11 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:12:11 DEBUG root:77 - Project0_PartII/RevatureAccounts/AdminAccount.java: Entered evaluateAccounts().
+2018-07-01 15:12:11 DEBUG root:178 - Project0_PartII/RevatureAccounts/Account.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:108 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:92 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:188 - Project0_PartII/RevatureAccounts/Account.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:178 - Project0_PartII/RevatureAccounts/Account.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:108 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:92 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:188 - Project0_PartII/RevatureAccounts/Account.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:178 - Project0_PartII/RevatureAccounts/Account.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:108 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:92 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Entered print().
+2018-07-01 15:12:11 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:188 - Project0_PartII/RevatureAccounts/Account.java: Exiting print().
+2018-07-01 15:12:11 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:12:50 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:12:50 DEBUG root:126 - Project0_PartII/RevatureAccounts/AdminAccount.java: Entered decide().
+2018-07-01 15:12:50 DEBUG root:166 - Project0_PartII/RevatureAccounts/AdminAccount.java: Entered getDecision().
+2018-07-01 15:12:51 DEBUG root:178 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting getDecision().
+2018-07-01 15:12:51 DEBUG root:56 - Project0_PartII/RevatureAccounts/Account.java: Entered approve().
+2018-07-01 15:12:51 DEBUG root:61 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered approve().
+2018-07-01 15:12:51 DEBUG root:65 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting approve().
+2018-07-01 15:12:51 DEBUG root:59 - Project0_PartII/RevatureAccounts/Account.java: Exiting approve().
+2018-07-01 15:12:51 DEBUG root:137 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting decide().
+2018-07-01 15:12:51 DEBUG root:178 - Project0_PartII/RevatureAccounts/Account.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:108 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:92 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:188 - Project0_PartII/RevatureAccounts/Account.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:178 - Project0_PartII/RevatureAccounts/Account.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:108 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:92 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:95 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/FirstName.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:75 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Entered print().
+2018-07-01 15:12:51 DEBUG root:78 - Project0_PartII/RevatureAccounts/AccountAttributes/LastName.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:188 - Project0_PartII/RevatureAccounts/Account.java: Exiting print().
+2018-07-01 15:12:51 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:12:56 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:12:56 DEBUG root:105 - Project0_PartII/RevatureAccounts/AdminAccount.java:Exiting evaluateAccounts().
+2018-07-01 15:12:56 DEBUG root:173 - Project0/RevatureBank.java: Entered and exiting getUnapprovedAccounts().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:153 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getID().
+2018-07-01 15:12:56 DEBUG root:97 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-01 15:12:56 DEBUG root:81 - Project0_PartII/RevatureAccounts/Account.java: Entered askUser().
+2018-07-01 15:12:59 DEBUG root:92 - Project0_PartII/RevatureAccounts/Account.java: Exiting askUser().
+2018-07-01 15:12:59 DEBUG root:214 - Project0_PartII/RevatureAccounts/Account.java: Entered signOut().
+2018-07-01 15:12:59 DEBUG root:217 - Project0_PartII/RevatureAccounts/Account.java: Exiting signOut().
+2018-07-01 15:12:59 DEBUG root:68 - Project0_PartII/RevatureAccounts/AdminAccount.java: Exiting enter().
+2018-07-01 15:12:59 DEBUG root:123 - Project0/RevatureBank.java: Exiting signIn().
+2018-07-01 15:12:59 DEBUG root:213 - Project0/RevatureBank.java: Exiting welcome().
+2018-07-01 15:12:59 DEBUG root:134 - Project0/RevatureBank.java: Exiting enter().
+2018-07-01 15:12:59 DEBUG root:142 - Project0/RevatureBank.java: Entered exit().
+2018-07-01 15:12:59 DEBUG root:33 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructing ToDisk().
+2018-07-01 15:12:59 DEBUG root:37 - Project0_PartII/RevatureDatabase/ToDisk.java: Constructed ToDisk().
+2018-07-01 15:12:59 DEBUG root:66 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered write().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:160 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getUsername().
+2018-07-01 15:12:59 DEBUG root:84 - Project0_PartII/RevatureAccounts/AccountAttributes/Username.java: Entered and exiting get().
+2018-07-01 15:12:59 DEBUG root:96 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting write().
+2018-07-01 15:12:59 DEBUG root:107 - Project0_PartII/RevatureDatabase/ToDisk.java: Entered close().
+2018-07-01 15:12:59 DEBUG root:111 - Project0_PartII/RevatureDatabase/ToDisk.java: Exiting close().
+2018-07-01 15:12:59 DEBUG root:163 - Project0/RevatureBank.java: Exiting exit().
+2018-07-01 15:12:59 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().

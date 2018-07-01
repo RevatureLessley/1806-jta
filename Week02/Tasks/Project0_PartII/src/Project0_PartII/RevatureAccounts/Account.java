@@ -2,7 +2,7 @@ package Project0_PartII.RevatureAccounts;
 
 import java.io.Serializable;
 import java.math.*;
-//import java.sql.*;
+import java.sql.*;
 import java.util.*;
 import java.util.regex.*;
 
@@ -217,4 +217,10 @@ public abstract class Account implements ConsoleReference, LogReference,
 		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
 	 	     	 "Exiting signOut().");
 	}
+	
+	public void write(Connection connection) throws SQLException {
+		for(AccountAttribute aa : attributes.values()) {
+			aa.write(connection, this.getUsername());
+		}
+ 	}
 }

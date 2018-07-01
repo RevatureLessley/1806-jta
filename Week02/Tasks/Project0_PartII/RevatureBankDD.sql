@@ -235,6 +235,29 @@ BEGIN
 END;
 /
 
---call insertAccount('walterx', 'walterx', 'Walter', 'Xia', 0, 'APPROVED');
+CREATE OR REPLACE PROCEDURE updateBalance(username IN VARCHAR2, 
+                                          balance IN NUMBER)
+IS
+BEGIN
+    UPDATE Account_Dynamic 
+    SET acc_dyn_balance = balance
+    WHERE acc_dyn_id IN (SELECT acc_dyn_id 
+                         FROM Account_Join 
+                         WHERE acc_sta_username = username);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE updateStatus(username IN VARCHAR2, co IN VARCHAR2)
+IS
+BEGIN
+    UPDATE Account_Static 
+    SET acc_sta = (SELECT sta_id 
+                   FROM Status 
+                   WHERE code = co)
+    WHERE acc_sta_username  = username;
+END;
+/
+
+call updateStatus('w', 'DENIED');
 
 COMMIT;

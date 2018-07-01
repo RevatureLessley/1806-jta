@@ -4,9 +4,11 @@ import java.io.*;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
-import java.util.*;
+import java.util.Locale;
+
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
+import Project0_PartII.RevatureDatabase.*;
 
 /**
  * Balance encapsulates the logic of an account balance.
@@ -60,6 +62,7 @@ public class Balance extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 					 "Balance.java: Entered deposit().");
 		balance = balance.add(getAmount());
+		dirty = true;
 		System.out.println("Transaction approved.");
 		print();
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
@@ -149,5 +152,17 @@ public class Balance extends AccountAttribute
 		print();
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 	 	 	 	 "Balance.java: Exiting withdraw().");
+	}
+	
+	@Override
+	public void write(Connection connection, String username) throws SQLException {
+		if(dirty) {
+			sqlUpdate = "{call updateBalance(?, ?)}";
+			statement = connection.prepareCall(sqlUpdate);
+			statement.setString(1, username);
+			statement.setBigDecimal(2, balance);
+			statement.execute();
+			DatabaseConnection.close(statement);
+		}
 	}
 }

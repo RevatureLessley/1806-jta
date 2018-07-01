@@ -12,6 +12,10 @@ public abstract class AccountAttribute implements ConsoleReference,
 												  LogReference, Serializable {
  	
 	private static final long serialVersionUID = -1507218302429698089L;
+	protected boolean dirty = false;
+	protected CallableStatement statement = null;
+	protected String sqlUpdate = null;
+	
 
 	public AccountAttribute(AdminAccount aa) {}
 	
@@ -90,4 +94,7 @@ public abstract class AccountAttribute implements ConsoleReference,
 	 	 	 	"AccountAttributes.java: AccountAttributes.withdraw()" + 
 	 	 	 	"was incorrectly called or is not overridden.");
 	}
+	
+	public void write(Connection connection, String username) 
+	throws SQLException {}
 }

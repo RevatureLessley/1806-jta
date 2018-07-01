@@ -2,8 +2,11 @@ package Project0_PartII.RevatureDatabase;
 
 import java.io.*;
 import java.sql.*;
+import java.util.HashMap;
+
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
+//import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 
 /**
  * ToDisk encapsulates the logic of writing to persistent storage.
@@ -59,21 +62,36 @@ public class ToDisk implements LogReference{
 		}
 	}
 
-	public void write(Object o) {
+	public void write(HashMap<Integer, Account> accounts) {
 		logger.debug("Project0_PartII/RevatureDatabase/ToDisk.java: " + 
 	                 "Entered write().");
+		String sqlCommit = "COMMIT";
+		Statement statement = null;
 		
-//		try{
+		try{
 //			record = new ObjectOutputStream(connection);
 //			record.writeObject(o);
 //			record.close();
-//		}
+			for(Account a : accounts.values()) {
+				a.write(connection);
+			}
+			statement = connection.createStatement();
+			statement.execute(sqlCommit);
+		}
 
 //		catch(IOException ioe){
 //			logger.error("Project0_PartII/RevatureDatabase/ToDisk.java: " + 
 //		                 "Writing to persistent storage failed!");
 //			ioe.printStackTrace();
 //		}
+		
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		
+		finally {
+			DatabaseConnection.close(statement);
+		}
 		
 		logger.debug("Project0_PartII/RevatureDatabase/ToDisk.java: " + 
 		             "Exiting write().");

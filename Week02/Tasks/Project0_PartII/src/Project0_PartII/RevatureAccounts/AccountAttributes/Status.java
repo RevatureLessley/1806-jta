@@ -1,11 +1,13 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
+import Project0_PartII.RevatureDatabase.DatabaseConnection;
 
 /**
  * Status encapsulates the logic of an account status.
@@ -59,6 +61,7 @@ public class Status extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
        	 	 		 "Status.java: Entered approve().");
 		status = AccountStatus.APPROVED;
+		dirty = true;
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
   	 	 		 	 "Status.java: Exiting approve().");
 	}
@@ -71,6 +74,7 @@ public class Status extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
   	 	 		 	 "Status.java: Entered deny().");
 		status = AccountStatus.DENIED;
+		dirty = true;
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 	 	 		 	 "Status.java: Exiting deny().");
 	}
@@ -114,5 +118,17 @@ public class Status extends AccountAttribute
 		 	 	 	 "Status.java: Entered and exiting getID().");
 		
 		return status.hashCode();
+	}
+	
+	@Override
+	public void write(Connection connection, String username) throws SQLException {
+		if(dirty) {
+			sqlUpdate = "{call updateStatus(?, ?)}";
+			statement = connection.prepareCall(sqlUpdate);
+			statement.setString(1, username);
+			statement.setString(2, status.getString());
+			statement.execute();
+			DatabaseConnection.close(statement);
+		}
 	}
 }
