@@ -1,6 +1,7 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 
@@ -13,6 +14,8 @@ public abstract class AccountAttribute implements ConsoleReference,
 	private static final long serialVersionUID = -1507218302429698089L;
 
 	public AccountAttribute(AdminAccount aa) {}
+	
+	public AccountAttribute(ResultSet rs) {}
  	
 	public AccountAttribute(UserAccount ua) {}
 

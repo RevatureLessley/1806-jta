@@ -1,12 +1,13 @@
 package Project0_PartII.RevatureAccounts;
 
+import java.util.*;
 import Project0_PartII.*;
 
 /**
  * AdminAccount enumerates all possible statuses an account could be in.
  */
 public enum AccountStatus implements LogReference{
-		APPROVED() {
+		APPROVED("APPROVED") {
 			public void display(Account a) {
 				logger.debug("Project0_PartII/RevatureAccounts/AccountStatus.java: " + 
 		     	 	 	 	 "Entered APPROVED.display().");
@@ -16,7 +17,7 @@ public enum AccountStatus implements LogReference{
 			}
 		}, 
 	
-		DENIED() {
+		DENIED("DENIED") {
 			public void display(Account a) { 
 				logger.debug("Project0_PartII/RevatureAccounts/AccountStatus.java: " + 
 	     	 	 	 	 "Entered DENIED.display().");
@@ -26,7 +27,7 @@ public enum AccountStatus implements LogReference{
 			}
 		}, 
 	
-		PENDING() {
+		PENDING("PENDING") {
 			public void display(Account a) {
 				logger.debug("Project0_PartII/RevatureAccounts/AccountStatus.java: " + 
 	     	 	 	 	 	 "Entered PENDING.display().");
@@ -35,6 +36,19 @@ public enum AccountStatus implements LogReference{
     	 	 	 	 	 	 "Exiting PENDING.display().");
 			}
 		};
+	
+		private String value;
+		private static HashMap<String, AccountStatus> hm = new HashMap<>();
+		
+		private AccountStatus(String s) {
+			value = s;
+		}
+		
+		static {
+			for (AccountStatus as : AccountStatus.values()) {
+	            hm.put(as.value, as);
+	        }
+		}
 
 		/**
 		 * display() chooses the correct view of an account to display
@@ -43,5 +57,13 @@ public enum AccountStatus implements LogReference{
 		 * @param a the account to display. 
 		 */
 		public abstract void display(Account a);
+		
+		public String getString() {
+			return value;
+		}
+		
+		public static AccountStatus getValue(String s) {
+				return hm.get(s);
+		}
 	};
 

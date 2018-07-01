@@ -12,6 +12,8 @@ public class DatabaseConnection {
 			Class.forName(args[0]);
 			connection = 
 					DriverManager.getConnection(args[1], args[2], args[3]);
+	
+			return connection;
 		}
 		
 		catch (SQLException e) {
@@ -22,7 +24,7 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		} 
 		
-		return connection;
+		return null;
 	}
 	
 	public static void close(Statement resource){

@@ -38,6 +38,12 @@ CREATE TABLE Status (
     CHECK (code IN ('APPROVED','DENIED','PENDING')) 
 );
 
+CREATE OR REPLACE VIEW Account_Join AS
+SELECT * 
+FROM Account_Dynamic, Account_Static
+INNER JOIN Person ON acc_per = per_id
+INNER JOIN Status ON acc_sta = sta_id;
+
 ALTER TABLE Account_Dynamic    
 ADD CONSTRAINT fk_dyn_sta 
 FOREIGN KEY (acc_dyn_id) 
@@ -228,6 +234,6 @@ BEGIN
 END;
 /
 
-call insertAccount('admin', 'admin', 'admin', 'admin', NULL, 'APPROVED');
+--call insertAccount('walterx', 'walterx', 'Walter', 'Xia', 0, 'APPROVED');
 
 COMMIT;

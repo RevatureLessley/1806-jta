@@ -1,6 +1,7 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 
@@ -41,6 +42,12 @@ public class Username extends AccountAttribute
 		ua.addAttribute("Username", this);
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 	             "Username.java: Constructed Username(UserAccount).");
+	}
+	
+	public Username(UserAccount ua, ResultSet rs) throws SQLException {
+		super(rs);
+		username = rs.getString("acc_sta_username");
+		ua.addAttribute("Username", this);
 	}
 
 	/**

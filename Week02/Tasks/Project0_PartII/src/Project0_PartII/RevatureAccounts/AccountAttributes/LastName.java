@@ -1,6 +1,8 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.*;
+
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 
@@ -41,6 +43,12 @@ public class LastName extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 	 	 	     	 "LastName.java: Constructed LastName(UserAccount).");
 	}
+	
+	public LastName(UserAccount ua, ResultSet rs) throws SQLException {
+		super(rs);
+		lastname = rs.getString("lastname");
+		ua.addAttribute("Lastname", this);
+	}	
 
 	/**
 	 * askUser() contains the logic for asking the user for a last name.

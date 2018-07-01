@@ -1,6 +1,9 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 
@@ -41,6 +44,12 @@ public class Status extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
        	 	 	     "Status.java: Constructed Status(UserAccount).");
 	}
+	
+	public Status(UserAccount ua, ResultSet rs) throws SQLException {
+		super(rs);
+		status = AccountStatus.getValue(rs.getString("code"));
+		ua.addAttribute("Status", this);
+	}	
 	
 	/**
 	 * approve() contains the logic that approves an account.

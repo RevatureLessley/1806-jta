@@ -1,6 +1,9 @@
 package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.*;
 /**
@@ -43,6 +46,12 @@ public class Password extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
   	 	 	     	 "Password.java: Constructed Password(UserAccount).");
 	}
+	
+	public Password(UserAccount ua, ResultSet rs) throws SQLException {
+		super(rs);
+		password = rs.getString("acc_sta_password");
+		ua.addAttribute("Password", this);
+	}	
 
 	/**
 	 * askUser() contains the logic for asking the user for a password.

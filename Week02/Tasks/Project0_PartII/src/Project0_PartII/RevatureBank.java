@@ -30,30 +30,33 @@ public class RevatureBank implements ConsoleReference, LogReference{
 	 * no persistent storage, the RevatureBank gets initialized with a single
 	 * admin account.
 	 */
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	private RevatureBank() {
 		logger.debug("Project0/RevatureBank.java: " + 
 					 "Constructing RevatureBank().");
 		
-		try {
-			FromDisk fd = new FromDisk(STORAGE);
-			accounts = (HashMap<Integer, Account>) fd.read();
+//		try {
+//			FromDisk fd = new FromDisk(STORAGE);
+			FromDisk fd = new FromDisk();
+			accounts = fd.read();
 			fd.close();
-		}
-
-		catch(FileNotFoundException fnfe) {
-			accounts = new HashMap<>();
 			AdminAccount aa = AdminAccount.admin;
 			accounts.put(aa.getID(), aa);
-			logger.info("Project0/RevatureBank.java: " + 
-			            "Creating admin account.");
-		}
+//		}
 
-		catch(IOException ioe) {
-			logger.error("Project0/RevatureBank.java: " + 
-						 "Closing persistent storage failed!");
-			ioe.printStackTrace();
-		}
+//		catch(FileNotFoundException fnfe) {
+//			accounts = new HashMap<>();
+//			AdminAccount aa = AdminAccount.admin;
+//			accounts.put(aa.getID(), aa);
+//			logger.info("Project0/RevatureBank.java: " + 
+//			            "Creating admin account.");
+//		}
+
+//		catch(IOException ioe) {
+//			logger.error("Project0/RevatureBank.java: " + 
+//						 "Closing persistent storage failed!");
+//			ioe.printStackTrace();
+//		}
 		
 		logger.debug("Project0/RevatureBank.java: " + 
 				     "Constructed RevatureBank().");
@@ -124,6 +127,7 @@ public class RevatureBank implements ConsoleReference, LogReference{
 		logger.debug("Project0/RevatureBank.java:  Entered enter().");
 		System.out.print("Welcome to RevatureBank. To Login as admin: ");
 		System.out.println("Username - admin, Password - admin.");
+		System.out.println(accounts);
 		welcome();
 		logger.debug("Project0/RevatureBank.java: Exiting enter().");
 	}

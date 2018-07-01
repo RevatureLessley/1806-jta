@@ -2,6 +2,7 @@ package Project0_PartII.RevatureAccounts.AccountAttributes;
 
 import java.io.*;
 import java.math.*;
+import java.sql.*;
 import java.text.*;
 import java.util.*;
 import Project0_PartII.*;
@@ -20,6 +21,7 @@ public class Balance extends AccountAttribute
 	 * 
 	 * @param ua UserAccount to which this account balance belongs.
 	 */
+	
 	public Balance(UserAccount ua) {
 		super(ua);
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
@@ -29,6 +31,12 @@ public class Balance extends AccountAttribute
 		logger.debug("Project0_PartII/RevatureAccounts/AccountAttributes/" + 
 	 	     	 	 "Balance.java: Constructed Balance(AdminAccount).");
 	}
+	
+	public Balance(UserAccount ua, ResultSet rs) throws SQLException {
+		super(rs);
+		balance = rs.getBigDecimal("acc_dyn_balance");
+		ua.addAttribute("Balance", this);
+	}	
 
 	/**
 	 * askUser() contains the logic for asking the user for input.

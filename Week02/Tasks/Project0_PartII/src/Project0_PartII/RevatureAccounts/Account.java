@@ -1,10 +1,13 @@
 package Project0_PartII.RevatureAccounts;
 
 import java.io.*;
+//import java.sql.*;
 import java.util.*;
 import java.util.regex.*;
-import Project0_PartII.*;
-import Project0_PartII.RevatureAccounts.AccountAttributes.*;
+
+import Project0_PartII.ConsoleReference;
+import Project0_PartII.LogReference;
+import Project0_PartII.RevatureAccounts.AccountAttributes.AccountAttribute;
 
 /**
  * AdminAccount encapsulates the logic of an account.
@@ -31,7 +34,7 @@ public abstract class Account implements ConsoleReference, LogReference,
 		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
       	 		 	 "Constructed Account().");
 	}
-
+	
 	/**
 	 * addAttributes adds an attribute to an Account.
 	 * 
@@ -184,7 +187,8 @@ public abstract class Account implements ConsoleReference, LogReference,
 		Integer index = username + password;
 		logger.debug("Project0_PartII/RevatureAccounts/Account.java: " + 
 	 	     	 	 "Exiting signIn().");
-
+		
+		System.out.println(index.hashCode());
 		return index.hashCode();	
 	}
 

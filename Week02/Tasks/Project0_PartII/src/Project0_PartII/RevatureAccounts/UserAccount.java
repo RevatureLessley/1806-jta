@@ -1,6 +1,7 @@
 package Project0_PartII.RevatureAccounts;
 
 import java.io.*;
+import java.sql.*;
 import Project0_PartII.*;
 import Project0_PartII.RevatureAccounts.AccountAttributes.*;
 
@@ -28,6 +29,17 @@ public class UserAccount extends Account
 		actions.add((Runnable & Serializable)() -> makeWithdrawal());
 		logger.debug("Project0_PartII/RevatureAccounts/UserAccount.java: " + 
            	 		 "Constructed UserAccount().");
+	}
+	
+	public UserAccount(ResultSet rs) throws SQLException {
+		new Username(this, rs);
+		new Password(this, rs);
+		new FirstName(this, rs);
+		new LastName(this, rs); 
+		new Balance(this, rs);
+		new Status(this, rs);
+		actions.add((Runnable & Serializable)() -> makeDeposit());
+		actions.add((Runnable & Serializable)() -> makeWithdrawal());
 	}
 
 	/**

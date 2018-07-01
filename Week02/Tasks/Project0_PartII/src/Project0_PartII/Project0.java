@@ -1,8 +1,5 @@
 package Project0_PartII;
 
-import java.sql.*;
-import Project0_PartII.RevatureDatabase.DatabaseConnection;
-
 public class Project0 implements ConsoleReference, LogReference{
 	/**
 	 * main() runs the RevatureBank application.
@@ -21,16 +18,12 @@ public class Project0 implements ConsoleReference, LogReference{
 //  		}
 //
 //  		else {
-//   			RevatureBank bank = RevatureBank.entrance;
-//   			bank.enter();
-//   			bank.exit();
+   			RevatureBank bank = RevatureBank.entrance;
+   			bank.enter();
+   			bank.exit();
 //  		}
 //  		
 //  		logger.debug("Project0/Project0.java: " + 
 //  		             "Application Ended, exiting main().");
-		
-		Connection con = DatabaseConnection.connection;
-		System.out.println("We have access to the database.");
-		DatabaseConnection.close(con);
   	}
 }
