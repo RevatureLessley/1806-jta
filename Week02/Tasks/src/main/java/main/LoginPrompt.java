@@ -33,8 +33,15 @@ public class LoginPrompt{
 	* @return None
 	*/
 	public User enterLogin(){
+		//*Used to create the admin account when creating the database
+		//*Admin admin = new Admin("admin","admin","Mr.","Admin");
+		//*this.storeUserDB(admin);
+		//*admin.setAuth(2);
+		//*this.approveUserDB(admin);
 		String username = console.readLine("Username: ");
 		User user = this.retrieveUserDB(username);
+		//*user.setAuth(2);
+		//*this.approveUserDB(user);
 		//User user = users.getUsers().get(username);
 		user = this.checkPassword(user,username);
 		if (user == null) return null;
@@ -71,7 +78,12 @@ public class LoginPrompt{
 			rs = ps.executeQuery();
 			
 			if(!rs.next()) return null;
-			rs.beforeFirst();
+			ps.close();
+			rs.close();
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,username);
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				return new User(
@@ -92,6 +104,11 @@ public class LoginPrompt{
 		}
 		return null;
 	}
+	/**
+	 * This method stores a newly created user into the db
+	 * @param user
+	 * User is the user to be stored in the db
+	 */
 	public void storeUserDB(User user) {
 		CallableStatement stmt = null;
 
@@ -104,6 +121,79 @@ public class LoginPrompt{
 			stmt.setString(4, user.getLname());
 			
 			stmt.execute(); //rows effected
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+	}
+	
+	/**
+	 * SQL statement to approve a user in the db
+	 * @param user
+	 */
+	public void approveUserDB(User user) {
+		PreparedStatement stmt = null;
+		
+
+		try (Connection conn = Connections.getConnection()){
+			String sql = "UPDATE auth set is_auth = ? WHERE a_id = ?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1,user.getAuth());
+			stmt.setInt(2,user.getPrimkey());
+			
+			stmt.executeUpdate();	//rows effected
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+	}
+	
+	/**
+	 * SQL statement to update the balance in the db
+	 * @param user
+	 * User whose balance has been updated
+	 */
+	public void updateBalanceDB(User user) {
+		PreparedStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()){
+			String sql = "UPDATE balance set bal = ? WHERE b_id = ?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setDouble(1,user.getBalance());
+			stmt.setInt(2,user.getPrimkey());
+
+			
+			stmt.executeUpdate();	//rows effected
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+	}
+	
+	/**
+	 * SQL function to remove a user form the db
+	 * @param user
+	 * User to be removed
+	 */
+	public void removeUserDB(User user) {
+		PreparedStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()){
+			String sql = "DELETE FROM login WHERE u_id = ?";
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1,user.getPrimkey());
+
+			
+			stmt.executeUpdate();	//rows effected
 
 		}catch(SQLException e) {
 			e.printStackTrace();

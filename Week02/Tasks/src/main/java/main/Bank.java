@@ -28,7 +28,6 @@ public class Bank{
 		
 		Bank bank = new Bank();
 		bank.options(user,lp);
-		lp.storeUsers(users);
 	}
 	
 	/**
@@ -52,31 +51,32 @@ public class Bank{
 				System.out.println(user.getBalance());
 				break;
 			case "1":
-				this.deposit(user);
+				this.deposit(user,lp);
 				break;
 			case "2":
-				this.withdraw(user);
+				this.withdraw(user,lp);
 				break;
 			case "3":
 				return;
 			case "authorize":
 				if(user.getAuth() == 2) {
-					//call update function here
 					this.approveUser(lp);
-					input = "options";
 				}else {
 					System.out.println("Only the Admin can approve users");
-					input = "options";
 				}
 				break;
 			case "goodbye":
-				this.removeUser(users);
+				if(user.getAuth() == 2) {
+					this.removeUser(lp);
+				}else {
+					System.out.println("Only the Admin can approve users");
+				}
 				break;
 			default:
 				System.out.println("Invalid Command");
 				break;
 		}
-		this.options(user,users);
+		this.options(user,lp);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class Bank{
 	 * @param user
 	 * User that is depositing
 	 */
-	public void deposit(User user) {
+	public void deposit(User user,LoginPrompt lp) {
 		System.out.println("How much would you like to deposit?");
 		String amount = LoginPrompt.console.readLine(": ");
 		double d = Double.parseDouble(amount);
@@ -95,6 +95,7 @@ public class Bank{
 			return;
 		}
 		user.setBalance(user.getBalance() + d);
+		lp.updateBalanceDB(user);
 		System.out.println("Current balance: " + user.getBalance());
 		logger.info(user.getUserid() + " Deposited " + d);
 		
@@ -105,9 +106,9 @@ public class Bank{
 	 * @param user
 	 * User that is withdrawing
 	 */
-	public void withdraw(User user) {
+	public void withdraw(User user,LoginPrompt lp) {
 		if(user.getBalance() == 0) {
-			System.out.println("Sorry, you're poor");
+			System.out.println("You need a job");
 			return;
 		}
 		System.out.println("How much would you like to withdraw?");
@@ -120,6 +121,7 @@ public class Bank{
 			return;
 		}
 		user.setBalance(user.getBalance() - d);
+		lp.updateBalanceDB(user);
 		System.out.println("Current balance: " + user.getBalance());
 		logger.info(user.getUserid() + " Withdrew " + d);
 	}
@@ -137,6 +139,7 @@ public class Bank{
 		else {
 			System.out.println("User successfully approved");
 			user.setAuth(1);
+			lp.approveUserDB(user);
 			logger.info(user.getUserid() + " Approved");
 		}
 	}
@@ -146,13 +149,13 @@ public class Bank{
 	 * @param users
 	 * Hashmap where users are stored
 	 */
-	public void removeUser(Users users) {
+	public void removeUser(LoginPrompt lp) {
 		String username = LoginPrompt.console.readLine(": ");
-		User user = users.getUsers().get(username);
+		User user = lp.retrieveUserDB(username);;
 		if(user == null) System.out.println("User does not exist");
 		else {
 			System.out.println("User successfully removed");
-			users.removeUser(user);
+			lp.removeUserDB(user);
 			logger.info(user.getUserid() + " Removed");
 		}
 	}

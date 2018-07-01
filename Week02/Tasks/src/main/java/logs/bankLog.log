@@ -1,2 +1,7 @@
 2018-06-30 15:22:01 INFO  Bank:93 - account Deposited 9999.0
 2018-06-30 19:03:50 INFO  LoginPrompt:125 - User [userid=a, fname=a, lname=a, balance=0.0] Created an account
+2018-07-01 15:30:58 INFO  Bank:100 - admin Deposited 399.0
+2018-07-01 15:31:15 INFO  Bank:126 - admin Withdrew 87.0
+2018-07-01 15:32:21 INFO  LoginPrompt:289 - User [userid=first, fname=first, lname=first, balance=0.0] Created an account
+2018-07-01 15:33:06 INFO  Bank:143 - first Approved
+2018-07-01 15:38:27 INFO  Bank:159 - first Removed
