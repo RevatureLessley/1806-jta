@@ -1,4 +1,4 @@
-package proj0;
+package main;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 
 public class BankTest {
 
@@ -56,8 +57,4 @@ public class BankTest {
 		users.removeUser(user);
 		assertEquals(users.getUsers().get("testuser"),null);
 	}
-	
-
-
-
 }
