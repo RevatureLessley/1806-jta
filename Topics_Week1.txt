@@ -1,0 +1,46 @@
+JAVA TOPICS COVERED (FAIR GAME FOR INTERVIEW, QUIZ, QC)
+-version control
+-git, github
+-Object Oriented programming
+-Pillars of object oriented programming
+--polymorphism, abstraction, inheritance, encapsulation
+-methods and parameters
+-control statements
+-continue, break
+-scopes of a variable
+-access modifiers
+-non access modifiers
+-constructors, no args constructors, default constructors
+-arrays, objects, varargs, packages/imports/static imports
+-String API (including methods)
+-stringbuilder stringbuffer
+-Wrapper classes
+-autoboxing
+-garbage collector
+-finalize, finally, final
+-Exception handling
+-Checked vs unchecked exceptions
+-try/catch/finally
+-ducking/progogating exceptions, custom exceptions
+-File I/O
+--FileInputStream/FileReader/writer bufferedreader/writer
+-Reading input from scanner
+-Abstract class, interfaces
+-Serialization
+-transient
+-marker interfaces
+-collection/collections
+-comparable vs comparator
+-list/set/queue/map
+-iterators
+map vs hashtable
+-multithreading
+-thread statements
+-thread methods
+-deadlock/livelock/starvation
+-produce vs consumer problem
+-junit
+-ALL junit annotations and use cases
+-log4j
+-design patterns
+-singleton/factory/bean/pojo

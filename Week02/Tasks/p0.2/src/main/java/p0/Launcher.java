@@ -1,35 +1,26 @@
 package p0;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.nio.file.Files;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+import p0.service.AccountListService;
 
 
-public class Launch 
-{
-	final static Logger logger = Logger.getLogger(Launch.class);
+public class Launcher {
+	
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
 	AccountList Active;
 	WaitingList Waiting;
-	final String VERSION_NUM = "1.0";
+	final String VERSION_NUM = "2.0";
 	
-	public static void main (String[] args) throws SQLException
-	{
-		Launch pgm = new Launch();
+	public static void main (String[] args) throws SQLException{
+		Launcher pgm = new Launcher();
 		pgm.mainMenu(pgm);
-
 	}
 	
 	/**
@@ -39,13 +30,11 @@ public class Launch
 	 * 
 	 * @param pgm a copy of the general launch program provided to give variable access to all methods
 	 */
-	public void mainMenu(Launch pgm)
-	{
+	public void mainMenu(Launcher pgm){
 		boolean cont = true;
 		pgm.in.reset();
 		
-		while(cont)
-		{
+		while(cont){
 			pgm.load(pgm);
 			pgm.dumpIn(pgm);
 			System.out.println("Welcome to the Aeva Areana Simulator");
@@ -70,24 +59,13 @@ public class Launch
 					break;
 			default:System.out.println("That is not a valid selection, please select again");
 			}
-
-			pgm.save(pgm);
+			
 			if(Waiting.getWorldFlagged() && Active.getWorldFlagged())
 			{
-				try {
-				Files.delete(new File("Active.ser").toPath());
-				Files.delete(new File("Waiting.ser").toPath());
-				cont = false;
-				break;
-				}
-				catch(IOException e)
-				{
-					e.printStackTrace();
-				}
+				//TODO: Turnicate list (Make SQL procedure to turnicate all tables)
 			}
 		}
 	}
-	
 	
 	/**
 	 * Method to handle the logic and error checking for logging into an account.
@@ -95,8 +73,7 @@ public class Launch
 	 * Offers option to create new user if the given name doesn't exist
 	 * @param pgm a copy of the general launch program provided to give variable access to all methods
 	 */
-	public void login(Launch pgm)
-	{
+	public void login(Launcher pgm){
 		boolean successU = false;
 		boolean successP = false;
 		while(!successP)
@@ -126,7 +103,7 @@ public class Launch
 			}
 			else 
 			{
-				for(Account a: pgm.Active.getList())
+				for(AccountClass a: pgm.Active.getList())
 				{
 
 					if(a.getuName().equals(tempUname))
@@ -180,137 +157,33 @@ public class Launch
 		pgm.clearScreen();
 	}
 	
-	
-	/**
-	 * A separated password tester, in future iterations will handle encoding and decoding for password
-	 * implementation.
-	 * @param a the account attempting to be tested
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 * @return returns success or failure to login loop
-	 */
-	public boolean pWordTest(Account a, Launch pgm)
-	{
-		System.out.print("Input Password: ");
-		String tempPword = pgm.in.next();
-		if(a.getuPass().equals(tempPword))
-		{
-			a.setPgm(pgm);
-			a.menu();
-			return true;
-		}
-		else
-		{
-			System.out.println("Password Incorrect, restarting login.");
-			return false;
-		}
+	public void newAccount(Launcher pgm) {
+		//TODO make DB safe account creation
 	}
-	
-	/**
-	 * Loads serialized information to build the AccountList storage class
-	 * Allows for data to remain continuous between runs, is called any time that the database might have changed.
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 */
-	public void load(Launch pgm)
-	{
-		if(pgm.Active == null)
-		{
-			pgm.Active = new AccountList();
-			pgm.Waiting = new WaitingList();
-		}
-		try
-		{
-			ObjectInputStream ois = new ObjectInputStream(
-										new FileInputStream("Active.ser"));
-			pgm.Active = (AccountList) ois.readObject();
-			ois.close();
-			
-		}
-		catch(IOException e)
+
+	public void load(Launcher pgm) {
+		AccountListService als = new AccountListService();
+		if(als.getAccSize() == 0)
 		{
 			System.out.println("There wasn't a vailid user list, starting new world list... \n");
 			pgm.generateWorld(pgm);
 		}
-		catch(ClassNotFoundException e)
-		{
-			logger.error("Complete crash, ActiveList class missing");
+		else {
+			Active = new AccountList();
+			Waiting = new WaitingList();
+			ArrayList<PlayerAccount> temp = als.getPlayerArray();
+			Active.setAdmin(als.getAdmin());
+			Active.setBanker(als.getBanker());
+			Active.setLoaner(als.getLoaner());
+			for(PlayerAccount p : temp) {
+				if(p.isAccountActive()){
+					Active.add(p);
+				}
+				else {
+					Waiting.add(p);
+				}
+			}
 		}
-		try
-		{
-			ObjectInputStream ois = new ObjectInputStream(
-										new FileInputStream("Waiting.ser"));
-			pgm.Waiting = (WaitingList) ois.readObject();
-			ois.close();
-		}
-		catch(IOException e)
-		{
-			System.out.println("Couldn't load waiting list");
-		}
-		catch(ClassNotFoundException e)
-		{
-			logger.error("Complete crash, WaitingList class missing");
-		}
-		if(pgm.Active.getAdmin() == null)
-		{
-
-			pgm.Active = new AccountList();
-			System.out.println("World not available, generating new world. \n");
-			pgm.generateWorld(pgm);
-		}
-		
-	}
-	
-	/**
-	 * Saves serialized information to build the AccountList storage class
-	 * Allows for data to remain continuous between runs, is called any time that the database needs to be secured.
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 */
-	public void save(Launch pgm)
-	{
-		pgm.Active.updateList();
-		pgm.Waiting.updateList();
-		try{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("Active.ser"));
-			oos.writeObject(pgm.Active);
-			oos.close();
-		}
-		catch(IOException e)
-		{
-			logger.error("Complications writing methods to file.");
-		}
-		try{
-			ObjectOutputStream oos = new ObjectOutputStream(
-										new FileOutputStream("Waiting.ser"));
-			oos.writeObject(pgm.Waiting); 
-			oos.close();
-		}
-		catch(IOException e)
-		{
-		}
-		
-		System.out.println("Successfully Saved");
-		pgm.dumpIn(pgm);
-		pgm.clearScreen();
-	}
-	
-	/**
-	 * Creates a new waiting account to be approved by the Administrator.
-	 * Collects Username Password and preferred name from the user for the new account.
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 */
-	public void newAccount(Launch pgm)
-	{
-		
-		pgm.dumpIn(pgm);
-		pgm.clearScreen();
-		System.out.print("Please choose a user name for the account: ");
-		String uName = pgm.in.nextLine();
-		System.out.print("Now choose a password for the account: ");
-		String pWord = pgm.in.nextLine();
-		System.out.print("What shall we call you?: ");
-		String Name = pgm.in.nextLine();
-		
-		pgm.Waiting.add(new Player(Name, uName, pWord, 100, 0, 0, pgm));
 	}
 	
 	/**
@@ -320,7 +193,7 @@ public class Launch
 	 * the information sticks.
 	 * @param pgm a copy of the general launch program provided to give variable access to all methods
 	 */
-	public void generateWorld(Launch pgm)
+	public void generateWorld(Launcher pgm)
 	{
 
 		pgm.dumpIn(pgm);
@@ -354,11 +227,8 @@ public class Launch
 		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
-	/**
-	 * A method to pause text and make sure that System.in is clear before continuing
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 */
-	public void dumpIn(Launch pgm)
+	
+	public void dumpIn(Launcher pgm)
 	{
 		System.out.println("Press Enter to Continue");
 		if(pgm.in.hasNextLine()) {

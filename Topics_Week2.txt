@@ -1,0 +1,35 @@
+SQL TOPICS COVERED (FAIR GAME FOR INTERVIEW, QUIZ, QC)
+
+DDL DML DQL DCL TCL
+TABLES COLUMNS RECORDS ATTRIBUTES
+Basic sql queries
+-SELECT, WHERE, FROM, HAVING, GROUP BY, ORDER BY, IN, EXISTS, LIKE, BETWEEN, AND, OR
+Nested/Sub queries
+CONSTRAINTS
+-pk, fk, null, unique, check, default
+Cardinality, multiplicity
+normaliation
+aggregate function
+scalar functions
+PL/SQL
+-triggers, functions, cursors, index, stored procedures, exception handling, sequences
+ETL
+datawarehousing
+denormalizaiton
+joins
+-inner, outer, left, right, natural, self, equi, theta, cross
+Set operations
+-union, union all, intersect, minus
+JDBC
+-components
+-statements (prepared/callale/simple)
+sql injection
+properties files
+environment variables
+properties of transacitons
+-ACID
+transaction isolation levels
+-dirty reads, non repeatable read, phantom reads
+
+Gauranteed interview questions:
+-all of them
