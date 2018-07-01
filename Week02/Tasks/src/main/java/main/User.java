@@ -14,7 +14,7 @@ public class User implements Serializable{
 	private String fname;
 	private String lname;
 	private double balance;
-	private boolean auth;
+	private int auth;
 	
 
 	/**
@@ -34,7 +34,16 @@ public class User implements Serializable{
 		this.fname = fname;
 		this.lname = lname;
 		this.balance = 0;
-		this.auth = false;
+		this.auth = 0;
+	}
+	
+	public User(String userid, String pass, String fname, String lname,double balance,int auth){
+		this.userid = userid;
+		this.pass = pass;
+		this.fname = fname;
+		this.lname = lname;
+		this.balance = balance;
+		this.auth = auth;
 	}
 	
 	/**
@@ -107,7 +116,7 @@ public class User implements Serializable{
 		return auth;
 	}
 
-	public void setAuth(boolean auth) {
+	public void setAuth(int auth) {
 		this.auth = auth;
 	}
 

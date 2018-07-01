@@ -20,8 +20,10 @@ public class Bank{
 		//Users users = new Users();
 		
 		LoginPrompt lp = new LoginPrompt();
-		Users users = lp.retrieveUsers();
-		User user = lp.enterLogin(users);
+		
+		//Used for serialization
+		//Users users = lp.retrieveUsers();
+		User user = lp.enterLogin();
 		if (user == null) return;
 		
 		Bank bank = new Bank();
@@ -59,6 +61,7 @@ public class Bank{
 				return;
 			case "authorize":
 				if(user instanceof Admin) {
+					//call update function here
 					this.approveUser(users);
 					input = "options";
 				}else {

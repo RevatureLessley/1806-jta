@@ -1,3 +1,5 @@
+//This class was used when storing with serializable
+
 package main;
 
 import java.io.Serializable;

@@ -30,6 +30,7 @@ CREATE TABLE auth (
     CONSTRAINT fk_a_id FOREIGN KEY (a_id) REFERENCES login(u_id)
 );
 
+
 --Used for creating new users
 DROP SEQUENCE userid_seq;
 CREATE SEQUENCE userid_seq
@@ -48,7 +49,8 @@ BEGIN
 END;
 /
 
---Stored procedure
+---Stored procedures
+--Insert a new user into the db
 CREATE OR REPLACE PROCEDURE insertNewUser(userName IN VARCHAR2,
                                             userPass IN VARCHAR2,
                                             firstN IN VARCHAR2,
@@ -69,7 +71,9 @@ BEGIN
 END;
 /
 
---User defined function to get user id based on username
+
+--User defined functions
+--get user id based on username
 CREATE OR REPLACE FUNCTION get_user_id (user_name IN VARCHAR2)
 RETURN NUMBER
 IS
@@ -84,5 +88,17 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE VIEW aggregate_data AS
+SELECT  l.u_id, l.username,l.pass_word,
+        p.FNAME,p.LNAME,
+        b.bal,
+        a.is_auth
+FROM login l
+INNER JOIN person p
+ON l.u_id = p.p_id
+INNER JOIN balance b
+ON p.p_id = b.b_id
+INNER JOIN auth a
+ON b.b_id = a.a_id;
 
 commit;
