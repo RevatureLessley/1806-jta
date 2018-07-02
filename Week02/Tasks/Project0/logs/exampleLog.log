@@ -601,3 +601,145 @@
 2018-07-02 10:16:59 INFO  Account:54 - New account initialized
 2018-07-02 10:16:59 INFO  Account:103 - Set account value to: 50.
 2018-07-02 10:16:59 INFO  Bank:548 - User now has: 50 dollars from their account.
+2018-07-02 10:56:48 INFO  Account:54 - New account initialized
+2018-07-02 10:56:48 INFO  Account:54 - New account initialized
+2018-07-02 10:56:48 INFO  Account:54 - New account initialized
+2018-07-02 10:56:48 INFO  Account:54 - New account initialized
+2018-07-02 10:56:48 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-02 10:56:59 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:57:01 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:02 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:02 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:02 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:02 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:03 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:03 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:20 INFO  Account:54 - New account initialized
+2018-07-02 10:57:20 INFO  Account:54 - New account initialized
+2018-07-02 10:57:20 INFO  Account:54 - New account initialized
+2018-07-02 10:57:20 INFO  Account:54 - New account initialized
+2018-07-02 10:57:20 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-02 10:57:29 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:57:31 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:31 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:31 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:32 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:32 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:32 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:32 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:33 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:33 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:34 INFO  Bank:385 - User entered incorrect input.
+2018-07-02 10:57:38 INFO  Account:54 - New account initialized
+2018-07-02 10:57:38 INFO  Account:54 - New account initialized
+2018-07-02 10:57:38 INFO  Account:54 - New account initialized
+2018-07-02 10:57:38 INFO  Account:54 - New account initialized
+2018-07-02 10:57:38 INFO  Account:103 - Set account value to: 51.
+2018-07-02 10:57:38 INFO  Bank:548 - User now has: 51 dollars from their account.
+2018-07-02 14:49:30 INFO  Account:54 - New account initialized
+2018-07-02 14:49:30 INFO  Account:54 - New account initialized
+2018-07-02 14:49:30 INFO  Account:54 - New account initialized
+2018-07-02 14:49:30 INFO  Account:54 - New account initialized
+2018-07-02 14:49:30 INFO  Bank:65 - Initializing Bank with existing accounts.
+2018-07-02 14:49:36 INFO  Bank:238 - Normal user successfully logged in.
+2018-07-02 14:49:39 INFO  Account:54 - New account initialized
+2018-07-02 14:49:39 INFO  Account:54 - New account initialized
+2018-07-02 14:49:39 INFO  Account:54 - New account initialized
+2018-07-02 14:49:39 INFO  Account:54 - New account initialized
+2018-07-02 14:49:39 INFO  Account:103 - Set account value to: 52.
+2018-07-02 14:49:39 INFO  Bank:551 - User now has: 52 dollars from their account.
+2018-07-02 14:49:53 INFO  Bank:238 - Normal user successfully logged in.
+2018-07-02 14:49:56 INFO  Account:54 - New account initialized
+2018-07-02 14:49:56 INFO  Account:54 - New account initialized
+2018-07-02 14:49:56 INFO  Account:54 - New account initialized
+2018-07-02 14:49:56 INFO  Account:54 - New account initialized
+2018-07-02 14:49:56 INFO  Account:103 - Set account value to: 54.
+2018-07-02 14:49:56 INFO  Bank:551 - User now has: 54 dollars from their account.
+2018-07-02 14:55:18 INFO  Account:54 - New account initialized
+2018-07-02 14:55:18 INFO  Account:54 - New account initialized
+2018-07-02 14:55:18 INFO  Account:54 - New account initialized
+2018-07-02 14:55:18 INFO  Account:54 - New account initialized
+2018-07-02 14:55:18 INFO  Bank:66 - Initializing Bank with existing accounts.
+2018-07-02 14:55:29 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 14:55:32 INFO  Account:54 - New account initialized
+2018-07-02 14:55:32 INFO  Account:54 - New account initialized
+2018-07-02 14:55:32 INFO  Account:54 - New account initialized
+2018-07-02 14:55:32 INFO  Account:54 - New account initialized
+2018-07-02 14:55:32 INFO  Account:103 - Set account value to: 55.
+2018-07-02 14:55:32 INFO  Bank:552 - User now has: 55 dollars from their account.
+2018-07-02 14:55:38 INFO  Account:54 - New account initialized
+2018-07-02 14:55:38 INFO  Account:54 - New account initialized
+2018-07-02 14:55:38 INFO  Account:54 - New account initialized
+2018-07-02 14:55:38 INFO  Account:54 - New account initialized
+2018-07-02 14:55:38 INFO  Bank:66 - Initializing Bank with existing accounts.
+2018-07-02 14:55:42 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 14:55:46 INFO  Account:54 - New account initialized
+2018-07-02 14:55:46 INFO  Account:54 - New account initialized
+2018-07-02 14:55:46 INFO  Account:54 - New account initialized
+2018-07-02 14:55:46 INFO  Account:54 - New account initialized
+2018-07-02 14:55:46 INFO  Account:103 - Set account value to: 75.
+2018-07-02 14:55:46 INFO  Bank:552 - User now has: 75 dollars from their account.
+2018-07-02 14:55:51 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 14:56:03 INFO  Bank:525 - User withdrew: 10 dollars from their account.
+2018-07-02 14:56:03 INFO  Account:54 - New account initialized
+2018-07-02 14:56:03 INFO  Account:54 - New account initialized
+2018-07-02 14:56:03 INFO  Account:54 - New account initialized
+2018-07-02 14:56:03 INFO  Account:54 - New account initialized
+2018-07-02 14:56:03 INFO  Account:103 - Set account value to: 65.
+2018-07-02 14:56:03 INFO  Bank:531 - User now has: 65 dollars from their account.
+2018-07-02 14:57:54 INFO  Account:54 - New account initialized
+2018-07-02 14:57:54 INFO  Account:54 - New account initialized
+2018-07-02 14:57:54 INFO  Account:54 - New account initialized
+2018-07-02 14:57:54 INFO  Account:54 - New account initialized
+2018-07-02 14:57:54 INFO  Bank:66 - Initializing Bank with existing accounts.
+2018-07-02 14:58:00 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 14:58:02 INFO  Bank:525 - User withdrew: 2 dollars from their account.
+2018-07-02 14:58:02 INFO  Account:54 - New account initialized
+2018-07-02 14:58:02 INFO  Account:54 - New account initialized
+2018-07-02 14:58:02 INFO  Account:54 - New account initialized
+2018-07-02 14:58:02 INFO  Account:54 - New account initialized
+2018-07-02 14:58:02 INFO  Account:103 - Set account value to: 63.
+2018-07-02 14:58:02 INFO  Bank:531 - User now has: 63 dollars from their account.
+2018-07-02 14:58:09 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 14:58:11 INFO  Bank:525 - User withdrew: 5 dollars from their account.
+2018-07-02 14:58:11 INFO  Account:54 - New account initialized
+2018-07-02 14:58:11 INFO  Account:54 - New account initialized
+2018-07-02 14:58:11 INFO  Account:54 - New account initialized
+2018-07-02 14:58:11 INFO  Account:54 - New account initialized
+2018-07-02 14:58:11 INFO  Account:103 - Set account value to: 58.
+2018-07-02 14:58:11 INFO  Bank:531 - User now has: 58 dollars from their account.
+2018-07-02 15:00:56 INFO  Account:54 - New account initialized
+2018-07-02 15:00:56 INFO  Account:54 - New account initialized
+2018-07-02 15:00:56 INFO  Account:54 - New account initialized
+2018-07-02 15:00:56 INFO  Account:54 - New account initialized
+2018-07-02 15:00:56 INFO  Bank:66 - Initializing Bank with existing accounts.
+2018-07-02 15:01:01 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 15:01:03 INFO  Account:54 - New account initialized
+2018-07-02 15:01:03 INFO  Account:54 - New account initialized
+2018-07-02 15:01:03 INFO  Account:54 - New account initialized
+2018-07-02 15:01:03 INFO  Account:54 - New account initialized
+2018-07-02 15:01:03 INFO  Account:103 - Set account value to: 59.
+2018-07-02 15:01:03 INFO  Bank:553 - User now has: 59 dollars from their account.
+2018-07-02 15:01:08 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 15:01:10 INFO  Account:54 - New account initialized
+2018-07-02 15:01:10 INFO  Account:54 - New account initialized
+2018-07-02 15:01:10 INFO  Account:54 - New account initialized
+2018-07-02 15:01:10 INFO  Account:54 - New account initialized
+2018-07-02 15:01:10 INFO  Account:103 - Set account value to: 64.
+2018-07-02 15:01:10 INFO  Bank:553 - User now has: 64 dollars from their account.
+2018-07-02 15:01:13 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 15:01:16 INFO  Bank:525 - User withdrew: 10 dollars from their account.
+2018-07-02 15:01:16 INFO  Account:54 - New account initialized
+2018-07-02 15:01:16 INFO  Account:54 - New account initialized
+2018-07-02 15:01:16 INFO  Account:54 - New account initialized
+2018-07-02 15:01:16 INFO  Account:54 - New account initialized
+2018-07-02 15:01:16 INFO  Account:103 - Set account value to: 54.
+2018-07-02 15:01:16 INFO  Bank:531 - User now has: 54 dollars from their account.
+2018-07-02 15:01:21 INFO  Bank:239 - Normal user successfully logged in.
+2018-07-02 15:01:22 INFO  Bank:525 - User withdrew: 1 dollars from their account.
+2018-07-02 15:01:23 INFO  Account:54 - New account initialized
+2018-07-02 15:01:23 INFO  Account:54 - New account initialized
+2018-07-02 15:01:23 INFO  Account:54 - New account initialized
+2018-07-02 15:01:23 INFO  Account:54 - New account initialized
+2018-07-02 15:01:23 INFO  Account:103 - Set account value to: 53.
+2018-07-02 15:01:23 INFO  Bank:531 - User now has: 53 dollars from their account.

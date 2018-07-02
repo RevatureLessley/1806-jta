@@ -136,4 +136,5 @@ BEGIN
     COMMIT;
 END;
 
+SELECT * FROM bank_transaction;
 SELECT COUNT(*) FROM bank_transaction;

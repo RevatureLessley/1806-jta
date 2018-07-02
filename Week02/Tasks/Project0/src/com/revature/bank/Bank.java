@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.revature.service.AccountService;
-import com.revature.main.Driver;
+import com.revature.service.TransactionService;
 
 
 /**
@@ -50,16 +50,19 @@ public class Bank
 	private int enteredAccountType;
 	private int counter;
 	private static int accountsAmount;
+	private static int transactionsAmount;
 	private String registered;
 	private static final int USER = 0;
 	private static final int ADMIN = 1;
 	private static AccountService as = new AccountService();
+	private static TransactionService ts = new TransactionService();
 	
 	
 	public Bank( ArrayList<Account> accs )
 	{
 		this.accs = accs;
 		accountsAmount = accs.size();
+		transactionsAmount = ts.getTransactionsAmount();
 		logger.info("Initializing Bank with existing accounts.");
 	}
 	
@@ -121,7 +124,7 @@ public class Bank
 	public void login()
 	{
 		activeAccount = -1;
-		displayAccountGroup(accs);
+		//displayAccountGroup(accs);
 		System.out.println("Welcome to the bank, do you have an account? (Yes/No): ");
 		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try
@@ -527,7 +530,9 @@ public class Bank
 		}
 		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
-		//displayAccountGroup(accs);
+		System.out.println("Thank you for your transaction! Logging you out now.\n");
+		ts.insertTransaction(account, transactionsAmount, 0, withdrawAmount);
+		transactionsAmount = ts.getTransactionsAmount();
 		login();
 	}
 	
@@ -547,7 +552,9 @@ public class Bank
 		account.setAccountValue(account.getAccountValue() + depositAmount);
 		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
-		//displayAccountGroup(accs);
+		System.out.println("Thank you for your transaction! Logging you out now.\n");
+		ts.insertTransaction(account, transactionsAmount, depositAmount, 0);
+		transactionsAmount = ts.getTransactionsAmount();
 		login();
 	}
 	

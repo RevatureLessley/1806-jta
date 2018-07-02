@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.revature.bank.Account;
 import com.revature.util.Connections;
@@ -17,14 +16,6 @@ import com.revature.util.Connections;
 
 public class AccountDao 
 {
-
-	public void insertAccount(Account account) 
-	{
-
-		
-		
-	}
-
 	public Account selectAccountById(Integer id) 
 	{
 		PreparedStatement ps = null;
