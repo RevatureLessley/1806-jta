@@ -7,14 +7,17 @@ import com.revature.beans.BUser;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
 
-
 public class UserService implements UserServiceInterface {
 
 	UserDaoImpl userDao = new UserDaoImpl();
 
 	@Override
 	public Integer getUser(String name) {
-		return userDao.selectByName(name).getId();
+		BUser bUser = userDao.selectByName(name);
+		if (bUser != null)
+			return bUser.getId();
+		else
+			return null;
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class UserService implements UserServiceInterface {
 			while (sb2.length() < 15)
 				sb2.append(" ");
 
-			sb2.append(new AccountDaoImpl().getUserTotalBalance(u.getId()));
+			sb2.append(AccountService.formatCurrency(new AccountDaoImpl().getUserTotalBalance(u.getId())));
 			sb2.append('\n');
 
 			sb1.append(sb2.toString());
@@ -87,10 +90,9 @@ public class UserService implements UserServiceInterface {
 		BUser u = userDao.selectById(userId);
 
 		u.setType(admin ? 1 : 2);
-		
+
 		userDao.update(u);
 	}
-
 
 	/**
 	 * Checks whether the password is long enough.
@@ -104,7 +106,7 @@ public class UserService implements UserServiceInterface {
 
 		return true;
 	}
-	
+
 	/**
 	 * Checks whether the username is long enough. Usernames also cannot contain any
 	 * spaces.

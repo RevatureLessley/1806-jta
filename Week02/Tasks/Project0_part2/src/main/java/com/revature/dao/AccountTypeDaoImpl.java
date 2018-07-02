@@ -8,12 +8,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.revature.beans.BAccountType;
 import com.revature.utils.Connections;
 
 public class AccountTypeDaoImpl implements GenericDao<BAccountType>{
+	
+	private static Map<Integer, BAccountType> typeMap; 
+	
+	public static Map<Integer, BAccountType> getTypeMap(){
+		if(typeMap == null) {
+			
+			typeMap = new HashMap<>();
+			List<BAccountType> l = new AccountTypeDaoImpl().selectAll();
+			
+			for(BAccountType t : l)
+				typeMap.put(t.getId(), t);			
+		}
+		
+		return typeMap;
+	}
 
 	@Override
 	public void insert(BAccountType t) {
@@ -71,7 +88,7 @@ public class AccountTypeDaoImpl implements GenericDao<BAccountType>{
 		Statement stmt = null; // simple sql query to be executed
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM account_table";
+		String sql = "SELECT * FROM account_type";
 
 		List<BAccountType> ls = new ArrayList<BAccountType>();
 

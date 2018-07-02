@@ -2,6 +2,7 @@ package com.revature.dao;
 
 import static com.revature.utils.CloseStreams.close;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.util.Map;
 import com.revature.beans.BAccount;
 import com.revature.beans.BUser;
 import com.revature.beans.Npc;
+import com.revature.service.AccountService;
 import com.revature.utils.Connections;
 
 public class AccountDaoImpl implements GenericDao<BAccount> {
@@ -218,12 +220,12 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 	
 
 
-	public Integer getUserTotalBalance(Integer userId) {
+	public Double getUserTotalBalance(Integer userId) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT SUM(acct_balance) FROM account_table WHERE user_id = ?";
-		Integer total = 0;
+		String sql = "SELECT SUM(acct_balance) FROM account_table WHERE user_id = ? AND acct_validated = 1";
+		Double total = 0.0;
 
 		try (Connection conn = Connections.getConnection()) {
 			ps = conn.prepareStatement(sql);
@@ -232,7 +234,7 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 			rs = ps.executeQuery();
 
 			if (rs.next())
-				total += rs.getInt(1);
+				total += rs.getDouble(1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -244,31 +246,31 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 		return total;
 	}
 
-	public List<String> selectJoinUserAccountNames(Integer userId) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		String sql = "SELECT acct_id, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = ?";
-		List<String> l = new ArrayList<>();
-
-		try (Connection conn = Connections.getConnection()) {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, userId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next())
-				l.add(rs.getString(2) + " " + rs.getString(1));
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(ps);
-		}
-
-		return l;
-	}
+//	public List<String> selectJoinUserAccountNames(Integer userId) {
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//
+//		String sql = "SELECT acct_id, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = ?";
+//		List<String> l = new ArrayList<>();
+//
+//		try (Connection conn = Connections.getConnection()) {
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, userId);
+//
+//			rs = ps.executeQuery();
+//
+//			while (rs.next())
+//				l.add(rs.getString(2) + " " + rs.getString(1));
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(ps);
+//		}
+//
+//		return l;
+//	}
 	
 	public List<String> selectJoinUserAccountSummary(Integer userId) {
 		PreparedStatement ps = null;
@@ -283,8 +285,12 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 
 			rs = ps.executeQuery();
 
-			while (rs.next())
-				l.add(rs.getString(2) + " " + rs.getString(1));
+			while (rs.next()) {
+				if(rs.getInt(2) == 1)
+					l.add(rs.getString(4) + " " + rs.getString(1) + " - " + AccountService.formatCurrency(rs.getDouble(3)));
+				else
+					l.add(rs.getString(4) + " " + rs.getString(1) + " - awaiting validation");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -294,6 +300,98 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 		}
 
 		return l;
+	}
+
+	public Integer getMaxId() {
+		Statement stmt = null; // simple sql query to be executed
+		ResultSet rs = null;
+
+		String sql = "SELECT MAX(acct_id) FROM account_table";
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
+		return 100000;
+	}
+
+	public boolean applyInterest(int days) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{CALL APPLYINTEREST(?)}");
+			
+			stmt.setInt(1, days);
+
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+		
+	}
+	
+	public boolean requestLoan(Integer userId, Double amount, Integer targetAcct) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{CALL requestLoan(?, ?, ?)}");
+			
+			stmt.setInt(1, userId);
+			stmt.setDouble(2, amount);
+			stmt.setInt(3, targetAcct);
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+		
+	}
+	
+	public boolean validateLoan(Integer loanAccount) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{CALL validateLoan(?)}");
+			
+			stmt.setInt(1, loanAccount);
+
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+		
 	}
 	
 

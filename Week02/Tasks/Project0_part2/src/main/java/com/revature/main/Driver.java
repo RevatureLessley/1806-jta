@@ -91,10 +91,8 @@ public class Driver {
 
 		userService = new UserService();
 		accountService = new AccountService();
-		//userController = UserController.getUserController();
-		//accountController = AccountController.getAccountController();
-
-		//accountController.applyInterest();
+		
+		accountService.applyInterest();
 
 		return Phase.Login;
 	}
@@ -245,7 +243,7 @@ public class Driver {
 
 		if (input == 1) {
 			// Accounts Summary
-			System.out.println( accountService.UserAccountSummary(activeUser));
+			System.out.println( accountService.getUserAccountSummary(activeUser));
 			enterWait();
 			return phase;
 		} else if (input == 2) {
@@ -294,11 +292,8 @@ public class Driver {
 
 			enterWait();
 		} else if (input == 3) {
-			//TODO
-			System.out.println("Loan service is currently unavailable");
-			enterWait();
-			
-			return phase;
+
+			return executeLoanRequest();
 		}
 
 		return Phase.UserControl;
@@ -312,7 +307,7 @@ public class Driver {
 	 * @return next major program phase to execute in the main loop, returns null in
 	 *         the event of invalid input
 	 */
-	/*
+
 	private Phase executeLoanRequest() {
 	//TODO reimplement loans
 		String[] accountNames = accountService.getUserAccountNames(activeUser);
@@ -349,11 +344,11 @@ public class Driver {
 		printOptions(false, accountNames);
 		int in3 = getOption() - 1;
 
-		Integer a = accountService.getUserAccount(activeUser, in3);// activeUser.getAccount(in3);
+		Integer targetAcct = accountService.getUserAccount(activeUser, in3);// activeUser.getAccount(in3);
 
-		if (a != null) {
+		if (targetAcct != null) {
 			//if (!a.isValidated())
-			if(!accountService.accountIsValidate(a))
+			if(!accountService.accountIsValidate(targetAcct))
 				return null;
 
 			if (userService.isAdmin(activeUser))
@@ -362,7 +357,8 @@ public class Driver {
 				System.out.println(
 						"Thank you for using The Westward Banking Service. An Admin will validate your request promptly.");
 
-			accountController.addNewLoan(activeUser, borrow, a);
+			//accountController.addNewLoan(activeUser, borrow, a);
+			accountService.addNewLoan(activeUser, borrow, targetAcct);
 
 			enterWait();
 			return phase.UserControl;
@@ -370,7 +366,7 @@ public class Driver {
 
 		return null;
 	}
-	*/
+	
 
 	/**
 	 * Execution phase which prompts and processes input for selecting a user
@@ -383,9 +379,9 @@ public class Driver {
 	 */
 	private Phase executeUserSelectAccount() {
 		System.out.println("Select an account");
-		String[] acctNames = accountService.getUserAccountNames(activeUser); // activeUser.getAccountNames();
-
-		if (acctNames.length == 0) {
+		String[] acctNames = accountService.getUserAccountSummary(activeUser).split("\n"); // activeUser.getAccountNames();
+		
+		if (acctNames[0].length() == 0) {
 			System.out.println("No accounts available");
 			enterWait();
 			return phase;
@@ -426,7 +422,7 @@ public class Driver {
 		if(accountService.getAccountType(activeAccount) == 3)
 			return executeLoanPhase();
 
-		printHeader(activeAccount.toString(), "");
+		printHeader(accountService.getAccountSummary(activeAccount), "");
 
 		printOptions(true, "Withdraw", "Deposit", "Back");
 		int input = getOption();
@@ -598,10 +594,7 @@ public class Driver {
 
 		}
 
-		System.out.println("no user selected");
-		enterWait();
-
-		return phase;
+		return null;
 	}
 
 	/**

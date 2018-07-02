@@ -1,47 +1,48 @@
 package com.revature.service;
 
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.revature.beans.BAccount;
 import com.revature.beans.BAccountType;
-import com.revature.beans.BUser;
+import com.revature.beans.BInterestStamp;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.AccountTypeDaoImpl;
-import com.revature.dao.GenericDao;
-import com.revature.dao.UserDaoImpl;
+import com.revature.dao.InterestStampDao;
 
-public class AccountService implements AccountServiceInterface {
+public class AccountService {
 
 	private AccountDaoImpl accountDao = new AccountDaoImpl();
 
-	@Override
 	public void validateAccount(Integer accountId) {
 		BAccount bAccount = accountDao.selectById(accountId);
-		bAccount.setValidated(1);
-		accountDao.update(bAccount);
+		if (bAccount.getType() != 3) {
+			bAccount.setValidated(1);
+			accountDao.update(bAccount);
+		}else {
+			accountDao.validateLoan(bAccount.getId());
+		}
 	}
 
-	@Override
 	public int getWaitAccountCount() {
 
 		return accountDao.selectAll(false).size();
 	}
 
-	@Override
 	public Integer getWaitAccount(int i) {
 		List<BAccount> ls = accountDao.selectAll(false);
 		return ls.get(i).getId();
 	}
 
-	@Override
 	public Integer addNewAccount(Integer userId, int type) {
-		AccountDaoImpl aDao = new AccountDaoImpl();
 
-		Integer id = aDao.selectAll().size() + 1;
+		Integer id = accountDao.getMaxId() + 1;
 
-		String name = new AccountTypeDaoImpl().selectById(type).getName();
+		//String name = new AccountTypeDaoImpl().selectById(type).getName();
 		BAccount a = new BAccount(id, type, 0.0, 0, userId);
 
 		// logger.info("New account " + name + " created for user " + user.getName());
@@ -51,18 +52,15 @@ public class AccountService implements AccountServiceInterface {
 		if (new UserService().isAdmin(userId))
 			a.setValidated(1);
 
-		aDao.insert(a);
+		accountDao.insert(a);
 
 		return id;
 	}
 
-	@Override
-	public Integer addNewLoan(Integer userId, double borrow, Integer accountId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addNewLoan(Integer userId, double borrow, Integer targetAcct) {
+		accountDao.requestLoan(userId, borrow, targetAcct);
 	}
 
-	@Override
 	public String[] getWaitAccountNames() {
 		List<BAccount> l = accountDao.selectAll(false);
 
@@ -74,7 +72,7 @@ public class AccountService implements AccountServiceInterface {
 		for (int i = 0; i < acctNames.length; i++) {
 			a = l.get(i);
 
-			acctNames[i] = userService.getUserName(a.getUser()) + " " + a.getName();
+			acctNames[i] = userService.getUserName(a.getUser()) + " - " + getAccountName(a);
 
 		}
 
@@ -88,23 +86,12 @@ public class AccountService implements AccountServiceInterface {
 	 * @return Array of the user's accounts' names
 	 */
 	public String[] getUserAccountNames(Integer userId) {
-//		List<BAccount> l = accountDao.selectAll(userId);
-//
-//		String[] acctNames = new String[l.size()];
-//		BAccount a;
-//
-//		for (int i = 0; i < acctNames.length; i++) {
-//			a = l.get(i);
-//
-//			acctNames[i] = accountDao.get
-//					
-//			if (a.getValidated() == 1)
-//				acctNames[i] = a.getName() + " - " + formatCurrency(a.getBalance());
-//			else
-//				acctNames[i] = a.getName() + " - awaiting validation";
-//		}
-		
-		List<String> acctNames = accountDao.selectJoinUserAccountNames(userId);
+
+		List<String> acctNames = new ArrayList<>();
+
+		for (BAccount a : accountDao.selectAll(userId))
+			acctNames.add(getAccountName(a));
+
 		String[] names = new String[acctNames.size()];
 		acctNames.toArray(names);
 		return names;
@@ -116,41 +103,94 @@ public class AccountService implements AccountServiceInterface {
 	 * 
 	 * @return summary String
 	 */
-	public String UserAccountSummary(Integer userId) {
+	public String getUserAccountSummary(Integer userId) {
 		StringBuilder sb = new StringBuilder();
-		List<BAccount> l = accountDao.selectAll(userId);
+		// List<BAccount> l = accountDao.selectAll(userId);
 
-		for (BAccount a : l) {
-			sb.append(a.toString());
+		List<String> l = accountDao.selectJoinUserAccountSummary(userId);
+
+		for (String s : l) {
+			sb.append(s);
 			sb.append('\n');
 		}
 
 		return sb.toString();
 	}
 
-	@Override
 	public void removeAccount(Integer accountId) {
 		accountDao.deleteById(accountId);
 	}
 
-	@Override
+	/**
+	 * Calculate the number of days (using minutes for simulation purposes) since
+	 * interest was last applied and apply interest to all validated accounts
+	 */
 	public void applyInterest() {
-		// TODO Auto-generated method stub
+		LocalDateTime currDate = LocalDateTime.now();
+		InterestStampDao interestDao = new InterestStampDao();
 
+		BInterestStamp stamp = interestDao.selectNewest();
+
+		if (stamp != null) {
+			long days = ChronoUnit.MINUTES.between(stamp.getLocalDateTime(), currDate);
+			System.out.println("applying interest for " + days + " periods");
+
+			if (days <= 0)
+				return;
+
+			// applyInterest(days);
+			accountDao.applyInterest((int) days);
+
+		}
+		BInterestStamp newStamp = new BInterestStamp(LocalDateTime.now());
+		interestDao.insert(newStamp);
 	}
 
-	@Override
-	public void applyInterest(long days) {
-		// TODO Auto-generated method stub
-
-	}
+	/**
+	 * Apply interest to all validated accounts
+	 */
+	// public void applyInterest(long periods) {
+	//
+	// List<BAccount> accounts = accountDao.selectAll(true);
+	// Map<Integer, BAccountType> typeMap = AccountTypeDaoImpl.getTypeMap();
+	// //System.out.println(typeMap);
+	//
+	// double r;
+	// double balance;
+	//
+	// for (BAccount a : accounts) {
+	// // a.applyInterest(days);
+	// r = typeMap.get(a.getType()).getRate();
+	// //System.out.println(a.getType());
+	// //System.out.println(r);
+	//
+	// balance = a.getBalance();
+	// //System.out.println(balance);
+	// //System.out.println(Math.pow((1 + r / 365.0), periods));
+	//
+	// balance = balance * Math.pow((1 + r / 365.0), periods);
+	// //System.out.println(balance);
+	//
+	// a.setBalance(balance);
+	//
+	// accountDao.update(a);
+	//
+	// }
+	// }
 
 	public String getAccountName(Integer accountId) {
-		System.out.println("looking up: " + accountId);
-		BAccount acc = accountDao.selectById(accountId);
-		String typeName = new AccountTypeDaoImpl().selectById(acc.getId()).getName();
 
-		return typeName + acc.getId();
+		BAccount acc = accountDao.selectById(accountId);
+		return getAccountName(acc);
+	}
+
+	public String getAccountName(BAccount acc) {
+
+		Map<Integer, BAccountType> typeMap = AccountTypeDaoImpl.getTypeMap();
+
+		String typeName = typeMap.get(acc.getType()).getName();
+
+		return typeName + "_" + acc.getId();
 	}
 
 	public Integer getUserAccount(Integer userId, int index) {
@@ -185,8 +225,7 @@ public class AccountService implements AccountServiceInterface {
 		accountDao.update(bAccount);
 
 	}
-	
-	
+
 	/**
 	 * Formats doubles to resemble a proper currency format
 	 * 
@@ -199,6 +238,16 @@ public class AccountService implements AccountServiceInterface {
 		String s = nf.format(a);
 
 		return s;
+	}
+
+	public String getAccountSummary(Integer accountId) {
+		return getAccountName(accountId) + " - " + AccountService.formatCurrency(getAccountBalance(accountId));
+	}
+
+	public Double getAccountBalance(Integer accountId) {
+		BAccount bAccount = accountDao.selectById(accountId);
+
+		return bAccount.getBalance();
 	}
 
 }

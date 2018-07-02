@@ -20,18 +20,12 @@ public class Connections {
 			prop = new Properties();
 			prop.load(new FileInputStream(FILE_NAME));
 
-			// String s = System.getenv("DBProps");
-			// String[] props = System.getenv("DBProps").split(";");
-			//
-			// Class.forName(props[0]);
-			// con = DriverManager.getConnection(props[1], props[2], props[3]);
-
 			Class.forName(prop.getProperty("class"));
 
 			con = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"),
 					prop.getProperty("password"));
 
-			System.out.println("DATABASE CONNECTION SUCCESS");
+			//System.out.println(".");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
