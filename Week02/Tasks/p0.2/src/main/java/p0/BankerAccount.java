@@ -1,5 +1,6 @@
 package p0;
 
+import p0.beans.Account;
 import p0.beans.Banker;
 
 public class BankerAccount extends AccountClass
@@ -10,9 +11,9 @@ public class BankerAccount extends AccountClass
 	 * Constructor used for the banker class, does little more than call the super constructor
 	 * since there are no more variables than required for a generic account on creation.
 	 */
-	public BankerAccount(String name, String uname, String pword, double i)
+	public BankerAccount(double i, String name, String uname, String pword)
 	{
-		bAcc = new Banker (name, uname, pword, i);
+		bAcc = new Banker (i, name, uname, pword);
 	}
 	
 	/**
@@ -24,9 +25,9 @@ public class BankerAccount extends AccountClass
 		pgm.clearScreen();
 		int count = 1;
 		System.out.println("List of currently active members");
-		for(PlayerAccount p: pgm.Active.getList())
+		for(PlayerAccount p: pgm.Accounts.getList())
 		{
-			System.out.println(count + ". " + p.getAccountInfo().getuName() + " Account Balance: " + p.getPlayerInfo().getBankBalance());
+			System.out.println(count + ". " + p.getAccount().getuName() + " Account Balance: " + p.getPlayerInfo().getBankBalance());
 		}
 	}
 	
@@ -55,7 +56,7 @@ public class BankerAccount extends AccountClass
 		{
 			pgm.dumpIn(pgm);
 			pgm.clearScreen();
-			System.out.println("Welcome Banker " + getAccountInfo().getName() + "\n");
+			System.out.println("Welcome Banker " + getAccount().getName() + "\n");
 			System.out.println("What would you like to do today?");
 			int count = 1;
 			System.out.println(count + ". View active accounts");
@@ -77,7 +78,18 @@ public class BankerAccount extends AccountClass
 		}
 	}
 	
+	@Override
+	public Account getAccount() {
+		return bAcc.getAccountInfo();
+	}
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+	}
+	
 	public Banker getBankInfo() {
 		return bAcc;
 	}
+
 }

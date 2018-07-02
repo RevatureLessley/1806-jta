@@ -4,6 +4,7 @@ import p0.beans.Account;
 
 public class Player {
 	
+	private int PlayerID;
 	private int accountBalance;
 	private int loanBalance;
 	private int bankBalance;
@@ -13,15 +14,20 @@ public class Player {
 	private boolean accountFlagged = false;
 	private Account AccountInfo;
 	
-	public Player(int id, int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting,
+	public Player(int pid, int aid, int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting,
 			String Name, String Uname, String Pword) {
-		this.AccountID= id;
+		this.PlayerID= pid;
+		this.AccountID = aid;
 		this.accountBalance = accountBalance;
 		this.loanBalance = loanBalance;
 		this.bankBalance = bankBalance;
 		this.hasLoan = hasLoan;
 		this.loanWaiting = loanWaiting;
 		AccountInfo = new Account(Name,Uname,Pword);
+	}
+	
+	public int getPlayerID() {
+		return PlayerID;
 	}
 	public int getAccountBalance() {
 		return accountBalance;

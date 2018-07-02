@@ -4,9 +4,9 @@ public class Banker {
 	private double interest;
 	private Account AccountInfo;
 
-	public Banker(String name, String uname, String pword, double i) {
-		AccountInfo = new Account(uname, pword, name);
+	public Banker(double i, String name, String uname, String pword) {
 		this.interest = i;
+		AccountInfo = new Account(name, uname, pword);
 	}
 
 	public Account getAccountInfo() {

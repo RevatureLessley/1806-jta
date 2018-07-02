@@ -12,16 +12,12 @@ public class Launcher {
 	
 	Scanner in = new Scanner(System.in);
 	Random rng = new Random();
-	AccountList Active;
-	WaitingList Waiting;
+	AccountList Accounts;
 	final String VERSION_NUM = "2.0";
-	AccountListService als = new AccountListService();
 	
 	public static void main (String[] args) throws SQLException{
 		Launcher pgm = new Launcher();
-		//pgm.mainMenu(pgm);
-		BankerAccount bank = pgm.als.getBanker();
-		System.out.println(bank.getBankInfo().getAccountInfo().getName());
+		pgm.mainMenu(pgm);
 	}
 	
 	/**
@@ -60,11 +56,6 @@ public class Launcher {
 					break;
 			default:System.out.println("That is not a valid selection, please select again");
 			}
-			
-			if(Waiting.getWorldFlagged() && Active.getWorldFlagged())
-			{
-				//TODO: Turnicate list (Make SQL procedure to turnicate all tables)
-			}
 		}
 	}
 	
@@ -84,30 +75,30 @@ public class Launcher {
 			String tempUname = pgm.in.next();
 			successP = false;
 			successU = false;
-			if(pgm.Active.getAdmin().getAccountInfo().getuName().equals(tempUname))
+			if(pgm.Accounts.getAdmin().getAdminInfo().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
-				successP = pWordTest(pgm.Active.getAdmin(), pgm); 
+				successP = pWordTest(pgm.Accounts.getAdmin(), pgm); 
 			}
-			else if(pgm.Active.getBanker().getBankInfo().getAccountInfo().getuName().equals(tempUname))
+			else if(pgm.Accounts.getBanker().getBankInfo().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
-				successP = pWordTest(pgm.Active.getBanker(), pgm); 
+				successP = pWordTest(pgm.Accounts.getBanker(), pgm); 
 			}
-			else if(pgm.Active.getLoaner().getAccountInfo().getuName().equals(tempUname))
+			else if(pgm.Accounts.getLoaner().getLoanerInfo().getAccountInfo().getuName().equals(tempUname))
 			{
 
 				successU = true;
-				successP = pWordTest(pgm.Active.getLoaner(), pgm); 
+				successP = pWordTest(pgm.Accounts.getLoaner(), pgm); 
 			}
 			else 
 			{
-				for(AccountClass a: pgm.Active.getList())
+				for(AccountClass a: pgm.Accounts.getList())
 				{
 
-					if(a.getAccountInfo().getuName().equals(tempUname))
+					if(a.getAccount().getuName().equals(tempUname))
 					{
 						successU = true;
 						successP = pWordTest(a, pgm); 
@@ -121,9 +112,9 @@ public class Launcher {
 			else if (!successU)
 			{
 				boolean test = false;
-				for(PlayerAccount p: pgm.Waiting.getList())
+				for(PlayerAccount p: pgm.Accounts.getWaitingList())
 				{
-					if(p.getAccountInfo().getuName().equals(tempUname))
+					if(p.getAccount().getuName().equals(tempUname))
 						test = true;
 				}
 				if(test)
@@ -162,7 +153,7 @@ public class Launcher {
 	{
 		System.out.print("Input Password: ");
 		String tempPword = pgm.in.next();
-		if(a.getAccountInfo().getuPass().equals(tempPword))
+		if(a.getAccount().getuPass().equals(tempPword))
 		{
 			a.setPgm(pgm);
 			a.menu();
@@ -187,19 +178,17 @@ public class Launcher {
 			pgm.generateWorld(pgm);
 		}
 		else {
-			Active = new AccountList();
-			Waiting = new WaitingList();
+			Accounts = new AccountList();
 			ArrayList<PlayerAccount> temp = als.getPlayerArray();
-			Active.setAdmin(als.getAdmin());
-			Active.setBanker(als.getBanker());
-			Active.setLoaner(als.getLoaner());
+			ArrayList<PlayerAccount> temp2 = als.getWaitingPlayerArray();
+			Accounts.setAdmin(als.getAdmin());
+			Accounts.setBanker(als.getBanker());
+			Accounts.setLoaner(als.getLoaner());
 			for(PlayerAccount p : temp) {
-				if(p.getPlayerInfo().isAccountFlagged()){
-					Active.add(p);
-				}
-				else {
-					Waiting.add(p);
-				}
+				Accounts.add(p);
+			}
+			for(PlayerAccount p : temp2){
+				Accounts.addWaiting(p);
 			}
 		}
 	}
@@ -213,6 +202,7 @@ public class Launcher {
 	 */
 	public void generateWorld(Launcher pgm)
 	{
+		//TODO: Generate world function (OPTIONAL WITH WORLD DELETE GONE)
 //
 //		pgm.dumpIn(pgm);
 //		pgm.clearScreen();
@@ -242,7 +232,7 @@ public class Launcher {
 //		Loaner tempL =new Loaner(Name,uName,pWord, pgm);
 //		
 //		System.out.println("Accounts created, generating world.");
-//		pgm.Active = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
+//		pgm.Accounts = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
 	

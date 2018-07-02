@@ -9,10 +9,10 @@ public class Account {
 	protected String Name;
 	protected transient Launcher pgm;
 	
-	public Account(String uName, String uPass, String name) {
+	public Account( String name, String uName, String uPass) {
+		this.Name = name;
 		this.uName = uName;
 		this.uPass = uPass;
-		this.Name = name;
 	}
 
 	public String getuName() {

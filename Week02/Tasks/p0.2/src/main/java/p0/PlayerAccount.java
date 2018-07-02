@@ -1,6 +1,8 @@
 package p0;
 
+import p0.beans.Account;
 import p0.beans.Player;
+import p0.service.PlayerService;
 
 public class PlayerAccount extends AccountClass
 {
@@ -13,9 +15,9 @@ public class PlayerAccount extends AccountClass
 	 * @param pBal the amount of money in the players back account
 	 * @param lBal the value of the players loan
 	 */
-	public PlayerAccount(int id, String name, String uName, String pword, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting)
+	public PlayerAccount(int pid, int aid, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting, String name, String uName, String pword)
 	{
-		pAcc = new Player(id, aBal,lBal, bBal, hasL, lWaiting, name, uName, pword);
+		pAcc = new Player(pid, aid, aBal,lBal, bBal, hasL, lWaiting, name, uName, pword);
 	}
 	
 
@@ -184,11 +186,11 @@ public class PlayerAccount extends AccountClass
 	{
 		if(pAcc.getAccountBalance() >0)
 		{
-			pAcc.setAccountBalance((int)(pAcc.getAccountBalance() * pgm.Active.getBanker().getBankInfo().getInterest()));
+			pAcc.setAccountBalance((int)(pAcc.getAccountBalance() * pgm.Accounts.getBanker().getBankInfo().getInterest()));
 		}
 		if(pAcc.getLoanBalance() > 0 && pAcc.isHasLoan()) 
 		{
-			pAcc.setLoanBalance((int)(pAcc.getLoanBalance() * pgm.Active.getLoaner().getInterest())); 
+			pAcc.setLoanBalance((int)(pAcc.getLoanBalance() * pgm.Accounts.getLoaner().getLoanerInfo().getInterest())); 
 		}
 	}
 	
@@ -202,9 +204,12 @@ public class PlayerAccount extends AccountClass
 		pgm.clearScreen();
 		int selection = 0;
 		System.out.println("Welcome " + pAcc.getAccountInfo().getName()+ "\n");
+		
 		while(selection != 5)
 		{
-
+			if(pAcc.isAccountFlagged()) {
+				System.out.println("This account is flagged for deletion");
+			}
 			System.out.println("Gold: " + pAcc.getAccountBalance());
 			System.out.println("Bank balance: " + pAcc.getBankBalance());
 			if(pAcc.isHasLoan())
@@ -230,16 +235,6 @@ public class PlayerAccount extends AccountClass
 			count++;
 			System.out.println(count + ". Logout");
 			count++;
-			if(pAcc.isAccountFlagged())
-			{
-				System.out.println(count + ". Change your mind");
-				count++;
-			}
-			else
-			{
-				System.out.println(count + ". Close account");
-				count++;
-			}
 			selection = pgm.in.nextInt();
 			switch (selection) {
 			case 1: this.bet();
@@ -254,78 +249,32 @@ public class PlayerAccount extends AccountClass
 			case 4: deposit();
 					break;
 			case 5: logout();
-			break;
-			case 6: if(!pAcc.isAccountFlagged())
-						deleteAcc();
-					else
-						saveAcc();
 					break;
 			}
 		}
 	}
 	
-	public void deleteAcc()
-	{
-		pgm.dumpIn(pgm);
-		pgm.clearScreen();
-		System.out.println("You have chosen to dissable your account...");
-		System.out.print("Are you sure this is what you want to do? Y/N:");
-		char selection = pgm.in.next().charAt(0);
-		if (selection =='Y' || selection =='y')
-		{
-			pAcc.setAccountFlagged(true);
-			System.out.println("Thank you for your stay with Aeva Arena.");
-			System.out.println("Your account has been flagged for deletion");
-			System.out.println("and will be destroyed upon next logout.");
-			pgm.in.nextLine();
-			pgm.in.nextLine();
-		}
-		else if(selection == 'N' || selection == 'n')
-		{
-			System.out.println("I'll take it this was just an accident then.");
-		}
-		else 
-		{
-			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
-		}
+	@Override
+	public Account getAccount() {
+		return pAcc.getAccountInfo();
 	}
 	
-	/**
-	 * Gives the player the ability to reverse the decision to delete their account if they 
-	 * change their mind before logging out.
-	 */
-	public void saveAcc()
-	{
-		pgm.dumpIn(pgm);
-		pgm.clearScreen();
-		System.out.println("You have chosen to keep your account...");
-		System.out.print("Are you sure this is what you want to do? Y/N:");
-		char selection = pgm.in.next().charAt(0);
-		if (selection =='Y' || selection =='y')
-		{
-			pAcc.setAccountFlagged(false);;
-			System.out.println("Thank you for choosing to stay with Aeva Arena.");
-			System.out.println("We have removed your deletion status");
-			System.out.println("We are glad to have you back.");
-			pgm.in.nextLine();
-			pgm.in.nextLine();
-		}
-		else if(selection == 'N' || selection == 'n')
-		{
-			System.out.println("Sticking to your decision despite second thoughts, at least you are sure.");
-		}
-		else 
-		{
-			System.out.println("That wasn't something I recognize. \n Try that again when you want to give a true answer");
-		}
-	}
-
 	@Override
 	public void logout() {
+		update();
 		System.out.println("Farewell " + pAcc.getAccountInfo().getName() + " we hope to see you again soon.");
 		System.out.println();
 	}
 	
+	public void update() {
+		PlayerService ps = new PlayerService();
+
+		Account tempA = pAcc.getAccountInfo();
+		PlayerAccount temp = new PlayerAccount(pAcc.getPlayerID(),pAcc.getAccountID(), pAcc.getAccountBalance(), 
+				pAcc.getBankBalance(), pAcc.getLoanBalance(), pAcc.isHasLoan(), pAcc.isLoanWaiting(),
+				tempA.getName(), tempA.getuName(),tempA.getuPass());
+		ps.updatePlayer(temp);
+	}
 	/*
 	 * General getters/setters bellow this point
 	 */

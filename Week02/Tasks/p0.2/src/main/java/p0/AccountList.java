@@ -9,24 +9,41 @@ public class AccountList
 	 * and all currently acitve player characters as well as manage deletion 
 	 * of accounts that are flagged for removal.
 	 */
-	private ArrayList<PlayerAccount> accounts = new ArrayList<PlayerAccount>();
-	private BankerAccount banker;
+
 	private AdministratorAccount admin;
+	private BankerAccount banker;
 	private LoanerAccount loaner;
+	private ArrayList<PlayerAccount> accounts = new ArrayList<PlayerAccount>();	
+	private ArrayList<PlayerAccount> waiting = new ArrayList<PlayerAccount>();
 	
-	public AccountList(ArrayList<PlayerAccount> list, AdministratorAccount a, BankerAccount b, LoanerAccount l)
-	{
+	public AccountList() {
+		admin = null;
+		banker = null;
+		loaner = null;
+	}
+	
+	public AccountList(ArrayList<PlayerAccount> list, AdministratorAccount a, BankerAccount b, LoanerAccount l){
 		accounts = list;
 		admin = a;
 		banker = b;
 		loaner = l;
 	}
 	
-	public ArrayList<PlayerAccount> getList()
-	{
+	public ArrayList<PlayerAccount> getList(){
 		return accounts;
 	}
 	
+	public void add(PlayerAccount a){
+		accounts.add(a);
+	}
+	
+	public ArrayList<PlayerAccount> getWaitingList(){
+		return waiting;
+	}
+
+	public void addWaiting(PlayerAccount a) {
+		waiting.add(a);
+	}
 	public BankerAccount getBanker() {
 		return banker;
 	}
@@ -51,8 +68,5 @@ public class AccountList
 		this.loaner = loaner;
 	}
 
-	public void add(PlayerAccount a)
-	{
-		accounts.add(a);
-	}
+	
 }

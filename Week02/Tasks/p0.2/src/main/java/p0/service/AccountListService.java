@@ -19,6 +19,10 @@ public class AccountListService {
 		return ald.getPlayerArray();
 	}
 	
+	public ArrayList<PlayerAccount> getWaitingPlayerArray(){
+		return ald.getWaitingPlayerArray();
+	}
+	
 	public AdministratorAccount getAdmin() {
 		return ald.getAdmin();
 	}

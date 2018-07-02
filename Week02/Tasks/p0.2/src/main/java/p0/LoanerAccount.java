@@ -8,10 +8,12 @@ import p0.beans.Loaner;
 public class LoanerAccount extends AccountClass
 {
 	private Loaner lAcc;
+	private ArrayList<PlayerAccount> active = new ArrayList<>();
+	private ArrayList<PlayerAccount> waiting = new ArrayList<>();
 	
-	public LoanerAccount(String name, String uname, String pword, int bal, double interest)
+	public LoanerAccount(int bal, double interest, String name, String uname, String pword)
 	{
-		lAcc = new Loaner(name, uname, pword, bal, interest);
+		lAcc = new Loaner(bal, interest,name, uname, pword);
 	}
 	
 	/**
@@ -25,17 +27,14 @@ public class LoanerAccount extends AccountClass
 		updateLists();
 		while(selection != -1)
 		{
-			if(pgm.Active.getList().size() >0)
+			if(active.size() >0)
 			{
 				for(PlayerAccount p: active)
 				{
-					if(p.getPlayerInfo().isHasLoan())
-					{
-						System.out.println(count + ". " + p.getAccountInfo().getuName() + ", " + p.getPlayerInfo().getLoanBalance());
-						count++;
-					}
+					System.out.println(p.getPlayerInfo().getAccountID() + ". " + p.getAccount().getuName() + ", " + p.getPlayerInfo().getLoanBalance());
 				}
 				pgm.in.next();
+				//TODO: add managing accounts activities.
 			}
 			else
 			{
@@ -62,11 +61,9 @@ public class LoanerAccount extends AccountClass
 				int count = 1;
 				for(PlayerAccount p: waiting)
 				{
-					if(p.getPlayerInfo().isLoanWaiting())
-					{
-						System.out.println(count + ". " + p.getAccountInfo().getuName());
-						count++;
-					}
+					
+					System.out.println(p.getPlayerInfo().getAccountID() + ". " + p.getAccount().getuName());
+
 				}
 				System.out.print("\n" + "Select an account to manage or -1 to exit: ");
 				selection = pgm.in.nextInt();
@@ -76,7 +73,7 @@ public class LoanerAccount extends AccountClass
 					int selection2 = 0;
 					count = 1;
 					System.out.println("Account info");
-					System.out.println("User Name: " + temp.getAccountInfo().getuName());
+					System.out.println("User Name: " + temp.getAccount().getuName());
 					System.out.println("Loan Ammount: " + temp.getPlayerInfo().getLoanBalance());
 					System.out.println("");
 					System.out.println(count + ". Approve account");
@@ -89,11 +86,12 @@ public class LoanerAccount extends AccountClass
 					{
 					case 1: temp.getPlayerInfo().setLoanWaiting(false);;
 							temp.getPlayerInfo().setHasLoan(true);
-							balance -= temp.getPlayerInfo().getLoanBalance();
+							lAcc.setBalance(lAcc.getBalance() - temp.getPlayerInfo().getLoanBalance());
 							break;
 					case 2: temp.getPlayerInfo().setLoanWaiting(false);
 					case 3: break;
 					default: System.out.println("Invalid choice, try again.");
+					//TODO: Loop selection in case of invalid input
 				}
 				}
 			}
@@ -111,9 +109,9 @@ public class LoanerAccount extends AccountClass
 	 */
 	public void updateLists()
 	{
-		active = new ArrayList();
-		waiting = new ArrayList();
-		for(PlayerAccount p: pgm.Active.getList()) 
+		active = new ArrayList<>();
+		waiting = new ArrayList<>();
+		for(PlayerAccount p: pgm.Accounts.getList()) 
 		{
 			if(p.getPlayerInfo().isHasLoan())
 			{
@@ -134,16 +132,11 @@ public class LoanerAccount extends AccountClass
 	{
 		pgm.dumpIn(pgm);
 		pgm.clearScreen();
-		System.out.println("The current interest rate is (Format 00.00 times)" + interestRate);
+		System.out.println("The current interest rate is (Format 00.00 times)" + lAcc.getInterest());
 		System.out.print("What should the new interest rate be?: ");
-		interestRate = pgm.in.nextDouble();
+		lAcc.setInterest(pgm.in.nextDouble());
 		
-		System.out.println("The new interest rate is: " + interestRate);
-	}
-	
-	public double getInterest()
-	{
-		return interestRate;
+		System.out.println("The new interest rate is: " + lAcc.getInterest());
 	}
 	
 	/**
@@ -155,7 +148,7 @@ public class LoanerAccount extends AccountClass
 		pgm.dumpIn(pgm);
 		pgm.clearScreen();
 		int selection = 0;
-		System.out.println("Welcome Loaner " + lAcc.getName() + "\n");
+		System.out.println("Welcome Loaner " + lAcc.getAccountInfo().getName() + "\n");
 		while(selection != 4)
 		{
 			System.out.println("What would you like to do today?");
@@ -182,5 +175,19 @@ public class LoanerAccount extends AccountClass
 					break;
 			}
 		}
+	}
+
+	@Override
+	public Account getAccount() {
+		return lAcc.getAccountInfo();
+	}
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub	
+	}
+	
+	public Loaner getLoanerInfo() {
+		return lAcc;
 	}
 }

@@ -5,10 +5,10 @@ public class Loaner {
 	private double interest;
 	private Account AccountInfo;
 
-	public Loaner(String name, String uname, String pword, int balance, double interest) {
-		AccountInfo = new Account(uname, pword, name);
+	public Loaner( int balance, double interest, String name, String uname, String pword) {
 		this.balance = balance;
 		this.interest = interest;
+		AccountInfo = new Account(name, uname, pword);
 	}
 
 	public double getInterest() {

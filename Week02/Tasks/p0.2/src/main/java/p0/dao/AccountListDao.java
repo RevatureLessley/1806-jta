@@ -10,6 +10,7 @@ import p0.PlayerAccount;
 public interface AccountListDao {
 	public Integer getAccSize();
 	public ArrayList<PlayerAccount> getPlayerArray();
+	public ArrayList<PlayerAccount> getWaitingPlayerArray();
 	public AdministratorAccount getAdmin();
 	public BankerAccount getBanker();
 	public LoanerAccount getLoaner();

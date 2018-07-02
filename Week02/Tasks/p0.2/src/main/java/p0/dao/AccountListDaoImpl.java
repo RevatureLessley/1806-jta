@@ -54,7 +54,7 @@ public class AccountListDaoImpl implements AccountListDao {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				if(rs.getInt(8) == 1)
+				if(rs.getInt(7) == 1)
 				{
 					boolean hasL;
 					boolean lWait;
@@ -75,7 +75,56 @@ public class AccountListDaoImpl implements AccountListDao {
 					{
 						lWait = true;
 					}
-					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait);
+					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8),  rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, rs.getString(10), rs.getString(11), rs.getString(12));
+					players.add(p);
+				}
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+			close(rs);
+		}
+		return players;
+	}
+	
+	@Override
+	public ArrayList<PlayerAccount> getWaitingPlayerArray() {
+		Statement stmt = null; // Simple SQL query to be executed
+		ResultSet rs = null; // Object that holds query results
+		ArrayList<PlayerAccount> players = new ArrayList<>();
+		
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "SELECT * FROM player FULL OUTER JOIN acc ON player.acc_id = acc.acc_id WHERE player.acc_id >3";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				if(rs.getInt(8) == 0)
+				{
+					boolean hasL;
+					boolean lWait;
+					if(rs.getInt(6) == 0)
+					{
+						hasL = false;
+					}
+					else
+					{
+						hasL = true;
+					}
+
+					if(rs.getInt(7) == 0)
+					{
+						lWait = false;
+					}
+					else
+					{
+						lWait = true;
+					}
+					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8), rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, rs.getString(10), rs.getString(11), rs.getString(12));
 					players.add(p);
 				}
 			}
@@ -104,7 +153,7 @@ public class AccountListDaoImpl implements AccountListDao {
 			
 			while(rs.next()) {
 
-				admin = new AdministratorAccount(rs.getString(3), rs.getString(4), rs.getString(5));
+				admin = new AdministratorAccount(rs.getString(4), rs.getString(5), rs.getString(6));
 				
 			}
 		}
@@ -131,8 +180,7 @@ public class AccountListDaoImpl implements AccountListDao {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				banker = new BankerAccount(rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(2));
-				System.out.println("successfully made banker");
+				banker = new BankerAccount(rs.getInt(2), rs.getString(5), rs.getString(6), rs.getString(7));
 			}
 		}
 		catch(SQLException e){
@@ -147,8 +195,28 @@ public class AccountListDaoImpl implements AccountListDao {
 
 	@Override
 	public LoanerAccount getLoaner() {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = null; // Simple SQL query to be executed
+		ResultSet rs = null; // Object that holds query results
+		LoanerAccount loaner = null;
+		
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql ="SELECT * FROM loaner FULL OUTER JOIN acc ON loaner.acc_id = acc.acc_id WHERE loaner.acc_id = 3";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				loaner = new LoanerAccount(rs.getInt(2), rs.getInt(3), rs.getString(6), rs.getString(7), rs.getString(8));
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+			close(rs);
+		}
+		return loaner;
 	}
 
 }
