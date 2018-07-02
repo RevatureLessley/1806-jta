@@ -115,3 +115,12 @@
 2018-07-01 17:38:27 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
 2018-07-01 17:38:27 DEBUG root:163 - Project0_PartII/RevatureAccounts/Account.java: Entered and exiting getStatus().
 2018-07-01 17:38:27 DEBUG root:105 - Project0_PartII/RevatureAccounts/AccountAttributes/Status.java: Entered and exiting display().
+2018-07-02 01:15:36 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-02 01:15:36 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-07-02 01:15:36 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().
+2018-07-02 01:15:36 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-02 01:15:36 DEBUG root:9 - Project0/Project0.java: Application Started, entered main().
+2018-07-02 01:15:36 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-07-02 01:15:36 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().
+2018-07-02 01:15:36 INFO  root:16 - Project0/Project0.java: User tried to run application in an IDE.
+2018-07-02 01:15:36 DEBUG root:26 - Project0/Project0.java: Application Ended, exiting main().
