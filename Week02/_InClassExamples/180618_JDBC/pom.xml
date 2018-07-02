@@ -10,11 +10,12 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	
-	<dependencies>
-		<dependency>
-			<artifactId>ojdbc7</artifactId>
-			<groupId>com.oracle</groupId>
-			<version>12.1.0</version>
-		</dependency>
-	</dependencies>
+	 <!-- ojdbc7.jar example -->
+	 <dependencies>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0</version>
+        </dependency>
+      </dependencies>
 </project>
