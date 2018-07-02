@@ -1,0 +1,569 @@
+2018-06-25 13:00:17 INFO  Bank:585 - First time running the app, adding 1 admin account to accountsFile.txt.
+2018-06-25 13:00:17 INFO  Account:40 - New account initialized
+2018-06-25 13:00:17 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:00:23 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:00:23 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:44:37 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-25 13:44:37 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:44:43 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:44:43 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:44:44 INFO  Bank:78 - Registering a new user.
+2018-06-25 13:44:50 INFO  Account:40 - New account initialized
+2018-06-25 13:44:50 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:44:56 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 13:45:03 INFO  Bank:415 - Admin approved account: Account [userName=Test, password=Test, accountNumber=4, accountValue=0, accountType=0, approved= false].
+2018-06-25 13:45:03 INFO  Account:106 - Set approved to: true.
+2018-06-25 13:45:03 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:45:03 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-25 13:45:10 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-25 13:45:12 INFO  Account:84 - Set account value to: 50.
+2018-06-25 13:45:12 INFO  Bank:512 - User now has: 50 dollars from their account.
+2018-06-25 13:45:12 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:45:14 INFO  Bank:351 - Logging out of users account.
+2018-06-25 13:48:10 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-25 13:48:10 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 13:48:15 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-25 13:48:18 INFO  Bank:493 - User withdrew: 1 dollars from their account.
+2018-06-25 13:48:18 INFO  Account:84 - Set account value to: 49.
+2018-06-25 13:48:18 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:48:18 INFO  Bank:497 - User now has: 49 dollars from their account.
+2018-06-25 13:48:18 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 13:48:20 INFO  Bank:351 - Logging out of users account.
+2018-06-25 14:44:42 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-25 14:44:43 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-25 14:44:50 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-25 14:44:52 INFO  Bank:493 - User withdrew: 1 dollars from their account.
+2018-06-25 14:44:52 INFO  Account:84 - Set account value to: 48.
+2018-06-25 14:44:52 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 14:44:52 INFO  Bank:497 - User now has: 48 dollars from their account.
+2018-06-25 14:44:52 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-25 14:44:54 INFO  Bank:359 - User entered incorrect input.
+2018-06-25 14:44:59 INFO  Bank:302 - Admin successfully logged in.
+2018-06-25 14:44:59 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-26 08:44:41 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-26 08:44:41 INFO  Bank:605 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-26 08:44:41 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-26 08:44:41 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-26 08:44:52 INFO  Bank:215 - Normal user successfully logged in.
+2018-06-26 08:44:55 INFO  Bank:493 - User withdrew: 1 dollars from their account.
+2018-06-26 08:44:55 INFO  Account:84 - Set account value to: 47.
+2018-06-26 08:44:55 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-26 08:44:55 INFO  Bank:497 - User now has: 47 dollars from their account.
+2018-06-26 08:44:55 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-26 08:44:57 INFO  Bank:351 - Logging out of users account.
+2018-06-26 08:45:01 INFO  Bank:302 - Admin successfully logged in.
+2018-06-26 08:45:01 INFO  Bank:436 - Admin finished going through accounts to approve, now logging out.
+2018-06-29 10:49:01 INFO  Bank:52 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-29 10:49:02 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-29 10:49:24 INFO  Bank:52 - App has been run before, initializing with accounts from accountsFile.txt.
+2018-06-29 10:49:24 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 18:11:05 INFO  Account:54 - New account initialized
+2018-06-30 18:11:05 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 18:11:05 INFO  Bank:493 - User withdrew: 10 dollars from their account.
+2018-06-30 18:11:05 INFO  Account:103 - Set account value to: 40.
+2018-06-30 18:11:05 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-30 18:11:05 INFO  Bank:497 - User now has: 40 dollars from their account.
+2018-06-30 18:11:05 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-30 18:11:05 INFO  Account:54 - New account initialized
+2018-06-30 18:11:05 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 18:11:05 INFO  Account:103 - Set account value to: 10.
+2018-06-30 18:11:05 INFO  Bank:512 - User now has: 10 dollars from their account.
+2018-06-30 18:11:05 INFO  Bank:527 - Writing existing ArrayList of Accounts to accountsFile.txt
+2018-06-30 18:11:12 INFO  Account:54 - New account initialized
+2018-06-30 18:11:12 INFO  Account:54 - New account initialized
+2018-06-30 18:11:12 INFO  Account:54 - New account initialized
+2018-06-30 21:18:56 INFO  Account:54 - New account initialized
+2018-06-30 21:18:56 INFO  Account:54 - New account initialized
+2018-06-30 22:49:23 INFO  Account:54 - New account initialized
+2018-06-30 22:49:23 INFO  Account:54 - New account initialized
+2018-06-30 22:49:23 INFO  Bank:65 - Initializing Bank with existing accounts.
+2018-06-30 22:49:34 INFO  Bank:309 - Admin succesfully logged in but account needs approval.
+2018-06-30 22:49:54 INFO  Bank:309 - Admin succesfully logged in but account needs approval.
+2018-06-30 23:13:41 INFO  Account:54 - New account initialized
+2018-06-30 23:13:41 INFO  Account:54 - New account initialized
+2018-06-30 23:13:41 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 23:20:08 INFO  Account:54 - New account initialized
+2018-06-30 23:20:08 INFO  Account:54 - New account initialized
+2018-06-30 23:20:08 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 23:20:23 INFO  Bank:219 - Normal user succesfully logged in but account needs approval.
+2018-06-30 23:20:29 INFO  Bank:301 - Admin successfully logged in.
+2018-06-30 23:20:31 INFO  Bank:419 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-06-30 23:20:31 INFO  Account:125 - Set approved to: 1.
+2018-06-30 23:20:31 INFO  Bank:439 - Admin finished going through accounts to approve, now logging out.
+2018-06-30 23:20:38 INFO  Bank:214 - Normal user successfully logged in.
+2018-06-30 23:20:41 INFO  Bank:355 - Logging out of users account.
+2018-06-30 23:24:49 INFO  Account:54 - New account initialized
+2018-06-30 23:24:49 INFO  Account:54 - New account initialized
+2018-06-30 23:24:49 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-06-30 23:25:00 INFO  Bank:219 - Normal user succesfully logged in but account needs approval.
+2018-06-30 23:25:15 INFO  Bank:301 - Admin successfully logged in.
+2018-06-30 23:25:16 INFO  Bank:419 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-06-30 23:25:16 INFO  Account:125 - Set approved to: 1.
+2018-06-30 23:25:16 INFO  Bank:439 - Admin finished going through accounts to approve, now logging out.
+2018-06-30 23:25:27 INFO  Bank:214 - Normal user successfully logged in.
+2018-06-30 23:25:30 INFO  Account:54 - New account initialized
+2018-06-30 23:25:30 INFO  Account:103 - Set account value to: 10.
+2018-06-30 23:25:30 INFO  Bank:517 - User now has: 999 dollars from their account.
+2018-06-30 23:27:09 INFO  Bank:497 - User withdrew: 1 dollars from their account.
+2018-06-30 23:27:09 INFO  Account:54 - New account initialized
+2018-06-30 23:27:09 INFO  Account:103 - Set account value to: -1.
+2018-06-30 23:27:09 INFO  Bank:502 - User now has: 999 dollars from their account.
+2018-07-01 14:35:23 INFO  Account:54 - New account initialized
+2018-07-01 14:35:23 INFO  Account:54 - New account initialized
+2018-07-01 14:35:23 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 14:35:29 INFO  Bank:78 - Registering a new user.
+2018-07-01 14:35:33 INFO  Account:54 - New account initialized
+2018-07-01 14:36:26 INFO  Account:54 - New account initialized
+2018-07-01 14:36:26 INFO  Account:54 - New account initialized
+2018-07-01 14:36:26 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 14:36:29 INFO  Bank:78 - Registering a new user.
+2018-07-01 14:36:32 INFO  Account:54 - New account initialized
+2018-07-01 14:47:56 INFO  Account:54 - New account initialized
+2018-07-01 14:47:56 INFO  Account:54 - New account initialized
+2018-07-01 14:47:56 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 14:50:08 INFO  Account:54 - New account initialized
+2018-07-01 14:50:08 INFO  Account:54 - New account initialized
+2018-07-01 14:50:08 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 14:50:17 INFO  Bank:300 - Admin successfully logged in.
+2018-07-01 14:50:31 INFO  Bank:418 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 14:50:31 INFO  Account:125 - Set approved to: 1.
+2018-07-01 14:50:31 INFO  Bank:438 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 14:53:10 INFO  Account:54 - New account initialized
+2018-07-01 14:53:10 INFO  Account:54 - New account initialized
+2018-07-01 14:53:10 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 14:53:24 INFO  Bank:95 - Registering a new user.
+2018-07-01 14:53:28 INFO  Account:54 - New account initialized
+2018-07-01 17:45:03 INFO  Account:54 - New account initialized
+2018-07-01 17:45:03 INFO  Account:54 - New account initialized
+2018-07-01 17:45:03 INFO  Account:54 - New account initialized
+2018-07-01 17:45:03 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 17:46:03 INFO  Account:54 - New account initialized
+2018-07-01 17:46:03 INFO  Account:54 - New account initialized
+2018-07-01 17:46:03 INFO  Account:54 - New account initialized
+2018-07-01 17:46:03 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 17:46:12 INFO  Bank:321 - Admin successfully logged in.
+2018-07-01 17:46:14 INFO  Bank:439 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 17:46:14 INFO  Account:125 - Set approved to: 1.
+2018-07-01 17:46:16 INFO  Bank:439 - Admin approved account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 17:46:16 INFO  Account:125 - Set approved to: 1.
+2018-07-01 17:46:16 INFO  Bank:459 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 17:46:41 INFO  Bank:234 - Normal user successfully logged in.
+2018-07-01 17:46:43 INFO  Bank:375 - Logging out of users account.
+2018-07-01 17:46:45 INFO  Bank:97 - Registering a new user.
+2018-07-01 17:46:49 INFO  Account:54 - New account initialized
+2018-07-01 17:47:26 INFO  Account:54 - New account initialized
+2018-07-01 17:47:26 INFO  Account:54 - New account initialized
+2018-07-01 17:47:26 INFO  Account:54 - New account initialized
+2018-07-01 17:47:26 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 18:01:57 INFO  Account:54 - New account initialized
+2018-07-01 18:01:57 INFO  Account:54 - New account initialized
+2018-07-01 18:01:57 INFO  Account:54 - New account initialized
+2018-07-01 18:01:57 INFO  Bank:62 - Initializing Bank with existing accounts.
+2018-07-01 18:02:11 INFO  Bank:321 - Admin successfully logged in.
+2018-07-01 18:02:13 INFO  Bank:439 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:02:14 INFO  Bank:439 - Admin approved account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:02:14 INFO  Bank:459 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:02:26 INFO  Bank:239 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:02:32 INFO  Bank:321 - Admin successfully logged in.
+2018-07-01 18:02:35 INFO  Bank:439 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:02:36 INFO  Bank:439 - Admin approved account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:02:36 INFO  Bank:459 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:03:29 INFO  Bank:97 - Registering a new user.
+2018-07-01 18:03:36 INFO  Account:54 - New account initialized
+2018-07-01 18:04:11 INFO  Account:54 - New account initialized
+2018-07-01 18:04:11 INFO  Account:54 - New account initialized
+2018-07-01 18:04:11 INFO  Account:54 - New account initialized
+2018-07-01 18:04:11 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:04:38 INFO  Account:54 - New account initialized
+2018-07-01 18:04:38 INFO  Account:54 - New account initialized
+2018-07-01 18:04:38 INFO  Account:54 - New account initialized
+2018-07-01 18:04:38 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:04:42 INFO  Bank:98 - Registering a new user.
+2018-07-01 18:04:47 INFO  Account:54 - New account initialized
+2018-07-01 18:05:08 INFO  Bank:241 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:05:14 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 18:05:15 INFO  Bank:441 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:05:16 INFO  Bank:441 - Admin approved account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:05:16 INFO  Bank:461 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:08:11 INFO  Account:54 - New account initialized
+2018-07-01 18:08:11 INFO  Account:54 - New account initialized
+2018-07-01 18:08:11 INFO  Account:54 - New account initialized
+2018-07-01 18:08:11 INFO  Account:54 - New account initialized
+2018-07-01 18:08:11 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:08:25 INFO  Bank:229 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:08:27 INFO  Bank:86 - Registering a new user.
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:08:30 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Account:54 - New account initialized
+2018-07-01 18:09:03 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:10:07 INFO  Bank:229 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:10:14 INFO  Account:54 - New account initialized
+2018-07-01 18:10:14 INFO  Account:54 - New account initialized
+2018-07-01 18:10:14 INFO  Account:54 - New account initialized
+2018-07-01 18:10:14 INFO  Account:54 - New account initialized
+2018-07-01 18:10:14 INFO  Account:54 - New account initialized
+2018-07-01 18:10:14 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:12:29 INFO  Account:54 - New account initialized
+2018-07-01 18:12:29 INFO  Account:54 - New account initialized
+2018-07-01 18:12:29 INFO  Account:54 - New account initialized
+2018-07-01 18:12:29 INFO  Account:54 - New account initialized
+2018-07-01 18:12:29 INFO  Account:54 - New account initialized
+2018-07-01 18:12:29 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:22:51 INFO  Account:54 - New account initialized
+2018-07-01 18:22:51 INFO  Account:54 - New account initialized
+2018-07-01 18:22:51 INFO  Account:54 - New account initialized
+2018-07-01 18:22:51 INFO  Account:54 - New account initialized
+2018-07-01 18:22:51 INFO  Account:54 - New account initialized
+2018-07-01 18:22:51 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:22:57 INFO  Bank:311 - Admin successfully logged in.
+2018-07-01 18:22:59 INFO  Bank:429 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:22:59 INFO  Account:54 - New account initialized
+2018-07-01 18:22:59 INFO  Account:54 - New account initialized
+2018-07-01 18:22:59 INFO  Account:54 - New account initialized
+2018-07-01 18:22:59 INFO  Account:54 - New account initialized
+2018-07-01 18:22:59 INFO  Account:54 - New account initialized
+2018-07-01 18:23:00 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:23:01 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test3, password=test3, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:23:02 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test4, password=test4, accountNumber=5, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:23:02 INFO  Bank:450 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:23:02 INFO  Account:54 - New account initialized
+2018-07-01 18:23:02 INFO  Account:54 - New account initialized
+2018-07-01 18:23:02 INFO  Account:54 - New account initialized
+2018-07-01 18:23:02 INFO  Account:54 - New account initialized
+2018-07-01 18:23:02 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:49 INFO  Account:54 - New account initialized
+2018-07-01 18:23:58 INFO  Bank:311 - Admin successfully logged in.
+2018-07-01 18:24:00 INFO  Bank:429 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:24:00 INFO  Account:54 - New account initialized
+2018-07-01 18:24:00 INFO  Account:54 - New account initialized
+2018-07-01 18:24:00 INFO  Account:54 - New account initialized
+2018-07-01 18:24:00 INFO  Account:54 - New account initialized
+2018-07-01 18:24:00 INFO  Account:54 - New account initialized
+2018-07-01 18:24:01 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:24:02 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test3, password=test3, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:24:03 INFO  Bank:437 - Admin DID NOT approve account: Account [userName=test4, password=test4, accountNumber=5, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:24:03 INFO  Bank:450 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:03 INFO  Account:54 - New account initialized
+2018-07-01 18:24:12 INFO  Bank:229 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:24:12 INFO  Account:54 - New account initialized
+2018-07-01 18:24:12 INFO  Account:54 - New account initialized
+2018-07-01 18:24:12 INFO  Account:54 - New account initialized
+2018-07-01 18:24:12 INFO  Account:54 - New account initialized
+2018-07-01 18:24:12 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Account:54 - New account initialized
+2018-07-01 18:25:00 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:25:20 INFO  Account:54 - New account initialized
+2018-07-01 18:25:20 INFO  Account:54 - New account initialized
+2018-07-01 18:25:20 INFO  Account:54 - New account initialized
+2018-07-01 18:25:20 INFO  Account:54 - New account initialized
+2018-07-01 18:25:20 INFO  Account:54 - New account initialized
+2018-07-01 18:25:20 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:25:27 INFO  Bank:241 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:25:33 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 18:25:34 INFO  Bank:441 - Admin approved account: Account [userName=testname, password=testpass, accountNumber=2, accountValue=999, accountType=0, approved= 0].
+2018-07-01 18:25:35 INFO  Account:54 - New account initialized
+2018-07-01 18:25:35 INFO  Account:54 - New account initialized
+2018-07-01 18:25:35 INFO  Account:54 - New account initialized
+2018-07-01 18:25:35 INFO  Account:54 - New account initialized
+2018-07-01 18:25:35 INFO  Account:54 - New account initialized
+2018-07-01 18:25:35 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:25:36 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test3, password=test3, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:25:37 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test4, password=test4, accountNumber=5, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:25:37 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:35:28 INFO  Account:54 - New account initialized
+2018-07-01 18:35:28 INFO  Account:54 - New account initialized
+2018-07-01 18:35:28 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:35:34 INFO  Bank:98 - Registering a new user.
+2018-07-01 18:35:39 INFO  Account:54 - New account initialized
+2018-07-01 18:35:39 INFO  Account:54 - New account initialized
+2018-07-01 18:35:39 INFO  Account:54 - New account initialized
+2018-07-01 18:35:39 INFO  Account:54 - New account initialized
+2018-07-01 18:35:46 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 18:35:48 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:35:48 INFO  Account:54 - New account initialized
+2018-07-01 18:35:48 INFO  Account:54 - New account initialized
+2018-07-01 18:35:48 INFO  Account:54 - New account initialized
+2018-07-01 18:35:48 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 18:36:43 INFO  Account:54 - New account initialized
+2018-07-01 18:36:43 INFO  Account:54 - New account initialized
+2018-07-01 18:36:43 INFO  Account:54 - New account initialized
+2018-07-01 18:36:43 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:36:54 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 18:36:56 INFO  Bank:377 - Logging out of users account.
+2018-07-01 18:37:05 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 18:37:10 INFO  Account:54 - New account initialized
+2018-07-01 18:37:10 INFO  Account:54 - New account initialized
+2018-07-01 18:37:10 INFO  Account:54 - New account initialized
+2018-07-01 18:37:10 INFO  Bank:545 - User now has: 50 dollars from their account.
+2018-07-01 18:37:23 INFO  Bank:377 - Logging out of users account.
+2018-07-01 18:39:16 INFO  Account:54 - New account initialized
+2018-07-01 18:39:16 INFO  Account:54 - New account initialized
+2018-07-01 18:39:16 INFO  Account:54 - New account initialized
+2018-07-01 18:39:16 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 18:39:18 INFO  Bank:98 - Registering a new user.
+2018-07-01 18:39:20 INFO  Account:54 - New account initialized
+2018-07-01 18:39:20 INFO  Account:54 - New account initialized
+2018-07-01 18:39:20 INFO  Account:54 - New account initialized
+2018-07-01 18:39:20 INFO  Account:54 - New account initialized
+2018-07-01 18:39:20 INFO  Account:54 - New account initialized
+2018-07-01 18:39:31 INFO  Bank:241 - Normal user succesfully logged in but account needs approval.
+2018-07-01 18:39:37 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 18:39:38 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Bank:441 - Admin approved account: Account [userName=test2, password=test2, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Account:54 - New account initialized
+2018-07-01 18:39:38 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 19:25:10 INFO  Account:54 - New account initialized
+2018-07-01 19:25:10 INFO  Account:54 - New account initialized
+2018-07-01 19:25:10 INFO  Account:54 - New account initialized
+2018-07-01 19:25:10 INFO  Account:54 - New account initialized
+2018-07-01 19:25:10 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:25:16 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 19:25:18 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:25:19 INFO  Account:54 - New account initialized
+2018-07-01 19:25:19 INFO  Account:54 - New account initialized
+2018-07-01 19:25:19 INFO  Account:54 - New account initialized
+2018-07-01 19:25:19 INFO  Account:54 - New account initialized
+2018-07-01 19:25:20 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:25:20 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 19:25:27 INFO  Bank:241 - Normal user succesfully logged in but account needs approval.
+2018-07-01 19:32:23 INFO  Account:54 - New account initialized
+2018-07-01 19:32:23 INFO  Account:54 - New account initialized
+2018-07-01 19:32:23 INFO  Account:54 - New account initialized
+2018-07-01 19:32:23 INFO  Account:54 - New account initialized
+2018-07-01 19:32:23 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:32:30 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 19:32:31 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:32:31 INFO  Account:54 - New account initialized
+2018-07-01 19:32:31 INFO  Account:54 - New account initialized
+2018-07-01 19:32:31 INFO  Account:54 - New account initialized
+2018-07-01 19:32:31 INFO  Account:54 - New account initialized
+2018-07-01 19:33:01 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:33:01 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 19:34:31 INFO  Account:54 - New account initialized
+2018-07-01 19:34:31 INFO  Account:54 - New account initialized
+2018-07-01 19:34:31 INFO  Account:54 - New account initialized
+2018-07-01 19:34:31 INFO  Account:54 - New account initialized
+2018-07-01 19:34:31 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:34:36 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 19:34:37 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:34:37 INFO  Account:54 - New account initialized
+2018-07-01 19:34:37 INFO  Account:54 - New account initialized
+2018-07-01 19:34:37 INFO  Account:54 - New account initialized
+2018-07-01 19:34:37 INFO  Account:54 - New account initialized
+2018-07-01 19:37:38 INFO  Account:54 - New account initialized
+2018-07-01 19:37:38 INFO  Account:54 - New account initialized
+2018-07-01 19:37:38 INFO  Account:54 - New account initialized
+2018-07-01 19:37:38 INFO  Account:54 - New account initialized
+2018-07-01 19:37:38 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:37:45 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:37:49 INFO  Account:54 - New account initialized
+2018-07-01 19:37:49 INFO  Account:54 - New account initialized
+2018-07-01 19:37:49 INFO  Account:54 - New account initialized
+2018-07-01 19:37:49 INFO  Account:54 - New account initialized
+2018-07-01 19:37:49 INFO  Bank:543 - User now has: 50 dollars from their account.
+2018-07-01 19:37:52 INFO  Account:54 - New account initialized
+2018-07-01 19:37:52 INFO  Account:54 - New account initialized
+2018-07-01 19:37:52 INFO  Account:54 - New account initialized
+2018-07-01 19:37:52 INFO  Account:54 - New account initialized
+2018-07-01 19:37:52 INFO  Bank:543 - User now has: 50 dollars from their account.
+2018-07-01 19:37:56 INFO  Bank:520 - User withdrew: 10 dollars from their account.
+2018-07-01 19:37:56 INFO  Account:54 - New account initialized
+2018-07-01 19:37:56 INFO  Account:54 - New account initialized
+2018-07-01 19:37:56 INFO  Account:54 - New account initialized
+2018-07-01 19:37:56 INFO  Account:54 - New account initialized
+2018-07-01 19:37:56 INFO  Bank:525 - User now has: 50 dollars from their account.
+2018-07-01 19:38:09 INFO  Bank:520 - User withdrew: 10 dollars from their account.
+2018-07-01 19:38:09 INFO  Account:54 - New account initialized
+2018-07-01 19:38:09 INFO  Account:54 - New account initialized
+2018-07-01 19:38:09 INFO  Account:54 - New account initialized
+2018-07-01 19:38:09 INFO  Account:54 - New account initialized
+2018-07-01 19:38:09 INFO  Bank:525 - User now has: 50 dollars from their account.
+2018-07-01 19:38:14 INFO  Account:54 - New account initialized
+2018-07-01 19:38:14 INFO  Account:54 - New account initialized
+2018-07-01 19:38:14 INFO  Account:54 - New account initialized
+2018-07-01 19:38:14 INFO  Account:54 - New account initialized
+2018-07-01 19:38:14 INFO  Bank:543 - User now has: 50 dollars from their account.
+2018-07-01 19:38:19 INFO  Bank:520 - User withdrew: 10 dollars from their account.
+2018-07-01 19:38:19 INFO  Account:54 - New account initialized
+2018-07-01 19:38:19 INFO  Account:54 - New account initialized
+2018-07-01 19:38:19 INFO  Account:54 - New account initialized
+2018-07-01 19:38:19 INFO  Account:54 - New account initialized
+2018-07-01 19:38:19 INFO  Bank:525 - User now has: 50 dollars from their account.
+2018-07-01 19:38:26 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:38:30 INFO  Bank:323 - Admin successfully logged in.
+2018-07-01 19:38:31 INFO  Bank:441 - Admin approved account: Account [userName=test1, password=test1, accountNumber=3, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:38:31 INFO  Account:54 - New account initialized
+2018-07-01 19:38:31 INFO  Account:54 - New account initialized
+2018-07-01 19:38:31 INFO  Account:54 - New account initialized
+2018-07-01 19:38:31 INFO  Account:54 - New account initialized
+2018-07-01 19:38:33 INFO  Bank:449 - Admin DID NOT approve account: Account [userName=test2, password=test2, accountNumber=4, accountValue=0, accountType=0, approved= 0].
+2018-07-01 19:38:33 INFO  Bank:462 - Admin finished going through accounts to approve, now logging out.
+2018-07-01 19:42:56 INFO  Account:54 - New account initialized
+2018-07-01 19:42:56 INFO  Account:54 - New account initialized
+2018-07-01 19:42:56 INFO  Account:54 - New account initialized
+2018-07-01 19:42:56 INFO  Account:54 - New account initialized
+2018-07-01 19:42:56 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:43:04 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:43:08 INFO  Bank:487 - User tried to withdraw too much.
+2018-07-01 19:43:10 INFO  Bank:497 - User withdrew: 0 dollars from their account.
+2018-07-01 19:43:10 INFO  Account:54 - New account initialized
+2018-07-01 19:43:10 INFO  Account:54 - New account initialized
+2018-07-01 19:43:10 INFO  Account:54 - New account initialized
+2018-07-01 19:43:10 INFO  Account:54 - New account initialized
+2018-07-01 19:43:10 INFO  Bank:525 - User now has: 0 dollars from their account.
+2018-07-01 19:43:22 INFO  Account:54 - New account initialized
+2018-07-01 19:43:22 INFO  Account:54 - New account initialized
+2018-07-01 19:43:22 INFO  Account:54 - New account initialized
+2018-07-01 19:43:22 INFO  Account:54 - New account initialized
+2018-07-01 19:43:22 INFO  Bank:543 - User now has: 0 dollars from their account.
+2018-07-01 19:43:26 INFO  Account:54 - New account initialized
+2018-07-01 19:43:26 INFO  Account:54 - New account initialized
+2018-07-01 19:43:26 INFO  Account:54 - New account initialized
+2018-07-01 19:43:26 INFO  Account:54 - New account initialized
+2018-07-01 19:43:26 INFO  Bank:543 - User now has: 0 dollars from their account.
+2018-07-01 19:43:31 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:43:43 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:43:46 INFO  Account:54 - New account initialized
+2018-07-01 19:43:46 INFO  Account:54 - New account initialized
+2018-07-01 19:43:46 INFO  Account:54 - New account initialized
+2018-07-01 19:43:46 INFO  Account:54 - New account initialized
+2018-07-01 19:43:46 INFO  Bank:543 - User now has: 20 dollars from their account.
+2018-07-01 19:43:49 INFO  Account:54 - New account initialized
+2018-07-01 19:43:49 INFO  Account:54 - New account initialized
+2018-07-01 19:43:49 INFO  Account:54 - New account initialized
+2018-07-01 19:43:49 INFO  Account:54 - New account initialized
+2018-07-01 19:43:49 INFO  Bank:543 - User now has: 20 dollars from their account.
+2018-07-01 19:43:50 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:44:39 INFO  Account:54 - New account initialized
+2018-07-01 19:44:39 INFO  Account:54 - New account initialized
+2018-07-01 19:44:39 INFO  Account:54 - New account initialized
+2018-07-01 19:44:39 INFO  Account:54 - New account initialized
+2018-07-01 19:44:39 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:44:46 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:44:48 INFO  Account:54 - New account initialized
+2018-07-01 19:44:48 INFO  Account:54 - New account initialized
+2018-07-01 19:44:48 INFO  Account:54 - New account initialized
+2018-07-01 19:44:48 INFO  Account:54 - New account initialized
+2018-07-01 19:44:48 INFO  Bank:543 - User now has: 30 dollars from their account.
+2018-07-01 19:44:54 INFO  Account:54 - New account initialized
+2018-07-01 19:44:54 INFO  Account:54 - New account initialized
+2018-07-01 19:44:54 INFO  Account:54 - New account initialized
+2018-07-01 19:44:54 INFO  Account:54 - New account initialized
+2018-07-01 19:44:54 INFO  Bank:543 - User now has: 30 dollars from their account.
+2018-07-01 19:44:58 INFO  Account:54 - New account initialized
+2018-07-01 19:44:58 INFO  Account:54 - New account initialized
+2018-07-01 19:44:58 INFO  Account:54 - New account initialized
+2018-07-01 19:44:58 INFO  Account:54 - New account initialized
+2018-07-01 19:44:58 INFO  Bank:543 - User now has: 30 dollars from their account.
+2018-07-01 19:45:02 INFO  Account:54 - New account initialized
+2018-07-01 19:45:02 INFO  Account:54 - New account initialized
+2018-07-01 19:45:02 INFO  Account:54 - New account initialized
+2018-07-01 19:45:02 INFO  Account:54 - New account initialized
+2018-07-01 19:45:02 INFO  Bank:543 - User now has: 30 dollars from their account.
+2018-07-01 19:45:06 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:45:12 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:45:15 INFO  Account:54 - New account initialized
+2018-07-01 19:45:15 INFO  Account:54 - New account initialized
+2018-07-01 19:45:15 INFO  Account:54 - New account initialized
+2018-07-01 19:45:15 INFO  Account:54 - New account initialized
+2018-07-01 19:45:15 INFO  Bank:543 - User now has: 32 dollars from their account.
+2018-07-01 19:45:20 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:45:44 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:45:49 INFO  Bank:487 - User tried to withdraw too much.
+2018-07-01 19:45:53 INFO  Bank:497 - User withdrew: 15 dollars from their account.
+2018-07-01 19:45:53 INFO  Account:54 - New account initialized
+2018-07-01 19:45:53 INFO  Account:54 - New account initialized
+2018-07-01 19:45:53 INFO  Account:54 - New account initialized
+2018-07-01 19:45:53 INFO  Account:54 - New account initialized
+2018-07-01 19:45:53 INFO  Bank:525 - User now has: 33 dollars from their account.
+2018-07-01 19:45:58 INFO  Bank:377 - Logging out of users account.
+2018-07-01 19:47:14 INFO  Account:54 - New account initialized
+2018-07-01 19:47:14 INFO  Account:54 - New account initialized
+2018-07-01 19:47:14 INFO  Account:54 - New account initialized
+2018-07-01 19:47:14 INFO  Account:54 - New account initialized
+2018-07-01 19:47:14 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:47:20 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:47:26 INFO  Account:54 - New account initialized
+2018-07-01 19:47:26 INFO  Account:54 - New account initialized
+2018-07-01 19:47:26 INFO  Account:54 - New account initialized
+2018-07-01 19:47:26 INFO  Account:54 - New account initialized
+2018-07-01 19:47:26 INFO  Bank:545 - User now has: -17 dollars from their account.
+2018-07-01 19:47:31 INFO  Bank:487 - User tried to withdraw too much.
+2018-07-01 19:48:48 INFO  Account:54 - New account initialized
+2018-07-01 19:48:48 INFO  Account:54 - New account initialized
+2018-07-01 19:48:48 INFO  Account:54 - New account initialized
+2018-07-01 19:48:48 INFO  Account:54 - New account initialized
+2018-07-01 19:48:48 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:49:15 INFO  Account:54 - New account initialized
+2018-07-01 19:49:15 INFO  Account:54 - New account initialized
+2018-07-01 19:49:15 INFO  Account:54 - New account initialized
+2018-07-01 19:49:15 INFO  Account:54 - New account initialized
+2018-07-01 19:49:15 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:49:20 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:49:23 INFO  Account:54 - New account initialized
+2018-07-01 19:49:23 INFO  Account:54 - New account initialized
+2018-07-01 19:49:23 INFO  Account:54 - New account initialized
+2018-07-01 19:49:23 INFO  Account:54 - New account initialized
+2018-07-01 19:49:23 INFO  Bank:546 - User now has: 50 dollars from their account.
+2018-07-01 19:49:38 INFO  Account:54 - New account initialized
+2018-07-01 19:49:38 INFO  Account:54 - New account initialized
+2018-07-01 19:49:38 INFO  Account:54 - New account initialized
+2018-07-01 19:49:38 INFO  Account:54 - New account initialized
+2018-07-01 19:49:38 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-01 19:49:43 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:49:45 INFO  Account:54 - New account initialized
+2018-07-01 19:49:45 INFO  Account:54 - New account initialized
+2018-07-01 19:49:45 INFO  Account:54 - New account initialized
+2018-07-01 19:49:45 INFO  Account:54 - New account initialized
+2018-07-01 19:49:45 INFO  Bank:546 - User now has: 60 dollars from their account.
+2018-07-01 19:49:52 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:49:55 INFO  Account:54 - New account initialized
+2018-07-01 19:49:55 INFO  Account:54 - New account initialized
+2018-07-01 19:49:55 INFO  Account:54 - New account initialized
+2018-07-01 19:49:55 INFO  Account:54 - New account initialized
+2018-07-01 19:49:56 INFO  Bank:546 - User now has: 70 dollars from their account.
+2018-07-01 19:50:11 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-01 19:50:13 INFO  Bank:521 - User withdrew: 1 dollars from their account.
+2018-07-01 19:50:13 INFO  Account:54 - New account initialized
+2018-07-01 19:50:13 INFO  Account:54 - New account initialized
+2018-07-01 19:50:13 INFO  Account:54 - New account initialized
+2018-07-01 19:50:13 INFO  Account:54 - New account initialized
+2018-07-01 19:50:13 INFO  Bank:527 - User now has: 80 dollars from their account.
