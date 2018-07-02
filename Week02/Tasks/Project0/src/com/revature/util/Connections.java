@@ -7,17 +7,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
+import com.revature.bank.Bank;
+
+
 public class Connections 
 {
 	private static Connection conn = null;
 	private final static String FILE_NAME = "dbprops.properties";
 	private static Properties prop = null;
+	final static Logger logger = Logger.getLogger(Bank.class);
 	
 	public static Connection getConnection()
 	{
 		try
 		{			
-			//CONNECTION VIA PROPERTY FILE
 			prop = new Properties();
 			prop.load(new FileInputStream(FILE_NAME));
 			
@@ -28,14 +33,12 @@ public class Connections
 					prop.getProperty("password")
 					);
 			
-			// THIS WOULD BE LOGGER MESSAGE
-			//System.out.println("DATABASE CONNECTION SUCCESS");
+			logger.info("Connection successfully made.");
 		} 
 		catch ( SQLException e1 ) 
 		{
 			e1.printStackTrace();
-			// THIS WOULD BE LOGGER MESSAGE
-			//System.out.println("DATABASE CONNECTION FAILED");
+			logger.info("Connected failed to be made.");
 		}
 		catch ( ClassNotFoundException e )
 		{

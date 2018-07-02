@@ -1,20 +1,11 @@
 package com.revature.bank;
 
 import static org.junit.Assert.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.revature.bank.Account;
 
 public class AccountTest 
 {
-
-	private static final int ADMIN = 1;
-	private static final int USER = 0;
 	
 	@Test
 	public void createNewAdminAccount() 

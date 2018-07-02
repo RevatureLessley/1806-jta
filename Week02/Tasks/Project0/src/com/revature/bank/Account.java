@@ -3,20 +3,7 @@ package com.revature.bank;
 import java.io.Serializable;
 import org.apache.log4j.Logger;
 
-/**
- * POJO<br>
- * Account class is responsible for holding information
- * that relates to a person who owns an account at the bank.
- * <br>Fields:
- * <br>- userName(String)
- * <br>- password(String)
- * <br>- accountNumber(int)
- * <br>- accountValue(int)
- * <br>- accountType(int)
- * <br>- approved(String)
- * 
- * @author Logan Brewer
- */
+
 public class Account implements Serializable
 {
 	final static Logger logger = Logger.getLogger(Account.class);
@@ -26,21 +13,7 @@ public class Account implements Serializable
 	private int accountNumber;
 	private int accountValue;
 	private int accountType;
-	private String PERSON_ID;
 	private int approved;
-	
-	public Account(int accountNumber, String userName, String password, int accountValue, int accountType, String PERSON_ID, int approved) 
-	{
-		super();
-		this.accountNumber = accountNumber;
-		this.userName = userName;
-		this.password = password;
-		this.accountValue = accountValue;
-		this.accountType = accountType;
-		this.PERSON_ID = PERSON_ID;
-		this.approved = approved;
-		logger.info("New account initialized");
-	}
 	
 	public Account(int accountNumber, String userName, String password, int accountValue, int accountType, int approved) 
 	{

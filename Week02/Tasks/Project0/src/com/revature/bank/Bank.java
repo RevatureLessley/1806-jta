@@ -11,41 +11,11 @@ import com.revature.service.AccountService;
 import com.revature.service.TransactionService;
 
 
-/**
- * Lets a normal user login, logout, 
- * deposit and withdraw from their account.
- * <br>Lets an admin login, logout,
- * and approve accounts. 
- * <br>Fields:
- * <br>logger(Logger)
- * <br>accs(ArrayList<Account>)
- * <br>activeAccount(int)
- * <br>counter(int)
- * <br>accountsAmount(int)
- * <br>registered(String)
- * <br>USER(int)
- * <br>ADMIN(int)
- * <br>
- * <br>Methods:
- * <br>public Bank(ArrayList<Account>)
- * <br>public void register()
- * <br>public void login()
- * <br>public void userLogin()
- * <br>public void adminLogin()
- * <br>public void askUserInput(Account)
- * <br>public void askAdminInput(Account)
- * <br>public void userWithdraw(int, Account)
- * <br>public void userDeposit(int, Account)
- * <br>public void writeAccountsFile(ArrayList<Account>)
- * <br>public ArrayList<Account> readAccountsFile()
- * 
- * 
- * @author Logan Brewer
- */
+
 public class Bank 
 {
 	final static Logger logger = Logger.getLogger(Bank.class);
-	private static ArrayList<Account> accs = null;
+	private ArrayList<Account> accs = null;
 	private int activeAccount = -1;
 	private int enteredAccountType;
 	private int counter;
@@ -53,11 +23,17 @@ public class Bank
 	private static int transactionsAmount;
 	private String registered;
 	private static final int USER = 0;
-	private static final int ADMIN = 1;
 	private static AccountService as = new AccountService();
 	private static TransactionService ts = new TransactionService();
 	
 	
+	/**
+	 * Constructor that takes in an ArrayList of accounts that will be used throughout the 
+	 * program and initializes the ArrayList. Sets the accountsAmount which will be used for setting 
+	 * the account_id in the database. Sets the transactionAmounts which will be used for setting
+	 * the transaction_id in the database.
+	 * @param accs
+	 */
 	public Bank( ArrayList<Account> accs )
 	{
 		this.accs = accs;
@@ -66,7 +42,12 @@ public class Bank
 		logger.info("Initializing Bank with existing accounts.");
 	}
 	
-	
+	/**
+	 * This is a helper method that displays some information about all of the accounts
+	 * that exist in the ArrayList. Useful for testing what information is actually being
+	 * stored or updated.
+	 * @param accs
+	 */
 	public static void displayAccountGroup(ArrayList<Account> accs)
 	{
 		for(Account acc: accs)
@@ -84,13 +65,10 @@ public class Bank
 		}
 	}
 	
-	
-	
 	/**
-	 * This is used when a user does not have an account.
-	 * Has the user enter a username and password they want to use.
-	 * Stores that username and password in the accs ArrayList<Account>
-	 * and writes that ArrayList to a file named "accountsFile.txt"
+	 * This is used when a user says they do not have an account. It prompts them for a username
+	 * and password and then takes that information along with some other default values
+	 * and submits those values into the bank_account table in the database.
 	 */
 	public void register()
 	{
@@ -124,7 +102,6 @@ public class Bank
 	public void login()
 	{
 		activeAccount = -1;
-		//displayAccountGroup(accs);
 		System.out.println("Welcome to the bank, do you have an account? (Yes/No): ");
 		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in) );
 		try
@@ -420,7 +397,7 @@ public class Bank
 	/**
 	 * Takes an admin account as the parameter and goes into their main menu. 
 	 * An admin is only able to approve accounts, they don't have any other functionality in this
-	 * method. They loop through all of the unapproved accounts and have the option to change those accounts
+	 * program. They loop through all of the unapproved accounts and have the option to change those accounts
 	 * to be approved or leave them as unapproved.
 	 * @param account
 	 */
@@ -463,7 +440,6 @@ public class Bank
 			System.out.println("Done going through all accounts.");
 			System.out.println("Logging you out, switch to user account to perform transactions.\n");
 			logger.info("Admin finished going through accounts to approve, now logging out.");
-			//displayAccountGroup(accs);
 			login();
 		}
 		catch ( IOException e)
@@ -476,7 +452,7 @@ public class Bank
 	 * Used when an account, that is passed in as a parameter, tries to withdraw from their account.
 	 * If they withdraw an amount that is less than zero or greater than the amount that
 	 * is in their account, it prompts them to enter a valid amount. After entering a valid
-	 * amount, it sends them to their askUserInput() menu page.
+	 * amount, it logs them out and sends them to the login() page.
 	 * @param withdrawAmount
 	 * @param account
 	 */
@@ -538,14 +514,13 @@ public class Bank
 	
 	/**
 	 * Used when an account, that is passed in as a parameter, tries to deposit into their account.
-	 * After entering a valid amount, it sends them to their askUserInput() menu page.
+	 * After entering a valid amount, it logs them out and sends them to the login() page.
 	 * @param depositAmount
 	 * @param account
 	 */
 	public void userDeposit(int depositAmount, Account account)
 	{
 		System.out.println("Amount in the account before deposit: $" + account.getAccountValue());
-		//account.setAccountValue(account.getAccountValue() + depositAmount);
 		int newTotal = account.getAccountValue() + depositAmount;
 		as.updateAccountValue(account, newTotal);
 		accs = as.getAllAccounts();

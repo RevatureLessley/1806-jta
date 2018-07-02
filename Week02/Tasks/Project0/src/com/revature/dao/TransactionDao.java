@@ -7,14 +7,24 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import com.revature.bank.Account;
 import com.revature.util.Connections;
 
+
 public class TransactionDao 
 {
-
+	/**
+	 * The purpose of this function is to take a deposit or withdraw transaction and store
+	 * the what happened into the bank_transaction database. It opens the connection,
+	 * calls the insert_into_bank_transaction stored procedure and executes it with
+	 * the entered parameters.
+	 * @param account
+	 * @param transactionId
+	 * @param depositAmount
+	 * @param withdrawAmount
+	 * @return
+	 */
 	public Boolean insertTransactionViaSp(Account account, int transactionId, int depositAmount, int withdrawAmount) 
 	{
 		CallableStatement stmt = null; 
@@ -38,6 +48,12 @@ public class TransactionDao
 		return false;
 	}
 	
+	/**
+	 * The purpose of this is to get the count of all transactions that have occurred 
+	 * and return that value to be used so the transaction ID for each 
+	 * transaction doesn't get overwritten or duplicated which would cause issues.
+	 * @return
+	 */
 	public int selectCountTransactions() 
 	{
 		int transactionsAmount = 0;

@@ -743,3 +743,20 @@
 2018-07-02 15:01:23 INFO  Account:54 - New account initialized
 2018-07-02 15:01:23 INFO  Account:103 - Set account value to: 53.
 2018-07-02 15:01:23 INFO  Bank:531 - User now has: 53 dollars from their account.
+2018-07-02 18:29:01 INFO  Account:27 - New account initialized
+2018-07-02 18:29:01 INFO  Account:27 - New account initialized
+2018-07-02 18:29:01 INFO  Account:27 - New account initialized
+2018-07-02 18:29:05 INFO  Account:27 - New account initialized
+2018-07-02 18:29:05 INFO  Bank:36 - Connection successfully made.
+2018-07-02 18:29:05 INFO  Bank:42 - Initializing Bank with existing accounts.
+2018-07-02 18:29:05 INFO  Bank:501 - User withdrew: 10 dollars from their account.
+2018-07-02 18:29:06 INFO  Bank:36 - Connection successfully made.
+2018-07-02 18:29:06 INFO  Bank:36 - Connection successfully made.
+2018-07-02 18:29:06 INFO  Account:27 - New account initialized
+2018-07-02 18:29:06 INFO  Account:27 - New account initialized
+2018-07-02 18:29:06 INFO  Account:27 - New account initialized
+2018-07-02 18:29:06 INFO  Account:27 - New account initialized
+2018-07-02 18:29:06 INFO  Account:76 - Set account value to: 40.
+2018-07-02 18:29:06 INFO  Bank:507 - User now has: 40 dollars from their account.
+2018-07-02 18:29:06 INFO  Bank:36 - Connection successfully made.
+2018-07-02 18:29:06 INFO  Bank:36 - Connection successfully made.

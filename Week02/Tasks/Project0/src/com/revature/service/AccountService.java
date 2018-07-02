@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import com.revature.bank.Account;
 import com.revature.dao.AccountDao;
 
+
 public class AccountService 
 {
-
+	/**
+	 * A helper method that calls the selectAllAccount method from the 
+	 * AccountDao class.
+	 * @return
+	 */
 	public ArrayList<Account> getAllAccounts()
 	{
 		AccountDao nd = new AccountDao();
@@ -16,43 +21,39 @@ public class AccountService
 		return accs;
 	}
 	
-	public Account getAccountById(Integer id)
-	{
-		AccountDao nd = new AccountDao();
-		Account acc = nd.selectAccountById(id);
-		
-		return acc;
-	}
-	
-	public boolean updateCurrencyById(Integer id, Integer value)
-	{
-		AccountDao nd = new AccountDao();
-		Account acc = nd.selectAccountById(id);
-		
-		if(acc != null)
-		{
-			acc.setAccountValue(value);
-			if(nd.updateAccount(acc) > 0)
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
+	/**
+	 * A helper method that calls the insertAccountViaSp method from the 
+	 * AccountDao class.
+	 * @param acc
+	 * @return
+	 */
 	public boolean insertAccount(Account acc)
 	{
 		AccountDao nd = new AccountDao();
 		return nd.insertAccountViaSp(acc);
 	}
 	
+	/**
+	 * A helper method that calls the updateCurrencyViaSp method from the
+	 * AccountDao class.
+	 * @param acc
+	 * @param newValue
+	 * @return
+	 */
 	public boolean updateAccountValue(Account acc, int newValue)
 	{
 		AccountDao nd = new AccountDao();
 		return nd.updateCurrencyViaSp(acc, newValue);
 	}
 	
+	
+	/**
+	 * A helper method that calls the updateApprovedViaSp method from the
+	 * AccountDao class.
+	 * @param acc
+	 * @param newApproved
+	 * @return
+	 */
 	public boolean updateApproved(Account acc, int newApproved)
 	{
 		AccountDao nd = new AccountDao();
