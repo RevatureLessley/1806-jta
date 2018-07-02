@@ -1,0 +1,110 @@
+2018-06-23 21:26:35 INFO  EntryClass:56 - tester password
+2018-06-23 21:26:45 INFO  EntryClass:64 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 120.0
+2018-06-23 22:20:26 INFO  EntryClass:40 - tester password
+2018-06-23 22:20:26 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 22:22:51 INFO  EntryClass:29 - admintest password
+2018-06-23 22:22:52 INFO  EntryClass:31 - ad85e3ce-d0b4-4008-8096-fe19add1683d
+2018-06-23 22:24:11 INFO  EntryClass:40 - admintest password
+2018-06-23 22:24:12 INFO  EntryClass:45 - Login Successful for useradmintest
+2018-06-23 22:26:08 INFO  EntryClass:40 - user password
+2018-06-23 22:26:09 INFO  EntryClass:121 - IOException is caught
+2018-06-23 22:26:50 INFO  EntryClass:40 - tester 
+2018-06-23 22:27:48 INFO  EntryClass:40 - tester password
+2018-06-23 22:27:48 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 22:30:55 INFO  EntryClass:40 - tester password
+2018-06-23 22:30:56 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 22:36:29 INFO  EntryClass:40 - admin password
+2018-06-23 22:36:29 INFO  EntryClass:122 - IOException is caught
+2018-06-23 22:37:05 INFO  EntryClass:40 - admintest password
+2018-06-23 22:37:05 INFO  EntryClass:122 - IOException is caught
+2018-06-23 22:43:03 INFO  EntryClass:40 - admin password
+2018-06-23 22:43:03 INFO  EntryClass:122 - IOException is caught
+2018-06-23 22:43:57 INFO  EntryClass:40 - adminuser password
+2018-06-23 22:43:57 INFO  EntryClass:122 - IOException is caught
+2018-06-23 22:44:34 INFO  EntryClass:40 - tester password
+2018-06-23 22:44:34 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 23:38:32 INFO  EntryClass:29 - ATester password
+2018-06-23 23:38:33 INFO  EntryClass:31 - 04bb039c-6ac1-4074-a910-e6b96d2dd4ab
+2018-06-23 23:39:00 INFO  EntryClass:40 - ATester password
+2018-06-23 23:39:00 INFO  EntryClass:45 - Login Successful for userATester
+2018-06-23 23:39:27 INFO  EntryClass:40 - tester password
+2018-06-23 23:39:27 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 23:39:33 INFO  EntryClass:73 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 200.0
+2018-06-23 23:40:34 INFO  EntryClass:40 - tester password
+2018-06-23 23:40:34 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-23 23:40:42 INFO  EntryClass:73 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 1000200.0
+2018-06-23 23:41:19 INFO  EntryClass:40 - tester password
+2018-06-23 23:41:19 INFO  EntryClass:45 - Login Successful for usertester
+2018-06-24 10:02:50 INFO  EntryClass:38 - tester password
+2018-06-24 10:02:50 INFO  EntryClass:43 - Login Successful for usertester
+2018-06-24 10:03:00 INFO  EntryClass:95 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 1000210.0
+2018-06-24 10:06:12 INFO  EntryClass:38 - ATester password
+2018-06-24 10:06:13 INFO  EntryClass:43 - Login Successful for userATester
+2018-06-24 10:06:33 INFO  EntryClass:38 - tester password
+2018-06-24 10:06:33 INFO  EntryClass:43 - Login Successful for usertester
+2018-06-24 10:06:55 INFO  EntryClass:87 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 900210.0
+2018-06-24 10:07:07 INFO  EntryClass:99 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 901210.0
+2018-06-24 10:24:12 INFO  EntryClass:38 - tester password
+2018-06-24 10:24:13 INFO  EntryClass:43 - Login Successful for usertester
+2018-06-24 10:26:56 INFO  EntryClass:38 - tester password
+2018-06-24 10:26:57 INFO  EntryClass:43 - Login Successful for usertester
+2018-06-25 10:28:30 INFO  EntryClass:39 - ATestor dddd
+2018-06-25 10:28:30 INFO  Utility:27 - IOException is caught
+2018-06-25 10:35:04 INFO  EntryClass:39 - ATester password
+2018-06-25 10:35:05 INFO  EntryClass:44 - Login Successful for userATester
+2018-06-25 10:36:12 INFO  EntryClass:39 - tester password
+2018-06-25 10:36:12 INFO  EntryClass:44 - Login Successful for usertester
+2018-06-25 11:05:35 INFO  EntryClass:39 - ATestor rer
+2018-06-25 11:05:35 INFO  Utility:27 - IOException is caught
+2018-06-25 11:05:51 INFO  EntryClass:39 - ATester password
+2018-06-25 11:05:51 INFO  EntryClass:44 - Login Successful for userATester
+2018-06-25 11:06:13 INFO  EntryClass:39 - tester password
+2018-06-25 11:06:14 INFO  EntryClass:44 - Login Successful for usertester
+2018-06-25 11:06:16 INFO  EntryClass:112 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 901210.0
+2018-06-25 11:06:56 INFO  EntryClass:103 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 901510.34
+2018-06-25 11:07:02 INFO  EntryClass:112 - b41ae83e-fb3e-480b-bb87-099d417911d4 | 901510.34
+2018-06-25 11:08:15 INFO  EntryClass:26 - Perform quit case.
+2018-07-01 17:19:47 INFO  EntryClass:198 - tester password
+2018-07-01 17:19:53 INFO  EntryClass:206 - tester
+2018-07-01 17:32:58 INFO  EntryClass:198 - tester password
+2018-07-01 17:33:02 INFO  EntryClass:206 - tester
+2018-07-01 17:33:50 INFO  EntryClass:198 - admin password
+2018-07-01 17:33:53 INFO  EntryClass:206 - admin
+2018-07-01 17:34:03 INFO  EntryClass:56 - admin password
+2018-07-01 17:34:03 INFO  EntryClass:62 - Login Successful for useradmin
+2018-07-01 17:35:46 INFO  EntryClass:56 - admin password
+2018-07-01 17:35:49 INFO  EntryClass:62 - Login Successful for useradmin
+2018-07-01 17:42:52 INFO  EntryClass:56 - tester password
+2018-07-01 17:42:55 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 17:42:58 INFO  EntryClass:93 - Perform quit case.
+2018-07-01 17:43:05 INFO  EntryClass:56 - admin password
+2018-07-01 17:43:06 INFO  EntryClass:62 - Login Successful for useradmin
+2018-07-01 17:46:15 INFO  EntryClass:56 - admin password
+2018-07-01 17:46:19 INFO  EntryClass:62 - Login Successful for useradmin
+2018-07-01 17:46:37 INFO  EntryClass:74 - Perform quit case.
+2018-07-01 17:46:45 INFO  EntryClass:56 - tester password
+2018-07-01 17:46:46 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 17:47:57 INFO  EntryClass:56 - tester password
+2018-07-01 17:48:00 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 17:50:07 INFO  EntryClass:56 - tester password
+2018-07-01 17:50:10 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 17:57:27 INFO  EntryClass:56 - tester password
+2018-07-01 17:57:31 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 18:04:22 INFO  EntryClass:56 - tester 
+2018-07-01 18:05:41 INFO  EntryClass:56 - tester password
+2018-07-01 18:05:49 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-01 18:06:01 INFO  EntryClass:136 - 100001 | 150.0
+2018-07-01 18:06:32 INFO  EntryClass:136 - 100001 | 180.0
+2018-07-01 18:06:54 INFO  EntryClass:152 - 100001 | 180.0
+2018-07-01 18:07:07 INFO  EntryClass:117 - 100001 | 160.0
+2018-07-01 18:07:19 INFO  EntryClass:93 - Perform quit case.
+2018-07-01 18:07:34 INFO  EntryClass:38 - Perform quit case.
+2018-07-02 15:00:01 INFO  EntryClass:203 - thisisatest password
+2018-07-02 15:00:06 INFO  EntryClass:211 - thisisatest
+2018-07-02 15:02:03 INFO  EntryClass:198 - test password
+2018-07-02 15:04:32 INFO  EntryClass:198 - test password
+2018-07-02 15:11:00 INFO  EntryClass:198 - test password
+2018-07-02 15:27:56 INFO  EntryClass:198 - test test
+2018-07-02 15:51:19 INFO  EntryClass:198 - test test
+2018-07-02 15:51:22 INFO  EntryClass:206 - test
+2018-07-02 15:52:33 INFO  EntryClass:38 - Perform quit case.
