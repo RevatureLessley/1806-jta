@@ -29,6 +29,7 @@ public class AdministratorAccount extends AccountClass
 				for(PlayerAccount a: pgm.Accounts.getList())
 				{
 					System.out.println(count + ". " + a.getPlayerInfo().getAccountInfo().getuName());
+					count++;
 				}
 				System.out.print("\n Select an account to manage or -1 to exit: ");
 				selection = pgm.in.nextInt();
@@ -97,7 +98,8 @@ public class AdministratorAccount extends AccountClass
 				int selection2 = pgm.in.nextInt();
 				switch (selection2)
 				{
-				case 1: //TODO Approve account
+				case 1: temp.getPlayerInfo().setAccountActive(true);
+						pgm.Accounts.update();
 						break;
 				case 2: //TODO Deny account
 				case 3: break;

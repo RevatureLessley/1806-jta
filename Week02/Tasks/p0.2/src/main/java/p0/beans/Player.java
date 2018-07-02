@@ -11,21 +11,31 @@ public class Player {
 	private int AccountID;
 	private boolean hasLoan;
 	private boolean loanWaiting;
+	private boolean accountActive;
 	private boolean accountFlagged = false;
 	private Account AccountInfo;
 	
-	public Player(int pid, int aid, int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting,
+	public Player(int pid, int aid, int accountBalance, int bankBalance, int loanBalance, boolean hasLoan, boolean loanWaiting, boolean active,
 			String Name, String Uname, String Pword) {
 		this.PlayerID= pid;
 		this.AccountID = aid;
 		this.accountBalance = accountBalance;
 		this.loanBalance = loanBalance;
 		this.bankBalance = bankBalance;
+		this.accountActive = active;
 		this.hasLoan = hasLoan;
 		this.loanWaiting = loanWaiting;
 		AccountInfo = new Account(Name,Uname,Pword);
 	}
 	
+	public boolean isAccountActive() {
+		return accountActive;
+	}
+
+	public void setAccountActive(boolean accountActive) {
+		this.accountActive = accountActive;
+	}
+
 	public int getPlayerID() {
 		return PlayerID;
 	}

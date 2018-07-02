@@ -29,6 +29,31 @@ public class AccountList
 		loaner = l;
 	}
 	
+	public void update() {
+		boolean found = false;
+		do {
+			found = false;
+			int mark =0;
+			if(waiting.size()>0)
+			{
+				for(int i = 0; i < waiting.size(); i++)
+				{
+					PlayerAccount p = waiting.get(i);
+					if(p.getPlayerInfo().isAccountActive())
+					{
+						System.out.println("Added " + p.getAccount().getName() + " to the active list");
+						accounts.add(p);
+						p.update();
+						found = true;
+					}
+				}
+				if(found) {
+					waiting.remove(mark);
+				}
+			}
+		}while(found);
+	}
+	
 	public ArrayList<PlayerAccount> getList(){
 		return accounts;
 	}

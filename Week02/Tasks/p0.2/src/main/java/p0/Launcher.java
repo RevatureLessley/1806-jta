@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import p0.dao.PlayerDaoImpl;
 import p0.service.AccountListService;
 
 
@@ -168,74 +169,37 @@ public class Launcher {
 	
 	public void newAccount(Launcher pgm) {
 		//TODO make DB safe account creation
+		pgm.dumpIn(pgm);
+		System.out.print("Select Name for new account: ");
+		String tempN = in.nextLine();
+		System.out.print("Select User Name for new account: ");
+		String tempU = in.nextLine();
+		System.out.print("Select Password for new account: ");
+		String tempP = in.nextLine();
+		
+		int count = pgm.Accounts.getList().size()+pgm.Accounts.getWaitingList().size() +4;
+		
+		PlayerDaoImpl pdi = new PlayerDaoImpl();
+		pdi.createPlayer(tempN, tempU, tempP, count);
 	}
 
 	public void load(Launcher pgm) {
 		AccountListService als = new AccountListService();
-		if(als.getAccSize() == 0)
-		{
-			System.out.println("There wasn't a vailid user list, starting new world list... \n");
-			pgm.generateWorld(pgm);
+
+		Accounts = new AccountList();
+		ArrayList<PlayerAccount> temp = als.getPlayerArray();
+		ArrayList<PlayerAccount> temp2 = als.getWaitingPlayerArray();
+		Accounts.setAdmin(als.getAdmin());
+		Accounts.setBanker(als.getBanker());
+		Accounts.setLoaner(als.getLoaner());
+		for(PlayerAccount p : temp) {
+			Accounts.add(p);
 		}
-		else {
-			Accounts = new AccountList();
-			ArrayList<PlayerAccount> temp = als.getPlayerArray();
-			ArrayList<PlayerAccount> temp2 = als.getWaitingPlayerArray();
-			Accounts.setAdmin(als.getAdmin());
-			Accounts.setBanker(als.getBanker());
-			Accounts.setLoaner(als.getLoaner());
-			for(PlayerAccount p : temp) {
-				Accounts.add(p);
-			}
-			for(PlayerAccount p : temp2){
-				Accounts.addWaiting(p);
-			}
+		for(PlayerAccount p : temp2){
+			Accounts.addWaiting(p);
 		}
-	}
-	
-	/**
-	 * Activated whenever there is an error in loading the database
-	 * Collects information for the Administrator, Banker and Loaner accounts
-	 * Sets these accounts as the basis for the world and saves upon exiting to make sure
-	 * the information sticks.
-	 * @param pgm a copy of the general launch program provided to give variable access to all methods
-	 */
-	public void generateWorld(Launcher pgm)
-	{
-		//TODO: Generate world function (OPTIONAL WITH WORLD DELETE GONE)
-//
-//		pgm.dumpIn(pgm);
-//		pgm.clearScreen();
-//		System.out.println("Welcome to the Aeva Arena Simulater version: " + VERSION_NUM + "\n");
-//		System.out.print("Please choose a user name for the administrator: ");
-//		String uName = pgm.in.nextLine();
-//		System.out.print("Now choose a password for the administator account: ");
-//		String pWord = pgm.in.nextLine();
-//		System.out.println("Finally what shall we call the administrator?: ");
-//		String Name = pgm.in.nextLine();
-//		Administrator tempA =new Administrator(Name,uName,pWord, pgm);
-//
-//		System.out.print("Please choose a user name for the banker: ");
-//		uName = pgm.in.nextLine();
-//		System.out.print("Now choose a password for the banker account: ");
-//		pWord = pgm.in.nextLine();
-//		System.out.println("Finally what shall we call the banker?: ");
-//		Name = pgm.in.nextLine();
-//		Banker tempB =new Banker(Name,uName,pWord, pgm);
-//
-//		System.out.print("Please choose a user name for the loaner: ");
-//		uName = pgm.in.nextLine();
-//		System.out.print("Now choose a password for the loaner account: ");
-//		pWord = pgm.in.nextLine();
-//		System.out.println("Finally what shall we call the loaner?: ");
-//		Name = pgm.in.nextLine();
-//		Loaner tempL =new Loaner(Name,uName,pWord, pgm);
-//		
-//		System.out.println("Accounts created, generating world.");
-//		pgm.Accounts = new AccountList(new ArrayList<Player>(), tempA, tempB, tempL);
 	}
 
-	
 	public void dumpIn(Launcher pgm)
 	{
 		System.out.println("Press Enter to Continue");

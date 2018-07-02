@@ -15,9 +15,9 @@ public class PlayerAccount extends AccountClass
 	 * @param pBal the amount of money in the players back account
 	 * @param lBal the value of the players loan
 	 */
-	public PlayerAccount(int pid, int aid, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting, String name, String uName, String pword)
+	public PlayerAccount(int pid, int aid, int aBal, int bBal, int lBal, boolean hasL, boolean lWaiting, boolean active, String name, String uName, String pword)
 	{
-		pAcc = new Player(pid, aid, aBal,lBal, bBal, hasL, lWaiting, name, uName, pword);
+		pAcc = new Player(pid, aid, aBal,lBal, bBal, hasL, lWaiting, active, name, uName, pword);
 	}
 	
 
@@ -207,8 +207,8 @@ public class PlayerAccount extends AccountClass
 		
 		while(selection != 5)
 		{
-			if(pAcc.isAccountFlagged()) {
-				System.out.println("This account is flagged for deletion");
+			if(pAcc.isLoanWaiting()) {
+				System.out.println("This account is waiting for a loan");
 			}
 			System.out.println("Gold: " + pAcc.getAccountBalance());
 			System.out.println("Bank balance: " + pAcc.getBankBalance());
@@ -271,7 +271,7 @@ public class PlayerAccount extends AccountClass
 
 		Account tempA = pAcc.getAccountInfo();
 		PlayerAccount temp = new PlayerAccount(pAcc.getPlayerID(),pAcc.getAccountID(), pAcc.getAccountBalance(), 
-				pAcc.getBankBalance(), pAcc.getLoanBalance(), pAcc.isHasLoan(), pAcc.isLoanWaiting(),
+				pAcc.getBankBalance(), pAcc.getLoanBalance(), pAcc.isHasLoan(), pAcc.isLoanWaiting(), true,
 				tempA.getName(), tempA.getuName(),tempA.getuPass());
 		ps.updatePlayer(temp);
 	}

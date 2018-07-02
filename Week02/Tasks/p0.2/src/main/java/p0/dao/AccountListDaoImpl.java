@@ -58,7 +58,8 @@ public class AccountListDaoImpl implements AccountListDao {
 				{
 					boolean hasL;
 					boolean lWait;
-					if(rs.getInt(6) == 0)
+					boolean active = true;
+					if(rs.getInt(5) == 0)
 					{
 						hasL = false;
 					}
@@ -67,7 +68,7 @@ public class AccountListDaoImpl implements AccountListDao {
 						hasL = true;
 					}
 
-					if(rs.getInt(7) == 0)
+					if(rs.getInt(6) == 0)
 					{
 						lWait = false;
 					}
@@ -75,7 +76,7 @@ public class AccountListDaoImpl implements AccountListDao {
 					{
 						lWait = true;
 					}
-					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8),  rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, rs.getString(10), rs.getString(11), rs.getString(12));
+					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8), rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, active, rs.getString("acc_name"), rs.getString("acc_uname"), rs.getString("acc_pword"));
 					players.add(p);
 				}
 			}
@@ -103,11 +104,12 @@ public class AccountListDaoImpl implements AccountListDao {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				if(rs.getInt(8) == 0)
+				if(rs.getInt(7) == 0)
 				{
 					boolean hasL;
 					boolean lWait;
-					if(rs.getInt(6) == 0)
+					boolean active = false;
+					if(rs.getInt(5) == 0)
 					{
 						hasL = false;
 					}
@@ -116,7 +118,7 @@ public class AccountListDaoImpl implements AccountListDao {
 						hasL = true;
 					}
 
-					if(rs.getInt(7) == 0)
+					if(rs.getInt(6) == 0)
 					{
 						lWait = false;
 					}
@@ -124,7 +126,7 @@ public class AccountListDaoImpl implements AccountListDao {
 					{
 						lWait = true;
 					}
-					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8), rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, rs.getString(10), rs.getString(11), rs.getString(12));
+					PlayerAccount p = new PlayerAccount(rs.getInt(1), rs.getInt(8), rs.getInt(2), rs.getInt(3),rs.getInt(4), hasL, lWait, active, rs.getString("acc_name"), rs.getString("acc_uname"), rs.getString("acc_pword"));
 					players.add(p);
 				}
 			}
@@ -180,7 +182,7 @@ public class AccountListDaoImpl implements AccountListDao {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				banker = new BankerAccount(rs.getInt(2), rs.getString(5), rs.getString(6), rs.getString(7));
+				banker = new BankerAccount(rs.getDouble(2), rs.getString(5), rs.getString(6), rs.getString(7));
 			}
 		}
 		catch(SQLException e){
@@ -206,7 +208,7 @@ public class AccountListDaoImpl implements AccountListDao {
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
-				loaner = new LoanerAccount(rs.getInt(2), rs.getInt(3), rs.getString(6), rs.getString(7), rs.getString(8));
+				loaner = new LoanerAccount(rs.getInt(2), rs.getDouble(3), rs.getString(6), rs.getString(7), rs.getString(8));
 			}
 		}
 		catch(SQLException e){

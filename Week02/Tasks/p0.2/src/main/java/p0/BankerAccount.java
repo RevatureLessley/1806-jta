@@ -2,6 +2,7 @@ package p0;
 
 import p0.beans.Account;
 import p0.beans.Banker;
+import p0.service.BankerService;
 
 public class BankerAccount extends AccountClass
 {
@@ -82,12 +83,21 @@ public class BankerAccount extends AccountClass
 	public Account getAccount() {
 		return bAcc.getAccountInfo();
 	}
-
+	
 	@Override
 	public void logout() {
-		// TODO Auto-generated method stub
+		update();
+		System.out.println("Farewell Banker, hope to see you again soon. \n");
 	}
 	
+	public void update() {
+		BankerService bs = new BankerService();
+
+		Account tempA = bAcc.getAccountInfo();
+		BankerAccount temp = new BankerAccount(bAcc.getInterest(),
+				tempA.getName(), tempA.getuName(),tempA.getuPass());
+		bs.updateBanker(temp);
+	}
 	public Banker getBankInfo() {
 		return bAcc;
 	}
