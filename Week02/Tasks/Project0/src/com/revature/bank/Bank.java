@@ -498,6 +498,7 @@ public class Bank
 						finalAmount = account.getAccountValue() - withdrawAmount;
 						as.updateAccountValue(account, finalAmount);
 						accs = as.getAllAccounts();
+						account.setAccountValue(account.getAccountValue() - withdrawAmount);
 						break;
 					}
 					else
@@ -522,7 +523,7 @@ public class Bank
 			finalAmount = account.getAccountValue() - withdrawAmount;
 			as.updateAccountValue(account, finalAmount);
 			accs = as.getAllAccounts();
-			//account.setAccountValue(account.getAccountValue() - withdrawAmount);
+			account.setAccountValue(account.getAccountValue() - withdrawAmount);
 		}
 		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
@@ -543,6 +544,7 @@ public class Bank
 		int newTotal = account.getAccountValue() + depositAmount;
 		as.updateAccountValue(account, newTotal);
 		accs = as.getAllAccounts();
+		account.setAccountValue(account.getAccountValue() + depositAmount);
 		logger.info("User now has: " + account.getAccountValue() + " dollars from their account.");
 		System.out.println("Amount in the account after deposit: $" + account.getAccountValue() + "\n");
 		//displayAccountGroup(accs);

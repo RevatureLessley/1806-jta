@@ -20,23 +20,6 @@ public class Driver
 	private static ArrayList<Account> accs = null;
 	
 	
-//	public static void displayAccountGroup(ArrayList<Account> accs)
-//	{
-//		for(Account acc: accs)
-//		{
-//			System.out.println("Username " + acc.getUserName() +
-//								", password: " +
-//								acc.getPassword() +
-//								", currency: " +
-//								acc.getAccountValue() +
-//								", accountType: " +
-//								acc.getAccountType() +
-//								", accountApproved: " +
-//								acc.getApproved()
-//								);
-//		}
-//	}
-	
 	public static void main(String[] args) 
 	{
 		Connection conn = Connections.getConnection();

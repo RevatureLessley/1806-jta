@@ -567,3 +567,37 @@
 2018-07-01 19:50:13 INFO  Account:54 - New account initialized
 2018-07-01 19:50:13 INFO  Account:54 - New account initialized
 2018-07-01 19:50:13 INFO  Bank:527 - User now has: 80 dollars from their account.
+2018-07-02 10:16:02 INFO  Account:54 - New account initialized
+2018-07-02 10:16:02 INFO  Account:54 - New account initialized
+2018-07-02 10:16:02 INFO  Account:54 - New account initialized
+2018-07-02 10:16:02 INFO  Account:54 - New account initialized
+2018-07-02 10:16:02 INFO  Bank:63 - Initializing Bank with existing accounts.
+2018-07-02 10:16:11 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:16:15 INFO  Account:54 - New account initialized
+2018-07-02 10:16:15 INFO  Account:54 - New account initialized
+2018-07-02 10:16:15 INFO  Account:54 - New account initialized
+2018-07-02 10:16:15 INFO  Account:54 - New account initialized
+2018-07-02 10:16:15 INFO  Account:103 - Set account value to: 81.
+2018-07-02 10:16:15 INFO  Bank:548 - User now has: 81 dollars from their account.
+2018-07-02 10:16:24 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:16:28 INFO  Account:54 - New account initialized
+2018-07-02 10:16:28 INFO  Account:54 - New account initialized
+2018-07-02 10:16:28 INFO  Account:54 - New account initialized
+2018-07-02 10:16:28 INFO  Account:54 - New account initialized
+2018-07-02 10:16:28 INFO  Account:103 - Set account value to: 101.
+2018-07-02 10:16:28 INFO  Bank:548 - User now has: 101 dollars from their account.
+2018-07-02 10:16:39 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:16:49 INFO  Bank:522 - User withdrew: 100 dollars from their account.
+2018-07-02 10:16:49 INFO  Account:54 - New account initialized
+2018-07-02 10:16:49 INFO  Account:54 - New account initialized
+2018-07-02 10:16:49 INFO  Account:54 - New account initialized
+2018-07-02 10:16:49 INFO  Account:54 - New account initialized
+2018-07-02 10:16:49 INFO  Account:103 - Set account value to: 1.
+2018-07-02 10:16:49 INFO  Bank:528 - User now has: 1 dollars from their account.
+2018-07-02 10:16:56 INFO  Bank:236 - Normal user successfully logged in.
+2018-07-02 10:16:59 INFO  Account:54 - New account initialized
+2018-07-02 10:16:59 INFO  Account:54 - New account initialized
+2018-07-02 10:16:59 INFO  Account:54 - New account initialized
+2018-07-02 10:16:59 INFO  Account:54 - New account initialized
+2018-07-02 10:16:59 INFO  Account:103 - Set account value to: 50.
+2018-07-02 10:16:59 INFO  Bank:548 - User now has: 50 dollars from their account.
