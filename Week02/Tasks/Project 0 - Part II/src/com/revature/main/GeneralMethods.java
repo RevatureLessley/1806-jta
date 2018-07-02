@@ -72,31 +72,30 @@ public class GeneralMethods {
 		List<User> users = ud.selectAllUsers();
 		
 		for(User u:users) {
-			if(u.getEmail().equals(email)) {
-				if(u.getPassword().equals(password)) {
-					if(u.getState() == 2) {
-						System.out.println("You haven't been approved by an administrator, please check again later.");
-						return;
-					}
-					if(u.getState() == 3) {
-						System.out.println("You have been banned by an administrator.");
-						return;
-					}
-					else {
-						System.out.println("You have logged in successfully!");
-						if(u.getRole() == 1) {
-							Bank.adminMethods.adminMenu();
-						}
-						//else give the user more options
-						else {
-							Bank.userMethods.userMenu(u);
-						}
-					}
-				}else {
-					System.out.println("Wrong password or email");
+			if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
+				if(u.getState() == 2) {
+					System.out.println("You haven't been approved by an administrator, please check again later.");
+					return;
 				}
+				if(u.getState() == 3) {
+					System.out.println("You have been banned by an administrator.");
+					return;
+				}
+				else {
+					System.out.println("You have logged in successfully!");
+					if(u.getRole() == 1) {
+						Bank.adminMethods.adminMenu();
+					}
+					//else give the user more options
+					else {
+						Bank.userMethods.userMenu(u);
+					}
+				}
+			} else {
+				System.out.println("Wrong email or password.");
 			}
 		}
+		Bank.logger.info("End of login method.");
 	}
 	
 	/**

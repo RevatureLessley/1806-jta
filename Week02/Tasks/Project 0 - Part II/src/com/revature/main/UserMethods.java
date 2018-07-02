@@ -109,12 +109,12 @@ public class UserMethods {
 			currentBalance = currentBalance.subtract(amount);
 			bDao.updateBalanceAmountById(user.getId(), currentBalance);
 			bDao.commit();
+			Bank.logger.info("Account balance updated successfully.");
 		}else {
 			System.out.println("You don't have enough money to withdraw that amount.");
 		}
 		
 		System.out.println("Your current balance is " + bDao.selectBalanceViaFnc(user.getId()));
-		
 	}
 	
 	/**
@@ -126,8 +126,10 @@ public class UserMethods {
 	public boolean enoughMoneyToWithdraw(BigDecimal currentBalance, BigDecimal amount) {
 		
 		if(currentBalance == null || currentBalance.compareTo(amount) < 0) {
+			Bank.logger.info("User has not enough money.");
 			return false;
 		}
+		Bank.logger.info("User has enough money.");
 		return true;
 	}
 	

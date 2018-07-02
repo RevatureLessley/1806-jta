@@ -52,6 +52,7 @@ public class AdminMethods {
 				break;
 			}
 		}
+		Bank.logger.info("End of list of users waiting to be approved.");
 		System.out.println("There are no more users waiting to be approved.");
 	}
 	
@@ -93,5 +94,6 @@ public class AdminMethods {
 		for(User u:users) {
 			System.out.println(u + "\n");
 		}
+		Bank.logger.info("End of list of users.");
 	}
 }
