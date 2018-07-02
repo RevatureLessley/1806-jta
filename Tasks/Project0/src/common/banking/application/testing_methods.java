@@ -10,7 +10,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class testing_methods {
-	customer client = new customer("First", "Last", "0", new StringBuffer("password"));
+	customer client = new customer("FIRST NAME", "LAST NAME", "111111111", 
+            new String("password"), new String("addresss"), 
+            new String("651-123-4567"));
 	
 	@Test
 	public void activatedCheck() {

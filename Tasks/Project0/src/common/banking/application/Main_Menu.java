@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import common.banking.dao.*;
+
 public class Main_Menu {
 //====================================Variables========================================================================//
 	int INPUT = 0; 
@@ -12,8 +14,10 @@ public class Main_Menu {
 	Scanner COMMAND = new Scanner(System.in);
 	data_storage ACCOUNTER = new data_storage();
 	String STRING = null;
-	StringBuffer sBuff = new StringBuffer();
-	customer CLIENT = new customer("ERROR", "CUSTOMER", "NOT FOUND", sBuff);
+	String sBuff = new String();
+	customer CLIENT = new customer("FIRST NAME", "LAST NAME", "111111111", 
+            new String("password"), new String("addresss"), 
+            new String("651-123-4567"));
 	final static Logger logger = Logger.getLogger(Main_Menu.class);
 	final String WELCOM_MENU = "Hello, and welcome to your banking please input one of the following commands:"
 						  + "\n 1 - Deposit"
@@ -56,22 +60,18 @@ public class Main_Menu {
 				System.out.println("Hello press 1 to login and 2 to create an account and 3 to exit the program or 5 for admin activation");
 			}
 			if (INPUT == 1) {
-				System.out.println("Welcome to login please enter your first name:");
-				CLIENT.setFirst_name(COMMAND.next());
-				System.out.println("Please enter your last name");
-				CLIENT.setLast_name(COMMAND.next());
 				System.out.println("Please enter your social security number no space or '-'");
 				CLIENT.setSs_number(COMMAND.next());
 				System.out.println("Please enter your password");
-				CLIENT.setPassword(sBuff.replace(0, sBuff.length(), COMMAND.next()));
-				if(ACCOUNTER.check_account(CLIENT)) {
+				CLIENT.setPassword(COMMAND.next());
+				if(Banking.clientsql.doesExist(CLIENT) & Banking.accountsql.getPassword(CLIENT).equals(CLIENT.getPassword())) {
 					System.out.println("Account found loggin you in. . .");
-					if(ACCOUNTER.open_account(CLIENT, CLIENT.getFirst_name(), CLIENT.getLast_name(), CLIENT.getSs_number(), CLIENT.getPassword())) {
-						break;
-					}
-					else {
-						  System.out.println("Error in logging you in please contact Admin");
-					     }
+					CLIENT.setFirst_name(Banking.personalsql.getFirstname(CLIENT));
+					CLIENT.setLast_name(Banking.personalsql.getLastname(CLIENT));
+					CLIENT.setBalance(Banking.accountsql.getBalance(CLIENT));
+					CLIENT.setActivated(Banking.clientsql.isActivated(CLIENT));
+					CLIENT.setAdmin(Banking.clientsql.isAdmin(CLIENT));
+					break;
 				}
 			
 				else {
@@ -88,9 +88,13 @@ public class Main_Menu {
 				System.out.println("Please enter your social security number no space or '-'");
 				CLIENT.setSs_number(COMMAND.next());
 				System.out.println("Please enter a password");
-				CLIENT.setPassword(sBuff.replace(0, sBuff.length(), COMMAND.next()));
+				CLIENT.setPassword(COMMAND.next());
+				System.out.println("Please enter a phone number");
+				CLIENT.setPhonenum(COMMAND.next());
+				System.out.println("Please enter an address");
+				CLIENT.setAddress(COMMAND.next());
 				
-				if(ACCOUNTER.check_account(CLIENT)) {
+				if(Banking.clientsql.doesExist(CLIENT)) {
 					System.out.println("Account already made please contact an Admin for assistance");
 				}
 				
@@ -104,7 +108,10 @@ public class Main_Menu {
 					COMMAND.nextLine();
 				}
 				INPUT = COMMAND.nextInt();				
-				ACCOUNTER.create_client(CLIENT);}
+				Banking.clientsql.insertClient(CLIENT);
+				Banking.accountsql.createAccount(CLIENT);
+				Banking.contactsql.createContact(CLIENT);
+				Banking.personalsql.createPersonalinfo(CLIENT);}
 			}
 			
 			if (INPUT == 3) {
@@ -118,30 +125,36 @@ public class Main_Menu {
 			if (INPUT == 4) {
 				System.out.println("Your account needs to be approved by an admin before activating, "
 						+ "please wait for a confirmation from an admin");
+				System.out.println("Hello press 1 to login and 2 to create an account and 3 to exit the program and 5 for admin activation");
 			}
 		
 			if(INPUT == 5) {
 				System.out.println("Welcome, please login to become an Admin:");
-				System.out.println("Please enter your first name");
-				CLIENT.setFirst_name(COMMAND.next());
-				System.out.println("Please enter your last name");
-				CLIENT.setLast_name(COMMAND.next());
 				System.out.println("Please enter your social security number no space or '-'");
 				CLIENT.setSs_number(COMMAND.next());
 				System.out.println("Please enter your password");
-				CLIENT.setPassword(sBuff.replace(0, sBuff.length(), COMMAND.next()));
+				CLIENT.setPassword(COMMAND.next());
 				
 				//LOGIN TO SET UP ADMIN
-				if (ACCOUNTER.check_account(CLIENT)) {
-					ACCOUNTER.open_account(CLIENT, CLIENT.getFirst_name(), CLIENT.getLast_name(), CLIENT.getSs_number(), CLIENT.getPassword());
+				if (Banking.clientsql.doesExist(CLIENT) & Banking.accountsql.getPassword(CLIENT).equals(CLIENT.getPassword())) {
 					System.out.println("Please enter the Admin authorization password");
 					STRING = COMMAND.next();
-					CLIENT.setAdmin(STRING);
-					CLIENT.setActivated(true);
-					ACCOUNTER.close_account(CLIENT);
+					System.out.println(System.getenv("adminpass"));
+					System.out.println(STRING);
+					if(STRING.equals(System.getenv("adminpass"))) {
+						Banking.clientsql.adminClient(CLIENT);
+						Banking.clientsql.activateClient(CLIENT.getSs_number());
+						System.out.println("You are now an admin and your account is activated");
+						System.out.println("Hello press 1 to login and 2 to create an account and 3 to exit the program and 5 for admin activation");						
+					}
+					else {
+						System.out.println("Incorrect admin activation password. . .");
+						System.out.println("Hello press 1 to login and 2 to create an account and 3 to exit the program and 5 for admin activation");
+						}
 				}
 				else {
-					System.out.println("Account not found please create an account"); 
+					System.out.println("Account doesn't exist or incorrect password"); 
+					System.out.println("Hello press 1 to login and 2 to create an account and 3 to exit the program and 5 for admin activation");
 					}
 			}
 		
@@ -157,17 +170,17 @@ public class Main_Menu {
 	{
 		if(Banking.TURNON == 1)logger.info("Entering start menu");
 		if(Banking.exit ==true) {System.out.println("Quitting Application...");}
-		else if(!CLIENT.isActivated() & Banking.exit== false){
+		else if((CLIENT.isActivated() == 0) & Banking.exit== false){
 			if(Banking.TURNON == 1)logger.info("Account is not activated display error message");
 			System.out.println("Your account is not activated. Please have an admin activate it");
 		}
 		
-		else if(CLIENT.isAdmin() & Banking.exit== false) {
+		else if((CLIENT.isAdmin()==1) & Banking.exit== false) {
 			if(Banking.TURNON == 1)logger.info("Account was tested true for admin");
 			admin_menu(CLIENT);
 		}
 		
-		else if(!CLIENT.isAdmin() & Banking.exit== false){
+		else if((CLIENT.isAdmin()==0) & Banking.exit== false){
 			if(Banking.TURNON == 1)logger.info("Account was tested false for admin");
 			customer_menu(CLIENT);
 		}
@@ -199,6 +212,7 @@ public class Main_Menu {
 				System.out.println("Enter an amount to be deposited");
 				fINPUT = COMMAND.nextFloat();
 				CLIENT.deposit(fINPUT);
+				Banking.accountsql.depositAccount(CLIENT, fINPUT);
 				System.out.println(COMMAND_MENU);
 				}
 			if (INPUT == 2) 
@@ -206,12 +220,13 @@ public class Main_Menu {
 				if(Banking.TURNON == 1)logger.info("Input 2 read for customer_menu");
 				fINPUT = COMMAND.nextFloat();
 				CLIENT.withdraw(fINPUT);
+				Banking.accountsql.withdrawAccount(CLIENT, fINPUT);
 				System.out.println(COMMAND_MENU);
 				}
 			if (INPUT == 3) 
 				{
 				if(Banking.TURNON == 1)logger.info("Input 3 read for customer_menu");
-				ACCOUNTER.close_account(CLIENT);
+				CLIENT.reset();
 				break;
 				}
 			if (INPUT == 4)
@@ -261,6 +276,7 @@ public class Main_Menu {
 					System.out.println("Enter an amount to be deposited");
 					fINPUT = COMMAND.nextFloat();
 					CLIENT.deposit(fINPUT);
+					Banking.accountsql.depositAccount(CLIENT, fINPUT);
 					System.out.println(COMMAND_MENU);
 					System.out.println(" 5 - Authorize Account");
 					}
@@ -270,14 +286,15 @@ public class Main_Menu {
 					System.out.println("Enter an amount to be withdrawn");
 					fINPUT = COMMAND.nextFloat();
 					CLIENT.withdraw(fINPUT);
+					Banking.accountsql.withdrawAccount(CLIENT, fINPUT);
 					System.out.println(COMMAND_MENU);
 					System.out.println(" 5 - Authorize Account");
 					}
 				if (INPUT == 3) 
 					{
 				    if(Banking.TURNON == 1)logger.info("Input 3 Read for admin menu");
-					ACCOUNTER.close_account(CLIENT);
-					System.out.println("Logging you out. . .");
+				    CLIENT.reset();
+				    System.out.println("Logging you out. . .");
 					break;
 					}
 					if (INPUT == 4)
@@ -291,7 +308,18 @@ public class Main_Menu {
 				if (INPUT == 5)
 					{
 				    if(Banking.TURNON == 1)logger.info("Input 5 Read for admin menu");
-				    authorize_account();
+					System.out.println("Enter the Social Security number of the account you wish to activate");
+					String ss_account = COMMAND.next();
+					if(Banking.clientsql.doesExist(ss_account))	Banking.clientsql.activateClient(ss_account);
+					else System.out.println("Account doesn't exist");
+					System.out.println(COMMAND_MENU);
+					System.out.println(" 5 - Authorize Account");
+					}
+				
+				if(INPUT == 6)
+					{
+				    if(Banking.TURNON == 1)logger.info("Input 6 Read for admin menu");
+				    
 					}
 					
 				if (INPUT != 5 && INPUT != 4 && INPUT != 3 && INPUT != 2 && INPUT != 1 && INPUT != 0)

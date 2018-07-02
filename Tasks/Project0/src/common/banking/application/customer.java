@@ -5,21 +5,40 @@ import java.io.*;
 public class customer implements java.io.Serializable {
     /*Variable and Data for each customer*/
     private float balance = 0;
-    private boolean activated = false; 
+    private int activated = 0; 
+    private int admin = 0;
     private String first_name = "First Name";
     private String last_name = "Last Name";
     private String ss_number = "numbers";
-    private StringBuffer password = new StringBuffer();
-    private boolean admin = false;
+    private String password = null;
+    private String address = null;
+    private String phonenum = null;
+    
+    
+    //Resets the default client
+    public void reset() {
+        this.balance = 0;
+        this.activated = 0; 
+        this.admin = 0;
+        this.first_name = "First Name";
+        this.last_name = "Last Name";
+        this.ss_number = "numbers";
+        this.password = null;
+        this.address = null;
+        this.phonenum = null;    
+        }
 
     
     /*Constructor takes in one double variable to set the balance*/
-    public customer(String f_name, String l_name, String ss_num, StringBuffer newpass){
-      this.first_name = f_name;
-      this.last_name = l_name; 
-      this.ss_number = ss_num;
-      this.password = newpass;
-    }
+    public customer(String first_name, String last_name, String ss_number,
+			String password, String address, String phonenum) {
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.ss_number = ss_number;
+		this.password = password;
+		this.address = address;
+		this.phonenum = phonenum;
+	}
     
     
     
@@ -29,7 +48,9 @@ public class customer implements java.io.Serializable {
 		return ss_number;
 	}
 
-    //sets the social security number
+
+
+	//sets the social security number
 	public void setSs_number(String ss_number) {
 		this.ss_number = ss_number;
 	}
@@ -55,7 +76,7 @@ public class customer implements java.io.Serializable {
 	}
 //=================BALANCE EDITORS=======================
     /*Get the balance*/
-    public double getbalance ()
+    public float getbalance ()
     {return balance;}
 
 	/*Print out the balance*/
@@ -91,26 +112,26 @@ public class customer implements java.io.Serializable {
 
 //================PASSWORD EDITORS=====================
 
-	public StringBuffer getPassword() 
+	public String getPassword() 
 	{return password;}
 
-	public void setPassword(StringBuffer password) 
+	public void setPassword(String password) 
 	{this.password = password;}
 
 
 //===============Activation editors accessible only by ADMIN==========
 	//Checks to see if the account is activated
-	public boolean isActivated() 
+	public int isActivated() 
 	{return activated;}
 
 	//Activates the account to either true or false
 	/**Activates or deactivates the account*/
-	public void setActivated(boolean activated) 
+	public void setActivated(int activated) 
 	{this.activated = activated;}
 	
 //==============Check to see if you are an admin=======================
 
-	public boolean isAdmin() 
+	public int isAdmin() 
 	{return admin;}
 
 	/**If the parameter given is a string
@@ -119,18 +140,46 @@ public class customer implements java.io.Serializable {
 	 * this is done at the login menu*/
 	public void setAdmin(String admin_password) 
 	{
-		if(admin_password.equals("password1")) 
+		if(admin_password.equals("password1")) //Change 'password1' to change admin authorization code
 		{
 		System.out.println("Correct you are now registered as an admin");
-		this.admin = true;
+		this.admin = 1;
 		}
 		else {System.out.println("Wrong password you are not set as an admin");}
 	}
 	
 	/**If the parameter given is a boolean
 	 * Sets the admin as either true or false */
-	public void setAdmin(boolean setter) 
+	public void setAdmin(int setter) 
 	{this.admin = setter;}
+
+
+
+	
+	//==================ADDRESS GETTERS AND SETTER===================
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	//==================PHONE NUMBER GETTERS AND SETTER===================
+
+	public String getPhonenum() {
+		return phonenum;
+	}
+
+
+
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
 
 
 

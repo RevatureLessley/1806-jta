@@ -1,0 +1,87 @@
+--2.1
+select * from employee;
+select * from employee where lastname = 'King';
+select * from employee where firstname = 'Andrew' and (REPORTSTO is null);
+
+--2.2
+select * from Album order by title asc;
+select firstname from Customer order by city asc;
+
+--2.3
+insert into genre values(26,'Soul');
+insert into genre values(27,'Romantic');
+
+insert into employee values(9,'Bob','Squarepants',
+                            'Sales Support Agent',2,'20-DEC-1980',
+                            '18-OCt-04','123 Drive lane','Calgary',
+                            'AB','Canada','T3b 0c5', '+1 (403) 123-1234',
+                            '+1 (403) 321-4321','squarepants@gmail.com');
+insert into employee values(10,'Patrick','Star',
+                            'Sales Support Agent',2,'20-DEC-1980',
+                            '18-OCt-04','123 Drive lane','Calgary',
+                            'AB','Canada','T3b 0c5', '+1 (403) 123-1234',
+                            '+1 (403) 321-4321','star@gmail.com');
+
+insert into customer values(60 , 'Squid' , 'Ward' ,
+                            null , '123 Chelsea Grove' , 'New York City' , 'New York' ,
+                            'United States' , 'H-100' , '+1 123 324 6347' , null, 'ward1411@gmail.com'
+                            , 3);
+insert into customer values(61 , 'Richard' , 'Richardson' ,
+                            null , '123 Mangrove Grove' , 'Madison' , 'Wisconsin' ,
+                            'United States' , 'H-100' , '+1 389 131 6347' , null, 'richardson839@gmail.com'
+                            , 3);
+
+
+--2.4
+update customer set firstname = 'Robert' , lastname = 'Walter' 
+where customerid = 32;
+update artist set name = 'CCR' 
+where artistid = 76;
+
+--2.5
+select * from invoice where billingaddress like 'T%';
+
+--2.6
+select * from invoice where total between 15 and 50;
+select * from employee where hiredate between '1-Jun-03' and '1-Mar-04';
+
+--2.7
+delete from invoiceline where invoiceid = 50;
+delete from invoiceline where invoiceid = 61; 
+delete from invoiceline where invoiceid = 116; 
+delete from invoiceline where invoiceid = 245;
+delete from invoiceline where invoiceid = 268; 
+delete from invoiceline where invoiceid = 290; 
+delete from invoiceline where invoiceid = 342;
+delete from invoice where customerid = 32;
+delete from customer where firstname = 'Robert' and lastname = 'Walter';
+
+
+--7.0
+
+--7.1
+select customer.firstname, invoice.invoiceid
+from customer
+inner join invoice on customer.customerid = invoice.customerid;
+
+--7.2
+select customer.customerid, customer.firstname, 
+       customer.lastname, invoice.invoiceid,
+       invoice.total
+from customer
+full outer join invoice on customer.customerid = invoice.customerid;
+
+--7.3
+select artist.name, album.title
+from artist
+right join album on artist.artistid = album.artistid;
+
+--7.4
+select artist.name, album.title
+from artist
+cross join album order by artist.name asc;
+
+--7.5
+select employee.firstname, employee.lastname
+from employee
+where employee.reportsto = employee.reportsto;

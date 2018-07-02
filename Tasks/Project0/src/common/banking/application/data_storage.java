@@ -46,15 +46,17 @@ public class data_storage {
 
 	//Gets account data and transfers them to a customer parameter
 	/**Opens the ser file and passes the information of the file to the customer parameter for editing and use*/
-	public boolean open_account(customer client, String first_name, String last_name, String SS_number, StringBuffer pass_word) 
+	public boolean open_account(customer client, String first_name, String last_name, String SS_number, String pass_word) 
 	{
 		//Creates file path
 		String filename = "Clients\\" + first_name+last_name+SS_number+".ser";		
 		File newfile = new File(filename);
-		StringBuffer redudant = new StringBuffer();
+		String redudant = new String();
 		
 		//Create a class carrier
-		customer data_client = new customer("4","5","6",redudant);
+		customer data_client = new customer("FIRST NAME", "LAST NAME", "111111111", 
+                new String("password"), new String("addresss"), 
+                new String("651-123-4567"));
 		
 		//Checks to see if file exists to open
 		if(newfile.exists())
@@ -128,10 +130,12 @@ public class data_storage {
 	public void activate(String first_name, String last_name, String SS_number) {
 		String filename = "Clients\\" + first_name+last_name+SS_number+".ser";		
 		File newfile = new File(filename);
-		StringBuffer redudant = new StringBuffer();
+		String redudant = new String();
 
 		
-        customer data_client = new customer("4","5","6",redudant);
+        customer data_client = new customer("FIRST NAME", "LAST NAME", "111111111", 
+                new String("password"), new String("addresss"), 
+                new String("651-123-4567"));
 		
 		//Checks to see if file exists to open
 		if(newfile.exists()){
@@ -153,7 +157,7 @@ public class data_storage {
 		}
 		else {System.out.println("Error file not found");}
 		
-		data_client.setActivated(true);
+		data_client.setActivated(1);
 		close_account(data_client);
 	}
 
