@@ -7,3 +7,18 @@
 2018-06-25 14:18:48 INFO  root:376 - carol withdrew 500
 2018-06-25 14:47:08 INFO  root:362 - carol: withdraw attempted.
 2018-06-25 14:47:08 INFO  root:383 - carol withdrew 435
+2018-07-01 20:58:38 INFO  root:228 - Attempting to create a new user
+2018-07-01 21:05:54 INFO  root:229 - Attempting to create a new user
+2018-07-01 21:06:00 INFO  root:217 - User created sucessfully!
+2018-07-01 23:37:49 INFO  root:228 - Attempting to create a new user
+2018-07-01 23:37:57 INFO  root:216 - User created sucessfully!
+2018-07-01 23:40:50 INFO  root:228 - Attempting to create a new user
+2018-07-01 23:41:00 INFO  root:216 - User created sucessfully!
+2018-07-02 00:53:32 INFO  root:444 - carol: withdraw attempted.
+2018-07-02 00:53:32 INFO  root:465 - carol withdrew 35
+2018-07-02 01:14:24 INFO  root:444 - carol: withdraw attempted.
+2018-07-02 01:14:24 INFO  root:465 - carol withdrew 35
+2018-07-02 01:20:01 INFO  root:444 - carol: withdraw attempted.
+2018-07-02 01:20:01 INFO  root:465 - carol withdrew 35
+2018-07-02 01:22:00 INFO  root:444 - carol: withdraw attempted.
+2018-07-02 01:22:00 INFO  root:465 - carol withdrew 35

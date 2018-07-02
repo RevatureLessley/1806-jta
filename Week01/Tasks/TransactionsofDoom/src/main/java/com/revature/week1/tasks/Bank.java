@@ -4,10 +4,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
+
+import com.revature.week1.tasks.util.Connections;
 public class Bank implements Serializable {
 	/**
 	 * 
@@ -23,7 +29,7 @@ public class Bank implements Serializable {
 	
 	String answer;
 	float newBalance;
-	Logger logger = BankMain.logger;
+	transient Logger logger = BankMain.logger;
 	
 	private boolean isNameCorrect = false;
 	private boolean isPasswordCorrect = false;
@@ -31,7 +37,9 @@ public class Bank implements Serializable {
 	private String password;
 	public transient static Scanner sc = new Scanner(System.in);
 	//Set up User array. May make this an ArrayList in the future and allow the user to add themselves.
-	private ArrayList<User> users = new ArrayList<>();
+	private ArrayList<User> users = new ArrayList<User>();
+	private int newId;
+	
 	
 	
 	
@@ -89,13 +97,14 @@ public class Bank implements Serializable {
  */
 public void initialSetup()
 	{			
-		firstScreen();
+	
+	firstScreen();
 	}
 	
 	void firstScreen()
 	{
 		
-	
+		//BankMain.testthis();	
 		
 		while(true)
 		{
@@ -124,8 +133,10 @@ public void initialSetup()
 	 * if it does not find one, it will send you back to the start screen
 	 * It will then check and see if the use is an admin or just a regular user
 	 */
+	
 	public void Login()
 	{	
+		
 		enterName();
 		isNameCorrect = false;
 		
@@ -198,7 +209,12 @@ public void initialSetup()
 	}
 	private void addUser()
 	{
-		users.add(new User(newName, newPassword, newBalance, newisAdmin, newisApproved));
+		UserDaoImpl ud = new UserDaoImpl();
+		User user = new User(newId, newName, newPassword, newBalance, newisAdmin, newisApproved);
+		ud.insertUser(user);
+		ud.insertUser(user, "unapprovedusers");
+		// add the user to the general users list
+		users.add(new User(newId, newName, newPassword, newBalance, newisAdmin, newisApproved));
 		BankMain.logger.info("User created sucessfully!");
 	}
 	
@@ -238,15 +254,15 @@ public void initialSetup()
 		}
 		// Helper function to add the user to the users ArrayList
 		addUser();
-		
+		// All OOS and OIS have been disabled due to the database serving as a way to "save the data"
+		/*
 		try{
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
 			oos.writeObject(this); //Serialize
 			oos.close();
 		}catch(IOException e){
 			e.printStackTrace();
-			//System.out.println("Yep did it great!");
-		}
+		}*/
 		System.out.println("Thank you! You will have access as soon as an adminstrator approves your account!");
 		System.out.println("Have a nice day!");
 		
@@ -261,21 +277,74 @@ public void initialSetup()
 		// Well, I guess you don't HAVE to approve them but there really isn't a reason not to
 		adminCheckUsers(); // <<< Self commenting code! Say Whaaaaaaaaaaa?
 	}	
+	
 	private void adminCheckUsers()
 	{
-		for (int i = 0; i < users.size(); i++)
+		try(Connection conn = Connections.getConnection())
 		{
-			if(!users.get(i).isApproved())
+			Statement stmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM USERS2";
+			 
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			rs = stmt.executeQuery(sql);
+			
+			
+			int size = 0;  
+            if (rs != null)   
+            {  
+              
+            rs.last();  
+            size = rs.getRow();
+            rs.beforeFirst();  
+            }
+         
+			while(rs.next())
 			{
-				adminApproveUser(users.get(i));
+				if(rs.getInt(6) == 0)
+				{
+					newId = rs.getInt(1);
+					newName = rs.getString(2);
+					newPassword = rs.getString(3);
+					newBalance = rs.getFloat(4);
+					if(rs.getInt(5) == 1)
+					{
+						newisAdmin = true;
+					}
+					else
+					{
+						newisAdmin = false;
+					}
+					
+					if(rs.getInt(6) == 1)
+					{
+						newisApproved = true;
+					}
+					else
+					{
+						newisApproved = false;
+					}
+					
+					User user = new User(newId, newName, newPassword, newBalance, newisAdmin, newisApproved);
+					adminApproveUser(user);
+					//System.out.println("test admin check and approve");
+					
+				}
+				else
+				{
+					System.out.println("test admin check its all good");
+					continue;
+				}
 			}
-			else
-			{
-				continue;
-			}
+			
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		adminFinalScreen();
-	}
+		}
 	/**
 	 * just allows an admin to switch the isApproved bool to true
 	 * @param user
@@ -286,24 +355,21 @@ public void initialSetup()
 		if(sc.nextLine().equals("y"))
 		{
 			user.setApproved(true);
+			UserDaoImpl ud = new UserDaoImpl();
+			//User user = user.selectNpcById(id);
+			
+			if(user != null)
+			{
+				ud.updateUser(user);
+			}
 			System.out.println(user.getName()+ " has been approved!");
 		}
 		else if(sc.nextLine().equals("n"))
 		{
 			System.out.println("I mean.....alright then. Your call. Just sayin' that maybe you should reconsider.");
 		}
-		
-		try
-		{
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
-			oos.writeObject(this); //Serialize
-			oos.close();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
+
 	
 	public void adminFinalScreen()
 	{
@@ -397,6 +463,8 @@ public void initialSetup()
 		user.setBalance(newBalance);
 		System.out.println("Total Remaining: " + user.getBalance());
 		BankMain.logger.info(user.getName() + " withdrew " + answer);
+		UserDaoImpl ud = new UserDaoImpl();
+		ud.updateUser(user);
 		//userWelcomeScreen(user);
 		
 		try
@@ -446,6 +514,8 @@ public void initialSetup()
 		user.setBalance(newBalance);
 		System.out.println("Total Remaining: " + user.getBalance());
 		BankMain.logger.info(user.getName() + " deposited " + answer);
+		UserDaoImpl ud = new UserDaoImpl();
+		ud.updateUser(user);
 		
 		try
 		{

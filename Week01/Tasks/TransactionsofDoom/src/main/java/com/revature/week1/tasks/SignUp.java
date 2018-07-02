@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SignUp {
 	
-	public static HashMap<String, String> usersMap = new HashMap<>();
+	public static HashMap<String, String> usersMap = new HashMap<String, String>();
 	String userName;
 	String userPassword;
 	Scanner sc = new Scanner(System.in);

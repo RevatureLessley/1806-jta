@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class JUnitTests {
 	
-	ArrayList<User> users = new ArrayList<>();
+	ArrayList<User> users = new ArrayList<User>();
 	
 	
 	@Before
 	public void setup () throws Exception
 	{
 		
-		users.add(new User("toby", "pass", 3500, false, true));
+		users.add(new User(123,"toby", "pass", 3500, false, true));
 		//Bank b = new Bank(users);
 	}
 	

@@ -14,6 +14,8 @@ public class User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 88660438728653761L;
+	
+	private int userid;
 	private String name;
 	private String password;
 	private float balance;
@@ -22,7 +24,14 @@ public class User implements Serializable{
 	
 	
 	
-	
+	public int getUserid()
+	{
+		return userid;
+	}
+	public void setUserid(int userid)
+	{
+		this.userid = userid;
+	}
 	public String getName() 
 	{
 		return name;
@@ -82,6 +91,21 @@ public class User implements Serializable{
 		this.isApproved = isApproved;
 	}
 	
+	public User(int userid, String name, String password, float balance, boolean isAdmin, boolean isApproved)
+	{
+		super();
+		this.userid = userid;
+		this.name = name;
+		this.password = password;
+		this.balance = balance;
+		this.isAdmin = isAdmin;
+		this.isApproved = isApproved;
+	}
+	
+	public User()
+	{
+		super();
+	}
 	
 	
 	
