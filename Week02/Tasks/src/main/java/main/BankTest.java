@@ -51,12 +51,11 @@ public class BankTest {
 		assertEquals(lp.retrieveUserDB("testuser").getAuth(),user.getAuth());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void updataBalanceTest() {
 		user = lp.retrieveUserDB("testuser");
 		user.setBalance(10);
 		lp.updateBalanceDB(user);
-		assertEquals(lp.retrieveUserDB("testuser").getBalance(),user.getBalance());
+		assertEquals(lp.retrieveUserDB("testuser").getBalance(),user.getBalance(),0.01);
 	}
 }
