@@ -1,0 +1,150 @@
+2018-07-01 19:57:05 INFO  root:16 - Starting program
+2018-07-01 19:57:05 INFO  root:25 - Displaying initial menu.
+2018-07-01 19:57:09 INFO  root:61 - Beginning of login method
+2018-07-01 19:58:53 INFO  root:16 - Starting program
+2018-07-01 19:58:53 INFO  root:25 - Displaying initial menu.
+2018-07-01 19:58:56 INFO  root:61 - Beginning of login method
+2018-07-01 20:00:54 INFO  root:16 - Starting program
+2018-07-01 20:00:54 INFO  root:25 - Displaying initial menu.
+2018-07-01 20:00:57 INFO  root:61 - Beginning of login method
+2018-07-01 21:01:56 INFO  root:16 - Starting program
+2018-07-01 21:01:56 INFO  root:26 - Displaying initial menu.
+2018-07-01 21:01:59 INFO  root:62 - Beginning of login method
+2018-07-01 21:02:12 INFO  root:37 - Displaying administrator menu.
+2018-07-02 00:38:35 INFO  root:16 - Starting program
+2018-07-02 00:38:35 INFO  root:26 - Displaying initial menu.
+2018-07-02 00:38:39 INFO  root:62 - Beginning of login method
+2018-07-02 00:38:51 INFO  root:60 - Displaying administrator menu.
+2018-07-02 00:38:54 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 02:51:25 INFO  root:16 - Starting program
+2018-07-02 02:51:25 INFO  root:26 - Displaying initial menu.
+2018-07-02 02:51:28 INFO  root:25 - Beginning of method to register an user.
+2018-07-02 02:54:28 INFO  root:16 - Starting program
+2018-07-02 02:54:28 INFO  root:26 - Displaying initial menu.
+2018-07-02 02:54:31 INFO  root:25 - Beginning of method to register an user.
+2018-07-02 02:54:56 INFO  root:62 - Beginning of login method
+2018-07-02 02:56:33 INFO  root:62 - Beginning of login method
+2018-07-02 02:56:44 INFO  root:60 - Displaying administrator menu.
+2018-07-02 02:56:46 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 02:58:43 INFO  root:16 - Starting program
+2018-07-02 02:58:43 INFO  root:26 - Displaying initial menu.
+2018-07-02 02:58:46 INFO  root:62 - Beginning of login method
+2018-07-02 02:58:57 INFO  root:60 - Displaying administrator menu.
+2018-07-02 02:59:00 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 02:59:04 INFO  root:39 - User has been approved.
+2018-07-02 02:59:09 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 02:59:17 INFO  root:39 - User has been approved.
+2018-07-02 03:06:20 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 03:06:24 INFO  root:39 - User has been approved.
+2018-07-02 03:06:26 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 03:06:35 INFO  root:16 - Starting program
+2018-07-02 03:06:35 INFO  root:26 - Displaying initial menu.
+2018-07-02 03:06:36 INFO  root:62 - Beginning of login method
+2018-07-02 03:06:45 INFO  root:60 - Displaying administrator menu.
+2018-07-02 03:06:46 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 03:06:49 INFO  root:39 - User has been approved.
+2018-07-02 03:06:50 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 08:16:21 INFO  root:16 - Starting program
+2018-07-02 08:16:21 INFO  root:26 - Displaying initial menu.
+2018-07-02 08:16:22 INFO  root:62 - Beginning of login method
+2018-07-02 08:16:32 INFO  root:61 - Displaying administrator menu.
+2018-07-02 08:16:33 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:02:27 INFO  root:16 - Starting program
+2018-07-02 10:02:27 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:02:29 INFO  root:62 - Beginning of login method
+2018-07-02 10:02:38 INFO  root:63 - Displaying administrator menu.
+2018-07-02 10:02:40 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:02:46 INFO  root:41 - User has been approved.
+2018-07-02 10:02:49 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:04:19 INFO  root:41 - User has been approved.
+2018-07-02 10:04:23 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:13:17 INFO  root:16 - Starting program
+2018-07-02 10:13:17 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:14:50 INFO  root:16 - Starting program
+2018-07-02 10:14:50 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:14:53 INFO  root:62 - Beginning of login method
+2018-07-02 10:15:00 INFO  root:63 - Displaying administrator menu.
+2018-07-02 10:15:03 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:15:08 INFO  root:41 - User has been approved.
+2018-07-02 10:15:10 INFO  root:20 - Beginning of approveUser method.
+2018-07-02 10:15:31 INFO  root:62 - Beginning of login method
+2018-07-02 10:15:46 INFO  root:126 - Displaying menu for regular users.
+2018-07-02 10:15:51 INFO  root:91 - Beginning of function to withdraw money.
+2018-07-02 10:18:47 INFO  root:16 - Starting program
+2018-07-02 10:18:47 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:18:49 INFO  root:62 - Beginning of login method
+2018-07-02 10:19:07 INFO  root:126 - Displaying menu for regular users.
+2018-07-02 10:19:10 INFO  root:91 - Beginning of function to withdraw money.
+2018-07-02 10:20:12 INFO  root:16 - Starting program
+2018-07-02 10:20:12 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:20:14 INFO  root:62 - Beginning of login method
+2018-07-02 10:20:22 INFO  root:127 - Displaying menu for regular users.
+2018-07-02 10:20:24 INFO  root:91 - Beginning of function to withdraw money.
+2018-07-02 10:23:02 INFO  root:16 - Starting program
+2018-07-02 10:23:02 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:23:03 INFO  root:62 - Beginning of login method
+2018-07-02 10:23:16 INFO  root:127 - Displaying menu for regular users.
+2018-07-02 10:23:18 INFO  root:91 - Beginning of function to withdraw money.
+2018-07-02 10:23:27 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:24:54 INFO  root:16 - Starting program
+2018-07-02 10:24:54 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:24:56 INFO  root:62 - Beginning of login method
+2018-07-02 10:25:07 INFO  root:127 - Displaying menu for regular users.
+2018-07-02 10:25:08 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:25:14 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:25:33 INFO  root:109 - Card number is valid.
+2018-07-02 10:31:14 INFO  root:16 - Starting program
+2018-07-02 10:31:14 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:31:16 INFO  root:62 - Beginning of login method
+2018-07-02 10:31:28 INFO  root:128 - Displaying menu for regular users.
+2018-07-02 10:31:32 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:31:39 INFO  root:109 - Card number is valid.
+2018-07-02 10:31:40 INFO  root:67 - Balance inserted successfully.
+2018-07-02 10:31:48 INFO  root:83 - Added money successfully.
+2018-07-02 10:36:13 INFO  root:16 - Starting program
+2018-07-02 10:36:13 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:36:16 INFO  root:62 - Beginning of login method
+2018-07-02 10:36:36 INFO  root:129 - Displaying menu for regular users.
+2018-07-02 10:36:37 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:36:57 INFO  root:84 - Added money successfully.
+2018-07-02 10:39:22 INFO  root:16 - Starting program
+2018-07-02 10:39:22 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:39:24 INFO  root:62 - Beginning of login method
+2018-07-02 10:39:37 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:39:39 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:44:14 INFO  root:16 - Starting program
+2018-07-02 10:44:14 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:44:19 INFO  root:62 - Beginning of login method
+2018-07-02 10:44:30 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:44:32 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:45:24 INFO  root:16 - Starting program
+2018-07-02 10:45:24 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:45:27 INFO  root:62 - Beginning of login method
+2018-07-02 10:45:43 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:45:45 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:46:47 INFO  root:16 - Starting program
+2018-07-02 10:46:47 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:46:50 INFO  root:62 - Beginning of login method
+2018-07-02 10:47:01 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:47:07 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:55:10 INFO  root:16 - Starting program
+2018-07-02 10:55:10 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:55:35 INFO  root:16 - Starting program
+2018-07-02 10:55:35 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:55:38 INFO  root:62 - Beginning of login method
+2018-07-02 10:55:47 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:55:50 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:57:06 INFO  root:16 - Starting program
+2018-07-02 10:57:06 INFO  root:26 - Displaying initial menu.
+2018-07-02 10:57:09 INFO  root:62 - Beginning of login method
+2018-07-02 10:57:20 INFO  root:131 - Displaying menu for regular users.
+2018-07-02 10:57:21 INFO  root:51 - Beginning of function to add money.
+2018-07-02 10:57:28 INFO  root:86 - Added money successfully.
+2018-07-02 10:57:32 INFO  root:95 - Beginning of function to withdraw money.
+2018-07-02 11:05:32 INFO  root:16 - Starting program
+2018-07-02 11:05:32 INFO  root:26 - Displaying initial menu.
+2018-07-02 11:05:34 INFO  root:62 - Beginning of login method
+2018-07-02 11:05:44 INFO  root:63 - Displaying administrator menu.
+2018-07-02 11:05:47 INFO  root:90 - Printing users.
+2018-07-02 11:46:29 INFO  root:109 - Card number is valid.
+2018-07-02 11:46:29 INFO  root:112 - Card number is invalid.
