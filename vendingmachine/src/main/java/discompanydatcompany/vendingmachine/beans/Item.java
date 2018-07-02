@@ -50,6 +50,15 @@ public class Item implements Serializable {
     public String use() {
     	return "Nothing happened.\n";
     }
+    
+    public boolean canSell() {
+    	return this.cannotSell;
+    }
+    
+    public String isSellable() {
+    	String sellable = this.cannotSell == true ? "No" : "Yes";
+    	return sellable;
+    }
 
     @Override
     public String toString() {
