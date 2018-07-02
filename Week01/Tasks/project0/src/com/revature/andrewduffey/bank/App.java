@@ -1,17 +1,20 @@
 package com.revature.andrewduffey.bank;
 
+import com.revature.andrewduffey.bank.bean.AdminUser;
+import com.revature.andrewduffey.bank.bean.RegularUser;
+import com.revature.andrewduffey.bank.bean.User;
+import com.revature.andrewduffey.bank.service.AccountService;
+import com.revature.andrewduffey.bank.service.TransactionService;
+import com.revature.andrewduffey.bank.service.UserInfoService;
+import com.revature.andrewduffey.bank.service.UserService;
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class App {
     final static Logger logger = Logger.getLogger(App.class);
     public static final Scanner scanner = new Scanner(System.in);
     public static boolean quit = false;
-    public static final String USERS_PATH = "data/users/";
-    public static final String PENDING_PATH = USERS_PATH + "pending/";
 
     public static void main(String[] args) {
         logger.info("Application starting");
@@ -37,62 +40,44 @@ public class App {
         password = scanner.nextLine().trim();
         logger.info("Password accepted");
 
-        if (userExists(username)) {
-            File file = new File(USERS_PATH + username + ".ser");
-            User user = User.deserialize(username, (file.exists() ? App.USERS_PATH : App.PENDING_PATH));
-            if (user.validatePassword(password)) {
-                if (!file.exists()) {
+        Integer id = UserService.getUserId(username);
+
+        if (id != null) {
+            if (UserInfoService.validatePassword(id, password)) {
+                User user = null;
+                if (UserInfoService.isAdmin(id)) {
+                    user = new AdminUser(id, username);
+
+                } else if (UserInfoService.isPending(id)) {
                     System.out.println("Still waiting to be approved by an admin");
                 } else {
-                    logger.info((user.isAdmin() ? "Admin" : "Regular") + " user logged in");
+                    user = new RegularUser(id, username);
+                }
+
+                if (user != null) {
+                    boolean isAdmin = user.isAdmin();
+                    logger.info((isAdmin ? "Admin" : "Regular") + " user logged in");
+                    if (!isAdmin) {
+                        int accountId = AccountService.getAccountId(id);
+                        int balance = TransactionService.getBalance(accountId);
+                        ((RegularUser)user).getAccount().setBalance(balance);
+                    }
                     user.prompt();
                 }
             } else {
                 System.out.println("Username and Password combination is incorrect!");
             }
         } else {
-            if (activeUsers() == 0) {
-                try {
-                    User.serialize(new AdminUser(username, password), App.USERS_PATH);
-                    logger.info("Admin user created");
-                    System.out.println("Admin account created!");
-                } catch (NoSuchAlgorithmException ex) {
-                    ex.printStackTrace();
-                }
+            id = UserService.insert(username);
+            if (id != null) {
+                boolean isAdmin = (UserInfoService.adminUsers() == 0);
+                UserInfoService.insert(id, password, isAdmin, !isAdmin, false);
+                System.out.println("Account creation success!");
+                logger.info("Account creation success");
             } else {
-                try {
-                    User.serialize(new RegularUser(username, password), App.PENDING_PATH);
-                    logger.info("Regular user created");
-                    System.out.println("Account created! Waiting to be approved.");
-                } catch (NoSuchAlgorithmException ex) {
-                    ex.printStackTrace();
-                }
+                System.out.println("Account creation failed!");
+                logger.info("Account creation failed");
             }
         }
-    }
-
-    /**
-     * Returns the number of active users
-     * @return
-     */
-    private static int activeUsers() {
-        File directory = new File(USERS_PATH);
-        int result = 0;
-
-        for (File file : directory.listFiles()) {
-            if (file.isFile() && file.getName().endsWith(".ser")) result++;
-        }
-        return result;
-    }
-
-    /**
-     * Checks if a user account has been created
-     * @param username
-     * @return
-     */
-    private static boolean userExists(String username) {
-        File users = new File(USERS_PATH + username + ".ser");
-        File pending = new File(PENDING_PATH + username + ".ser");
-        return users.exists() || pending.exists();
     }
 }

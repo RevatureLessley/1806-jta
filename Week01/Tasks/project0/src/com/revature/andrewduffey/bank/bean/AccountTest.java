@@ -1,4 +1,4 @@
-package com.revature.andrewduffey.bank;
+package com.revature.andrewduffey.bank.bean;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class AccountTest {
 
     @Test
     public void whenDepositAmountShouldOverflowBalanceShouldReturnFalse() {
-        boolean result = account.deposit(Double.MAX_VALUE);
+        boolean result = account.deposit(Integer.MAX_VALUE);
         Assert.assertFalse(result);
     }
 

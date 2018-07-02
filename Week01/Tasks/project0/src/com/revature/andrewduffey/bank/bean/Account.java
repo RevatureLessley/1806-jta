@@ -1,21 +1,29 @@
-package com.revature.andrewduffey.bank;
+package com.revature.andrewduffey.bank.bean;
 
 import java.io.Serializable;
 
 public class Account implements Serializable {
     private static final long serialVersionUID = 8117479689929343439L;
-    private double balance;
+    private int balance;
 
     public Account() {
-        balance = 0.0;
+        balance = new Integer(0);
     }
 
     /**
      * Returns the balance of the account.
      * @return
      */
-    public double getBalance() {
+    public Integer getBalance() {
         return balance;
+    }
+
+    /**
+     * Sets the balance to a given value
+     * @param balance
+     */
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 
     /**
@@ -23,9 +31,12 @@ public class Account implements Serializable {
      * @param amount
      * @return
      */
-    public boolean deposit(double amount) {
-        double val = (balance + amount);
-        if (val >= Double.MAX_VALUE) return false;
+    public boolean deposit(Integer amount) {
+        int val = (balance + amount);
+        if (val < balance) {
+            System.out.println("Cannot deposit more than " + (Integer.MAX_VALUE - balance) );
+            return false;
+        }
         balance = val;
         return true;
     }
@@ -35,8 +46,10 @@ public class Account implements Serializable {
      * @param amount
      * @return
      */
-    public boolean withdrawal(double amount) {
-        if (balance < amount) {
+    public boolean withdrawal(Integer amount) {
+        if (amount < 0 || balance < amount) {
+            System.out.println("Cannot withdraw more than you have");
+
             return false;
         }
         balance -= amount;

@@ -1,16 +1,21 @@
-package com.revature.andrewduffey.bank;
+package com.revature.andrewduffey.bank.bean;
 
+import com.revature.andrewduffey.bank.App;
+import com.revature.andrewduffey.bank.service.AccountService;
+import com.revature.andrewduffey.bank.service.UserInfoService;
+import com.revature.andrewduffey.bank.service.UserService;
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class AdminUser extends User {
     final static Logger logger = Logger.getLogger(AdminUser.class);
     private static final long serialVersionUID = 2105587968682648018L;
 
-    public AdminUser(String username, String password) throws NoSuchAlgorithmException {
-        super(username, password);
+    public AdminUser(int id, String username){
+        super(id, username);
         admin = true;
     }
 
@@ -20,23 +25,19 @@ public class AdminUser extends User {
             case "logout":
                 return false;
             case "approve":
-                File dir = new File(App.PENDING_PATH);
-                if (dir.listFiles().length == 0) {
-                    System.out.println("No users to approve");
-                }
-                for(File file : dir.listFiles()) {
-                    String filename = file.getName();
-                    if (file.isFile() && filename.endsWith(".ser")) {
-                        String username = filename.substring(0, filename.length() - ".ser".length());
-                        System.out.print("Approve " + username + " [y/n]: ");
-                        String result = App.scanner.nextLine().toLowerCase();
-                        if (result.startsWith("y")) {
-                            User.serialize(User.deserialize(username, App.PENDING_PATH),App.USERS_PATH);
-                            logger.info("Admin accepted: " + username);
-                        } else {
-                            logger.info("Admin declined: " + username);
-                        }
-                        file.delete();
+                List<Integer> users = UserInfoService.getPendingUserIds();
+
+                for (Integer id : users) {
+                    String username = UserService.getUserName(id);
+                    System.out.print("Approve " + username + " [y/n]: ");
+                    String result = App.scanner.nextLine().toLowerCase();
+                    if (result.startsWith("y")) {
+                        UserInfoService.setPending(id,false);
+                        AccountService.createAccount(id);
+                        logger.info("Admin accepted: " + username);
+                    } else {
+                        UserInfoService.setLocked(id, true);
+                        logger.info("Admin declined: " + username);
                     }
                 }
                 break;
