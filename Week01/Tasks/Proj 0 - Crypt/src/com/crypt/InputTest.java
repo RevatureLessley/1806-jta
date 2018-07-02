@@ -8,11 +8,8 @@ import com.crypt.util.Connections;
 
 public class InputTest {
 
-	@Test()
-	public void dbConnectionTest() {
-		assertNotNull("CONNECTION FAILED", Connections.getConnection());
-	}
-	@Test()
+
+	/*@Test()
 	public void byteRead() {//Tests input for bytes
 		assertEquals(20, Input.getInputByte());
 	}
@@ -24,7 +21,7 @@ public class InputTest {
 	public void stringArray() {
 		String[] s = { "1", "2", "3" };
 		assertArrayEquals(s, Input.giveStringArray("1", "2", "3"));
-	}
+	}*/
 	
 //	@Test()
 //	public void returnTest() {

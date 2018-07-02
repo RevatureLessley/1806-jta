@@ -1,13 +1,21 @@
 package com.crypt;
 
-import static com.crypt.Menus.*;
+import static com.crypt.Menus.showAdminOptionsMenu;
+import static com.crypt.Menus.showApproveAccountsMenu;
+import static com.crypt.Menus.showCurrentItemsMenu;
+import static com.crypt.Menus.showDefaultSeedMethodMenu;
+import static com.crypt.Menus.showLoginFailMenu;
+import static com.crypt.Menus.showLoginPassMenu;
+import static com.crypt.Menus.showMainMenu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import com.crypt.Services.AccountService;
 import com.crypt.Services.UserPassService;
@@ -19,16 +27,16 @@ public class Crypt {
 	static final HashMap<String, Integer> ROLES = new HashMap<String, Integer>()
 	{private static final long serialVersionUID = 1L;
 	{put("user",  0); put("admin",  1);}};
-	//Keeps a running list of usernames and passwords
+	//Keeps a running list of user names and passwords
 	static HashMap<String, String> userPassInfo = new HashMap<String, String>();
 	//Stores account data
 	static Map<String, Account> accounts = new HashMap<>();
 	//Saves and loads user pass info
 
-	final static Logger logger = Logger.getLogger("Crypt.class");	
+	//final static Logger logger = Logger.getRootLogger();	
 
 	public static void main(String[] args) {
-		logger.trace("Main method started");
+		//logger.trace("Main method started");
 		Crypt c = new Crypt();
 		//filling variables from files for persistence
 		userPassInfo = UserPassService.selectAllUserPass();
@@ -62,7 +70,7 @@ public class Crypt {
 	}
 
 	private void login() {
-		logger.info("login attempted");
+		//logger.info("login attempted");
 		//testAdminExist(); //Tests existence of at least one user
 		UserPass up = userPass(); //Gets user name and password
 		if(testUserPass(up)) //tests user name and password
@@ -78,7 +86,7 @@ public class Crypt {
 	}
 
 	private void loginFail(byte input) {
-		logger.trace("login failed");
+		//logger.trace("login failed");
 		switch(input) {
 		case 1:
 			login();
@@ -93,7 +101,7 @@ public class Crypt {
 	}
 
 	private void loginPass(Account a) {
-		logger.info("login passed");
+		//logger.info("login passed");
 		switch(showLoginPassMenu(a)) {
 		case (byte)1://Account Options 
 			//accountOptions();
@@ -126,21 +134,21 @@ public class Crypt {
 	}
 
 	private void adminOptions(byte input, Account a) {
-		logger.info("made it to admin options");
+		//logger.info("made it to admin options");
 		switch(input) {
 		case 1: //Approve user
-			logger.info("attempting user approval");
-			HashMap<String, Account> unapprovedAccounts = new HashMap<>();
-
+			//logger.info("attempting user approval");
+			List<String> unapprovedAccounts = new ArrayList<>();
+			
 			for( Account a2 : accounts.values()) 
 			{ 
 				if(a2.isApproved() == 0) 
 				{ 
-					unapprovedAccounts.put(a2.getUsername(), a2); 
+					unapprovedAccounts.add(a2.getUsername()); 
 				} 
 			}
 			if(!unapprovedAccounts.isEmpty())
-				approveAccounts(showApproveAccountsMenu(unapprovedAccounts.keySet()), unapprovedAccounts);
+				approveAccounts(showApproveAccountsMenu(unapprovedAccounts), unapprovedAccounts);
 			else {
 				System.out.println("There are currently no accounts awaiting approval.");
 			}
@@ -161,15 +169,20 @@ public class Crypt {
 		}
 	}
 
-	private void approveAccounts(byte input, HashMap<String, Account> unapprovedAccounts) {
-		if(input > 0 && input <= unapprovedAccounts.size()) { //Choosing any one particular account to approve
-			accounts.values().toArray(new Account[accounts.values().size()])[input].setApproved(1);
-		} else if(input == unapprovedAccounts.size() + 1) { //Choosing all of the above
+	private void approveAccounts(byte input, List<String> unapprovedAccounts) {
+		if(input > 0 && input <= unapprovedAccounts.size()) { 
+			//Choosing any one particular account to approve
+			String enteredUsername = unapprovedAccounts.get(input - 1);
+			accounts.get(enteredUsername).setApproved(1);
+			unapprovedAccounts.remove(enteredUsername);
+		} else if(input == unapprovedAccounts.size() + 1) { 
+			//Choosing all of the above
 			accounts.values().forEach( a -> a.setApproved(1));
-			//for(Account a : accounts.values()) { if(!a.isApproved())a.setApproved(true); }
-		}else { //No matching input. Reshowing unapproved accounts menu
+			unapprovedAccounts.clear();
+		}else { 
+			//No matching input. Reshowing unapproved accounts menu
 			noMatch();
-			approveAccounts(showApproveAccountsMenu(unapprovedAccounts.keySet()), unapprovedAccounts);
+			approveAccounts(showApproveAccountsMenu(unapprovedAccounts), unapprovedAccounts);
 		}
 	}
 

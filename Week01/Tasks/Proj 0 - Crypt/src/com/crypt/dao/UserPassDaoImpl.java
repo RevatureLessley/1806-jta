@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 import com.crypt.beans.UserPass;
@@ -13,10 +14,20 @@ import com.crypt.util.Connections;
 public class UserPassDaoImpl extends DAO {
 
 	public static HashMap<String,String> selectAll() throws SQLException {
-		ResultSet rs = getData("SELECT * FROM user_pass");
 		HashMap<String, String> ups = new HashMap<>();
-		while(rs.next()) { ups.put(rs.getString(1), rs.getString(2)); }
-		return ups;
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM user_pass");
+			
+			while(rs.next()) { ups.put(rs.getString(1), rs.getString(2)); }
+
+			return ups;
+		}
 	}
 
 	public static void insert(UserPass t) {

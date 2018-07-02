@@ -24,7 +24,7 @@ public class Input {
 		try {
 			return Byte.parseByte(scan());
 		}catch(InputMismatchException e){
-			Crypt.logger.error("Input: Byte conversion failed: " + e.getMessage());
+			//Crypt.logger.error("Input: Byte conversion failed: " + e.getMessage());
 			return (byte) -1;
 		}
 	}
@@ -33,7 +33,7 @@ public class Input {
 		try {
 			return scan();
 		}catch(InputMismatchException e){
-			Crypt.logger.error("Input Reader: String conversion failed: " + e.getMessage());
+			//Crypt.logger.error("Input Reader: String conversion failed: " + e.getMessage());
 			return "";
 		}		
 	}
@@ -53,7 +53,7 @@ public class Input {
 	 * @return
 	 */
 	public static byte showMenu(String prescript,String[] responses) {//input, Response
-		Crypt.logger.trace("show message entered");
+		//Crypt.logger.trace("show message entered");
 		System.out.println(prescript);
 		System.out.println("Please choose one of the following to continue:");
 		Integer i = 1;

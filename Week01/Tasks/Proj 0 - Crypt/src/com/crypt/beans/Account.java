@@ -56,7 +56,7 @@ public class Account implements Serializable {
 		this.role = role;
 		this.defaultSeed = defaultSeed;
 	}
-	
+
 	/**
 	 * allows for complete instantiation of an account
 	 * @param transactionHistory
@@ -88,30 +88,31 @@ public class Account implements Serializable {
 	public void deposit(String pathname/*byte a, byte b, byte c*/) {
 		//TODO: Create a new folder for specific user repo
 		//TODO: Encrypt based on encryption specified by user
-		byte[] read = null;
-		File file = new File(pathname);
+		byte[] fileData = null;
+		File filePath = new File(pathname);
 		InputStream is = null;
 
 		try {
-			is = new FileInputStream(file);
-			read = new byte[is.available()];
-			for(int i = 0; i < is.available(); i++) {
-				read[i] = (byte)is.read();
-			}
-			
+			is = new FileInputStream(filePath);
+			fileData = new byte[is.available()];
+			for(int i = 0; i < is.available(); i++) 
+			{ fileData[i] = (byte)is.read(); }
+
+			items.add(
+					new DataFile(
+							filePath,
+							filePath.getName(),
+							fileData)
+					);
+
 		}catch(IOException e) { e.printStackTrace(); 
 		}finally{ CloseStreams.close(is); }
 
 
-		items.add(
-				new DataFile(
-				file,
-				file.getName(),
-				read)
-				);
 
-		System.out.println("Deposited " + file.getName());
-		transactionHistory.add(new Note(transactionHistory.size(), this.id, "Deposited " + file.getName() ));
+
+		System.out.println("Deposited " + filePath.getName());
+		transactionHistory.add(new Note(transactionHistory.size(), this.id, "Deposited " + filePath.getName() ));
 
 		reportBalance();
 	}
@@ -131,7 +132,7 @@ public class Account implements Serializable {
 						)
 				);
 		items.remove(index);
-		
+
 		reportBalance();
 	}
 
