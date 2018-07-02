@@ -1,0 +1,6 @@
+2018-06-22 14:06:54 TRACE root:15 - Yeah! My logger is configured properly!
+2018-06-22 14:06:54 DEBUG root:16 - Yeah! My logger is configured properly!
+2018-06-22 14:06:54 INFO  root:17 - Yeah! My logger is configured properly!
+2018-06-22 14:06:54 WARN  root:18 - Yeah! My logger is configured properly!
+2018-06-22 14:06:54 ERROR root:19 - Yeah! My logger is configured properly!
+2018-06-22 14:06:54 FATAL root:20 - Yeah! My logger is configured properly!
