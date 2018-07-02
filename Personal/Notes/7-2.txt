@@ -175,3 +175,20 @@ Class vs ID
 -external stylesheet: <link rel="stylesheet" type="text/css" href="location">
 
 #RRGGBB hexadecimal customizes colors.
+
+Required Technologies
+---------------------
+-Java
+-Oracle 11g
+-JDBC 
+	-or Hibernate <- self
+-HTML/CSS/JavaScript
+	-or Angular <- self
+-Servlets
+-Logging
+-JUnit
+	-markito
+-RDS, EC2 <- self
+-Jenkins <- self
+-SonarQube <- self
+-Selenium <- self
