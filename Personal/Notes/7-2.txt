@@ -6,5 +6,172 @@ A lambda expression uses the -> arrow notation to define a reference at runtime.
 
 Method References allow you to call specific methods on each element in a colletion. Syntax: (Classname::methodofclass), (Classname::new) provides a new instance for every element in collection.
 
+Set jar to war in Maven for a web application.
 
+Maven Lifecycle
+---------------
+0   - mvn clean
+    - removes the target folder that houses a compiled/bundled appplication that can be deployed called distributions (dist)
+0.5 - mvn validate
+    - ensures all dependencies are present and updated. 
+1   - mvn compile
+    - compiles all .java files.
+2   - mvn test
+    - runs all tests, if any fails then deployment aborts.
+3   - mvn package
+    - bundle the application for distribution into .jar and .war into target
+4   - mvn install
+    - installs application into local repo (.m2)
+5   - mvn deploy
+    - deploys and installs application to the server.
+Running a goal runs all lower steps automatically.
 
+HTML -Hypertext Markup Language
+     -describes the structure of a webpage using markup.
+     -tags represents elements which make up the building blocks of webpages and are not shown to the user, they are rendered by the browser.
+     -does not preserve white-space.
+
+Elements 
+-are the names the tags represents.
+<p id = "Bobbert"> stuff </p> // <Element attributes>innerhtml</p>
+-contain start and end tags.
+-convention suggests lower case names for tags.
+-tags are nestable.
+"Mike's things"
+'He said "What?"'
+'Mike&apos;s quote is "What?"'
+
+Attributes
+-all elements can have attributes which provide additional information about the tag. 
+-always nested in tags.
+-typically used in key-value pairs.
+-can use apostrophes or quotes.
+
+XML -Extensible Markup Language
+    -often used for distributing information over the internet.
+    -designed to store and transport data, typically self-describing.
+    -XML carries the data that HTML displays.
+
+Syntax Rules
+------------
+-must have one root element.
+-optionally have a prolog as the first line: <?xml version="1.0" encoding="UTF-8"?>
+-all elements must have closing tags that match case.
+-attributes must use quotes, not apotrophes.
+-must use entity references for reserved characters (&quot;)
+-preserves white space
+-no tags may close after another tag opens.
+
+Well-formed XML follows all syntax rules.
+
+		Element <bookstore>
+		|
+		<books> - "category"
+		|
+		-------------------------
+|---------------|	|	|	|
+"language"	title 	author	year	price
+		|	|	|	|
+		text	text	text	text
+
+XML namespaces allow prefixes to better separate tags to be more categorized or disambiguating: <bobstables Xmlns:prefix="URI">, prefix could be whatever.
+URL: http://www.stuff.com/things/bob <- URI: things/bob
+
+<bobstables Xmlns:bob="URI">
+	<bob:table>
+		<bob:name>
+			stuff
+		</bob:name>
+	</bob:table>
+</bobstables>
+
+DTD - Document Type Definitions
+-------------------------------
+book.xml
+--------
+<!DOCTYPE book SYSTEM "book.dtd">
+<book>
+	<name></name>
+	<author></author>
+	<year></year>
+	<price></price>
+</book>
+
+book.dtd
+--------
+<!DOCTYPE book 
+	<!ELEMENT (name, author, price, year)>
+	<!name (more, stuff)>
+
+XSD -XML Schema Definition
+    -stronger than DTDs
+    -easier to describe content
+    -supports datatypes and namespaces.
+    -written in XML so it has a DOM.
+	-Document Object Model
+	--Document refers to the current page.
+HTML
+----
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<p>stuff</p>
+	</body>
+</html>
+
+DOM
+---
+html
+|
+body----head
+|	|
+title	p id="bob"
+	|
+	stuff
+
+XPath is the path to any element -> html/body/p[@ id="bob"] -> absolute XPaths are the last option. 
+//p[@ id="bob"] -> relative XPaths
+//p[2] accesses all p that is in position 3.
+
+XSD
+---
+<xs:element name="">
+<xs:complextype>
+	<xs:sequence>
+		<xs:innerElement>
+		</xs:innerElement>
+	</xs:sequence>
+</xs:complextype>
+</xs:element>
+
+Valid XML follows a DTD or XSD and is well-formed.
+
+<!--  HTML comment-->
+
+HTML documents typically start with <!DOCTYPE html> that tells the browser this is HTML and its version. HTML5 is default.
+HTML documents will always have a root tag <html> and will usually have <head>, <body> tags. The <meta charset=""> tag indicates the character set, UTF-8 supports any language. The <title> tag labels the page with a title. The <head> tag stores metadata. 
+
+<ol> are organized lists that use number/letters/etc... while <ul> are unorganized lists that use bullets.
+
+CSS -Cascading Stylesheets
+    -used to format HTML pages, introduced to give webpages a better look.
+    -applied to specific elements or groups of elements via CSS selectors.
+	--apply a style to certain tags.
+
+Class vs ID
+-IDs should be unique, clases could be duplicated.
+-CSS references classes with .classname and IDs with #ID.
+
+3 ways to bring in CSS
+-inline: <p style="color:red">
+-internal stylesheet: 
+ <style>
+	p {
+		color:red;
+	}
+ </style>
+-external stylesheet: <link rel="stylesheet" type="text/css" href="location">
+
+#RRGGBB hexadecimal customizes colors.
