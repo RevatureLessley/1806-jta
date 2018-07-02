@@ -1,42 +1,59 @@
 package com.crypt.dao;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 import com.crypt.beans.UserPass;
+import com.crypt.util.CloseStreams;
+import com.crypt.util.Connections;
 
-public class UserPassDaoImpl implements UserPassDao {
+public class UserPassDaoImpl extends DAO {
 
-	@Override
-	public List<UserPass> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public static HashMap<String,String> selectAll() throws SQLException {
+		ResultSet rs = getData("SELECT * FROM user_pass");
+		HashMap<String, String> ups = new HashMap<>();
+		while(rs.next()) { ups.put(rs.getString(1), rs.getString(2)); }
+		return ups;
 	}
 
-	@Override
-	public void insert(UserPass t) {
-		// TODO Auto-generated method stub
-		
+	public static void insert(UserPass t) {
+			PreparedStatement stmt = null; 
+			
+			try(Connection conn = Connections.getConnection()){
+			
+				stmt = conn.prepareCall("INSERT INTO user_pass VALUES(?, ?)");
+				
+				stmt.setString(1, t.getUsername());
+				stmt.setString(2, t.getPassword());
+				
+				stmt.execute();				
+			
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{
+				CloseStreams.close(stmt);
+			}		
 	}
+	
 
-	@Override
 	public UserPass selectById(String id) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
-	@Override
 	public Integer deleteById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Integer updateById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean insertViaSp(UserPass t) {
 		// TODO Auto-generated method stub
 		return false;

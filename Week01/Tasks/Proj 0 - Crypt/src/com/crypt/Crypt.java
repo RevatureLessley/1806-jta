@@ -1,27 +1,29 @@
 package com.crypt;
 
+import static com.crypt.Menus.*;
+
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.crypt.Accounts.Account;
-import com.crypt.filemanager.UserPassFileManager;
-import static com.crypt.lambda.LambdaPackage.*;
+import com.crypt.Services.AccountService;
+import com.crypt.Services.UserPassService;
+import com.crypt.beans.Account;
+import com.crypt.beans.UserPass;
 
 public class Crypt {
 	//Making a proper enumerator IE: Making a Hash map that I can use to get roles as numbers
-	static final HashMap<String, Byte> ROLES = new HashMap<String, Byte>()
+	static final HashMap<String, Integer> ROLES = new HashMap<String, Integer>()
 	{private static final long serialVersionUID = 1L;
-	{put("user", (byte) 0); put("admin", (byte) 1);}};
+	{put("user",  0); put("admin",  1);}};
 	//Keeps a running list of usernames and passwords
 	static HashMap<String, String> userPassInfo = new HashMap<String, String>();
 	//Stores account data
-	static HashMap<String, Account> accounts = new HashMap<String, Account>();
+	static Map<String, Account> accounts = new HashMap<>();
 	//Saves and loads user pass info
-	static UserPassFileManager upfm = new UserPassFileManager("accounts.ser");	
 
 	final static Logger logger = Logger.getLogger("Crypt.class");	
 
@@ -29,23 +31,14 @@ public class Crypt {
 		logger.trace("Main method started");
 		Crypt c = new Crypt();
 		//filling variables from files for persistence
-		HashMap<String, Account> al = new HashMap<String, Account>(); 
-		if(upfm.fileExists())al = upfm.readObject();
-		if(al != null) accounts = al;
-		testAdminExist();
-		userPassInfo = upfm.fillUserPassInfo(accounts);
+		userPassInfo = UserPassService.selectAllUserPass();
+		accounts = AccountService.selectAllAccounts();
 
 		//showing the main menu
-		c.mainMenu(c.showMainMenu());
-
-		//writing to files at the end of execution for persistence
-		upfm.writeObject(accounts);
+		c.mainMenu(showMainMenu());
+		
 	}
 
-	private byte showMainMenu() { //Shows main menu
-		logger.trace("showed main method");
-		return Input.showMenu("Welcome to Crypt.", 
-				Input.giveStringArray("Log in", "Create an account", "Forgotten password", "Exit")); }
 
 	private void mainMenu(byte input) {
 		switch(input) {
@@ -71,23 +64,17 @@ public class Crypt {
 	private void login() {
 		logger.info("login attempted");
 		//testAdminExist(); //Tests existence of at least one user
-		Account a = userPass(); //Gets user name and password
-		if(testUserPass(a)) //tests user name and password
-		{ 
-			a = accounts.get(a.getUsername());
-			if(a.isApproved()) { loginPass(a); } 
+		UserPass up = userPass(); //Gets user name and password
+		if(testUserPass(up)) //tests user name and password
+		{
+			Account a = accounts.get(up.getUsername());
+			if(a.isApproved() == 1) { loginPass(a); } 
 			else {
 				System.out.println("This account has yet to be approved.");
 				mainMenu(showMainMenu());
 			}
 		} //if successful log in and the account has been authorized
 		else { loginFail(showLoginFailMenu()); } //if login failed
-	}
-
-	private byte showLoginFailMenu() {
-		logger.trace("login fail menu shown" );
-		return Input.showMenu("Username and password do not match.", //calls showMenu and gives prescript
-				Input.giveStringArray("Try again", "Exit to main menu")); //gets string array, prints options
 	}
 
 	private void loginFail(byte input) {
@@ -103,18 +90,6 @@ public class Crypt {
 			noMatch();
 			break;
 		}
-	}
-
-	private byte showLoginPassMenu(Account a) {
-		logger.trace("login pass menu shown");
-		String[] s;
-		if(a.getRole() == ROLES.get("admin")) { 
-			s = new String[] { "Account Options", "Deposit Data", "Withdraw Data", "Admin Options", "Log Out"};  //Displays admin options if admin
-		} else { 
-			s = new String[] { "Account Options", "Deposit Data", "Withdraw Data", "Log Out" };//Not so much
-		}
-		
-		return Input.showMenu("Access Granted", s);
 	}
 
 	private void loginPass(Account a) {
@@ -150,12 +125,6 @@ public class Crypt {
 		}
 	}
 
-	private byte showAdminOptionsMenu() {
-		logger.trace("admin options menu shown");
-		return Input.showMenu("Admin Options.", 
-				Input.giveStringArray("Approve an applying user", "Search accounts", "Change user accounts", "Return to previous menu"));
-	}
-
 	private void adminOptions(byte input, Account a) {
 		logger.info("made it to admin options");
 		switch(input) {
@@ -165,7 +134,7 @@ public class Crypt {
 
 			for( Account a2 : accounts.values()) 
 			{ 
-				if(!a2.isApproved()) 
+				if(a2.isApproved() == 0) 
 				{ 
 					unapprovedAccounts.put(a2.getUsername(), a2); 
 				} 
@@ -194,9 +163,9 @@ public class Crypt {
 
 	private void approveAccounts(byte input, HashMap<String, Account> unapprovedAccounts) {
 		if(input > 0 && input <= unapprovedAccounts.size()) { //Choosing any one particular account to approve
-			accounts.values().toArray(new Account[accounts.values().size()])[input].setApproved(true);
+			accounts.values().toArray(new Account[accounts.values().size()])[input].setApproved(1);
 		} else if(input == unapprovedAccounts.size() + 1) { //Choosing all of the above
-			accounts.values().forEach( a -> a.setApproved(true));
+			accounts.values().forEach( a -> a.setApproved(1));
 			//for(Account a : accounts.values()) { if(!a.isApproved())a.setApproved(true); }
 		}else { //No matching input. Reshowing unapproved accounts menu
 			noMatch();
@@ -204,31 +173,19 @@ public class Crypt {
 		}
 	}
 
-	private byte showApproveAccountsMenu(Set<String> keySet) {
-		String[] s = new String[keySet.size()]; 
-		s = keySet.toArray(new String[keySet.size() + 1]);
-		s[s.length - 1] = "All of the above.";
-		return Input.showMenu("These accounts are waiting for approval.", s);
-	}
-
 	private void withdraw(Account a) {
 		showCurrentItems((byte) 1, a);
 		System.out.println("Which item would you like to withdraw?");
-		a.getRepoContents().trimToSize();
-		String[] s = new String[a.getRepoContents().size()];
-		s = a.getRepoContents().toArray(s);
+		a.getItems().toString();
+		String[] s = new String[a.getItems().size()];
+		s = a.getItems().toArray(s);
 		a.withdraw(Input.showMenu("", s));
-	}
-
-	private byte showCurrentItemsMenu() {
-		return Input.showMenu("Would you like to see a list of your current items?",
-				Input.giveStringArray("Yes", "No"));
 	}
 
 	private void showCurrentItems(byte input, Account a) {
 		switch(input) {
 		case 1:
-			System.out.println("Your currently stored items are:\n" + a.getRepoContents());
+			System.out.println("Your currently stored items are:\n" + a.getItems());
 			break;
 		case 2:
 			break;
@@ -275,30 +232,8 @@ public class Crypt {
 	private void deposit(Account a) {
 		System.out.println("Enter a filepath to deposit:");
 		String s = Input.getInputString();
-		if(s.contains("/") || s.contains("\\")) { a.setFilepath(s); }
+		if(s.contains("/") || s.contains("\\")) { a.deposit(s); }
 		else { System.out.println("That is not a valid filepath."); deposit(a); }
-
-		//Sets up encryption based on user input and desire default seed.
-		//TODO: Part 2
-		//encryptionOptions(showEncryptionAOptionsMenu(), showEncryptionBOptionsMenu(), showEncryptionCOptionsMenu());
-
-		a.deposit(/*a, b, c*/);
-
-	}
-
-	private byte showEncryptionAOptionsMenu() {
-		return Input.showMenu("Please select an encryption algorithm.", 
-				Input.giveStringArray("AES", "DES", "DESede", "RSA"));
-	}	
-
-	private byte showEncryptionBOptionsMenu() {
-		return Input.showMenu("Please select an encryption mode.", 
-				Input.giveStringArray("CBC", "ECB"));
-	}	
-
-	private byte showEncryptionCOptionsMenu() {
-		return Input.showMenu("Please select an encryption padding mode.", 
-				Input.giveStringArray("NoPadding", "PKCS5Padding"));
 	}
 
 	/**
@@ -310,34 +245,42 @@ public class Crypt {
 	}
 
 	/**
-	 * tests to see if username and password are both approved
+	 * tests to see if user name and password are both approved
 	 * and match database entry
-	 * @param a
+	 * @param up
 	 * @return
 	 */
-	private boolean testUserPass(Account a) {
-		if(!userPassInfo.containsKey(a.getUsername())
+	private boolean testUserPass(UserPass up) {
+		if(
+				!userPassInfo.containsKey(up.getUsername())
 				&& 
-				!userPassInfo.get(a.getUsername()).equals(a.getPassword())) 
+				!userPassInfo.get(up.getUsername()).equals(up.getPassword())) 
 		{ return false; } else { return true; }
 	}
 
 	/**
-	 * allows for creation of new users and admins
+	 * allows for creation of new users and administrators
 	 * @return
 	 */
 	private Account createAccount() {
-		Account a = userPass();
+		UserPass up = userPass();
 		for(String username : userPassInfo.keySet()) {
-			if(a.getUsername().equals(username)) {
+			if(up.getUsername().equals(username)) {
 				System.out.println("That usename is not available. Please try again.");
 				createAccount();
 			}
 		}
-		userPassInfo.put(a.getUsername(), a.getPassword());
+		
+		userPassInfo.put(up.getUsername(), up.getPassword());
 
-		switch(Input.showMenu("Choose a default seed method:", 
-				Input.giveStringArray("Manual", "Randomly generate"))) 
+		Account a = new Account(up.getUsername(), ROLES.get("user"));
+		a = defaultSeedMethod(a);
+		
+		return a;
+	}
+
+	private Account defaultSeedMethod(Account a) {
+		switch(showDefaultSeedMethodMenu()) 
 		{
 		case 1:
 			a.setDefaultSeed(Integer.parseInt(Input.getInputString()));
@@ -346,14 +289,12 @@ public class Crypt {
 			a.generateDefaultSeed();
 			break;
 		default:
+			noMatch();
 			createAccount();
 			break;
 		}
-
-		a.setRole(ROLES.get("user"));
 		return a;
 	}
-
 	/**
 	 * allows user to reset password in case of forgetting
 	 * @return
@@ -370,22 +311,14 @@ public class Crypt {
 	 * retrieves user name and password
 	 * @return
 	 */
-	private Account userPass() {
-		Account a = new Account();
+	private UserPass userPass() {
+		UserPass up = new UserPass();
 
 		System.out.print("Username: ");
-		a.setUsername(Input.getInputString().toLowerCase());
+		up.setUsername(Input.getInputString().toLowerCase());
 		System.out.print("Password: ");
-		a.setPassword(Input.getInputString());
-		return a;
-	}
-
-	/**
-	 * if the user database is empty then fills it with a default admin
-	 */
-	private static void testAdminExist() {
-		if(accounts.isEmpty() || !accounts.keySet().contains("Austin")) 
-		{ accounts.put("austin", new Account("austin", "bobbert", ROLES.get("admin"))); }
+		up.setPassword(Input.getInputString());
+		return up;
 	}
 
 	/**
