@@ -1,0 +1,10 @@
+ROWNUM quits queries when the WHERE condition fails so always use less than with it.
+
+An interface that has only one unimplemented method signature is called a functional interface. They cater to lambda expressions. You can have as many implemented as desired but as soon as there are mulitple unimplemented methods, its no longer a functional interface.
+
+A lambda expression uses the -> arrow notation to define a reference at runtime. This provides an implementation to the signature in the functional interface. Lambda syntax: (Parameters) -> (Expression). Java determines how to use them and what gets returned. Java could also the datatype. If there is only one parameter, parathensis on the left are optional (a -> a*a).
+
+Method References allow you to call specific methods on each element in a colletion. Syntax: (Classname::methodofclass), (Classname::new) provides a new instance for every element in collection.
+
+
+
