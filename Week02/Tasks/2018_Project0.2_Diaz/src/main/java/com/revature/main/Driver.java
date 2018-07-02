@@ -18,7 +18,6 @@ public class Driver {
 		Scanner in = new Scanner(System.in);
 		Connection conn = Connections.getConnection();
 		
-
 		BankMenu.menu();
 
 		

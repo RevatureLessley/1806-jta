@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.revature.util.CloseStreams;
 import com.revature.util.Connections;
 import com.revature.util.SecondMenu;
 
@@ -70,12 +71,11 @@ public class Transactions {
 	        int amount = in.nextInt();
 	        System.out.println(ab);
 	        
-	        amount = addToAccount(amount,ab);
-	        System.out.println(amount);
+	        int amount2 = addToAccount(amount,ab);
 	        
 	        String query1=("UPDATE BANK_ACCOUNT SET ACCOUNT_BALANCE = ? WHERE ACCOUNT_ID = ?");
 	        pstmt = conn.prepareStatement(query1);
-	        pstmt.setInt(1,amount);
+	        pstmt.setInt(1,amount2);
 	        pstmt.setInt(2,accountId);
 	        rs = pstmt.executeQuery();
 	        
@@ -113,7 +113,12 @@ public class Transactions {
 	        
 	     }catch(SQLException e) {
 	        System.out.println("SQL exception occured" + e);
-	     }
+	     }finally {
+				CloseStreams.close(ps);
+				CloseStreams.close(callSt);
+				CloseStreams.close(rs);
+				CloseStreams.close(pstmt);
+			}
 		
 	}
 	public static void withdrawfromAccount() {
@@ -145,16 +150,16 @@ public class Transactions {
 	           System.out.println("|"+aId+"   | "+"$"+ab+"	|"+ trID+ "|" );
 	           System.out.println("----------------------------------------------------");
 	         }
-	        System.out.println("How much do you want to deposit?");
+	        System.out.println("How much do you want to Withdraw?");
 	        int amount = in.nextInt();
 	        System.out.println(ab);
 	        
-	        amount = subFromAccount(ab,amount);
+	        int amount2 = subFromAccount(ab,amount);
 	        System.out.println(amount);
 	        
 	        String query1=("UPDATE BANK_ACCOUNT SET ACCOUNT_BALANCE = ? WHERE ACCOUNT_ID = ?");
 	        pstmt = conn.prepareStatement(query1);
-	        pstmt.setInt(1,amount);
+	        pstmt.setInt(1,amount2);
 	        pstmt.setInt(2,accountId);
 	        rs = pstmt.executeQuery();
 	        
@@ -169,7 +174,7 @@ public class Transactions {
 	           aId = rs.getInt("ACCOUNT_ID");
 	           ab = rs.getInt("ACCOUNT_BALANCE");
 	           trID= rs.getInt("TRAN_ID");
-	           System.out.println("|"+aId+"   | "+"$"+ab+"	|" + trID+ "|");
+	           System.out.println("|"+aId+"  	| "+"$"+ab+"	|" + trID+ "|");
 	           System.out.println("----------------------------------------------------");
 	         }
 	        
@@ -183,8 +188,8 @@ public class Transactions {
 
 	        ps = conn.prepareStatement("CALL Transations_test(?,?,?)");
 	        ps.setInt(1, trID);
-			ps.setInt(2, amount);
-			ps.setInt(3, 0);
+			ps.setInt(2, 0);
+			ps.setInt(3, amount);
 			ps.executeUpdate();
 			
 			
@@ -192,7 +197,12 @@ public class Transactions {
 	        
 	     }catch(SQLException e) {
 	        System.out.println("SQL exception occured" + e);
-	     }
+	     }finally {
+				CloseStreams.close(ps);
+				CloseStreams.close(callSt);
+				CloseStreams.close(rs);
+				CloseStreams.close(pstmt);
+			}
 		
 	}
 	/**

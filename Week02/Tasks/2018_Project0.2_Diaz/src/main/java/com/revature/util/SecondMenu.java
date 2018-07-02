@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-
+import com.revature.util.CloseStreams;
 import com.revature.service.BanKAccountService;
 import com.revature.service.Transactions;
 /**
@@ -23,7 +23,7 @@ public class SecondMenu {
 	final static int secrPassword = 203065; // admin password s not completely set up need to fix
 	
 	public static void switchTwo() {
-		Scanner in = new Scanner(System.in);// useer input
+		Scanner in = new Scanner(System.in);// User input
 		BanKAccountService.intro2();
 		int choice =0;
 		choice = in.nextInt();
@@ -35,18 +35,20 @@ public class SecondMenu {
 				System.out.println("     Please come again.");
 				BankMenu.menu();
 				break;
-			case 1://adds to trasaction table in database
+			case 1://Adds to transaction table in database
 				Transactions.transactions();	
-			case 2://ads new account and customer ifomation to approrate tables
+			case 2://Ads new account and customer info to appropriate tables
 				ShowSecondMenu();
 				switchTwo();
-			case 3:// displays the current account info
+			case 3://Displays the current account info
 				BanKAccountService.tableView();
 				switchTwo();
-			case 4://dis[alys the current customer info
+			case 4://Displays the current customer info
 				BanKAccountService.tableView2();
 				switchTwo();
-				
+			case 5://Displays the current Transaction info
+				BanKAccountService.tableView3();
+				switchTwo();
 		}
 	}
 	
@@ -55,14 +57,12 @@ public class SecondMenu {
 	 * ShowSecondMenu creates the new entry into the banking database contains calls, update and inserts
 	 */
 	public static void ShowSecondMenu() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		CallableStatement callSt = null;
 		try {
 			Scanner in = new Scanner(System.in);// useer input
-			PreparedStatement ps = null;
-			CallableStatement callSt = null;
-			CallableStatement callSt1 = null;
-			Statement stmt = null; 
-			ResultSet rs = null;
-			Connection conn = Connections.getConnection();
+			conn = Connections.getConnection();
 			// adding to customer address table
 			System.out.println("What is the customers street number?");
 			int streetNum = in.nextInt();
@@ -135,18 +135,16 @@ public class SecondMenu {
 			ps.setInt(2, temp2);
 			ps.executeUpdate();
 
-			
-			
-			
-			
 			System.out.println("REVATURE TRANSUNION New account confirmed As:"
 				+ fName +" "+ lName +" With a starting balance of: " + "$" + balance+ "\n");
-			
-			
-			
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		
+			}finally {
+				CloseStreams.close(ps);
+				CloseStreams.close(callSt);
+				CloseStreams.close(conn);
 			}
 		Scanner in = new Scanner(System.in);// useer input
 		System.out.println("Would you like to stay log press 1 for yes and any other number to log out");
