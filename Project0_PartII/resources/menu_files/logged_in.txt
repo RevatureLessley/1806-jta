@@ -1,0 +1,9 @@
+UserInterface:
+
+1. Withdraw
+2. Deposit
+3. Get loan
+4. Account Settings 
+5. Logout
+
+Select an option:
