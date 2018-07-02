@@ -9,8 +9,8 @@ public class Database_Connection
         try
         {
             return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
-                    "bankDBA",
-                    "banking");
+                    "localuser",
+                    "password");
         }
         catch (SQLException e)
         {

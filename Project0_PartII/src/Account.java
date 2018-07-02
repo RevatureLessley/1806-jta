@@ -43,11 +43,19 @@ public class Account implements Serializable
         this.accountBalance = 0;
     }
 
+    public Account(String username, String password, boolean isAdmin, boolean isApproved)
+    {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.isApproved = isApproved;
+    }
+
     public String getUsername() {
         return username;
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return password;
     }
 

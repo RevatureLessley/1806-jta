@@ -11,19 +11,15 @@ public class UserInterface
     public boolean validInput = false;
 
     Account currentAccount;
-    RecordsManager_old recordsManagerOld;
+    RecordsManager recordsManager;
     AccountsRecord accountsRecord;
     StatusLogger statusLogger;
-    RecordsManager_new recordsManager;
 
     public UserInterface()
     {
         statusLogger = new StatusLogger();
-        recordsManagerOld = new RecordsManager_old();
-//        accountsRecord = recordsManagerOld.getFile();
-
-        accountsRecord = new AccountsRecord();
-        recordsManager = new RecordsManager_new(accountsRecord);
+        recordsManager = new RecordsManager();
+        accountsRecord = recordsManager.getFile();
     }
 
     public void userInputInt(Hashtable<Integer, Runnable> commands)
@@ -220,7 +216,6 @@ public class UserInterface
         Account adminAccount = accountInput(true);
 
         accountsRecord.addAccount(adminAccount);
-        recordsManager.createAccount(adminAccount);
         superAdminMenu();
     }
 
@@ -301,8 +296,8 @@ public class UserInterface
                 "\n" +
                 "1. Withdraw\n" +
                 "2. Deposit\n" +
-//                "3. Get loan\n" +
-//                "4. Account Settings \n" +
+                "3. Get loan\n" +
+                "4. Account Settings \n" +
                 "5. Logout\n" +
                 "\n" +
                 "Select an option: ");
@@ -310,8 +305,8 @@ public class UserInterface
         commandTable = new Hashtable<>();
         commandTable.put(1, this::withdraw);
         commandTable.put(2, this::deposit);
-//        commandTable.put(3, this::getLoan);
-//        commandTable.put(4, this::showAccountDetails);
+        commandTable.put(3, this::getLoan);
+        commandTable.put(4, this::showAccountDetails);
         commandTable.put(5, this::logout);
 
         userInputInt(commandTable);
@@ -329,7 +324,6 @@ public class UserInterface
         else
         {
             accountsRecord.addAccount(newAccount);
-            recordsManager.createAccount(newAccount);
             System.err.println("Your account must be approved");
 
             statusLogger.logMessage(newAccount.getUsername() + "has registered, waiting approval");
@@ -369,7 +363,6 @@ public class UserInterface
 
 
         accountsRecord.updateAccount(currentAccount);
-        recordsManager.updateBalance(currentAccount);
         userMenu();
     }
 
@@ -398,25 +391,24 @@ public class UserInterface
         statusLogger.logMessage(currentAccount.getUsername() + "has deposited $" + depositAmount);
 
         accountsRecord.updateAccount(currentAccount);
-        recordsManager.updateBalance(currentAccount);
         userMenu();
     }
-//
-//    public void getLoan()
-//    {
-//        System.out.println("=====================================");
-//        scanner = new Scanner(System.in);
-//        System.out.println("Enter loan request amount: ");
-//        int withdrawalAmount = scanner.nextInt();
-//        System.out.println("You have requested a loan for $" + withdrawalAmount);
-//        System.err.println("Your loan request has been denied!");
-//        userMenu();
-//    }
+
+    public void getLoan()
+    {
+        System.out.println("=====================================");
+        scanner = new Scanner(System.in);
+        System.out.println("Enter loan request amount: ");
+        int withdrawalAmount = scanner.nextInt();
+        System.out.println("You have requested a loan for $" + withdrawalAmount);
+        System.err.println("Your loan request has been denied!");
+        userMenu();
+    }
 
     public void logout()
     {
         statusLogger.logMessage(currentAccount.getUsername() + " has logged out");
-        recordsManagerOld.saveFile(accountsRecord);
+        recordsManager.saveFile(accountsRecord);
         statusLogger.logMessage("Saving accounts and writing file");
 
 
@@ -425,27 +417,27 @@ public class UserInterface
         System.out.println("You have logged out.");
         mainMenu();
     }
-//
-//    public void showAccountDetails()
-//    {
-//        System.out.println("Here are your account details");
-//        System.out.println("Menu: \n" +
-//                "1. View Account Details" +
-//                "2. Go Back");
-//
-//        commandTable = new Hashtable<>();
-//        commandTable.put(1, new Runnable() {
-//            @Override
-//            public void run() {
-//                currentAccount.printAccountDetails();
-//
-//            }
-//        });
-//        commandTable.put(2, this::userMenu);
-//
-//        userInputInt(commandTable);
-//
-//    }
+
+    public void showAccountDetails()
+    {
+        System.out.println("Here are your account details");
+        System.out.println("Menu: \n" +
+                "1. View Account Details" +
+                "2. Go Back");
+
+        commandTable = new Hashtable<>();
+        commandTable.put(1, new Runnable() {
+            @Override
+            public void run() {
+                currentAccount.printAccountDetails();
+
+            }
+        });
+        commandTable.put(2, this::userMenu);
+
+        userInputInt(commandTable);
+
+    }
 
     public void submitLoan()
     {

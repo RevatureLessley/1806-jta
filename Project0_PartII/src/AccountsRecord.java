@@ -108,4 +108,9 @@ public class AccountsRecord implements Serializable
             accountsStore.get(key).setApproved(true);
         }
     }
+
+    public void clearRecords()
+    {
+        accountsStore.clear();
+    }
 }
