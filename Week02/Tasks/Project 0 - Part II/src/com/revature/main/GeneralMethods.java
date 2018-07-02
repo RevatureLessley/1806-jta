@@ -1,5 +1,8 @@
 package com.revature.main;
+import java.lang.invoke.CallSite;
 import java.util.List;
+
+import org.junit.experimental.theories.Theories;
 
 import com.revature.main.Bank;
 import com.revature.beans.User;
@@ -9,8 +12,7 @@ import com.revature.dao.UserDaoImpl;
 public class GeneralMethods {
 	//public static File file = new File("users.ser");
 	/**
-	 * Runs the program. If there are no users in files, then it asks to create an
-	 * administrator account. Else, it displays the initial menu (login, register).
+	 * Calls the initial menu to start the program.
 	 */
 	
 	UserMethods userMethods =  new UserMethods();

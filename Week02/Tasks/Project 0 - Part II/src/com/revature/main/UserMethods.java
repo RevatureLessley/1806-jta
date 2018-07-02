@@ -19,8 +19,8 @@ public class UserMethods {
 	public BalanceDao bDao = new BalanceDaoImpl();
 	
 	/**
-	 * Function that handles registration. If file is empty or does not exist, creates a new file.
-	 * Otherwise it deserializes the data, adds the new data, and finally serializes again.
+	 * Function that handles registration. If user already exists it will display a message. 
+	 * Otherwise, it will register the given user.
 	 */
 	public void register() {
 		Bank.logger.info("Beginning of method to register an user.");
@@ -119,7 +119,7 @@ public class UserMethods {
 	
 	/**
 	 * Checks if an user has enough funds to withdraw the amount requested.
-	 * @param user the user's information to access current balance
+	 * @param currentBalance user's current balance
 	 * @param amount requested amount to withdraw
 	 * @return true if the user has enough funds, else false
 	 */
