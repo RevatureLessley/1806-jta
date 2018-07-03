@@ -1,14 +1,22 @@
 package com.revature.project0;
 
 
+import static com.revature.project0.util.CloseResources.close;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import com.revature.project0.Service.UserService;
 import com.revature.project0.dao.AccountDao;
 import com.revature.project0.dao.AccountDaoImpl;
 import com.revature.project0.dao.UserDao;
 import com.revature.project0.dao.UserDaoImpl;
+import com.revature.project0.util.Connections;
 
 public class EntryClass {
 	public static Logger logger = Logger.getLogger(EntryClass.class);
@@ -19,6 +27,7 @@ public class EntryClass {
 		if(conn!=null){
 			conn.close();
 		}*/
+		System.out.println("====Welcome to The Bank====\n");
 		mainFlow();
 	}
 	/**
@@ -30,13 +39,16 @@ public class EntryClass {
 			switch (choice) {
 			case 1:
 				createAccount();
+				
 				break;
 			case 2:
 				loginFlow();
 				break;
 			case 3:
 				logger.info("Perform quit case.");
+				System.out.println("===Ending Application===");
 				break breakhere;
+				
 			default:
 				// The user input an unexpected choice.
 			}
@@ -47,7 +59,8 @@ public class EntryClass {
 	 * regular User. Allows Admin to activate and inactivate users. Allows User to 
 	 * deposit, withdrawal, and check balance.
 	 */
-	private static void loginFlow() {
+	private static void loginFlow(){
+		System.out.println("=========================");
 		in = new Scanner(System.in);
 		System.out.println("Enter Username:");
 		String username = in.nextLine();
@@ -57,7 +70,7 @@ public class EntryClass {
 		//User u1 = Utility.retrieveUser(username);
 		UserDao userDao = new UserDaoImpl();
 		User u1 = userDao.selectUserByName(username);
-		if (u1.getPassword().equals(password)) {
+		if (u1 != null && u1.getPassword().equals(password)) {
 
 			logger.info("Login Successful for user" + username);
 			if (u1.isAdmin()) {
@@ -71,6 +84,10 @@ public class EntryClass {
 						adminBanAcc();
 						break;
 					case 3:
+						getUserCount();
+						break;
+					case 4:
+						System.out.println("Logout successful.");
 						logger.info("Perform quit case.");
 						break breakAdmin;
 					default: // The user input an unexpected choice.
@@ -90,6 +107,7 @@ public class EntryClass {
 						userBalanceCheck(u1);
 						break;	
 					case 4:
+						System.out.println("Logout Successful.");
 						logger.info("Perform quit case.");
 						break breakUser;
 					default: // The user inputs an unexpected choice
@@ -100,11 +118,35 @@ public class EntryClass {
 		} else {
 			System.out.println("Incorrect username or password");
 		}
+		System.out.println("=========================");
+	}
+	/**
+	 * Method allows to get the number of users.
+	 */
+	private static void getUserCount() {
+		CallableStatement stmt = null;
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareCall("{?= call getCountUser}");
+			stmt.registerOutParameter(1, Types.INTEGER);
+			stmt.execute();
+			int output = stmt.getInt(1);
+			System.out.print("There are ");
+			System.out.print(output);
+			System.out.println(" users in the database.");
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}
+		System.out.println("=========================");
+		
 	}
 	/**
 	 * Called when the withdrawal option is selected on the User menu. Withdraws
 	 * the amount entered from the user's account given sufficent funds.
-	 * @param u1 the User Object that is persisted from .ser file.
+	 * @param u1 the User Object that is persisted into the databases.
 	 */
 	private static void userWithdraw(User u1) {
 		System.out.println("Enter Withdrawel Amount:");
@@ -118,11 +160,12 @@ public class EntryClass {
 		} else  {
 			System.out.println("You account is not activated, please contact admin.");
 		}
+		System.out.println("=========================");
 	}
 	/**
 	 * Called when the deposit option is selected on the User menu. Deposits
 	 * the amount entered into the user's account.
-	 * @param u1 the User Object that is persisted from .ser file.
+	 * @param u1 the User Object that is persisted from database.
 	 */
 	private static void userDeposit(User u1) {
 		System.out.println("Enter Deposit Amount:");
@@ -137,12 +180,13 @@ public class EntryClass {
 		} else {
 			System.out.println("You account is not activated, please contact admin.");
 		}
+		System.out.println("=========================");
 	}
 	
 	/**
 	 * Called when the check balance option is selected on the User menu. Checks
 	 * the amount available for withdrawal.
-	 * @param u1 the User Object that is persisted from .ser file.
+	 * @param u1 the User Object that is persisted from database.
 	 */
 	private static void userBalanceCheck(User u1) {
 		AccountDao accDao = new AccountDaoImpl();
@@ -153,6 +197,7 @@ public class EntryClass {
 		} else  {
 			System.out.println("You account is not activated, please contact admin.");
 		}
+		System.out.println("=========================");
 	}
 	/**
 	 * Called when the approve account option is selected on the Admin menu. Activates
@@ -167,7 +212,8 @@ public class EntryClass {
 		acc.setActive(Boolean.TRUE);
 		accDao.updateAccount(acc);
 		//Utility.persistObj(u2);
-		System.out.println("Account is approved:" + userAccountName);
+		System.out.println("Account is approved: " + userAccountName);
+		System.out.println("=========================");
 	}
 	/**
 	 * Called when the ban account option is selected on the Admin menu. Inactivates
@@ -183,11 +229,13 @@ public class EntryClass {
 		//Utility.persistObj(u2);
 		accDao.updateAccount(acc);
 		System.out.println("Account is Inactivated:" + userAccountName);
+		System.out.println("=========================");
 	}
 	/**
 	 * Account creation method.
 	 */
-	private static void createAccount() {
+	private static Integer createAccount() {
+		System.out.println("=========================");
 		in = new Scanner(System.in);
 		System.out.println("Enter new Username:");
 		String username = in.nextLine();
@@ -196,15 +244,18 @@ public class EntryClass {
 		System.out.println("Admin? (True/False):");
 		boolean isAdmin = in.nextBoolean();
 		logger.info(username + " " + password);
-		User u = new User(username, password, isAdmin);
-		UserDao userDao = new UserDaoImpl();
-		Integer userId = userDao.insertUser(u);
-		Account acc = new Account();
-		AccountDao accDao = new AccountDaoImpl();
-		Integer accId = accDao.insertAccount(acc);
-		userDao.saveUserAccount(userId, accId);
-		logger.info(u.getUsername());
+		User newUser = new User(username, password, isAdmin);
+		UserService ns = new UserService();
+
+		if(ns.insertUser(newUser)){
+			logger.info("User Insertion via Stored Procedure successful.");			
+		}else{
+			logger.info("STORED PROCEDURE FAILURE!");
+		}
+		
+		logger.info(newUser.getUsername());
 		//Utility.persistObj(u);
+		return null;
 	}
 	/**
 	 * The entry menu that allows for account creation and logging in.
@@ -237,7 +288,7 @@ public class EntryClass {
 		System.out.println("1 - Deposit to account");
 		System.out.println("2 - Withdraw from account");
 		System.out.println("3 - Check account balance");
-		System.out.println("4 - Quit");
+		System.out.println("4 - Logout");
 
 		selection = in.nextInt();
 		return selection;
@@ -252,7 +303,8 @@ public class EntryClass {
 		System.out.println("-------------------------\n");
 		System.out.println("1 - Approve account");
 		System.out.println("2 - Ban account");
-		System.out.println("3 - Quit");
+		System.out.println("3 - Get User Count");
+		System.out.println("4 - Logout");
 
 		selection = in.nextInt();
 		return selection;

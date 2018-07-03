@@ -17,7 +17,7 @@ public class AccountDaoImpl implements AccountDao {
 	@Override
 	public Integer insertAccount(Account acc) {
 		String key[] = {"ACC_ID"};
-		String insertTableSQL = "INSERT INTO ACCOUNT (IS_ACTIVE, BALANCE) VALUES (?,?)";
+		String insertTableSQL = "INSERT INTO ACC (IS_ACTIVE, BALANCE) VALUES (?,?)";
 		PreparedStatement ps = null;
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(insertTableSQL,key);
@@ -40,7 +40,7 @@ public class AccountDaoImpl implements AccountDao {
 	public Account selectAccountById(Integer id) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT ACC_ID, IS_ACTIVE, BALANCE, FROM ACCOUNT WHERE ACC_ID = ?";
+		String sql = "SELECT ACC_ID, IS_ACTIVE, BALANCE, FROM ACC WHERE ACC_ID = ?";
 
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Override
 	public Integer deleteAccountById(Integer id) {
-		String insertTableSQL = "DELETE FROM ACCOUNT WHERE ACC_ID = ?";
+		String insertTableSQL = "DELETE FROM ACC WHERE ACC_ID = ?";
 		int status = 0;
 		PreparedStatement ps = null;
 		try (Connection conn = Connections.getConnection()){
@@ -81,7 +81,7 @@ public class AccountDaoImpl implements AccountDao {
 		PreparedStatement stmt = null;
 		int status = 0;
 		try (Connection conn = Connections.getConnection()) {
-			String sql = "UPDATE ACCOUNT SET IS_ACTIVE = ?,BALANCE = ? WHERE ACC_ID=?";
+			String sql = "UPDATE ACC SET IS_ACTIVE = ?,BALANCE = ? WHERE ACC_ID=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setBoolean(1, acc.getIsActive());
 			stmt.setDouble(2, acc.getBal());
@@ -102,7 +102,7 @@ public class AccountDaoImpl implements AccountDao {
 		List<Account> accounts = new ArrayList();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT a.ACC_ID, a.IS_ACTIVE, a.BALANCE FROM USER_ACCOUNT ua, ACCOUNT a "
+		String sql = "SELECT a.ACC_ID, a.IS_ACTIVE, a.BALANCE FROM USER_ACCOUNT ua, ACC a "
 				+ "WHERE ua.ACC_ID = a.ACC_ID AND ua.USER_ID = ?";
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class AccountDaoImpl implements AccountDao {
 		List<Account> accounts = new ArrayList();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT a.ACC_ID, a.IS_ACTIVE, a.BALANCE FROM BANK_USER ba, USER_ACCOUNT ua, ACCOUNT a "
+		String sql = "SELECT a.ACC_ID, a.IS_ACTIVE, a.BALANCE FROM BANK_USER ba, USER_ACCOUNT ua, ACC a "
 				+ "WHERE ba.USER_ID = ua.USER_ID AND ua.ACC_ID = a.ACC_ID AND ba.USERNAME = ?";
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);

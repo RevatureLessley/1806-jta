@@ -2,11 +2,13 @@ package com.revature.project0.dao;
 
 import static com.revature.project0.util.CloseResources.close;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.project0.Account;
 import com.revature.project0.User;
 import com.revature.project0.util.Connections;
 
@@ -14,8 +16,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public Integer insertUser(User user) {
-		String key[] = {"USER_ID"};
-		String insertTableSQL = "INSERT INTO BANK_USER (USERNAME, PASSWORD, IS_ADMIN) VALUES (?,?,?)";
+/*		String key[] = {"USER_ID"};
+		String insertTableSQL = "INSERT INTO BANK_USER (USERNAME, PASS, IS_ADMIN) VALUES (?,?,?)";
 		PreparedStatement ps = null;
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(insertTableSQL, key);
@@ -32,6 +34,7 @@ public class UserDaoImpl implements UserDao {
 		} finally {
 			close(ps);
 		}
+		return null;*/
 		return null;
 	}
 
@@ -39,8 +42,7 @@ public class UserDaoImpl implements UserDao {
 	public User selectUserByName(String userName) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT USER_ID,USERNAME, PASSWORD, IS_ADMIN FROM BANK_USER WHERE USERNAME = ?";
-
+		String sql = "SELECT USER_ID,USERNAME, PASS, IS_ADMIN FROM BANK_USER WHERE USERNAME = ?";
 		try (Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, userName);
@@ -82,7 +84,7 @@ public class UserDaoImpl implements UserDao {
 		PreparedStatement stmt = null;
 		int status = 0;
 		try (Connection conn = Connections.getConnection()) {
-			String sql = "UPDATE BANK_USER SET Username = ?,Password = ?, IS_ADMIN = ? WHERE USER_ID=?";
+			String sql = "UPDATE BANK_USER SET Username = ?,Pass = ?, IS_ADMIN = ? WHERE USER_ID=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, user.getUsername());
 			stmt.setString(2, user.getPassword());
@@ -113,6 +115,29 @@ public class UserDaoImpl implements UserDao {
 			close(ps);
 		}
 		
+	}
+	@Override
+	public Boolean insertUserViaSp(User u) {
+
+		CallableStatement stmt = null;
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareCall("{call insertIntoBankUser(?,?,?)}");
+			stmt.setString(1, u.getUsername());
+			stmt.setString(2, u.getPassword());
+			stmt.setBoolean(3, u.isAdmin());
+			stmt.execute();
+			User u1 = this.selectUserByName(u.getUsername());
+			Account acc = new Account();
+			AccountDao accDao = new AccountDaoImpl();
+			Integer accId = accDao.insertAccount(acc);
+			this.saveUserAccount(u1.getUserid(), accId);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return true;
 	}
 
 }

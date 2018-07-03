@@ -108,3 +108,59 @@
 2018-07-02 15:51:19 INFO  EntryClass:198 - test test
 2018-07-02 15:51:22 INFO  EntryClass:206 - test
 2018-07-02 15:52:33 INFO  EntryClass:38 - Perform quit case.
+2018-07-03 00:00:57 INFO  EntryClass:198 - tester test
+2018-07-03 00:01:00 INFO  EntryClass:206 - tester
+2018-07-03 00:01:15 INFO  EntryClass:198 - admintest test
+2018-07-03 00:01:16 INFO  EntryClass:206 - admintest
+2018-07-03 00:01:28 INFO  EntryClass:56 - admintest test
+2018-07-03 00:01:28 INFO  EntryClass:62 - Login Successful for useradmintest
+2018-07-03 00:01:39 INFO  EntryClass:74 - Perform quit case.
+2018-07-03 00:02:27 INFO  EntryClass:56 - tester test
+2018-07-03 00:02:27 INFO  EntryClass:62 - Login Successful for usertester
+2018-07-03 00:02:33 INFO  EntryClass:136 - 100000 | 100.0
+2018-07-03 00:02:46 INFO  EntryClass:117 - 100000 | 0.0
+2018-07-03 00:02:52 INFO  EntryClass:152 - 100000 | 0.0
+2018-07-03 00:02:56 INFO  EntryClass:93 - Perform quit case.
+2018-07-03 01:06:58 INFO  EntryClass:199 - tesr test
+2018-07-03 01:07:01 INFO  EntryClass:206 - STORED PROCEDURE FAILURE!
+2018-07-03 01:07:01 INFO  EntryClass:209 - tesr
+2018-07-03 01:08:10 INFO  EntryClass:199 - bobbert test
+2018-07-03 01:08:13 INFO  EntryClass:204 - User Insertion via Stored Procedure successful.
+2018-07-03 01:08:13 INFO  EntryClass:209 - bobbert
+2018-07-03 01:08:25 INFO  EntryClass:57 - admin test
+2018-07-03 01:10:40 INFO  EntryClass:57 - admintest test
+2018-07-03 01:10:43 INFO  EntryClass:63 - Login Successful for useradmintest
+2018-07-03 01:10:57 INFO  EntryClass:75 - Perform quit case.
+2018-07-03 01:11:04 INFO  EntryClass:57 - bobbert test
+2018-07-03 01:11:04 INFO  EntryClass:63 - Login Successful for userbobbert
+2018-07-03 01:11:14 INFO  EntryClass:137 - 100003 | 100.0
+2018-07-03 01:11:20 INFO  EntryClass:118 - 100003 | 0.0
+2018-07-03 01:11:25 INFO  EntryClass:153 - 100003 | 0.0
+2018-07-03 01:11:28 INFO  EntryClass:94 - Perform quit case.
+2018-07-03 02:41:35 INFO  EntryClass:63 - admintest test
+2018-07-03 02:42:38 INFO  EntryClass:221 - adminTest test
+2018-07-03 02:42:41 INFO  EntryClass:226 - User Insertion via Stored Procedure successful.
+2018-07-03 02:42:41 INFO  EntryClass:231 - adminTest
+2018-07-03 02:42:51 INFO  EntryClass:221 - tester test
+2018-07-03 02:42:52 INFO  EntryClass:226 - User Insertion via Stored Procedure successful.
+2018-07-03 02:42:52 INFO  EntryClass:231 - tester
+2018-07-03 02:43:02 INFO  EntryClass:221 - test test
+2018-07-03 02:43:02 INFO  EntryClass:226 - User Insertion via Stored Procedure successful.
+2018-07-03 02:43:02 INFO  EntryClass:231 - test
+2018-07-03 02:43:09 INFO  EntryClass:63 - adminTest test
+2018-07-03 02:43:09 INFO  EntryClass:69 - Login Successful for useradminTest
+2018-07-03 02:43:11 INFO  EntryClass:83 - Perform quit case.
+2018-07-03 02:45:00 INFO  EntryClass:63 - adminTest test
+2018-07-03 02:45:06 INFO  EntryClass:69 - Login Successful for useradminTest
+2018-07-03 02:45:09 INFO  EntryClass:83 - Perform quit case.
+2018-07-03 02:55:23 INFO  EntryClass:64 - adminTest test
+2018-07-03 02:55:27 INFO  EntryClass:70 - Login Successful for useradminTest
+2018-07-03 02:55:29 INFO  EntryClass:84 - Perform quit case.
+2018-07-03 02:56:13 INFO  EntryClass:64 - adminTest test
+2018-07-03 02:56:17 INFO  EntryClass:70 - Login Successful for useradminTest
+2018-07-03 02:56:38 INFO  EntryClass:64 - adminTest test
+2018-07-03 02:56:42 INFO  EntryClass:70 - Login Successful for useradminTest
+2018-07-03 02:56:45 INFO  EntryClass:84 - Perform quit case.
+2018-07-03 02:58:00 INFO  EntryClass:64 - adminTest test
+2018-07-03 02:58:04 INFO  EntryClass:70 - Login Successful for useradminTest
+2018-07-03 02:58:06 INFO  EntryClass:84 - Perform quit case.

@@ -9,5 +9,6 @@ public interface UserDao {
 	public Integer deleteUserById(Integer id);
 	public Integer updateUser(User u);
 	public void saveUserAccount(Integer userId, Integer accountId);
+	public Boolean insertUserViaSp(User u);
 
 }
