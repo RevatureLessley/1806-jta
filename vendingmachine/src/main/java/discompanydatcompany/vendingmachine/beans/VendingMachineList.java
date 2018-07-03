@@ -2,6 +2,7 @@ package discompanydatcompany.vendingmachine.beans;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 public class VendingMachineList implements Serializable {
 
@@ -39,6 +40,10 @@ public class VendingMachineList implements Serializable {
 		} else {
 			return null;
 		}
+	}
+	
+	public List<VendingMachine> getVendingMachines() {
+		return (List<VendingMachine>) this.vendingMachineList.values();
 	}
 	
 	/**

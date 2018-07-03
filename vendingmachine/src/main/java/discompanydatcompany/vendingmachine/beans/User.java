@@ -197,6 +197,10 @@ public class User implements Serializable {
     	}
     }
     
+    public Inventory getInventory() {
+    	return this.inventory;
+    }
+    
     public int getCash() {
     	return this.cash;
     }

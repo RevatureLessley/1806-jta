@@ -111,6 +111,10 @@ public class UserList implements Serializable {
 		}
 	}
 	
+	public List<User> getUsers() {
+		return (List<User>) this.userList.values();
+	}
+	
 	public int size() {
 		return this.userList.size();
 	}

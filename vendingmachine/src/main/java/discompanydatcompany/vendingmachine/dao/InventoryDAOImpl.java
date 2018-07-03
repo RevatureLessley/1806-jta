@@ -207,7 +207,7 @@ public class InventoryDAOImpl extends Connection implements InventoryDAO {
 		try {
 			callableStatement = getConnection().prepareCall("{call updateInventory(?, ?)}");
 			callableStatement.setObject(1, user.getLoginUUID());
-			callableStatement.setObject(2, user);
+			callableStatement.setObject(2, user.getInventory());
 			if (callableStatement.execute() == true) {
 				return true;
 			}
@@ -223,7 +223,7 @@ public class InventoryDAOImpl extends Connection implements InventoryDAO {
 		try {
 			callableStatement = getConnection().prepareCall("{call updateInventory(?, ?)}");
 			callableStatement.setObject(1, vendingMachine.getVendingMachineId());
-			callableStatement.setObject(2, vendingMachine);
+			callableStatement.setObject(2, vendingMachine.getInventory());
 			if (callableStatement.execute() == true) {
 				return true;
 			}
