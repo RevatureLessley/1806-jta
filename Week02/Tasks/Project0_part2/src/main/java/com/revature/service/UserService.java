@@ -2,16 +2,23 @@ package com.revature.service;
 
 import java.util.List;
 
-import com.revature.beans.BAccount;
+import org.apache.log4j.Logger;
+
 import com.revature.beans.BUser;
 import com.revature.dao.AccountDaoImpl;
 import com.revature.dao.UserDaoImpl;
 
-public class UserService implements UserServiceInterface {
+public class UserService{
 
 	UserDaoImpl userDao = new UserDaoImpl();
+	private static Logger logger = Logger.getLogger(UserService.class);
 
-	@Override
+	/**
+	 * Gets a userId by name from the DB
+	 * 
+	 * @param name
+	 * @return User associated with the given name
+	 */
 	public Integer getUser(String name) {
 		BUser bUser = userDao.selectByName(name);
 		if (bUser != null)
@@ -20,22 +27,40 @@ public class UserService implements UserServiceInterface {
 			return null;
 	}
 
-	@Override
+	/**
+	 * Accesses the DB to determine whether a user name is available
+	 * @param name
+	 * @return
+	 */
 	public boolean checkUsernameAvailable(String name) {
 		return userDao.selectByName(name) == null;
 	}
 
-	@Override
+	/**
+	 * Creates a new User and adds it to the database.
+	 * TODO password encryption
+	 * 
+	 * @param name
+	 * @param password
+	 * @return new User instance
+	 */
 	public Integer addUser(String name, String password) {
 		Integer id = userDao.selectAll().size() + 1;
 
 		BUser u = new BUser(id, 2, name, password);
 		userDao.insert(u);
+		
+		logger.info("added user " + name + " with id " + id);
 
 		return id;
 	}
 
-	@Override
+	/**
+	 * Creates a string which contains all user names. Each user name is followed by
+	 * the sum of balances in all the user's accounts.
+	 * 
+	 * @return
+	 */
 	public String summarizeAllUsers() {
 		List<BUser> l = userDao.selectAll();
 
@@ -61,6 +86,12 @@ public class UserService implements UserServiceInterface {
 		return sb1.toString();
 	}
 
+	/**
+	 * Checks if a given String matches the User's password
+	 * 
+	 * @param password
+	 * @return true if valid, else false
+	 */
 	public int validateLogin(String username, String password) {
 
 		BUser u = userDao.selectByName(username);
@@ -90,6 +121,8 @@ public class UserService implements UserServiceInterface {
 		BUser u = userDao.selectById(userId);
 
 		u.setType(admin ? 1 : 2);
+		
+		logger.info("user " + userId + " is now an admin ");
 
 		userDao.update(u);
 	}

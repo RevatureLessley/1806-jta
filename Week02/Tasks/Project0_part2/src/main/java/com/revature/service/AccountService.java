@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.revature.beans.BAccount;
 import com.revature.beans.BAccountType;
 import com.revature.beans.BInterestStamp;
@@ -17,37 +19,59 @@ import com.revature.dao.InterestStampDao;
 public class AccountService {
 
 	private AccountDaoImpl accountDao = new AccountDaoImpl();
-
+	private static Logger logger = Logger.getLogger(AccountService.class);
+	
+	/**
+	 * Marks an account as 'validated' within the DB If the account was a loan,
+	 * transaction involving the loan are also applied
+	 * 
+	 * @param account
+	 */
 	public void validateAccount(Integer accountId) {
 		BAccount bAccount = accountDao.selectById(accountId);
 		if (bAccount.getType() != 3) {
+			logger.info(
+					"Account " + bAccount.getName() + " has been validated.");
 			bAccount.setValidated(1);
 			accountDao.update(bAccount);
-		}else {
+		} else {
 			accountDao.validateLoan(bAccount.getId());
 		}
 	}
 
+	/**
+	 * 
+	 * @return number of accounts waiting to be validated
+	 */
 	public int getWaitAccountCount() {
 
 		return accountDao.selectAll(false).size();
 	}
 
+	/**
+	 * 
+	 * @param i
+	 * @return the ith account on the unvalidated set
+	 */
 	public Integer getWaitAccount(int i) {
 		List<BAccount> ls = accountDao.selectAll(false);
 		return ls.get(i).getId();
 	}
 
+	/**
+	 * Creates and adds an account to the DB. If the account belongs to an admin, it
+	 * is automatically validated
+	 * 
+	 * @param account
+	 */
 	public Integer addNewAccount(Integer userId, int type) {
 
 		Integer id = accountDao.getMaxId() + 1;
 
-		//String name = new AccountTypeDaoImpl().selectById(type).getName();
+
 		BAccount a = new BAccount(id, type, 0.0, 0, userId);
 
-		// logger.info("New account " + name + " created for user " + user.getName());
-
-		// BUser u = new UserDaoImpl().selectById(userId);
+		logger.info("New account " + getAccountName(a) + " created for user " + userId);
 
 		if (new UserService().isAdmin(userId))
 			a.setValidated(1);
@@ -57,10 +81,25 @@ public class AccountService {
 		return id;
 	}
 
+	/**
+	 * Executes the loan request procedure int the DB. Creates and adds a new
+	 * LoanAccount and loan request. If the account belongs to an admin, it is
+	 * automatically validated. Also sets borrow and target account values to be
+	 * used once the account has been validated
+	 * 
+	 * @param account
+	 */
 	public void addNewLoan(Integer userId, double borrow, Integer targetAcct) {
 		accountDao.requestLoan(userId, borrow, targetAcct);
+		logger.info("New loan request made by user " + userId + " for " + borrow);
 	}
 
+	/**
+	 * Builds an array of accounts waiting to be validated. The account name is
+	 * proceeded by the name of the user associated with the account
+	 * 
+	 * @return
+	 */
 	public String[] getWaitAccountNames() {
 		List<BAccount> l = accountDao.selectAll(false);
 
@@ -105,19 +144,23 @@ public class AccountService {
 	 */
 	public String getUserAccountSummary(Integer userId) {
 		StringBuilder sb = new StringBuilder();
-		// List<BAccount> l = accountDao.selectAll(userId);
 
-		List<String> l = accountDao.selectJoinUserAccountSummary(userId);
-
-		for (String s : l) {
-			sb.append(s);
+		for (BAccount a : accountDao.selectAll(userId)) {
+			sb.append(getAccountSummary(a));
 			sb.append('\n');
 		}
 
 		return sb.toString();
 	}
 
+	/**
+	 * Remove an account from the DB. Also removes the account from its owner. Used
+	 * for completed loans and denied accounts.
+	 * 
+	 * @param a
+	 */
 	public void removeAccount(Integer accountId) {
+		logger.info("removed account " + accountId);
 		accountDao.deleteById(accountId);
 	}
 
@@ -133,12 +176,13 @@ public class AccountService {
 
 		if (stamp != null) {
 			long days = ChronoUnit.MINUTES.between(stamp.getLocalDateTime(), currDate);
-			System.out.println("applying interest for " + days + " periods");
+			//System.out.println("applying interest for " + days + " periods");
 
 			if (days <= 0)
 				return;
 
 			// applyInterest(days);
+			logger.info("applied interest for " + days + " periods");
 			accountDao.applyInterest((int) days);
 
 		}
@@ -147,43 +191,25 @@ public class AccountService {
 	}
 
 	/**
-	 * Apply interest to all validated accounts
+	 * Uses a naming convention to generate a name for the account based on its type
+	 * and id.
+	 * 
+	 * @param accountId
+	 * @return
 	 */
-	// public void applyInterest(long periods) {
-	//
-	// List<BAccount> accounts = accountDao.selectAll(true);
-	// Map<Integer, BAccountType> typeMap = AccountTypeDaoImpl.getTypeMap();
-	// //System.out.println(typeMap);
-	//
-	// double r;
-	// double balance;
-	//
-	// for (BAccount a : accounts) {
-	// // a.applyInterest(days);
-	// r = typeMap.get(a.getType()).getRate();
-	// //System.out.println(a.getType());
-	// //System.out.println(r);
-	//
-	// balance = a.getBalance();
-	// //System.out.println(balance);
-	// //System.out.println(Math.pow((1 + r / 365.0), periods));
-	//
-	// balance = balance * Math.pow((1 + r / 365.0), periods);
-	// //System.out.println(balance);
-	//
-	// a.setBalance(balance);
-	//
-	// accountDao.update(a);
-	//
-	// }
-	// }
-
 	public String getAccountName(Integer accountId) {
 
 		BAccount acc = accountDao.selectById(accountId);
 		return getAccountName(acc);
 	}
 
+	/**
+	 * Uses a naming convention to generate a name for the account based on its type
+	 * and id.
+	 * 
+	 * @param acc
+	 * @return
+	 */
 	public String getAccountName(BAccount acc) {
 
 		Map<Integer, BAccountType> typeMap = AccountTypeDaoImpl.getTypeMap();
@@ -193,6 +219,14 @@ public class AccountService {
 		return typeName + "_" + acc.getId();
 	}
 
+	/**
+	 * Gets the account at the given index that belongs to the given user. Assumes
+	 * the list is sorted by account id
+	 * 
+	 * @param userId
+	 * @param index
+	 * @return
+	 */
 	public Integer getUserAccount(Integer userId, int index) {
 		List<BAccount> l = accountDao.selectAll(userId);
 		try {
@@ -202,25 +236,54 @@ public class AccountService {
 		}
 	}
 
+	/**
+	 * Access the DB to determine whether an account has been validated.
+	 * 
+	 * @param accountId
+	 * @return
+	 */
 	public boolean accountIsValidate(Integer accountId) {
 		return (accountDao.selectById(accountId).getValidated() == 1);
 	}
 
+	/**
+	 * Access the DB to determine the type of an account.
+	 * 
+	 * @param accountId
+	 * @return
+	 */
 	public int getAccountType(Integer activeAccount) {
 		return accountDao.selectById(activeAccount).getType();
 	}
 
+	/**
+	 * Obtains an account from the DB, modifies the balance, and updates the DB.
+	 * 
+	 * @param accountId
+	 * @param amt
+	 */
 	public void withdraw(Integer accountId, double amt) {
 		BAccount bAccount = accountDao.selectById(accountId);
 		bAccount.setBalance(bAccount.getBalance() - amt);
+		
+		logger.info("withdrew " + amt + " from " + getAccountName(bAccount));
 
 		accountDao.update(bAccount);
 
 	}
 
+	/**
+	 * Obtains an account from the DB, modifies the balance, and updates the DB.
+	 * TODO completed loans should be removed from the DB
+	 * 
+	 * @param accountId
+	 * @param amt
+	 */
 	public void deposit(Integer accountId, double amt) {
 		BAccount bAccount = accountDao.selectById(accountId);
 		bAccount.setBalance(bAccount.getBalance() + amt);
+		
+		logger.info("deposit " + amt + " to " + getAccountName(bAccount));
 
 		accountDao.update(bAccount);
 
@@ -240,10 +303,41 @@ public class AccountService {
 		return s;
 	}
 
+	/**
+	 * Obtains a simple summary of the account which includes the name and balance
+	 * 
+	 * @param accountId
+	 * @return
+	 */
 	public String getAccountSummary(Integer accountId) {
-		return getAccountName(accountId) + " - " + AccountService.formatCurrency(getAccountBalance(accountId));
+		return getAccountSummary(accountDao.selectById(accountId));
 	}
 
+	/**
+	 * Obtains a simple summary of the account which includes the name and balance
+	 * 
+	 * @param accountId
+	 * @return
+	 */
+	public String getAccountSummary(BAccount account) {
+		if (account.getValidated() == 1)
+			return getAccountName(account) + " - " + AccountService.formatCurrency(account.getBalance());
+		else {
+			if (account.getType() == 3)
+				return getAccountName(account) + " - request for "
+						+ AccountService.formatCurrency(-account.getBalance());
+			else
+				return getAccountName(account) + " - awaiting validation";
+		}
+
+	}
+
+	/**
+	 * Obtains the balance of an account from the DB.
+	 * 
+	 * @param accountId
+	 * @return
+	 */
 	public Double getAccountBalance(Integer accountId) {
 		BAccount bAccount = accountDao.selectById(accountId);
 

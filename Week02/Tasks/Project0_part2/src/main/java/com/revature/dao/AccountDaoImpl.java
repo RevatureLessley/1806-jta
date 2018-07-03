@@ -9,14 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.revature.beans.BAccount;
-import com.revature.beans.BUser;
-import com.revature.beans.Npc;
-import com.revature.service.AccountService;
 import com.revature.utils.Connections;
 
 public class AccountDaoImpl implements GenericDao<BAccount> {
@@ -76,7 +70,7 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 
 	@Override
 	public List<BAccount> selectAll() {
-		Statement stmt = null; // simple sql query to be executed
+		Statement stmt = null;
 		ResultSet rs = null;
 
 		String sql = "SELECT * FROM account_table";
@@ -105,8 +99,14 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 		return ls;
 	}
 
+	/**
+	 * Creates list which contains all account beans in the database that have been
+	 * validated
+	 * 
+	 * @param t
+	 */
 	public List<BAccount> selectAll(boolean validated) {
-		PreparedStatement ps = null; // simple sql query to be executed
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		String sql = "SELECT * FROM account_table WHERE acct_validated = ?";
@@ -135,9 +135,15 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 
 		return ls;
 	}
-	
+
+	/**
+	 * Creates list which contains all account beans in the database that have are
+	 * owned by the given user
+	 * 
+	 * @param t
+	 */
 	public List<BAccount> selectAll(Integer userId) {
-		PreparedStatement ps = null; // simple sql query to be executed
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		String sql = "SELECT * FROM account_table WHERE user_id = ?";
@@ -217,9 +223,13 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 
 		return changes;
 	}
-	
 
-
+	/**
+	 * Aggregates the balances of all activated accounts that belong to the given
+	 * user.
+	 * 
+	 * @param t
+	 */
 	public Double getUserTotalBalance(Integer userId) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -246,11 +256,16 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 		return total;
 	}
 
-//	public List<String> selectJoinUserAccountNames(Integer userId) {
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+//	public List<String> selectJoinUserAccountSummary(Integer userId) {
 //		PreparedStatement ps = null;
 //		ResultSet rs = null;
 //
-//		String sql = "SELECT acct_id, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = ?";
+//		String sql = "SELECT acct_id, acct_validated, acct_balance, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = ?";
 //		List<String> l = new ArrayList<>();
 //
 //		try (Connection conn = Connections.getConnection()) {
@@ -259,8 +274,13 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 //
 //			rs = ps.executeQuery();
 //
-//			while (rs.next())
-//				l.add(rs.getString(2) + " " + rs.getString(1));
+//			while (rs.next()) {
+//				if (rs.getInt(2) == 1)
+//					l.add(rs.getString(4) + " " + rs.getString(1) + " - "
+//							+ AccountService.formatCurrency(rs.getDouble(3)));
+//				else
+//					l.add(rs.getString(4) + " " + rs.getString(1) + " - awaiting validation");
+//			}
 //
 //		} catch (SQLException e) {
 //			e.printStackTrace();
@@ -271,39 +291,9 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 //
 //		return l;
 //	}
-	
-	public List<String> selectJoinUserAccountSummary(Integer userId) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		String sql = "SELECT acct_id, acct_validated, acct_balance, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = ?";
-		List<String> l = new ArrayList<>();
-
-		try (Connection conn = Connections.getConnection()) {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, userId);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				if(rs.getInt(2) == 1)
-					l.add(rs.getString(4) + " " + rs.getString(1) + " - " + AccountService.formatCurrency(rs.getDouble(3)));
-				else
-					l.add(rs.getString(4) + " " + rs.getString(1) + " - awaiting validation");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(ps);
-		}
-
-		return l;
-	}
 
 	public Integer getMaxId() {
-		Statement stmt = null; // simple sql query to be executed
+		Statement stmt = null;
 		ResultSet rs = null;
 
 		String sql = "SELECT MAX(acct_id) FROM account_table";
@@ -329,70 +319,68 @@ public class AccountDaoImpl implements GenericDao<BAccount> {
 	}
 
 	public boolean applyInterest(int days) {
-		CallableStatement stmt = null; 
-		
-		try(Connection conn = Connections.getConnection()){
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()) {
 
 			stmt = conn.prepareCall("{CALL APPLYINTEREST(?)}");
-			
+
 			stmt.setInt(1, days);
 
-			
-			stmt.execute(); //Returns amount rows effected;
+			stmt.execute();
 			return true;
-			
-		}catch(SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(stmt);
-		}		
+		}
 		return false;
-		
+
 	}
-	
+
 	public boolean requestLoan(Integer userId, Double amount, Integer targetAcct) {
-		CallableStatement stmt = null; 
-		
-		try(Connection conn = Connections.getConnection()){
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()) {
 
 			stmt = conn.prepareCall("{CALL requestLoan(?, ?, ?)}");
-			
+
 			stmt.setInt(1, userId);
 			stmt.setDouble(2, amount);
 			stmt.setInt(3, targetAcct);
-			
-			stmt.execute(); //Returns amount rows effected;
+
+			stmt.execute();
 			return true;
-			
-		}catch(SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(stmt);
-		}		
+		}
 		return false;
-		
+
 	}
-	
+
 	public boolean validateLoan(Integer loanAccount) {
-		CallableStatement stmt = null; 
-		
-		try(Connection conn = Connections.getConnection()){
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()) {
 
 			stmt = conn.prepareCall("{CALL validateLoan(?)}");
-			
+
 			stmt.setInt(1, loanAccount);
 
-			stmt.execute(); //Returns amount rows effected;
+			stmt.execute();
 			return true;
-			
-		}catch(SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(stmt);
-		}		
+		}
 		return false;
-		
+
 	}
-	
 
 }

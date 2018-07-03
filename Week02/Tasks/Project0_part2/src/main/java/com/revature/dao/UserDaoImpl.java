@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.beans.BAccount;
 import com.revature.beans.BUser;
 import com.revature.utils.Connections;
 
@@ -140,7 +139,7 @@ public class UserDaoImpl implements GenericDao<BUser>{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "DELETE FROM user_table WHERE acct_id = ?";
+		String sql = "DELETE FROM user_table WHERE u_id = ?";
 		int changes = 0; 
 		
 		try (Connection conn = Connections.getConnection()) {

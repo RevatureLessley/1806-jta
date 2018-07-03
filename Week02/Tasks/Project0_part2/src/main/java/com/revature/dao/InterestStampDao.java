@@ -3,19 +3,12 @@ package com.revature.dao;
 import static com.revature.utils.CloseStreams.close;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.revature.beans.BAccount;
 import com.revature.beans.BInterestStamp;
 import com.revature.utils.Connections;
 

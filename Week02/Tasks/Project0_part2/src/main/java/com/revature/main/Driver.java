@@ -11,14 +11,11 @@ import com.revature.service.UserService;
 
 public class Driver {
 
-	//private UserController userController;
 	private UserService userService;
 	private AccountService accountService;
-	//private static AccountController accountController;
 	private Phase phase = Phase.Initialize;
 	private Integer activeUser;
 	private Integer activeAccount;
-	//private Account activeAccount;
 	
 	private static boolean doClear = true;
 	private static Scanner scanner;
@@ -176,7 +173,6 @@ public class Driver {
 
 		}
 
-		//userController.addUser(name, password);
 		userService.addUser(name, password);
 		System.out.println("Hello, " + name + ". Welcome to The Westward Banking Service");
 		enterWait();
@@ -198,7 +194,6 @@ public class Driver {
 		System.out.print("Enter password: ");
 		String password = scanner.nextLine();
 
-		//User user = userController.getUser(name);
 		Integer user = userService.getUser(name);
 		
 		if (user == null) {
@@ -206,7 +201,7 @@ public class Driver {
 			enterWait();
 			return phase;
 		} else {
-			//int logVal = user.validateLogin(password);
+
 			int logVal = userService.validateLogin(name, password);
 			
 			if (logVal == 1) {
@@ -231,9 +226,6 @@ public class Driver {
 	 *         the event of invalid input
 	 */
 	private Phase executeUserPhase() {
-		
-		//BUser u = new UserDaoImpl().selectById(activeUser);
-
 
 		printHeader("Welcome, " + userService.getUserName(activeUser) + ".",
 				"Your total balance: " + AccountService.formatCurrency(new AccountDaoImpl().getUserTotalBalance(activeUser)));
@@ -277,8 +269,6 @@ public class Driver {
 		int input = getOption();
 
 		if (input == 1 || input == 2) {
-
-			//Account a = accountController.addNewAccount(activeUser, input);
 			Integer a = accountService.addNewAccount(activeUser, input);
 			
 			String name = accountService.getAccountName(a);
@@ -309,7 +299,7 @@ public class Driver {
 	 */
 
 	private Phase executeLoanRequest() {
-	//TODO reimplement loans
+
 		String[] accountNames = accountService.getUserAccountNames(activeUser);
 		
 		if (accountNames.length <= 0) {
@@ -347,7 +337,7 @@ public class Driver {
 		Integer targetAcct = accountService.getUserAccount(activeUser, in3);// activeUser.getAccount(in3);
 
 		if (targetAcct != null) {
-			//if (!a.isValidated())
+			
 			if(!accountService.accountIsValidate(targetAcct))
 				return null;
 
@@ -357,11 +347,11 @@ public class Driver {
 				System.out.println(
 						"Thank you for using The Westward Banking Service. An Admin will validate your request promptly.");
 
-			//accountController.addNewLoan(activeUser, borrow, a);
+
 			accountService.addNewLoan(activeUser, borrow, targetAcct);
 
 			enterWait();
-			return phase.UserControl;
+			return Phase.UserControl;
 		}
 
 		return null;
@@ -390,7 +380,6 @@ public class Driver {
 		printOptions(false, acctNames);
 		int input = getOption() - 1;
 
-		//Account a = activeUser.getAccount(input - 1);
 		Integer a = accountService.getUserAccount(activeUser, input);
 		
 		
@@ -418,7 +407,6 @@ public class Driver {
 	 */
 	private Phase executeAccountPhase() {
 
-		//if (activeAccount.getType() == Account.LOAN)
 		if(accountService.getAccountType(activeAccount) == 3)
 			return executeLoanPhase();
 
@@ -562,31 +550,30 @@ public class Driver {
 	 */
 	private Phase executeValidate() {
 
-		String[] names = accountService.getWaitAccountNames();//accountController.getWaitAccountNames();
+		String[] names = accountService.getWaitAccountNames();
 		System.out.println("Please select and account to modify");
 		printOptions(false, names);
 		int waitIndex = getOption() - 1;
 
-		if (waitIndex < 0 || waitIndex >= accountService.getWaitAccountCount()) {//accountController.getWaitAccountCount()) {
+		if (waitIndex < 0 || waitIndex >= accountService.getWaitAccountCount()) {
 			return null;
 		} else {
 
 			System.out.println("You have selected: " + names[waitIndex]);
 			printOptions(true, "Approved", "Deny");
 			int input = getOption();
-			Integer acct = accountService.getWaitAccount(waitIndex);//accountController.getWaitAccount(waitIndex);
+			Integer acct = accountService.getWaitAccount(waitIndex);
 
 			if (input == 1) {
 				// approve
-				//accountController.validateAccount(acct);
 				accountService.validateAccount(acct);
 				System.out.println(names[waitIndex] + " has been approved.");
 				enterWait();
 				return Phase.UserControl;
+				
 			} else if (input == 0) {
 				// deny
 				System.out.println(names[waitIndex] + "'s was denied.");
-				//accountController.removeAccount(acct);
 				accountService.removeAccount(acct);
 				enterWait();
 				return Phase.UserControl;

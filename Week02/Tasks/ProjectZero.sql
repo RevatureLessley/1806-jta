@@ -102,7 +102,7 @@ BEGIN
     FROM account_type 
     WHERE atype_id = acctType;
 
-    RETURN acctRate*100;
+    RETURN acctRate*1000;
 END;
 
 /
@@ -112,7 +112,7 @@ IS
 BEGIN
 
     UPDATE account_table
-    SET ACCT_BALANCE = ACCT_BALANCE * POWER(1+get_rate(ACCT_TYPE)/100/365, periods);
+    SET ACCT_BALANCE = ACCT_BALANCE * POWER(1+get_rate(ACCT_TYPE)/1000/365, periods) WHERE ACCT_VALIDATED = 1;
     
     COMMIT;
 END;
@@ -169,14 +169,14 @@ INSERT INTO account_table VALUES (100650, 1, 200, 1, 2);
 INSERT INTO account_table VALUES (100651, 2, 400, 1, 2);
 
 
---SELECT * FROM user_table;
---SELECT * FROM account_table;
---SELECT * FROM account_type;
---SELECT acct_id, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = 3;
---
+SELECT * FROM user_table;
+SELECT * FROM account_table;
+SELECT * FROM account_type;
+SELECT acct_id, atype_name FROM account_table LEFT JOIN account_type ON acct_type = atype_id WHERE user_id = 3;
+
 SELECT * FROM interest_table;
---
---SELECT * FROM interest_table WHERE it_id IN (SELECT MAX(it_id) FROM interest_table);
+
+SELECT * FROM interest_table WHERE it_id IN (SELECT MAX(it_id) FROM interest_table);
 
 
 COMMIT;
