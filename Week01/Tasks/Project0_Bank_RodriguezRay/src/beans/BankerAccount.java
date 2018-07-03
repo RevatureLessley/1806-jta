@@ -57,7 +57,6 @@ public class BankerAccount extends Account implements Serializable{
 			for (Loan l : selected.getLoans()) {
 				if (l.id == Integer.parseInt(s)) {
 					l.setApproved(true);
-					selected.setBalance(l.getAmount());
 				}
 			}
 		}

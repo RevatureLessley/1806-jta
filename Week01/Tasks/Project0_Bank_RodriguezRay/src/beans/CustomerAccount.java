@@ -19,14 +19,6 @@ public class CustomerAccount extends Account implements Serializable{
 	boolean approved;
 	boolean banned;
 	
-	public CustomerAccount(int accNum, String accType, String fName, String lName, String userName, 
-			String password, double balance, boolean approved, boolean banned) {
-		super(accNum, accType, fName, lName, userName, password);
-		this.balance = balance;
-		this.banned = banned;
-		this.approved = approved;
-	}
-	
 	public CustomerAccount(String accType, String fName, String lName, String userName, String password, double balance) {
 		super(accType, fName, lName, userName, password);
 		this.balance = balance;
@@ -48,21 +40,14 @@ public class CustomerAccount extends Account implements Serializable{
 		super();
 	}
 	
-	public Boolean isApproved() {
+	public boolean isApproved() {
 		return approved;
 	}
 	
-	public Boolean isBanned() {
+	public boolean isBanned() {
 		return banned;
 	}
 	
-	public double getBalance() {
-		return balance;
-	}
-	
-	public void setBalance(double amt) {
-		balance = amt;
-	}
 	/**
 	 * Displays the balance of the account to the console
 	 * @return double balance

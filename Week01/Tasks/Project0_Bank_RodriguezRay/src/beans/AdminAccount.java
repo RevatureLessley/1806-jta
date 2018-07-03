@@ -4,21 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-import bank.Driver;
-import bank.Loan;
-
-public class BankerAccount extends Account implements Serializable{
+public class AdminAccount extends Account implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5819807580931107845L;
 
-	public BankerAccount(String accType, String fName, String lName, String userName, String password) {
+	public AdminAccount(String accType, String fName, String lName, String userName, String password) {
 		super(accType, fName, lName, userName, password);
 		
 	}
 	
-	public BankerAccount() {
+	public AdminAccount() {
 		super();
 	}
 
@@ -29,36 +26,37 @@ public class BankerAccount extends Account implements Serializable{
 	 * @param users list of the user accounts
 	 * @param reader global reader to prompt the user
 	 */
-	public void ApproveUserLoans(List<CustomerAccount> users, Scanner reader) {
+	public void ApproveUsers(List<CustomerAccount> users, Scanner reader) {
 		DisplayUsers(users);
 		
-		System.out.println("Please enter the Account Number to view loans: ");
-		int key = Integer.parseInt(reader.nextLine());
-		
-		CustomerAccount selected = null;
-		
-		for (CustomerAccount user : users) {
-			if (user.getAccNumber() == key)
-				selected = user;
-		}
-		
-		if (selected != null)
-			selected.DisplayLoansDetails();
-		else {
-			System.out.println("User not found");
-			Driver.logger.error("User not found");
-			return;
-		}
-		
-		System.out.println("Please enter loan ids to approve: ");
+		System.out.println("Please enter the Account Numbers to approve: ");
 		String input = reader.nextLine();
-		String[] loanIDs = input.split(" ");
-		for(String s : loanIDs) {
-			for (Loan l : selected.getLoans()) {
-				if (l.id == Integer.parseInt(s)) {
-					l.setApproved(true);
-					selected.setBalance(l.getAmount());
-				}
+		String[] accNumbers = input.split(" ");
+		for (String s : accNumbers){
+			for (CustomerAccount user : users) {
+				if (user.getAccNumber() == Integer.parseInt(s))
+					user.approved = true;
+			}
+		}
+	}
+	
+	/**
+	 * This method will allow the admin to view all acounts, and enter user account numbers in a string separated
+	 * by spacing to select the users to ban, once banned user accounts will not be allowed to login
+	 * 
+	 * @param users list of the user accounts
+	 * @param reader global reader to prompt the user
+	 */
+	public void BanUsers(List<CustomerAccount> users, Scanner reader) {
+		DisplayUsers(users);
+		
+		System.out.println("Please enter the Account Numbers to ban: ");
+		String input = reader.nextLine();
+		String[] accNumbers = input.split(" ");
+		for (String s : accNumbers){
+			for (CustomerAccount user : users) {
+				if (user.getAccNumber() == Integer.parseInt(s))
+					user.banned = true;
 			}
 		}
 	}

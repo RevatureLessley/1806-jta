@@ -38,4 +38,8 @@ public class Loan implements Serializable{
 	public void setApproved(boolean val) {
 		approved = val;
 	}
+	
+	public double getAmount() {
+		return loanAmount;
+	}
 }

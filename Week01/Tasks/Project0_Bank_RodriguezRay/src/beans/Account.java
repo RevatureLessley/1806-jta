@@ -26,16 +26,6 @@ public  class Account implements Serializable {
 		accNumCnt++;
 	}
 	
-	public Account(int accNum, String accType, String fName, String lName, String userName, String password) {
-		super();
-		this.accType = accType;
-		this.fName = fName;
-		this.lName = lName;
-		this.userName = userName;
-		this.password = password;
-		this.accNum = accNum;
-	}
-	
 	public Account(String userName, String password) {
 		super();
 		this.userName = userName;
@@ -46,56 +36,6 @@ public  class Account implements Serializable {
 		super();
 	}
 	
-	
-	
-	public int getAccNum() {
-		return accNum;
-	}
-
-	public void setAccNum(int accNum) {
-		this.accNum = accNum;
-	}
-
-	public String getAccType() {
-		return accType;
-	}
-
-	public void setAccType(String accType) {
-		this.accType = accType;
-	}
-
-	public String getfName() {
-		return fName;
-	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-
-	public String getlName() {
-		return lName;
-	}
-
-	public void setlName(String lName) {
-		this.lName = lName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public void DisplayAccDetails() {
 		System.out.format("|%-15d|%-12s|%-20s|%-20s|", accNum, accType, fName, lName);
 	}
