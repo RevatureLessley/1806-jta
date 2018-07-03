@@ -70,6 +70,14 @@ SELECT * FROM Employee WHERE HireDate BETWEEN TO_DATE('2003-06-01', 'yyyy-mm-dd'
 /*
     2.7 - Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
 */
+
+DELETE FROM InvoiceLine WHERE InvoiceID IN (
+    SELECT InvoiceId FROM Invoice WHERE CustomerId IN (
+        SELECT CustomerID FROM Customer WHERE FirstName='Robert' AND LastName='Walter'));
+
+DELETE FROM Invoice WHERE CustomerId IN (
+        SELECT CustomerID FROM Customer WHERE FirstName='Robert' AND LastName='Walter');
+
 DELETE FROM Customer WHERE FirstName = 'Robert' AND LastName = 'Walter';
 
 /*
