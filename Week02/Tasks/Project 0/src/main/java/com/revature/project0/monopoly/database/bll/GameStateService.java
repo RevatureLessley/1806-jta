@@ -47,7 +47,6 @@ public class GameStateService {
             square.setMortgageCost(bsPartial.getMortgageValue());
             square.setVisitPrices(visitPricesDao.getVisitPrices(bsPartial.getSquareId()));
             squares.add(square);
-            System.out.println(square.getName() + ": " + square.getExpansions());
         }
         board.updateBoardSquareMetadata(squares);
 
