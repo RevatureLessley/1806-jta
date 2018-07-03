@@ -27,14 +27,20 @@ SELECT FirstName FROM Customer ORDER BY City ASC;
 /*
     2.3.1 - Insert two new records into Genre table
 */
+INSERT INTO Genre (GenreID, Name) VALUES (26, 'Horror');
+INSERT INTO Genre (GenreID, Name) VALUES (27, 'Suspense');
 
 /*
     2.3.2 - Insert two new records into Employee table
 */
+INSERT INTO Employee (EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Fax, Email) VALUES (9, 'Richardson', 'Micheal', 'IT Staff', 6, TO_DATE('1952-11-7 00:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2006-10-3 00:00:00','yyyy-mm-dd hh24:mi:ss'), ' 4002 Forest Drive', 'Mclean', 'VA', 'United States', '22101', '+1 (707) 883-5394', '+1 (707) 883-5394', 'micheal@chinookcorp.com');
+INSERT INTO Employee (EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Fax, Email) VALUES (10, 'Scott', 'Leonard', 'IT Staff', 6, TO_DATE('1983-10-19 00:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2003-11-2 00:00:00','yyyy-mm-dd hh24:mi:ss'), ' 376 Patterson Street', 'Lennon', 'MI', 'Michigan', '48449', '+1 (810) 621-9261', '+1 (810) 621-9261', 'leonard@chinookcorp.com');
 
 /*
     2.3.3 - Insert two new records into Customer table
 */
+INSERT INTO Customer (CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Fax, Email, SupportRepId) VALUES (60, 'Isaiah', 'Fonville', 'Allied City Stores', '501 Little Acres Lane', 'Peoria', 'IL', 'United States', '61602', '+1 (217) 934-7651', '+1 (217) 934-7651', 'isaiah.fonville@gmail.com', 3);
+INSERT INTO Customer (CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Fax, Email, SupportRepId) VALUES (61, 'Ralph', 'Jones', 'Allied City Stores', '501 Little Acres Lane', 'Peoria', 'IL', 'United States', '61602', '+1 (217) 934-7651', '+1 (217) 934-7651', 'ralph.jones@gmail.com', 3);
 
 /*
     2.4.1 - Update Aaron Mitchell in Customer table to Robert Walter
