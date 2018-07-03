@@ -13,7 +13,12 @@ import com.revature.project0.Account;
 import com.revature.project0.util.Connections;
 
 public class AccountDaoImpl implements AccountDao {
-
+	/**
+	 * 
+	 * @param Account acc
+	 *            the account to be persisted into the database
+	 * @return the Integer value of the ACC_ID
+	 */
 	@Override
 	public Integer insertAccount(Account acc) {
 		String key[] = {"ACC_ID"};
@@ -35,7 +40,12 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		return null;
 	}
-
+	/**
+	 * 
+	 * @param Integer id
+	 *            the Integer value ACC_ID
+	 * @return the Account object
+	 */
 	@Override
 	public Account selectAccountById(Integer id) {
 		PreparedStatement ps = null;
@@ -58,7 +68,12 @@ public class AccountDaoImpl implements AccountDao {
 		return null;
 
 	}
-
+	/**
+	 * NOT USED
+	 * @param Integer id
+	 *            the Integer value ACC_ID
+	 * @return the Integer value of the ACC_ID
+	 */
 	@Override
 	public Integer deleteAccountById(Integer id) {
 		String insertTableSQL = "DELETE FROM ACC WHERE ACC_ID = ?";
@@ -75,7 +90,12 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		return status;
 	}
-
+	/**
+	 * 
+	 * @param Account acc
+	 *            the account to be updated into the database
+	 * @return the Integer value of the ACC_ID
+	 */
 	@Override
 	public Integer updateAccount(Account acc) {
 		PreparedStatement stmt = null;
@@ -96,7 +116,12 @@ public class AccountDaoImpl implements AccountDao {
 		return status;
 
 	}
-
+	/**
+	 * 
+	 * @param Integer userId
+	 * 			the primary key associated with the User
+	 * @return an List of accounts associated with the User
+	 */
 	@Override
 	public List<Account> getAccountByUser(Integer userId) {
 		List<Account> accounts = new ArrayList();
@@ -120,7 +145,12 @@ public class AccountDaoImpl implements AccountDao {
 		return accounts;
 		
 	}
-
+	/**
+	 * 
+	 * @param String userName
+	 * 		the string of the userName of the User
+	 * @return an List of accounts associated with the User
+	 */
 	@Override
 	public List<Account> getAccountByUserName(String userName) {
 		List<Account> accounts = new ArrayList();

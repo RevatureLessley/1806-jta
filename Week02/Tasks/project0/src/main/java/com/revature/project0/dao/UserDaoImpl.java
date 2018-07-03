@@ -37,7 +37,12 @@ public class UserDaoImpl implements UserDao {
 		return null;*/
 		return null;
 	}
-
+	/**
+	 * 
+	 * @param String userName
+	 *            the string of the userName of the User
+	 * @return the User object
+	 */
 	@Override
 	public User selectUserByName(String userName) {
 		PreparedStatement ps = null;
@@ -61,7 +66,12 @@ public class UserDaoImpl implements UserDao {
 		return null;
 
 	}
-
+	/**
+	 * NOT USED
+	 * @param Integer id
+	 *            the Integer value USER_ID
+	 * @return the Integer value of the USER_ID
+	 */
 	@Override
 	public Integer deleteUserById(Integer id) {
 		String insertTableSQL = "DELETE FROM BANK_USER WHERE USER_ID = ?";
@@ -78,7 +88,12 @@ public class UserDaoImpl implements UserDao {
 		}
 		return status;
 	}
-
+	/**
+	 * 
+	 * @param User user
+	 *            the user to be updated into the database
+	 * @return the Integer value of the USER_ID
+	 */
 	@Override
 	public Integer updateUser(User user) {
 		PreparedStatement stmt = null;
@@ -99,7 +114,14 @@ public class UserDaoImpl implements UserDao {
 		return status;
 
 	}
-
+	/**
+	 * 
+	 * @param Integer USER_ID,
+	 *            the userID to associated with the User
+	 *        Integer ACCOUNT_ID
+	 *        	  the AccountID to associated with the Account
+	 * Maps the User to the Account(s)associated with the User using their respective ids.
+	 */
 	@Override
 	public void saveUserAccount(Integer userId, Integer accountId) {
 		String insertTableSQL = "INSERT INTO USER_ACCOUNT (USER_ID, ACC_ID) VALUES (?,?)";
@@ -116,6 +138,11 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 	}
+	/**
+	 * * @param User u
+	 * 		the User to be presisted into the database
+	 * 	@return Boolean value true if successful
+	 */
 	@Override
 	public Boolean insertUserViaSp(User u) {
 
