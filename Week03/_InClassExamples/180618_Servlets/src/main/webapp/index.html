@@ -1,0 +1,173 @@
+<!-- Html documents typically start with the Doctype Declaration
+	This line tells browsers to view this as an html page, and also which version
+	of html to display with. (Some pages haven't beyond 4.
+	By default, or if no otherwise specified, doctype will use html 5. -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- THIS IS AN HTML COMMENT
+
+	HTML documents will always have a root tag of 'html'.
+	They will also have a <head> and <body> tag.-->
+<meta charset="UTF-8">
+	<!-- The meta charset tag will determine how many character types are supported
+	on your browser. UTF-8, for the most part, allows ANY language. -->
+
+<!-- We are bring in bootstrap via a CDN (Content Delivery Network)
+	These networks let use utilize libraries over the net as opposed to 
+	downloading locally and using them. -->
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+
+<script
+			  src="http://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bring in supplemental javascript for bootstrap -->
+
+<title>Welcome To My Webpage</title>
+	<!-- The title tag will label a page with an identifying title. This is mostly
+	seen in the tab itself on most browsers. -->
+	
+	<!-- The <head> tag is used to store metadata about the page, such as,
+			page title, or charset encodings. -->
+			
+	<style>
+		/*This is a block of css code!
+			This is also called internal stylesheet.
+		*/
+		li i {
+			color:blue;
+		}
+		
+	</style>
+	<link rel="stylesheet" type="text/css" href= "./resources/css/main.css">
+</head>
+<body>
+
+	 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  <!-- Brand -->
+	  <a class="navbar-brand" href="index.html">Ryanture</a>
+	
+	  <!-- Links -->
+	  <ul class="navbar-nav">
+	    <li class="nav-item">
+	      <a class="nav-link" href="index.html">HOME</a>
+	    </li>
+	
+	    <!-- Dropdown -->
+	    <li class="nav-item dropdown">
+	      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+	        CSS REFERENCES
+	      </a>
+	      <div class="dropdown-menu">
+	        <a class="dropdown-item" href="https://www.w3schools.com/bootstrap4/default.asp">BOOTSTRAP 4</a>
+	        <a class="dropdown-item" href="https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp">NAV BARS</a>
+	        <a class="dropdown-item" href="https://www.w3schools.com/cssref/css_selectors.asp">CSS REFERENCES</a>
+	      </div>
+	    </li>
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> EXAMPLE LINKS </a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item"
+						href="./forms.html">FORMS</a> 
+				</div></li>
+	  </ul>
+	</nav> 
+	
+	<div class="container-fluid">
+		<div class="rsection">
+			<h1>MY HOMPAGE</h1>
+			<p>Check this out,今日は僕の誕生日です
+				And other stuff</p>
+			<p> Below is some information about me!</p>		
+		</div>
+		<hr> <!-- Auto closeable, no closing tag needed, creates a horizontal rule -->
+
+		<div class="rsection">
+			<h3> TABLES! </h3>
+			<!-- Designates a table itself -->
+			<table border = 2px>
+				<!-- Designates a table row -->
+				<tr>
+					<!-- Designates a table header -->
+					<th> NAME </th>
+					<th> AGE </th>
+					<th> FAVORITE ANIMAL </th>
+					<th> FAVORITE 90s Nick Show </th>
+				</tr>
+				<tr>
+					<!-- Designates normal table data -->
+					<td id="thisguy">Ryan</td>
+					<td> 72 </td>
+					<td> Husky </td>
+					<td> Invader Zim </td>
+				</tr>
+				<tr>
+					<td>Bobbert </td>
+					<td> 22 </td>
+					<td> Galapogos Bob </td>
+					<td> Franklin The Turtle</td>
+				</tr>
+			</table>
+
+		</div>
+		
+		<hr>
+		
+		<div class="rsection">
+			<h3>Anchors!</h3>
+			<p>Anchor tags are used to setup hyperlinks that can reroute users to different
+			pages </p>
+			<a href="http://www.google.com">Yahoo.com</a>
+			<br>
+			<a href="http://www.reddit.com/r/nosleep">Reddit Fictional Stories</a>
+			<hr>
+			
+			<!-- Lists are a often used tag for combining multiple 
+			elements into an organized format. 
+			Thre are 2 types: organized lists, which uses umers/letter/etc to organize data.
+			(<ol>)
+			Unorganized lists which use bullet points, or bullet points (<ul>)-->
+			<h4>CSS REFERENCE</h4>
+			<ol>
+				<!-- Use list items within any list to make items for it <li> -->
+				<li><a href="https://www.w3schools.com/cssref/">CSS References</a></li>
+				<li><a href="www.bing.com">google</a></li>
+				<li><a href="www.duckduckgo.com">Sneaky sneaky</a></li>
+			</ol>
+			<ul>
+				<li>Dog</li>
+				<li>Cat</li>
+				<li>Flying Bob</li>
+			</ul>
+			<hr>
+			<h3>TEXT FORMATTING</h3>
+			<ul>
+				<!-- Inline CSS -->
+				<li><b style="color:red">BOLD TEXT</b></li>
+				<li><i>ITALICIZED TEXT</i></li>
+				<li><u>UNDERLINE TEXT</u></li>
+				<li><s>STRIKE THROUGH</s></li>
+				<li><q>QUOTE</q></li>
+				<li><em>Emphasized</em></li>
+				<li><mark>MARKED</mark></li>
+			</ul>
+			<p><i>I am not effected by the internal stylesheet!</i></p>
+
+		</div>
+			
+		<div class="row">
+			<div class="col-md-6"><p>STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF </p></div>
+			<div class="col-md-1"><p>STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF </p></div>
+			<div class="col-md-2"><p>STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF </p></div>
+			<div class="col-md-3"><p>STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF STUFF </p></div>
+		</div>
+	</div>
+</body>
+</html>
