@@ -27,7 +27,7 @@ public static Connection getConnection() {
 		
 		
 		
-		System.out.println("Database connected!");
+		//System.out.println("Database connected!");
 		return conn;
 	}
 

@@ -41,4 +41,13 @@ user_admin  number(1),
 user_approved  number(1)
 );
 
+CREATE OR REPLACE TRIGGER users_seq_trigger
+BEFORE INSERT ON users2
+FOR EACH ROW 
+BEGIN
+    IF :new.user_id IS NULL THEN
+        SELECT user_id_sequence.NEXTVAL INTO :new.user_id FROM dual;
+    END IF;
+END;
+/
 commit;

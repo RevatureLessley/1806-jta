@@ -22,3 +22,40 @@
 2018-07-02 01:20:01 INFO  root:465 - carol withdrew 35
 2018-07-02 01:22:00 INFO  root:444 - carol: withdraw attempted.
 2018-07-02 01:22:00 INFO  root:465 - carol withdrew 35
+2018-07-03 07:00:25 INFO  root:444 - carol: withdraw attempted.
+2018-07-03 07:00:25 INFO  root:465 - carol withdrew 35
+2018-07-03 07:22:55 INFO  root:230 - Attempting to create a new user
+2018-07-03 07:23:08 INFO  root:218 - User created sucessfully!
+2018-07-03 07:50:47 INFO  root:230 - Attempting to create a new user
+2018-07-03 07:50:54 INFO  root:218 - User created sucessfully!
+2018-07-03 07:58:55 INFO  root:230 - Attempting to create a new user
+2018-07-03 07:59:03 INFO  root:218 - User created sucessfully!
+2018-07-03 08:03:03 INFO  root:230 - Attempting to create a new user
+2018-07-03 08:03:13 INFO  root:218 - User created sucessfully!
+2018-07-03 08:04:20 INFO  root:230 - Attempting to create a new user
+2018-07-03 08:04:31 INFO  root:218 - User created sucessfully!
+2018-07-03 08:09:27 INFO  root:230 - Attempting to create a new user
+2018-07-03 08:09:37 INFO  root:218 - User created sucessfully!
+2018-07-03 08:13:06 INFO  root:231 - Attempting to create a new user
+2018-07-03 08:13:13 INFO  root:219 - User created sucessfully!
+2018-07-03 08:55:32 INFO  root:231 - Attempting to create a new user
+2018-07-03 08:55:45 INFO  root:219 - User created sucessfully!
+2018-07-03 08:59:45 INFO  root:231 - Attempting to create a new user
+2018-07-03 08:59:51 INFO  root:219 - User created sucessfully!
+2018-07-03 09:07:25 INFO  root:232 - Attempting to create a new user
+2018-07-03 09:07:31 INFO  root:220 - User created sucessfully!
+2018-07-03 09:10:42 INFO  root:232 - Attempting to create a new user
+2018-07-03 09:10:46 INFO  root:220 - User created sucessfully!
+2018-07-03 09:21:28 INFO  root:447 - carol: withdraw attempted.
+2018-07-03 09:22:26 INFO  root:447 - carol: withdraw attempted.
+2018-07-03 09:22:36 INFO  root:447 - carol: withdraw attempted.
+2018-07-03 09:22:36 INFO  root:472 - carol withdrew 25
+2018-07-03 09:28:13 INFO  root:447 - carol: withdraw attempted.
+2018-07-03 09:28:13 INFO  root:472 - carol withdrew 35
+2018-07-03 09:38:39 INFO  root:232 - Attempting to create a new user
+2018-07-03 09:39:02 INFO  root:220 - User created sucessfully!
+2018-07-03 09:41:01 INFO  root:447 - bobbert: withdraw attempted.
+2018-07-03 09:41:12 INFO  root:494 - bobbert: deposit attempted.
+2018-07-03 09:41:12 INFO  root:514 - bobbert deposited 150
+2018-07-03 09:41:16 INFO  root:447 - bobbert: withdraw attempted.
+2018-07-03 09:41:16 INFO  root:472 - bobbert withdrew 50

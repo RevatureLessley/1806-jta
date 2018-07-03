@@ -53,7 +53,7 @@ public class BankMain {
 		// Note to self: User( "name", "password", balance, isAdmin, isApproved)
 		// These users are here largely for testing, but also so that I have an administrator to approve people
 		// They also serve as an initial setup for the first time the "app" is run
-		users2.add(new User("chris", "password", 9999, true, true));
+		users2.add(new User("chris", "password", 9999, false, true));
 		users2.add(new User("carol", "kitty", 356, false, true));
 		users2.add(new User("jack", "secretpassword", 1500, false, false));
 		users2.add(new User("admin", "password", 0, true, true));
@@ -73,7 +73,7 @@ public class BankMain {
             {   
 	            rs.last();  
 	            size = rs.getRow();
-	            System.out.println(size);
+	           // System.out.println(size);
 	            if(size <= 0)
 	            {
 	            	UserDaoImpl ud = new UserDaoImpl();
@@ -133,7 +133,7 @@ public class BankMain {
 									rs.getInt(6) == 1? true:false
 									);
 							users.add(user);
-							System.out.println(user);
+							//System.out.println(user);
 			}
 		
 	

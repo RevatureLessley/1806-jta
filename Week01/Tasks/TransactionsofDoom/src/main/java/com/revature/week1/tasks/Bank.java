@@ -162,6 +162,7 @@ public void initialSetup()
 					}
 					else
 					{
+						System.out.println(users.get(i).isApproved());
 						System.out.println("Sorry, but your account is not approved yet.");
 						firstScreen();
 					}
@@ -212,6 +213,7 @@ public void initialSetup()
 		UserDaoImpl ud = new UserDaoImpl();
 		User user = new User(newId, newName, newPassword, newBalance, newisAdmin, newisApproved);
 		ud.insertUser(user);
+		ud.updateUser(user);
 		ud.insertUser(user, "unapprovedusers");
 		// add the user to the general users list
 		users.add(new User(newId, newName, newPassword, newBalance, newisAdmin, newisApproved));
@@ -355,6 +357,7 @@ public void initialSetup()
 		if(sc.nextLine().equals("y"))
 		{
 			user.setApproved(true);
+			//System.out.println(user.isApproved());
 			UserDaoImpl ud = new UserDaoImpl();
 			//User user = user.selectNpcById(id);
 			
@@ -459,24 +462,19 @@ public void initialSetup()
 	{
 		System.out.println("Balance: " + user.getBalance());
 		System.out.println("Withdrawal amount: " + answer);
-		newBalance = user.getBalance() - Integer.parseInt(answer);
-		user.setBalance(newBalance);
-		System.out.println("Total Remaining: " + user.getBalance());
-		BankMain.logger.info(user.getName() + " withdrew " + answer);
-		UserDaoImpl ud = new UserDaoImpl();
-		ud.updateUser(user);
-		//userWelcomeScreen(user);
+		if( user.getBalance() - Integer.parseInt(answer) < 0)
+			System.out.println("nope. you dont have enough to do that!");
+		else
+		{
+			newBalance = user.getBalance() - Integer.parseInt(answer);
+			user.setBalance(newBalance);
+			System.out.println("Total Remaining: " + user.getBalance());
+			BankMain.logger.info(user.getName() + " withdrew " + answer);
+			UserDaoImpl ud = new UserDaoImpl();
+			ud.updateUser(user);
+			//userWelcomeScreen(user);
+		}
 		
-		try
-		{
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("BankUsers.ser"));
-			oos.writeObject(this); //Serialize
-			oos.close();
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
 	}	
 	private void userDepositScreen(User user)
 	{

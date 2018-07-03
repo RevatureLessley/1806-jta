@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +34,14 @@ public class UserDaoImpl implements UserDao{
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertInto" + tableSelection +"(?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertInto" + tableSelection +"(?,?,?,?,?,?)}");
 			
-			stmt.setString(1, user.getName());
-			stmt.setString(2,  user.getPassword());
-			stmt.setFloat(3, user.getBalance());
-			stmt.setInt(4, user.isAdmin() == true? 1:0);
-			stmt.setInt(5, user.isApproved() == true? 1:0);
+			stmt.setInt(1, user.getUserid());
+			stmt.setString(2, user.getName());
+			stmt.setString(3,  user.getPassword());
+			stmt.setFloat(4, user.getBalance());
+			stmt.setInt(5, user.isAdmin() == true? 1:0);
+			stmt.setInt(6, user.isApproved() == true? 1:0);
 
 			
 			stmt.execute(); //Returns amount rows effected;
@@ -190,10 +192,44 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public Integer deleteUserById(Integer id)
+	public Integer deleteUserById(User user)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		
+		PreparedStatement stmt2 = null;
+		ResultSet rs2 = null;
+		
+		
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "SELECT * FROM unapproved_users where user_id = " + user.getUserid();
+					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+					rs = stmt.executeQuery(sql);
+					
+					if(rs != null)
+					{
+						rs.last();  
+			            int size = rs.getRow();
+			            System.out.println(size);
+			            if(size == 1)
+			            	{
+			            	rs.beforeFirst();	
+			            	String sql2 = "DELETE FROM unapproved_users WHERE user_id = ?";
+			            		stmt2 = conn.prepareStatement(sql2);
+								stmt2.setInt(1, user.getUserid());
+								stmt2.executeQuery();
+			            	}
+					}
+				}catch(SQLException e){
+					e.printStackTrace();
+				}finally{
+					close(stmt);
+					close(stmt2);
+				}
+		System.out.println("Update is a success!");
+				return 0;
 	}
 
 	@Override
