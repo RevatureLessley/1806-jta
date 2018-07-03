@@ -28,3 +28,7 @@ div container
 		       col-lg-# <- desktops
 
 <form> groups forms together. Radio button name attributes group them and limits slection to one. Multple radio button can be toggled. To enforce that one specfic group can be toggled then that group must share names.
+
+Servlets are Java applications that waits for and handles HTTP requests and sends HTTP responses. Web container whether servlets are instantiated. If, not then init() is called, otherwise the current instance is used which makes a servlet a singleton. Then then the service() method is called with the HTTP request and response. After an idle period, the web container calls destroy().
+
+You need to tell the server the type of content in a reponse.
