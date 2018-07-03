@@ -68,7 +68,7 @@ public class PlayerAccount extends AccountClass
 		int ammount = pgm.in.nextInt();
 		if(ammount > 0 && ammount <= pAcc.getAccountBalance())
 		{
-			pAcc.setAccountBalance(pAcc.getAccountBalance()-ammount);
+			pAcc.setAccountBalance(pAcc.getAccountBalance()+ammount);
 			pAcc.setBankBalance(pAcc.getBankBalance()-ammount);
 		}
 		else
@@ -184,9 +184,9 @@ public class PlayerAccount extends AccountClass
 	 */
 	public void incrementTime()
 	{
-		if(pAcc.getAccountBalance() >0)
+		if(pAcc.getBankBalance() >0)
 		{
-			pAcc.setAccountBalance((int)(pAcc.getAccountBalance() * pgm.Accounts.getBanker().getBankInfo().getInterest()));
+			pAcc.setBankBalance((int)(pAcc.getBankBalance() * pgm.Accounts.getBanker().getBankInfo().getInterest()));
 		}
 		if(pAcc.getLoanBalance() > 0 && pAcc.isHasLoan()) 
 		{

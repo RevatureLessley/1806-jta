@@ -99,8 +99,8 @@ INSERT INTO admin_acc VALUES(1,1);
 INSERT INTO banker VALUES(1,1.10, 2);
 INSERT INTO loaner VALUES(1,10000, 1.30, 3);
 INSERT INTO player VALUES(1,100, 100, 0, 0, 0, 1, 4);
-select * from player
-full outer join acc
-on player.acc_id = acc.acc_id
-where player.acc_id >3;
+--select * from player
+--full outer join acc
+--on player.acc_id = acc.acc_id
+--where player.acc_id >3;
 commit;
