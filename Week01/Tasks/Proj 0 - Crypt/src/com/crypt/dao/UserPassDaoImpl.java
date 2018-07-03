@@ -1,19 +1,20 @@
 package com.crypt.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
 import com.crypt.beans.UserPass;
-import com.crypt.util.CloseStreams;
 import com.crypt.util.Connections;
+import static com.crypt.util.CloseStreams.*;
 
-public class UserPassDaoImpl extends DAO {
-
-	public static HashMap<String,String> selectAll() throws SQLException {
+public class UserPassDaoImpl implements UserPassDao {
+	
+	@Override
+	public HashMap<String,String> selectAll() throws SQLException {
 		HashMap<String, String> ups = new HashMap<>();
 
 		Statement stmt = null;
@@ -30,44 +31,25 @@ public class UserPassDaoImpl extends DAO {
 		}
 	}
 
-	public static void insert(UserPass t) {
-			PreparedStatement stmt = null; 
+	@Override
+	public Boolean insertUserNewUserPass(UserPass up) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call insertIntoUserPass(?,?)}");
 			
-			try(Connection conn = Connections.getConnection()){
+			stmt.setString(1, up.getUsername());
+			stmt.setString(2, up.getPassword());
 			
-				stmt = conn.prepareCall("INSERT INTO user_pass VALUES(?, ?)");
-				
-				stmt.setString(1, t.getUsername());
-				stmt.setString(2, t.getPassword());
-				
-				stmt.execute();				
+			stmt.execute(); //Returns amount rows effected;
+			return true;
 			
-			}catch(SQLException e){
-				e.printStackTrace();
-			}finally{
-				CloseStreams.close(stmt);
-			}		
-	}
-	
-
-	public UserPass selectById(String id) {
-
-		return null;
-	}
-
-	public Integer deleteById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Integer updateById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean insertViaSp(UserPass t) {
-		// TODO Auto-generated method stub
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
 		return false;
 	}
-
 }

@@ -1,5 +1,8 @@
 package com.crypt.dao;
 
+import static com.crypt.util.CloseStreams.close;
+
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,10 +14,10 @@ import com.crypt.beans.Account;
 import com.crypt.beans.Note;
 import com.crypt.util.Connections;
 
-public class NoteDaoImpl extends DAO {
+public class NoteDaoImpl implements NoteDao {
 
-
-	public static List<Note> selectAll(Account a) throws SQLException {
+	@Override
+	public List<Note> selectAll(Account a) throws SQLException {
 		List<Note> notes = new ArrayList<>();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -40,34 +43,27 @@ public class NoteDaoImpl extends DAO {
 
 	}
 
+	@Override
+	public Boolean insertNewNote(Note note) {
+		CallableStatement stmt = null; 
 
-	public void insert(Note t) {
-		// TODO Auto-generated method stub
+		try(Connection conn = Connections.getConnection()){
 
-	}
+			stmt = conn.prepareCall("{call insertIntoNote(?,?)}");
 
+			stmt.setInt(1, note.getAcctId());
+			stmt.setString(2, note.getContent());
 
-	public Note selectById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			stmt.execute(); //Returns amount rows effected;
+			return true;
 
-
-	public Integer deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public Integer updateById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public boolean insertViaSp(Note t) {
-		// TODO Auto-generated method stub
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
 		return false;
 	}
+
 
 }

@@ -9,8 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public abstract class FileManager<T> implements Serializable {
-	private T t = null;
+public class FileManager implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,17 +18,17 @@ public abstract class FileManager<T> implements Serializable {
 	FileInputStream fis;	
 	ObjectOutputStream oos;
 	ObjectInputStream ois;
-	private static String fileName;
+	private static String filePath;
 	
 	public FileManager(String fileName) {
 		super();
-		FileManager.fileName = fileName;
+		FileManager.filePath = fileName;
 	}
 	
 	void crossTheStreams() throws FileNotFoundException, IOException {
-		fos = new FileOutputStream(fileName);
+		fos = new FileOutputStream(filePath);
 		oos = new ObjectOutputStream(fos);
-		fis = new FileInputStream(fileName);
+		fis = new FileInputStream(filePath);
 		ois = new ObjectInputStream(fis);
 	}
 	void closeTheStreams() throws IOException{
@@ -39,28 +38,27 @@ public abstract class FileManager<T> implements Serializable {
 		ois.close();
 	}
 	
-	void writeObject(T obj){
+	public void writeObject(byte[] b){
 		try {
 			crossTheStreams();
-			oos.writeObject(obj);
+			oos.write(b);
 			closeTheStreams();
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); } 
 		catch (IOException e) { e.printStackTrace(); } 
 	}
-	T readObject(){
+	public byte[] readObject(byte[] t){
 		try {
 			crossTheStreams();
-			if(ois.available() > 0) t = (T)ois.readObject();
+			if(ois.available() > 0) ois.read(t);
 			closeTheStreams();
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); } 
 		catch (IOException e) { e.printStackTrace(); }
-		catch (ClassNotFoundException e) { e.printStackTrace(); }
 		
 		return t;
 	}
 	
-	public boolean fileExists(){ return new File(fileName).exists(); }
+	public boolean fileExists(){ return new File(filePath).exists(); }
 	
 }

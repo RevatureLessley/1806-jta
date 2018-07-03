@@ -23,8 +23,9 @@ public class Input {
 	public static byte getInputByte() {
 		try {
 			return Byte.parseByte(scan());
-		}catch(InputMismatchException e){
+		}catch(InputMismatchException| NumberFormatException e){
 			//Crypt.logger.error("Input: Byte conversion failed: " + e.getMessage());
+			
 			return (byte) -1;
 		}
 	}

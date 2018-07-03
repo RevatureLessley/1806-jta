@@ -2,15 +2,17 @@ package com.crypt.Services;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 
+import com.crypt.beans.UserPass;
+import com.crypt.dao.UserPassDao;
 import com.crypt.dao.UserPassDaoImpl;
 
 public class UserPassService {
 	public static HashMap<String, String> selectAllUserPass(){
 		HashMap<String, String> ups = new HashMap<>();
 		try {
-			ups = UserPassDaoImpl.selectAll();
+			UserPassDao upd = new UserPassDaoImpl();
+			ups = upd.selectAll();
 			return ups;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -18,5 +20,9 @@ public class UserPassService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static Boolean insertUserPass(UserPass up) {
+		UserPassDao upd = new UserPassDaoImpl();
+		return upd.insertUserNewUserPass(up);
 	}
 }

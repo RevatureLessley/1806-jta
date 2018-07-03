@@ -22,6 +22,14 @@ public class DataFile {
 		this.uploadedData = uploadedData;
 	}
 
+	public DataFile(Integer ownerId, File filepath, String fileName, byte[] uploadedData) {
+		super();
+		this.ownerId = ownerId;
+		this.filepath = filepath;
+		this.fileName = fileName;
+		this.uploadedData = uploadedData;
+	}
+
 	public DataFile(File file, String name, byte[] read) {
 		this.filepath = file;
 		this.fileName = name;

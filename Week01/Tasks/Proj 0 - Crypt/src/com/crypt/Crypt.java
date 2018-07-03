@@ -20,6 +20,7 @@ import java.util.Scanner;
 import com.crypt.Services.AccountService;
 import com.crypt.Services.UserPassService;
 import com.crypt.beans.Account;
+import com.crypt.beans.DataFile;
 import com.crypt.beans.UserPass;
 
 public class Crypt {
@@ -44,7 +45,7 @@ public class Crypt {
 
 		//showing the main menu
 		c.mainMenu(showMainMenu());
-		
+
 	}
 
 
@@ -106,18 +107,18 @@ public class Crypt {
 		case (byte)1://Account Options 
 			//accountOptions();
 			System.out.println("Not currently implemented. Please come back later.");
-			loginPass(a);
-			break;
+		loginPass(a);
+		break;
 		case (byte)2://Deposit Data
 			deposit(a);
-			showCurrentItems(showCurrentItemsMenu(), a);
-			loginPass(a);
-			break;
+		showCurrentItems(showCurrentItemsMenu(), a);
+		loginPass(a);
+		break;
 		case (byte)3://Withdraw Data
 			withdraw(a);
-			showCurrentItems(showCurrentItemsMenu(), a);
-			loginPass(a);
-			break;
+		showCurrentItems(showCurrentItemsMenu(), a);
+		loginPass(a);
+		break;
 		case 5://Log out
 			mainMenu(showMainMenu());
 			break;
@@ -139,19 +140,16 @@ public class Crypt {
 		case 1: //Approve user
 			//logger.info("attempting user approval");
 			List<String> unapprovedAccounts = new ArrayList<>();
-			
-			for( Account a2 : accounts.values()) 
-			{ 
-				if(a2.isApproved() == 0) 
-				{ 
-					unapprovedAccounts.add(a2.getUsername()); 
-				} 
-			}
+			List<Account> as = AccountService.selectAccount("SELECT * FROM acct WHERE acct_approved=0");
+
+			as.forEach((account) -> unapprovedAccounts.add(account.getUsername()));
+
 			if(!unapprovedAccounts.isEmpty())
 				approveAccounts(showApproveAccountsMenu(unapprovedAccounts), unapprovedAccounts);
 			else {
 				System.out.println("There are currently no accounts awaiting approval.");
 			}
+
 			adminOptions(showAdminOptionsMenu(), a);
 			break;
 		case 2://Search accounts
@@ -174,11 +172,16 @@ public class Crypt {
 			//Choosing any one particular account to approve
 			String enteredUsername = unapprovedAccounts.get(input - 1);
 			accounts.get(enteredUsername).setApproved(1);
+			AccountService.approveAccount(accounts.get(enteredUsername).getId());
 			unapprovedAccounts.remove(enteredUsername);
 		} else if(input == unapprovedAccounts.size() + 1) { 
 			//Choosing all of the above
 			accounts.values().forEach( a -> a.setApproved(1));
+			
+			//Many accounts were changed so they all have to be updated in the db
+			accounts.values().forEach(a -> AccountService.approveAccount(a.getId()));
 			unapprovedAccounts.clear();
+			accounts = AccountService.selectAllAccounts();
 		}else { 
 			//No matching input. Reshowing unapproved accounts menu
 			noMatch();
@@ -190,8 +193,10 @@ public class Crypt {
 		showCurrentItems((byte) 1, a);
 		System.out.println("Which item would you like to withdraw?");
 		a.getItems().toString();
-		String[] s = new String[a.getItems().size()];
-		s = a.getItems().toArray(s);
+		List<DataFile> dfs = a.getItems();
+		String[]s = new String[dfs.size()];
+		int i = 0;
+		for(DataFile df : dfs) { s[i] = df.getFileName(); i++; }
 		a.withdraw(Input.showMenu("", s));
 	}
 
@@ -208,7 +213,7 @@ public class Crypt {
 			break;
 		}
 	}
-	
+
 	/**
 	 * WIP: allows for edit of account options
 	 * IE: user name, password, etc.
@@ -279,16 +284,17 @@ public class Crypt {
 		UserPass up = userPass();
 		for(String username : userPassInfo.keySet()) {
 			if(up.getUsername().equals(username)) {
-				System.out.println("That usename is not available. Please try again.");
+				System.out.println("That username is not available. Please try again.");
 				createAccount();
 			}
 		}
-		
+
 		userPassInfo.put(up.getUsername(), up.getPassword());
 
 		Account a = new Account(up.getUsername(), ROLES.get("user"));
 		a = defaultSeedMethod(a);
-		
+		AccountService.newAccount(a, up);
+
 		return a;
 	}
 

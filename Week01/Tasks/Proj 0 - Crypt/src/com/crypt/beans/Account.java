@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.crypt.Services.DataFileService;
+import com.crypt.filemanager.FileManager;
 import com.crypt.util.CloseStreams;
 
 public class Account implements Serializable {
@@ -100,20 +102,20 @@ public class Account implements Serializable {
 
 			items.add(
 					new DataFile(
+							this.id,
 							filePath,
 							filePath.getName(),
 							fileData)
 					);
-
+			System.out.println(items.toString());
+			DataFileService.insertNewFile(items.get(items.size() - 1));
+			
 		}catch(IOException e) { e.printStackTrace(); 
 		}finally{ CloseStreams.close(is); }
 
-
-
-
 		System.out.println("Deposited " + filePath.getName());
 		transactionHistory.add(new Note(transactionHistory.size(), this.id, "Deposited " + filePath.getName() ));
-
+		refreshFiles();
 		reportBalance();
 	}
 
@@ -124,18 +126,27 @@ public class Account implements Serializable {
 	public void withdraw(byte index) {
 		//TODO: Decrypt item
 		if(items.isEmpty()) { System.out.println("No items currently stored"); return; }
+		
+		FileManager fm = new FileManager(items.get(index-1).getFilepath().getAbsolutePath());
+		fm.writeObject(items.get(index-1).getUploadedData());
+		
 		transactionHistory.add(
 				new Note(
 						transactionHistory.size(),
 						this.id,
-						"Withdrew " + items.get(index).getFileName() 
+						"Withdrew " + items.get(index-1).getFileName() 
 						)
 				);
-		items.remove(index);
+		items.remove(index-1);
 
 		reportBalance();
 	}
-
+	
+	private void refreshFiles() {
+		Account a = new Account();
+		a.setId(this.id);
+		items = DataFileService.selectAllFiles(a);
+	}
 	/**
 	 * reports current balance.
 	 */
