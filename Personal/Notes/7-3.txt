@@ -17,7 +17,7 @@ Bootstrap Grid System
 ---------------------
 -all bootstrap should go into a container
 -container classes cannot be nested.
-	-container-fuild firs most of the screen.
+	-container-fluid fits most of the screen.
 	-container centers the website.
 
 div container
