@@ -25,7 +25,6 @@ BEGIN
     COMMIT;
 END delete_table;
 /
-call delete_table;
 CREATE OR REPLACE FUNCTION getAccounts --if no parameters, then dont type parenthesis
 RETURN NUMBER
 IS
@@ -46,4 +45,3 @@ BEGIN
     COMMIT;
 END;
 /
-
