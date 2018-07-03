@@ -1,0 +1,23 @@
+/*
+	This is my external stylesheet.
+*/
+
+p {
+	color:darkgreen;
+	background-color:yellow;
+}
+
+body {
+	/*
+		You can make a more customized color by using #RRGGBB
+		Where the letters are hexidecimal numbers, and each one
+		indicates how much RED/Green/blue to use to make your color.
+		These are indeed the primary colors of light;
+	*/
+	background-color:#AA44FF;
+	color:#33AA00;
+}
+#thisguy:hover {
+	font-size:72px;
+	color:white;
+}
