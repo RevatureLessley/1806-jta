@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+
+<script
+              src="http://code.jquery.com/jquery-3.3.1.min.js"
+              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bring in supplemental javascript for bootstrap -->
+
+The above code brings in bootstrap via CDN (Content Delivery Network) that allows you to access libraries over the internet rather than locally.
+
+Bootstrap Grid System
+---------------------
+-all bootstrap should go into a container
+-container classes cannot be nested.
+	-container-fuild firs most of the screen.
+	-container centers the website.
+
+div container
+	div row
+	Column syntax: col-xs-#	<- phones
+		       col-sm-# <- tablets
+		       col-md-# <- laptops
+		       col-lg-# <- desktops
+
+<form> groups forms together. Radio button name attributes group them and limits slection to one. Multple radio button can be toggled. To enforce that one specfic group can be toggled then that group must share names.
