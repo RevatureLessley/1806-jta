@@ -1,5 +1,6 @@
 package discompanydatcompany.vendingmachine.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -169,6 +170,27 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean preparedUpdate(User user) {
+		
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = getConnection().prepareCall("{call updateInventory(?, ?, ?, ?, ?)}");
+			callableStatement.setObject(1, user.getLoginUUID());
+			callableStatement.setString(2, user.getName());
+			callableStatement.setInt(3, user.getCash());
+			callableStatement.setString(4, user.isActive());
+			callableStatement.setObject(5, user);
+			
+			if (callableStatement.execute() == true) {
+				return true;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
 		}
 		return false;
 	}

@@ -15,4 +15,6 @@ public interface InventoryDAO {
 	public boolean deleteInventory(VendingMachine vendingMachine);
 	public boolean updateInventory(User user);
 	public boolean updateInventory(VendingMachine vendingMachine);
+	public boolean preparedUpdate(User user);
+	public boolean preparedUpdate(VendingMachine vendingMachine);
 }

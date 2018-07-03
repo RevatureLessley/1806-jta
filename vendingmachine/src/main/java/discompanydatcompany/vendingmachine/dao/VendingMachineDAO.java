@@ -11,4 +11,5 @@ public interface VendingMachineDAO {
 	public boolean deleteVendingMachine(String vendingMachineUUID);
 	public boolean deleteVendingMachine(VendingMachine vendingMachine);
 	public boolean updateVendingMachine(VendingMachine vendingMachine);
+	public boolean preparedUpdate(VendingMachine vendingMachine);
 }

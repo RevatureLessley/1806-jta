@@ -232,7 +232,10 @@ public class User implements Serializable {
     public void disableAccount() {
     	this.enabled = false;
     }
-    
+    public String isActive() {
+    	String result = this.enabled == true ? "Y" : "N";
+    	return result;
+    }
     @Override 
     public String toString() {
     	StringBuffer stringBuffer = new StringBuffer("{ USER: " + this.name + " " + "ITEMS: ");

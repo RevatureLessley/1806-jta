@@ -1,5 +1,6 @@
 package discompanydatcompany.vendingmachine.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -199,5 +200,36 @@ public class InventoryDAOImpl extends Connection implements InventoryDAO {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public boolean preparedUpdate(User user) {
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = getConnection().prepareCall("{call updateInventory(?, ?)}");
+			callableStatement.setObject(1, user.getLoginUUID());
+			callableStatement.setObject(2, user);
+			if (callableStatement.execute() == true) {
+				return true;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean preparedUpdate(VendingMachine vendingMachine) {
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = getConnection().prepareCall("{call updateInventory(?, ?)}");
+			callableStatement.setObject(1, vendingMachine.getVendingMachineId());
+			callableStatement.setObject(2, vendingMachine);
+			if (callableStatement.execute() == true) {
+				return true;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return false;
+	}
 }

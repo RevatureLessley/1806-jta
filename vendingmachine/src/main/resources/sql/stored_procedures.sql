@@ -109,7 +109,7 @@ begin
 end;
 
 -- save_file table
-create or replace procedure insertIntoVendingMachineItem(serializedObject blob)
+create or replace procedure insertIntoSaveFile(serializedObject blob)
 is
 begin
     insert into save_file(save_file_index, serialized_object)
@@ -117,3 +117,11 @@ begin
     commit;
 end;
 /
+
+create or replace procedure updateSaveFile(serializedObject blob)
+is
+begin
+    update save_file set serialized_object = serializedObject
+                     where save_file_index = 1;
+    commit;
+end;

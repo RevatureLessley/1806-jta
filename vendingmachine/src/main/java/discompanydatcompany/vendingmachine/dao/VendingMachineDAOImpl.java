@@ -1,5 +1,6 @@
 package discompanydatcompany.vendingmachine.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -151,6 +152,22 @@ public class VendingMachineDAOImpl extends Connection implements VendingMachineD
 			return false;
 		}
 		
+		return false;
+	}
+
+	@Override
+	public boolean preparedUpdate(VendingMachine vendingMachine) {
+
+		try {
+			CallableStatement callableStatement = getConnection().prepareCall("{call updateVendingMachine(?, ?, ?, ?, ?)}");
+			callableStatement.setString(1, vendingMachine.getVendingMachineId());
+			callableStatement.setString(2, vendingMachine.getVendingMachineName());
+			callableStatement.setString(3, vendingMachine.getAdminName());
+			callableStatement.setString(4, vendingMachine.getAdminUUID());
+			callableStatement.setObject(5, vendingMachine);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
 		return false;
 	}
 }

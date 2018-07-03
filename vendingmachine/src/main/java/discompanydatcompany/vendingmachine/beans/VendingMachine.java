@@ -141,6 +141,14 @@ public class VendingMachine implements Serializable {
     	this.adminName = adminName;
     }
     
+    public String getAdminUUID() {
+    	return this.adminUUID;
+    }
+    
+    public void setAdminUUID(String adminUUID) {
+    	this.adminUUID = adminUUID;
+    }
+    
     public Inventory getInventory() {
     	return this.inventory;
     }

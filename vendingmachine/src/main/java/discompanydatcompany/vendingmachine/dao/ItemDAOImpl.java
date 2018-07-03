@@ -1,5 +1,6 @@
 package discompanydatcompany.vendingmachine.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -120,6 +121,26 @@ public class ItemDAOImpl extends Connection implements ItemDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean preparedUpdate(Item item) {
+		try {
+			CallableStatement callableStatement = getConnection().prepareCall("{call updateVendingMachineItem(?, ?, ?, ?, ?)}");
+			callableStatement.setString(1, item.getName());
+			callableStatement.setInt(2, item.getValue());
+			callableStatement.setString(3, item.isSellable());
+			callableStatement.setString(4, item.getDescription());
+			callableStatement.setObject(5, item);
+			
+			if (callableStatement.execute() == true) {
+				return true;
+			}
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
 		}
 		return false;
 	}

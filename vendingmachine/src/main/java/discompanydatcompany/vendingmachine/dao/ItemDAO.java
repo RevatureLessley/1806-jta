@@ -9,4 +9,5 @@ public interface ItemDAO {
 	public List<Item> getAllItems();
 	public boolean deleteItem(Item item);
 	public boolean updateItem(Item item);
+	boolean preparedUpdate(Item item);
 }

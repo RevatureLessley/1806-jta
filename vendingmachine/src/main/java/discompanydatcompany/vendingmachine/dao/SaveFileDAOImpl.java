@@ -1,5 +1,6 @@
 package discompanydatcompany.vendingmachine.dao;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +15,7 @@ public class SaveFileDAOImpl extends Connection implements SaveFileDAO {
 
 	@Override
 	public void addSaveFile(SaveFile saveFile) {
-		// TODO Auto-generated method stub
-
+		preparedUpdate(saveFile);
 	}
 
 	@Override
@@ -87,6 +87,21 @@ public class SaveFileDAOImpl extends Connection implements SaveFileDAO {
 			return false;
 		}
 		
+		return false;
+	}
+	
+	@Override
+	public boolean preparedUpdate(SaveFile saveFile) {
+		CallableStatement callableStatement = null;
+		try {
+			callableStatement = getConnection().prepareCall("{call updateSaveFile(?)}");
+			callableStatement.setObject(1, saveFile);
+			if (callableStatement.execute() == true) {
+				return true;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
 		return false;
 	}
 

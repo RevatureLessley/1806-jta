@@ -10,4 +10,5 @@ public interface SaveFileDAO {
 	public boolean deleteSaveFile(int saveFileIndex);
 	boolean updateSaveFile(int fileIndex, SaveFile saveFile);
 	boolean saveContent(SaveFile saveFile);
+	boolean preparedUpdate(SaveFile saveFile);
 }
