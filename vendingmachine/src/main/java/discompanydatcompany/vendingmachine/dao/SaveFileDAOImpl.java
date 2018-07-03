@@ -90,4 +90,10 @@ public class SaveFileDAOImpl extends Connection implements SaveFileDAO {
 		return false;
 	}
 
+	@Override
+	public boolean saveContent(SaveFile saveFile) {
+		
+		
+		return false;
+	}
 }

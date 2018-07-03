@@ -17,8 +17,7 @@ create table vending_machine_item (
     item_value number(4),
     item_cannot_be_sold varchar2(1),
     item_description varchar2(100),
-    serialized_object blob
-);
+    serialized_object blob);
 
 -- item table
 create sequence vending_machine_item_sequence

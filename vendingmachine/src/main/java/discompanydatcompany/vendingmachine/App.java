@@ -1,7 +1,5 @@
 package discompanydatcompany.vendingmachine;
 
-import static org.hamcrest.CoreMatchers.containsString;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -243,7 +241,7 @@ public class App {
 						System.out.println("This user does not have admin. priveleges.");
 					} else {
 						System.out.println("Hi admin! Menu options:");
-						System.out.println("inactive -- view pending/inactive user list.");
+						System.out.println("pending -- view pending/inactive user list.");
 						System.out.println("modify -- modify user. Approve pending.");
 						System.out.println("search -- search for user.");
 						String option = scanner.nextLine();
@@ -262,63 +260,62 @@ public class App {
 								if (user != null) {
 									String activity = user.getEnabled() ? "enabled" : "disabled";
 									System.out.println(user.getName() + " " + user.getLoginUUID());
-									System.out.println("Account active");
 									System.out.println(user.getAboutMe());
 									System.out.println("Account is " + activity + ".");
-								}
 								
-								System.out.println("enable, disable, rename, password");
-								option = scanner.nextLine();
 								
-								switch(option) {
-									case "enable":
-										user.enableAccount();
-										System.out.println("The account " + user.getName() + " was enabled.");
-										break;
-									case "disable":
-										user.disableAccount();
-										System.out.println("The account " + user.getName() + " was disabled");
-										break;
-									case "password":
-										System.out.println("Enter a new password");
-										option = scanner.nextLine();
-										if (option != null && option != "") {
-											user.setPassword(option);
-										} else {
-											System.out.println("Changing the password failed!");
-										}
-									case "rename":
-										System.out.println("Enter a new username:");
-										option = scanner.nextLine();
-										if (option != null && option != "") {
-											user.setName(option);
-										} else {
-											System.out.println("Renaming failed");
-										}
-										break;
-								}
-								
-								modify:
-								while (true) {
-									if (userList.getUser(uuid) == null) {
-										System.out.println("User not found. Try again? (Y/N)");
-										scannerInput = scanner.nextLine();
-										switch (scannerInput.toUpperCase()) {
-											case "Y":
-												break;
-											case "YES":
-												break;
-											default:
-												break modify;
+									System.out.println("enable, disable, rename, password");
+									option = scanner.nextLine();
+									
+									switch(option) {
+										case "enable":
+											user.enableAccount();
+											System.out.println("The account " + user.getName() + " was enabled.");
+											break;
+										case "disable":
+											user.disableAccount();
+											System.out.println("The account " + user.getName() + " was disabled");
+											break;
+										case "password":
+											System.out.println("Enter a new password");
+											option = scanner.nextLine();
+											if (option != null && option != "") {
+												user.setPassword(option);
+											} else {
+												System.out.println("Changing the password failed!");
+											}
+										case "rename":
+											System.out.println("Enter a new username:");
+											option = scanner.nextLine();
+											if (option != null && option != "") {
+												user.setName(option);
+											} else {
+												System.out.println("Renaming failed");
+											}
+											break;
+									}
+									
+									modify:
+									while (true) {
+										if (userList.getUser(uuid) == null) {
+											System.out.println("User not found. Try again? (Y/N)");
+											scannerInput = scanner.nextLine();
+											switch (scannerInput.toUpperCase()) {
+												case "Y":
+													break;
+												case "YES":
+													break;
+												default:
+													break modify;
+											}
 										}
 									}
+								} else {
+									System.out.println("No users found with the information supplied.");
 								}
 								break;
-							default:
-								System.out.println("Search for a user by");
-								System.out.println("1 -- UUID");
-								System.out.println("2 -- username");
-								System.out.println("3 -- Vending Machine UUID");
+							default:								
+								search(scanner, userList, vendingMachineList);
 								break;
 						}
 					}
@@ -342,6 +339,12 @@ public class App {
 		        			activeUser.setCash(-1 * cost);
 		        			stockItem.takeFromStock(1);
 		        		}
+		        	} else {
+		        		System.out.println(Printing.leftPadString("\n", 19, '\n'));
+						System.out.println("Location" + vendingMachineList.getVendingMachine(activeUser.getLocation()).getVendingMachineId());
+						System.out.println(vend.toString());
+						System.out.println(activeUser.toString());
+						System.out.println(vend.getVendingMachineName() + ": Sorry. There is no item at that selection.");
 		        	}
 					break;
 				case "login":
@@ -418,6 +421,7 @@ public class App {
 		        	// Todo catch input
 		        	int quantity = Integer.valueOf(scanner.next());
 		        	System.out.println("Enter a a value A-D, 1-5. Like D3 or C5.");
+		        	System.out.println("I will do my best to stock in that location.");
 		        	location = scanner.nextLine();
 		        	switch (item) {
 		        		case "gum":
