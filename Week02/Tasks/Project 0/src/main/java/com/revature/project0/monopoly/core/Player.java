@@ -3,7 +3,6 @@ package com.revature.project0.monopoly.core;
 import com.revature.project0.monopoly.core.Board.BoardPiece;
 
 import java.awt.Color;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
@@ -16,9 +15,9 @@ import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
  * This class represents one of the players playing Monopoly. It stores data such as their name, what piece they chose
  * to play as, how much money they have and where on the board they are.
  */
-public class Player implements Serializable {
+public class Player {
 
-    private static final long serialVersionUID = -3242726462934587978L;
+    private int id;
     private String name;
     private BoardPiece piece;
     private int money;
@@ -27,8 +26,10 @@ public class Player implements Serializable {
 
     private HashMap<Board.BoardSquare, Boolean> properties;     //BoardSquare, Boolean <true = mortgaged, false = not mortgaged>
 
-    boolean isInJail;
+    private boolean isInJail;
     int jailTurnCount = 0;
+
+    private static int idInc = 0;
 
     /**
      * Constructor of a Player object.
@@ -37,6 +38,7 @@ public class Player implements Serializable {
      */
     public Player(String name, BoardPiece piece){
         this.name = name;
+        this.id = ++idInc;
         this.piece = piece;
         this.money = 1500;
         this.location = 0;
@@ -45,6 +47,7 @@ public class Player implements Serializable {
         outOfJailCard = false;
         LogWrapper.log(this.getClass(), "Player created: " + this, DEBUG);
     }
+
 
     /**
      * This method will move this player around the Monopoly board.
@@ -272,7 +275,16 @@ public class Player implements Serializable {
     }
 
     /* Getters and Setters */
-    String getName() {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -280,7 +292,7 @@ public class Player implements Serializable {
         this.name = name;
     }
 
-    BoardPiece getPiece() {
+    public BoardPiece getPiece() {
         return piece;
     }
 
@@ -288,31 +300,47 @@ public class Player implements Serializable {
         this.piece = piece;
     }
 
-    int getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    void setMoney(int money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    int getLocation() {
+    public int getLocation() {
         return location;
     }
 
-    void setLocation(int location) {
+    public void setLocation(int location) {
         this.location = location;
     }
 
-    boolean hasGetOutOfJailCard(){
+    public boolean hasGetOutOfJailCard(){
         return outOfJailCard;
     }
 
-    void setHasJailCard(boolean value){
+    public void setHasJailCard(boolean value){
         outOfJailCard = value;
     }
 
-    Set<Board.BoardSquare> getOwnedProperties(){
+    public boolean getIsInJail() {
+        return isInJail;
+    }
+
+    public void setIsInJail(boolean inJail) {
+        isInJail = inJail;
+    }
+
+    public void setOwnedProperties(HashMap<Board.BoardSquare, Boolean> map){
+        this.properties = map;
+    }
+
+    public boolean isPropertyMortgaged(Board.BoardSquare square){
+        return properties.get(square);
+    }
+
+    public Set<Board.BoardSquare> getOwnedProperties(){
         return properties.keySet();
     }
 

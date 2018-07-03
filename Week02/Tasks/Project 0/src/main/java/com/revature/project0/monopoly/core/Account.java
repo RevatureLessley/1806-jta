@@ -1,14 +1,11 @@
 package com.revature.project0.monopoly.core;
 
-import java.io.Serializable;
-
 /**
- * This class represents an Account for the players, storing their username and password. It is serializable.
- * NOTE: It serializes the password, which is not a secure method to transmit this field.
+ * This class represents an Account for the players, storing their username and password.
+ * NOTE: It does NOT encrypt the password.
  */
-public class Account implements Serializable {
+public class Account {
 
-    private static final long serialVersionUID = -6777518409670196094L;
     private String username;
     private String password;
 
@@ -23,11 +20,11 @@ public class Account implements Serializable {
         LogWrapper.log(this.getClass(), "Account created: " + this.toString(), LogWrapper.Severity.DEBUG);
     }
 
-    String getPassword(){
+    public String getPassword(){
         return password;
     }
 
-    String getUsername(){
+    public String getUsername(){
         return username;
     }
 

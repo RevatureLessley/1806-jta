@@ -1,16 +1,14 @@
 package com.revature.project0.monopoly.core;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.revature.project0.monopoly.core.LogWrapper.Severity.DEBUG;
 
 /**
- * POJO for holding accounts. This class will be serializable to store Account information for all the players.
+ * POJO for holding accounts.
  */
-public class AccountContainer implements Serializable {
+public class AccountContainer {
 
-    private static final long serialVersionUID = 3992351913256300598L;
     private ArrayList<Account> accountList;
 
     /**
@@ -25,7 +23,7 @@ public class AccountContainer implements Serializable {
      * This method adds an account to the ArrayList of accounts maintained by this class.
      * @param acc the Account to be added to the list.
      */
-    void addAccount(Account acc){
+    public void addAccount(Account acc){
         accountList.add(acc);
         LogWrapper.log(this.getClass(), "Account added to List:" + acc.toString(), DEBUG);
     }

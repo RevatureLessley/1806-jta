@@ -6,10 +6,15 @@ package com.revature.project0.monopoly.core;
  * This project simulates the Monopoly game by Hasbro, restricted to console output.
  * On top of that, game data will persist if the application is exited naturally, and players
  * may create accounts for themselves (actually they're required to).
+ * NOTE: The program *might* crash if the number of connections to a server is not raised. The server running this
+ * program was raised to 792 allowable connections.
  * Known Bugs: Players may choose already chosen game pieces (but this has no effect on gameplay)
  */
 
-import java.io.FileNotFoundException;
+import com.revature.project0.monopoly.database.utilities.DatabaseController;
+import com.revature.project0.monopoly.database.utilities.DatabaseController.DatabaseAccessException;
+import com.revature.project0.monopoly.database.utilities.DatabaseWipe;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +27,8 @@ import static com.revature.project0.monopoly.core.CardDeck.CardType.COMMUNITY_CH
     TODO List:
     TODO: Buying and Selling of property between players
     TODO: Restrict developing of properties so that at any given time, min number of expansions +1 = max number of expansions
+    TODO: Probably can refactor out the AccountContainer class now.
+    TODO: Wipe Database when game ends (Delete gamestate and everything associated with it
 */
 
 /**
@@ -39,11 +46,13 @@ public class Monopoly {
     private static Scanner scanner;
 
     private static Board board;
+    private static GameState gs;
 
     private static final int JACKPOT_BASE_VALUE = 500;
     private static int jackpot;
 
     private static boolean doOnce;
+    private static boolean newGame;
 
 
     private static void testFunction(){
@@ -68,11 +77,12 @@ public class Monopoly {
         getAccountList();
         System.out.println("Please enter your account credentials:");
         login();
-        GameState gs = null;
-        try { gs = GameStateSerializer.deserialize(); }
-        catch (FileNotFoundException e){
+
+
+        gs = DatabaseController.getGameState();
+        if (gs == null){
             System.out.println("No prior game data exists, creating new game.");
-            LogWrapper.log(Monopoly.class, e);
+            LogWrapper.log(Monopoly.class, "GameState was NULL.", LogWrapper.Severity.WARN);
         }
         if (gs != null){
             String line;
@@ -81,7 +91,7 @@ public class Monopoly {
                 System.out.println(msg);
                 line = waitForValidInput(msg, "a", "b");
                 if (line.equals("b")) {
-                    createExistingGame(gs);
+                    createExistingGame();
                     if (scanner != null) scanner.close();   //clean up resources
                     return; //In other words, don't create a new game
                 } else {
@@ -100,10 +110,9 @@ public class Monopoly {
 
     /**
      * This method will retrieve the instance of GameState of the saved game, and then start playing it.
-     * It uses serialization to accomplish this.
-     * @param gs the GameState will all the metadata of the saved game.
      */
-    private static void createExistingGame(GameState gs){
+    private static void createExistingGame(){
+        newGame = false;
         LogWrapper.log(Monopoly.class, "Using an existing Monopoly Game");
         playerList = gs.getPlayers();
         board = gs.getBoard();
@@ -119,6 +128,7 @@ public class Monopoly {
      * This method initializes a new Monopoly Game.
      */
     private static void createNewGame(int numPlayers){
+        newGame = true;
         LogWrapper.log(Monopoly.class, "Creating new Monopoly Game");
         board = new Board();
         board.initBoard();
@@ -132,7 +142,7 @@ public class Monopoly {
             System.out.println(account.getUsername() + ", pick your playing piece:\nAvailable pieces: ");
             System.out.println(availablePieces.toString());
             Board.BoardPiece playerPiece;
-            while ((playerPiece = board.selectPiece(scanner.nextLine())) == null ) { //BUG: player can still select from full list, even if another player has that piece
+            while ((playerPiece = Board.selectPiece(scanner.nextLine())) == null ) { //BUG: player can still select from full list, even if another player has that piece
                 System.out.println("Invalid piece, choose again:");
                 System.out.println(availablePieces.toString());
             }
@@ -179,9 +189,6 @@ public class Monopoly {
      * This method simulates gameplay of Monopoly, running in an infinite loop until a player is declared the winner.
      */
     private static void beginPlaying(int turn){
-        //NOTE: Serialization doesn't technically belong here, but its a good place to stick it in the
-        //      flow of the program execution, because it's guarenteed to be done being useful at this point.
-        AccountContainerSerializer.serialize(accContainer);
         LogWrapper.log(Monopoly.class, "Beginning game simulation");
         while(true){    //game loop
             for (int i = 0; i < playerList.size(); i++){
@@ -292,31 +299,31 @@ public class Monopoly {
                     }
                     //Roll was selected
                     LogWrapper.log(Monopoly.class, "User is rolling dice");
-                    if (player.isInJail && player.hasGetOutOfJailCard()){
+                    if (player.getIsInJail() && player.hasGetOutOfJailCard()){
                         System.out.println("You have a 'Get out of Jail Free' card. Would you like to use it? Yes (Y), No (N)");
                         line = waitForValidInput("Would you like to use it? Yes (Y), No (N)", "y","n");
                         if (line.equals("y")) {
-                            player.isInJail = false;
+                            player.setIsInJail(false);
                             player.setHasJailCard(false);
                         }
                     }
-                    if (player.isInJail) {
+                    if (player.getIsInJail()) {
                         msg = "Before you roll, would you like to pay $50 to get out now? Yes (Y), No (N)";
                         System.out.println(msg);
                         line = waitForValidInput(msg, "y", "n");
-                        if (line.equals("y")) player.isInJail = false;
+                        if (line.equals("y")) player.setIsInJail(false);
                     }
 
                     int[] roll = Dice.roll();
                     LogWrapper.log(Monopoly.class, "Roll values: " +roll[0]+", "+roll[1]+". Sum: "+(roll[0] + roll[1]));
                     System.out.printf("You rolled a %d and a %d, for a total of %d!\n", roll[0], roll[1], roll[0]+roll[1]);
                     if (roll[0] == roll[1]){
-                        if (!player.isInJail) {
+                        if (!player.getIsInJail()) {
                             doubles = true;
                             if (++doublesCount != 3)System.out.println("Wow, doubles! You get an extra turn!");
                         }
                         else {
-                            player.isInJail = false;
+                            player.setIsInJail(false);
                             System.out.println("You rolled doubles! You're free to leave.");
                             player.jailTurnCount = 0;
                             doubles = false;
@@ -326,10 +333,10 @@ public class Monopoly {
                     }
                     else {
                         doubles = false;
-                        if (player.isInJail) player.jailTurnCount++;
+                        if (player.getIsInJail()) player.jailTurnCount++;
                         if (player.jailTurnCount == 3){
                             player.jailTurnCount = 0;
-                            player.isInJail = false;
+                            player.setIsInJail(false);
                             System.out.println("You were unable to roll doubles thrice in a row, so we're kicking you out.");
                             if (!owesMoney(player, 50, null)) break;
                             else{
@@ -340,16 +347,16 @@ public class Monopoly {
                     }
                     if (doublesCount == 3){
                         player.setLocation(10); //Jail
-                        player.isInJail = true;
+                        player.setIsInJail(true);
                         System.out.println("Uh-oh! You rolled doubles thrice in a row, into jail you go!");
                         break;  //out of do-while
                     }
-                    if (!player.isInJail) player.move(roll[0] + roll[1]);
+                    if (!player.getIsInJail()) player.move(roll[0] + roll[1]);
 
                     board.drawBoard(playerList);
                     System.out.printf("You landed on %s! ", board.getBoardSquare(player.getLocation()).getName());
                     if (!handleSquareEvent(player, roll[0] + roll[1])) break;
-                    if (player.isInJail) doubles = false;   //prevent extra turn
+                    if (player.getIsInJail()) doubles = false;   //prevent extra turn
                     if (doubles) {
                         System.out.println("(Press Enter to take your extra turn)");
                         if (DEBUG) scanner.nextLine();      //to eat the '\n' left over from the nextInt() called in DEBUG mode
@@ -430,13 +437,13 @@ public class Monopoly {
                 }
             break;  //end Luxury Tax case
             case "Jail":
-                if (player.isInJail) System.out.println("How unfortunate.");    //NOTE: Getting out is handled earlier, in beginPlaying()
+                if (player.getIsInJail()) System.out.println("How unfortunate.");    //NOTE: Getting out is handled earlier, in beginPlaying()
                 else System.out.println("Visiting hours are over today, but feel free to hang around until your next turn.");
             break;  //end Jail case
             case "Go To Jail":
                 System.out.printf("\nSending %s to jail.\n", player.getName());
                 player.setLocation(10); //10 is jail
-                player.isInJail = true;
+                player.setIsInJail(true);
             break;  //end Go to Jail case
             case "Free Parking":
                 player.setMoney(player.getMoney() + jackpot);
@@ -512,13 +519,13 @@ public class Monopoly {
     }
 
     /**
-     * Deserializes the Account List.
+     * Retrieves the Account List.
      */
     private static void getAccountList(){
         try {
-            accContainer = AccountContainerSerializer.deserialize();
+            accContainer = DatabaseController.getAccountContainer();
         }
-        catch (FileNotFoundException e){
+        catch (DatabaseAccessException e){
             LogWrapper.log(Monopoly.class, e);
             System.out.println("Account List not found, generating new one.");
             accContainer = new AccountContainer();
@@ -560,6 +567,7 @@ public class Monopoly {
                 if (line.equals("c")){
                     acc = new Account(username, password);
                     accContainer.addAccount(acc);
+                    DatabaseController.addAccount(acc);
                     System.out.println("Account created.");
                     LogWrapper.log(Monopoly.class, "Successful Login: " + username);
                     System.out.printf("Logged in as %s\n", username);
@@ -578,9 +586,10 @@ public class Monopoly {
     private static void leaveAndSuspendGame(Player player){
         System.out.printf("Sorry everyone, %s has decided to leave the game. Come back later!\n", player.getName());
         //Save the game state
-        GameState gs = new GameState();
-        gs.setGameState(playerList, board, playerList.indexOf(player)+1, jackpot);
-        GameStateSerializer.serialize(gs);
+        gs = new GameState(newGame);    //TODO: refactor newgame to be an instance variable of GameState?
+        gs.setGameState(playerList, board, playerList.indexOf(player)+1, jackpot);  //+1 cuz 0-based indexing to 1-based
+        DatabaseController.deleteOldGameState(gs.getIdNum());
+        DatabaseController.setGameState(gs);
         //TODO: enter loop to fill their spot, or just shut down and force a new instance?
         //It's easier for now to just shut down.
         //NOTE: Handled in calling method.

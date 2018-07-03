@@ -18,7 +18,7 @@ public class LogWrapper {
      * @param message the message to be printed to the log
      * @param level the severity level of the log, can be one of: FATAL, ERROR, WARN, INFO, DEBUG, TRACE
      */
-    static void log(Class callingClass, String message, Severity level){
+    public static void log(Class callingClass, String message, Severity level){
         Logger logger = Logger.getLogger(callingClass);    //TODO: Efficiency? Is there a method to simply change the Class type?
         switch (level){
             case FATAL: logger.fatal(message); break;
@@ -36,7 +36,7 @@ public class LogWrapper {
      * @param callingClass the class initiating the log call
      * @param message the message to be printed to the log
      */
-    static void log(Class callingClass, String message){
+    public static void log(Class callingClass, String message){
         log(callingClass, message, Severity.INFO);
     }
 
@@ -45,7 +45,8 @@ public class LogWrapper {
      * @param callingClass The class calling the Logger
      * @param e the Exception being thrown
      */
-    static void log(Class callingClass, Exception e){
+    public static void log(Class callingClass, Exception e){
+        e.printStackTrace();
         Logger logger = Logger.getLogger(callingClass);
         StringBuilder sb = new StringBuilder();
         sb.append(e.getClass().getSimpleName()).append(" encountered: \"").append(e.getMessage()).append("\"\n");

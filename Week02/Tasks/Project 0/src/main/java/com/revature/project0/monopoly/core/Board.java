@@ -1,7 +1,6 @@
 package com.revature.project0.monopoly.core;
 
 import java.awt.Color;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,17 +11,16 @@ import static com.revature.project0.monopoly.core.LogWrapper.Severity.WARN;
 /**
  * This class represents the Monopoly Board and all the information that the Board should care about
  */
-public class Board implements Serializable {
+public class Board {
 
-    private static final long serialVersionUID = 3114123156991142900L;
-    private final Color PURPLE = new Color(87, 0, 127);
-    private final Color CYAN = Color.CYAN;
-    private final Color MAHOGANY = new Color(127,35,63);
-    private final Color ORANGE = new Color(255,106,0);
-    private final Color RED = Color.RED;
-    private final Color YELLOW = Color.YELLOW;
-    private final Color GREEN = new Color(0,181,98);
-    private final Color BLUE = new Color(0,38,133);
+    private static final Color PURPLE = new Color(87, 0, 127);
+    private static final Color CYAN = Color.CYAN;
+    private static final Color MAHOGANY = new Color(127,35,63);
+    private static final Color ORANGE = new Color(255,106,0);
+    private static final Color RED = Color.RED;
+    private static final Color YELLOW = Color.YELLOW;
+    private static final Color GREEN = new Color(0,181,98);
+    private static final Color BLUE = new Color(0,38,133);
 
     private BoardSquare[] squares;
 
@@ -35,7 +33,7 @@ public class Board implements Serializable {
      * @param piece the String representation of the enum type BoardPiece
      * @return the enum type itself (BoardPiece) or null if @param piece is not one of the enum values
      */
-    BoardPiece selectPiece(String piece){
+    public static BoardPiece selectPiece(String piece){
         switch (piece.toLowerCase()){
             case "tophat": return BoardPiece.TOPHAT;
             case "thimble": return BoardPiece.THIMBLE;
@@ -54,48 +52,48 @@ public class Board implements Serializable {
      * Monopoly board and places them in an array for indexing.
      * Each BoardSquare contains data such as name, color, buying price, etc.
      */
-    void initBoard() {
+    public void initBoard() {
         squares = new BoardSquare[]{
-                new BoardSquare("GO", null, -1, null),
-                new BoardSquare("Mediterranean Avenue", PURPLE, 60, new int[]{2,10,30,90,160,250}),
-                new BoardSquare("Community Chest", null, -1, null),
-                new BoardSquare("Baltic Avenue", PURPLE, 60, new int[]{4,20,60,180,320,450}),
-                new BoardSquare("Income Tax", null, -1, null),
-                new BoardSquare("Reading Railroad", null, 200, new int[]{25,50,100,200}),
-                new BoardSquare("Oriental Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
-                new BoardSquare("Chance", null, -1, null),
-                new BoardSquare("Vermont Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
-                new BoardSquare("Connecticut Avenue", CYAN, 120, new int[]{8,40,100,300,450,600}),
-                new BoardSquare("Jail", null, -1, null),
-                new BoardSquare("St. Charles Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
-                new BoardSquare("Electric Company", null, 150, null),
-                new BoardSquare("States Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
-                new BoardSquare("Virginia Avenue", MAHOGANY, 160, new int[]{12,60,180,500,700,900}),
-                new BoardSquare("Pennsylvania Railroad", null, 200, new int[]{25,50,100,200}),
-                new BoardSquare("St. James Place", ORANGE, 180, new int[]{14,70,200,550,750,950}),
-                new BoardSquare("Community Chest", null, -1, null),
-                new BoardSquare("Tennessee Avenue", ORANGE, 180, new int[]{14,70,200,550,750, 950}),
-                new BoardSquare("New York Avenue", ORANGE, 200, new int[]{16,80,220,600,800,1000}),
-                new BoardSquare("Free Parking", null, -1, null),
-                new BoardSquare("Kentucky Avenue", RED, 220, new int[]{18,90,250,700,875,1050}),
-                new BoardSquare("Chance", null, -1, null),
-                new BoardSquare("Indiana Avenue", RED, 220, new int[]{18,90,250,700,875,1050}),
-                new BoardSquare("Illinois Avenue", RED, 240, new int[]{20,100,300,750,925,1100}),
-                new BoardSquare("B & O Railroad", null, 200, new int[]{25,50,100,200}),
-                new BoardSquare("Atlantic Avenue", YELLOW, 260, new int[]{22,110,330,800,975,1150}),
-                new BoardSquare("Ventor Avenue", YELLOW, 260, new int[]{22,110,330,800,975,1150}),
-                new BoardSquare("Water Works", null, 150, null),
-                new BoardSquare("Marvin Gardens", YELLOW, 280, new int[]{24,120,360,850,1025,1200}),
-                new BoardSquare("Go To Jail", null, -1, null),
-                new BoardSquare("Pacific Avenue", GREEN, 300, new int[]{26,130,390,900,1100,1275}),
-                new BoardSquare("North Carolina Avenue", GREEN, 300, new int[]{26,130,390,900,1100,1275}),
-                new BoardSquare("Community Chest", null, -1, null),
-                new BoardSquare("Pennsylvania Avenue", GREEN, 320, new int[]{28,150,450,1000,1200,1400}),
-                new BoardSquare("Short Line", null, 200, new int[]{25,50,100,200}),
-                new BoardSquare("Chance", null, -1, null),
-                new BoardSquare("Park Place", BLUE, 350, new int[]{35,175,500,1100,1300,1500}),
-                new BoardSquare("Luxury Tax", null, -1, null),
-                new BoardSquare("Boardwalk", BLUE, 400, new int[]{50,200,600,1400,1700,2000})
+                new BoardSquare(0,"GO", null, -1, null),
+                new BoardSquare(1,"Mediterranean Avenue", PURPLE, 60, new int[]{2,10,30,90,160,250}),
+                new BoardSquare(2,"Community Chest", null, -1, null),
+                new BoardSquare(3,"Baltic Avenue", PURPLE, 60, new int[]{4,20,60,180,320,450}),
+                new BoardSquare(4,"Income Tax", null, -1, null),
+                new BoardSquare(5,"Reading Railroad", null, 200, new int[]{25,50,100,200}),
+                new BoardSquare(6,"Oriental Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
+                new BoardSquare(7,"Chance", null, -1, null),
+                new BoardSquare(8,"Vermont Avenue", CYAN, 100, new int[]{6,30,90,270,400,550}),
+                new BoardSquare(9,"Connecticut Avenue", CYAN, 120, new int[]{8,40,100,300,450,600}),
+                new BoardSquare(10,"Jail", null, -1, null),
+                new BoardSquare(11,"St. Charles Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
+                new BoardSquare(12,"Electric Company", null, 150, null),
+                new BoardSquare(13,"States Avenue", MAHOGANY, 140, new int[]{10,50,150,450,625,750}),
+                new BoardSquare(14,"Virginia Avenue", MAHOGANY, 160, new int[]{12,60,180,500,700,900}),
+                new BoardSquare(15,"Pennsylvania Railroad", null, 200, new int[]{25,50,100,200}),
+                new BoardSquare(16,"St. James Place", ORANGE, 180, new int[]{14,70,200,550,750,950}),
+                new BoardSquare(17,"Community Chest", null, -1, null),
+                new BoardSquare(18,"Tennessee Avenue", ORANGE, 180, new int[]{14,70,200,550,750, 950}),
+                new BoardSquare(19,"New York Avenue", ORANGE, 200, new int[]{16,80,220,600,800,1000}),
+                new BoardSquare(20,"Free Parking", null, -1, null),
+                new BoardSquare(21,"Kentucky Avenue", RED, 220, new int[]{18,90,250,700,875,1050}),
+                new BoardSquare(22,"Chance", null, -1, null),
+                new BoardSquare(23,"Indiana Avenue", RED, 220, new int[]{18,90,250,700,875,1050}),
+                new BoardSquare(24,"Illinois Avenue", RED, 240, new int[]{20,100,300,750,925,1100}),
+                new BoardSquare(25,"B & O Railroad", null, 200, new int[]{25,50,100,200}),
+                new BoardSquare(26,"Atlantic Avenue", YELLOW, 260, new int[]{22,110,330,800,975,1150}),
+                new BoardSquare(27,"Ventor Avenue", YELLOW, 260, new int[]{22,110,330,800,975,1150}),
+                new BoardSquare(28,"Water Works", null, 150, null),
+                new BoardSquare(29,"Marvin Gardens", YELLOW, 280, new int[]{24,120,360,850,1025,1200}),
+                new BoardSquare(30,"Go To Jail", null, -1, null),
+                new BoardSquare(31,"Pacific Avenue", GREEN, 300, new int[]{26,130,390,900,1100,1275}),
+                new BoardSquare(32,"North Carolina Avenue", GREEN, 300, new int[]{26,130,390,900,1100,1275}),
+                new BoardSquare(33,"Community Chest", null, -1, null),
+                new BoardSquare(34,"Pennsylvania Avenue", GREEN, 320, new int[]{28,150,450,1000,1200,1400}),
+                new BoardSquare(35,"Short Line", null, 200, new int[]{25,50,100,200}),
+                new BoardSquare(36,"Chance", null, -1, null),
+                new BoardSquare(37,"Park Place", BLUE, 350, new int[]{35,175,500,1100,1300,1500}),
+                new BoardSquare(38,"Luxury Tax", null, -1, null),
+                new BoardSquare(39,"Boardwalk", BLUE, 400, new int[]{50,200,600,1400,1700,2000})
         };
         LogWrapper.log(this.getClass(), "Game board initialized");
     }
@@ -191,9 +189,14 @@ public class Board implements Serializable {
         return (40 - index) * 2;
     }
 
-    BoardSquare getBoardSquare(int index){
+    public BoardSquare getBoardSquare(int index){
         return squares[index];
     }
+
+    public void updateBoardSquareMetadata(ArrayList<BoardSquare> squares){
+        this.squares = squares.toArray(this.squares);
+    }
+
 
     /**
      * This class represents a single tile on a standard Monopoly Board, containing information about:
@@ -204,10 +207,10 @@ public class Board implements Serializable {
      * Property Owner
      * Number of Exansions (Houses 1,2,3,4 or Hotel)
      */
-    class BoardSquare implements Serializable{
-        private static final long serialVersionUID = 6340183481971574039L;
-        private final int MAX_EXPANSIONS = 5;
+    public static class BoardSquare {
 
+        private final int MAX_EXPANSIONS = 5;
+        private int id;
         private Color color;    //null if no color
         private String name;
         private int buyPrice;   // -1 if cannot be bought
@@ -217,7 +220,8 @@ public class Board implements Serializable {
         private int mortgageValue;
         private int mortgageCost;
 
-        private BoardSquare(String name, Color color, int buyPrice, int[] visitPrices) {
+        public BoardSquare(int id, String name, Color color, int buyPrice, int[] visitPrices) {
+            this.id = id;
             this.name = name;
             this.color = color;
             this.buyPrice = buyPrice;
@@ -247,11 +251,11 @@ public class Board implements Serializable {
             }
         }
 
-        Color getColor() {
+        public Color getColor() {
             return color;
         }
 
-        String getName() {
+        public String getName() {
             return name;
         }
 
@@ -259,7 +263,7 @@ public class Board implements Serializable {
          * This function gets the price of buying the base property or an expansion thereof.
          * @return the base cost of the property if no one owns it, or the cost of expanding one time if it is owned.
          */
-        int getBuyPrice() {
+        public int getBuyPrice() {
             int price;
             if (owner == null) price = buyPrice;
             else{   //expansion prices
@@ -279,6 +283,10 @@ public class Board implements Serializable {
             return price;
         }
 
+        public int getLocation(){
+            return id;
+        }
+
         int getOriginalBuyPrice(){
             return buyPrice;
         }
@@ -295,19 +303,47 @@ public class Board implements Serializable {
             return visitPrices[expansions];
         }
 
-        Player getOwner() {
+        public int[] getAllVisitPrices() {
+            return visitPrices;
+        }
+
+        public Player getOwner() {
             return owner;
         }
 
-        void setOwner(Player owner){
+        public void setOwner(Player owner){
             this.owner = owner;
         }
 
-        int getExpansions(){
+        public void setColor(Color color) {
+            this.color = color;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setBuyPrice(int buyPrice) {
+            this.buyPrice = buyPrice;
+        }
+
+        public void setVisitPrices(int[] visitPrices) {
+            this.visitPrices = visitPrices;
+        }
+
+        public void setMortgageValue(int mortgageValue) {
+            this.mortgageValue = mortgageValue;
+        }
+
+        public void setMortgageCost(int mortgageCost) {
+            this.mortgageCost = mortgageCost;
+        }
+
+        public int getExpansions(){
             return this.expansions;
         }
 
-        void setExpansions(int value){
+        public void setExpansions(int value){
             this.expansions = value;
         }
 
@@ -315,8 +351,9 @@ public class Board implements Serializable {
             return MAX_EXPANSIONS - expansions;
         }
 
-        int getMortgageValue(){
+        public int getMortgageValue(){
             return this.mortgageValue + (int)((getBuyPrice() * expansions) / 2.0f);
         }
     }
+
 }
