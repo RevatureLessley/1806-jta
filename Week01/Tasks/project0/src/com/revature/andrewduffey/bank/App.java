@@ -50,6 +50,8 @@ public class App {
 
                 } else if (UserInfoService.isPending(id)) {
                     System.out.println("Still waiting to be approved by an admin");
+                } else if (UserInfoService.isLocked(id)){
+                    System.out.println("Account locked by an admin");
                 } else {
                     user = new RegularUser(id, username);
                 }

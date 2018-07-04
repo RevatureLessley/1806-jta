@@ -7,7 +7,7 @@ public class Account implements Serializable {
     private int balance;
 
     public Account() {
-        balance = new Integer(0);
+        balance = 0;
     }
 
     /**

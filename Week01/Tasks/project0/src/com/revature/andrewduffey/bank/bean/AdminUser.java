@@ -6,8 +6,6 @@ import com.revature.andrewduffey.bank.service.UserInfoService;
 import com.revature.andrewduffey.bank.service.UserService;
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class AdminUser extends User {
@@ -31,11 +29,12 @@ public class AdminUser extends User {
                     String username = UserService.getUserName(id);
                     System.out.print("Approve " + username + " [y/n]: ");
                     String result = App.scanner.nextLine().toLowerCase();
-                    if (result.startsWith("y")) {
+                    if (result.toLowerCase().startsWith("y")) {
                         UserInfoService.setPending(id,false);
                         AccountService.createAccount(id);
                         logger.info("Admin accepted: " + username);
                     } else {
+                        UserInfoService.setPending(id,false);
                         UserInfoService.setLocked(id, true);
                         logger.info("Admin declined: " + username);
                     }

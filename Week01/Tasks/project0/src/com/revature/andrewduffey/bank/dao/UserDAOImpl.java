@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
             stmt.setString(1, username);
             rs = stmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("user_id");
             }
 
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 return rs.getString("username");
             }
 

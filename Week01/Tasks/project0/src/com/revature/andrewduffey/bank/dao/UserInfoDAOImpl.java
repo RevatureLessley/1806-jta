@@ -83,6 +83,29 @@ public class UserInfoDAOImpl implements UserInfoDAO {
     }
 
     @Override
+    public String selectLockedById(Integer id) {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT locked FROM UserInfo WHERE user_id = ?";
+        try (Connection conn = Connections.getConnection()) {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                return rs.getString("locked");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            close(rs);
+            close(stmt);
+        }
+        return null;
+    }
+
+    @Override
     public Integer selectCountByAdmin() {
         PreparedStatement stmt = null;
         ResultSet rs = null;

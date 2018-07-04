@@ -42,6 +42,11 @@ public class UserInfoService {
         return uid.selectPendingById(id).equals("Y");
     }
 
+    public static boolean isLocked(Integer id) {
+        UserInfoDAO uid = new UserInfoDAOImpl();
+        return uid.selectLockedById(id).equals("Y");
+    }
+
     public static Integer adminUsers() {
         UserInfoDAO uid = new UserInfoDAOImpl();
         return uid.selectCountByAdmin();
@@ -66,5 +71,4 @@ public class UserInfoService {
         UserInfoDAO uid = new UserInfoDAOImpl();
         uid.updateLocked(id, locked ? "Y" : "N");
     }
-
 }
