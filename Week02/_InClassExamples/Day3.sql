@@ -42,14 +42,33 @@ CREATE TABLE job_class (
     job_name varchar2(100) NOT NULL
 );
 
+/*
+    CONSTRAINTS
+    -PRIMARY KEY
+        -A not null, unique key for identifying each record uniquely
+    -FOREIGN KEY
+        -A key that may only exist, if the value it references exists in the table that
+        it references. Used for referential integrity/
+        -Note: Any record that has a foreign key that points to a non existent record, is
+        called an ORPHAN RECORD.
+    -NULL/NOT NULL
+        -Enforcement of whether or not null values are allowed for a column.
+    -UNIQUE
+        -Enforces that each value in a column must be unique
+    -DEFAULT
+        -Lets you set a default value for a column, should null be provided
+    -CHECK
+        -Extra conditionals applied to data being inserted into the column.
 
+*/
 CREATE TABLE npc (
     npc_id number(6) primary key,
-    npc_name varchar(100) NOT NULL,
-    npc_lvl number(3) NOT NULL,
+    npc_name varchar(100),
+    npc_lvl number(3) DEFAULT 3,
     currency number(6) NOT NULL,
-    job_id number(6),
+    job_id number(6) NOT NULL CHECK (job_id > 0),
     CONSTRAINT fk_job_id FOREIGN KEY (job_id) REFERENCES job_class (job_id)
+    --,CONSTRAINT unique_name UNIQUE (npc_name)
 );
 
 CREATE TABLE shop (
@@ -57,7 +76,7 @@ CREATE TABLE shop (
     shop_name VARCHAR2(100) NOT NULL,
     owner_id number(6) NOT NULL,
     CONSTRAINT pk_shop_id PRIMARY KEY (shop_id), --adds shop_id as a primary key
-    CONSTRAINT fk_owner_id FOREIGN KEY (owner_id) 
+    CONSTRAINT fk_owner_id FOREIGN KEY (owner_id)
         REFERENCES npc (npc_id)
 );
 
@@ -137,7 +156,7 @@ INSERT INTO shop_2_item VALUES (3,1);
     -COUNT()
     -LAST()
     -FIRST()
-    
+
     SCALAR FUNCTION
     -Any function that applies some alteration to the cell for each record
     of the input.
@@ -153,7 +172,10 @@ INSERT INTO shop_2_item VALUES (3,1);
     -trim()
     -ltrim()
     -rtrim()
-    
+
 */
 
 select * from npc;
+
+INSERT INTO npc (npc_name, currency, job_id)
+VALUES ('Bobbert2.0', 777, 3);
