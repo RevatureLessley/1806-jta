@@ -18,7 +18,7 @@ public class Driver {
 	public final static Logger logger = Logger.getRootLogger();
 	Bank bank = new Bank("Chase", "100 circle way", "555-555-5555");
 	//Bank bank = getBank();
-	AccountService as = new AccountService(); 
+	public static AccountService as = new AccountService(); 
 	
 	public static Scanner reader = new Scanner(System.in);
 	String nextLine;
@@ -99,6 +99,9 @@ public class Driver {
 				break;
 			case 6:
 				loggedIn.DisplayLoansDetails();
+				break;
+			case 0:
+				as.updateCustomerAccount(loggedIn);
 				break;
 			}
 		} while (aOpt != 0);
@@ -194,13 +197,13 @@ public class Driver {
 			
 			switch(adOpt) {
 			case 1:
-				adminLoggedIn.ApproveUsers(bank.userAccounts, reader);
+				adminLoggedIn.ApproveUsers(as.selectAllCustomers(), reader);
 				break;
 			case 2:
-				adminLoggedIn.BanUsers(bank.userAccounts, reader);
+				adminLoggedIn.BanUsers(as.selectAllCustomers(), reader);
 				break;
 			case 3:
-				adminLoggedIn.DisplayUsers(bank.userAccounts);
+				adminLoggedIn.DisplayUsers(as.selectAllCustomers());
 				break;
 			}
 		} while (adOpt != 0);
@@ -214,6 +217,7 @@ public class Driver {
 			System.out.println("Please Choose an option 1-3: \n");
 			System.out.println("1: Approve user loans\n"
 							 + "3: Display users\n"
+							 + "4: Display all loans\n"
 							 + "0: Logout\n");
 
 			nextLine = reader.nextLine();
@@ -227,10 +231,13 @@ public class Driver {
 			
 			switch(adOpt) {
 			case 1:
-				bankerLoggedIn.ApproveUserLoans(bank.userAccounts, reader);
+				bankerLoggedIn.ApproveUserLoans(as.selectAllCustomers(), reader);
 				break;
 			case 3:
-				bankerLoggedIn.DisplayUsers(bank.userAccounts);
+				bankerLoggedIn.DisplayUsers(as.selectAllCustomers());
+				break;
+			case 4:
+				bankerLoggedIn.DisplayAllLoans();
 				break;
 			}
 		} while (adOpt != 0);
@@ -333,37 +340,11 @@ public class Driver {
 			break;
 		case "admin":
 			adminLoggedIn = as.selectAdmin(un, pw);
-			if(loggedIn.isApproved()) {
-				if (loggedIn.isBanned())
-				{
-					accountMenu();
-				} else {
-					System.out.println("This account has been banned. Please contact an admin.\n");
-					logger.info("banned account login attempt");
-					loggedIn = null;
-				}
-			} else {
-				System.out.println("This account has no been approved yet. Please contact an admin.\n");
-				logger.info("unapproved account login attempt");
-				loggedIn = null;
-			}
+			adminAccMenu();
 			break;
 		case "banker":
 			bankerLoggedIn = as.selectBanker(un, pw);
-			if(loggedIn.isApproved()) {
-				if (loggedIn.isBanned())
-				{
-					accountMenu();
-				} else {
-					System.out.println("This account has been banned. Please contact an admin.\n");
-					logger.info("banned account login attempt");
-					loggedIn = null;
-				}
-			} else {
-				System.out.println("This account has no been approved yet. Please contact an admin.\n");
-				logger.info("unapproved account login attempt");
-				loggedIn = null;
-			}
+			bankerAccMenu();
 			break;
 		}
 		

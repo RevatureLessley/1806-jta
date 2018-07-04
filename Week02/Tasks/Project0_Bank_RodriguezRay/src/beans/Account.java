@@ -7,24 +7,12 @@ public  class Account implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6620672985645695111L;
-	static int accNumCnt = 1000;
 	int accNum;
 	String accType;
 	String fName;
 	String lName;
 	String userName;
 	String password;
-	
-	public Account(String accType, String fName, String lName, String userName, String password) {
-		super();
-		this.accType = accType;
-		this.fName = fName;
-		this.lName = lName;
-		this.userName = userName;
-		this.password = password;
-		accNum = accNumCnt;
-		accNumCnt++;
-	}
 	
 	public Account(int accNum, String accType, String fName, String lName, String userName, String password) {
 		super();
@@ -34,6 +22,15 @@ public  class Account implements Serializable {
 		this.userName = userName;
 		this.password = password;
 		this.accNum = accNum;
+	}
+	
+	public Account(String accType, String fName, String lName, String userName, String password) {
+		super();
+		this.accType = accType;
+		this.fName = fName;
+		this.lName = lName;
+		this.userName = userName;
+		this.password = password;
 	}
 	
 	public Account(String userName, String password) {

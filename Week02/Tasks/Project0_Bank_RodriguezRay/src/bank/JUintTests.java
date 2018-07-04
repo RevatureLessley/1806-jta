@@ -18,9 +18,9 @@ public class JUintTests {
 	
 	@Before
 	public void setUp() throws Exception {
-		user = new CustomerAccount("user", "Test", "Tester", "test", "1234", 2000);
-		user2 = new CustomerAccount("user", "Test", "Tester", "test", "1234", 2000);
-		user3 = new CustomerAccount("user", "Test", "Tester", "test", "1234", 2000);
+		user = new CustomerAccount(1, "user", "Test", "Tester", "test", "1234", 2000);
+		user2 = new CustomerAccount(2, "user", "Test", "Tester", "test", "1234", 2000);
+		user3 = new CustomerAccount(3, "user", "Test", "Tester", "test", "1234", 2000);
 	}
 
 	@After

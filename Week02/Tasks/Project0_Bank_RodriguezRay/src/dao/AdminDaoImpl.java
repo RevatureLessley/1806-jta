@@ -25,7 +25,7 @@ public class AdminDaoImpl implements AdminDao{
 	public AdminAccount selectAdminById(Integer adminId) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlAdmin = "SELECT account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD," + 
+		String sqlAdmin = "SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD," + 
 				"FROM admin JOIN account ON admin.acc_id = account.acc_id;";
 		
 		try(Connection conn = Connections.getConnection()){
@@ -33,7 +33,7 @@ public class AdminDaoImpl implements AdminDao{
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return new AdminAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				return new AdminAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(3), rs.getString(4), rs.getString(5));
 			}
 			
 		}catch(SQLException e){
@@ -49,19 +49,19 @@ public class AdminDaoImpl implements AdminDao{
 	public AdminAccount selectAdminByUNandPw(String un, String pw) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlCustomer = "SELECT ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD, BALANCE"+ 
+		String sql = "SELECT a.ACC_ID, a.ACC_TYPE, a.FIRST_NAME, a.LAST_NAME, a.USER_NAME, a.USER_PASSWORD"+ 
 				" FROM account a, admin c "+ 
 				"WHERE a.user_name = ? AND a.user_password = ? AND a.acc_id = c.acc_id";
 		
 		
 		try(Connection conn = Connections.getConnection()){
-			ps = conn.prepareStatement(sqlCustomer);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, un);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return new AdminAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				return new AdminAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 			}
 			
 		}catch(SQLException e){
@@ -77,7 +77,7 @@ public class AdminDaoImpl implements AdminDao{
 	public List<AdminAccount> selectAllAdmins() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlAdmin = "SELECT account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD, admin.BALANCE " + 
+		String sqlAdmin = "SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD, admin.BALANCE " + 
 				"FROM admin JOIN account ON admin.acc_id = account.acc_id;";
 		List<AdminAccount> admins = new ArrayList<>();
 		
@@ -86,7 +86,7 @@ public class AdminDaoImpl implements AdminDao{
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				admins.add(new AdminAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+				admins.add(new AdminAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 			}
 			return admins;
 			

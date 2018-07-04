@@ -1,8 +1,13 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import bank.Driver;
 
 public class AdminAccount extends Account implements Serializable{
 	/**
@@ -10,6 +15,11 @@ public class AdminAccount extends Account implements Serializable{
 	 */
 	private static final long serialVersionUID = 5819807580931107845L;
 
+	public AdminAccount(int accNum, String accType, String fName, String lName, String userName, String password) {
+		super(accNum, accType, fName, lName, userName, password);
+		
+	}
+	
 	public AdminAccount(String accType, String fName, String lName, String userName, String password) {
 		super(accType, fName, lName, userName, password);
 		
@@ -28,15 +38,23 @@ public class AdminAccount extends Account implements Serializable{
 	 */
 	public void ApproveUsers(List<CustomerAccount> users, Scanner reader) {
 		DisplayUsers(users);
+		List<CustomerAccount> updateQueue = new ArrayList<>();
 		
 		System.out.println("Please enter the Account Numbers to approve: ");
 		String input = reader.nextLine();
-		String[] accNumbers = input.split(" ");
-		for (String s : accNumbers){
+		List<String> accNumbers = Arrays.asList(input.split(" "));
+		List<Integer> accNumbersInt = accNumbers.stream().map(Integer::parseInt).sorted().collect(Collectors.toList());
+
+		for (Integer i : accNumbersInt){
 			for (CustomerAccount user : users) {
-				if (user.getAccNumber() == Integer.parseInt(s))
+				if (user.getAccNumber() == i)
 					user.approved = true;
+					updateQueue.add(user);
 			}
+		}
+		
+		for(CustomerAccount cust : updateQueue) {
+			Driver.as.updateCustomerAccount(cust);
 		}
 	}
 	
@@ -49,15 +67,23 @@ public class AdminAccount extends Account implements Serializable{
 	 */
 	public void BanUsers(List<CustomerAccount> users, Scanner reader) {
 		DisplayUsers(users);
+		List<CustomerAccount> updateQueue = new ArrayList<>();
 		
 		System.out.println("Please enter the Account Numbers to ban: ");
 		String input = reader.nextLine();
-		String[] accNumbers = input.split(" ");
-		for (String s : accNumbers){
+		List<String> accNumbers = Arrays.asList(input.split(" "));
+		List<Integer> accNumbersInt = accNumbers.stream().map(Integer::parseInt).sorted().collect(Collectors.toList());
+
+		for (Integer i : accNumbersInt){
 			for (CustomerAccount user : users) {
-				if (user.getAccNumber() == Integer.parseInt(s))
+				if (user.getAccNumber() == i)
 					user.banned = true;
+					updateQueue.add(user);
 			}
+		}
+		
+		for(CustomerAccount cust : updateQueue) {
+			Driver.as.updateCustomerAccount(cust);
 		}
 	}
 	

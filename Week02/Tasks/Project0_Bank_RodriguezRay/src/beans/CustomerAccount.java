@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bank.Driver;
-import bank.Loan;
 
 public class CustomerAccount extends Account implements Serializable{
 	/**
@@ -27,9 +26,16 @@ public class CustomerAccount extends Account implements Serializable{
 		this.approved = approved;
 	}
 	
-	public CustomerAccount(String accType, String fName, String lName, String userName, String password, double balance) {
-		super(accType, fName, lName, userName, password);
+	public CustomerAccount(int accNum, String accType, String fName, String lName, String userName, 
+			String password, double balance) {
+		super(accNum, accType, fName, lName, userName, password);
 		this.balance = balance;
+		this.banned = false;
+		this.approved = false;
+	}
+	
+	public CustomerAccount(int accNum, String accType, String fName, String lName, String userName, String password) {
+		super(accNum, accType, fName, lName, userName, password);
 		this.banned = false;
 		this.approved = false;
 	}
@@ -76,6 +82,8 @@ public class CustomerAccount extends Account implements Serializable{
 	 * Displays the account details to the console
 	 */
 	public void DisplayAccDetails() {
+		System.out.format("|%-15s|%-12s|%-20s|%-20s|%-15s|%-9s|%-9s|\n", "Account Number", "Account Type", "Fist Name", "Last Name", "Balance", "Banned", "Approved");
+		System.out.println("----------------------------------------------------------------------------------------------------------------");
 		super.DisplayAccDetails();
 		System.out.format("%-15f|%-9b|%-9b|", balance, banned, approved);
 		System.out.println();
@@ -123,7 +131,7 @@ public class CustomerAccount extends Account implements Serializable{
 	 */
 	public void ApplyForLoan(double loanAmount, int loanTerm) {
 		Loan loan = new Loan(loanAmount, loanTerm);
-		loans.add(loan);
+		Driver.as.insertLoan(loan, this.accNum);
 		System.out.println("Loan submitted for approval.\n");
 	}
 	
@@ -131,6 +139,7 @@ public class CustomerAccount extends Account implements Serializable{
 	 * displays the details of all the loans the user has
 	 */
 	public void DisplayLoansDetails() {
+		loans = Driver.as.selectAllLoansByAccId(this.accNum);
 		if (loans.isEmpty()) {
 			System.out.println("No loans.");
 			return;

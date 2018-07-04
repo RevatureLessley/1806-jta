@@ -2,10 +2,18 @@
 --GRANT DBA TO project0;
 SELECT * FROM admin JOIN account ON admin.acc_id = account.acc_id;
 
-SELECT * FROM customer JOIN account ON customer.acc_id = account.acc_id;
+SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME,
+account.USER_PASSWORD, customer.BALANCE, customer.APPROVED, customer.BANNED 
+FROM customer JOIN account ON customer.acc_id = account.acc_id 
+WHERE account.user_name='rrod' AND account.user_password='cards';
 
+SELECT * FROM loan;
 SELECT * FROM admin;
 SELECT * FROM account;
+
+SELECT ACC_ID, ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD, BALANCE, APPROVED, BANNED 
+FROM account a, customer c
+WHERE a.user_name = 'rrod' AND a.user_password = 'cards' AND a.acc_id = c.acc_id;
 
 TRUNCATE TABLE customer;
 
@@ -47,6 +55,19 @@ CREATE TABLE customer(
     CONSTRAINT fk_customer_acc_id FOREIGN KEY (acc_id) REFERENCES account(acc_id)
 );
 
+CREATE TABLE loan(
+    loan_id NUMBER(9) PRIMARY KEY,
+    interest_rate NUMBER(12),
+    apr NUMBER(12),
+    ori_fee NUMBER(12),
+    loan_term NUMBER(12),
+    loan_amount NUMBER(12),
+    loan_approved NUMBER(1,0),
+    acc_id NUMBER(9),
+    
+    CONSTRAINT fk_loan_acc_id FOREIGN KEY(acc_id) REFERENCES account(acc_id)
+);
+
 CREATE TABLE admin(
     admin_id NUMBER(9) PRIMARY KEY,
     acc_id NUMBER(9),
@@ -62,6 +83,22 @@ CREATE TABLE banker(
     CONSTRAINT fk_banker_bank_id FOREIGN KEY (bank_id) REFERENCES bank(bank_id),
     CONSTRAINT fk_banker_acc_id FOREIGN KEY (acc_id) REFERENCES account(acc_id)
 );
+
+DROP SEQUENCE loan_seq;
+CREATE SEQUENCE loan_seq
+    START WITH 100
+    INCREMENT BY 1;
+/
+CREATE OR REPLACE TRIGGER loan_seq_trigger
+BEFORE INSERT ON loan --NOTE: you can use BEFORE or AFTER followed by a CRUD
+FOR EACH ROW --PL/SQL for loop
+BEGIN --This keyword signifies a block for a transaction
+    IF :new.loan_id IS NULL THEN
+        SELECT loan_seq.NEXTVAL INTO :new.loan_id FROM dual;
+    END IF;
+END;
+/
+
 
 DROP SEQUENCE account_seq;
 CREATE SEQUENCE account_seq
@@ -155,6 +192,23 @@ BEGIN
 	INSERT INTO customer(acc_id, bank_id, balance, approved, banned)
 	VALUES((SELECT acc_id FROM account WHERE first_name=firstName AND last_name=lastName),
     1, customerBalance, customerApproved, customerBanned);
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertLoan(
+	interestRate IN NUMBER,
+	apr IN NUMBER,
+	oriFee IN NUMBER,
+	loanTerm IN NUMBER,
+    loanAmount IN NUMBER,
+    approved IN NUMBER,
+    accId IN NUMBER)
+IS
+BEGIN 
+	INSERT INTO loan(interest_rate, apr, ori_fee, loan_term, loan_amount, loan_approved, 
+    acc_id)
+	VALUES (interestRate, apr, oriFee, loanTerm, loanAmount, approved, accId);
 	COMMIT;
 END;
 /

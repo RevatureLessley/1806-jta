@@ -45,18 +45,22 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 
 	@Override
-	public CustomerAccount selectCustomerById(Integer custId) {
+	public CustomerAccount selectCustomerById(Integer accId) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlCustomer = "SELECT account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD, customer.BALANCE " + 
-				"FROM customer JOIN account ON customer.acc_id = account.acc_id;";
+		String sqlCustomer = "SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME"
+				+ "FROM customer JOIN account ON "
+				+ "customer.acc_id = account.acc_id"
+				+ "WHERE customer.acc_id=?";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sqlCustomer);
+			ps.setInt(1, accId);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return new CustomerAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6));
+				return new CustomerAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+						rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getBoolean(8), rs.getBoolean(9));
 			}
 			
 		}catch(SQLException e){
@@ -72,19 +76,21 @@ public class CustomerDaoImpl implements CustomerDao{
 	public CustomerAccount selectCustomerByUNandPw(String un, String pw) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlCustomer = "SELECT ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD, BALANCE"+ 
-				" FROM account a, customer c "+ 
-				"WHERE a.user_name = ? AND a.user_password = ? AND a.acc_id = c.acc_id";
+		String sql = "SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, "
+				+"account.USER_PASSWORD, customer.BALANCE, customer.APPROVED, customer.BANNED "
+				+"FROM customer JOIN account ON customer.acc_id = account.acc_id "
+				+"WHERE account.user_name=? AND account.user_password=?";
 		
 		
 		try(Connection conn = Connections.getConnection()){
-			ps = conn.prepareStatement(sqlCustomer);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, un);
 			ps.setString(2, pw);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return new CustomerAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6));
+				return new CustomerAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
+						rs.getString(6), rs.getDouble(7), rs.getBoolean(8), rs.getBoolean(9));
 			}
 			
 		}catch(SQLException e){
@@ -100,16 +106,18 @@ public class CustomerDaoImpl implements CustomerDao{
 	public List<CustomerAccount> selectAllCustomers() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlCustomer = "SELECT account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, account.USER_PASSWORD, customer.BALANCE " + 
-				"FROM customer JOIN account ON customer.acc_id = account.acc_id;";
+		String sql = "SELECT account.ACC_ID, account.ACC_TYPE, account.FIRST_NAME, account.LAST_NAME, account.USER_NAME, "
+				+"account.USER_PASSWORD, customer.BALANCE, customer.APPROVED, customer.BANNED "
+				+"FROM customer JOIN account ON customer.acc_id = account.acc_id";
 		List<CustomerAccount> custs = new ArrayList<>();
 		
 		try(Connection conn = Connections.getConnection()){
-			ps = conn.prepareStatement(sqlCustomer);
+			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				custs.add(new CustomerAccount(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6)));
+				custs.add(new CustomerAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
+						rs.getString(6), rs.getDouble(7), rs.getBoolean(8), rs.getBoolean(9)));
 			}
 			return custs;
 			
@@ -128,8 +136,28 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 
 	@Override
-	public Integer updateCustomer(CustomerAccount cust) {
-		return null;
+	public Boolean updateCustomer(CustomerAccount cust) {
+		PreparedStatement ps = null;
+		String sql = "UPDATE customer SET balance=?, approved=?, banned=?"
+				+ "WHERE acc_id=?";
+
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, cust.getBalance());
+			ps.setBoolean(2, cust.isApproved());
+			ps.setBoolean(3, cust.isBanned());
+			ps.setInt(4, cust.getAccNum());
+			
+			if(ps.executeUpdate()>0) {
+				return true;
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		return false;
 	}
 
 	@Override

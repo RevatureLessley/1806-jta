@@ -111,7 +111,7 @@ public class BankerDaoImpl implements BankerDao{
 	public BankerAccount selectBankerByUNandPw(String un, String pw) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlCustomer = "SELECT ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD, BALANCE"+ 
+		String sqlCustomer = "SELECT ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD"+ 
 				" FROM account a, banker c "+ 
 				"WHERE a.user_name = ? AND a.user_password = ? AND a.acc_id = c.acc_id";
 		

@@ -11,6 +11,6 @@ public interface CustomerDao {
 	public boolean withdrawById(Integer accId, Double amount);
 	public List<CustomerAccount> selectAllCustomers();
 	public Integer deleteCustomerById(Integer id);
-	public Integer updateCustomer(CustomerAccount cust);
+	public Boolean updateCustomer(CustomerAccount cust);
 	public Boolean insertCustomerViaSp(CustomerAccount cust);
 }

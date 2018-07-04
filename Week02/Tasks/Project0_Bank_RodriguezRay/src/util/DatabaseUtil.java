@@ -13,7 +13,7 @@ public class DatabaseUtil {
 	public static Account findUserOnDB(String un) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sqlBanker = "SELECT ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD " + 
+		String sqlBanker = "SELECT ACC_ID, ACC_TYPE, FIRST_NAME, LAST_NAME, USER_NAME, USER_PASSWORD " + 
 				"FROM account WHERE user_name = ?";
 		
 		try(Connection conn = Connections.getConnection()){
@@ -22,7 +22,7 @@ public class DatabaseUtil {
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return new Account(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 			}
 			
 		}catch(SQLException e){
