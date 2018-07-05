@@ -27,4 +27,14 @@
     <servlet-name>Headers</servlet-name>
     <url-pattern>/Headers</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetVsPost</display-name>
+    <servlet-name>GetVsPost</servlet-name>
+    <servlet-class>com.revature.servlets.GetVsPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetVsPost</servlet-name>
+    <url-pattern>/GetVsPost</url-pattern>
+  </servlet-mapping>
 </web-app>
