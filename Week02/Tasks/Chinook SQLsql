@@ -1,0 +1,84 @@
+--2.1
+SELECT * FROM Employee;
+
+SELECT * FROM Employee WHERE LastName != 'King';
+
+SELECT * FROM Employee WHERE FirstName = 'Andrew' AND ReportsTo IS NULL;
+
+--2.2
+SELECT * FROM Album
+ORDER BY title DESC;
+
+SELECT FirstName FROM customer
+ORDER BY city ASC;
+
+--2.3
+INSERT INTO Genre (GenreId, Name) VALUES (26, 'Electro Funk');
+INSERT INTO Genre (GenreId, Name) VALUES (27, 'Post Modern Dark House Metal');
+
+INSERT INTO Employee (EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Fax, Email) VALUES (9, 'Elris', 'Salara', 'IT Staff', NULL, TO_DATE('1991-10-06 09:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2018-10-2 00:00:00','yyyy-mm-dd hh24:mi:ss'), '5027 Cambodial Avenue', 'Sweet Home', 'AL', 'United States', '109-19283', '+1 (403) 867-5309', NULL, 'SalaraElris@gmail.com');
+INSERT INTO Employee (EmployeeId, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode, Phone, Fax, Email) VALUES (10, 'Person', 'Real', 'Totally A worker', 3, TO_DATE('1823-12-25 00:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('1986-3-4 00:00:00','yyyy-mm-dd hh24:mi:ss'), '123 Bethlaham Rd.', 'Some City', 'SW', 'Over There', '123-4567', '+1 (403) 555-1634', '+1 (403) 666-6969', 'TotallyReal@BelieveMe.com');
+
+INSERT INTO Customer (CustomerId, FirstName, LastName, Address, City, Country, PostalCode, Phone, Email, SupportRepId) VALUES (60, 'Bobsen', 'Bobbert', '521 Adress Goes Here', 'Wardrobe', 'Narnia', '69461', '+1 (234) 192-1252', 'BobbertIsAwesome@Bobbert.com', 2);
+INSERT INTO Customer (CustomerId, FirstName, LastName, Address, City, Country, PostalCode, Phone, Email, SupportRepId) VALUES (61, 'Risis', 'Aeva', '1565 Vixena St.', 'Chicago', 'Illinois', '098234', '+1 (284) 129-7745', 'AevaProductions@gmail.com', 3);
+
+--2.4
+UPDATE Customer
+SET FirstName = 'Robert',
+LastName = 'Walter'
+WHERE FirstName = 'Aaron' AND LastName = 'Mitchell';
+
+UPDATE Artist
+SET name = 'CCR'
+WHERE name = 'Creedence Clearwater Revival';
+
+--2.5
+SELECT * FROM Invoice WHERE BillingAddress LIKE 'T%';
+
+--2.6
+SELECT * FROM Invoice WHERE total BETWEEN 15 AND 50;
+
+SELECT * FROM Employee WHERE HireDate BETWEEN TO_DATE('2003-06-01 00:00:00','yyyy-mm-dd hh24:mi:ss') AND TO_DATE('2004-03-01 00:00:00','yyyy-mm-dd hh24:mi:ss');
+
+--2.7
+ALTER TABLE Invoice DROP CONSTRAINT FK_InvoiceCustomerId;
+
+
+ALTER TABLE Invoice
+Add CONSTRAINT FK_InvoiceCustomerId
+FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId)
+ON DELETE CASCADE;
+
+ALTER TABLE InvoiceLine DROP CONSTRAINT FK_InvoiceLineInvoiceID;
+
+ALTER TABLE InvoiceLine 
+ADD CONSTRAINT FK_InvoiceLineInvoiceId
+FOREIGN KEY (InvoiceId) REFERENCES Invoice (InvoiceId)  
+ON DELETE CASCADE;
+
+DELETE FROM Customer WHERE FirstName = 'Robert' AND LastName = 'Walter';
+
+--7.1
+SELECT * FROM Customer
+inner join Invoice
+ON Customer.CustomerId = Invoice.CustomerID;
+
+--7.2
+SELECT Customer.CustomerId, FirstName, LastName, InvoiceID, total FROM Customer
+FULL OUTER JOIN Invoice
+ON Customer.CustomerId = Invoice.CustomerID;
+
+--7.3
+SELECT Artist.Name, Album.Title FROM Artist
+RIGHT JOIN Album
+ON Artist.ArtistID = Album.ArtistID;
+
+--7.4
+SELECT * FROM  Album
+CROSS JOIN Artist
+ORDER BY Artist.Name ASC;
+
+--7.5
+SELECT DISTINCT e1.* FROM Employee e1, Employee e2
+WHERE e1.ReportsTo = e2.ReportsTo
+ORDER BY e1.ReportsTo;
