@@ -45,6 +45,12 @@ Request Headers
 	--user agent: identifies browser and react to specific browsers.
 -Response Headers
 	--allow: specifies which HTTP methods are supported by server
-	--connection: determines persistence of connection.
-	--expires: determines when web page should no longer
+	--connection: determines persistence of connection to server.
+	--expires: determines when web page should no longer be cached.
+	--refresh: sets timer for reloading web page.
+	--set-cookies: specifies a cookies with a page.
 
+GET vs POST
+-User input is stored in a header with a key called query string. GET stores it in the URL with a max size of 1024 bytes, information is exposed.
+-GET separates parameters by a ? followed by key=value@key2=value2... 
+-POST stores it in the request body so information is hidden and limited by memory.
