@@ -134,3 +134,6 @@ JSession
 --------
 -creates a dynamic id and stores it as a cookie clientside and also stores it serverside.
 -can invalidate sessions serverside.
+-HttpSession hs = HttpServletRequest.getSession() gets the current session or creates a new session. 
+-HttpSession hs = HttpServletRequest.getSession(false) does not create a session. 
+-HttpServletRequest.getsession().invalidate() deletes the session serverside.
