@@ -1,4 +1,5 @@
 --RYAN's DATABASE BUILDER SCRIPT
+DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE item CASCADE CONSTRAINTS;
 DROP TABLE shop CASCADE CONSTRAINTS;
 DROP TABLE npc CASCADE CONSTRAINTS;
@@ -41,6 +42,14 @@ CREATE TABLE shop_2_item(
     CONSTRAINT fk_shop_id FOREIGN KEY (shop_id) REFERENCES shop (shop_id),
     CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES item (item_id)
 );
+
+CREATE TABLE users(
+    npc_id number(6) primary key,
+    username varchar2(100) unique,
+    password varchar2(100),
+    constraint fk_npc_id foreign key (npc_id) REFERENCES npc(npc_id)
+);
+
 
 --DML NEW
 INSERT INTO job_class VALUES(1, 'Shopkeep');
@@ -108,6 +117,17 @@ IS
 BEGIN
     INSERT INTO npc (npc_name, npc_lvl, currency, job_id)
     VALUES(npcName, npcLvl, npcCurrency, npcJobId);
+    COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertIntoUser(npcId IN NUMBER, 
+                                            username IN VARCHAR2,
+                                            userpass IN VARCHAR2)
+IS
+BEGIN
+    INSERT INTO users 
+    VALUES(npcId, username, userpass);
     COMMIT;
 END;
 /
