@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>180618_Servlets</display-name>
-  <!--  -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -10,13 +9,96 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
-  	<servlet-name>HelloWorld</servlet-name>
-  	<servlet-class>com.revature.servlets.HelloWorld</servlet-class>
+    <servlet-name>HelloWorld</servlet-name>
+    <servlet-class>com.revature.servlets.HelloWorld</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>HelloWorld</servlet-name>
-  	<url-pattern>/hello</url-pattern>
+    <servlet-name>HelloWorld</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Headers</display-name>
+    <servlet-name>Headers</servlet-name>
+    <servlet-class>com.revature.servlets.Headers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Headers</servlet-name>
+    <url-pattern>/Headers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetVsPost</display-name>
+    <servlet-name>GetVsPost</servlet-name>
+    <servlet-class>com.revature.servlets.GetVsPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetVsPost</servlet-name>
+    <url-pattern>/GetVsPost</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/what.html</location>
+  </error-page>
+  <servlet>
+    <description></description>
+    <display-name>CreateCookie</display-name>
+    <servlet-name>CreateCookie</servlet-name>
+    <servlet-class>com.revature.servlets.CreateCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateCookie</servlet-name>
+    <url-pattern>/CreateCookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RetrieveCookies</display-name>
+    <servlet-name>RetrieveCookies</servlet-name>
+    <servlet-class>com.revature.servlets.RetrieveCookies</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RetrieveCookies</servlet-name>
+    <url-pattern>/RetrieveCookies</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteCookie</display-name>
+    <servlet-name>DeleteCookie</servlet-name>
+    <servlet-class>com.revature.servlets.DeleteCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCookie</servlet-name>
+    <url-pattern>/DeleteCookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateSession</display-name>
+    <servlet-name>CreateSession</servlet-name>
+    <servlet-class>com.revature.servlets.CreateSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateSession</servlet-name>
+    <url-pattern>/CreateSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrackSession</display-name>
+    <servlet-name>TrackSession</servlet-name>
+    <servlet-class>com.revature.servlets.TrackSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrackSession</servlet-name>
+    <url-pattern>/TrackSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteSession</display-name>
+    <servlet-name>DeleteSession</servlet-name>
+    <servlet-class>com.revature.servlets.DeleteSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteSession</servlet-name>
+    <url-pattern>/DeleteSession</url-pattern>
   </servlet-mapping>
 </web-app>
