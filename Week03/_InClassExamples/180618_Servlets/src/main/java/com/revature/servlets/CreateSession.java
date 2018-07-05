@@ -17,6 +17,7 @@ import com.revature.util.HtmlTemplates;
 public class CreateSession extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
