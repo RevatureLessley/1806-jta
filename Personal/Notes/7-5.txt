@@ -54,3 +54,23 @@ GET vs POST
 -User input is stored in a header with a key called query string. GET stores it in the URL with a max size of 1024 bytes, information is exposed.
 -GET separates parameters by a ? followed by key=value@key2=value2... 
 -POST stores it in the request body so information is hidden and limited by memory.
+
+Status Code
+-100 series: informational
+	--100 Continue: request has not been fully received.
+-200 series: success
+	--200 OK
+	--201 Created: file created
+	--202 Accepted: still waiting final response.
+-300 series: redirection
+	--301 Page Moved Permenantly
+	--302 Page Moved Temporarily
+-400 series: Client Error
+	--400 Bad Request: server confused.
+	--401 Unauthorized: incorrect username/passsword.
+	--403 Forbidden: correct login but bad role.
+	--404 Not Found
+	--418 I am a teapot
+-500 series: Server Error
+	--500 Exception on Server
+	--503 Server Down
