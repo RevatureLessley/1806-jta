@@ -16,7 +16,7 @@ import com.revature.util.HtmlTemplates;
  */
 public class GetVsPost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
