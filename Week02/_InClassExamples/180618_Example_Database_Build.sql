@@ -121,6 +121,17 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE insertIntoUser(npcId IN NUMBER, 
+                                            username IN VARCHAR2,
+                                            userpass IN VARCHAR2)
+IS
+BEGIN
+    INSERT INTO users 
+    VALUES(npcId, username, userpass);
+    COMMIT;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE get_class(npcId IN NUMBER, className OUT VARCHAR2)
 IS
 BEGIN
