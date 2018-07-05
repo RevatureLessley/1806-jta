@@ -20,6 +20,16 @@ DROP TABLE Grading_Format
 CASCADE CONSTRAINTS;
 DROP TABLE Reimbursement 
 CASCADE CONSTRAINTS;
+DROP SEQUENCE app_seq;
+DROP SEQUENCE app_addinf_seq;
+DROP SEQUENCE app_att_seq;
+DROP SEQUENCE app_typ_seq;
+DROP SEQUENCE dep_seq;
+DROP SEQUENCE emp_seq;
+DROP SEQUENCE eve_seq;
+DROP SEQUENCE eve_typ_seq;
+DROP SEQUENCE gra_for_seq;
+DROP SEQUENCE rei_seq;
 
 CREATE TABLE Approval (
     app_id NUMBER PRIMARY KEY,
@@ -31,22 +41,22 @@ CREATE TABLE Approval (
     app_reason VARCHAR2(4000)
 );
 
+CREATE TABLE Approval_Additional_Info (
+    app_addinf_id NUMBER PRIMARY KEY,
+    app_addinf_file BLOB
+);
+
+CREATE TABLE Approval_Attachment (
+    app_att_id NUMBER PRIMARY KEY,
+    att_att_file BLOB
+);
+
 CREATE TABLE Approval_Type (
     app_typ_id NUMBER PRIMARY KEY,
     app_typ CHAR(20)
         CHECK (app_typ IN ('BENEFITS_COORDINATOR', 
                            'DEPARTMENT_HEAD', 
                            'DIRECT_SUPERVISOR'))
-);
-
-CREATE TABLE Approval_Additional_Info (
-    app_addinf_id NUMBER PRIMARY KEY,
-    app_addinf_file LONG RAW
-);
-
-CREATE TABLE Approval_Attachment (
-    app_att_id NUMBER PRIMARY KEY,
-    att_att_file LONG RAW
 );
 
 CREATE TABLE Department (
@@ -63,7 +73,7 @@ CREATE TABLE Employee (
     emp_password VARCHAR2(4000),
     emp_firstname VARCHAR2(4000),
     emp_lastname VARCHAR2(4000),
-    emp_isBenCo CHAR(1) 
+    emp_isBenCo CHAR(1) DEFAULT 'N'
         CHECK (emp_isBenCo IN ('N', 'Y'))
 );
 
@@ -80,7 +90,7 @@ CREATE TABLE Event (
 
 CREATE TABLE Event_Attachment (
     eve_att_id NUMBER PRIMARY KEY,
-    eve_att_file LONG RAW
+    eve_att_file BLOB
 );
 
 CREATE TABLE Event_Type (
@@ -91,15 +101,15 @@ CREATE TABLE Event_Type (
         CHECK (eve_typ_value IN ('CERTIFICATION',
                                  'CERTIFICATION_PREPARATION_CLASS',
                                  'SEMINAR', 
-                                 'TECHINAL_TRAINING',
+                                 'TECHNICAL_TRAINING',
                                  'UNIVERSITY_COURSE'))
 );
 
 CREATE TABLE Grading_Format (
     gra_for_id NUMBER PRIMARY KEY,
-    gra_for_confirmed CHAR(1)
+    gra_for_confirmed CHAR(1) DEFAULT 'U'
         CHECK (gra_for_confirmed IN ('N', 'Y', 'U')),
-    gra_for_proof LONG RAW,
+    gra_for_proof BLOB,
     gra_for_passing_cutoff NUMBER DEFAULT NULL
 );
 
@@ -182,3 +192,184 @@ ADD CONSTRAINT fk_rei_emp
 FOREIGN KEY (rei_emp_id) 
 REFERENCES Employee(emp_id)
 DEFERRABLE INITIALLY DEFERRED;
+
+CREATE SEQUENCE app_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER app_tri
+BEFORE INSERT ON Approval
+FOR EACH ROW
+BEGIN
+    IF :new.app_id IS NULL THEN
+        SELECT app_seq.NEXTVAL 
+        INTO :new.app_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE app_addinf_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER app_addinf_tri
+BEFORE INSERT ON Approval_Additional_Info
+FOR EACH ROW
+BEGIN
+    IF :new.app_addinf_id IS NULL THEN
+        SELECT app_addinf_seq.NEXTVAL 
+        INTO :new.app_addinf_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE app_att_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER app_att_tri
+BEFORE INSERT ON Approval_Attachment
+FOR EACH ROW
+BEGIN
+    IF :new.app_att_id IS NULL THEN
+        SELECT app_att_seq.NEXTVAL 
+        INTO :new.app_att_id FROM dual;
+    END IF;
+END;
+/
+
+
+CREATE SEQUENCE app_typ_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER app_typ_tri
+BEFORE INSERT ON Approval_Type
+FOR EACH ROW
+BEGIN
+    IF :new.app_typ_id IS NULL THEN
+        SELECT app_typ_seq.NEXTVAL 
+        INTO :new.app_typ_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE dep_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER dep_tri
+BEFORE INSERT ON Department
+FOR EACH ROW
+BEGIN
+    IF :new.dep_id IS NULL THEN
+        SELECT dep_seq.NEXTVAL 
+        INTO :new.dep_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE emp_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER emp_tri
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+    IF :new.emp_id IS NULL THEN
+        SELECT emp_seq.NEXTVAL 
+        INTO :new.emp_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE eve_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eve_tri
+BEFORE INSERT ON Event
+FOR EACH ROW
+BEGIN
+    IF :new.eve_id IS NULL THEN
+        SELECT eve_seq.NEXTVAL 
+        INTO :new.eve_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE eve_typ_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eve_typ_tri
+BEFORE INSERT ON Event_Type
+FOR EACH ROW
+BEGIN
+    IF :new.eve_typ_id IS NULL THEN
+        SELECT eve_typ_seq.NEXTVAL 
+        INTO :new.eve_typ_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE gra_for_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER gra_for_tri
+BEFORE INSERT ON Grading_Format
+FOR EACH ROW
+BEGIN
+    IF :new.gra_for_id IS NULL THEN
+        SELECT gra_for_seq.NEXTVAL 
+        INTO :new.gra_for_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE rei_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER rei_tri
+BEFORE INSERT ON Reimbursement
+FOR EACH ROW
+BEGIN
+    IF :new.rei_id IS NULL THEN
+        SELECT rei_seq.NEXTVAL 
+        INTO :new.rei_id FROM dual;
+    END IF;
+END;
+/
+
+INSERT INTO Approval_Type(app_typ)
+VALUES ('BENEFITS_COORDINATOR');
+INSERT INTO Approval_Type(app_typ)
+VALUES ('DEPARTMENT_HEAD');
+INSERT INTO Approval_Type(app_typ)
+VALUES ('DIRECT_SUPERVISOR');
+
+INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
+VALUES('CERTIFICATION', 1);
+INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
+VALUES('CERTIFICATION_PREPARATION_CLASS', 0.75);
+INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
+VALUES('SEMINAR', 0.6);
+INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
+VALUES('TECHNICAL_TRAINING', 0.3);
+INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
+VALUES('UNIVERSITY_COURSE', 0.8);
+
+--COMMIT;
