@@ -71,4 +71,34 @@
     <servlet-name>DeleteCookie</servlet-name>
     <url-pattern>/DeleteCookie</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateSession</display-name>
+    <servlet-name>CreateSession</servlet-name>
+    <servlet-class>com.revature.servlets.CreateSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateSession</servlet-name>
+    <url-pattern>/CreateSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrackSession</display-name>
+    <servlet-name>TrackSession</servlet-name>
+    <servlet-class>com.revature.servlets.TrackSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrackSession</servlet-name>
+    <url-pattern>/TrackSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteSession</display-name>
+    <servlet-name>DeleteSession</servlet-name>
+    <servlet-class>com.revature.servlets.DeleteSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteSession</servlet-name>
+    <url-pattern>/DeleteSession</url-pattern>
+  </servlet-mapping>
 </web-app>
