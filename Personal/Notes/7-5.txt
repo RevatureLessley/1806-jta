@@ -137,3 +137,10 @@ JSession
 -HttpSession hs = HttpServletRequest.getSession() gets the current session or creates a new session. 
 -HttpSession hs = HttpServletRequest.getSession(false) does not create a session. 
 -HttpServletRequest.getsession().invalidate() deletes the session serverside.
+
+HttpServletRequest.getRequestURI() stores the uri in a string.
+
+Front Controller
+-Designates a single servlet to handle all requests and dispatching. It is the gatekeeper to the application.
+
+FilterChain.doFilter(HttpServletRequest, HttpServletResponse) forwards the request to the servlet the request was intended for.
