@@ -220,6 +220,38 @@
 				</div>
 			</div>
 		</div>
+		<div class="rsection row">
+			<div class="col-sm-4">
+				<form method="POST" action="CreateCookie">
+				<h3>CREATE COOKIE</h3>
+					<ul style= "list-style-type:none">
+						<li>COOKIE NAME</li>
+						<li><input name="cookieName" type="text"></li>
+						<li>COOKIE VALUE</li>
+						<li><input name="cookieValue" type="text"></li>
+						<li><input type="submit" value="CREATE!"></li>
+					</ul>
+				</form>
+			</div>
+			<div class=col-sm-4 style="background-color:#888888">
+				<h3>RETRIEVE COOKIES</h3>
+				<form method="GET" action="RetrieveCookies">
+					<ul style= "list-style-type:none">
+						<li><input type="submit" value="GET"></li>
+					</ul>
+				</form>
+
+			</div>
+			<div class=col-sm-4>
+				<h3>DELETE COOKIES</h3>
+				<form method="GET" action="DeleteCookie">
+					<ul style= "list-style-type:none">
+						<li><input type="submit" value="EAT"></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		
 	</div>
 
 
