@@ -51,7 +51,8 @@ Request Headers
 	--set-cookies: specifies a cookies with a page.
 
 GET vs POST
--User input is stored in a header with a key called query string. GET stores it in the URL with a max size of 1024 bytes, information is exposed.
+-User input is stored in a header with a key called query string. 
+-GET stores it in the URL with a max size of 1024 bytes, information is exposed.
 -GET separates parameters by a ? followed by key=value@key2=value2... 
 -POST stores it in the request body so information is hidden and limited by memory.
 
@@ -74,3 +75,62 @@ Status Code
 -500 series: Server Error
 	--500 Exception on Server
 	--503 Server Down
+
+Request
+GET localhost:8080/GETvsPOST Http/1.1
+accept = blah
+cookie = blah
+.
+.
+.
+Query_String=param1=blah;param2=blah;
+
+POST localhost:8080/GETvsPOST Http/1.1
+accept = blah
+cookie = blah
+.
+.
+.
+<body>
+Query_String=param1=blah;param2=blah;
+</body>
+
+Response
+Http/1.1 200 OK
+header1: blah
+header2: blah
+.
+.
+.
+<html>
+	<head>
+	</head>
+	<body>
+	</body>
+</html>
+
+Session Tracking
+-http is stateless
+	--For every page received by the server, a separate connection is made to the server. Any information about the last connection is lost.
+-4 ways to track sessions:
+	--URL rewriting: bad
+	--hidden fields: bad
+	--cookies: neutral
+	--JSession: good
+
+URL Rewriting
+-------------
+-append a manually generated session id to the end of the url.
+
+Hidden Fields
+-------------
+-<input type="hidden">
+
+Cookies
+-------
+-flat files with cookies name and value with other metadata.
+
+JSession
+--------
+-creates a dynamic id and stores it as a cookie clientside and also stores it serverside.
+-can invalidate sessions serverside.
