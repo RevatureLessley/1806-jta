@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<title>Welcome To My Webpage</title>
+
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="index.html">Ryanture</a>
+
+		<!-- Links -->
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="index.html">HOME</a>
+			</li>
+
+			<!-- Dropdown -->
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> CSS REFERENCES </a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item"
+						href="https://www.w3schools.com/bootstrap4/default.asp">BOOTSTRAP
+						4</a> <a class="dropdown-item"
+						href="https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp">NAV
+						BARS</a> <a class="dropdown-item"
+						href="https://www.w3schools.com/cssref/css_selectors.asp">CSS
+						REFERENCES</a>
+				</div></li>
+
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> EXAMPLE LINKS </a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="./forms.html">FORMS</a>
+				</div></li>
+		</ul>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="rsection">
+			<h3>SERVLETS</h3>
+		</div>
+		<div class="rsection">
+			<h4>HELLO WORLD SERVLET</h4>
+			<form action="hello">
+				<input type="submit" value="HELLO">
+			</form>
+		</div>
+		<div class="rsection">
+			<h4>HEADER SERVLET</h4>
+			<form action="Headers">
+				<input type="submit" value="GET HEADERS">
+			</form>
+		</div>
+		<div>
+			<div class="rsection">
+				<h4>GET VS POST</h4>
+			</div>
+			<div class="row">
+				<div class="col-sm-5 rsection">
+					<h4>GET</h4>
+					<form>
+						<h4>RADIO BUTTONS</h4>
+						<ul style="list-style-type: none">
+							<li><b>DOGS</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="radio" name="dogs" value="yes" checked="checked">YES</li>
+							<li><input type="radio" name="dogs" value="no">NO</li>
+							<li><input type="radio" name="dogs" value="last name">Last
+								Name</li>
+						</ul>
+						<hr>
+						<p>With radio button types, you can have multiple radio buttons
+							that may be toggled. However, in order to enforce that only one of
+							a specific group can be toggled. you need to ensure they each have
+							hte same name. Since the rule goes: Only one radio button of the
+							same named group may be toggled at the same time. The value
+							attribute is used to store one that is toggled.</p>
+		
+						<hr>
+						<h4>CHECK BOXES</h4>
+						<ul style="list-style-type: none">
+							<li><b>DOGS</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="checkbox" name="dogs" value="yes">YES</li>
+							<li><input type="checkbox" name="dogs" value="no">NO</li>
+							<li><input type="checkbox" name="dogs" value="last name">Last
+								Name</li>
+						</ul>
+						<ul style="list-style-type: none">
+							<li><b>DO YOU AGREE TO GET SPAM MAIL FROM ME EVERYDAY?</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="checkbox" name="spam" value="yes"
+								checked="checked" disabled="disabled">YES PLEASE, THANK
+								YOU!</li>
+						</ul>
+						<hr>
+						<h4>COMPLETE REGISTRATION</h4>
+						<ul style="list-style-type: none">
+							<li><label for="username"><b>USERNAME</b></label></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="text" id="username" name="username" required></li>
+							<li><b>PASSWORD</b></li>
+							<li><input type="password" name="password1" required></li>
+							<li><b>CONFIRM PASSWORD</b></li>
+							<li><input type="password" name="password2" required></li>
+							<hr>
+							<h4>PERSONAL DETAIL</h4>
+							<li><b>FIRST NAME</b></li>
+							<li><input type="text" name="fname" required></li>
+							<li><b>LAST NAME</b></li>
+							<li><input type="text" name="lname" required></li>
+							<li><b>EMAIL</b></li>
+							<li><input type="email" name="email" required></li>
+							<li><b>PHONE</b></li>
+							<li><input type="text" name="phone" required></li>
+							<li><b>DATE IN WHICH YOU TOOK YOUR FIRST BREATH</b></li>
+							<li><input type="date" name="dob" required></li>
+							
+							<hr>
+							<h4>WEBLIST</h4>
+							<select required>
+								<option>SELECT ONE</option>
+								<option >"DOGS"</option>
+								<option>"DOGS?"</option>
+								<option>"DOGS!"</option>
+							</select>
+							
+							<li><input type="submit" value="submit"><input type="reset" value="reset"></li>
+						</ul>
+					</form>
+				</div>
+				
+				<div class="col-sm-5 rsection">
+					<h4>POST</h4>
+					<form>
+						<h4>RADIO BUTTONS</h4>
+						<ul style="list-style-type: none">
+							<li><b>DOGS</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="radio" name="dogs" value="yes" checked="checked">YES</li>
+							<li><input type="radio" name="dogs" value="no">NO</li>
+							<li><input type="radio" name="dogs" value="last name">Last
+								Name</li>
+						</ul>
+						<hr>
+						<p>With radio button types, you can have multiple radio buttons
+							that may be toggled. However, in order to enforce that only one of
+							a specific group can be toggled. you need to ensure they each have
+							hte same name. Since the rule goes: Only one radio button of the
+							same named group may be toggled at the same time. The value
+							attribute is used to store one that is toggled.</p>
+		
+						<hr>
+						<h4>CHECK BOXES</h4>
+						<ul style="list-style-type: none">
+							<li><b>DOGS</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="checkbox" name="dogs" value="yes">YES</li>
+							<li><input type="checkbox" name="dogs" value="no">NO</li>
+							<li><input type="checkbox" name="dogs" value="last name">Last
+								Name</li>
+						</ul>
+						<ul style="list-style-type: none">
+							<li><b>DO YOU AGREE TO GET SPAM MAIL FROM ME EVERYDAY?</b></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="checkbox" name="spam" value="yes"
+								checked="checked" disabled="disabled">YES PLEASE, THANK
+								YOU!</li>
+						</ul>
+						<hr>
+						<h4>COMPLETE REGISTRATION</h4>
+						<ul style="list-style-type: none">
+							<li><label for="username"><b>USERNAME</b></label></li>
+							<!-- The name attribute groups them, limiting selection to one per group -->
+							<li><input type="text" id="username" name="username" required></li>
+							<li><b>PASSWORD</b></li>
+							<li><input type="password" name="password1" required></li>
+							<li><b>CONFIRM PASSWORD</b></li>
+							<li><input type="password" name="password2" required></li>
+							<hr>
+							<h4>PERSONAL DETAIL</h4>
+							<li><b>FIRST NAME</b></li>
+							<li><input type="text" name="fname" required></li>
+							<li><b>LAST NAME</b></li>
+							<li><input type="text" name="lname" required></li>
+							<li><b>EMAIL</b></li>
+							<li><input type="email" name="email" required></li>
+							<li><b>PHONE</b></li>
+							<li><input type="text" name="phone" required></li>
+							<li><b>DATE IN WHICH YOU TOOK YOUR FIRST BREATH</b></li>
+							<li><input type="date" name="dob" required></li>
+							
+							<hr>
+							<h4>WEBLIST</h4>
+							<select required>
+								<option>SELECT ONE</option>
+								<option >"DOGS"</option>
+								<option>"DOGS?"</option>
+								<option>"DOGS!"</option>
+							</select>
+							
+							<li><input type="submit" value="submit"><input type="reset" value="reset"></li>
+						</ul>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
