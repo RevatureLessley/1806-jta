@@ -37,4 +37,10 @@
     <servlet-name>GetVsPost</servlet-name>
     <url-pattern>/GetVsPost</url-pattern>
   </servlet-mapping>
+  
+  <!-- Custom error pages -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/what.html</location>
+  </error-page>
 </web-app>
