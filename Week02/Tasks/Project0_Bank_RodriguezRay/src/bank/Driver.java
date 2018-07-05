@@ -216,8 +216,8 @@ public class Driver {
 		do {
 			System.out.println("Please Choose an option 1-3: \n");
 			System.out.println("1: Approve user loans\n"
-							 + "3: Display users\n"
-							 + "4: Display all loans\n"
+							 + "2: Display users\n"
+							 + "3: Display all loans\n"
 							 + "0: Logout\n");
 
 			nextLine = reader.nextLine();
@@ -233,10 +233,10 @@ public class Driver {
 			case 1:
 				bankerLoggedIn.ApproveUserLoans(as.selectAllCustomers(), reader);
 				break;
-			case 3:
+			case 2:
 				bankerLoggedIn.DisplayUsers(as.selectAllCustomers());
 				break;
-			case 4:
+			case 3:
 				bankerLoggedIn.DisplayAllLoans();
 				break;
 			}

@@ -52,7 +52,7 @@ public class AccountService {
 		return loanD.selectAllLoansByAccId(accId);
 	}
 	
-	public List<Loan> selectAllLoans(){
+	public String selectAllLoans(){
 		LoanDaoImpl loanD = new LoanDaoImpl();
 		return loanD.selectAllLoans();
 	}

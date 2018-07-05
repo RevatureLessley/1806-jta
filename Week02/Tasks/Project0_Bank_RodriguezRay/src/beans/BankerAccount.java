@@ -82,20 +82,11 @@ public class BankerAccount extends Account implements Serializable{
 	}
 	
 	public void DisplayAllLoans() {
-		List<Loan>loans = Driver.as.selectAllLoans();
-		
-		if (loans.isEmpty()) {
-			System.out.println("No loans.");
-			return;
-		}
-		System.out.format("%-12s|%-15s|%-14s|%-12s|%-12s|%-9s", "Loan ID", "Loan Amount", 
-				"Interest Rate", "APR", "Loan Term", "Approved\n");
-		System.out.println("-------------------------------------------------------------"
+		System.out.format("%-12s|%-15s|%-14s|%-12s|%-12s|%-12s|%-12s|%-12s|%-12s|%-12s|\n", "Loan ID", "Interest Rate", 
+				"APR", "Ori Fee", "Loan Term", "Loan Amount", "Approved", "Acc ID", "First Name", "Last Name");
+		System.out.println("--------------------------------------------------------------------------------------------------------------------"
 				+ "----------------------");
-		CustomerAccount cust;
-		for(Loan loan : loans) {
-			loan.DisplayLoanDetails();
-		}
+		Driver.as.selectAllLoans();
 		System.out.println();
 	}
 

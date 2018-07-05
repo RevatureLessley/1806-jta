@@ -75,10 +75,13 @@ public class LoanDaoImpl implements LoanDao{
 	}
 	
 	@Override
-	public List<Loan> selectAllLoans() {
+	public String selectAllLoans() {
+		String result = "";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM loan"; 
+		String sql = "SELECT loan.loan_id, loan.interest_rate, loan.apr, loan.ori_fee, loan.loan_term, "
+				+ "loan.loan_amount, loan.loan_approved, loan.acc_id, account.first_name, account.last_name "
+				+ "FROM loan JOIN account ON loan.acc_id = account.acc_id"; 
 		List<Loan> loans = new ArrayList<>();
 		
 		try(Connection conn = Connections.getConnection()){
@@ -86,10 +89,11 @@ public class LoanDaoImpl implements LoanDao{
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				loans.add(new Loan(rs.getInt(1), rs.getFloat(2), rs.getFloat(3), rs.getDouble(4),
-						rs.getInt(5), rs.getDouble(6), rs.getBoolean(7)));
+				System.out.format("%-12s|%-15s|%-14s|%-12s|%-12s|%-12s|%-12s|%-12s|%-12s|%-12s|", rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+						rs.getString(9), rs.getString(10));
 			}
-			return loans;
+			return result;
 			
 		}catch(SQLException e){
 			e.printStackTrace();
