@@ -33,8 +33,8 @@ public class Connections {
 			 * enterprises. Is now simply having to change an on-computer text file.
 			 */
 			
-			prop = new Properties();
-			prop.load(new FileInputStream(FILE_NAME));
+//			prop = new Properties();
+//			prop.load(new FileInputStream(FILE_NAME));
 //			
 //			Class.forName(prop.getProperty("class"));
 //			conn = DriverManager.getConnection(
@@ -53,9 +53,7 @@ public class Connections {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("ORACLE DRIVER CLASS NOT FOUND.");
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+		} 
 		return conn;
 	}
 }

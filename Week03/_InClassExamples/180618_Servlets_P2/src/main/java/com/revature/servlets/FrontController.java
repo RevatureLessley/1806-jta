@@ -51,6 +51,10 @@ public class FrontController extends HttpServlet {
 		case "login":
 			System.out.println("TBD: Login here");
 			break;
+		case "register":
+			rd = request.getRequestDispatcher("RegisterServlet");
+			rd.forward(request, response);
+			break;
 		default:
 			response.sendError(404);
 		}
