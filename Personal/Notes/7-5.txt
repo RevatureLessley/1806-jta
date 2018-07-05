@@ -1,0 +1,50 @@
+1)  Client sends a HTTP GET request by default as a flat file without extensions.
+2)  Server forwards the request and sends an empty response file to the web container.
+3)  Web container checks the deployment descriptor (web.xml) for forwarding.
+4)  If the request is not for the index page, the Web container wraps the request/response as a Java object and sends it to the proper servlet.
+4A) If the servlet isn't instantiated, the web container calls the init() method.
+4B) The request/response is sent to the servlet for processing. Multiple requests/responses are multithreaded through the thread pool.
+4C) At server shutdown or timeout, the webcontainer calls the destroy() method.
+5)  The response is contructed and sent back with the request to the web container.
+6)  The web container unwraps the object and the flat files forwards to the server.
+7)  Server forwards to the client which displays the response depending on the status code.
+
+Front End
+---------
+-html
+-css
+-angular
+-javascript
+-user sees these
+|
+Middleware: Servlets
+--------------------
+-deployment descriptor
+|
+Middleware: Service
+-------------------
+-service methods
+|
+Middleware: DAO
+---------------
+-grabs data
+|
+Back End: DB
+------------
+
+HttpServlets should not override the service methods. doGet() is called by  service() for GET. doPost() is called by service for POST.
+
+Request Headers
+-requests/responses have headers that contain key-value pairs containing metadata.
+-Request headers typically include:
+	--accept: file types allowed to be received/returned
+	--authorization: header used for identification
+	--connection: determines how long a connection lasts
+	--cookie: stores cookies previously received by the browser.
+	--host: specifies host and port.
+	--user agent: identifies browser and react to specific browsers.
+-Response Headers
+	--allow: specifies which HTTP methods are supported by server
+	--connection: determines persistence of connection.
+	--expires: determines when web page should no longer
+
