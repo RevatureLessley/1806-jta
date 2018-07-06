@@ -49,6 +49,35 @@ public class NpcDaoImpl implements NpcDao{
 		return null;
 	}
 
+	public Npc selectNpcByName(String name) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM npc WHERE npc_name = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return new Npc(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getInt(3),
+						rs.getInt(4),
+						rs.getInt(5)
+						);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+	
+	
 	/*
 	 * Try-With-Resources will close any streams you create within the
 	 * parenthesis' of the try blockm once the try-catch-finally has
