@@ -80,8 +80,8 @@ CREATE TABLE Employee (
 CREATE TABLE Event (
     eve_id NUMBER PRIMARY KEY,
     eve_typ_id NUMBER,
-    eve_att_id NUMBER,
-    eve_rei_id NUMBER,
+--    eve_att_id NUMBER,
+--    eve_rei_id NUMBER,
     eve_cost NUMBER CHECK (eve_cost > 0),
     eve_datetime TIMESTAMP WITH LOCAL TIME ZONE,
     eve_description VARCHAR2(4000),
@@ -117,8 +117,8 @@ CREATE TABLE Grading_Format (
 CREATE TABLE Reimbursement (
   rei_id NUMBER PRIMARY KEY,
   rei_emp_id NUMBER,
-  rei_eve_id NUMBER,
-  rei_awarded NUMBER,
+--  rei_eve_id NUMBER,
+  rei_awarded NUMBER DEFAULT 0,
   rei_isCancelled CHAR(1) DEFAULT 'N'
     CHECK (rei_isCancelled IN ('N', 'Y')),
   rei_isPending CHAR(1) DEFAULT 'Y'
@@ -171,7 +171,7 @@ DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Event    
 ADD CONSTRAINT fk_eve_rei 
-FOREIGN KEY (eve_rei_id) 
+FOREIGN KEY (eve_id) 
 REFERENCES Reimbursement(rei_id)
 DEFERRABLE INITIALLY DEFERRED;
 
@@ -195,7 +195,7 @@ DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Reimbursement    
 ADD CONSTRAINT fk_rei_eve 
-FOREIGN KEY (rei_eve_id) 
+FOREIGN KEY (rei_id) 
 REFERENCES Event(eve_id)
 DEFERRABLE INITIALLY DEFERRED;
 
@@ -378,10 +378,10 @@ VALUES('TECHNICAL_TRAINING', 0.3);
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('UNIVERSITY_COURSE', 0.8);
 
-CREATE OR REPLACE FUNCTION getSupervisor(username IN VARCHAR2)
+CREATE OR REPLACE FUNCTION getEmployee(username IN VARCHAR2)
 RETURN NUMBER
 IS
-    supID NUMBER;
+    empID NUMBER;
     
     CURSOR cur IS
     SELECT emp_id
@@ -389,15 +389,39 @@ IS
     WHERE emp_username = username;
 BEGIN
     OPEN cur;
-    FETCH cur INTO supID;
+    FETCH cur INTO empID;
     
     IF cur%NOTFOUND THEN
-      supID := 0;
+      empID := 0;
     END IF;
     
     CLOSE cur;
     
-    RETURN supID;
+    RETURN empID;
+END;
+/
+
+CREATE OR REPLACE FUNCTION getEventType(typ IN VARCHAR2)
+RETURN NUMBER
+IS
+    evetypID NUMBER;
+    NONEXISTENT_EVENT_TYPE EXCEPTION;
+    
+    CURSOR cur IS
+    SELECT eve_typ_id
+    FROM Event_Type
+    WHERE eve_typ_value = typ;
+BEGIN
+    OPEN cur;
+    FETCH cur INTO evetypID;
+    
+    IF cur%NOTFOUND THEN
+      RAISE NONEXISTENT_EVENT_TYPE;
+    END IF;
+    
+    CLOSE cur;
+    
+    RETURN evetypID;
 END;
 /
 
@@ -405,15 +429,15 @@ CREATE OR REPLACE FUNCTION checkSupervisor(supervisor IN VARCHAR2)
 RETURN NUMBER
 IS
     supID NUMBER;
-    NONEXISTENT_SUPERVISOR EXCEPTION;
+    NONEXISTENT_EMPLOYEE EXCEPTION;
 BEGIN
     IF supervisor IS NULL THEN
         supID := NULL;
     ELSE
-        supID := getSupervisor(supervisor);
+        supID := getEmployee(supervisor);
     
         IF supID = 0 THEN
-            RAISE NONEXISTENT_SUPERVISOR;
+            RAISE NONEXISTENT_EMPLOYEE;
         END IF;
     END IF;
     
@@ -478,13 +502,57 @@ BEGIN
 END;
 /
 
---CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science', NULL, 'N');
---CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science', 'swilery', 'N');
+CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science', NULL, 'N');
+CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science', 'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science', 'bobbertb', 'Y');
 
-CREATE OR REPLACE PROCEDURE insertReimbursement()
+CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2, 
+                                        cos IN NUMBER, 
+                                        dat IN VARCHAR2,
+                                        loc IN VARCHAR2,
+                                        work_missed IN INTERVAL DAY TO SECOND,
+                                        des IN VARCHAR2)
 IS
+    evetypID NUMBER;
 BEGIN
+    evetypID := getEventType(typ);
+    INSERT INTO Event(eve_typ_id, eve_cost, eve_datetime, eve_location, 
+                    eve_work_missed, eve_description)
+    VALUES(evetypID, cos, dat, loc, work_missed, des);
 END;
+/
+
+CREATE OR REPLACE PROCEDURE insertReimbursement(employee IN VARCHAR2, 
+                                                typ IN VARCHAR2, 
+                                                cos IN NUMBER, 
+                                                dat IN VARCHAR2, 
+                                                loc IN VARCHAR2,
+                                                work_missed IN 
+                                                    INTERVAL DAY TO SECOND,
+                                                des IN VARCHAR2,
+                                                justification IN VARCHAR2)
+IS
+    empID NUMBER;
+    NONEXISTENT_EMPLOYEE EXCEPTION;
+BEGIN
+    empID := getEmployee(employee);
+    
+    IF empID = 0 THEN
+        RAISE NONEXISTENT_EMPLOYEE;
+    END IF;
+    
+    INSERT INTO Reimbursement(rei_emp_id, rei_justification)
+    VALUES(empID, justification);
+    
+    insertEvent(typ, cos, dat, des, loc, work_missed);
+    
+END;
+/
+
+CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
+                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
+                         INTERVAL '70 00:00:00' DAY TO SECOND, 
+                         'Revature training', 'i dunno y');
+--CALL insertReimbursement('ryanl', '');
 
 --COMMIT;
