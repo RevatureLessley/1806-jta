@@ -11,4 +11,5 @@ public interface NpcDao {
 	public Integer deleteNpcById(Integer id);
 	public Integer updateNpc(Npc npc);
 	public Boolean insertNpcViaSp(Npc npc);
+	public Npc selectNpcByName(String name);
 }
