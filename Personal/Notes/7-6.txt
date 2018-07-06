@@ -1,0 +1,112 @@
+web.xml
+<?xml version="1.0" encoding="UTF-8"?>		//Prolog
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name></display-name>			//optional
+  <welcome-file-list>
+    <welcome-file></welcome-file>		//initial url
+  </welcome-file-list>
+  <context-param>				//optional, all servlets can access
+    <param-name></param-name>
+    <param-value></param-value>
+  </context-param>
+  <servlet>
+    <description></description>			//optional
+    <display-name></display-name>		//optional
+    <servlet-name></servlet-name>
+    <servlet-class></servlet-class>
+    <init-param>				//optional, only this servlet can access
+        <param-name></param-name>
+        <param-value></param-value>
+    </init-param>
+    <load-on-startup></load-on-startup>		//natural number order of startup
+  </servlet>
+  <servlet-mapping>
+    <servlet-name></servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  <filter>
+  	<display-name></display-name>
+  	<filter-name></filter-name>
+  	<filter-class></filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name></filter-name>
+  	<url-mapping></url-mapping>
+  </filter-mapping>
+  <error-page>
+  	<error-code></error-code>
+  	<location></location>			//image location
+  	<exception-name></exception-name>
+  </error-page>
+</web-app>
+
+Serializable(Interface)		Servlet(Interface)		Servlet Config(Interface)
+	|				|					| 
+	--------------------------------|----------------------------------------
+					|		     
+				GenericServlet
+					|-init() -> init(ServletConfig)
+					|-service()
+					|-destroy()
+					|
+				HttpServlet
+					|-service() -> doGet()
+	   					    -> doPost()
+
+HTTPMethods
+-----------
+GET - get data
+POST - insert data
+PUT - update data
+DELETE - delete data
+OPTIONS - return what HTTP methods are allowed
+HEAD - return server header information
+TRACE - return every destination packets hit roundtrip
+PATCH - like POST
+
+Servlet config is an object that describes a servlet. Servlet context is an object that describes all servlets.
+
+OLTP -Online Transaction Processing
+     -more normalized (3NF)
+     -used for application data
+
+OLAP -Online Analytic Processing
+     -more denormalized (1-2NF)
+     -used for datawarehouses and datamarts
+
+HTML
+-forms
+-tags
+-elements
+-attributes
+
+CSS
+-inline, internal, external
+-selectors
+-bootstrap
+
+XML
+-well-formed
+-valid
+-namespaces
+
+Servlet
+-config, context
+-lifecycle
+-inheritance tree
+-deployment descriptor
+-web.xml tags
+-PrintWriter
+-doGet, doPost
+-getFormParameters
+-requestDispatcher
+-sendRedirects
+-FromController
+
+SQL
+-DDL, DML, DCL, TCL, DQL
+-IN vs EXISTS
+-OLTP vs OLAP
+-transaction isolation levels
+-ACID
+-joins vs sets

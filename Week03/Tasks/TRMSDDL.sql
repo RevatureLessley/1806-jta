@@ -551,7 +551,7 @@ END;
 
 CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
                          TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
-                         INTERVAL '70 00:00:00' DAY TO SECOND, 
+                         INTERVAL '70' DAY, 
                          'Revature training', 'i dunno y');
 --CALL insertReimbursement('ryanl', '');
 
