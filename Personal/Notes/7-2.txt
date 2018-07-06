@@ -192,3 +192,4 @@ Required Technologies
 -Jenkins <- self
 -SonarQube <- self
 -Selenium <- self
+-AJAX

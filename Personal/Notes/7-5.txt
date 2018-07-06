@@ -148,8 +148,10 @@ FilterChain.doFilter(HttpServletRequest, HttpServletResponse) forwards the reque
 RequestDispatcher
 -retains current request/response through the redirection.
 -cannot redirect outside of the server.
+-supplied by the request.
 
 SendRedirect
 -replaces the old request with a new one.
 -can redirect to other servers.
 -risks two roundtrips.
+-suppplied by the response.
