@@ -372,26 +372,26 @@ VALUES('TECHNICAL_TRAINING', 0.3);
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('UNIVERSITY_COURSE', 0.8);
 
-CREATE OR REPLACE FUNCTION getDepartment(nam IN VARCHAR2)
+CREATE OR REPLACE FUNCTION getSupervisor(username IN VARCHAR2)
 RETURN NUMBER
 IS
-    depID NUMBER;
+    supID NUMBER;
     
     CURSOR cur IS
-    SELECT dep_id
-    FROM Department
-    WHERE dep_name = UPPER(nam);
+    SELECT emp_id
+    FROM Employee
+    WHERE emp_username = username;
 BEGIN
     OPEN cur;
-    FETCH cur INTO depID;
+    FETCH cur INTO supID;
     
     IF cur%NOTFOUND THEN
-      depID := 0;
+      supID := 0;
     END IF;
     
     CLOSE cur;
     
-    RETURN depID;
+    RETURN supID;
 END;
 /
 
@@ -415,26 +415,26 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE FUNCTION getSupervisor(username IN VARCHAR2)
+CREATE OR REPLACE FUNCTION getDepartment(nam IN VARCHAR2)
 RETURN NUMBER
 IS
-    supID NUMBER;
+    depID NUMBER;
     
     CURSOR cur IS
-    SELECT emp_id
-    FROM Employee
-    WHERE emp_username = username;
+    SELECT dep_id
+    FROM Department
+    WHERE dep_name = UPPER(nam);
 BEGIN
     OPEN cur;
-    FETCH cur INTO supID;
+    FETCH cur INTO depID;
     
     IF cur%NOTFOUND THEN
-      supID := 0;
+      depID := 0;
     END IF;
     
     CLOSE cur;
     
-    RETURN supID;
+    RETURN depID;
 END;
 /
 
