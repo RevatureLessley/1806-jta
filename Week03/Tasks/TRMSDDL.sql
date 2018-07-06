@@ -83,6 +83,7 @@ CREATE TABLE Event (
     eve_att_id NUMBER,
     eve_rei_id NUMBER,
     eve_cost NUMBER CHECK (eve_cost > 0),
+    eve_datetime TIMESTAMP WITH LOCAL TIME ZONE,
     eve_description VARCHAR2(4000),
     eve_location VARCHAR2(4000),
     eve_work_missed INTERVAL DAY(9) TO SECOND(0)
@@ -118,7 +119,6 @@ CREATE TABLE Reimbursement (
   rei_emp_id NUMBER,
   rei_eve_id NUMBER,
   rei_awarded NUMBER,
-  rei_datetime TIMESTAMP WITH LOCAL TIME ZONE,
   rei_isCancelled CHAR(1) DEFAULT 'N'
     CHECK (rei_isCancelled IN ('N', 'Y')),
   rei_isPending CHAR(1) DEFAULT 'Y'
@@ -191,6 +191,12 @@ ALTER TABLE Reimbursement
 ADD CONSTRAINT fk_rei_emp 
 FOREIGN KEY (rei_emp_id) 
 REFERENCES Employee(emp_id)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Reimbursement    
+ADD CONSTRAINT fk_rei_eve 
+FOREIGN KEY (rei_eve_id) 
+REFERENCES Event(eve_id)
 DEFERRABLE INITIALLY DEFERRED;
 
 CREATE SEQUENCE app_seq
@@ -476,5 +482,9 @@ END;
 --CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science', 'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science', 'bobbertb', 'Y');
 
+CREATE OR REPLACE PROCEDURE insertReimbursement()
+IS
+BEGIN
+END;
 
 --COMMIT;
