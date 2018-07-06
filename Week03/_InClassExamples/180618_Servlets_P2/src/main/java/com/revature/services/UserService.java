@@ -20,7 +20,14 @@ public class UserService {
 		NpcDao nd = new NpcDaoImpl();
 		UsersDaoImpl ud = new UsersDaoImpl();
 		Npc npc = new Npc(username,3,0,3);
+		
+		if(!(nd.selectNpcByName(username) == null)){
+			return false;
+		}
+		
 		nd.insertNpcViaSp(npc);
+		
+
 		
 		List<Npc> npcs = nd.selectAllNpc();
 		for(Npc n: npcs){
@@ -31,5 +38,19 @@ public class UserService {
 			}
 		}
 		return false;
+	}
+	
+	public static boolean userLogin(String username, String password){
+		UsersDaoImpl ud = new UsersDaoImpl();
+		User user = null;
+		if((user = ud.selectUserByUsername(username)) == null){
+			return false;
+		}
+		if(!user.getPassword().equals(password)){
+			return false;
+		}
+		
+		
+		return true;
 	}
 }
