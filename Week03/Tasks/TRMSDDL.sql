@@ -61,15 +61,15 @@ CREATE TABLE Approval_Type (
 
 CREATE TABLE Department (
     dep_id NUMBER PRIMARY KEY,
-    dep_name VARCHAR2(4000)
+    dep_name VARCHAR2(4000) UNIQUE
 );
 
 CREATE TABLE Employee (
     emp_id NUMBER PRIMARY KEY,
     emp_department NUMBER,
     emp_supervisor NUMBER,
-    emp_available_reimbursement NUMBER,
-    emp_username VARCHAR2(4000),
+    emp_available_reimbursement NUMBER DEFAULT 1000,
+    emp_username VARCHAR2(4000) UNIQUE,
     emp_password VARCHAR2(4000),
     emp_firstname VARCHAR2(4000),
     emp_lastname VARCHAR2(4000),
@@ -371,5 +371,110 @@ INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('TECHNICAL_TRAINING', 0.3);
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('UNIVERSITY_COURSE', 0.8);
+
+CREATE OR REPLACE FUNCTION getDepartment(nam IN VARCHAR2)
+RETURN NUMBER
+IS
+    depID NUMBER;
+    
+    CURSOR cur IS
+    SELECT dep_id
+    FROM Department
+    WHERE dep_name = UPPER(nam);
+BEGIN
+    OPEN cur;
+    FETCH cur INTO depID;
+    
+    IF cur%NOTFOUND THEN
+      depID := 0;
+    END IF;
+    
+    CLOSE cur;
+    
+    RETURN depID;
+END;
+/
+
+CREATE OR REPLACE FUNCTION checkSupervisor(supervisor IN VARCHAR2)
+RETURN NUMBER
+IS
+    supID NUMBER;
+    NONEXISTENT_SUPERVISOR EXCEPTION;
+BEGIN
+    IF supervisor IS NULL THEN
+        supID := NULL;
+    ELSE
+        supID := getSupervisor(supervisor);
+    
+        IF supID = 0 THEN
+            RAISE NONEXISTENT_SUPERVISOR;
+        END IF;
+    END IF;
+    
+    RETURN supID;
+END;
+/
+
+CREATE OR REPLACE FUNCTION getSupervisor(username IN VARCHAR2)
+RETURN NUMBER
+IS
+    supID NUMBER;
+    
+    CURSOR cur IS
+    SELECT emp_id
+    FROM Employee
+    WHERE emp_username = username;
+BEGIN
+    OPEN cur;
+    FETCH cur INTO supID;
+    
+    IF cur%NOTFOUND THEN
+      supID := 0;
+    END IF;
+    
+    CLOSE cur;
+    
+    RETURN supID;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertDepartment(department IN VARCHAR2)
+IS
+BEGIN
+    INSERT INTO Department(dep_name)
+    VALUES(UPPER(department));
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertEmployee(username IN VARCHAR2, 
+                                           pas IN VARCHAR2, 
+                                           firstname IN VARCHAR2, 
+                                           lastname IN VARCHAR2, 
+                                           department IN VARCHAR2, 
+                                           supervisor IN VARCHAR2, 
+                                           isBenCo IN CHAR)
+IS
+    depID NUMBER;
+    supID NUMBER;
+BEGIN
+    supID := checkSupervisor(supervisor);
+    depID := getDepartment(department);
+        
+    IF depID = 0 THEN
+        insertDepartment(department);
+        depID := getDepartment(department);
+    END IF;
+
+    INSERT INTO Employee(emp_username, emp_password, emp_firstname,
+                         emp_lastname, emp_department, emp_supervisor,
+                         emp_isBenco)
+    VALUES(username, pas, firstname, lastname, depID, supID, isBenCo);
+END;
+/
+
+--CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science', NULL, 'N');
+--CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science', 'swilery', 'N');
+--CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science', 'bobbertb', 'Y');
+
 
 --COMMIT;
