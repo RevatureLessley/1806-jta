@@ -1,9 +1,10 @@
 DROP TABLE Employee CASCADE CONSTRAINTS;
 DROP TABLE EmployeeType CASCADE CONSTRAINTS;
 DROP TABLE Department CASCADE CONSTRAINTS;
-DROP TABLE RFORM CASCADE CONSTRAINTS;
+DROP TABLE RForm CASCADE CONSTRAINTS;
 DROP TABLE Event CASCADE CONSTRAINTS;
 DROP TABLE EventType CASCADE CONSTRAINTS;
+DROP TABLE Approval CASCADE CONSTRAINTS;
 
 CREATE TABLE EmployeeType (
     emp_type_id number(6) PRIMARY KEY,
@@ -25,6 +26,7 @@ CREATE TABLE Employee (
     dep_id number(6) NOT NULL,
     bal number(8,2) NOT NULL,
     emp_type_id number(6) NOT NULL,
+    auth_lvl number(1) NOT NULL,
     
     CONSTRAINT fk_emp_type_id FOREIGN KEY (emp_type_id) REFERENCES EmployeeType (emp_type_id), 
     CONSTRAINT fk_dep_id FOREIGN KEY (dep_id) REFERENCES Department(dep_id)
@@ -62,7 +64,20 @@ CREATE TABLE RForm (
     --event related attatchment blobs id
     time_missed number(6), --hours
     form_closed number(1), --binary, edited by supervisor or benco emp
+    app_lvl number(1),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
     CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES Event(event_id)
 );
+
+CREATE TABLE Approval (
+    app_id number(6) PRIMARY KEY,
+    form_id number(6),
+    is_app number(1),
+    app_lvl number(1),
+    
+    CONSTRAINT fk_form_id FOREIGN KEY (form_id) REFERENCES RForm(form_id)
+);
+
+commit;
+
