@@ -1,4 +1,6 @@
 SELECT * FROM branch_manager;
+SELECT * FROM ben_co;
+SELECT * FROM head;
 DELETE FROM branch_manager WHERE branch_manager_id > 100;
 commit;
 
@@ -199,25 +201,23 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE insertHead(
-	headId IN NUMBER,
 	benCoId IN NUMBER,
 	fName IN VARCHAR2,
 	lName IN VARCHAR2,
-	phone IN VARCHAR2,
+	phone IN NUMBER,
 	email IN VARCHAR2,
 	address IN VARCHAR2,
 	headLocation IN VARCHAR2)
 IS
 BEGIN 
-	INSERT INTO head (head_id, ben_co_id, fname, lname, phone, email, address, head_location)
-	VALUES (headId, benCoId, fName, lName, phone, email, address, headLocation);
+	INSERT INTO head (ben_co_id, fname, lname, phone, email, address, head_location)
+	VALUES (benCoId, fName, lName, phone, email, address, headLocation);
 
 	COMMIT;
 END;
 /
 
 CREATE OR REPLACE PROCEDURE insertBenCo(
-	benCoId IN NUMBER,
 	branchManagerId IN NUMBER,
 	fName IN VARCHAR2,
 	lName IN VARCHAR2,

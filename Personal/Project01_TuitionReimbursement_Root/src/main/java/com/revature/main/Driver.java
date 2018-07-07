@@ -1,14 +1,18 @@
 package com.revature.main;
 
-import com.revature.beans.BranchManager;
+import com.revature.beans.DepartmentHead;
+import com.revature.services.BenefitsCoordinatorService;
 import com.revature.services.BranchManagerService;
+import com.revature.services.DepartmentHeadService;
 
 public class Driver {
 
 	public static void main(String[] args) {
 		BranchManagerService bms = new BranchManagerService();
-		bms.insertBranchManager(new BranchManager(100, 99, "Jared", "Belford", 5555555, 
-				"jbel@email.com", "100 way dr", "hamptons"));
+		BenefitsCoordinatorService bencos = new BenefitsCoordinatorService();
+		DepartmentHeadService heads = new DepartmentHeadService();
+		heads.insertDepartmentHead(new DepartmentHead(100, 100, "Fitra", "Khan", 5555555, 
+				"Fitra@email.com", "100 way dr", "hamptons"));
 	}
 
 }
