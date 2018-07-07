@@ -53,10 +53,10 @@ CREATE TABLE Approval_Attachment (
 
 CREATE TABLE Approval_Type (
     app_typ_id NUMBER PRIMARY KEY,
-    app_typ CHAR(20)
-        CHECK (app_typ IN ('BENEFITS_COORDINATOR', 
-                           'DEPARTMENT_HEAD', 
-                           'DIRECT_SUPERVISOR'))
+    app_typ_value CHAR(20)
+        CHECK (app_typ_value IN ('BENEFITS_COORDINATOR', 
+                                 'DEPARTMENT_HEAD', 
+                                 'DIRECT_SUPERVISOR'))
 );
 
 CREATE TABLE Department (
@@ -357,11 +357,11 @@ BEGIN
 END;
 /
 
-INSERT INTO Approval_Type(app_typ)
+INSERT INTO Approval_Type(app_typ_value)
 VALUES ('BENEFITS_COORDINATOR');
-INSERT INTO Approval_Type(app_typ)
+INSERT INTO Approval_Type(app_typ_value)
 VALUES ('DEPARTMENT_HEAD');
-INSERT INTO Approval_Type(app_typ)
+INSERT INTO Approval_Type(app_typ_value)
 VALUES ('DIRECT_SUPERVISOR');
 
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
