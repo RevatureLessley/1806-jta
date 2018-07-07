@@ -80,8 +80,6 @@ CREATE TABLE Employee (
 CREATE TABLE Event (
     eve_id NUMBER PRIMARY KEY,
     eve_typ_id NUMBER,
---    eve_att_id NUMBER,
---    eve_rei_id NUMBER,
     eve_cost NUMBER CHECK (eve_cost > 0),
     eve_datetime TIMESTAMP WITH LOCAL TIME ZONE,
     eve_description VARCHAR2(4000),
@@ -117,7 +115,6 @@ CREATE TABLE Grading_Format (
 CREATE TABLE Reimbursement (
   rei_id NUMBER PRIMARY KEY,
   rei_emp_id NUMBER,
---  rei_eve_id NUMBER,
   rei_awarded NUMBER DEFAULT 0,
   rei_isCancelled CHAR(1) DEFAULT 'N'
     CHECK (rei_isCancelled IN ('N', 'Y')),
@@ -502,9 +499,12 @@ BEGIN
 END;
 /
 
-CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science', NULL, 'N');
-CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science', 'swilery', 'N');
---CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science', 'bobbertb', 'Y');
+--CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science',
+--                    NULL, 'N');
+--CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
+--                    'swilery', 'N');
+--CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
+--                    'bobbertb', 'Y');
 
 CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2, 
                                         cos IN NUMBER, 
@@ -522,6 +522,37 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE insertGradingFormat(passingCutoff IN NUMBER, 
+                                                graforID OUT NUMBER)
+IS
+BEGIN
+    INSERT INTO Grading_Format(gra_for_passing_cutoff)
+    VALUES(passingCutoff);
+    SELECT gra_for_seq.CURRVAL 
+    INTO graforID 
+    FROM dual;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertApproval(passingCutoff IN NUMBER, 
+                                           reiID IN NUMBER)
+IS
+    approvals NUMBER;
+    counter NUMBER;
+    graforID NUMBER;
+BEGIN
+    SELECT COUNT(*) 
+    INTO approvals 
+    FROM Approval_Type;
+    insertGradingFormat(passingCutoff, graforID);
+    
+    FOR counter IN 1..approvals LOOP
+        INSERT INTO Approval(app_typ_id, app_gra_for_id, app_rei_id)
+        VALUES(counter, graforID, reiID);
+    END LOOP;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE insertReimbursement(employee IN VARCHAR2, 
                                                 typ IN VARCHAR2, 
                                                 cos IN NUMBER, 
@@ -529,10 +560,12 @@ CREATE OR REPLACE PROCEDURE insertReimbursement(employee IN VARCHAR2,
                                                 loc IN VARCHAR2,
                                                 work_missed IN 
                                                     INTERVAL DAY TO SECOND,
+                                                passingCutoff IN NUMBER,
                                                 des IN VARCHAR2,
                                                 justification IN VARCHAR2)
 IS
     empID NUMBER;
+    reiID NUMBER;
     NONEXISTENT_EMPLOYEE EXCEPTION;
 BEGIN
     empID := getEmployee(employee);
@@ -544,15 +577,19 @@ BEGIN
     INSERT INTO Reimbursement(rei_emp_id, rei_justification)
     VALUES(empID, justification);
     
-    insertEvent(typ, cos, dat, des, loc, work_missed);
-    
+    insertEvent(typ, cos, dat, loc, work_missed, des);
+    SELECT rei_seq.CURRVAL
+    INTO reiID
+    FROM dual;
+    insertApproval(passingCutoff, reiID);
 END;
 /
 
-CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
-                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
-                         INTERVAL '70' DAY, 
-                         'Revature training', 'i dunno y');
---CALL insertReimbursement('ryanl', '');
+--CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
+--                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
+--                         INTERVAL '70' DAY, 0.7, 'Revature training', 'i dunno y');
+--CALL insertReimbursement('swilery', 'TECHNICAL_TRAINING', 20000,
+--                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
+--                         NULL, 'Revature training', 'i dunno y');
 
---COMMIT;
+COMMIT;
