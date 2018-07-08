@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import oracle.jdbc.OracleTypes;
 import trms.beans.User;
@@ -126,10 +127,9 @@ public class UserDAOImpl extends Connection implements UserDAO {
 				callableStatement.setString(5, user.getLastName());
 				callableStatement.setString(6, user.getEmail());
 				callableStatement.setString(7, user.getPhoneNumber());
-				
-				if (callableStatement.execute()) {
-					return true;
-				}
+				callableStatement.execute();
+
+				return true;
 			} catch (SQLException sqle) {
 				sqle.printStackTrace();
 			}
@@ -166,9 +166,21 @@ public class UserDAOImpl extends Connection implements UserDAO {
 	
 	public static void main(String[] args) {
 		try {
+			// TODO: before test
+			User testUser = new User();
+			testUser.setUuid(String.valueOf(UUID.randomUUID()));
+			testUser.setUsername("test");
+			testUser.setFirstName("First");
+			testUser.setLastName("Last");
+			testUser.setEmail("test@user.mail");
+			testUser.setPhoneNumber("(555) 555 - 5555"); 
+			testUser.setLoginPassword("test");
+			
 			UserDAO userDAO = new UserDAOImpl();
-		if (userDAO.getUserByUsername("fanny") == null) {
+		if (userDAO.getUserByUsername(testUser.getUsername()) == null) {
 			System.out.println("No user found.");
+			System.out.println("Adding test user");
+			userDAO.registerUser(testUser);
 		}
 		} catch (Exception e) {
 			e.printStackTrace();
