@@ -1,9 +1,50 @@
+<!-- Html documents typically start with the Doctype Declaration
+	This line tells browsers to view this as an html page, and also which version
+	of html to display with. (Some pages haven't beyond 4.
+	By default, or if no otherwise specified, doctype will use html 5. -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>HELLO WORLD HOMEPAGE</title>
-</head>
+<!-- THIS IS AN HTML COMMENT
+	HTML documents will always have a root tag of 'html'.
+	They will also have a <head> and <body> tag.-->
+<meta charset="UTF-8">
+	<!-- The meta charset tag will determine how many character types are supported
+	on your browser. UTF-8, for the most part, allows ANY language. -->
+
+<!-- We are bring in bootstrap via a CDN (Content Delivery Network)
+	These networks let use utilize libraries over the net as opposed to 
+	downloading locally and using them. -->
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+
+<script
+			  src="http://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bring in supplemental javascript for bootstrap -->
+
+<title>Welcome To My Webpage</title>
+	<!-- The title tag will label a page with an identifying title. This is mostly
+	seen in the tab itself on most browsers. -->
+	
+	<!-- The <head> tag is used to store metadata about the page, such as,
+			page title, or charset encodings. -->
+			
+	<style>
+		/*This is a block of css code!
+			This is also called internal stylesheet.
+		*/
+		li i {
+			color:blue;
+		}
+		
+	</style>
+	<link rel="stylesheet" type="text/css" href= "./resources/css/main.css">
 <body>
 	<h1>HELLO WORLD</h1>
 </body>

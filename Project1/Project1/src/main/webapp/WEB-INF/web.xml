@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>180618FirstMavene</display-name>
+  <display-name>Project1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -10,31 +10,23 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>HelloWorld</servlet-name>
-    <servlet-class>com.revature.servlets.HelloWorld</servlet-class>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HelloWorld</servlet-name>
-    <url-pattern>/hello</url-pattern>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>/FrontController</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Headers</display-name>
-    <servlet-name>Headers</servlet-name>
-    <servlet-class>com.revature.servlets.Headers</servlet-class>
+    <display-name>RegisterServlet</display-name>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.revature.servlets.RegisterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Headers</servlet-name>
-    <url-pattern>/Headers</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GetVsPost</display-name>
-    <servlet-name>GetVsPost</servlet-name>
-    <servlet-class>com.revature.servlets.GetVsPost</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetVsPost</servlet-name>
-    <url-pattern>/GetVsPost</url-pattern>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
 </web-app>
