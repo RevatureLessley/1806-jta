@@ -13,4 +13,9 @@ public class BenefitsCoordinator extends Employee {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public BenefitsCoordinator(int supVId, String firstName, String lastName, int phone,
+			String email, String address, String location) {
+		super(supVId, firstName, lastName, phone, email, address, location);
+		// TODO Auto-generated constructor stub
+	}
 }

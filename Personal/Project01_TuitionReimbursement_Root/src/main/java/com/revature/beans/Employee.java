@@ -22,6 +22,17 @@ public class Employee {
 		this.address = address;
 		this.location = location;
 	}
+	public Employee(int supVId, String firstName, String lastName, int phone, String email, String address,
+			String location) {
+		super();
+		this.supVId = supVId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.location = location;
+	}
 	
 	public Employee() {
 		super();

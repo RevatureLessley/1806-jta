@@ -1,9 +1,10 @@
 package com.revature.main;
 
-import com.revature.beans.DepartmentHead;
 import com.revature.services.BenefitsCoordinatorService;
 import com.revature.services.BranchManagerService;
 import com.revature.services.DepartmentHeadService;
+import com.revature.services.EmployeeService;
+
 
 public class Driver {
 
@@ -11,8 +12,10 @@ public class Driver {
 		BranchManagerService bms = new BranchManagerService();
 		BenefitsCoordinatorService bencos = new BenefitsCoordinatorService();
 		DepartmentHeadService heads = new DepartmentHeadService();
-		heads.insertDepartmentHead(new DepartmentHead(100, 100, "Fitra", "Khan", 5555555, 
-				"Fitra@email.com", "100 way dr", "hamptons"));
+		SupervisorService sups = new SupervisorService();
+		EmployeeService emps = new EmployeeService();
+		sups.insertSupervisor(new Supervisor(100, "Eli", "Laster", 5555555, 
+				"elast@email.com", "100 way dr", "hamptons"));
 	}
 
 }
