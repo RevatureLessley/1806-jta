@@ -156,7 +156,7 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 		UserDAO userDAO = new UserDAOImpl();
 		
 		try {
-			CallableStatement callableStatement = connection.prepareCall("{call removeBenefitsCoordinator}");
+			CallableStatement callableStatement = connection.prepareCall("{call removeBenefitsCoordinator(?)}");
 			callableStatement.setString(1, user.getUuid());
 			callableStatement.execute();
 			return true;
@@ -167,8 +167,17 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 
 	@Override
 	public boolean removeUserAsDepartmentHead(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		java.sql.Connection connection = this.getConnection();
+		UserDAO userDAO = new UserDAOImpl();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("{call removeDeparmentHead(?)}");
+			callableStatement.setString(1, user.getUuid());
+			callableStatement.execute();
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 
 }

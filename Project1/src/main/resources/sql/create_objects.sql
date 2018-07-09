@@ -42,7 +42,7 @@ values (null, 'Supervisor');
 insert into project_1_role
 values (null, 'Benefits Coordinator');
 insert into project_1_role
-values (null, 'Deparment Head');
+values (null, 'Department Head');
 insert into project_1_role
 values (null, 'Admin');
 
@@ -92,6 +92,62 @@ begin
 end;
 /
 
+create or replace procedure isUserASupervisor(userUUID in varchar2,
+                                              response out varchar2)
+is
+    v_row_count number := 0;
+begin
+    select count(*) into v_row_count from project_1_role_relationship where employee_uuid = userUUID;
+    if v_row_count = 0 then
+        response := 'YES';
+    else
+        response := 'NO';
+    end if;
+end;
+/
+
+create or replace procedure isUserABenefitsCoordinator(userUUID in varchar2,
+                                                       response out varchar2)
+is
+    v_row_count number := 0;
+begin
+    select count(*) into v_row_count from project_1_role_relationship where employee_uuid = userUUID;
+    if v_row_count = 0 then
+        response := 'YES';
+    else
+        response := 'NO';
+    end if;
+end;
+/
+
+create or replace procedure isUserADepartmentHead(userUUID in varchar2,
+                                                  response out varchar2)
+is
+    v_row_count number := 0;
+begin
+    select count(*) into v_row_count from project_1_role_relationship where employee_uuid = userUUID;
+    if v_row_count = 0 then
+        response := 'YES';
+    else
+        response := 'NO';
+    end if;
+end;
+/
+
+create or replace procedure isUserAnAdmin(userUUID in varchar2,
+                                          response out varchar2)
+is
+ v_row_count number := 0;
+begin
+    select count(*) into v_row_count from project_1_role_relationship where employee_uuid=userUUID;
+    if v_row_count = 0 then
+        response := 'YES';
+    else
+        response := 'NO';
+    end if;
+end;
+/
+
 create or replace procedure selectWithUsername(userHandle in varchar2,
                                                userPassword in varchar2,
                                                returnCursor out sys_refcursor)
@@ -132,6 +188,7 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 1);
+    commit;
 end;
 /
 
@@ -140,6 +197,7 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 2);
+    commit;
 end;
 /
 
@@ -148,6 +206,7 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 3);
+    commit;
 end;
 /
 
@@ -156,6 +215,7 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 4);
+    commit;
 end;
 /
 
