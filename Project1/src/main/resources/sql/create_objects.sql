@@ -181,32 +181,40 @@ end;
 
 create or replace procedure removeSupervisor(userUUID in varchar2)
 is
+    v_role_number number := 1;
 begin
-    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 1;
+    select role_number into v_role_number from project_1_role where role_name='Supervisor';
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;
 /
 
 create or replace procedure removeBenefitsCoordinator(userUUID in varchar2)
 is
+    v_role_number number := 2;
 begin
-    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 2;
+    select role_number into v_role_number from project_1_role where role_name='BenefitsCoordinator';
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;
 /
 
 create or replace procedure removeAdmin(userUUID in varchar2)
 is
+    v_role_number number := 3;
 begin
-    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 3;
+    select role_number into v_role_number from project_1_role where role_name='Admin';
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;
 /
 
 create or replace procedure removeDepartmentHead(userUUID in varchar2)
 is
+    v_role_number number := 4;
 begin
-    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 4;
+    select role_number into v_role_number from project_1_role where role_name='DepartmentHead';
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;
 /
