@@ -49,8 +49,11 @@ CREATE TABLE event
 CREATE TABLE employee
 (
     emp_id NUMBER(6),
+    emp_accountname VARCHAR2(100) UNIQUE,
+    emp_password VARCHAR2(100),
     fname VARCHAR2(100),
     lname VARCHAR2(100),
+    email VARCHAR2(100) UNIQUE,
     job_type_id NUMBER(6),
     CONSTRAINT pk_emp_id PRIMARY KEY (emp_id),
     CONSTRAINT fk_job_type_id FOREIGN KEY (job_type_id) REFERENCES job_type (job_type_id)
@@ -60,18 +63,20 @@ CREATE TABLE reimbursement
 (
     r_id NUMBER(6),
     event_date DATE,
-    event_time TIMESTAMP,
+    event_time VARCHAR2(100),
     event_location VARCHAR2(100),
     event_desc VARCHAR2(100),
     event_cost NUMBER(6),
     justification VARCHAR2(100),
     grade_cutoff NUMBER(6),
     grade NUMBER(6),
+    emp_id NUMBER(6),
     event_id NUMBER(6),
     grading_format_id NUMBER(6),
     doc_id NUMBER(6),
     approval_id NUMBER(6),
     CONSTRAINT pk_r_id PRIMARY KEY (r_id),
+    CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES employee (emp_id),
     CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES event (event_id),
     CONSTRAINT fk_grading_format_id_2 FOREIGN KEY (grading_format_id) REFERENCES grading_format (grading_format_id),
     CONSTRAINT fk_doc_id FOREIGN KEY (doc_id) REFERENCES documents (doc_id),
@@ -120,10 +125,16 @@ VALUES (5, 'Technical Training', 90, 3);
 INSERT INTO event
 VALUES (6, 'Other', 30, 3);
 
-SELECT * FROM approval;
-SELECT * FROM grading_format;
-SELECT * FROM job_type;
-SELECT * FROM documents;
-SELECT * FROM event;
-SELECT * FROM employee;
-SELECT * FROM reimbursement;
+--SELECT * FROM approval;
+--SELECT * FROM grading_format;
+--SELECT * FROM job_type;
+--SELECT * FROM documents;
+--SELECT * FROM event;
+--SELECT * FROM employee;
+--SELECT * FROM reimbursement;
+
+INSERT INTO employee
+VALUES (1, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 5);
+INSERT INTO reimbursement
+VALUES (1, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 19300, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
+    
