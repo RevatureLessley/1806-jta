@@ -41,25 +41,97 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 
 	@Override
 	public boolean addUserAsSupervisor(User user) {
-		// TODO Auto-generated method stub
+		java.sql.Connection connection = this.getConnection();
+		UserDAO userDAO = new UserDAOImpl();
+		
+		try {
+			// If user does not exist, register the user
+			
+			if (userDAO.getUserByUUID(user.getUuid()) == null) {
+				userDAO.registerUser(user);
+				
+				// Associate user's UUID with the Supervisor role
+				CallableStatement callableStatement = connection.prepareCall("{call insertSupervisor(?)}");
+				callableStatement.setString(1, user.getUuid());
+				callableStatement.execute();
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean addUserAsBenefitsCoordinator(User user) {
-		// TODO Auto-generated method stub
+		java.sql.Connection connection = this.getConnection();
+		UserDAO userDAO = new UserDAOImpl();
+		
+		try {
+			// If user does not exist, register the user
+			
+			if (userDAO.getUserByUUID(user.getUuid()) == null) {
+				userDAO.registerUser(user);
+				
+				// Associate user's UUID with the Benefits Coordinator role
+				CallableStatement callableStatement = connection.prepareCall("{call insertBenefitsCoordinator(?)}");
+				callableStatement.setString(1, user.getUuid());
+				callableStatement.execute();
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean addUserAsDepartmentHead(User user) {
-		// TODO Auto-generated method stub
+		java.sql.Connection connection = this.getConnection();
+		UserDAO userDAO = new UserDAOImpl();
+		
+		try {
+			// If user does not exist, register the user
+			
+			if (userDAO.getUserByUUID(user.getUuid()) == null) {
+				userDAO.registerUser(user);
+				
+				// Associate user's UUID with the Department Head role
+				CallableStatement callableStatement = connection.prepareCall("{call insertDepartmentHead(?)}");
+				callableStatement.setString(1, user.getUuid());
+				callableStatement.execute();
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean addUserAsAdmin(User user) {
-		// TODO Auto-generated method stub
+		java.sql.Connection connection = this.getConnection();
+		UserDAO userDAO = new UserDAOImpl();
+		
+		try {
+			// If user does not exist, register the user
+			
+			if (userDAO.getUserByUUID(user.getUuid()) == null) {
+				userDAO.registerUser(user);
+				
+				// Associate user's UUID with the Admin role
+				CallableStatement callableStatement = connection.prepareCall("{call insertAdmin(?)}");
+				callableStatement.setString(1, user.getUuid());
+				callableStatement.execute();
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 

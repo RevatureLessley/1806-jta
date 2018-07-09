@@ -62,7 +62,6 @@ create table project_1_direct_supervisor (
 );
 /
 
-
 create or replace procedure selectAllRoles (returnCursor out sys_refcursor)
 as
 begin
@@ -176,6 +175,38 @@ begin
                               email = userEmail,
                               phone_number = phoneNumber
                           where uuid = userUuid;
+    commit;
+end;
+/
+
+create or replace procedure removeSupervisor(userUUID in varchar2)
+is
+begin
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 1;
+    commit;
+end;
+/
+
+create or replace procedure removeBenefitsCoordinator(userUUID in varchar2)
+is
+begin
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 2;
+    commit;
+end;
+/
+
+create or replace procedure removeAdmin(userUUID in varchar2)
+is
+begin
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 3;
+    commit;
+end;
+/
+
+create or replace procedure removeDepartmentHead(userUUID in varchar2)
+is
+begin
+    delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = 4;
     commit;
 end;
 /
