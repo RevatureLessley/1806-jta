@@ -158,6 +158,7 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 		try {
 			CallableStatement callableStatement = connection.prepareCall("{call removeBenefitsCoordinator(?)}");
 			callableStatement.setString(1, user.getUuid());
+			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
 			callableStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -175,6 +176,94 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 			callableStatement.setString(1, user.getUuid());
 			callableStatement.execute();
 			return true;
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isUserASupervisor(User user) {
+		java.sql.Connection connection = this.getConnection();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("{call isUserAsupervisor(?,?)}");
+			callableStatement.setString(1, user.getUuid());
+			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
+			callableStatement.execute();
+			String result = (String) callableStatement.getObject(2);
+			
+			if (result.equals("YES")) {
+				return true;
+			} else {
+				return false;
+			}
+					
+		} catch (SQLException sqle) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isUserABenefitsCoordinator(User user) {
+		java.sql.Connection connection = this.getConnection();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("{call isUserABenefitsCoordinator(?,?)}");
+			callableStatement.setString(1, user.getUuid());
+			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
+			callableStatement.execute();
+			String result = (String) callableStatement.getObject(2);
+			
+			if (result.equals("YES")) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isUserADepartmentHead(User user) {
+		java.sql.Connection connection  = this.getConnection();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("{call isUserADepartmentHead(?,?)}");
+			callableStatement.setString(1, user.getUuid());
+			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
+			callableStatement.execute();
+			String result = (String) callableStatement.getObject(2);
+			
+			if (result.equals("YES")) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isUserAnAdmin(User user) {
+		java.sql.Connection connection = this.getConnection();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("{call isUserAnAdmin(?,?)}");
+			callableStatement.setString(1, user.getUuid());
+			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
+			callableStatement.execute();
+			String result = (String) callableStatement.getObject(2);
+			
+			if (result.equals("YES")) {
+				return true;
+			} else {
+				return false;
+			}
+			
 		} catch (SQLException e) {
 			return false;
 		}
