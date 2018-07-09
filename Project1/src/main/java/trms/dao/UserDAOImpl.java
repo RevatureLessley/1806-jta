@@ -164,6 +164,36 @@ public class UserDAOImpl extends Connection implements UserDAO {
 		return null;
 	}
 	
+
+	@Override
+	public User getUserByUUID(String uuid) {
+		try {
+			User user = null;
+			java.sql.Connection connection = this.getConnection();
+			CallableStatement callableStatement = connection.prepareCall("{call selectUserByUUID(?,?)}");
+			callableStatement.setString(1, uuid);
+			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+			callableStatement.executeQuery();
+			ResultSet rs = (ResultSet) callableStatement.getObject(2);
+		
+
+			while (rs.next()) {
+					user.setUuid(rs.getString("uuid"));
+					user.setUsername(rs.getString("username"));
+					user.setFirstName(rs.getString("first_name"));
+					user.setLastName(rs.getString("last_name"));
+					user.setLoginPassword(rs.getString("login_password"));
+					user.setEmail(rs.getString("email"));
+			}
+			
+			return user;
+		} catch (SQLException sqle) {
+			
+		}
+		return null;
+	}
+
+	
 	public static void main(String[] args) {
 		try {
 			// TODO: before test
@@ -186,5 +216,4 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			e.printStackTrace();
 		}
 	}
-
 }

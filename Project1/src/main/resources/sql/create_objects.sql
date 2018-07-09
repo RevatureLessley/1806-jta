@@ -42,6 +42,8 @@ values (null, 'Supervisor');
 insert into project_1_role
 values (null, 'Benefits Coordinator');
 insert into project_1_role
+values (null, 'Deparment Head');
+insert into project_1_role
 values (null, 'Admin');
 
 create table project_1_role_relationship (
@@ -60,18 +62,34 @@ create table project_1_direct_supervisor (
 );
 /
 
+
+create or replace procedure selectAllRoles (returnCursor out sys_refcursor)
+as
+begin
+    open returnCursor for select * from PROJECT_1_ROLE_RELATIONSHIP;
+end;
+/
+
 create or replace procedure selectAllUsers (returnCursor out sys_refcursor)
 as
 begin
     open returnCursor for select * from project_1_user;
 end;
 /
-call selectUserByUsername('user');
+
 create or replace procedure selectUserByUsername (userHandle in varchar2,
                                                    returnCursor out sys_refcursor)
 is
 begin
     open returnCursor for select * from project_1_user where username=userHandle;
+end;
+/
+
+create or replace procedure selectUserByUUID (userUUID in varchar2,
+                                              returnCursor out sys_refcursor)
+is
+begin
+    open returnCursor for select * from project_1_user where uuid=userUUID;
 end;
 /
 
@@ -107,6 +125,38 @@ begin
     insert into project_1_user (uuid, username, login_password, first_name, last_name, email, phone_number)
     values(userUuid, userHandle, loginPassword, firstName, lastName, userEmail, phoneNumber);
     commit;
+end;
+/
+ 
+create or replace procedure insertSupervisor(uuid in varchar2)
+is
+begin
+    insert into project_1_role_relationship
+    values (uuid, 1);
+end;
+/
+
+create or replace procedure insertBenefitsCoordinator(uuid in varchar2)
+is
+begin
+    insert into project_1_role_relationship
+    values (uuid, 2);
+end;
+/
+
+create or replace procedure insertAdmin(uuid in varchar2)
+is
+begin
+    insert into project_1_role_relationship
+    values (uuid, 3);
+end;
+/
+
+create or replace procedure insertDepartmentHead(uuid in varchar2)
+is
+begin
+    insert into project_1_role_relationship
+    values (uuid, 4);
 end;
 /
 
