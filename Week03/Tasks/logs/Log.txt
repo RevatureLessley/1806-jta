@@ -1,0 +1,2 @@
+2018-07-09 22:08:50 DEBUG root:19 - Project0_PartII/RevatureDatabase/DatabaseConnection.java: Entered connect().
+2018-07-09 22:08:51 DEBUG root:26 - Project0_PartII/RevatureDatabase/DatabaseConnection.java: Exiting connect().

@@ -27,6 +27,7 @@ DROP SEQUENCE app_typ_seq;
 DROP SEQUENCE dep_seq;
 DROP SEQUENCE emp_seq;
 DROP SEQUENCE eve_seq;
+DROP SEQUENCE eve_att_seq;
 DROP SEQUENCE eve_typ_seq;
 DROP SEQUENCE gra_for_seq;
 DROP SEQUENCE rei_seq;
@@ -43,11 +44,15 @@ CREATE TABLE Approval (
 
 CREATE TABLE Approval_Additional_Info (
     app_addinf_id NUMBER PRIMARY KEY,
+    app_addinf_approval NUMBER,
+    app_addinf_name VARCHAR2(4000),
     app_addinf_file BLOB
 );
 
 CREATE TABLE Approval_Attachment (
     app_att_id NUMBER PRIMARY KEY,
+    app_att_approval NUMBER,
+    app_att_name VARCHAR2(4000),
     att_att_file BLOB
 );
 
@@ -89,7 +94,9 @@ CREATE TABLE Event (
 
 CREATE TABLE Event_Attachment (
     eve_att_id NUMBER PRIMARY KEY,
-    eve_att_file BLOB
+    eve_att_event NUMBER,
+    eve_att_name VARCHAR2(4000),
+    eve_att_file BLOB DEFAULT EMPTY_BLOB()
 );
 
 CREATE TABLE Event_Type (
@@ -144,13 +151,13 @@ DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Approval_Additional_Info   
 ADD CONSTRAINT fk_app_addinf 
-FOREIGN KEY (app_addinf_id) 
+FOREIGN KEY (app_addinf_approval) 
 REFERENCES Approval(app_id)
 DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Approval_Attachment    
 ADD CONSTRAINT fk_app_att 
-FOREIGN KEY (app_att_id) 
+FOREIGN KEY (app_att_approval) 
 REFERENCES Approval(app_id)
 DEFERRABLE INITIALLY DEFERRED;
 
@@ -180,7 +187,7 @@ DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Event_Attachment    
 ADD CONSTRAINT fk_eve_att 
-FOREIGN KEY (eve_att_id) 
+FOREIGN KEY (eve_att_event) 
 REFERENCES Event(eve_id)
 DEFERRABLE INITIALLY DEFERRED;
 
@@ -305,6 +312,22 @@ BEGIN
     IF :new.eve_id IS NULL THEN
         SELECT eve_seq.NEXTVAL 
         INTO :new.eve_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE eve_att_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER eve_att_tri
+BEFORE INSERT ON Event_Attachment
+FOR EACH ROW
+BEGIN
+    IF :new.eve_att_id IS NULL THEN
+        SELECT eve_att_seq.NEXTVAL 
+        INTO :new.eve_att_id FROM dual;
     END IF;
 END;
 /
@@ -496,15 +519,31 @@ BEGIN
                          emp_lastname, emp_department, emp_supervisor,
                          emp_isBenco)
     VALUES(username, pas, firstname, lastname, depID, supID, isBenCo);
+    COMMIT;
 END;
 /
 
---CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science',
---                    NULL, 'N');
---CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
---                    'swilery', 'N');
+CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science',
+                    NULL, 'N');
+CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
+                    'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
 --                    'bobbertb', 'Y');
+
+CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, filename IN VARCHAR2)
+IS
+    loc BFILE;
+    fil BLOB;
+BEGIN
+    INSERT INTO Event_Attachment (eve_att_event, eve_att_name)
+    VALUES (event, filename)
+    RETURN eve_att_file INTO fil;
+    loc := BFILENAME('FROMFS', filename);
+    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+    DBMS_LOB.FILECLOSE(loc);
+END;
+/
 
 CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2, 
                                         cos IN NUMBER, 
@@ -582,14 +621,18 @@ BEGIN
     INTO reiID
     FROM dual;
     insertApproval(passingCutoff, reiID);
+    COMMIT;
 END;
 /
 
---CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
---                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
---                         INTERVAL '70' DAY, 0.7, 'Revature training', 'i dunno y');
+CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
+                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
+                         INTERVAL '70' DAY, 0.7, 'Revature training', 'i dunno y');
 --CALL insertReimbursement('swilery', 'TECHNICAL_TRAINING', 20000,
 --                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
 --                         NULL, 'Revature training', 'i dunno y');
+CALL insertEventAttachment(1, '10369913_267485166779577_5573839803579672783_n.jpg');
+CALL insertEventAttachment(1, 'Interview Prep Handbook.doc');
+CALL insertEventAttachment(1, 'Journey to the West Vocabulary.odt');
 
 COMMIT;
