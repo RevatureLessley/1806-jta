@@ -78,8 +78,8 @@ CREATE TABLE Approval (
     rform_id number(6),
     is_app number(1),
     app_lvl number(1),
-    approver number(6),
-    requester number(6),
+    approver_id number(6),
+    requester_id number(6),
     
     CONSTRAINT fk_rform_id FOREIGN KEY (rform_id) REFERENCES RForm(rform_id),
     CONSTRAINT fk_approver FOREIGN KEY (approver) REFERENCES Employee(emp_id),
@@ -270,7 +270,7 @@ CREATE OR REPLACE PROCEDURE insertNewApproval(rformid IN number,
                                             req IN number)
 IS
 BEGIN
-    INSERT INTO Approval(rform_id,is_app,app_lvl,approver,requester)
+    INSERT INTO Approval(rform_id,is_app,app_lvl,approver_id,requester_id)
     VALUES(rformid,isapp,applvl,appr,req);
     commit;
 END;
