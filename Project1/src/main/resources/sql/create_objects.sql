@@ -62,6 +62,48 @@ create table project_1_direct_supervisor (
 );
 /
 
+create table project_1_available_reimbursement (
+    employee_uuid varchar2(36) primary key,
+    amount_available number(5)
+);
+/
+
+create table project_1_reimbursement_form (
+    form_uuid varchar2(36) primary key,
+    employee_uuid varchar2(36),
+    form_creation_date date,
+    status varchar2(15),
+    direct_supervisor_uuid varchar2(32),
+    department_head_uuid varchar2(32),
+    benco_decision varchar2(15),
+    supervisor_decision varchar2(15),
+    supervisor_decision_date varchar2(15),
+    supervisor_comments varchar2(300),
+    department_head_decision varchar2(15),
+    department_head_decision_date varchar2(15),
+    form_closed_date date,
+    present_to_management_required varchar(3),
+    completed_with_satisfaction varchar2(3),
+    constraint fk_employee_form foreign key (employee_uuid) references project_1_user (uuid)
+);
+/
+
+create table project_1_grade (
+    is_presentation varchar2(3),
+    employee_uuid varchar2(36),
+    form_uuid varchar2(36),
+    grade varchar2(4),
+    file_data blob
+);
+/
+
+create table project_1_attachment (
+    employee_uuid varchar2(36),
+    form_uuid varchar2(36),
+    attachment_data blob
+);
+/
+
 create or replace procedure selectAllRoles (returnCursor out sys_refcursor)
 as
 begin

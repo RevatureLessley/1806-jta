@@ -162,8 +162,7 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			sqle.printStackTrace();
 		}
 		return null;
-	}
-	
+	}	
 
 	@Override
 	public User getUserByUUID(String uuid) {
