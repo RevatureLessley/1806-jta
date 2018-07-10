@@ -46,14 +46,14 @@ CREATE TABLE Approval_Additional_Info (
     app_addinf_id NUMBER PRIMARY KEY,
     app_addinf_approval NUMBER,
     app_addinf_name VARCHAR2(4000),
-    app_addinf_file BLOB
+    app_addinf_file BLOB DEFAULT EMPTY_BLOB()
 );
 
 CREATE TABLE Approval_Attachment (
     app_att_id NUMBER PRIMARY KEY,
     app_att_approval NUMBER,
     app_att_name VARCHAR2(4000),
-    att_att_file BLOB
+    app_att_file BLOB DEFAULT EMPTY_BLOB()
 );
 
 CREATE TABLE Approval_Type (
@@ -530,7 +530,40 @@ CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
 --                    'bobbertb', 'Y');
 
-CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, filename IN VARCHAR2)
+CREATE OR REPLACE PROCEDURE insertApprovalAdditionalInfo(info IN NUMBER, 
+                                                         filename IN VARCHAR2)
+IS
+    loc BFILE;
+    fil BLOB;
+BEGIN
+    INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name)
+    VALUES (info, filename)
+    RETURN app_addinf_file INTO fil;
+    loc := BFILENAME('FROMFS', filename);
+    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+    DBMS_LOB.FILECLOSE(loc);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertApprovalAttachment(approval IN NUMBER,
+                                                     filename IN VARCHAR2)
+IS
+    loc BFILE;
+    fil BLOB;
+BEGIN
+    INSERT INTO Approval_Attachment (app_att_approval, app_att_name)
+    VALUES (approval, filename)
+    RETURN app_att_file INTO fil;
+    loc := BFILENAME('FROMFS', filename);
+    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+    DBMS_LOB.FILECLOSE(loc);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, 
+                                                  filename IN VARCHAR2)
 IS
     loc BFILE;
     fil BLOB;
@@ -627,12 +660,14 @@ END;
 
 CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
                          TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
-                         INTERVAL '70' DAY, 0.7, 'Revature training', 'i dunno y');
+                         INTERVAL '70' DAY, 0.7, 'Revature training', 
+                         'i dunno y');
 --CALL insertReimbursement('swilery', 'TECHNICAL_TRAINING', 20000,
 --                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
 --                         NULL, 'Revature training', 'i dunno y');
-CALL insertEventAttachment(1, '10369913_267485166779577_5573839803579672783_n.jpg');
-CALL insertEventAttachment(1, 'Interview Prep Handbook.doc');
-CALL insertEventAttachment(1, 'Journey to the West Vocabulary.odt');
+CALL insertEventAttachment(1, 
+    '10369913_267485166779577_5573839803579672783_n.jpg');
+CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');
+CALL insertApprovalAdditionalInfo(1, 'Journey to the West Vocabulary.odt');
 
 COMMIT;
