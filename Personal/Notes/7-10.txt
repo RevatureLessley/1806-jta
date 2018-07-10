@@ -1,0 +1,27 @@
+JavaScript
+----------
+-interpreted runtime language
+-supported in most browsers by default.
+-originally called mocha -> livescript -> JavaScript for marketing
+-built in 10 days and shipped with netscape
+
+clear() clears the console.
+only three datatypes: string, number, boolean, function, object, undefined
+1/0 and 1/-0 is infinity.
+Errors: ReferenceError
+null is an object but is not typeof nor instanceof Object.
+undefined means a variable without a value. 
+undefined == null <- true. === compares values.
+undefined === null <- false. === compares values and datatypes.
+JavaScript does type coercion.
+false == "false" <- false.
+Boolean logic works like in C.
+"bobbert" * 3 is NaN, which is typeof number.
+\ is the escape character.
+[] denotes arrays. {} denotes objects.
+x = []; x.push(value). Arrays does not have typing. Indexes could be anything, including Infinity, NaN, null.
+console.log() is standard output.
+x.pop() gets the last index that is a Number.
+x.unshift() gets the first index that is a Number.
+x.splice(Number i, Number j, Object o) insertas o at i, destroying j following elements.
+x.sort() sorts indexes like strings. x.sort(Function) sorts by Function.
