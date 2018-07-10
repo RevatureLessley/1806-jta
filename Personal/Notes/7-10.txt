@@ -8,7 +8,6 @@ JavaScript
 clear() clears the console.
 only three datatypes: string, number, boolean, function, object, undefined
 1/0 and 1/-0 is infinity.
-Errors: ReferenceError
 null is an object but is not typeof nor instanceof Object.
 undefined means a variable without a value. 
 undefined == null <- true. === compares values.
@@ -25,3 +24,43 @@ x.pop() gets the last index that is a Number.
 x.unshift() gets the first index that is a Number.
 x.splice(Number i, Number j, Object o) insertas o at i, destroying j following elements.
 x.sort() sorts indexes like strings. x.sort(Function) sorts by Function.
+JavaScript objects are key-value pairs.
+obj.field and obj[field] accesses a field of an object.
+
+JavaScript is built on ECMAscript. We are currently on version ES8.
+JavaScript variables have global, function, lexical scopes.
+If you don't use var for variable declarations then it defaults to global. Using var can keep variables in function scope.
+ES6 introduced const and let, which makes constants and lexical scoping.
+Lexical scoping uses curly braces. consts are automatically lexical scope.
+
+var x = 5;
+function foo() {
+	var y = 10;
+	for(var i = 0: i < y; i++) {
+		var z = 5;
+	}
+	console.log(x + y + z);		//prints 20
+}
+
+let x = 5;
+function foo() {
+	let y = 10;
+	for(let i = 0: i < y; i++) {
+		let z = 5;
+	}
+	console.log(x + y + z);		//ReferenceError
+}
+
+JavaScript does variable hosting which hosts all declarations to the top of their scope.
+
+JavaScript cannot save files or interact with servers.
+
+6 Errors
+--------
+ReferenceError
+SyntaxError
+EvalError - deprecated
+URIError
+RangeError
+TypeError
+
