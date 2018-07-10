@@ -275,5 +275,28 @@ BEGIN
     commit;
 END;
 /
+DROP TABLE testtable CASCADE CONSTRAINTS;
+CREATE TABLE testtable(
+    test_id number(6) PRIMARY KEY,
+    blobData BLOB NOT NULL
+);
+
+--Create new approval id
+DROP SEQUENCE blob_seq;
+CREATE SEQUENCE blob_seq
+    START WITH 100
+    INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER blob_seq_trigger
+BEFORE INSERT ON testtable
+FOR EACH ROW 
+BEGIN 
+    IF :new.test_id IS NULL THEN
+        SELECT blob_seq.NEXTVAL INTO :new.test_id FROM dual;
+    END IF;
+END;
+/
+
 commit;
 
