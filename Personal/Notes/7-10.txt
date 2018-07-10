@@ -64,3 +64,14 @@ URIError
 RangeError
 TypeError
 
+Self-invoking function: var foo = (function definition)(); <- var foo = <function definition>; foo = foo();
+
+Invoking new on a function creates a constructor.
+
+JavaScript follows prototypal inheritance. Every object inherits from Prototype.
+
+object.prototype accesses the prototype which acts like a static variable.
+
+Callback functions 
+-take function definitions as parameters
+-functions can then be executed within a parent function after an asynchronous event
