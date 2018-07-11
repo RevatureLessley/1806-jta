@@ -9,7 +9,7 @@ DROP TABLE Approval CASCADE CONSTRAINTS;
 --Tables
 CREATE TABLE EmployeeType (
     emp_type_id number(6) PRIMARY KEY,
-    emp_type varchar(100) NOT NULL
+    emp_type varchar2(100) NOT NULL
 );
 
 CREATE TABLE Department (
@@ -64,6 +64,7 @@ CREATE TABLE RForm (
     event_id number(6) NOT NULL,
     prop_reim number(6,2), --value from event is used, this is proposed value
     justification varchar2(500),
+    formkey varchar2(100),
     --event related attatchment blobs id
     time_missed number(6), --hours
     form_closed number(1), --binary, edited by supervisor or benco emp
@@ -273,28 +274,6 @@ BEGIN
     INSERT INTO Approval(rform_id,is_app,app_lvl,approver_id,requester_id)
     VALUES(rformid,isapp,applvl,appr,req);
     commit;
-END;
-/
-DROP TABLE testtable CASCADE CONSTRAINTS;
-CREATE TABLE testtable(
-    test_id number(6) PRIMARY KEY,
-    blobData BLOB NOT NULL
-);
-
---Create new approval id
-DROP SEQUENCE blob_seq;
-CREATE SEQUENCE blob_seq
-    START WITH 100
-    INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER blob_seq_trigger
-BEFORE INSERT ON testtable
-FOR EACH ROW 
-BEGIN 
-    IF :new.test_id IS NULL THEN
-        SELECT blob_seq.NEXTVAL INTO :new.test_id FROM dual;
-    END IF;
 END;
 /
 

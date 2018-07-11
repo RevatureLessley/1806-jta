@@ -63,8 +63,6 @@ public class UploadServlet extends HttpServlet {
 				InputStream is = item.getInputStream();
 				s3client.putObject(new PutObjectRequest(bucketname, item.getName(),is,new ObjectMetadata())
 										.withCannedAcl(CannedAccessControlList.PublicRead));
-//				item.write(new File("/Users/auhwang/Documents/Revature/Repo/Week03/Tasks/testfileupload/" +
-//								item.getName()));
 				is.close();
 				String home = System.getProperty("user.home");
 				String directory = home+"/Downloads/";
