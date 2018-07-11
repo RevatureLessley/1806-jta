@@ -35,7 +35,7 @@ DROP SEQUENCE rei_seq;
 CREATE TABLE Approval (
     app_id NUMBER PRIMARY KEY,
     app_typ_id NUMBER,
-    app_gra_for_id NUMBER,
+--    app_gra_for_id NUMBER,
     app_rei_id NUMBER,
     app_isApproved CHAR(1) DEFAULT 'U'
         CHECK (app_isApproved IN ('N', 'Y', 'U')),
@@ -115,7 +115,8 @@ CREATE TABLE Grading_Format (
     gra_for_id NUMBER PRIMARY KEY,
     gra_for_confirmed CHAR(1) DEFAULT 'U'
         CHECK (gra_for_confirmed IN ('N', 'Y', 'U')),
-    gra_for_proof BLOB,
+    gra_for_filename VARCHAR2(4000),
+    gra_for_file BLOB DEFAULT EMPTY_BLOB(),
     gra_for_passing_cutoff NUMBER DEFAULT NULL
 );
 
@@ -143,11 +144,11 @@ FOREIGN KEY (app_typ_id)
 REFERENCES Approval_Type(app_typ_id)
 DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE Approval   
-ADD CONSTRAINT fk_app_gra_for 
-FOREIGN KEY (app_gra_for_id) 
-REFERENCES Grading_Format(gra_for_id)
-DEFERRABLE INITIALLY DEFERRED;
+--ALTER TABLE Approval   
+--ADD CONSTRAINT fk_app_gra_for 
+--FOREIGN KEY (app_gra_for_id) 
+--REFERENCES Grading_Format(gra_for_id)
+--DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Approval_Additional_Info   
 ADD CONSTRAINT fk_app_addinf 
@@ -191,6 +192,12 @@ FOREIGN KEY (eve_att_event)
 REFERENCES Event(eve_id)
 DEFERRABLE INITIALLY DEFERRED;
 
+ALTER TABLE Grading_Format    
+ADD CONSTRAINT fk_gra_for_rei 
+FOREIGN KEY (gra_for_id) 
+REFERENCES Reimbursement(rei_id)
+DEFERRABLE INITIALLY DEFERRED;
+
 ALTER TABLE Reimbursement    
 ADD CONSTRAINT fk_rei_emp 
 FOREIGN KEY (rei_emp_id) 
@@ -201,6 +208,12 @@ ALTER TABLE Reimbursement
 ADD CONSTRAINT fk_rei_eve 
 FOREIGN KEY (rei_id) 
 REFERENCES Event(eve_id)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Reimbursement    
+ADD CONSTRAINT fk_rei_gra_for 
+FOREIGN KEY (rei_id) 
+REFERENCES Grading_Format(gra_for_id)
 DEFERRABLE INITIALLY DEFERRED;
 
 CREATE SEQUENCE app_seq
@@ -578,6 +591,23 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE updateGradingFormatProof(graforID IN NUMBER, 
+                                                     filename IN VARCHAR2)
+IS
+    loc BFILE;
+    fil BLOB;
+BEGIN
+    UPDATE GRADING_FORMAT
+    SET gra_for_filename = filename
+    WHERE gra_for_id = graforID
+    RETURN gra_for_file INTO fil;
+    loc := BFILENAME('FROMFS', filename);
+    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+    DBMS_LOB.FILECLOSE(loc);
+END;
+/
+
 CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2, 
                                         cos IN NUMBER, 
                                         dat IN VARCHAR2,
@@ -594,33 +624,31 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE insertGradingFormat(passingCutoff IN NUMBER, 
-                                                graforID OUT NUMBER)
+CREATE OR REPLACE PROCEDURE insertGradingFormat(passingCutoff IN NUMBER)
 IS
 BEGIN
     INSERT INTO Grading_Format(gra_for_passing_cutoff)
     VALUES(passingCutoff);
-    SELECT gra_for_seq.CURRVAL 
-    INTO graforID 
-    FROM dual;
+--    SELECT gra_for_seq.CURRVAL 
+--    INTO graforID 
+--    FROM dual;
 END;
 /
 
-CREATE OR REPLACE PROCEDURE insertApproval(passingCutoff IN NUMBER, 
-                                           reiID IN NUMBER)
+CREATE OR REPLACE PROCEDURE insertApproval(reiID IN NUMBER)
 IS
     approvals NUMBER;
     counter NUMBER;
-    graforID NUMBER;
+--    graforID NUMBER;
 BEGIN
     SELECT COUNT(*) 
     INTO approvals 
     FROM Approval_Type;
-    insertGradingFormat(passingCutoff, graforID);
+--    insertGradingFormat(passingCutoff, graforID);
     
     FOR counter IN 1..approvals LOOP
-        INSERT INTO Approval(app_typ_id, app_gra_for_id, app_rei_id)
-        VALUES(counter, graforID, reiID);
+        INSERT INTO Approval(app_typ_id, app_rei_id)
+        VALUES(counter, reiID);
     END LOOP;
 END;
 /
@@ -650,10 +678,11 @@ BEGIN
     VALUES(empID, justification);
     
     insertEvent(typ, cos, dat, loc, work_missed, des);
+    insertGradingFormat(passingCutoff);
     SELECT rei_seq.CURRVAL
     INTO reiID
     FROM dual;
-    insertApproval(passingCutoff, reiID);
+    insertApproval(reiID);
     COMMIT;
 END;
 /
@@ -669,5 +698,6 @@ CALL insertEventAttachment(1,
     '10369913_267485166779577_5573839803579672783_n.jpg');
 CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');
 CALL insertApprovalAdditionalInfo(1, 'Journey to the West Vocabulary.odt');
+CALL updateGradingFormatProof(1, 'What does this poem in Journey to the West mean.pdf');
 
 COMMIT;
