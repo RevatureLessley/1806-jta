@@ -18,3 +18,20 @@ FizzBuzz
 -input for min/max numbers.
 -proper error handling.
 -able to reset results.
+
+AJAX -Asynchronous JavaScript and XML
+     -web browser technology, indepedent of web service technology
+     -no wait times, user can continue actions while AJAX works in the background.
+     -XMLHttpRequest communicates with the server API endpoint.
+	--States:
+		---0 Request created but not configured.
+		---1 Requst properly configured and .open() is called.
+		---2 Request sent to server and .send() is called.
+		---3 Request received and processed but no response.
+		---4 Reponse received, lifecycle completed.
+
+JSON -JavaScript Opject Notation
+     -stores data
+     -favorite among developers because we can navigate data like a JavaScript object. Instead of using DOM manipulation, we use dot or bracket notation.
+
+ 
