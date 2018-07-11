@@ -9,9 +9,17 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<param-name>contextVar</param-name>
+  	<param-value>This var is accessible from everywhere</param-value>
+  </context-param>
   <servlet>
     <servlet-name>HelloWorld</servlet-name>
     <servlet-class>com.revature.servlets.HelloWorld</servlet-class>
+  	<init-param>
+  		<param-name>helloVar</param-name>
+  		<param-value>Hello, I am a parameter</param-value>
+  	</init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloWorld</servlet-name>
