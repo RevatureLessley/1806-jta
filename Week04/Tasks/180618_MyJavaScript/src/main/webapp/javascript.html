@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Welcome To Ryanture</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
+<script src="./resources/js/main.js">	
+</script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="./index.html">HOME</a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="./javascript.html">JAVASCRIPT</a></li>
+		</ul>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="rsection" onmouseover="changeSection()" id="magicSection">
+			<h1>WELCOME TO JAVASCRIPT</h1>
+			<h3>PRINTING TO THE PAGE</h3>
+			<p id="para1" onclick="document.getElementById('para1').innerHTML += 'EXTRA TEXT<br>'">
+				NO ONE IS GONNA SEE THIS TEXT
+			</p>
+			<hr>
+			<button onclick="writeToPage()">WRITE</button>
+			<hr>
+			<button onclick="window.alert('never use this for debugging')">ALERT</button>
+			<hr>
+			<button onclick="console.log('stuff')">CONSOLE.LOG</button>
+			<hr>
+			<button onclick="console.log('you have written ' + prompt('write something') )">prompt</button>
+			
+			<script>
+				document.getElementById("para1").innerHTML = "<b>ALTERED TEXT</b>";
+				document.write("<h1>this is safe</h1>");
+			</script>
+		</div>
+		<div class="rsection">
+			<h3>DYNAMIC TABLES</h3>
+			<ul style="list-style-type:none">
+				<li>
+					NPC NAME
+				</li>
+				<li>
+					<input type="text" id="NPCName">
+				</li>
+				<li>
+					NPC CLASS
+				</li>
+				<li>
+					<input type="text" id="NPCClass">
+				</li>
+				<li>
+					<button onclick="addNPC()">ADDNPC</button>
+				</li>
+			</ul>
+			<hr>
+			<table border="2px" id="theTable">
+				<tr>
+					<th>
+						NPC ID
+					</th>
+					<th>
+						NPC NAME
+					</th>
+					<th>
+						NPC CLASS
+					</th>
+				</tr>
+			</table>
+		</div>
+		<div class="rsection">
+			<h1>BUBBLING AND CAPTURING</h1>
+			<div style="padding:50px; background-color:red" id="1">
+				<div style="padding:50px; background-color:blue" id="2">
+					<div style="padding:50px; background-color:yellow; color:black" id="3">
+						<h3>hello</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

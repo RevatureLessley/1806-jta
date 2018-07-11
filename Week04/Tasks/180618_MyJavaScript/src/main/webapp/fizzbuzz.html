@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Logans FizzBuzz</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
+<script src="./resources/js/fizzbuzzjs.js">	
+</script>
+
+</head>
+<body style="background-color:white">
+	<div class="container-fluid">
+		<h1 style="color:black">Fizz Buzz</h1>
+		<div class="rsection">
+			<h3>values</h3>
+			<p id="para1"></p>
+			<ul style="list-style-type:none">
+				<li>
+					Min
+				</li>
+				<li>
+					<input type="text" id="MinValue">
+				</li>
+				<li>
+					Max
+				</li>
+				<li>
+					<input type="text" id="MaxValue">
+				</li>
+				<li>
+					<button onclick="doFizzBuzz()">DoFizzBuzz</button>
+				</li>
+				<li>
+					<button onclick="resetTable()">ResetTable</button>
+				</li>
+			</ul>
+			<hr>
+			<table border="2px" id="theTable">
+				<tr>
+					<th>
+						Number
+					</th>
+					<th>
+						Word
+					</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
