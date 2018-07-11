@@ -4,3 +4,17 @@ window.alert interrupts automated processes.
 document.getElementById("").value grabs input text.
 document.createElement('td') creates <td></td>
 docment.createElement('').appendChild() nests a new tag.
+
+addEventListener() accepts the event, a callback function, and useCapture. useCapture is false by default.
+Bubbling goes from innermost to outermost elements. Capturing goes from outermost to innermost elements.
+
+FizzBuzz
+--------
+-print numbers from x to y.
+-every number divisible by 3 prints fizz.
+-every number divisible by 5 prints buzz.
+-every number divisible by 3 and 5 prints fizzbuzz
+-results display in html.
+-input for min/max numbers.
+-proper error handling.
+-able to reset results.
