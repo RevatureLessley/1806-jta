@@ -13,19 +13,17 @@ import com.revature.util.Connections;
 
 public class EmployeeDao 
 {
-	public Boolean insertEmployeeViaSp(Employee employee) {
+	public Boolean updateEmployeeAmountLeftViaSp(Employee employee) {
 		CallableStatement stmt = null; 
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertIntoUser(?,?,?)}");
+			stmt = conn.prepareCall("{call update_amount_left(?,?)}");
 			
-			stmt.setInt(1, user.getId());
-			stmt.setString(2, user.getUsername());
-			stmt.setString(3, user.getPassword());
+			stmt.setInt(1, employee.getEmployeeId());
+			stmt.setInt(2, employee.getEmployeeAmountLeft());
 
-			
-			stmt.execute(); //Returns amount rows effected;
+			stmt.execute();
 			return true;
 			
 		}catch(SQLException e){
@@ -36,20 +34,25 @@ public class EmployeeDao
 		return false;
 	}
 	
-	public Employee selectUserByName(String name) {
+	public Employee selectEmployeeByAccountName(String accountName) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM users WHERE username = ?";
+		String sql = "SELECT * FROM employee WHERE emp_accountname = ?";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, name);
+			ps.setString(1, accountName);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				return new User(
+				return new Employee(
 						rs.getInt(1),
 						rs.getString(2),
-						rs.getString(3)
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getInt(7),
+						rs.getInt(8)
 						);
 			}
 			

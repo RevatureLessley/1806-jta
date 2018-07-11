@@ -8,10 +8,11 @@ public class Employee
 	private String employeeFName;
 	private String employeeLName;
 	private String employeeEmail;
+	private Integer employeeAmountLeft;
 	private Integer employeeJobTypeId;
 	
 	public Employee(Integer employeeId, String employeeAccountName, String employeePassword, String employeeFName,
-			String employeeLName, String employeeEmail, Integer employeeJobTypeId) 
+			String employeeLName, String employeeEmail,Integer employeeAmountLeft, Integer employeeJobTypeId) 
 	{
 		super();
 		this.employeeId = employeeId;
@@ -20,6 +21,7 @@ public class Employee
 		this.employeeFName = employeeFName;
 		this.employeeLName = employeeLName;
 		this.employeeEmail = employeeEmail;
+		this.employeeAmountLeft = employeeAmountLeft;
 		this.employeeJobTypeId = employeeJobTypeId;
 	}
 	
@@ -95,6 +97,16 @@ public class Employee
 	public void setEmployeeJobTypeId(Integer employeeJobTypeId) 
 	{
 		this.employeeJobTypeId = employeeJobTypeId;
+	}
+	
+	public Integer getEmployeeAmountLeft() 
+	{
+		return employeeAmountLeft;
+	}
+	
+	public void setEmployeeAmountLeft(Integer employeeAmountLeft) 
+	{
+		this.employeeAmountLeft = employeeAmountLeft;
 	}
 	
 	@Override

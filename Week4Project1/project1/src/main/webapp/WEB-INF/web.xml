@@ -9,4 +9,33 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <filter>
+    <display-name>SecurityFilter</display-name>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>com.revature.filters.SecurityFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <url-pattern>/SecurityFilter</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>/FrontController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
