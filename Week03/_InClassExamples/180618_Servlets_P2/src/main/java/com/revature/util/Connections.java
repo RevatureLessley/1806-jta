@@ -42,7 +42,7 @@ public class Connections {
 //					prop.getProperty("username"),
 //					prop.getProperty("password"));
 			
-			String props[] = System.getenv("DBProps").split(";");
+			String props[] = System.getenv("AWSVARS").split(";");
 			Class.forName(props[0]);
 			conn = DriverManager.getConnection(props[1],props[2],props[3]);
 

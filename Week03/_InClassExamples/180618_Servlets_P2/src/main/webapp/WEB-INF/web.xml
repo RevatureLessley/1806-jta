@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>180618_Servlets_P2</display-name>
+  <!-- 	xml version is the prologue
+		webapp is the root tag for web.xml, can only be one
+  		welcome file for the homepage 
+  		servlet 
+  			-servlet name and servlet class
+  			-load on startup loads when the server starts up
+  		-servlet mapping is connected by the sservlet name and maps to a url
+  		-filter -similar to servlet
+  		-->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -13,7 +22,7 @@
     <description></description>
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
-    <servlet-class>com.revature.serlvets.FrontController</servlet-class>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
@@ -48,4 +57,11 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <!-- 
+  <error-page>
+  	<error-code></error-code>
+  	<location>file</location>
+  	<exception-name></exception-name>
+  </error-page>
+   -->
 </web-app>
