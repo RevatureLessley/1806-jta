@@ -1,0 +1,6 @@
+// JavaScript line comment
+/* JavaScript block comment */
+window.alert interrupts automated processes.
+document.getElementById("").value grabs input text.
+document.createElement('td') creates <td></td>
+docment.createElement('').appendChild() nests a new tag.
