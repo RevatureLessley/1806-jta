@@ -1,8 +1,9 @@
 function fizzBuzz()
 	{
-		var x = 0;
-	
-		while (x < 100) {
+	x = Number(document.getElementById('min').value);
+	y = Number(document.getElementById('max').value);
+		
+	while (x <= y) {
 		  
 		  x = x + 1;
 		  
@@ -21,8 +22,13 @@ function fizzBuzz()
 		    continue;
 		  }
 		  
-		  document.getElementById('para1').innerHTML += x+'<br>';
+		  document.getElementById('para1').innerHTML += x +'<br>';
 		  console.log(x.toString());
 		  
 		}
 	}
+
+function clear()
+{
+	 document.getElementById('para1').innerHTML = ' ';
+}

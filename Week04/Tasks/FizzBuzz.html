@@ -18,9 +18,19 @@
 
 </head>
 <body>
-<p id="para1">Welcome to FizzBuzz!</p>
+<div class="form-group">
+							<label for="x">Start Number:</label> <input type="text"
+								class="form-control" id="min" name="min">
+						</div>
+						<div class="form-group">
+							<label for="y">Finish Number:</label> <input type="text"
+								class="form-control" id="max" name="max">
+						</div>
+
+<p id="para1">Welcome to FizzBuzz!<br></p>
 							
-							<button onclick=fizzBuzz();>ADD NPC</button>
+							<button onclick=fizzBuzz()>Play Fizz Buzz!</button>
+							<button onclick=clear()>Clear Fizz Buzz!</button>
 
 </body>
 </html>
