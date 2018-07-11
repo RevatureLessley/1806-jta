@@ -1,5 +1,6 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -13,11 +14,13 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
@@ -58,11 +61,16 @@ public class UploadServlet extends HttpServlet {
 			List<FileItem> files = sf.parseRequest(request);
 			for(FileItem item: files) {
 				InputStream is = item.getInputStream();
-				s3client.putObject(new PutObjectRequest(bucketname, item.toString(),is,new ObjectMetadata())
+				s3client.putObject(new PutObjectRequest(bucketname, item.getName(),is,new ObjectMetadata())
 										.withCannedAcl(CannedAccessControlList.PublicRead));
 //				item.write(new File("/Users/auhwang/Documents/Revature/Repo/Week03/Tasks/testfileupload/" +
 //								item.getName()));
-				
+				is.close();
+				String home = System.getProperty("user.home");
+				String directory = home+"/Downloads/.";
+				String ext = FilenameUtils.getExtension(item.getName());
+				File dest = new File(directory + ext);
+				s3client.getObject(new GetObjectRequest(bucketname,item.getName()),dest);
 			}
 			System.out.println("file uploaded");
 		} catch (FileUploadException e) {
