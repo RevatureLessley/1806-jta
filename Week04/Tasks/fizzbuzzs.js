@@ -1,6 +1,6 @@
 function fizzBuzz() {
-	let start = document.getElementById("start").value;
-	let end = document.getElementById("end").value;
+	let start = Math.round(document.getElementById("start").value);
+	let end = Math.round(document.getElementById("end").value);
 
 	let row = document.createElement('tr');
 	let rowBreak = document.createElement('tr');
@@ -41,5 +41,5 @@ function fizzBuzz() {
 }
 
 function clear() {
-	document.getElementById('tableDiv').innerHTML = '<table border="5px" id="resultTable"><tr><th>column index : print statement</th></tr></table>';
+	document.getElementById('tableDiv').innerHTML = "";
 }

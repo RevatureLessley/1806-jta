@@ -42,13 +42,11 @@
 						<label for="resultTable">Results</label>
 						<div id="tableDiv">
 							<table border="5px" id="resultTable">
-							<tr>
 								<th>column index : print statement</th>
-							</tr>
-						</table>
+							</table>
 						</div>
-						<button onclick="fizzBuzz()">run!</button>
-						<button onclick="clear()">clear!</button>
+						<button onclick='document.getElementById("resultTable").innerHTML = "<table><th>column index : print statement</th></table";fizzBuzz()'>run!</button>
+						<button onclick='document.getElementById("resultTable").innerHTML = "<table><th>column index : print statement</th></table"'>clear!</button>
 					</div>
 				</div>
 			</div>
