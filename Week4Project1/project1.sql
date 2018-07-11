@@ -54,6 +54,7 @@ CREATE TABLE employee
     fname VARCHAR2(100),
     lname VARCHAR2(100),
     email VARCHAR2(100) UNIQUE,
+    amount_left NUMBER(6),
     job_type_id NUMBER(6),
     CONSTRAINT pk_emp_id PRIMARY KEY (emp_id),
     CONSTRAINT fk_job_type_id FOREIGN KEY (job_type_id) REFERENCES job_type (job_type_id)
@@ -134,7 +135,16 @@ VALUES (6, 'Other', 30, 3);
 --SELECT * FROM reimbursement;
 
 INSERT INTO employee
-VALUES (1, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 5);
+VALUES (1, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 5);
 INSERT INTO reimbursement
-VALUES (1, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 19300, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
-    
+VALUES (1, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
+
+CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
+                                               newAmountLeft IN employee.amount_left%TYPE)
+IS
+BEGIN
+    UPDATE employee SET amount_left = newAmountLeft WHERE emp_id = empId;
+    COMMIT;
+END;
+
+--CALL update_amount_left(1, 900);
