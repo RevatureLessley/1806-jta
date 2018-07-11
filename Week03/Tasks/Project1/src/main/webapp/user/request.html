@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../resources/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Welcome to Project1</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Logo</a>
+
+		<!-- Links -->
+		<ul class="navbar-nav">
+
+			<!-- Dropdown -->
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbardrop"
+				data-toggle="dropdown"> Dropdown link </a>
+				<div class="dropdown-menu"></div></li>
+		</ul>
+	</nav>
+
+	<br>
+
+	<div class="container-fluid justify-content-md-center">
+
+		<form action='EventRequest.do' method="post">
+			<div class="rsection">
+				<h4 style="text-align: center;">Reimbursement Request</h4>
+				<div class="row justify-content-md-center">
+
+					<!-- areas -->
+					<div class="col-5">
+						<div class="form-group">
+							<label for="eventname">Event Name</label> <input
+								class="form-control" type="text" name="eventname"
+								required="required">
+						</div>
+						<div class="form-group">
+							<label>Grade Format</label> <select name="eventType"
+								class="form-control" required="required">
+								<option value="1">University Course</option>
+								<option value="2">Seminar</option>
+								<option value="3">Certification</option>
+								<option value="4">Cert. Preparation Class</option>
+								<option value="5">Technical Training</option>
+								<option value="6">Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Grade Format</label> <select name="gradeFormat"
+								class="form-control" required="required">
+								<option value="1">Standard Scale</option>
+								<option value="2">Pass/Fail</option>
+								<option value="3">Attendance</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="date">Date</label> <input class="form-control"
+								type="date" name="date" required="required">
+						</div>
+						<div class="form-group">
+
+							<label for="cost">Cost</label>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">$</span>
+								</div>
+								<input type="number" class="form-control" name="cost" min="0.01"
+									step="0.01" max="1000">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="location">Location</label> <input
+								class="form-control" type="text" name="username"
+								required="required">
+						</div>
+					</div>
+
+					<!-- text areas -->
+					<div class="col-10">
+						<div class="form-group">
+							<label for="description">Description</label>
+							<textarea name="description" class="form-control" rows="3"
+								id="comment"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="justification">Justification</label>
+							<textarea name="justification" class="form-control" rows="3"
+								id="comment"></textarea>
+						</div>
+
+						<!-- Below text areas -->
+					</div>
+					<div class="col-5">
+						<div class="form-group">
+							<label for="username">Attach Documents</label> <input type="file"
+								multiple="multiple">
+						</div>
+
+					</div>
+					<div class="col-5">
+						<div class="form-group">
+							<label for="username">Pre-Approval Letter</label> <input
+								type="file" accept=".msg">
+						</div>
+						<br>
+
+
+					</div>
+					<br>
+
+					<div class="col-5">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="reset" class="btn btn-secondary">Reset</button>
+
+					</div>
+					<div class="col-5">
+						<div align="right">
+							<button type="reset" class="btn btn-warning" onclick='goBack()'>Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+
+</body>
+</html>
