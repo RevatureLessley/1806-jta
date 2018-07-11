@@ -67,9 +67,8 @@ public class UploadServlet extends HttpServlet {
 //								item.getName()));
 				is.close();
 				String home = System.getProperty("user.home");
-				String directory = home+"/Downloads/.";
-				String ext = FilenameUtils.getExtension(item.getName());
-				File dest = new File(directory + ext);
+				String directory = home+"/Downloads/";
+				File dest = new File(directory + item.getName());
 				s3client.getObject(new GetObjectRequest(bucketname,item.getName()),dest);
 			}
 			System.out.println("file uploaded");
