@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Welcome to Project1</title>
+<script src="./resources/js/fizzbuzz.js"></script>
+</head>
+<body>
+
+
+	<div class="container-fluid">
+		<div class="rsection">
+			<p style="color: red;" id="errorP"></p>
+			<ul style="list-style-type: none">
+				<li>Min</li>
+				<li><input type="number" id="nMin" value="0"></li>
+				<li>Max</li>
+				<li><input type="number" id="nMax" value="0"></li>
+				<br>
+				<li><button onclick="checkFizzBuzz()">do</button>
+					<button onclick="reset()">reset</button></li>
+			</ul>
+
+
+			<hr>
+			<div id="fbSpace" style="margin: 80px"></div>
+		</div>
+
+	</div>
+</body>
+</html>
