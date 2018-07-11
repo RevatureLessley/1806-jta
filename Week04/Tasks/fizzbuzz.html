@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>FizzBuzz Task</h1>
+
+  <ul style="list-style-type:none">
+			<li>Min:</br><input type="text" id="Minimum"></li>
+			<li>Max:</br><input type="text" id="Maximum"></li>
+			<li></br><button onclick="fizzbuzz()">Submit</button></li>
+</ul>
+
+<script>
+function fizzbuzz(){
+var min = parseInt(document.getElementById("Minimum").value,10);
+var max = parseInt(document.getElementById("Maximum").value,10);
+var number = " ";
+var i;
+
+for (i = min; i <= max; i++) {
+    if(i % 3 == 0 && i % 5 ==0)
+    number += "fizzbuzz" + "<br>";
+    else if(i % 3 == 0)
+    number += "fizz" + "<br>";
+    else if(i % 5 == 0)
+    number += "buzz" + "<br>";
+   	else number += i + "<br>";
+}
+document.getElementById("demo").innerHTML = number;
+}
+</script>
+<p id="demo" style="color:green"></p>
+</body>
+</html>
