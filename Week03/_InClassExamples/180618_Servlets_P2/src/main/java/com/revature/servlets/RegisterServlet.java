@@ -34,6 +34,8 @@ public class RegisterServlet extends HttpServlet {
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
 		
+		System.out.println(username);
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		

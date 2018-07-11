@@ -3,6 +3,7 @@ package com.revature.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,16 @@ public class HelloWorld extends HttpServlet{
 	 * it will use the current instance. This effectively makes the servlet a Singleton.
 	 */
 	
-	public void init(){
-		System.out.println(this.getServletName() + ": INIT");
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println(config.getInitParameter("helloVar"));
+		
+		super.init(config);
 	}
+	
+//	public void init(){
+//		System.out.println(this.getServletName() + ": INIT");
+//	}
 	
 	
 	/*
@@ -45,6 +53,8 @@ public class HelloWorld extends HttpServlet{
 		//Using the actual writer
 		out.println(
 				"<h3>HELLO WORLD!</h3>"
+				+ this.getServletConfig().getInitParameter("helloVar") + "<br>"
+				+ this.getServletContext().getInitParameter("contextVar")
 				);
 		
 		out.println(""
