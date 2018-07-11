@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Hello World Web</title>
+<link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- Bring Bootstrap 3 libraries -->
+
+<script
+              src="http://code.jquery.com/jquery-3.3.1.min.js"
+              integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Bring in supplemental javascript for bootstrap -->
+<script src="./fizzbuzz.js"></script>
+</head>
+	<body>
+		<div class="container-fluid" onmouseover="changeSection()" id="magicSection">
+		<h1>Welcome to JavaScript!</h1>
+		<h3>Printing to the page.</h3>
+		<p id="para1" onclick="document.getElementById('para1').innerHTML += Extra Text.<br>">No one is going to see this.</p>
+		<script document.getElementById("para1").innerHTML = "Alter Text.">
+		</script>
+		<form>
+				<h4>Play FizzBuzz</h4>
+				<ul style="list-style-type: none">
+					<li><b>Min</b></li>
+					<!-- The name attribute groups them, limiting selection to one per group -->
+					<li><input type="text" id="min" name="min" required></li>
+					<li><b>Max</b></li>
+					<li><input type="text" id="max" name="max" required></li>
+					<hr>
+				</ul>
+				<button onclick="fizzbuzz()">Play FizzBuzz</button> 
+		</form>
+		<button onclick="window.alert('Never use this for debugging.')">Alert</button>
+		<button onclick="console.log('Stuff')">Console</button>
+		<button onclick="console.log('You have written ' + prompt('Write Something'))">Prompt</button>
+		</div>
+		<div class="container-fluid">
+			<h3>Dynamic Tables</h3>
+			<ul style="list-style-type:none">
+				<li>NPC Name</li>
+				<li><input type="text" id="NPCName"></li>
+				<li>NPC Class</li>
+				<li><input type="text" id="NPCClass"></li>
+				<li><button onclick="addNPC()">Add NPC</button></li>
+			</ul>
+			<hr>
+			<table border="2px" id="theTable">
+				<tr>
+					<th>NPC ID</th>
+					<th>NPC Name</th>
+					<th>NPC Class</th>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<h1>Bubbling and Capturing</h1>
+			<div style="padding:50px; background-color:red" id=1>
+				<div style="padding:50px; background-color:blue" id=2>
+					<div style="padding:50px; background-color:yellow" id=3>
+						<h4>Hi!</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
