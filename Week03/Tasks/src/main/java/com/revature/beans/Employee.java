@@ -13,6 +13,39 @@ public class Employee {
 	private double awarded;
 	private int empType;
 	private int auth;
+	
+	public Employee(int empid, String userN, String passW, String firstN, String lastN, int dirSupId, int depId,
+			double balance, double pending, double awarded, int empType, int auth) {
+		super();
+		this.empid = empid;
+		this.userN = userN;
+		this.passW = passW;
+		this.firstN = firstN;
+		this.lastN = lastN;
+		this.dirSupId = dirSupId;
+		this.depId = depId;
+		this.balance = balance;
+		this.pending = pending;
+		this.awarded = awarded;
+		this.empType = empType;
+		this.auth = auth;
+	}
+	public Employee(int empid, String userN, String passW, String firstN, String lastN,
+			int dirSupId, int depId, int empType) {
+		super();
+		this.empid = empid;
+		this.userN = userN;
+		this.passW = passW;
+		this.firstN = firstN;
+		this.lastN = lastN;
+		this.dirSupId = dirSupId;
+		this.depId = depId;
+		this.balance = 0;
+		this.pending = 0;
+		this.awarded = 0;
+		this.empType = empType;
+		this.auth = 0;
+	}
 	/**
 	 * @return the empid
 	 */

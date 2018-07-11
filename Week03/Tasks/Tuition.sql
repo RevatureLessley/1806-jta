@@ -83,8 +83,8 @@ CREATE TABLE Approval (
     requester_id number(6),
     
     CONSTRAINT fk_rform_id FOREIGN KEY (rform_id) REFERENCES RForm(rform_id),
-    CONSTRAINT fk_approver FOREIGN KEY (approver) REFERENCES Employee(emp_id),
-    CONSTRAINT fk_requester FOREIGN KEY (requester) REFERENCES Employee(emp_id)
+    CONSTRAINT fk_approver FOREIGN KEY (approver_id) REFERENCES Employee(emp_id),
+    CONSTRAINT fk_requester FOREIGN KEY (requester_id) REFERENCES Employee(emp_id)
 );
 
 --Sequencers and their triggers
@@ -217,8 +217,6 @@ CREATE OR REPLACE PROCEDURE insertNewEmployee(userN IN varchar2,
                                             lastN IN varchar2,
                                             dirS IN varchar2,
                                             depId IN number,
-                                            pendingR IN number,
-                                            awardedR IN number,
                                             empT in number)
 IS
 BEGIN

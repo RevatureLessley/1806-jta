@@ -10,6 +10,7 @@ public class RForm {
 	private int EventId;
 	private double propReim;
 	private String justification;
+	private String filekey;
 	private int timeMissed;
 	private int formClosed;
 	private int appLvl;
@@ -157,6 +158,19 @@ public class RForm {
 	public void setAppLvl(int appLvl) {
 		this.appLvl = appLvl;
 	}
+	
+	/**
+	 * @return the filekey
+	 */
+	public String getFilekey() {
+		return filekey;
+	}
+	/**
+	 * @param filekey the filekey to set
+	 */
+	public void setFilekey(String filekey) {
+		this.filekey = filekey;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -164,9 +178,10 @@ public class RForm {
 	public String toString() {
 		return "RForm [rFormId=" + rFormId + ", empid=" + empid + ", rFormDate=" + rFormDate + ", deadlineDate="
 				+ deadlineDate + ", place=" + place + ", info=" + info + ", EventId=" + EventId + ", propReim="
-				+ propReim + ", justification=" + justification + ", timeMissed=" + timeMissed + ", formClosed="
-				+ formClosed + ", appLvl=" + appLvl + "]";
+				+ propReim + ", justification=" + justification + ", filekey=" + filekey + ", timeMissed=" + timeMissed
+				+ ", formClosed=" + formClosed + ", appLvl=" + appLvl + "]";
 	}
+	
 	
 	
 }
