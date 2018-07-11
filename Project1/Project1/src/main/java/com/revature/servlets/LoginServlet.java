@@ -1,48 +1,47 @@
 package com.revature.servlets;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.services.EmployeeService;
 import com.revature.util.HtmlTemplates;
 
-/**
- * Servlet implementation class RegisterServlet
- */
-public class RegisterServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
+
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
-		String password = request.getParameter("password1");
-		String fname = request.getParameter("fname");
-		String lname = request.getParameter("lname");
-		
+		String password = request.getParameter("password");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		//ensures that we are starting fresh with a new session
+		HttpSession session = null;
 		
-		/*if(EmployeeService.createUserWithNpc(username, password, fname, lname)){
-			out.println("<h3 style='color:green'>USER: " + username + " CREATED!</h3>");
+		// Checks to see if the login process was successful
+		if(EmployeeService.employeeLogin(username, password)){
+			session = request.getSession();
+			session.setAttribute("username", username);
+			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
+			rd.forward(request, response);
 		}else{
-			response.sendError(418);
-		}*/
-		HtmlTemplates.goBackButton(out);
-		
+			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
+			HtmlTemplates.goBackButton(out);
+		}
+	
 	}
 
 	/**
@@ -52,4 +51,5 @@ public class RegisterServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
