@@ -1,0 +1,952 @@
+VM2121:1 Console was cleared
+undefined
+function foo(){
+	x = 10;
+}
+undefined
+x
+VM2128:1 Uncaught ReferenceError: x is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2128:1
+foo()
+undefined
+x
+10
+x
+10
+clera x
+VM2173:1 Uncaught SyntaxError: Unexpected identifier
+clear x
+VM2177:1 Uncaught SyntaxError: Unexpected identifier
+var x
+undefined
+clear x
+VM2185:1 Uncaught SyntaxError: Unexpected identifier
+delete x
+true
+x
+VM2193:1 Uncaught ReferenceError: x is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2193:1
+y
+VM2197:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2197:1
+z
+VM2201:1 Uncaught ReferenceError: z is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2201:1
+function stuff(){
+	var y = 10;
+}
+undefined
+y
+VM2211:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2211:1
+stuff(y);
+VM2215:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:7
+(anonymous) @ VM2215:1
+stuff();
+undefined
+y
+VM2220:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2220:1
+function stuff(){
+	var y = 10;
+}
+undefined
+function stuff(){
+	var y = 10;
+	console.log(y);
+}
+undefined
+stuff();
+VM2226:3 10
+undefined
+y
+VM2234:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2234:1
+function stuff(){
+	let y = 10;
+	
+	for(i = 0; i < 10; i++){
+		console.log(y);
+    }
+}
+undefined
+stuff();
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+VM2240:5 10
+undefined
+i
+10
+var i
+undefined
+delete i
+true
+i
+VM2260:1 Uncaught ReferenceError: i is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2260:1
+function stuff(){
+	let y = 10;
+	
+	for(let i = 0; i < 10; i++){
+		let z = 10;
+    }
+	console.log(i);
+}
+undefined
+stuff();
+VM2268:7 Uncaught ReferenceError: i is not defined
+    at stuff (<anonymous>:7:14)
+    at <anonymous>:1:1
+stuff @ VM2268:7
+(anonymous) @ VM2272:1
+function stuff(){
+	const y = 10;
+	
+	for(let i = 0; i < 10; i++){
+		let z = 10;
+    }
+	console.log(i);
+}
+undefined
+stuff();
+VM2276:7 Uncaught ReferenceError: i is not defined
+    at stuff (<anonymous>:7:14)
+    at <anonymous>:1:1
+stuff @ VM2276:7
+(anonymous) @ VM2280:1
+y
+VM2284:1 Uncaught ReferenceError: y is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2284:1
+function stuff(){
+	const y = 10;
+	
+	for(let i = 0; i < 10; i++){
+		const z = 10;
+    }
+	console.log(z);
+}
+undefined
+stuff()
+VM2291:7 Uncaught ReferenceError: z is not defined
+    at stuff (<anonymous>:7:14)
+    at <anonymous>:1:1
+stuff @ VM2291:7
+(anonymous) @ VM2295:1
+function log(x){
+	console.log(x);
+}
+undefined
+log("stuff");
+VM2303:2 stuff
+undefined
+x
+VM2311:1 Uncaught ReferenceError: x is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2311:1
+var x
+undefined
+x
+undefined
+clear x
+VM2323:1 Uncaught SyntaxError: Unexpected identifier
+delete x
+false
+var x = 10;
+undefined
+delete x
+false
+x = 10;
+10
+delete x
+false
+var x
+undefined
+delete x
+false
+a
+VM2355:1 Uncaught ReferenceError: a is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2355:1
+b
+VM2359:1 Uncaught ReferenceError: b is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2359:1
+c
+VM2363:1 Uncaught ReferenceError: c is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2363:1
+console.log(a);
+function bob(){
+
+}
+a = 10;
+VM2373:1 Uncaught ReferenceError: a is not defined
+    at <anonymous>:1:13
+(anonymous) @ VM2373:1
+console.log(a);
+function bob(){
+
+}
+a = 10;
+VM2374:1 Uncaught ReferenceError: a is not defined
+    at <anonymous>:1:13
+(anonymous) @ VM2374:1
+console.log(a);
+function bob(){
+
+}
+var a = 10;
+VM2378:1 undefined
+undefined
+console.log(a);
+function bob(){
+
+}
+var a = 10;
+VM2379:1 10
+undefined
+tim(2,5);
+function tim(a,b){
+	return a + b;
+}
+7
+try{
+	w;
+}catch(container){
+
+}finally{
+
+}
+undefined
+container
+VM2397:1 Uncaught ReferenceError: container is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2397:1
+w
+VM2401:1 Uncaught ReferenceError: w is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2401:1
+container
+VM2405:1 Uncaught ReferenceError: container is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2405:1
+try{
+	w;
+}catch(container){
+	container.message;
+}finally{
+
+}
+"w is not defined"
+function closures1(){
+	var name = "Bobbert";
+	function getName(){
+		console.log(name);
+    }
+	return getName;
+}
+undefined
+closures1.name
+"closures1"
+closuers1().name
+VM2429:1 Uncaught ReferenceError: closuers1 is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2429:1
+closures1().name
+"getName"
+checkthisout = closures1();
+ƒ getName(){
+		console.log(name);
+    }
+checkthisoout
+VM2441:1 Uncaught ReferenceError: checkthisoout is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2441:1
+checkthisout
+ƒ getName(){
+		console.log(name);
+    }
+checkthisout()
+VM2417:4 Bobbert
+undefined
+function makeAdder(x){
+	return function(y){
+		return x + y;
+    };
+}
+undefined
+add5 = makeAdder(5);
+ƒ (y){
+		return x + y;
+    }
+add5(10);
+15
+add5(20);
+25
+var counter = function(){
+	var privateCounter = 0;
+	function changeBy(val){
+		privateCounter += val;
+    }
+	return {
+		increment: function(){
+			changeBy(1);
+        },
+		decrement: function(){
+			changeBy(-1);
+        },
+		value: function(){
+			return privateCounter;
+        }
+    }
+}
+undefined
+counter.increment()
+VM2486:1 Uncaught TypeError: counter.increment is not a function
+    at <anonymous>:1:9
+(anonymous) @ VM2486:1
+counter.increment
+undefined
+counter.changeBy(1);
+VM2498:1 Uncaught TypeError: counter.changeBy is not a function
+    at <anonymous>:1:9
+(anonymous) @ VM2498:1
+var counter = (function(){
+	var privateCounter = 0;
+	function changeBy(val){
+		privateCounter += val;
+    }
+	return {
+		increment: function(){
+			changeBy(1);
+        },
+		decrement: function(){
+			changeBy(-1);
+        },
+		value: function(){
+			return privateCounter;
+        }
+    }
+})();
+undefined
+counter.value
+ƒ (){
+			return privateCounter;
+        }
+counter.value()
+0
+counter.increment()
+undefined
+counter.value();
+1
+counter.changeBy(1);
+VM2529:1 Uncaught TypeError: counter.changeBy is not a function
+    at <anonymous>:1:9
+(anonymous) @ VM2529:1
+var counter = function(){
+	var privateCounter = 0;
+	function changeBy(val){
+		privateCounter += val;
+    }
+	return {
+		increment: function(){
+			changeBy(1);
+        },
+		decrement: function(){
+			changeBy(-1);
+        },
+		value: function(){
+			return privateCounter;
+        }
+    }
+}
+undefined
+counter
+ƒ (){
+	var privateCounter = 0;
+	function changeBy(val){
+		privateCounter += val;
+    }
+	return {
+		increment: function(){
+			changeBy(1);
+        },
+		decrement: function(){
+			changeBy(-1);
+        },…
+test
+VM2538:1 Uncaught ReferenceError: test is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM2538:1
+counter
+ƒ (){
+	var privateCounter = 0;
+	function changeBy(val){
+		privateCounter += val;
+    }
+	return {
+		increment: function(){
+			changeBy(1);
+        },
+		decrement: function(){
+			changeBy(-1);
+        },…
+counter = counter();
+{increment: ƒ, decrement: ƒ, value: ƒ}
+function dude(name, age){
+	this.name = name;
+}
+undefined
+function dude(name, age){
+	this.name = name;
+	this.age = age;
+	return {
+		getName: function(){
+			return this.name;
+        },
+		getAge: function(){
+			return this.age;
+        }
+    }
+}
+undefined
+var bobbert = new dude("bobbert", 72);
+undefined
+bobbert.name
+undefined
+bobbert.age
+undefined
+bobbert.getAge();
+undefined
+function dude(name, age){
+	this.name = name;
+	this.age = age;
+	return {
+		getName: function(){
+			return name;
+        },
+		getAge: function(){
+			return age;
+        }
+    }
+}
+undefined
+bobbert = new dude("bobbert", 72);
+{getName: ƒ, getAge: ƒ}
+bobbert.age
+undefined
+bobbert.getAge();
+72
+function dude(name, age){
+	this.name = name;
+	this.age = age;
+	return {
+		getName: function(){
+			return name;
+        },
+		getAge: function(){
+			return age;
+        },
+		setName: function(name){
+			this.name = name;
+        },
+		setAge: function(age){
+			this.age = age;
+        }
+    }
+}
+undefined
+bobbert = new dude("bobbert", 72);
+{getName: ƒ, getAge: ƒ, setName: ƒ, setAge: ƒ}
+bobbert.getName();
+"bobbert"
+bobbert.setName = "Tombert";
+"Tombert"
+bobbert.getName();
+"bobbert"
+bobbert.setName
+"Tombert"
+bobbert = new dude("bobbert", 72);
+{getName: ƒ, getAge: ƒ, setName: ƒ, setAge: ƒ}
+bobbert.setName("Tombert");
+undefined
+bobbert.getName();
+"bobbert"
+function dude(name, age){
+	this.name = name;
+	this.age = age;
+	return {
+		getName: function(){
+			return name;
+        },
+		getAge: function(){
+			return age;
+        },
+		setName: function(newName){
+			name = newName;
+        },
+		setAge: function(newAge){
+			age = newAge;
+        }
+    }
+}
+undefined
+bobbert = new dude("asd",2);
+{getName: ƒ, getAge: ƒ, setName: ƒ, setAge: ƒ}
+bobbert.setName("Tombert");
+undefined
+bobbert.getName();
+"Tombert"
+super
+VM2681:1 Uncaught SyntaxError: 'super' keyword unexpected here
+super()
+VM2685:1 Uncaught SyntaxError: 'super' keyword unexpected here
+super Object
+VM2689:1 Uncaught SyntaxError: 'super' keyword unexpected here
+Object super dude
+VM2693:1 Uncaught SyntaxError: Unexpected token super
+console.log(super);
+VM2699:1 Uncaught SyntaxError: 'super' keyword unexpected here
+console.log(super());
+VM2702:1 Uncaught SyntaxError: 'super' keyword unexpected here
+bobbert
+{getName: ƒ, getAge: ƒ, setName: ƒ, setAge: ƒ}
+typeof bobbert
+"object"
+bobbert instanceof dude
+false
+bobbert instanceog Object
+VM2718:1 Uncaught SyntaxError: Unexpected identifier
+bobbert instanceof Object
+true
+function person(){
+	this.name = "Bob",
+	this.occupation = "Professional Bob"
+}
+undefined
+bob = new person();
+person {name: "Bob", occupation: "Professional Bob"}
+bob instanceof person
+true
+bob instanceof Object
+true
+tim = new person();
+person {name: "Bob", occupation: "Professional Bob"}
+mike = new person();
+person {name: "Bob", occupation: "Professional Bob"}
+tim.name = "tim";
+"tim"
+mike.name = "mike;
+VM2764:1 Uncaught SyntaxError: Invalid or unexpected token
+mike.name = "mike";
+"mike"
+mike instanceof person
+true
+person.prototype
+{constructor: ƒ}
+person.prototype.constructor
+ƒ person(){
+	this.name = "Bob",
+	this.occupation = "Professional Bob"
+}
+person.prototype.name
+undefined
+person.prototype.constructor.name
+"person"
+person.prototype.name
+undefined
+person.prototype.constructor.age
+undefined
+person.prototype.name = "ed";
+"ed"
+bob.name
+"Bob"
+person.prototype.test
+undefined
+bob.test
+undefined
+person.prototype.constructor.test
+undefined
+bob.test
+undefined
+person.prototype.constructor.test = "test";
+"test"
+bob.test
+undefined
+person.constructor.pro
+undefined
+person.constructor.prototype.name
+""
+person.constructor.prototype.test = "test"
+"test"
+bob.test
+undefined
+bob
+person {name: "Bob", occupation: "Professional Bob"}
+person.prototype.test
+undefined
+person.prototype.test = "test"
+"test"
+bob.test
+"test"
+tim.test
+"test"
+mike.test
+"test"
+bob.constructor.prototype.test2 = "test2"
+"test2"
+bob.test2
+"test2"
+tim.test2
+"test2"
+person.constructor.prototype.test3 = "test3"
+"test3"
+tim.test3
+undefined
+jeff = new person();
+person {name: "Bob", occupation: "Professional Bob"}
+jeff.test3
+undefined
+person.constructor
+ƒ Function() { [native code] }
+test = new person.constructor();
+ƒ anonymous(
+) {
+
+}
+test.test3
+"test3"
+bob
+person {name: "Bob", occupation: "Professional Bob"}
+bob.name
+"Bob"
+person.prototype.name
+"ed"
+bob.name = person.prototype.name
+"ed"
+bob.name
+"ed"
+person.prototype.name = "thomas";
+"thomas"
+bob.name
+"ed"
+function person(){
+	var name;
+	var age;
+}
+undefined
+bob = new person();
+person {}
+tim = new person();
+person {}
+tim.name = "tim";
+"tim"
+bob.name
+undefined
+tim.name
+"tim"
+person.prototype.name="ed";
+"ed"
+bob.name
+"ed"
+tim.name
+"tim"
+person.prototype.name="bobbert";
+"bobbert"
+bob.name
+"bobbert"
+bob.constructor
+ƒ person(){
+	var name;
+	var age;
+}
+nathan = new bob.constructor()
+person {}
+nathan.name
+"bobbert"
+setTimeout
+ƒ setTimeout() { [native code] }
+setTimeout(function(){ console.log("SURPRISE!")},5000);
+68
+VM3122:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+69
+VM3123:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+70
+VM3125:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+71
+VM3127:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+72
+VM3129:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+73
+VM3131:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+74
+setTimeout(function(){ console.log("SURPRISE!")},500);
+75
+VM3133:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+76
+setTimeout(function(){ console.log("SURPRISE!")},500);
+77
+VM3135:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+78
+VM3137:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},5000);
+79
+VM3139:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+80
+VM3141:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+81
+setTimeout(function(){ console.log("SURPRISE!")},500);
+82
+setTimeout(function(){ console.log("SURPRISE!")},500);
+83
+setTimeout(function(){ console.log("SURPRISE!")},500);
+84
+VM3145:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+85
+VM3147:1 SURPRISE!
+VM3147:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+86
+VM3151:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+87
+VM3153:1 SURPRISE!
+setTimeout(function(){ console.log("SURPRISE!")},500);
+88
+VM3155:1 SURPRISE!
+VM3155:1 SURPRISE!
+VM3155:1 SURPRISE!
+VM3155:1 SURPRISE!
+VM3155:1 SURPRISE!
+function foo(){
+	console.log("foo1");
+	return function(){
+		console.log("foo2");
+		return function(){
+			console.log("foo3");
+			return function(){
+				console.log("foo4");
+				return function(){
+					console.log("foo5");
+					return function(){
+						console.log("foo6");
+    				}
+    			}
+    		}
+	    }
+    }
+}
+undefined
+foo()
+VM3175:2 foo1
+ƒ (){
+		console.log("foo2");
+		return function(){
+			console.log("foo3");
+			return function(){
+				console.log("foo4");
+				return function(){
+					console.log("foo5");
+					return function(){
+						c…
+foo()()
+VM3175:2 foo1
+VM3175:4 foo2
+ƒ (){
+			console.log("foo3");
+			return function(){
+				console.log("foo4");
+				return function(){
+					console.log("foo5");
+					return function(){
+						console.log("foo6");
+    				}
+    			}
+    	…
+foo()()()()()()
+VM3175:2 foo1
+VM3175:4 foo2
+VM3175:6 foo3
+VM3175:8 foo4
+VM3175:10 foo5
+VM3175:12 foo6
+undefined
+sum(3)
+VM3191:1 Uncaught ReferenceError: sum is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM3191:1
+function sum(a,b){
+	if(!b){
+		return a;
+    }
+	return a + b;
+}
+undefined
+Whitespace
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Whitespace
+VM3204:1 Uncaught ReferenceError: Whitespace is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM3204:1
+clear sum
+VM3210:1 Uncaught SyntaxError: Unexpected identifier
+delete sum
+false
+var sum = 10
+undefined
+delete sum
+false
+sum(2,5);
+VM3226:1 Uncaught TypeError: sum is not a function
+    at <anonymous>:1:1
+(anonymous) @ VM3226:1
+sum(2)(5);
+VM3229:1 Uncaught TypeError: sum is not a function
+    at <anonymous>:1:1
+(anonymous) @ VM3229:1
+function sum(a,b){
+	return a + b;
+}
+undefined
+sum(2,5);
+7
+sum(2)(5)
+VM3243:1 Uncaught TypeError: sum(...) is not a function
+    at <anonymous>:1:7
+(anonymous) @ VM3243:1
+function sum(a,b){
+	if(b){
+		return a + b;
+    }
+	return function(c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+}
+undefined
+sum(2,5);
+7
+sum(2)(5);
+7
+sum(2)(0);
+2
+sum(2,0);
+ƒ (c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+function sum(a,b){
+	if(isNaN(b)){
+		return a + b;
+    }
+	return function(c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+}
+undefined
+sum(2,0)
+ƒ (c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+function sum(a,b){
+	if(a&b){
+		return a + b;
+    }
+	return function(c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+}
+undefined
+sum(2,0)
+ƒ (c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+function sum(a,b){
+	if(a|b){
+		return a + b;
+    }
+	return function(c){
+		if(c){
+			return a + c;
+        }
+		return a;
+    }
+}
+undefined
+sum(2,0);
+2
+sum(0,2);
+2
+sum("bob",2);
+"bob2"
+sum(2, "bob");
+"2bob"
