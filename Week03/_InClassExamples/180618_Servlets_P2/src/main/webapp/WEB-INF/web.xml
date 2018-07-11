@@ -13,7 +13,8 @@
     <description></description>
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
-    <servlet-class>com.revature.serlvets.FrontController</servlet-class>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
