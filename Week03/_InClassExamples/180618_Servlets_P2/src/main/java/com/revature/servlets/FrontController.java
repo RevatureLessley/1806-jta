@@ -14,6 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		System.out.println("FRONT CONTROLLER STARTED");
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
