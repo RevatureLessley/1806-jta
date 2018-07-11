@@ -5,26 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Tuition Reimbursement Management System</title>
-
-<!-- CSS - Custom fonts -->
-<link href="resources/libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-<!-- <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
-
-<!-- CSS - jQuery DataTables -->
-<link href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-
-<!-- CSS - Bootstrap -->
-<link rel="stylesheet" type="text/css" href="resources/libraries/css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="resources/libraries/css/freelancer.css"/>
-<link rel="stylesheet" type="text/css" href="resources/libraries/css/half-slider.css"/>
-
-<!-- CSS - Custom -->
-<link rel="stylesheet" type="text/css" href="resources/styles/custom.css"/>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>Tuition Reimbursement Management System</title>
 </head>
 <body id="page-top" class="index">
 
@@ -64,15 +47,21 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="Manage">Manage Profile</a></li>
-                          <li class="divider"></li>
-                          <% if (request.isUserInRole("Admin")) { %>
-                          <li><a href="#">Modify User Accounts</a></li>
-                          <% } %>
+                          <c:choose>
+                              <c:when test="${empty username}">
+                              	<li ><a href="login.jsp">Login</a></li>
+                              	<li><a href="register.jsp">Register Account</a></li>
+                              </c:when>
+                              <c:otherwise>
+	                          <li><a href="Manage">Manage Profile</a></li>
+	                          <li class="divider"></li>
+	                          <% if (request.isUserInRole("Admin")) { %>
+	                          <li><a href="#">Modify User Accounts</a></li>
+	                          <% } %>
+                          	  </c:otherwise>
+                          </c:choose>
                         </ul>
-                    </li>
-
-                                       
+                    </li>           
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

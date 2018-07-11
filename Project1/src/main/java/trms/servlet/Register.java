@@ -56,15 +56,19 @@ public class Register extends HttpServlet {
 		Boolean creationSuccess = userDAO.registerUser(newUser);
 		
 		if (creationSuccess) {
-			RequestDispatcher rs = request.getRequestDispatcher("index.html");
+			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 			rs.forward(request, response);
 		} else {
 			out.println("An error occurred while creating the user account.");
-			RequestDispatcher rs = request.getRequestDispatcher("login.html");
+			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 			rs.include(request, response);
 		}
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 }

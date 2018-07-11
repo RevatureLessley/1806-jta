@@ -33,19 +33,28 @@ public class Login extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String email = request.getParameter("email");
+		String signin = request.getParameter("signin");
 		String password = request.getParameter("password");
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.userLoginWithEmail(email, password);
+		User user = null;
+		if (signin.contains("@")) {
+			user = userDAO.userLoginWithEmail(signin, password);
+		} else {
+			user = userDAO.userLoginWithUsername(signin, password);
+		}
 		
 		if (user != null) {
 			RequestDispatcher rs = request.getRequestDispatcher("Welcome");
 			rs.forward(request, response);
 		} else {
 			out.println("Username or password is incorrect.");
-			RequestDispatcher rs = request.getRequestDispatcher("index.html");
+			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			rs.include(request, response);
 		}
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 }

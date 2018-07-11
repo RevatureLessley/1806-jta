@@ -46,6 +46,7 @@ values (null, 'Department Head');
 insert into project_1_role
 values (null, 'Admin');
 
+drop table project_1_role_relationship;
 create table project_1_role_relationship (
     employee_uuid varchar2(36),
     employee_role number(2),
@@ -54,6 +55,7 @@ create table project_1_role_relationship (
 );
 /
 
+drop table project_1_direct_supervisor;
 create table project_1_direct_supervisor (
     employee_uuid varchar2(36),
     direct_supervisor_uuid varchar2(36),
@@ -62,12 +64,14 @@ create table project_1_direct_supervisor (
 );
 /
 
+drop table project_1_available_reimbursement;
 create table project_1_available_reimbursement (
     employee_uuid varchar2(36) primary key,
     amount_available number(5)
 );
 /
 
+drop table project_1_reimbursement_form;
 create table project_1_reimbursement_form (
     form_uuid varchar2(36) primary key,
     employee_uuid varchar2(36),
@@ -88,6 +92,7 @@ create table project_1_reimbursement_form (
 );
 /
 
+drop table project_1_grade;
 create table project_1_grade (
     is_presentation varchar2(3),
     employee_uuid varchar2(36),
@@ -97,12 +102,25 @@ create table project_1_grade (
 );
 /
 
+drop table project_1_attachment;
 create table project_1_attachment (
     employee_uuid varchar2(36),
     form_uuid varchar2(36),
     attachment_data blob
 );
 /
+
+create or replace procedure retreiveUserInformation (employeeUUID in varchar2,
+                                                     returnCursor out sys_refcursor)
+is
+begin
+    open returnCursor for select * from (
+                                         (select * from project_1_user user where uuid = employeeUUID)
+                                          left outer join (select * from (
+                                                           (select * from (
+                                                                           project_1_available_reimbursement where uuid = employeeUUID)
+                                          on project_1_user.uuid = project_1_available_reimbursement.uuid);
+end;
 
 create or replace procedure selectAllRoles (returnCursor out sys_refcursor)
 as

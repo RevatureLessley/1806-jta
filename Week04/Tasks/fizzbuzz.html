@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+		<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<title>FizzBuzz</title>
+		<script src="fizzbuzzs.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-sm bg-light navbar-light">
+			<ul class="navbar=nav">
+				<li class="nav-item active"><a class="nav-link" href="./fizzbuzz.html">FIZZBUZZ</a>
+			</ul>
+		</nav>
+		
+		<div class="container-fluid">
+			<div class="rsection">
+				<div class="row">
+					<div class="col-sm-6">
+						<p>This is Fizz Buzz. Prints all numbers from [start] to [end]</p>
+						<ul>
+							<li>Every number divisible by 3 prints 'Fizz'.</li>
+							<li>Every number divisible by 5 prints 'Buzz'.</li>
+							<li>Every number divisible by 3 and 5 prints 'Fizz Buzz'.</li>
+						</ul>
+					</div>
+					<div class="col-sm-6">
+						<fieldset id="number">
+						<label for="number">Fizz Buzz number range </label>
+						<hr>
+						<label for="start">[start]</label>
+						<input type="number" id="start">
+						<br/>
+						<label for="end">[end]</label>
+						<input type="number" id="end">
+						</fieldset>
+						<hr>
+						<label for="resultTable">Results</label>
+						<div id="tableDiv">
+							<table border="5px" id="resultTable">
+							<tr>
+								<th>column index : print statement</th>
+							</tr>
+						</table>
+						</div>
+						<button onclick="fizzBuzz()">run!</button>
+						<button onclick="clear()">clear!</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

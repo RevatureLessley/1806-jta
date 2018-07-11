@@ -37,11 +37,11 @@ public class FrontController extends HttpServlet {
 
 		switch(action) {
 		case "login":
-			requestDispatcher = request.getRequestDispatcher("login.html");
+			requestDispatcher = request.getRequestDispatcher("login.jsp");
 			requestDispatcher.forward(request, response);
 			break;
 		case "register":
-			requestDispatcher = request.getRequestDispatcher("register.html");
+			requestDispatcher = request.getRequestDispatcher("register.jsp");
 			requestDispatcher.forward(request, response);
 			break;
 		default:
@@ -49,13 +49,4 @@ public class FrontController extends HttpServlet {
 		}
 		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
