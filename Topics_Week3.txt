@@ -1,0 +1,42 @@
+HTML
+•	Forms
+•	Tags
+•	Elements
+•	Attributes
+CSS
+•	Inline, Internal, External
+•	CSS Selectors
+•	Bootstrap
+XML
+	Well-formed
+	valid
+	namespace
+Servlet
+	Config, Context
+	servlet lifecycle
+	servelt inheritance tree
+	deployment descriptor
+	web.sxml logs
+	print writer
+	doGet,doP	ost
+	get form parameters
+	request dispatcher
+	send redirect,
+	front controler
+OLTP 
+	Online Transaction Processing
+	More normalized(3NF+)
+	used for application data
+OLAP
+	Online Analytic processing
+	more denormalized(1-2NF)
+	data warehousing and datamarts
+SQL
+	ddl,dml,dcl,tcl,dql
+	in vs exists
+	OLTP vs OLAP
+	Transactions
+	ACID
+	Joins vs sets
+
+Clusterd index vs unclustered index
