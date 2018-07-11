@@ -1,0 +1,289 @@
+VM977:1 Console was cleared
+undefined
+x = "something"
+"something"
+x
+"something"
+y = 5
+5
+z = true;
+true
+typeof x
+"string"
+typeof y
+"number"
+typeofx z
+VM1005:1 Uncaught SyntaxError: Unexpected identifier
+typeof z
+"boolean"
+x = 6.5
+6.5
+typeof x
+"number"
+x = 'g'
+"g"
+typeof x
+"string"
+x = Boolean
+ƒ Boolean() { [native code] }
+typeof x
+"function"
+Boolean
+ƒ Boolean() { [native code] }
+Boolean()
+false
+x()
+false
+x = 5e9
+5000000000
+5e100
+5e+100
+5e300
+5e+300
+10^10
+0
+5e99999
+Infinity
+1/0
+Infinity
+1/-0
+-Infinity
+z
+true
+a
+VM1079:1 Uncaught ReferenceError: a is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM1079:1
+obj = {};
+{}
+typeof obj
+"object"
+n = null;
+null
+u = undefined
+undefined
+typeof u
+"undefined"
+typeof n
+"object"
+function add(a, b){
+	return
+	a + b;
+}
+undefined
+add(2,4);
+undefined
+obj
+{}
+obj instanceof Object
+true
+n instanceof Object
+false
+n
+null
+typeof n
+"object"
+var x
+undefined
+x
+5000000000
+delete(x)
+true
+x
+VM1149:1 Uncaught ReferenceError: x is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM1149:1
+var x
+undefined
+x
+undefined
+n
+null
+x
+undefined
+x == n
+true
+x === n
+false
+isNull
+VM1181:1 Uncaught ReferenceError: isNull is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM1181:1
+5 == 5
+true
+5 === 5
+true
+5 == "5"
+true
+5 == "five"
+false
+false = "false"
+VM1193:1 Uncaught ReferenceError: Invalid left-hand side in assignment
+false == "false"
+false
+5 + "5" + 5
+"555"
+5 + 5 + "5"
+"105"
+"5" + 5 + 5
+"555"
+function truthyfalsey(x){
+	if(x){
+		return true;
+    }
+return false;
+}
+undefined
+truthyFalsey();
+VM1211:1 Uncaught ReferenceError: truthyFalsey is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM1211:1
+truthyfalsey();
+false
+truthyfalsey(-5);
+true
+truthyfalsey(false);
+false
+truthyfalsey(5);
+true
+truthyfalsey(-5);
+true
+truthyfalsey(0);
+false
+truthyfalsey([]);
+true
+truthyfalsey({});
+true
+truthyfalsey(Infinity);
+true
+truthyfalsey(-Infinity);
+true
+"bobbert" * 3
+NaN
+typeof NaN
+"number"
+truthyfalsey(NaN)
+false
+truthyfalsey("")
+false
+truthyfalsey('')
+false
+'bob said "stuff"'
+"bob said "stuff""
+"bob's stuff"
+"bob's stuff"
+"bob's stuff said \"things\""
+"bob's stuff said "things""
+(5>3) ? true : false
+true
+(5>10) ? true : false
+false
+(5>10) ? "carrots" : Infinity
+Infinity
+(5>3) ? "carrots" : Infinity
+"carrots"
+x = []
+[]
+typeof x
+"object"
+Array
+ƒ Array() { [native code] }
+x instanceof Array
+true
+x instanceof Object
+true
+Array instance Object
+VM1300:1 Uncaught SyntaxError: Unexpected identifier
+Array instanceof Object
+true
+type(Array instanceof Object)
+VM1307:1 Uncaught ReferenceError: type is not defined
+    at <anonymous>:1:1
+(anonymous) @ VM1307:1
+typeof(Array instanceof Object)
+"boolean"
+typeof(typeof(Array instanceof Object))
+"string"
+x
+[]
+x.push("stuff")
+1
+x.push(5);
+2
+x.push(false)
+3
+x.push(null)
+4
+x
+(4) ["stuff", 5, false, null]
+[2]
+[2]
+x[2]
+false
+x[0]
+"stuff"
+x[-1]
+undefined
+x[10]
+undefined
+x[10] = "things"
+"things"
+x[10]
+"things"
+x[Infinity] = 10;
+10
+x[Infinity]
+10
+x[1/0]
+10
+x
+(11) ["stuff", 5, false, null, empty × 6, "things", Infinity: 10]
+x[NaN] = "You doubt javascript?"
+"You doubt javascript?"
+x[Nan]
+VM1437:1 Uncaught ReferenceError: Nan is not defined
+    at <anonymous>:1:3
+(anonymous) @ VM1437:1
+x[NaN]
+"You doubt javascript?"
+x[x] = 10;
+10
+x
+(11) ["stuff", 5, false, null, empty × 6, "things", Infinity: 10, NaN: "You doubt javascript?", stuff,5,false,,,,,,,,things: 10]
+for(i = 0; i < 5; i++){
+	x[i];
+}
+undefined
+for(i = 0; i < 5; i++){
+	console.log(x[i]);
+}
+VM1471:2 stuff
+VM1471:2 5
+VM1471:2 false
+VM1471:2 null
+VM1471:2 undefined
+undefined
+for(container in x){
+	console.log(container);
+}
+VM1479:2 0
+VM1479:2 1
+VM1479:2 2
+VM1479:2 3
+VM1479:2 10
+VM1479:2 Infinity
+VM1479:2 NaN
+VM1479:2 stuff,5,false,,,,,,,,things
+undefined
+for(container in x){
+	console.log(x[container]);
+}
+VM1485:2 stuff
+VM1485:2 5
+VM1485:2 false
+VM1485:2 null
+VM1485:2 things
+VM1485:2 10
+VM1485:2 You doubt javascript?
+VM1485:2 10
+undefined
