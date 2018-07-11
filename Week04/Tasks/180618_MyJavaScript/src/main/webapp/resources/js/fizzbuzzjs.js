@@ -9,11 +9,6 @@ function resetTable()
 	}
 }
 
-function errorValues()
-{
-	first
-}
-
 function doFizzBuzz()
 {
 	firstMinValue = parseInt(document.getElementById("MinValue").value);
