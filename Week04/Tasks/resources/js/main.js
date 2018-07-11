@@ -103,7 +103,7 @@ function fizzBuzz(){
 
 	document.getElementById("results").innerHTML += "<li>Results</li>";
 
-	while(x<y){
+	while(x<=y){
 		if((x%3 === 0) && (x%5 === 0)){
 			document.getElementById("results").innerHTML += "<li>fizzbuzz</li>";
 		}
