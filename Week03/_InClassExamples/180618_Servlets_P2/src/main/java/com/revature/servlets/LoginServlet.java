@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import com.revature.util.HtmlTemplates;
 /**
  * Servlet implementation class LoginServlet
  */
+
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,13 +39,15 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 		
+		System.out.println("AKSDKADJKASJDJ");
 		if(UserService.userLogin(username, password)){
 			session = request.getSession();
 			session.setAttribute("username", username);
-			out.print("<h3 style='color:green'>LOGIN SUCCESS!</h3>");
-			out.print("<button href='user/index.html>OKAY!</button>");
+			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
+			rd.forward(request, response);
 		}else{
-			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE</h3>");
+			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
 			HtmlTemplates.goBackButton(out);
 		}
 	
