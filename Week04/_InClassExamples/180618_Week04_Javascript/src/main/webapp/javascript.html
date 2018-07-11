@@ -31,7 +31,7 @@
 	<!-- MAIN HTML -->
 	<div class="container-fluid">
 		<div class=rsection onmouseover="changeSection()" id="magicSection">
-			<h1>Welcome To JavaScript</h1>
+			<h1 >Welcome To JavaScript</h1>
 			<h3>Printing to the page</h3>
 			<!--  Inline javascript -->
 			<p id="para1" onclick="document.getElementById('para1').innerHTML += 'EXTRA TEXT<br>'">
@@ -78,6 +78,17 @@
 				</tr>
 			</table>
 		</div>
+		<div class=rsection>
+			<h1> Bubbling and Capturing</h1>
+			<div style="padding:50px; background-color:red" id=1>
+				<div style="padding:50px; background-color:blue" id=2>
+					<div style="padding:50px; background-color:yellow; color:black" id=3>
+						<h3>Hiya!</h3>
+					</div>
+				</div>			
+			</div>
+		</div>
+		
 	</div>
 
 </body>

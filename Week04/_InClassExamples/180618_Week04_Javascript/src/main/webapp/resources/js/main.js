@@ -104,4 +104,32 @@ function removeRow(x){
 		console.log(row[thing]);
 	}
 }
-
+//Any functions executed here will be gauranteed that all elements are fully loaded and
+//ready for manipulation.
+window.onload = function(){
+	var d1 = document.getElementById("1");
+	var d2 = document.getElementById("2");
+	var d3 = document.getElementById("3");
+	
+	d1.addEventListener("click", d1click, true);
+	d2.addEventListener("click", d2click, true);
+	d3.addEventListener("click", d3click, true);
+	//AddEventListener passes 3 arguments
+	//the event, the callback function, useCapture <- This is set to false by default
+	
+	function d1click(){
+		window.alert("D1 CLICKED");
+		event.stopPropagation();
+		//Use this line to prevent full capturing
+		//or bubbling.
+		
+	}
+	function d2click(){
+		
+		window.alert("D2 CLICKED");
+	}
+	function d3click(){
+		window.alert("D3 CLICKED");
+	}
+	
+};
