@@ -33,18 +33,22 @@ public class BranchManagerDaoImpl implements BranchManagerDao {
 	}
 
 	public Boolean insertBranchManagerViaSp(BranchManager bm) {
-		CallableStatement stmt = null; 
+CallableStatement stmt = null; 
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertBranchManager(?,?,?,?,?,?)}");
-						
-			stmt.setString(1, bm.getFirstName());
-			stmt.setString(2, bm.getLastName());
-			stmt.setInt(3, bm.getPhone());
-			stmt.setString(4, bm.getEmail());
-			stmt.setString(5, bm.getAddress());
-			stmt.setString(6, bm.getLocation());
+			stmt = conn.prepareCall("{call insertEmployee(?,?,?,?,?,?,?,?,?,?)}");
+			
+			stmt.setString(1, "branchmanager");
+			stmt.setInt(2, bm.getSupVId());
+			stmt.setString(3, bm.getFirstName());
+			stmt.setString(4, bm.getLastName());
+			stmt.setInt(5, bm.getPhone());
+			stmt.setString(6, bm.getEmail());
+			stmt.setString(7, bm.getAddress());
+			stmt.setString(8, bm.getLocation());
+			stmt.setString(9, bm.getUsername());
+			stmt.setString(10, bm.getPassword());
 
 			
 			stmt.execute(); //Returns amount rows effected;

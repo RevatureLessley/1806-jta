@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+	<body>
+		<h1>FizzBuzz</h1>
+		Min: <input type="text" id="min"> <br>
+		Max: <input type="text" id="max"> <br>
+		<button onclick="fizzBuzz()">Run</button>
+		<hr>
+		<p id="content"></p>
+		<script>
+			function fizzBuzz(){
+				document.getElementById("content").innerHTML="";
+				var min = parseInt(document.getElementById("min").value, 10);
+				var max = parseInt(document.getElementById("max").value, 10);
+				var content = document.getElementById("content");
+				
+				if (min < max){
+					for (var i = min; i <= max; i++){
+						if (((i%3)==0) && ((i%5)==0)){
+							content.innerHTML += "FizzBuzz<br>";
+						}
+						else if ((i%5)==0){
+							content.innerHTML += "Buzz<br>";
+						}
+						else if ((i%3)==0){
+							content.innerHTML += "Fizz<br>";
+						}
+						else{
+							content.innerHTML += i+"<br>";
+						}
+					}
+				} else {
+					content.innerHTML = "<h3 style='color:red'>Min must be smaller than Max, try again.</h3>"
+				}
+			}
+	</script>
+	</body>
+</html> 

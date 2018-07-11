@@ -7,15 +7,15 @@ public class BranchManager extends Employee {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BranchManager(int id, int supVId, String firstName, String lastName, int phone, String email,
-			String address, String location) {
-		super(id, supVId, firstName, lastName, phone, email, address, location);
+	public BranchManager(int id, String role, int supVId, String firstName, String lastName, int phone, String email,
+			String address, String location, String username, String password) {
+		super(id, role, supVId, firstName, lastName, phone, email, address, location, username, password);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BranchManager(int supVId, String firstName, String lastName, int phone, String email,
-			String address, String location) {
-		super(supVId, firstName, lastName, phone, email, address, location);
+	public BranchManager(String role, int supVId, String firstName, String lastName, int phone, String email,
+			String address, String location, String username, String password) {
+		super(role, supVId, firstName, lastName, phone, email, address, location, username, password);
 		// TODO Auto-generated constructor stub
 	}
 }

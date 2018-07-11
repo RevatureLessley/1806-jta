@@ -10,5 +10,5 @@ public interface EmployeeDao {
 	public Integer deleteEmployeeById(Integer id);
 	public Integer updateEmployee(Employee emp);
 	public Boolean insertEmployeeViaSp(Employee emp);
-	public Employee selectEmployeeByName(String name);
+	public Employee selectEmployeeByUsername(String name);
 }

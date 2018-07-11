@@ -3,35 +3,44 @@ package com.revature.beans;
 public class Employee {
 	private int id;
 	private int supVId;
+	private String role;
 	private String firstName;
 	private String lastName;
 	private int phone;
 	private String email;
 	private String address;
 	private String location;
+	private String username;
+	private String password;
 	
-	public Employee(int id, int supVId, String firstName, String lastName, int phone, String email, String address,
-			String location) {
+	public Employee(int id, String role, int supVId, String firstName, String lastName, int phone, String email, String address,
+			String location, String username, String password) {
 		super();
 		this.id = id;
 		this.supVId = supVId;
+		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
 		this.location = location;
+		this.username = username;
+		this.password = password;
 	}
-	public Employee(int supVId, String firstName, String lastName, int phone, String email, String address,
-			String location) {
+	public Employee(String role, int supVId, String firstName, String lastName, int phone, String email, String address,
+			String location, String username, String password) {
 		super();
 		this.supVId = supVId;
+		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
 		this.address = address;
 		this.location = location;
+		this.username = username;
+		this.password = password;
 	}
 	
 	public Employee() {
@@ -80,7 +89,6 @@ public class Employee {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
 	public int getSupVId() {
 		return supVId;
 	}
@@ -88,7 +96,25 @@ public class Employee {
 	public void setSupVId(int supVId) {
 		this.supVId = supVId;
 	}
-
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", supVId=" + supVId + ", firstName=" + firstName + ", lastName=" + lastName
