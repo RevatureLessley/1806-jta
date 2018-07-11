@@ -6,11 +6,11 @@ JavaScript
 -built in 10 days and shipped with netscape
 
 clear() clears the console.
-only three datatypes: string, number, boolean, function, object, undefined
-1/0 and 1/-0 is infinity.
+Datatypes: string, number, boolean, function, object, undefined
+1/0 is infinity and 1/-0 is -infinity.
 null is an object but is not typeof nor instanceof Object.
 undefined means a variable without a value. 
-undefined == null <- true. === compares values.
+undefined == null <- true. == compares values.
 undefined === null <- false. === compares values and datatypes.
 JavaScript does type coercion.
 false == "false" <- false.
@@ -51,7 +51,7 @@ function foo() {
 	console.log(x + y + z);		//ReferenceError
 }
 
-JavaScript does variable hosting which hosts all declarations to the top of their scope.
+JavaScript does variable hoisting which hoists all declarations to the top of their scope.
 
 JavaScript cannot save files or interact with servers.
 
