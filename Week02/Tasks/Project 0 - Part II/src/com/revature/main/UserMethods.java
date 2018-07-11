@@ -23,7 +23,7 @@ public class UserMethods {
 	 * Otherwise, it will register the given user.
 	 */
 	public void register() {
-		Bank.logger.info("Beginning of method to register an user.");
+		//Bank.logger.info("Beginning of method to register an user.");
 		System.out.println("Enter your first name:");
 		String fname = Bank.sc.next();
 		System.out.println("Enter your last name:");
@@ -56,7 +56,7 @@ public class UserMethods {
 	 * @param user the user that will be updated
 	 */
 	public void addMoney(User user) {
-		Bank.logger.info("Beginning of function to add money.");
+		//Bank.logger.info("Beginning of function to add money.");
 		Balance balance = null;
 		balance = bDao.selectBalanceByUserId(user.getId());
 		BigDecimal currentBalance = bDao.selectBalanceViaFnc(user.getId());
@@ -85,13 +85,17 @@ public class UserMethods {
 		}
 		System.out.println("How much money do you want to add?:");
 		BigDecimal amount = Bank.sc.nextBigDecimal();
+		if (amount.compareTo(BigDecimal.ZERO)<0) {
+			System.out.println("PLease enter a positive amount.");
+			return;
+		}
 		balance = bDao.selectBalanceByUserId(user.getId());
 		bDao.updateBalanceAmountById(user.getId(), amount.add(balance.getBalance()));
 		bDao.commit();
 		
 		System.out.println("Your current balance is " + bDao.selectBalanceViaFnc(user.getId()));
 		
-		Bank.logger.info("Added money successfully.");
+		//Bank.logger.info("Added money successfully.");
 	}
 	
 	/**
@@ -100,11 +104,15 @@ public class UserMethods {
 	 * @param user
 	 */
 	public void withdrawMoney(User user) {
-		Bank.logger.info("Beginning of function to withdraw money.");
+		//Bank.logger.info("Beginning of function to withdraw money.");
 		BigDecimal currentBalance = bDao.selectBalanceViaFnc(user.getId());
 		System.out.println("Your current balance is " + currentBalance);
 		System.out.println("How much money do you want to withdraw?");
 		BigDecimal amount = Bank.sc.nextBigDecimal();
+		if (amount.compareTo(BigDecimal.ZERO)<0) {
+			System.out.println("PLease enter a positive amount.");
+			return;
+		}
 		if(enoughMoneyToWithdraw(currentBalance, amount)) {
 			currentBalance = currentBalance.subtract(amount);
 			bDao.updateBalanceAmountById(user.getId(), currentBalance);
@@ -126,10 +134,10 @@ public class UserMethods {
 	public boolean enoughMoneyToWithdraw(BigDecimal currentBalance, BigDecimal amount) {
 		
 		if(currentBalance == null || currentBalance.compareTo(amount) < 0) {
-			Bank.logger.info("User has not enough money.");
+			//Bank.logger.info("User has not enough money.");
 			return false;
 		}
-		Bank.logger.info("User has enough money.");
+		//Bank.logger.info("User has enough money.");
 		return true;
 	}
 	
@@ -138,7 +146,7 @@ public class UserMethods {
 	 * @param user current user's data, needed to update its information.
 	 */
 	public void userMenu(User user) {
-		Bank.logger.info("Displaying menu for regular users.");
+		//Bank.logger.info("Displaying menu for regular users.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 if you want to add money to your account, "

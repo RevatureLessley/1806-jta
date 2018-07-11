@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Fizz Buzz</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
+<script src="./script.js"></script>
+
+
+</head>
+<body>
+	<!-- NAVIGATION BAR -->
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="./index.html">HOME</a></li>
+		</ul>
+	</nav>
+
+	<!-- MAIN HTML -->
+	<div class="container-fluid">
+    <input type="number" placeholder="Min. range" id="min" min="1">
+    <input type="number" placeholder="Max. range" id="max" min="1">
+    <button class="btn bg-info" onclick="fizzBuzz()">Print</button>
+    <button class="btn bg-info" onclick="reset()">Reset</button>
+    <p id="textHere"></p>
+  </div>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ public class AdminMethods {
 	 * users that registered recently.
 	 */
 	public void approveUser() {
-		Bank.logger.info("Beginning of approveUser method.");
+		//Bank.logger.info("Beginning of approveUser method.");
 		List<User> users = null;
 		users = ud.selectUsersByState(2);
 		for(User u:users) {
@@ -38,13 +38,13 @@ public class AdminMethods {
 			case 1:
 				ud.updateUserStateById(u.getId(), 1);
 				ud.commit();
-				Bank.logger.info("User has been approved.");
+				//Bank.logger.info("User has been approved.");
 				break;
 
 			case 2:
 				ud.updateUserStateById(u.getId(), 3);
 				ud.commit();
-				Bank.logger.info("User has been rejected.");
+				//Bank.logger.info("User has been rejected.");
 				break;
 				
 			default:
@@ -52,7 +52,7 @@ public class AdminMethods {
 				break;
 			}
 		}
-		Bank.logger.info("End of list of users waiting to be approved.");
+		//Bank.logger.info("End of list of users waiting to be approved.");
 		System.out.println("There are no more users waiting to be approved.");
 	}
 	
@@ -61,11 +61,11 @@ public class AdminMethods {
 	 * @param user current user's data, needed to update its information.
 	 */
 	public void adminMenu() {
-		Bank.logger.info("Displaying administrator menu.");
+		//Bank.logger.info("Displaying administrator menu.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 if you want to approve users, "
-					+ "2 if you want print the existing users, or 3 if you want lo log out.");
+					+ "2 if you want to print the existing users, or 3 if you want lo log out.");
 			choice = Bank.sc.nextInt();
 			switch (choice) {
 			case 1:
@@ -88,12 +88,12 @@ public class AdminMethods {
 	 * Method only available to administrators, it prints all existing users.
 	 */
 	public void printUsers() {
-		Bank.logger.info("Printing users.");
+		//Bank.logger.info("Printing users.");
 		System.out.println("==========");
 		List<User> users = ud.selectAllUsers();
 		for(User u:users) {
 			System.out.println(u + "\n");
 		}
-		Bank.logger.info("End of list of users.");
+		//Bank.logger.info("End of list of users.");
 	}
 }

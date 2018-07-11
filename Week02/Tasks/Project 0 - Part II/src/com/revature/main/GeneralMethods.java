@@ -25,7 +25,7 @@ public class GeneralMethods {
 	 * Displays the initial menu (login, register, quit).
 	 */
 	public void initialMenu() {
-		Bank.logger.info("Displaying initial menu.");
+		//Bank.logger.info("Displaying initial menu.");
 		int choice = 0;
 		do {
 			System.out.println("Enter 1 to login, enter 2 to register, 3 to exit the program.");
@@ -61,7 +61,7 @@ public class GeneralMethods {
 	 * regular users.
 	 */
 	public void login() {
-		Bank.logger.info("Beginning of login method");
+		//Bank.logger.info("Beginning of login method");
 		System.out.println("Enter your email:");
 		String email = Bank.sc.next();
 		System.out.println("Enter your password:");
@@ -78,7 +78,8 @@ public class GeneralMethods {
 					return;
 				}
 				if(u.getState() == 3) {
-					System.out.println("You have been banned by an administrator.");
+					System.out.println("You have been rejected by an administrator. "
+							+ "Please call 111-111-2222 for more information.");
 					return;
 				}
 				else {
@@ -95,7 +96,7 @@ public class GeneralMethods {
 				System.out.println("Wrong email or password.");
 			}
 		}
-		Bank.logger.info("End of login method.");
+		//Bank.logger.info("End of login method.");
 	}
 	
 	/**
@@ -107,10 +108,10 @@ public class GeneralMethods {
 		String pattern = "\\d{10}";
 		String numString = Integer.toString(cardNum);
 	    if (numString.matches(pattern)) {
-	    	Bank.logger.info("Card number is valid.");
+	    	//Bank.logger.info("Card number is valid.");
 			return true;
 		}
-	    Bank.logger.info("Card number is invalid.");
+	    //Bank.logger.info("Card number is invalid.");
 		return false;
 	}
 }
