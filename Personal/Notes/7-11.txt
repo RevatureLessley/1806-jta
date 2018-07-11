@@ -33,5 +33,3 @@ AJAX -Asynchronous JavaScript and XML
 JSON -JavaScript Opject Notation
      -stores data
      -favorite among developers because we can navigate data like a JavaScript object. Instead of using DOM manipulation, we use dot or bracket notation.
-
- 
