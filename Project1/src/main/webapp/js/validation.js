@@ -1,5 +1,4 @@
 function validateRegistration() {
-	document.findElementById("error").remove();
 	
 	let password1 = document.forms['registerForm']['password1'].value;
 	let password2 = document.forms['registerForm']['password2'].value;
@@ -11,5 +10,7 @@ function validateRegistration() {
 		errorDiv.setAttribute("id", "error");
 		errorDive.appendChild(errorText);
 		document.findElementById("passwordMessage").appendChild(errorDiv);
+		
+		return false;
 	}
 }

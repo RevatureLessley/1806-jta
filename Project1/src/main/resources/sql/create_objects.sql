@@ -46,6 +46,25 @@ values (null, 'Department Head');
 insert into project_1_role
 values (null, 'Admin');
 
+drop table project_1_coverage;
+create table project_1_coverage (
+    coverage_area varchar2(40) primary key,
+    coverage_percent decimal(3,2)
+);
+
+insert into project_1_coverage
+values ('Other', 0.30);
+insert into project_1_coverage
+values ('Seminar', 0.60);
+insert into project_1_coverage
+values ('Certification Preparation Classes', 0.75);
+insert into project_1_coverage
+values ('University Courses', 0.80);
+insert into project_1_coverage
+values ('Technical Training', 0.90);
+insert into project_1_coverage
+values ('Certification', 1.00);
+
 drop table project_1_role_relationship;
 create table project_1_role_relationship (
     employee_uuid varchar2(36),

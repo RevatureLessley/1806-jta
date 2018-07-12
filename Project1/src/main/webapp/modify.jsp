@@ -1,6 +1,8 @@
 <jsp:include page="header.jsp" />
+<script src="js/uuidv4.min.js"></script>
+<script src="js/modify.js"></script>
 
-<form method="post" action="NewForm">
+<form method="post">
 	<fieldset>
 		<legend>Employee information</legend>
 		First name:<input type="text" name="firstName" /><br/>
@@ -23,11 +25,16 @@
 	</fieldset>
 	<fieldset>
 		<legend>Attachments</legend>
+		<div id="attachments">
+			<table id="attachmentTable">
+			</table>
+			<button type="button" onclick="addAttachment()">add attachments (e.g. pdf, png, jpeg, txt, doc, msg)</button>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend>Signature</legend>
 	</fieldset>
 </form>
 
-<input type="submit" value="newForm" />
+<input type="submit" value="newForm" action="NewForm" />
 </form>
