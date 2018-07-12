@@ -5,7 +5,6 @@ import java.util.List;
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDaoImpl;
 
-
 public class EmployeeService {
 	public static boolean registerEmployee(
 			int empid,
@@ -26,4 +25,15 @@ public class EmployeeService {
 	if(empDao.insertEmployeeViaSp(employee)) return true;
 	return false;
 }
+	public static boolean employeeLogin(String usern,String passw) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		Employee employee;
+		if((employee = empDao.selectEmployeeByUserN(usern)) == null) {
+			return false;
+		}
+		if(!employee.getPassW().equals(passw)) {
+			return false;
+		}
+		return true;
+	}
 }

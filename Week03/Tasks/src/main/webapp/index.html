@@ -15,11 +15,33 @@
 </head>
 
 <body>
+<div class="container-fluid">
+	<div class=rsection>
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Login</h4>
+				<form action="LoginServlet" method="POST">
+					<div class="form-group">
+						<label for="username">Username:</label> <input type="text"
+							class="form-control" id="username" name="username">
+					</div>
+					<div class="form-group">
+						<label for="password">Password:</label> <input type="password"
+							class="form-control" id="password" name="password">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-primary">Reset</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  Testing File upload
 <h1>asdf</h1>
-<!-- Testing file upload -->
 <form action="upload" method="post" enctype="multipart/form-data">
     <input type="file" name="file" />
     <input type="submit" />
 </form>
+-->
 </body>
 </html>
