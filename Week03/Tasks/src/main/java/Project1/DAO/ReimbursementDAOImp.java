@@ -15,15 +15,15 @@ public class ReimbursementDAOImp implements LogReference {
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
-			statement.setString(1, "ahwang");
-			statement.setString(2, "TECHNICAl_TRAINING");
+			statement.setString(1, "kwang");
+			statement.setString(2, "TECHNICAL_TRAINING");
 			statement.setBigDecimal(3, new BigDecimal(20000));
-			statement.setString(4, "Wang");
-			statement.setString(5, "Dictator");
-			statement.setString(6, "swilery");
-			statement.setString(7, "N");
-			statement.setString(8, "swilery");
-			statement.setString(9, "N");
+			statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			statement.setString(5, "Arlington, TX");
+			statement.setString(6, "7 0:0:0.0");
+			statement.setDouble(7, 0.9);
+			statement.setString(8, "Revature");
+			statement.setString(9, "My lungs!");
 			
 			return statement.execute();
 		}
@@ -41,5 +41,28 @@ public class ReimbursementDAOImp implements LogReference {
 		}
 		
 		return false;
+	}
+	
+	public void temp() {
+		String sqlInsert = "SELECT eve_work_missed FROM EVENT";
+		Statement statement = null;
+		ResultSet rs = null;
+		
+		try(Connection connection = DatabaseConnection.connect()) {
+			statement = connection.createStatement();
+			rs = statement.executeQuery(sqlInsert);
+			
+			while(rs.next()) {
+				System.out.println(rs.getString(1));
+			}
+		}
+
+		catch(SQLException se) {
+			se.printStackTrace();
+		}
+
+		finally {
+			DatabaseConnection.close(statement);
+		}
 	}
 }

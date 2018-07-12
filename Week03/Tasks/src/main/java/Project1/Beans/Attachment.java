@@ -1,16 +1,16 @@
 package Project1.Beans;
 
-import java.sql.Blob;
+import java.io.*;
 
 public class Attachment {
 	private String filename;
-	private Blob file;
+	private InputStream file;
 	
 	/**
 	 * @param filename
 	 * @param file
 	 */
-	public Attachment(String filename, Blob file) {
+	public Attachment(String filename, InputStream file) {
 		this.filename = filename;
 		this.file = file;
 	}
@@ -23,11 +23,11 @@ public class Attachment {
 		this.filename = filename;
 	}
 
-	public Blob getFile() {
+	public InputStream getFile() {
 		return file;
 	}
 
-	public void setFile(Blob file) {
+	public void setFile(InputStream file) {
 		this.file = file;
 	}
 }

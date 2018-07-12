@@ -544,67 +544,72 @@ CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
 --                    'bobbertb', 'Y');
 
 CREATE OR REPLACE PROCEDURE insertApprovalAdditionalInfo(info IN NUMBER, 
-                                                         filename IN VARCHAR2)
+                                                         filename IN VARCHAR2,
+                                                         fil IN BLOB)
 IS
-    loc BFILE;
-    fil BLOB;
+--    loc BFILE;
+--    fil BLOB;
 BEGIN
-    INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name)
-    VALUES (info, filename)
-    RETURN app_addinf_file INTO fil;
-    loc := BFILENAME('FROMFS', filename);
-    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
-    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
-    DBMS_LOB.FILECLOSE(loc);
+    INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name,
+                                         app_addinf_file)
+    VALUES (info, filename, fil);
+--    RETURN app_addinf_file INTO fil;
+--    loc := BFILENAME('FROMFS', filename);
+--    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+--    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+--    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE insertApprovalAttachment(approval IN NUMBER,
-                                                     filename IN VARCHAR2)
+                                                     filename IN VARCHAR2,
+                                                     fil IN BLOB)
 IS
-    loc BFILE;
-    fil BLOB;
+--    loc BFILE;
+--    fil BLOB;
 BEGIN
-    INSERT INTO Approval_Attachment (app_att_approval, app_att_name)
-    VALUES (approval, filename)
-    RETURN app_att_file INTO fil;
-    loc := BFILENAME('FROMFS', filename);
-    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
-    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
-    DBMS_LOB.FILECLOSE(loc);
+    INSERT INTO Approval_Attachment (app_att_approval, app_att_name, app_att_file)
+    VALUES (approval, filename, fil);
+--    RETURN app_att_file INTO fil;
+--    loc := BFILENAME('FROMFS', filename);
+--    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+--    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+--    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, 
-                                                  filename IN VARCHAR2)
+                                                  filename IN VARCHAR2,
+                                                  fil IN BLOB)
 IS
-    loc BFILE;
-    fil BLOB;
+--    loc BFILE;
+--    fil BLOB;
 BEGIN
-    INSERT INTO Event_Attachment (eve_att_event, eve_att_name)
-    VALUES (event, filename)
-    RETURN eve_att_file INTO fil;
-    loc := BFILENAME('FROMFS', filename);
-    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
-    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
-    DBMS_LOB.FILECLOSE(loc);
+    INSERT INTO Event_Attachment (eve_att_event, eve_att_name, eve_att_file)
+    VALUES (event, filename, fil);
+--    RETURN eve_att_file INTO fil;
+--    loc := BFILENAME('FROMFS', filename);
+--    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+--    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+--    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE updateGradingFormatProof(graforID IN NUMBER, 
-                                                     filename IN VARCHAR2)
+                                                     filename IN VARCHAR2,
+                                                     fil IN BLOB)
 IS
-    loc BFILE;
-    fil BLOB;
+--    loc BFILE;
+--    fil BLOB;
 BEGIN
-    UPDATE GRADING_FORMAT
-    SET gra_for_filename = filename
-    WHERE gra_for_id = graforID
-    RETURN gra_for_file INTO fil;
-    loc := BFILENAME('FROMFS', filename);
-    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
-    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
-    DBMS_LOB.FILECLOSE(loc);
+    UPDATE Grading_Format
+    SET gra_for_filename = filename, gra_for_file = fil
+    WHERE gra_for_id = graforID;
+--    RETURN gra_for_file INTO fil;
+--    loc := BFILENAME('FROMFS', filename);
+--    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
+--    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
+--    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
@@ -694,10 +699,10 @@ CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
 --CALL insertReimbursement('swilery', 'TECHNICAL_TRAINING', 20000,
 --                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
 --                         NULL, 'Revature training', 'i dunno y');
-CALL insertEventAttachment(1, 
-    '10369913_267485166779577_5573839803579672783_n.jpg');
-CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');
-CALL insertApprovalAdditionalInfo(1, 'Journey to the West Vocabulary.odt');
-CALL updateGradingFormatProof(1, 'What does this poem in Journey to the West mean.pdf');
+--CALL insertEventAttachment(1, 
+--    '10369913_267485166779577_5573839803579672783_n.jpg');
+--CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');
+--CALL insertApprovalAdditionalInfo(1, 'Journey to the West Vocabulary.odt');
+--CALL updateGradingFormatProof(1, 'What does this poem in Journey to the West mean.pdf');
 
 COMMIT;
