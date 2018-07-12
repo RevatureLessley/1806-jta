@@ -9,3 +9,22 @@ AJAX:
 
 Servlet:
 	request.getParameter("param1");
+
+AngularJS -> Angular2 -> Angular4 -> Angular5 -> Angular6
+-client side model view controller framework
+	-design pattern
+		--view: html
+		--model: data
+		--controller: business logic
+-annotations are called declarators, they provide metadata for bundling/compiling/deploying applications
+
+npm install --save bootstrap <- saves bootstrap locally
+
+Angular Project Structure
+	src <- global config, needs server restart
+		app <- global app config, does not need server restart
+			app_modules
+		styles.css
+		main.ts
+	angular.json
+	styles.css
