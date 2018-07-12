@@ -28,3 +28,21 @@ Angular Project Structure
 		main.ts
 	angular.json
 	styles.css
+
+Angular componenets represents a section of an application. Multiple componenets are brought together into a module to make an appllication. It helps nid a view with a controller.
+
+Any annotated words are declarators that serve to provide metadata for the Angular application. @Component indicates its contents should be used for the entire component bundle.
+
+Selector is needed to inject views. It indicates what the tag name should be for the injection site for this component.
+
+Template URLs point to a specific file to ne used as the front end for the specific component.
+
+Style URLs point to CSS files besides the global CSS to customize each individual component. Use an array for this.
+
+All componenets require a class for identification, allowing the import component to use it for the application. It also provides a section for storing/retreiving data from the frontend and backend of the client side.
+
+ng g c components/interpolation <- generates component at a location
+
+Databinding connects the view to the components. String Interpolation sends data from components to views. 
+
+npm install <- installs node_modules
