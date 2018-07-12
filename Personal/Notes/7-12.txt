@@ -1,0 +1,11 @@
+Use the servlet-url mapping for url when hitting it with AJAX.
+JSON.parse converts a JSON string to object.
+JSON.stringify converts JSON obect to string.
+
+AJAX:
+	XmlHttpRequest.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-force-urlencoded");
+	xhr.send("param1=value1&param2=value2");
+
+Servlet:
+	request.getParameter("param1");
