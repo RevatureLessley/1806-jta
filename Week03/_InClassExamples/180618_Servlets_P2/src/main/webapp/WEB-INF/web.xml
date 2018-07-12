@@ -49,4 +49,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectNpc</display-name>
+    <servlet-name>SelectNpc</servlet-name>
+    <servlet-class>com.revature.servlets.SelectNpc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectNpc</servlet-name>
+    <url-pattern>/SelectNpc</url-pattern>
+  </servlet-mapping>
 </web-app>
