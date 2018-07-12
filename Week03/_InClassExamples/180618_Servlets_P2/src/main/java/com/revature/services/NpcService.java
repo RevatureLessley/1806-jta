@@ -2,6 +2,8 @@ package com.revature.services;
 
 import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.revature.beans.JobClass;
 import com.revature.beans.Npc;
 import com.revature.dao.JobClassDao;
@@ -69,5 +71,19 @@ public class NpcService {
 	public boolean insertNpc(Npc npc){
 		NpcDao nd = new NpcDaoImpl();
 		return nd.insertNpcViaSp(npc);
+	}
+	
+	public String getAllNpcJSON(){
+		List<Npc> npcs = getAllNpcsWithClass();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(npcs);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 }
