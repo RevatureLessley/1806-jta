@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.PersonDaoImpl;
 import util.HtmlTemplates;
 
 /**
@@ -24,10 +25,10 @@ public class loginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+
+		PersonDaoImpl PDI = new PersonDaoImpl();
+		int test = PDI.checkPassword(request.getParameter(name), pWord)
 		
-		
-		
-		String values = "";
 		String pass= "password"; //TODO: Replace with password retrieved via username
 		if(confirmPass(request.getParameter("password1"), pass)) {
 			
