@@ -43,6 +43,27 @@ All componenets require a class for identification, allowing the import componen
 
 ng g c components/interpolation <- generates component at a location
 
-Databinding connects the view to the components. String Interpolation sends data from components to views. 
+Databinding connects the view to the components. String Interpolation transfers data from components to views, which is called model. It uses {{}} Interpolation is like an expression language {{2 + 2}} evaluates to 4.
 
 npm install <- installs node_modules
+
+Property binding also brings data from components to views. It makes the value of some element property equal to a result as defined in the typescript file. It uses []. 
+
+String Interpolation is usedful for evaluating data from the component and displaying on the view. Property binding is useful for taking values from components and applying them as properties to elements.
+
+Event Binding goes from the view to the components. It takes an action from HTML and call a function in a component. It uses ().
+
+Databinding is the exchange of data between the view and the component.
+     
+One-Way vs Two-Way
+-one way: data exchange from view to component or from component to view exclusively.
+	  property []
+	  event ()
+	  interpolation {{}}
+-two way: passing and receiving data  in both direction simultaneously.
+	  {(ngModel)}
+
+View --> Component: Event Binding
+Component --> View: Property Binding, String Interpolation
+View <--> Component: ngModel
+
