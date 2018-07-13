@@ -13,6 +13,9 @@
 <title>Welcome To Ryanture</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 
+<script src="./resources/js/forms.js"></script>
+<script src="./resources/js/ajax.js"></script>
+
 </head>
 <body>
 
@@ -28,12 +31,12 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<h4>REGISTER</h4>
-					<form action="Register.do">
+					<form action="" id="registerForm" onsubmit="return validateRegistration()">
 						<div class="form-group">
 							<label for="username">USERNAME:</label> <input type="text"
 								class="form-control" id="username" name="username">
 						</div>
-						<div class="form-group">
+						<div class="form-group" id="passwordMessage">
 							<label for="password1">Password:</label> <input type="password"
 								class="form-control" id="password1" name="password1">
 						</div>
@@ -59,7 +62,7 @@
 					<form action="LoginServlet" method="POST">
 						<div class="form-group">
 							<label for="username">USERNAME:</label> <input type="text"
-								class="form-control" id="username" name="username">
+								class="form-control" id="username2" name="username">
 						</div>
 						<div class="form-group">
 							<label for="password">Password:</label> <input type="password"
@@ -70,6 +73,16 @@
 					</form>
 				</div>
 			</div>
+		</div>
+		<div class="rsection">
+			<button onclick="getNpcs()">REFRESH</button>
+			<table id="npctable" border=2px;>
+				<tr>
+					<th>NPC ID</th>
+					<th>NPC NAME</th>
+					<th>NPC CLASS</th>
+				</tr>
+			</table>
 		</div>
 	</div>
 
