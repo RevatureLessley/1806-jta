@@ -2,15 +2,13 @@
 -----------  DROP/CREATE Tables and Constraints ---------------------------------------------
 ---------------------------------------------------------------------------------------------
 DROP TABLE employee;
-
 DROP TABLE reimbursement;
-
 DROP TABLE event cascade constraints;
-
 DROP TABLE event_type;
 
 CREATE TABLE employee (
     emp_id NUMBER(7) UNIQUE,
+    emp_password varchar2(30),
     fname VARCHAR2(20) NOT NULL,
     lname VARCHAR2(20) NOT NULL,
     address VARCHAR2(100) NOT NULL,
@@ -73,18 +71,19 @@ CREATE SEQUENCE event_seq START WITH 100100 INCREMENT BY 1;
 ---------------------------------------------------------------------------------------------
 
 CREATE OR REPLACE TRIGGER reimbursement_seq_trigger BEFORE
-    INSERT ON reimbursement_request
+    INSERT ON reimbursement
     FOR EACH ROW
 BEGIN
     IF
         :new.reimbursement_id IS NULL
     THEN
-        SELECT reimbursement_id_sequence.NEXTVAL
+        SELECT reimbursement_seq.NEXTVAL
         INTO :new.reimbursement_id
         FROM dual;
 
     END IF;
 END;
+/
 
 CREATE OR REPLACE TRIGGER event_seq_trigger BEFORE
     INSERT ON event
@@ -93,7 +92,7 @@ BEGIN
     IF
         :new.event_id IS NULL
     THEN
-        SELECT event_id_sequence.NEXTVAL
+        SELECT event_seq.NEXTVAL
         INTO :new.event_id
         FROM dual;
 
@@ -149,6 +148,7 @@ INSERT INTO event_type VALUES (
 
 INSERT INTO employee VALUES (
     1000,
+    'password',
     'chris',
     'parsons',
     '1405 trip St',
@@ -157,6 +157,7 @@ INSERT INTO employee VALUES (
 
 INSERT INTO employee VALUES (
     1032,
+    'password',
     'Meghan',
     'Trihard',
     '4356 segwauy Dr',
@@ -165,6 +166,7 @@ INSERT INTO employee VALUES (
 
 INSERT INTO employee VALUES (
     1024,
+    'password',
     'John',
     'Slickerson',
     '93028 Baker St',
@@ -173,6 +175,7 @@ INSERT INTO employee VALUES (
 
 INSERT INTO employee VALUES (
     10192,
+    'password',
     'Topher',
     'Harlott',
     '1405 Harrower St',
@@ -181,6 +184,7 @@ INSERT INTO employee VALUES (
 
 INSERT INTO employee VALUES (
     10001,
+    'password',
     'Blip',
     'Blop',
     '0000 Bloop St',

@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		int username = Integer.parseInt( request.getParameter("userid"));
 		String password = request.getParameter("password");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		if(EmployeeService.employeeLogin(username, password)){
 			session = request.getSession();
 			session.setAttribute("username", username);
-			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("userid"));
 			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
 			rd.forward(request, response);
 		}else{

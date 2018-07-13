@@ -28,6 +28,12 @@
       <artifactId>ojdbc7</artifactId>
       <version>12.1.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+<dependency>
+   <groupId>org.codehaus.jackson</groupId>
+   <artifactId>jackson-mapper-asl</artifactId>
+   <version>1.9.13</version>
+</dependency>
   </dependencies>
   
   

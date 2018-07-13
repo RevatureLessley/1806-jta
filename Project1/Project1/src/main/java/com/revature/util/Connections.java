@@ -19,6 +19,7 @@ public static Connection getConnection() {
 			String props[] = System.getenv("dbprops2").split(";");
 			Class.forName(props[0]);
 			conn = DriverManager.getConnection(props[1],props[2],props[3]);
+			for (String p : props) System.out.println(p);
 		}
 		catch(Exception e)
 		{

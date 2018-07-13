@@ -5,10 +5,8 @@ function fizzBuzz()
 		
 	while (x <= y) {
 		  
-		  x = x + 1;
-		  
 		  if ( x % 3 === 0 && x % 5 === 0 ){
-			document.getElementById('para1').innerHTML += x +'FIZZBUZZ1<br>';
+			document.getElementById('para1').innerHTML += x + 'FIZZBUZZ1<br>';
 		    continue;
 		  }
 		  
@@ -22,13 +20,14 @@ function fizzBuzz()
 		    continue;
 		  }
 		  
-		  document.getElementById('para1').innerHTML += x +'<br>';
-		  console.log(x.toString());
+		  document.getElementById('para1').innerHTML += x + '<br>';
+			console.log(x.toString());
+			x++;
 		  
 		}
 	}
 
 function clear()
 {
-	 document.getElementById('para1').innerHTML = ' ';
+	 document.getElementById('para1').innerHTML = " ";
 }
