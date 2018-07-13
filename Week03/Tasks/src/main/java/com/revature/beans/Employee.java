@@ -8,14 +8,14 @@ public class Employee {
 	private String lastN;
 	private int dirSupId;
 	private int depId;
-	private double balance;
+	private String depName;
 	private double pending;
 	private double awarded;
 	private int empType;
 	private int auth;
 	
 	public Employee(int empid, String userN, String passW, String firstN, String lastN, int dirSupId, int depId,
-			double balance, double pending, double awarded, int empType, int auth) {
+			double pending, double awarded, int empType, int auth) {
 		super();
 		this.empid = empid;
 		this.userN = userN;
@@ -24,11 +24,9 @@ public class Employee {
 		this.lastN = lastN;
 		this.dirSupId = dirSupId;
 		this.depId = depId;
-		this.balance = balance;
 		this.pending = pending;
 		this.awarded = awarded;
 		this.empType = empType;
-		this.auth = auth;
 	}
 	public Employee(int empid, String userN, String passW, String firstN, String lastN,
 			int dirSupId, int depId, int empType) {
@@ -40,11 +38,9 @@ public class Employee {
 		this.lastN = lastN;
 		this.dirSupId = dirSupId;
 		this.depId = depId;
-		this.balance = 0;
 		this.pending = 0;
 		this.awarded = 0;
 		this.empType = empType;
-		this.auth = 0;
 	}
 	/**
 	 * @return the empid
@@ -131,18 +127,6 @@ public class Employee {
 		this.depId = depId;
 	}
 	/**
-	 * @return the balance
-	 */
-	public double getBalance() {
-		return balance;
-	}
-	/**
-	 * @param balance the balance to set
-	 */
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	/**
 	 * @return the pending
 	 */
 	public double getPending() {
@@ -181,14 +165,18 @@ public class Employee {
 	/**
 	 * @return the auth
 	 */
-	public int getAuth() {
-		return auth;
+	
+	/**
+	 * @return the depName
+	 */
+	public String getDepName() {
+		return depName;
 	}
 	/**
-	 * @param auth the auth to set
+	 * @param depName the depName to set
 	 */
-	public void setAuth(int auth) {
-		this.auth = auth;
+	public void setDepName(String depName) {
+		this.depName = depName;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -196,8 +184,8 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [empid=" + empid + ", userN=" + userN + ", passW=" + passW + ", firstN=" + firstN + ", lastN="
-				+ lastN + ", dirSupId=" + dirSupId + ", depId=" + depId + ", balance=" + balance + ", pending="
-				+ pending + ", awarded=" + awarded + ", empType=" + empType + ", auth=" + auth + "]";
+				+ lastN + ", dirSupId=" + dirSupId + ", depId=" + depId + ", pending="
+				+ pending + ", awarded=" + awarded + ", empType=" + empType;
 	}
 	
 }

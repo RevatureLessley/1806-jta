@@ -26,11 +26,9 @@ CREATE TABLE Employee (
     l_name varchar2(100) NOT NULL,
     dir_sup_id number(6),
     dep_id number(6) NOT NULL,
-    bal number(6,2) NOT NULL,
     pending_reim number(6,2) NOT NULL,
     awarded_reim number(6,2) NOT NULL,
     emp_type_id number(6) NOT NULL,
-    auth_lvl number(1) NOT NULL,
     
     CONSTRAINT fk_emp_type_id FOREIGN KEY (emp_type_id) REFERENCES EmployeeType (emp_type_id), 
     CONSTRAINT fk_dep_id FOREIGN KEY (dep_id) REFERENCES Department(dep_id)
@@ -181,20 +179,20 @@ VALUES(4,'Marketing',4);
 
 --Department heads
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-VALUES(0,'executive','executive','Boss','Man',0,0,0,0,3,2);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+VALUES(0,'executive','executive','Boss','Man',0,0,0,3);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-VALUES(1,'benefits','benefits','Bobert','Bobson',1,0,0,0,2,1);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+VALUES(1,'benefits','benefits','Bobert','Bobson',1,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-VALUES(2,'production','production','Tommy','Droptables',2,0,0,0,2,1);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+VALUES(2,'production','production','Tommy','Droptables',2,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-VALUES(3,'finance','finance','Johnny','Tsunami',3,0,0,0,2,1);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+VALUES(3,'finance','finance','Johnny','Tsunami',3,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-VALUES(4,'marketing','marketing','Timmy','Turner',4,0,0,0,2,1);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+VALUES(4,'marketing','marketing','Timmy','Turner',4,0,0,2);
 
 --Event types table
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
@@ -221,8 +219,8 @@ CREATE OR REPLACE PROCEDURE insertNewEmployee(userN IN varchar2,
 IS
 BEGIN
     INSERT INTO Employee (username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,bal,pending_reim,awarded_reim,emp_type_id,auth_lvl)
-    VALUES(userN,userP,firstN,lastN,dirS,depId,0,0,0,empT,0);
+                            dep_id,pending_reim,awarded_reim,emp_type_id)
+    VALUES(userN,userP,firstN,lastN,dirS,depId,0,0,empT);
     commit;
 END;
 /
@@ -274,6 +272,7 @@ BEGIN
     commit;
 END;
 /
+
 
 commit;
 

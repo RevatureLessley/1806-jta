@@ -1,4 +1,4 @@
-package filter;
+package com.revature.filter;
 
 import java.io.IOException;
 

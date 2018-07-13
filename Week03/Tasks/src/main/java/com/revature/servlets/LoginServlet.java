@@ -1,4 +1,4 @@
-package servlets;
+package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.services.DepartmentService;
 import com.revature.services.EmployeeService;
 import com.revature.util.HtmlTemplates;
 
@@ -45,13 +46,14 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 		if(EmployeeService.employeeLogin(username, password)){
+			DepartmentService.getDepartments();
 			session = request.getSession();
 			session.setAttribute("username", username);
+			session.setAttribute("password", password);
 			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("username"));
-			RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
-			out.println("<h3 style='color:green'>Success?</h3>");
-			HtmlTemplates.goBackButton(out);
+
 		}else{
 			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
 			HtmlTemplates.goBackButton(out);

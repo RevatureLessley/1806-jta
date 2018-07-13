@@ -31,7 +31,6 @@ public class SecurityFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse)res;
 		
 		HttpSession session = request.getSession(false);
-		System.out.println("session");
 		if(session == null){
 			response.sendRedirect("../index.html");
 		}else{

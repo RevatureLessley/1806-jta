@@ -1,4 +1,4 @@
-package servlets;
+package com.revature.servlets;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.revature.services.DepartmentService;
 
 /**
  * Servlet implementation class FrontController
@@ -46,10 +48,10 @@ public class FrontController extends HttpServlet {
 		
 		action = action.substring(0, action.length()-3).toLowerCase();//something
 		
-		
 		switch(action){
 		case "login":
-			System.out.println("TBD: Login here");
+			rd = request.getRequestDispatcher("LoginServlet");
+			rd.forward(request, response);
 			break;
 		case "register":
 			rd = request.getRequestDispatcher("RegisterServlet");
@@ -57,6 +59,10 @@ public class FrontController extends HttpServlet {
 			break;
 		case "upload":
 			rd = request.getRequestDispatcher("UploadServlet");
+			rd.forward(request, response);
+			break;
+		case "logout":
+			rd = request.getRequestDispatcher("LogoutServlet");
 			rd.forward(request, response);
 			break;
 		default:

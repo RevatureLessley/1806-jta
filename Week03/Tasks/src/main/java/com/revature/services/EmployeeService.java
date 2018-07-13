@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import java.util.List;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDaoImpl;
@@ -24,7 +24,8 @@ public class EmployeeService {
 	}
 	if(empDao.insertEmployeeViaSp(employee)) return true;
 	return false;
-}
+	}
+	
 	public static boolean employeeLogin(String usern,String passw) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		Employee employee;
@@ -35,5 +36,22 @@ public class EmployeeService {
 			return false;
 		}
 		return true;
+	}
+	
+	public static String getEmpInfoJSON(String usern,String passw){
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		Employee employee;
+		employee = empDao.selectEmployeeByUserN(usern);
+		employee.setDepName(DepartmentService.department.getDepNameMap().get(employee.getDepId()));
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(employee);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 }

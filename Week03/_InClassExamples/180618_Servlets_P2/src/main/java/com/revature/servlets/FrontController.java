@@ -57,7 +57,8 @@ public class FrontController extends HttpServlet {
 		
 		switch(action){
 		case "login":
-			System.out.println("TBD: Login here");
+			rd = request.getRequestDispatcher("LoginServelt");
+			rd.forward(request, response);
 			break;
 		case "register":
 			rd = request.getRequestDispatcher("RegisterServlet");

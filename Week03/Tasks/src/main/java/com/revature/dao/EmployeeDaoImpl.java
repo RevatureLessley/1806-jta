@@ -60,9 +60,8 @@ public class EmployeeDaoImpl {
 						rs.getInt(7),
 						rs.getDouble(8),
 						rs.getDouble(9),
-						rs.getDouble(10),
-						rs.getInt(11),
-						rs.getInt(12)
+						rs.getInt(10),
+						rs.getInt(11)
 						);
 			}
 			
@@ -74,4 +73,5 @@ public class EmployeeDaoImpl {
 		}
 		return null;
 	}
+	
 }
