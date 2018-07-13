@@ -18,3 +18,27 @@ Use private for constructor parameters.
 Any directive used as an attribute of an element is called an Attribute Directive.
 
 Data represents the object of a successful REAT call to the URL.
+
+CORS -Cross Origin Resource Sharing
+     -browsers by default do not like the current IP grabbing data from another IP.
+
+Promises vs Observables
+-promises is a type of object that guarentees to get something back when the user sends data, whether an eror or otherwise. This with callback functions allows synchronous function calls. Promises can only listen to one event at a time. A user cannot cancel the event.
+-observables are promises with more features. They send the data back as a stream. They support any number of events at a time and support cancelling a current event's data stream. Introduced in ES7.
+
+Routing is used by angular to achieve Single Page Application format. We set up tags that takes injections of a separate html dynamically. This lets the user stay on the same page while new content is replaced. The contents gets cached clientside so the server is never hit. The caches usee the browser's bookmarks to allow the use of back/forward buttons.
+
+path contains the URL mapping.
+
+this.http.post("endpoint_url", {key1: "value1", key2: "value2"}).subscribe(PASS => {}, FAIL=> {});
+
+ng g service service/example <- generates new service
+
+Injectable decorator marks a class as may having injectable dependencies elsewhere. Convention and safetly dictates it should be included for all service classes. It also provides an easy way to include it in a module.
+
+The of method returns an observable of a collection of posts. It is like a stream with callback functionality.
+
+Webpack
+-angular bundler
+	--bundler combines all dependencies into a distribuable format
+	--includes components, HTML, CSS, JavaScript, XML
