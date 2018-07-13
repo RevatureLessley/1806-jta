@@ -30,6 +30,7 @@ public class UserService {
 
 		
 		List<Npc> npcs = nd.selectAllNpc();
+		System.out.println(username + "in service");
 		for(Npc n: npcs){
 			if(n.getName().equals(username)){
 				user = new User(n.getId(), username, password);
