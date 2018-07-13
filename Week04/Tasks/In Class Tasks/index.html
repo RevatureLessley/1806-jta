@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Eric Sundberg -->
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>Task</title>
+
+    <script src="./index.js"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="section1">
+            <ul style="list-style-type:none">
+                <li>MIN</li>
+                <li><input type="number" id="min"></li>
+                <li>MAX</li>
+                <li><input type="number" id="max"></li>
+                </br>
+                <li>
+                    <button onclick="captureInput()">FizzBuzz!</button>
+                </li>
+            </ul>
+            <hr>
+            <div id="output">
+            </div>
+        </div>
+    </div>
+
+</body>

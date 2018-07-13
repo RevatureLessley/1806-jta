@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous">
+        </script>
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+        </script>
+        <title>Project 1 Webpage</title>
+        <link rel="stylesheet" type="text/css" href= "./resources/css/main.css" />
+    </head>
+    <!-- ------------------------------------------------------------------------------------ -->
+    <body>
+
+
+    <div class="container-fluid">
+        <!-- <hr> <!-- Auto closeable, no closing tag needed, creates a horizontal rule -->
+        <h1>Welcome to Snailsforce!</h1>
+        <h5><i>A website made by snails, for snails</i></h5>
+        <div class="section1">
+            <form action="Authentication.Servlet" method="post">
+                <ul style="list-style-type:none">
+                    <li>Username</li>
+                    <li><input type="text" name="username" required></li>
+                    <li><br/></li>
+                    <li>Password</li>
+                    <li><input type="password" name="password" required></li>
+                    <li><br/></li>
+                    <li><input type="submit" value="Submit"></li>
+                </ul>
+            </form>
+            <br>
+            Not an employee of our company?<a class="nav-link" style="display:inline" href="./create-employee">Join Today!</a>
+        </div>
+        <div>
+            <a class="nav-link" href="./reimbursements.html">Reimbursement Form</a>
+        </div>
+    </div>
+    </body>
+</html>

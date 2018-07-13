@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- The character encoding scheme -->
+        <meta charset="UTF-8">
+        <!-- the bootstrap external stylesheet -->
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- JQuery -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <!-- More bootstrap stuff -->
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <title>Tuition Reimbursement Form</title>
+        <!-- Link to external stylesheet -->
+        <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+    </head>
+    <!-- --------------------------------------------------------------------------------- -->
+    <body>
+        <div class="container-fluid">
+            <div class="section1">
+                <h1>Tuition Reimbursement Form</h1>
+                <hr>    <!-- Line separator -->
+                <ul>
+                    <li><b>First Name</b></li>
+                    <li><input type="text" name="firstname" required></li>
+                    <li><b>Last Name</b></li>
+                    <li><input type="text" name="lastname" required></li>
+                    <li><b>Employee ID</b></li>
+                    <li><input type="number" name="idnum"></li>
+                    <li><b>Email</b></li>
+                    <li><input type="email" name="email"></li>
+                    <li><b>Phone #</b></li>
+                    <li><input type="number" name="phone"></li>
+
+                    <select required>
+                        <option>Choose Supervisor...</option>
+                        <!-- TODO: fill these with valid names -->
+                        <option>?</option>
+                        <option>!</option>
+                        <option>Bobbert</option>
+                    </select>
+                    <li><input type="submit" value="submit">
+                        <input type="reset" value="reset">
+                    </li>
+                </ul>
+                <form>
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
