@@ -13,5 +13,25 @@ export class InterpolationComponent implements OnInit {
   }
 
   componentVariable = "Secret message!";
-  
+  componentObject = {
+    author: "The Ryan Dude"
+  }
+  styleObject = {
+    color: 'blue',
+    fontFamily: 'Comic Sans MS'
+  }
+  //TypeScript function
+  public changeStyle(){
+    if(this.styleObject.color == 'blue'){
+      this.styleObject.color = 'green';
+    }else{
+      this.styleObject.color = 'blue';
+    }
+  }
+
+  visible = true;
+
+  public toggleVisibility(){
+    this.visible = !this.visible;
+  }
 }
