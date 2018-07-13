@@ -1,0 +1,5 @@
+Directives can invoke functionality with an html files. They are html syntax that can be used without breaking the frontend. A non-html element/attributes preceded with ng are likely to be directives. Directives with an asterisk (*) is a structural directivre that is capable of changing the structure of HTML, adding/removing elements on the page.
+
+In addition to templateURL, template literals build the html within the typescript file itself. This replaces 'templateUrl' with 'template' followed by backticks (`) with code in between
+
+*ngFor adds elements based off an array.

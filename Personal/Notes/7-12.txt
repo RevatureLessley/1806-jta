@@ -29,13 +29,13 @@ Angular Project Structure
 	angular.json
 	styles.css
 
-Angular componenets represents a section of an application. Multiple componenets are brought together into a module to make an appllication. It helps nid a view with a controller.
+Angular componenets represents a section of an application. Multiple componenets are brought together into a module to make an appllication. It helps bind a view with a controller.
 
 Any annotated words are declarators that serve to provide metadata for the Angular application. @Component indicates its contents should be used for the entire component bundle.
 
 Selector is needed to inject views. It indicates what the tag name should be for the injection site for this component.
 
-Template URLs point to a specific file to ne used as the front end for the specific component.
+Template URLs point to a specific file to be used as the front end for the specific component.
 
 Style URLs point to CSS files besides the global CSS to customize each individual component. Use an array for this.
 
