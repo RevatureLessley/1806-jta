@@ -97,4 +97,16 @@ export class PokeapiComponent implements OnInit {
 
     NOTE: Observables were introduced in ES7
   */
+
+          //Example of POST
+        /*
+        this.http.post("endpoint_url", {
+                                            key1: "value",
+                                            key2: "value",
+                                            etc : "value"
+                                        }).subscribe(
+                                            PASS => {}, 
+                                            FAIL => {})
+*/
+
 }
