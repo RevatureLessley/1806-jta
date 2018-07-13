@@ -15,7 +15,7 @@ public class EmployeeDao {
 	public Employee selectById(Integer id) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
+		
 		String sql = "SELECT * FROM employee WHERE emp_id = ?";
 		Employee a = null;
 

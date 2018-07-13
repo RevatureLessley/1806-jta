@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="com.revature.service.EventService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +14,7 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../resources/js/eventParse.js"></script>
 <title>Welcome to Project1</title>
 </head>
 <body>
@@ -47,16 +49,21 @@
 							<th>Type</th>
 							<th>Amount</th>
 							<th>Date</th>
+							<th>Status</th>
 						</tr>
 					</thead>
-					<tbody>
-						<%
-							out.write("<tr><td>a</td><td>b</td><td>v</td><td>d</td><td>e</td></tr>");
-							out.write("<tr><td>a</td><td>b</td><td>v</td><td>d</td><td>e</td></tr>");
-							out.write("<tr><td>a</td><td>b</td><td>v</td><td>d</td><td>e</td></tr>");
-						%>
-					</tbody>
+
+					<tbody id="tableBody"></tbody>
 				</table>
+				
+				<script>	
+				
+				let jsonStr = <%Integer userId = (Integer) session.getAttribute("userId");
+				out.print(EventService.selectUserEvents(userId));%>;
+				
+				createTable(jsonStr);	
+				
+				</script>
 
 				<div align="right" style="margin: 10px;">
 					<button type="reset" class="btn btn-primary" onclick='goBack()'>Back</button>

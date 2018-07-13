@@ -185,12 +185,12 @@ END;
    PL/SQL: Stored Procedures/Functions
 ********************************************************************************/
 
-CREATE OR REPLACE PROCEDURE ADD_NEW_EVENT(empId IN NUMBER, evType IN NUMBER, evGradeScale IN NUMBER, evName IN VARCHAR, evLocation IN VARCHAR, evDescription IN VARCHAR, evJustification IN VARCHAR, evCost IN DECIMAL)
+CREATE OR REPLACE PROCEDURE ADD_NEW_EVENT(empId IN NUMBER, evType IN NUMBER, evGradeScale IN NUMBER, evName IN VARCHAR, evDate IN TIMESTAMP, evLocation IN VARCHAR, evDescription IN VARCHAR, evJustification IN VARCHAR, evCost IN DECIMAL, evId OUT NUMBER)
 IS
 BEGIN
 --    INSERT INTO department VALUES (1, 'Human Resources');
-    INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_location, ev_description, ev_justification, ev_cost) 
-                VALUES(empId, evType, evGradeScale, evName, evLocation, evDescription, evJustification, evCost);
+    INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_date, ev_location, ev_description, ev_justification, ev_cost) 
+                VALUES(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost);
 
 END;
 /
@@ -202,6 +202,44 @@ BEGIN
     INSERT INTO event_document (ev_id, evdoc_name, evdoc_file, evdoc_is_approval)
         VALUES (evId, evName, evFile, evApproval);
 
+END;
+/
+
+CREATE OR REPLACE PROCEDURE EVENT_UPDATE_APPROVAL_FROM(evId IN NUMBER, otherId IN NUMBER)
+IS
+    empId NUMBER(6);
+    empRel NUMBER(6);
+BEGIN
+    SELECT emp_id INTO empId FROM event WHERE ev_id = evId;
+    empRel := GET_EMP_RELATION(empId, otherId);
+    
+    IF empRel = 1 THEN
+        --BenCo
+         UPDATE event SET ev_benco_approve = SYSDATE WHERE ev_id = evId;
+    END IF;
+    
+    IF empRel = 2 THEN
+        --Department Head
+         UPDATE event SET ev_head_approve  = SYSDATE WHERE ev_id = evId;
+    END IF;
+    
+    IF empRel = 3 THEN
+        --Supervisor
+         UPDATE event SET ev_super_approve = SYSDATE WHERE ev_id = evId;
+    END IF;
+    
+END;
+/
+
+CREATE OR REPLACE FUNCTION GET_EMP_RELATION(empId IN NUMBER, otherId IN NUMBER)
+RETURN NUMBER
+IS
+    empRel NUMBER(6);
+    temp NUMBER(6);
+BEGIN
+    SELECT emp_type INTO temp FROM employee WHERE emp_id = empId;
+    
+    return emp_type;    
 END;
 /
 /*******************************************************************************
@@ -228,7 +266,7 @@ INSERT INTO grade_scale VALUES (2, 'Pass/Fail');
 INSERT INTO grade_scale VALUES (3, 'Attendance');
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (1, 'fname', 'lname', 'name@email.com', 1, NULL, 1000, 1);
+    emp_balance, emp_department) VALUES (1, 'Bobbert', 'Bobson', 'name@email.com', 1, NULL, 1000, 1);
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
     emp_balance, emp_department) VALUES (2, 'Austin', 'Molina', 'austin.molina@email.com', 4, 1, 1000, 1);

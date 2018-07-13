@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (userId != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user_id", userId);
+			session.setAttribute("userId", userId);
 			response.sendRedirect("./user/");
 		} else {
 			response.sendRedirect("./");

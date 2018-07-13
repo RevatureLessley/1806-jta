@@ -48,4 +48,14 @@
     <servlet-name>EventRequestServlet</servlet-name>
     <url-pattern>/user/EventRequest.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectUserEventsServlet</display-name>
+    <servlet-name>SelectUserEventsServlet</servlet-name>
+    <servlet-class>com.revature.servlet.SelectUserEventsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectUserEventsServlet</servlet-name>
+    <url-pattern>/SelectUserEventsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

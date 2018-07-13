@@ -34,7 +34,7 @@
 
 	<div class="container-fluid justify-content-md-center">
 
-		<form action='EventRequest.do' method="post">
+		<form action='EventRequest.do' method="post" enctype="multipart/form-data">
 			<div class="rsection">
 				<h4 style="text-align: center;">Reimbursement Request</h4>
 				<div class="row justify-content-md-center">
@@ -43,7 +43,7 @@
 					<div class="col-5">
 						<div class="form-group">
 							<label for="eventname">Event Name</label> <input
-								class="form-control" type="text" name="eventname"
+								class="form-control" type="text" name="eventName"
 								required="required">
 						</div>
 						<div class="form-group">
@@ -85,7 +85,7 @@
 						</div>
 						<div class="form-group">
 							<label for="location">Location</label> <input
-								class="form-control" type="text" name="username"
+								class="form-control" type="text" name="location"
 								required="required">
 						</div>
 					</div>
@@ -109,14 +109,14 @@
 					<div class="col-5">
 						<div class="form-group">
 							<label for="username">Attach Documents</label> <input type="file"
-								multiple="multiple">
+								name="file" multiple="multiple">
 						</div>
 
 					</div>
 					<div class="col-5">
 						<div class="form-group">
 							<label for="username">Pre-Approval Letter</label> <input
-								type="file" accept=".msg">
+								name="file2" type="file" accept=".msg">
 						</div>
 						<br>
 
