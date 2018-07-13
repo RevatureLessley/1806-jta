@@ -1,0 +1,53 @@
+<div class="rsection">
+  <h1>DIRECTIVES</h1>
+  <p>Directives are ways that we can invoke functionality
+    within an html file. They act as syntax that can be used 
+    in html format without breaking the front end.
+  </p>
+
+  <p>NOTE: Rule of thumb is that if it is a non html element/attribute 
+    and it preceded with 'ng', chances are you have a directive on your hands.
+  </p>
+  <h3>*ngIf</h3>
+  <div class=rsection>
+    <p style="color:darksalmon">What does the asterisk(*) entail in front of the ngIf? 
+      (Asked Ryan's class unaminously)</p>
+    <input type="button" (click)="toggleAnswer()" [value]="buttonValue">
+    <p *ngIf="visible;else someTemplate">
+      <span style="color:crimson">Ryan:</span>Any directive that has an asterisk(*) 
+      means that it is a structural directive. This means the directive is capable 
+      of changing the actual structure of the HTML itself. IE, it can add/remove elements
+      on the page.
+    </p>
+    <ng-template #someTemplate>
+      <p>OOOOO, what's the answer?!</p>
+    </ng-template>
+
+  </div>
+
+  <div class=rsection>
+    <h3>*ngFor</h3>
+    <p>*ngFor is a directive that can add elements based off of some 
+      count fo items from an array. For each item we cna create a duplicate 
+      representation of the tag and children tags that we apply it to. With the data 
+      being different thanks to data binding. 
+      (Since this si changing the structure of our HTML page, we call this a 
+      structural directive. Also hinted by the asterisk (*) (3 lines on top of each 
+      other symmetrically))
+    </p>
+    <table border=2px>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+      </tr>
+      <tr *ngFor="let npc of npcs">
+        <td>{{npc.id}}</td>
+        <td appCustom>{{npc.name}}</td>
+      </tr>
+      <p>
+        NOTE: any directive used as an attribute of an element is called
+        an 'Attribute Directive'.
+      </p>
+    </table> 
+  </div>
+</div>
