@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ExampleService } from '../../services/example/example.service';
 
 @Component({
   selector: 'app-pokeapi',
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PokeapiComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ex:ExampleService) { }
 
   ngOnInit() {
   }
@@ -71,11 +72,15 @@ export class PokeapiComponent implements OnInit {
   }
 
   public fetchNpc(){
-    this.http.get("http://localhost:8085/180618_Servlets_P2/SelectNpc")
-      .subscribe(
-        success => { console.log(success)},
-        error => { console.log(error)}
-      )
+
+    this.ex.getNpc().subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log("ERROR");
+      }
+    );
   }
   /*
     Promises vs Observables
