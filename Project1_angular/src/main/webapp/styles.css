@@ -1,0 +1,16 @@
+
+/* https://developer.mozilla.org/ja/docs/Web/HTML/Element/Input/checkbox */
+
+legend {
+	background-color: #000,
+	color: #fff,
+	padding: 3px 4px;
+}
+
+.output {
+	font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+	margin: .4rem;
+}

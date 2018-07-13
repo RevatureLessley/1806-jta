@@ -1,6 +1,8 @@
 <jsp:include page="header.jsp" />
 <script src="js/uuidv4.min.js"></script>
 <script src="js/modify.js"></script>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.SimpleDateFormat" %>
 
 <form method="post">
 	<fieldset>
@@ -31,8 +33,12 @@
 			<button type="button" onclick="addAttachment()">add attachments (e.g. pdf, png, jpeg, txt, doc, msg)</button>
 		</div>
 	</fieldset>
-	<fieldset>
+	<fieldset id="signature">
 		<legend>Signature</legend>
+		<% SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+					Date now = new Date();
+					String currentDate = "\"" + simpleDate.format(now) + "\"";%>
+		<input type="date" id="currentDate" value=<%=currentDate%> readonly>
 	</fieldset>
 </form>
 
