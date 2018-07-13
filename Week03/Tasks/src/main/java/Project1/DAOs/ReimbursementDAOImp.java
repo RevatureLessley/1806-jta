@@ -1,4 +1,4 @@
-package Project1.DAO;
+package Project1.DAOs;
 
 import java.math.*;
 import java.sql.*;

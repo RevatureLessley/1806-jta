@@ -35,7 +35,6 @@ DROP SEQUENCE rei_seq;
 CREATE TABLE Approval (
     app_id NUMBER PRIMARY KEY,
     app_typ_id NUMBER,
---    app_gra_for_id NUMBER,
     app_rei_id NUMBER,
     app_isApproved CHAR(1) DEFAULT 'U'
         CHECK (app_isApproved IN ('N', 'Y', 'U')),
@@ -144,12 +143,6 @@ FOREIGN KEY (app_typ_id)
 REFERENCES Approval_Type(app_typ_id)
 DEFERRABLE INITIALLY DEFERRED;
 
---ALTER TABLE Approval   
---ADD CONSTRAINT fk_app_gra_for 
---FOREIGN KEY (app_gra_for_id) 
---REFERENCES Grading_Format(gra_for_id)
---DEFERRABLE INITIALLY DEFERRED;
-
 ALTER TABLE Approval_Additional_Info   
 ADD CONSTRAINT fk_app_addinf 
 FOREIGN KEY (app_addinf_approval) 
@@ -215,6 +208,15 @@ ADD CONSTRAINT fk_rei_gra_for
 FOREIGN KEY (rei_id) 
 REFERENCES Grading_Format(gra_for_id)
 DEFERRABLE INITIALLY DEFERRED;
+
+CREATE OR REPLACE VIEW Employee_View AS
+SELECT ER.emp_username AS E_Supervisor, 
+       EL.emp_available_reimbursement AS E_AvailableReimbursement, 
+       EL.emp_username AS E_Username, EL.emp_password AS E_Password, 
+       EL.emp_firstname AS E_FirstName, EL.emp_lastname AS E_LastName, 
+       EL.emp_isBenco AS E_IsBenCo
+FROM Employee EL
+INNER JOIN Employee ER ON EL.emp_supervisor = ER.emp_id;
 
 CREATE SEQUENCE app_seq
 START WITH 1
@@ -547,17 +549,10 @@ CREATE OR REPLACE PROCEDURE insertApprovalAdditionalInfo(info IN NUMBER,
                                                          filename IN VARCHAR2,
                                                          fil IN BLOB)
 IS
---    loc BFILE;
---    fil BLOB;
 BEGIN
     INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name,
                                          app_addinf_file)
     VALUES (info, filename, fil);
---    RETURN app_addinf_file INTO fil;
---    loc := BFILENAME('FROMFS', filename);
---    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
---    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
---    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
@@ -565,16 +560,9 @@ CREATE OR REPLACE PROCEDURE insertApprovalAttachment(approval IN NUMBER,
                                                      filename IN VARCHAR2,
                                                      fil IN BLOB)
 IS
---    loc BFILE;
---    fil BLOB;
 BEGIN
     INSERT INTO Approval_Attachment (app_att_approval, app_att_name, app_att_file)
     VALUES (approval, filename, fil);
---    RETURN app_att_file INTO fil;
---    loc := BFILENAME('FROMFS', filename);
---    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
---    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
---    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
@@ -582,16 +570,9 @@ CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER,
                                                   filename IN VARCHAR2,
                                                   fil IN BLOB)
 IS
---    loc BFILE;
---    fil BLOB;
 BEGIN
     INSERT INTO Event_Attachment (eve_att_event, eve_att_name, eve_att_file)
     VALUES (event, filename, fil);
---    RETURN eve_att_file INTO fil;
---    loc := BFILENAME('FROMFS', filename);
---    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
---    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
---    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
@@ -599,17 +580,10 @@ CREATE OR REPLACE PROCEDURE updateGradingFormatProof(graforID IN NUMBER,
                                                      filename IN VARCHAR2,
                                                      fil IN BLOB)
 IS
---    loc BFILE;
---    fil BLOB;
 BEGIN
     UPDATE Grading_Format
     SET gra_for_filename = filename, gra_for_file = fil
     WHERE gra_for_id = graforID;
---    RETURN gra_for_file INTO fil;
---    loc := BFILENAME('FROMFS', filename);
---    DBMS_LOB.FILEOPEN(loc, DBMS_LOB.FILE_READONLY);
---    DBMS_LOB.LOADFROMFILE(fil, loc, DBMS_LOB.GETLENGTH(loc));
---    DBMS_LOB.FILECLOSE(loc);
 END;
 /
 
@@ -634,9 +608,6 @@ IS
 BEGIN
     INSERT INTO Grading_Format(gra_for_passing_cutoff)
     VALUES(passingCutoff);
---    SELECT gra_for_seq.CURRVAL 
---    INTO graforID 
---    FROM dual;
 END;
 /
 
@@ -644,12 +615,10 @@ CREATE OR REPLACE PROCEDURE insertApproval(reiID IN NUMBER)
 IS
     approvals NUMBER;
     counter NUMBER;
---    graforID NUMBER;
 BEGIN
     SELECT COUNT(*) 
     INTO approvals 
     FROM Approval_Type;
---    insertGradingFormat(passingCutoff, graforID);
     
     FOR counter IN 1..approvals LOOP
         INSERT INTO Approval(app_typ_id, app_rei_id)

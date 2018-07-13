@@ -2,7 +2,7 @@ package Project1;
 
 import java.sql.*;
 
-import Project1.DAO.*;
+import Project1.DAOs.*;
 
 public class Project1 {
 

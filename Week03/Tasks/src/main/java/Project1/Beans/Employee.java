@@ -4,7 +4,7 @@ import java.math.*;
 import java.util.*;
 
 public class Employee {
-	private Employee supervisor;
+	private String supervisor;
 	private double availableReimbursement;
 	private String username;
 	private String password;
@@ -22,7 +22,7 @@ public class Employee {
 	 * @param lastname
 	 * @param isBenco
 	 */
-	public Employee(Employee supervisor, double availableReimbursement,
+	public Employee(String supervisor, double availableReimbursement,
 					String username, String password, String firstname,
 					String lastname, boolean isBenco) {
 		this.supervisor = supervisor;	// Think about this.
@@ -35,11 +35,11 @@ public class Employee {
 		reimbursements = new HashMap<>();
 	}
 
-	public Employee getSupervisor() {
+	public String getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSupervisor(Employee supervisor) {
+	public void setSupervisor(String supervisor) {
 		this.supervisor = supervisor;
 	}
 

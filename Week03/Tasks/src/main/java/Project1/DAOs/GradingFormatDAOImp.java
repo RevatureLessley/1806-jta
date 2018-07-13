@@ -1,16 +1,16 @@
-package Project1.DAO;
+package Project1.DAOs;
 
 import java.io.*;
 import java.sql.*;
 import Project1.*;
 
-public class AttachmentDAOImp implements LogReference {
+public class GradingFormatDAOImp implements LogReference {
 	
 	// Note: Remember to batch this.
-	public boolean insertAttachment(String table) {
-		logger.debug("Project1/DAO/ApplicationDAOImp.java: " + 
-           	 "Entered insertAttachment().");
-		String sqlInsert = "{call insert" + table + "(?, ?, ?)}";
+	public boolean updateGradingFormatProof() {
+		logger.debug("Project1/DAO/GradingFormatDAOImp.java: " + 
+           	 "Entered updateGradingFormatProof().");
+		String sqlInsert = "{call updateGradingFormatProof(?, ?, ?)}";
 		CallableStatement statement = null;
 		String filename = "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf";
 
@@ -25,7 +25,7 @@ public class AttachmentDAOImp implements LogReference {
 
 		catch(SQLException se) {
 			logger.error("Project1/DAO/ApplicationDAOImp.java: " + 
-		           	 "Inserting into Application failed!.");
+		           	 "Updating Grading_Format failed!.");
 			se.printStackTrace();
 		} 
 		
@@ -34,8 +34,8 @@ public class AttachmentDAOImp implements LogReference {
 		}
 
 		finally {
-			logger.debug("Project1/DAO/ApplicationDAOImp.java: " + 
-		           	 "Exiting insertAttachment().");
+			logger.debug("Project1/DAO/GradingFormatDAOImp.java: " + 
+		           	 "Exiting updateGradingFormatProof().");
 			DatabaseConnection.close(statement);
 		}
 		

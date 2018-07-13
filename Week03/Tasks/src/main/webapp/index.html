@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
-		<title>Insert title here</title>
+		<meta charset="UTF-8">
+		<title>TRMS</title>
+		<link 
+			rel="stylesheet" type="text/css" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/
+													bootstrap.min.css">
+		<script 
+			src="http://code.jquery.com/jquery-3.3.1.min.js" 
+			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			crossorigin="anonymous">
+		</script>
+		<script 
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
+													bootstrap.min.js">
+		</script>
 	</head>
 	<body>
-		<h1>Server Up!</h1>
+	<div class="container-fluid">
+		<h1 align="center">
+			Welcome to the Tuition Reimbursement Management System
+		</h1>
+		<div class="row">
+			<!-- <div class="col-sm-6">
+				<h4>REGISTER</h4>
+				<form action="" id="registerForm" onsubmit="return validateRegistration()">
+					<div class="form-group">
+						<label for="username">USERNAME:</label> <input type="text"
+							class="form-control" id="username" name="username">
+					</div>
+					<div class="form-group" id="passwordMessage">
+						<label for="password1">Password:</label> <input type="password"
+							class="form-control" id="password1" name="password1">
+					</div>
+					<div class="form-group">
+						<label for="password2">Password:</label> <input type="password"
+							class="form-control" id="password2" name="password2">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="fname">FIRST NAME:</label> <input type="text"
+							class="form-control" id="fname" name="fname">
+					</div>
+					<div class="form-group">
+						<label for="lname">LAST NAME:</label> <input type="text"
+							class="form-control" id="lname" name="lname">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-primary">Reset</button>
+				</form>
+			</div> -->
+			<div class="col-sm-6">
+				<h2>Login</h2>
+				<form action="LoginServlet" method="POST">
+					<div class="form-group">
+						<label for="username">Username:</label> 
+						<input 
+							class="form-control" id="username" 
+							name="username" type="text"
+						>
+					</div>
+					<div class="form-group">
+						<label for="password">Password:</label> 
+						<input 
+							class="form-control" id="password" 
+							name="password" type="password"
+						>
+					</div>
+					<button class="btn btn-primary" type="submit" >
+						Login
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+		<button onclick="getNpcs()">REFRESH</button>
+		<table id="npctable" border=2px;>
+			<tr>
+				<th>NPC ID</th>
+				<th>NPC NAME</th>
+				<th>NPC CLASS</th>
+			</tr>
+		</table>
 	</body>
 </html>
