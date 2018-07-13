@@ -6,27 +6,27 @@
 
 <form method="post">
 	<fieldset>
-		<legend>Employee information</legend>
-		First name:<input type="text" name="firstName" /><br/>
-		Last name:<input type="text" name="lastName" /><br/>
-		Employee relation<input type="text" name="relation"><br/>
+		<legend>[ Employee information ]</legend>
+		First name: <input type="text" name="firstName" /><br/>
+		Last name: <input type="text" name="lastName" /><br/>
+		Employee relation to applicant: <input type="text" name="relation"><br/>
 	</fieldset>
 	<fieldset>
-		<legend>Course information</legend>
-		Course Fee:<input type="number" name="fee" /><br/>
-		Start date:<input type="date" name="startDate" /><br/>
-		End date:<input type="date" name="endDate" /><br/>
-		Physical address the course takes place:<input type="text" name="courseLocation" /><br/>
+		<legend>[ Course information ]</legend>
+		Course Fee: <input type="number" name="fee" /><br/>
+		Start date: <input type="date" name="startDate" /><br/>
+		End date: <input type="date" name="endDate" /><br/>
+		Physical address the course takes place: <input type="text" name="courseLocation" /><br/>
 		Grading policy:<div>
-			<input type="checkbox" id="grade" name="grading" />
-			<label for="grade">Grade</label>
-			<input type="checkbox" id="presentation" name="presentation" />
+			<input type="radio" id="grade" name="policy" />
+			<label for="grade">Grade</label><br/>
+			<input type="radio" id="presentation" name="policy" />
 			<label for="presentation">Presentation</label>
 		</div>
 		
 	</fieldset>
 	<fieldset>
-		<legend>Attachments</legend>
+		<legend>[ Attachments ]</legend>
 		<div id="attachments">
 			<table id="attachmentTable">
 			</table>
@@ -34,13 +34,14 @@
 		</div>
 	</fieldset>
 	<fieldset id="signature">
-		<legend>Signature</legend>
+		<legend>[ Signature ]</legend>
 		<% SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 					Date now = new Date();
 					String currentDate = "\"" + simpleDate.format(now) + "\"";%>
+		Electronic signature: <input type="text" id="electronicSignature">
 		<input type="date" id="currentDate" value=<%=currentDate%> readonly>
 	</fieldset>
 </form>
-
-<input type="submit" value="newForm" action="NewForm" />
+<br />
+<input type="submit" value="submit application" action="NewForm" />
 </form>

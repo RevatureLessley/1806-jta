@@ -32,19 +32,17 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Overview<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Information<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="Benefits">Benefits</a></li>
-                          <li class="divider"></li>
-                          <li><a href="Approval">Approval Process</a></li>
+                          <li><a href="benefits.jsp">View tuition reimbursement benefits</a></li>
+                          <li><a href="approvalProcess.jsp">View approval process</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tuition Reimbursement Forms<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="application.jsp">Start a New Form</a></li>
-                          <li class="divider"></li>
-					      <li><a href="Pending">Pending Forms</a></li>
+                          <li><a href="application.jsp">Start a new form</a></li>
+					      <li><a href="pending.jsp">View pending forms</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -53,13 +51,13 @@
                           <c:choose>
                               <c:when test="${empty username}">
                               	<li ><a href="login.jsp">Login</a></li>
-                              	<li><a href="register.jsp">Register Account</a></li>
+                              	<li><a href="register.jsp">Register a new account</a></li>
                               </c:when>
                               <c:otherwise>
 	                          <li><a href="Manage">Manage Profile</a></li>
 	                          <li class="divider"></li>
 	                          <% if (request.isUserInRole("Admin")) { %>
-	                          <li><a href="#">Modify User Accounts</a></li>
+	                          <li><a href="#">Modify user accounts</a></li>
 	                          <% } %>
                           	  </c:otherwise>
                           </c:choose>
