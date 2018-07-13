@@ -13,6 +13,11 @@ function Start(){
 	let MIN = parseInt(document.getElementById("numMIN").value);
 	document.getElementById("test").innerHTML = "";
 	
+	if (MIN > MAX){
+		window.alert("Min can not be more then max");	
+	}
+	
+	
 	print(MIN, MAX);
 		
 }
