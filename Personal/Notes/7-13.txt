@@ -3,3 +3,18 @@ Directives can invoke functionality with an html files. They are html syntax tha
 In addition to templateURL, template literals build the html within the typescript file itself. This replaces 'templateUrl' with 'template' followed by backticks (`) with code in between
 
 *ngFor adds elements based off an array.
+
+ng g directive directives/custom <- generates a cutom directive.
+
+Encasing a selector with [] tells angular it has an element property instead of an element.
+
+Typescript Access Modfiers:
+-Public is accessible outside of the typescript file.
+-Private is accessible only inside the typescript file.
+-No modifiers defaults to Public.
+
+Use private for constructor parameters.
+
+Any directive used as an attribute of an element is called an Attribute Directive.
+
+Data represents the object of a successful REAT call to the URL.
