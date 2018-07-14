@@ -7,7 +7,7 @@ function getEmp(){
 	let list = document.getElementById("empinfo");
 	list.innerHTML = "";
 	
-	let url = "SelectEmployeeServlet";
+	let url = "SelectEmployee.do";
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4){

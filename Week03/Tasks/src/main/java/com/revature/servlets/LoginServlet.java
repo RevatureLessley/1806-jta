@@ -33,7 +33,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -58,6 +59,7 @@ public class LoginServlet extends HttpServlet {
 			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
 			HtmlTemplates.goBackButton(out);
 		}
+		doGet(request, response);
 	}
 
 }

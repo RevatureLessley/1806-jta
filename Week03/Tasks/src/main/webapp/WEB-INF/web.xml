@@ -67,6 +67,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SelectEmployeeServlet</servlet-name>
-    <url-pattern>/SelectEmployeeServlet</url-pattern>
+    <url-pattern>/SelectEmployee.do</url-pattern>
   </servlet-mapping>
 </web-app>
