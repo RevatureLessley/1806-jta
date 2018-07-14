@@ -83,10 +83,13 @@ create table project_1_direct_supervisor (
 );
 /
 
-drop table project_1_available_reimbursement;
-create table project_1_available_reimbursement (
+drop table project_1_finance;
+create table project_1_finance (
     employee_uuid varchar2(36) primary key,
-    amount_available number(5)
+    amount_available number(5),
+    amount_awarded number(5),
+    amount_pending number(5),
+    amount_exceeded number(5)
 );
 /
 
@@ -96,8 +99,9 @@ create table project_1_reimbursement_form (
     employee_uuid varchar2(36),
     form_creation_date date,
     status varchar2(15),
-    direct_supervisor_uuid varchar2(32),
-    department_head_uuid varchar2(32),
+    direct_supervisor_uuid varchar2(36),
+    department_head_uuid varchar2(36),
+    benco_uuid varchar2(36),
     benco_decision varchar2(15),
     supervisor_decision varchar2(15),
     supervisor_decision_date varchar2(15),
@@ -259,6 +263,8 @@ begin
     insert into project_1_user (uuid, username, login_password, first_name, last_name, email, phone_number)
     values(userUuid, userHandle, loginPassword, firstName, lastName, userEmail, phoneNumber);
     commit;
+    insert into project_1_finance values (userUuid, 10000, 0, 0, 0);
+    commit;
 end;
 /
  
@@ -294,6 +300,41 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 4);
+    commit;
+end;
+/
+
+create or replace procedure updateExceededAmount(uuid in varchar2,
+                                                 amount in number)
+is
+begin
+    update project_1_finance set amount_exceeded = amount where employee_uuid = uuid;
+end;
+/
+
+create or replace procedure updateAwardedAmount(uuid in varchar2,
+                                                amount in number)
+is
+begin
+    update project_1_finance set amount_awarded = amount where employee_uuid = uuid;                     
+    commit;
+end;
+/
+
+create or replace procedure updatePendingAmount(uuid in varchar2,
+                                                amount in number)
+is
+begin
+    update project_1_finance set amount_pending = amount where employee_uuid = uuid;
+    commit;
+end;
+/
+
+create or replace procedure updateAvailable(uuid in varchar2,
+                                            amount in number)
+is
+begin
+    update project_1_finance set amount_awarded = amount where employee_uuid = uuid;
     commit;
 end;
 /
@@ -357,3 +398,13 @@ begin
     commit;
 end;
 /
+
+create or replace procedure removeFinanceInformation(userUUID in varchar2)
+is
+begin
+    delete from project_1_finance where employee_uuid = userUUID;
+    commit;
+end;
+/
+
+create or replace procedure 
