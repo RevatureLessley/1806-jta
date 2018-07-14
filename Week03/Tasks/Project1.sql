@@ -266,16 +266,23 @@ INSERT INTO grade_scale VALUES (2, 'Pass/Fail');
 INSERT INTO grade_scale VALUES (3, 'Attendance');
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (1, 'Bobbert', 'Bobson', 'name@email.com', 1, NULL, 1000, 1);
+    emp_balance, emp_department) VALUES (1, 'Tom', 'Bobberson', 'name@email.com', 1, NULL, 1000, 1);
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (2, 'Austin', 'Molina', 'austin.molina@email.com', 4, 1, 1000, 1);
+    emp_balance, emp_department) VALUES (2, 'Some', 'Guy', 'austin.molina@email.com', 2, 1, 1000, 57);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (3, 'Ryan', 'Bobson', 'austin.molina@email.com', 3, 1, 1000, 57);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (4, 'Austin', 'Molina', 'austin.molina@email.com', 4, 1, 1000, 57);
    
-INSERT INTO employee_user VALUES (1, 'admin', 'admin');
-INSERT INTO employee_user VALUES (2, 'ausmo', 'admin');
+INSERT INTO employee_user VALUES (1, 'benco', 'admin');
+INSERT INTO employee_user VALUES (2, 'head', 'admin');
+INSERT INTO employee_user VALUES (3, 'super', 'admin');
+INSERT INTO employee_user VALUES (4, 'ausmo', 'user');
 
-
-SELECT * FROM employee_user;
-SELECT * FROM event;
+--SELECT * FROM employee_user;
+--SELECT * FROM event;
 
 commit;

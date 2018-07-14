@@ -1,13 +1,14 @@
 package com.revature.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.revature.service.EmployeeService;
 import com.revature.service.UserService;
 
 /**
@@ -41,14 +42,10 @@ public class LoginServlet extends HttpServlet {
 		if (userId != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userId);
-			response.sendRedirect("./user/");
+			response.sendRedirect(EmployeeService.getEmployeeRedirect(userId));
 		} else {
-			response.sendRedirect("./");
-			//trigger javascript
-			//response.getOutputStream();
+			response.sendRedirect("./?status=0");
 		}
-
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

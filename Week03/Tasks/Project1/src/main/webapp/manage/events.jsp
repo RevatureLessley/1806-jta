@@ -15,6 +15,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="../resources/js/displayParse.js"></script>
+<script src="../resources/js/template.js"></script>
 <title>Welcome to Project1</title>
 </head>
 <body>
@@ -61,7 +62,7 @@
 				let jsonStr = <%Integer userId = (Integer) session.getAttribute("userId");
 				out.print(EventService.selectUserEvents(userId));%>;
 				
-				createTable(jsonStr,"tableBody");	
+				createTable(jsonStr);	
 				
 				</script>
 

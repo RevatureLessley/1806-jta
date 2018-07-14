@@ -26,6 +26,9 @@ public class SecurityFilter implements Filter {
 		
 		HttpSession session = request.getSession(false);
 		
+		//TODO check that the user is in the right path
+		request.getRequestURI();
+		
 		if(session == null) {
 			System.out.println("no user session");
 			response.sendRedirect("../");
