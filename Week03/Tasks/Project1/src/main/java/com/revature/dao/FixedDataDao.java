@@ -12,6 +12,7 @@ import java.util.List;
 import com.revature.bean.Department;
 import com.revature.bean.EmployeeType;
 import com.revature.bean.EventType;
+import com.revature.bean.GradeScale;
 import com.revature.utils.Connections;
 
 public class FixedDataDao {
@@ -89,6 +90,35 @@ public class FixedDataDao {
 
 			while (rs.next()) {
 				Department a = new Department(rs.getInt(1), rs.getString(2));
+
+				ls.add(a);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
+		return ls;
+	}
+
+	public List<GradeScale> selectAllGradeScales() {
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM grade_scale";
+
+		List<GradeScale> ls = new ArrayList<GradeScale>();
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				GradeScale a = new GradeScale(rs.getInt(1), rs.getString(2));
 
 				ls.add(a);
 			}

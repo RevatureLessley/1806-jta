@@ -1,0 +1,76 @@
+<template>
+<div class="rsection">
+	<h4 style="text-align: center;">
+		<span id="eventName"></span>
+	</h4>
+	<h6 style="text-align: center;">
+		Event Id: <span id="eventId"></span>
+	</h6>
+	<br>
+	<div class="row justify-content-md-center">
+
+		<!-- areas -->
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="light-label">Employee Name:</label> <span
+					id="employeeName"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Event Type:</label> <span id="eventType"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Grade Format:</label> <span
+					id="gradeFormat"></span>
+			</div>
+		</div>
+
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="light-label" for="date">Date:</label> <span id="date"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label" for="reimbursement">Expected
+					Reimbursement:</label> <span id="reimbursement"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label" for="location">Location:</label> <span
+					id="location"></span>
+			</div>
+		</div>
+
+		<!-- text areas -->
+		<div class="col-10">
+			<div class="form-group">
+				<label class="light-label" for="description">Description:</label>
+				<p id="description"></p>
+			</div>
+
+			<div class="form-group">
+				<label class="light-label" for="justification">Justification:</label>
+				<p id="justification"></p>
+			</div>
+
+			<!-- Below text areas -->
+		</div>
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="light-label" for="username">Documents:</label>
+
+			</div>
+
+		</div>
+
+		<div class="col-md-5">
+			<div class="form-group">
+				<label class="light-label" for="username">Pre-Approval
+					Letter</label>
+			</div>
+		</div>
+
+
+	</div>
+	<div align="right" style="margin: 10px;">
+		<button type="reset" class="btn btn-primary" onclick='goBack()'>Back</button>
+	</div>
+</div>
+</template>

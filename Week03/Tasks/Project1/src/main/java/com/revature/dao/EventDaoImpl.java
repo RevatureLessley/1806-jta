@@ -13,9 +13,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.bean.Employee;
 import com.revature.bean.Event;
 import com.revature.utils.Connections;
 import com.revature.utils.StringManip;
+
+import oracle.jdbc.internal.OracleTypes;
 
 public class EventDaoImpl {
 
@@ -129,6 +132,75 @@ public class EventDaoImpl {
 						rs.getString(9), rs.getDouble(10));
 
 				ls.add(a);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
+		return ls;
+	}
+
+	public Event selectById(Integer id) {
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM event WHERE ev_id = ?";
+		Event a = null;
+
+		try (Connection conn = Connections.getConnection()) {
+			ps = conn.prepareStatement(sql);
+			System.out.println("selecting event id: " + id);
+			ps.setInt(1, id);
+
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
+						rs.getString(9), rs.getDouble(10));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+
+		return a;
+
+	}
+
+	public List<Event> selectSubordinateEvents(Integer userId) {
+		CallableStatement stmt = null;
+		ResultSet rs = null;
+
+		String sql = "{CALL GET_SUBORDINATE_EVENTS(?, ?)}";
+
+		List<Event> ls = new ArrayList<Event>();
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.prepareCall(sql);
+
+			stmt.setInt(1, userId);
+			stmt.registerOutParameter(2, OracleTypes.CURSOR);
+			
+			stmt.execute();
+			
+			rs = (ResultSet)stmt.getObject(2);
+
+			while (rs.next()) {
+				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
+						rs.getString(9), rs.getDouble(10));
+
+				ls.add(a);
+
 			}
 
 		} catch (SQLException e) {

@@ -1,11 +1,6 @@
-<%@page import="com.revature.dao.EmployeeDao"%>
-<%@page import="com.revature.displaywrapper.EmployeeDisplay"%>
-<%@page import="com.revature.utils.HtmlTemplates"%>
-<%@page import="com.revature.service.UserService"%>
-<%@page import="com.revature.service.EventService"%>
-<%@page import="com.revature.service.EmployeeService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
+<%@page import="com.revature.service.EventService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,31 +14,31 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<title>Welcome to Project1</title>
-<script src="../resources/js/employeeHome.js"></script>
+<title>Insert title here</title>
+<script src="../resources/js/eventview.js"></script>
+<script src="../resources/js/template.js"></script>
 <script src="../resources/js/common.js"></script>
-<link rel="import" href="../template/userbody.html">
+<link rel="import" href="../template/eventview.html">
 <link rel="import" href="../template/navbar.html">
 </head>
 <body>
 
-	<div id="navDiv"></div>
+<div id="navDiv"></div>
 	<br>	
 	<div id="container"></div>
 
 	<script>
 	 	addFromTemplate("navbar", "#navDiv");
-	    addFromTemplate("userbody", "#container");
+	    addFromTemplate("eventview", "#container");
 	   
 	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
 	    
-	    let json = <%out.write(EmployeeService.getEmployeeDisplay(userId));%>;
-		createEmployeeSummary(json);
-		setAmountRemaining(json);
-		
-		json = <%out.print(EventService.selectUserEvents(userId));%>;
-		createEventTableSmall(json, "tableBody");
-	</script>
 	
+		let json = <%
+				Integer eventId = Integer.parseInt(request.getParameter("eventId"));
+				out.print(EventService.selectUserEvent(userId, eventId));%>;
+		fillEventData(json, "tableBody");
+	</script>
+
 </body>
 </html>

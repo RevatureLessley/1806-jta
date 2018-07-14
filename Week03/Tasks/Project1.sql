@@ -234,14 +234,75 @@ END;
 CREATE OR REPLACE FUNCTION GET_EMP_RELATION(empId IN NUMBER, otherId IN NUMBER)
 RETURN NUMBER
 IS
-    empRel NUMBER(6);
-    temp NUMBER(6);
+    empRel NUMBER;
+    empType NUMBER;
+    temp1 NUMBER;
+    temp2 NUMBER;
 BEGIN
-    SELECT emp_type INTO temp FROM employee WHERE emp_id = empId;
+    SELECT emp_type INTO empType FROM employee WHERE emp_id = empId;
     
-    return emp_type;    
+    IF empType = 1 THEN
+        return 1;
+    END IF;
+    
+    IF empType = 2 THEN 
+        SELECT emp_department INTO temp1 FROM employee WHERE emp_id = empId;
+        SELECT emp_department INTO temp2 FROM employee WHERE emp_id = otherId;
+        
+        IF temp1 = temp2 THEN
+            return 2;
+        END IF;
+    END IF;
+    
+    IF empType = 3 THEN 
+
+        SELECT emp_supervised_by INTO temp1 FROM employee WHERE emp_id = otherId;
+        
+        IF temp1 = empId THEN
+            return 3;
+        END IF;
+    END IF;
+    
+    return 0;    
 END;
 /
+
+CREATE OR REPLACE PROCEDURE GET_SUBORDINATE_EVENTS(empId IN NUMBER, resultSet OUT sys_refcursor)
+IS
+    empType NUMBER;
+    department NUMBER;
+BEGIN
+
+    SELECT emp_type INTO empType FROM employee WHERE emp_id = empId;
+    
+    IF empType = 1 THEN
+        -- benco
+        OPEN resultSet FOR 
+            SELECT * FROM event;
+    END IF;
+    
+    IF empType = 2 THEN
+        -- department
+        SELECT emp_department INTO department FROM employee WHERE emp_id = empId;
+        
+        OPEN resultSet FOR 
+            SELECT * FROM event WHERE emp_id IN(
+                SELECT emp_id FROM employee
+                WHERE emp_department = department);
+    END IF;
+    
+    IF empType = 3 THEN
+        -- supervisor
+        OPEN resultSet FOR 
+            SELECT * FROM event WHERE emp_id IN(
+                SELECT emp_id FROM employee
+                WHERE emp_supervised_by = empId);
+    END IF;
+    
+END;
+/
+
+
 /*******************************************************************************
    Populate Tables
 ********************************************************************************/
@@ -282,6 +343,7 @@ INSERT INTO employee_user VALUES (2, 'head', 'admin');
 INSERT INTO employee_user VALUES (3, 'super', 'admin');
 INSERT INTO employee_user VALUES (4, 'ausmo', 'user');
 
+SELECT * FROM employee;
 --SELECT * FROM employee_user;
 --SELECT * FROM event;
 

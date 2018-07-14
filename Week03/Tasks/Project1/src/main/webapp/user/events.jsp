@@ -14,28 +14,21 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="../resources/js/displayParse.js"></script>
+<link rel="import" href="../template/navbar.html">
+<script src="../resources/js/events.js"></script>
+<script src="../resources/js/common.js"></script>
 <title>Welcome to Project1</title>
 </head>
 <body>
 
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> <!-- Brand -->
-	<a class="navbar-brand" href="#">Logo</a> <!-- Links -->
-	<ul class="navbar-nav">
 
-		<!-- Dropdown -->
-		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-			href="#" id="navbardrop" data-toggle="dropdown"> Dropdown link </a>
-			<div class="dropdown-menu"></div></li>
-	</ul>
-	</nav>
-
+	<div id="navDiv"></div>
 	<br>
 
 	<div class="container-fluid justify-content-md-center">
 
-		<h4 style="text-align: center;">All Requests</h4>
+		<h4 style="text-align: center;">My Requests</h4>
 
 		<div class="row justify-content-md-center">
 
@@ -55,15 +48,6 @@
 
 					<tbody id="tableBody"></tbody>
 				</table>
-				
-				<script>	
-				
-				let jsonStr = <%Integer userId = (Integer) session.getAttribute("userId");
-				out.print(EventService.selectUserEvents(userId));%>;
-				
-				createTable(jsonStr,"tableBody");	
-				
-				</script>
 
 				<div align="right" style="margin: 10px;">
 					<button type="reset" class="btn btn-primary" onclick='goBack()'>Back</button>
@@ -73,9 +57,11 @@
 	</div>
 
 	<script>
-		function goBack() {
-			window.history.back();
-		}
+		let jsonStr = <%Integer userId = (Integer) session.getAttribute("userId");
+			out.print(EventService.selectUserEvents(userId));%>;
+
+		createEventTable(jsonStr, "tableBody");
+		addFromTemplate("navbar", "#navDiv");
 	</script>
 
 </body>

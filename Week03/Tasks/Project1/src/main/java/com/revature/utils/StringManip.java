@@ -4,6 +4,8 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class StringManip {
 
 	public static LocalDateTime getLocalDateTime(String s) {
@@ -42,5 +44,19 @@ public class StringManip {
 
 	public static String formatDate(LocalDateTime eventDate) {
 		return eventDate.getMonthValue() + "/" + eventDate.getDayOfMonth() + "/" + eventDate.getYear();
+	}
+
+	public static String getJSONString(Object o) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		String json = null;
+
+		try {
+			json = mapper.writeValueAsString(o);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
 	}
 }

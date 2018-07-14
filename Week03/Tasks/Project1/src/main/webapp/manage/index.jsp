@@ -21,20 +21,22 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <title>Welcome to Project1</title>
 <script src="../resources/js/employeeHome.js"></script>
-<script src="../resources/js/template.js"></script>
+<script src="../resources/js/events.js"></script>
+<script src="../resources/js/common.js"></script>
 <link rel="import" href="../template/userbody.html">
-
+<link rel="import" href="../template/navbar.html">
+<link rel="import" href="../template/subevents.html">
 </head>
 <body>
 
 	<div id="navDiv"></div>
 	<br>	
-	<div id="container"></div>
+	<div id="container" class="container-fluid"></div>
 
 	<script>
-		
-	 	addFromTemplate("#navBar", "#navDiv");
-	    addFromTemplate("#userBody", "#container");
+	 	addFromTemplate("navbar", "#navDiv");
+	    addFromTemplate("userbody", "#container");
+	    addFromTemplate("subevents", "#container");
 	   
 	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
 	    
@@ -44,6 +46,11 @@
 		
 		json = <%out.print(EventService.selectUserEvents(userId));%>;
 		createEventTableSmall(json, "tableBody");
+		
+		json = <%out.print(EventService.selectSubordinateEvents(userId));%>;
+		console.log(json);
+		
+		createEventTableWithEmpName(json, "subTableBody");
 	</script>
 	
 </body>

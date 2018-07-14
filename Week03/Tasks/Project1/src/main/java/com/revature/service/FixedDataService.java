@@ -9,6 +9,7 @@ import com.revature.bean.Employee;
 import com.revature.bean.EmployeeType;
 import com.revature.bean.Event;
 import com.revature.bean.EventType;
+import com.revature.bean.GradeScale;
 import com.revature.dao.FixedDataDao;
 
 public class FixedDataService {
@@ -16,6 +17,7 @@ public class FixedDataService {
 	private static Map<Integer, EmployeeType> employeeTypeMap;
 	private static Map<Integer, EventType> eventTypeMap;
 	private static Map<Integer, Department> departmentMap;
+	private static Map<Integer, GradeScale> gradeScaleMap;
 
 	private static Map<Integer, EmployeeType> getEmployeeTypeMap() {
 		if (employeeTypeMap == null) {
@@ -46,6 +48,16 @@ public class FixedDataService {
 		}
 		return departmentMap;
 	}
+	
+	private static Map<Integer, GradeScale> getGradeScaleMap() {
+		if (gradeScaleMap == null) {
+			List<GradeScale> list = new FixedDataDao().selectAllGradeScales();
+			gradeScaleMap = new HashMap<>();
+			for (GradeScale i : list)
+				gradeScaleMap.put(i.getId(), i);
+		}
+		return gradeScaleMap;
+	}
 
 	public static EventType getEventType(Integer id) {
 		return getEventTypeMap().get(id);
@@ -70,4 +82,10 @@ public class FixedDataService {
 	public static Department getDepartment(Employee employee) {
 		return getDepartment(employee.getDepartment());
 	}
+
+	public static GradeScale getGradeScale(Integer id) {
+		return getGradeScaleMap().get(id);
+	}
+
+	
 }

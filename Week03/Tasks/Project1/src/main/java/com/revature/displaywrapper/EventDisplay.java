@@ -16,6 +16,25 @@ public class EventDisplay {
 	private String date;
 	private String status;
 	private String employeeName;
+	private String gradeScaleName;
+	
+	public String getGradeScaleName() {
+		return gradeScaleName;
+	}
+
+	public void setGradeScaleName(String gradeScaleName) {
+		this.gradeScaleName = gradeScaleName;
+	}
+
+	private Event event;
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 
 	public EventDisplay(Event event) {
 		this.id = event.getId();
@@ -29,6 +48,9 @@ public class EventDisplay {
 		this.date = StringManip.formatDate(event.getEventDate());
 		this.status = "processing";
 		this.employeeName = "e_"+event.getEmpId();
+		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
+
+		this.event = event;
 	}
 
 	public Integer getId() {
@@ -99,7 +121,7 @@ public class EventDisplay {
 	public String toString() {
 		return "EventDisplay [id=" + id + ", name=" + name + ", typeName=" + typeName + ", cost=" + cost
 				+ ", expectedAmount=" + expectedAmount + ", date=" + date + ", status=" + status + ", employeeName="
-				+ employeeName + "]";
+				+ employeeName + ", gradeScaleName=" + gradeScaleName + ", event=" + event + "]";
 	}
 	
 	

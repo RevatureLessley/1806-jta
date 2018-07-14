@@ -8,9 +8,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.revature.bean.Event;
 import com.revature.dao.EventDaoImpl;
 import com.revature.displaywrapper.EventDisplay;
+import com.revature.utils.StringManip;
 
 public class EventService {
-	
+
 	public static EventDisplay getEventWrapper(Event event) {
 		return new EventDisplay(event);
 	}
@@ -18,22 +19,28 @@ public class EventService {
 	public static String selectUserEvents(Integer userId) {
 		List<Event> events = new EventDaoImpl().selectUserEvents(userId);
 		List<EventDisplay> wrappedEvents = new ArrayList<>();
-		
-		for(Event ev : events) 
+
+		for (Event ev : events)
 			wrappedEvents.add(new EventDisplay(ev));
-		
-		
-		
-		ObjectMapper mapper = new ObjectMapper();
-		
-		String json = null;
-		
-		try {
-			json = mapper.writeValueAsString(wrappedEvents);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return json;
+
+		return StringManip.getJSONString(wrappedEvents);
+	}
+
+	public static String selectUserEvent(Integer userId, Integer eventId) {
+		Event event = new EventDaoImpl().selectById(eventId);
+
+		EventDisplay evD = new EventDisplay(event);
+
+		return StringManip.getJSONString(evD);
+	}
+
+	public static String selectSubordinateEvents(Integer userId) {
+		List<Event> events = new EventDaoImpl().selectSubordinateEvents(userId);
+		List<EventDisplay> wrappedEvents = new ArrayList<>();
+
+		for (Event ev : events)
+			wrappedEvents.add(new EventDisplay(ev));
+
+		return StringManip.getJSONString(wrappedEvents);
 	}
 }
