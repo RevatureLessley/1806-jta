@@ -20,18 +20,18 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = null;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		RequestDispatcher rd = null;
 
 		if(EmployeeService.employeeLogin(username, password)){
 			session = request.getSession();
 			session.setAttribute("username", username);
-			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
+			rd = request.getRequestDispatcher("user/index.html");
 			rd.forward(request, response);
 		}
 		
 		else {
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.write("<head><script>window.history.back();</script></head>");
+			rd = request.getRequestDispatcher("index.html");
+			rd.forward(request, response);
 		}
 	}
 
