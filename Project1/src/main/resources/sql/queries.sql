@@ -28,8 +28,20 @@ select
        left outer join project_1_grade grade
        on grade.form_uuid = u.uuid;
 /
- 
-select * from project_1_user;
+
+declare
+    available number := 10000;
+    pending number := 0;
+    awarded number := 0;
+    exceeded number := 0;
+begin
+    insert into project_1_finance (employee_uuid, amount_available, amount_awarded, amount_pending, amount_exceeded) select uuid, available, pending, awarded, exceeded from project_1_user;
+end;
+/
+
+select * from project_1_user
+inner join project_1_finance
+on project_1_user.uuid = project_1_finance.employee_uuid;
 
 select * from project_1_role;
 

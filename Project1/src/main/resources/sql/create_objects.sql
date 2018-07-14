@@ -140,7 +140,7 @@ begin
     open returnCursor for select * from (
                                          (select * from project_1_user user where uuid = employeeUUID)
                                           left outer join (select * from (
-                                                           (select * from (
+                                                          (select * from (
                                                                            project_1_available_reimbursement where uuid = employeeUUID)
                                           on project_1_user.uuid = project_1_available_reimbursement.uuid);
 end;
@@ -155,12 +155,12 @@ end;
 create or replace procedure selectAllUsers (returnCursor out sys_refcursor)
 as
 begin
-    open returnCursor for select * from project_1_user;
+    open returnCursor for select * from project_1_user inner join project_1_finance on project_1_user.uuid = project_1_finance.employee_uuid;
 end;
 /
 
 create or replace procedure selectUserByUsername (userHandle in varchar2,
-                                                   returnCursor out sys_refcursor)
+                                                  returnCursor out sys_refcursor)
 is
 begin
     open returnCursor for select * from project_1_user where username=userHandle;
@@ -304,6 +304,14 @@ begin
 end;
 /
 
+create or replace procedure selectFinancialInformation(uuid in varchar2,
+                                                       returnCursor out sys_refcursor)
+is
+begin
+    open returnCursor for select * from project_1_finance where employee_uuid = uuid;
+end;
+/
+
 create or replace procedure updateExceededAmount(uuid in varchar2,
                                                  amount in number)
 is
@@ -399,12 +407,11 @@ begin
 end;
 /
 
-create or replace procedure removeFinanceInformation(userUUID in varchar2)
+create or replace procedure removeEmployee(userUUID in varchar2)
 is
 begin
+    delete from project_1_user where uuid = userUUID;
     delete from project_1_finance where employee_uuid = userUUID;
     commit;
 end;
 /
-
-create or replace procedure 
