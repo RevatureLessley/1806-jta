@@ -1,6 +1,5 @@
 package Project1.Service;
 
-import Project1.Beans.*;
 import Project1.DAOs.*;
 
 public class EmployeeService {

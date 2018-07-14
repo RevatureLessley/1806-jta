@@ -1,11 +1,8 @@
 package Project1.Servlets;
 
 import java.io.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -20,9 +17,8 @@ public class LogoutServlet extends HttpServlet {
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
 				request.getSession().invalidate();
-				response.setContentType("text/html");
-				PrintWriter out = response.getWriter();
-				out.println("<h3>SESSION ERADICATED</h3>");
+				RequestDispatcher rd = request.getRequestDispatcher("index.html");
+				rd.forward(request, response);
 	}
 
 	/**

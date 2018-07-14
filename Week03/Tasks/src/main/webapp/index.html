@@ -16,6 +16,7 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
 													bootstrap.min.js">
 		</script>
+		<script src="./resources/js/ajax.js"></script>
 	</head>
 	<body>
 	<div class="container-fluid">
@@ -52,23 +53,26 @@
 				</form>
 			</div> -->
 			<div class="col-sm-6">
-				<h2>Login</h2>
+				<h2>Please Login</h2>
 				<form action="LoginServlet" method="POST">
 					<div class="form-group">
 						<label for="username">Username:</label> 
 						<input 
-							class="form-control" id="username" 
-							name="username" type="text"
+							class="form-control" id="username" name="username"
+							type="text" required
 						>
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label> 
 						<input 
-							class="form-control" id="password" 
-							name="password" type="password"
+							class="form-control" id="password" name="password"
+							type="password" required 
 						>
 					</div>
-					<button class="btn btn-primary" type="submit" >
+					<div id="beforeLogin"><br></div>
+					<button 
+						class="btn btn-primary" type="submit" 
+						onfocus= "login()" onmouseover="login()">
 						Login
 					</button>
 				</form>

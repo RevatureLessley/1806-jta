@@ -37,4 +37,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckEmployeeServlet</display-name>
+    <servlet-name>CheckEmployeeServlet</servlet-name>
+    <servlet-class>Project1.Servlets.CheckEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckEmployeeServlet</servlet-name>
+    <url-pattern>/CheckEmployeeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
