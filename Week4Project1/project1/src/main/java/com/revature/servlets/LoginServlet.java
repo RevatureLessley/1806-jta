@@ -30,13 +30,38 @@ public class LoginServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 		
+		System.out.println("accountname: " + accountname);
+		System.out.println("password: " + password);
+		
+		EmployeeService es = new EmployeeService();
 		
 		if ( EmployeeService.employeeLogin(accountname, password) )
 		{
 			session = request.getSession();
 			session.setAttribute("accountname", accountname);
-			out.println("<h3 style='color:green'>LOGIN SUCCESS</h3>");
-			out.println("<button href='user/index.html'>OKAY!</button>");
+			if ( es.checkEmpId(accountname) == 1 )
+			{
+				response.sendRedirect("./benefitscoordinator/index.html");
+			}
+			else if ( es.checkEmpId(accountname) == 2 )
+			{
+				response.sendRedirect("./supandhead/index.html");
+			}
+			else if ( es.checkEmpId(accountname) == 3 )
+			{
+				response.sendRedirect("./departmenthead/index.html");
+			}
+			else if ( es.checkEmpId(accountname) == 4 )
+			{
+				response.sendRedirect("./supervisor/index.html");
+			}
+			else if ( es.checkEmpId(accountname) == 5 )
+			{
+				response.sendRedirect("./employee/index.html");
+			}
+			
+//			out.println("<h3 style='color:green'>LOGIN SUCCESS</h3>");
+//			out.println("<a href=\"./employee/index.html\" class=\"btn btn-info\" role=\"button\">Employee login</a>");
 		}
 		else
 		{

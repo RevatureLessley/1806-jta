@@ -31,16 +31,16 @@
 	                            <h3 class="mb-0 text-white">Login</h3>
 	                        </div>
 	                        <div class="card-body">
-	                            <form action="LoginServlet" class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+	                            <form action="LoginServlet" method="POST">
 	                                <div class="form-group">
 	                                    <label for="accountname">Accountname</label>
 	                                    <input type="text" class="form-control form-control-lg rounded-0" name="accountname" id="accountname" required>
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Password</label>
-	                                    <input type="password" class="form-control form-control-lg rounded-0" id="password" required autocomplete="new-password">
+	                                    <input type="password" class="form-control form-control-lg rounded-0" name="password" id="password" required>
 	                                </div>
-	                                <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+	                                <button type="submit" class="btn btn-success btn-lg float-right">Login</button>
 	                            </form>
 	                        </div>
 	                    </div>
@@ -49,17 +49,6 @@
 	        </div>
 	    </div>
 	</div>
-	
-	<h1>home screen index.html</h1>
-	<a href="./employee/index.html" class="btn btn-info" role="button">Employee login</a>
-	<br><br>
-	<a href="./supervisor/index.html" class="btn btn-info" role="button">Supervisor login</a>
-	<br><br>
-	<a href="./departmenthead/index.html" class="btn btn-info" role="button">Department Head login</a>
-	<br><br>
-	<a href="./supandhead/index.html" class="btn btn-info" role="button">Supervisor and Department Head login</a>
-	<br><br>
-	<a href="./benefitscoordinator/index.html" class="btn btn-info" role="button">benefits coordinator login</a>
 	<br><br>
 </body>
 

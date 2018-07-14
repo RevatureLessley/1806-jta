@@ -136,8 +136,18 @@ VALUES (6, 'Other', 30, 3);
 
 INSERT INTO employee
 VALUES (1, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 5);
+INSERT INTO employee
+VALUES (2, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 1000, 4);
+INSERT INTO employee
+VALUES (3, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 1000, 3);
+INSERT INTO employee
+VALUES (4, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 2);
+INSERT INTO employee
+VALUES (5, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 1);
 INSERT INTO reimbursement
 VALUES (1, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
+
+COMMIT;
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -147,4 +157,8 @@ BEGIN
     COMMIT;
 END;
 
+
 --CALL update_amount_left(1, 900);
+--SELECT * FROM employee WHERE emp_accountname = 'loganbrewer';
+--SELECT * FROM employee;
+--SELECT job_type_id FROM employee WHERE emp_accountname = 'loganbrewer';
