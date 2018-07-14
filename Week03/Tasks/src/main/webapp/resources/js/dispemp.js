@@ -4,8 +4,8 @@ window.onload = function(){
 
 function getEmp(){
 	let xhr = new XMLHttpRequest();
-	let table = document.getElementById("emptable");
-	table.innerHTML = "";
+	let list = document.getElementById("empinfo");
+	list.innerHTML = "";
 	
 	let url = "SelectEmployeeServlet";
 	
@@ -13,9 +13,26 @@ function getEmp(){
 		if(xhr.readyState==4){
 			let data = JSON.parse(xhr.response);
 			console.log(data);
+			
+			list.innerHTML += "<li>Employee ID: "
+				+ data["empid"] + "</li>";
+			list.innerHTML += "<li>Employee Name: "
+				+ data["firstN"] + " " + data["lastN"] + "</li>";
+			list.innerHTML += "<li>Position: "
+				+ data["empTypeName"] + "</li>";
+			list.innerHTML += "<li>Direct Supervisor ID: "
+				+ data["dirSupId"] + "</li>";
+			list.innerHTML += "<li>Direct Supervisor Name: "
+				+ data["dirSupName"] + "</li>";
+			list.innerHTML += "<li>Department: "
+				+ data["depName"] + "</li>";
+			list.innerHTML += "<li>Pending Reimbursements Total: "
+				+ data["pending"] + "</li>";
+			list.innerHTML += "<li>Available Reimbursements Total: "
+				+ data["awarded"] + "</li>";
 			//table.appendChild(document.createElement('tr').appendChild(document.createElement('td').
 			//		appendChild(document.createTextNode('asdf'))));
-			let r1 = document.createElement('tr');
+			/*let r1 = document.createElement('tr');
 			let r1d1 = document.createElement('td');
 			let r1d2 = document.createElement('td');
 			let r1td1 = document.createTextNode('Employee ID: ')
@@ -92,7 +109,7 @@ function getEmp(){
 			table.appendChild(r3);
 			table.appendChild(r4);
 			table.appendChild(r5);
-			table.appendChild(r6);
+			table.appendChild(r6);*/
 			
 		}
 	}

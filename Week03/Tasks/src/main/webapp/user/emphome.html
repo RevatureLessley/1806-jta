@@ -23,13 +23,27 @@
 		</ul>
 	</nav>
 	
+	<!-- 
 	<div class="rsection">
-			<button onclick="getEmp()">REFRESH</button>
-			<table id="emptable" border=2px;>
-				<tr>
-					<th>Employee ID</th>
-				</tr>
-			</table>
+		<button onclick="getEmp()">REFRESH</button>
+		<table id="emptable" border=2px;>
+			<tr>
+				<th>Employee ID</th>
+			</tr>
+		</table>
+	</div>
+	 -->
+	<div class="rsection">
+			<h1>Employee Info</h1>
+			<form action="#">
+				<ul style="list-style-type:none">
+					
+					<li><button onclick="getEmp()">Refresh</button></li>
+				</ul>
+				<ul style="list-style-type:none" id ="empinfo">
+				</ul>
+			</form>
 		</div>
+		
 </body>
 </html>

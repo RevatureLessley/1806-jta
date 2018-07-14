@@ -43,7 +43,7 @@ public class EmployeeService {
 		Employee employee;
 		employee = empDao.selectEmployeeByUserN(usern);
 		Employee dirSup;
-		dirSup = empDao.selectEmployeeById(employee.getEmpid());
+		dirSup = empDao.selectEmployeeById(employee.getDirSupId());
 		DepartmentService.getDepartments();
 		EmployeeTypeService.getEmployeeTypes();
 		employee.setDepName(DepartmentService.department.getDepNameMap().get(employee.getDepId()));
