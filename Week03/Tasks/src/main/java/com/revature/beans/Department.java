@@ -8,6 +8,7 @@ public class Department {
 	public Department() {
 		depNameMap = new HashMap<>();
 	}
+	
 	public void insertDep(int depid, String depname) {
 		depNameMap.put(depid, depname);
 	}

@@ -42,7 +42,13 @@ public class EmployeeService {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		Employee employee;
 		employee = empDao.selectEmployeeByUserN(usern);
+		Employee dirSup;
+		dirSup = empDao.selectEmployeeById(employee.getEmpid());
+		DepartmentService.getDepartments();
+		EmployeeTypeService.getEmployeeTypes();
 		employee.setDepName(DepartmentService.department.getDepNameMap().get(employee.getDepId()));
+		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeMap().get(employee.getEmpType()));
+		employee.setDirSupName(dirSup.getFirstN() + " " + dirSup.getLastN());
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		

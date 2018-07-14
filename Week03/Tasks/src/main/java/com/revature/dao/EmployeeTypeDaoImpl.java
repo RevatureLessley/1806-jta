@@ -7,22 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.revature.beans.Department;
+import com.revature.beans.EmployeeType;
 import com.revature.util.Connections;
 
-public class DepartmentDaoImpl implements DepartmentDao{
-	public Department getDepartments() {
+public class EmployeeTypeDaoImpl implements EmployeeTypeDao{
+	public EmployeeType getEmployeeTypes() {
 		Statement stmt = null; 
 		ResultSet rs = null;
-		Department dep = new Department();
+		EmployeeType emptype = new EmployeeType();
 		try(Connection conn = Connections.getConnection()){
-			String sql = "SELECT dep_id, dep_name FROM Department";
+			String sql = "SELECT * FROM EmployeeType";
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
-				dep.insertDep(rs.getInt(1),rs.getString(2));
+				emptype.insertType(rs.getInt(1),rs.getString(2));
 			}
 			
 		}catch(SQLException e){
@@ -31,6 +31,6 @@ public class DepartmentDaoImpl implements DepartmentDao{
 			close(stmt);
 			close(rs);
 		}
-		return dep;
+		return emptype;
 	}
 }

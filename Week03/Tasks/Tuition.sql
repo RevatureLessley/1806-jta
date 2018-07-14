@@ -181,18 +181,18 @@ VALUES(4,'Marketing',4);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
 VALUES(0,'executive','executive','Boss','Man',0,0,0,3);
-INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
+INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(1,'benefits','benefits','Bobert','Bobson',1,0,0,2);
-INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
+VALUES(1,'benefits','benefits','Bobert','Bobson',0,1,0,0,2);
+INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(2,'production','production','Tommy','Droptables',2,0,0,2);
-INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
+VALUES(2,'production','production','Tommy','Droptables',0,2,0,0,2);
+INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(3,'finance','finance','Johnny','Tsunami',3,0,0,2);
-INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
+VALUES(3,'finance','finance','Johnny','Tsunami',0,3,0,0,2);
+INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(4,'marketing','marketing','Timmy','Turner',4,0,0,2);
+VALUES(4,'marketing','marketing','Timmy','Turner',0,4,0,0,2);
 
 --Event types table
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)

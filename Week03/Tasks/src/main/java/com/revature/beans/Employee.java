@@ -7,15 +7,16 @@ public class Employee {
 	private String firstN;
 	private String lastN;
 	private int dirSupId;
+	private String dirSupName;
 	private int depId;
 	private String depName;
 	private double pending;
 	private double awarded;
 	private int empType;
-	private int auth;
+	private String empTypeName;
 	
 	public Employee(int empid, String userN, String passW, String firstN, String lastN, int dirSupId, int depId,
-			double pending, double awarded, int empType, int auth) {
+			double pending, double awarded, int empType) {
 		super();
 		this.empid = empid;
 		this.userN = userN;
@@ -162,10 +163,23 @@ public class Employee {
 	public void setEmpType(int empType) {
 		this.empType = empType;
 	}
+	
 	/**
 	 * @return the auth
 	 */
 	
+	/**
+	 * @return the empTypeName
+	 */
+	public String getEmpTypeName() {
+		return empTypeName;
+	}
+	/**
+	 * @param empTypeName the empTypeName to set
+	 */
+	public void setEmpTypeName(String empTypeName) {
+		this.empTypeName = empTypeName;
+	}
 	/**
 	 * @return the depName
 	 */
@@ -181,11 +195,27 @@ public class Employee {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	/**
+	 * @return the dirSupName
+	 */
+	public String getDirSupName() {
+		return dirSupName;
+	}
+	/**
+	 * @param dirSupName the dirSupName to set
+	 */
+	public void setDirSupName(String dirSupName) {
+		this.dirSupName = dirSupName;
+	}
 	@Override
 	public String toString() {
 		return "Employee [empid=" + empid + ", userN=" + userN + ", passW=" + passW + ", firstN=" + firstN + ", lastN="
-				+ lastN + ", dirSupId=" + dirSupId + ", depId=" + depId + ", pending="
-				+ pending + ", awarded=" + awarded + ", empType=" + empType;
+				+ lastN + ", dirSupId=" + dirSupId + ", dirSupName=" + dirSupName + ", depId=" + depId + ", pending="
+				+ pending + ", awarded=" + awarded + ", empType=" + empType + ", empTypeName=" + empTypeName;
 	}
+	/**
+	 * @return the dirSupName
+	 */
+
 	
 }

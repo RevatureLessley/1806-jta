@@ -60,8 +60,7 @@ public class EmployeeDaoImpl {
 						rs.getInt(7),
 						rs.getDouble(8),
 						rs.getDouble(9),
-						rs.getInt(10),
-						rs.getInt(11)
+						rs.getInt(10)
 						);
 			}
 			
@@ -74,4 +73,36 @@ public class EmployeeDaoImpl {
 		return null;
 	}
 	
+	public Employee selectEmployeeById(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM Employee WHERE emp_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return new Employee(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getInt(6),
+						rs.getInt(7),
+						rs.getDouble(8),
+						rs.getDouble(9),
+						rs.getInt(10)
+						);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
 }
