@@ -6,7 +6,39 @@ import Project1.Beans.*;
 
 public class EmployeeDAOImp implements LogReference {
 	
-	public boolean insertEmployee() {
+	public boolean checkEmployee(String username) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sqlQuery = "SELECT * " + 
+						  "FROM Employee_View " + 
+						  "WHERE E_Username = ?";
+
+		try(Connection connection = DatabaseConnection.connect()) {
+			ps = connection.prepareStatement(sqlQuery);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+
+			if(rs.next()) return true;
+			
+			else return false;
+		}
+		
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			DatabaseConnection.close(ps);
+			DatabaseConnection.close(rs);
+		}
+
+		return false;
+	}
+	
+	public void insertEmployee(String username, String password,
+								  String firstname, String lastname, 
+								  String department, String supervisor, 
+								  String isBenco) {
 		logger.debug("Project1/DAO/EmployeeDAOImp.java: " + 
            	 "Entered insertEmployee().");
 		String sqlInsert = "{call insertEmployee(?, ?, ?, ?, ?, ?, ?)}";
@@ -14,15 +46,14 @@ public class EmployeeDAOImp implements LogReference {
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
-			statement.setString(1, "kwang");
-			statement.setString(2, "kwang");
-			statement.setString(3, "Kevin");
-			statement.setString(4, "Wang");
-			statement.setString(5, "Dictator");
-			statement.setString(6, "swilery");
-			statement.setString(7, "N");
-			
-			return statement.execute();
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.setString(3, firstname);
+			statement.setString(4, lastname);
+			statement.setString(5, department);
+			statement.setString(6, supervisor);
+			statement.setString(7, isBenco);
+			statement.execute();
 		}
 
 		catch(SQLException se) {
@@ -36,8 +67,6 @@ public class EmployeeDAOImp implements LogReference {
 		           	 "Exiting insertEmployee().");
 			DatabaseConnection.close(statement);
 		}
-		
-		return false;
 	}
 	
 	public Employee selectEmployee(String username, String password) {
@@ -47,7 +76,7 @@ public class EmployeeDAOImp implements LogReference {
 						  "FROM Employee_View " + 
 						  "WHERE E_Username = ? AND E_Password = ?";
 
-		try(Connection connection = DatabaseConnection.connect()){
+		try(Connection connection = DatabaseConnection.connect()) {
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, username);
 			ps.setString(2, password);

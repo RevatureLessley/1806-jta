@@ -16,76 +16,107 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
 													bootstrap.min.js">
 		</script>
-		<script src="./resources/js/ajax.js"></script>
 	</head>
 	<body>
-	<div class="container-fluid">
-		<h1 align="center">
-			Welcome to the Tuition Reimbursement Management System
-		</h1>
-		<div class="row">
-			<!-- <div class="col-sm-6">
-				<h4>REGISTER</h4>
-				<form action="" id="registerForm" onsubmit="return validateRegistration()">
-					<div class="form-group">
-						<label for="username">USERNAME:</label> <input type="text"
-							class="form-control" id="username" name="username">
-					</div>
-					<div class="form-group" id="passwordMessage">
-						<label for="password1">Password:</label> <input type="password"
-							class="form-control" id="password1" name="password1">
-					</div>
-					<div class="form-group">
-						<label for="password2">Password:</label> <input type="password"
-							class="form-control" id="password2" name="password2">
-					</div>
-					<hr>
-					<div class="form-group">
-						<label for="fname">FIRST NAME:</label> <input type="text"
-							class="form-control" id="fname" name="fname">
-					</div>
-					<div class="form-group">
-						<label for="lname">LAST NAME:</label> <input type="text"
-							class="form-control" id="lname" name="lname">
-					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-					<button type="reset" class="btn btn-primary">Reset</button>
-				</form>
-			</div> -->
-			<div class="col-sm-6">
-				<h2>Please Login</h2>
-				<form action="LoginServlet" method="POST">
-					<div class="form-group">
-						<label for="username">Username:</label> 
-						<input 
-							class="form-control" id="username" name="username"
-							type="text" required
-						>
-					</div>
-					<div class="form-group">
-						<label for="password">Password:</label> 
-						<input 
-							class="form-control" id="password" name="password"
-							type="password" required 
-						>
-					</div>
-					<div id="beforeLogin"><br></div>
-					<button 
-						class="btn btn-primary" type="submit" 
-						onfocus= "login()" onmouseover="login()">
-						Login
-					</button>
-				</form>
+		<div class="container-fluid">
+			<h1 align="center">
+				Welcome to the Tuition Reimbursement Management System
+			</h1>
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>Please Register</h2>
+					<form id="registerForm" action="RegisterServlet" method="POST">
+						<div class="form-group" id="beforeUsername">
+							<label for="username">Username:</label> 
+							<input 
+								class="form-control" id="username" 
+								name="username" type="text" 
+								onblur="checkUsername()" required
+							>
+						</div>
+						<div class="form-group" id="beforePassword">
+							<label for="password">Password:</label> 
+							<input
+								class="form-control" id="password"
+								name="password" type="password" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="passwordConfirm">Confirm Password:</label> 
+							<input 
+								class="form-control" id="passwordConfirm"
+								name="passwordConfirm" type="password"
+								onblur="checkPassword()" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="firstname">First Name:</label>
+							<input 
+								class="form-control" id="firstname" 
+								name="firstname" type="text" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="lastname">Last Name:</label>
+							<input 
+								type="text" class="form-control" 
+								id="lastname" name="lastname" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="department">Department:</label>
+							<input 
+								class="form-control" id="department"
+								name="department" type="text" required
+							>
+						</div>
+						<div class="form-group" id="beforeSupervisor">
+							<label for="supervisor">Supervisor Username:</label>
+							<input 
+								class="form-control" id="supervisor"
+								name="supervisor" type="text" 
+								onblur="checkSupervisor()" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="benCo">
+								Are you a Benefits Coordinator?
+							</label> 
+							<input 
+								type="checkbox" id="benCo" name="benCo" 
+								value="Y"
+							>
+						</div>
+						<button class="btn btn-primary" type="submit">
+							Register
+						</button>
+					</form>
+				</div>
+				<div class="col-sm-6">
+					<h2>Please Login</h2>
+					<form id="loginForm" action="LoginServlet" method="POST">
+						<div class="form-group">
+							<label for="username">Username:</label> 
+							<input 
+								class="form-control" id="username" 
+								name="username" type="text" required
+							>
+						</div>
+						<div class="form-group">
+							<label for="password">Password:</label> 
+							<input 
+								class="form-control" id="password"
+								name="password" type="password" required 
+							>
+						</div>
+						<div><p id="beforeLogin" style="color:red"></p></div>
+						<button 
+							class="btn btn-primary" type="submit">
+							Login
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-		<button onclick="getNpcs()">REFRESH</button>
-		<table id="npctable" border=2px;>
-			<tr>
-				<th>NPC ID</th>
-				<th>NPC NAME</th>
-				<th>NPC CLASS</th>
-			</tr>
-		</table>
 	</body>
 </html>

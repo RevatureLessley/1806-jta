@@ -15,7 +15,6 @@ public class Project1 {
 		ReimbursementDAOImp rdi = new ReimbursementDAOImp();
 		AttachmentDAOImp adi = new AttachmentDAOImp();
 		GradingFormatDAOImp gfdi = new GradingFormatDAOImp();
-		edi.insertEmployee();
 		rdi.insertReimbursement();
 		adi.insertAttachment("ApprovalAdditionalInfo");
 		adi.insertAttachment("ApprovalAttachment");

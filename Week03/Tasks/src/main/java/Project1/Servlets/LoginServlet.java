@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		RequestDispatcher rd = null;
+		PrintWriter out = response.getWriter();
 
 		if(EmployeeService.employeeLogin(username, password)){
 			session = request.getSession();
@@ -31,7 +32,12 @@ public class LoginServlet extends HttpServlet {
 		
 		else {
 			rd = request.getRequestDispatcher("index.html");
-			rd.forward(request, response);
+			rd.include(request, response);
+			out.println("<script>" + 
+							"document.getElementById(\"beforeLogin\")" + 
+									".innerHTML=" + 
+										"\"Username or Password incorrect.\"" + 
+						"</script>");
 		}
 	}
 

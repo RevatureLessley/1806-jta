@@ -36,8 +36,8 @@ CREATE TABLE Approval (
     app_id NUMBER PRIMARY KEY,
     app_typ_id NUMBER,
     app_rei_id NUMBER,
-    app_isApproved CHAR(1) DEFAULT 'U'
-        CHECK (app_isApproved IN ('N', 'Y', 'U')),
+    app_isApproved CHAR(1)
+        CHECK (app_isApproved IN ('N', 'Y')),
     app_reason VARCHAR2(4000)
 );
 
@@ -57,7 +57,7 @@ CREATE TABLE Approval_Attachment (
 
 CREATE TABLE Approval_Type (
     app_typ_id NUMBER PRIMARY KEY,
-    app_typ_value CHAR(20)
+    app_typ_value CHAR(20) NOT NULL
         CHECK (app_typ_value IN ('BENEFITS_COORDINATOR', 
                                  'DEPARTMENT_HEAD', 
                                  'DIRECT_SUPERVISOR'))
@@ -77,7 +77,7 @@ CREATE TABLE Employee (
     emp_password VARCHAR2(4000),
     emp_firstname VARCHAR2(4000),
     emp_lastname VARCHAR2(4000),
-    emp_isBenCo CHAR(1) DEFAULT 'N'
+    emp_isBenCo CHAR(1) DEFAULT 'N' NOT NULL
         CHECK (emp_isBenCo IN ('N', 'Y'))
 );
 
@@ -102,7 +102,7 @@ CREATE TABLE Event_Type (
     eve_typ_id NUMBER PRIMARY KEY,
     eve_typ_coverage NUMBER
         CHECK (eve_typ_coverage IN (0.3, 0.6, 0.75, 0.8, 1)),
-    eve_typ_value VARCHAR(40)
+    eve_typ_value VARCHAR(40) NOT NULL
         CHECK (eve_typ_value IN ('CERTIFICATION',
                                  'CERTIFICATION_PREPARATION_CLASS',
                                  'SEMINAR', 
@@ -112,8 +112,8 @@ CREATE TABLE Event_Type (
 
 CREATE TABLE Grading_Format (
     gra_for_id NUMBER PRIMARY KEY,
-    gra_for_confirmed CHAR(1) DEFAULT 'U'
-        CHECK (gra_for_confirmed IN ('N', 'Y', 'U')),
+    gra_for_confirmed CHAR(1)
+        CHECK (gra_for_confirmed IN ('N', 'Y')),
     gra_for_filename VARCHAR2(4000),
     gra_for_file BLOB DEFAULT EMPTY_BLOB(),
     gra_for_passing_cutoff NUMBER DEFAULT NULL
@@ -123,9 +123,9 @@ CREATE TABLE Reimbursement (
   rei_id NUMBER PRIMARY KEY,
   rei_emp_id NUMBER,
   rei_awarded NUMBER DEFAULT 0,
-  rei_isCancelled CHAR(1) DEFAULT 'N'
+  rei_isCancelled CHAR(1) DEFAULT 'N' NOT NULL
     CHECK (rei_isCancelled IN ('N', 'Y')),
-  rei_isPending CHAR(1) DEFAULT 'Y'
+  rei_isPending CHAR(1) DEFAULT 'Y' NOT NULL
     CHECK (rei_isPending IN ('N', 'Y')),
   rei_justification VARCHAR2(4000),
   rei_reason_exeeded_max VARCHAR2(4000)
@@ -216,7 +216,7 @@ SELECT ER.emp_username AS E_Supervisor,
        EL.emp_firstname AS E_FirstName, EL.emp_lastname AS E_LastName, 
        EL.emp_isBenco AS E_IsBenCo
 FROM Employee EL
-INNER JOIN Employee ER ON EL.emp_supervisor = ER.emp_id;
+LEFT JOIN Employee ER ON EL.emp_supervisor = ER.emp_id;
 
 CREATE SEQUENCE app_seq
 START WITH 1
