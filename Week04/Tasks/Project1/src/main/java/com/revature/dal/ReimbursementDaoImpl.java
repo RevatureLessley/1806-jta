@@ -6,10 +6,60 @@ import com.revature.utils.DatabaseConnection;
 import com.revature.utils.LogWrapper;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import static com.revature.utils.CloseStreams.close;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
+
+    @Override
+    public ArrayList<ReimbursementBean> retrieveReimbursementsByEmployee(int employeeId) {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try(Connection conn = DatabaseConnection.getConnection()){
+            String sql = "SELECT * FROM Complete_Employee a INNER JOIN Reimbursement_Requests b ON a.employee_id = b.employee_id WHERE b.employee_id = ?";
+
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, employeeId);
+            rs = statement.executeQuery();
+            ArrayList<ReimbursementBean> beanList = new ArrayList<>();
+            while (rs.next()){
+                ReimbursementBean bean = new ReimbursementBean(
+                        rs.getInt("request_id"),
+                        new EmployeeBean(
+                                rs.getInt("employee_id"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                rs.getString("password"),
+                                rs.getLong("phone"),
+                                rs.getString("email"),
+                                rs.getDouble("pending_reimbursement"),
+                                rs.getDouble("awarded_reimbursement"),
+                                rs.getInt("dir_supervisor_id"),
+                                rs.getInt("dept_head_id"),
+                                rs.getInt("ben_co_id")
+                        ),
+                        rs.getDate("date_requested").toLocalDate(),
+                        rs.getString("location"),
+                        rs.getString("description"),
+                        rs.getDouble("reimbursement"),
+                        rs.getString("grading_format"),
+                        rs.getInt("event_type"),
+                        rs.getInt("is_approved") != 0
+                );
+                beanList.add(bean);
+            }
+            LogWrapper.log(this.getClass(), "Retrieve Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
+            return beanList;
+        } catch (SQLException e) {
+            LogWrapper.log(this.getClass(), e);
+        }finally {
+            close(statement);
+            close(rs);
+        }
+        return null;
+
+    }
 
     @Override
     public ReimbursementBean retrieveReimbursementFormById(int id){

@@ -9,4 +9,5 @@ public interface EmployeeDao {
     boolean insertEmployee(EmployeeBean bean);
     boolean deleteEmployeeById(int id);
     ArrayList<EmployeeBean> retrieveEmployeesByEmail(String email);
+    ArrayList<EmployeeBean> retrieveAllEmployees();
 }

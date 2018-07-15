@@ -27,19 +27,14 @@ public class ReimbursementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LogWrapper.log(this.getClass(), "ReimbursementServlet received GET request.", LogWrapper.Severity.DEBUG);
-//        String firstName = req.getParameter("firstname");
-//        String lastName = req.getParameter("lastname");
-//        String email = req.getParameter("email");
-//        String type = req.getParameter("type");
+
         String location = req.getParameter("location");
         String description = req.getParameter("description");
 
-        //long phone = 0L;
         int idNum = 1;  //this should trigger SQLException constraint violation - primary key uniqueness
         double cost = 0;
         LocalDate date = null;
         try {
-            //phone = Long.parseLong(req.getParameter("phone"));
             idNum = Integer.parseInt(req.getParameter("idnum"));
             date = LocalDate.parse(req.getParameter("date"));
             cost = Integer.parseInt(req.getParameter("cost"));

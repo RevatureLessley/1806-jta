@@ -7,6 +7,7 @@ function validateRegistration(){
 	
 	let pass1 = document.forms['registerForm']['password1'].value;
 	let pass2 = document.forms['registerForm']['password2'].value;
+	console.log(pass1);
 	
 	if(pass1 != pass2){
 		let errorText = document.createTextNode("Passwords do not match!");

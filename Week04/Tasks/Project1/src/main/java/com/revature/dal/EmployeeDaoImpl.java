@@ -85,6 +85,43 @@ public class EmployeeDaoImpl implements EmployeeDao{
     }
 
     @Override
+    public ArrayList<EmployeeBean> retrieveAllEmployees() {
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try(Connection conn = DatabaseConnection.getConnection()){
+            String sql = "SELECT * FROM Employees a INNER JOIN Clearances b ON a.employee_id = b.employee_id";
+            statement = conn.prepareStatement(sql);
+            rs = statement.executeQuery();
+            ArrayList<EmployeeBean> beanList = new ArrayList<>();
+            while (rs.next()){
+                EmployeeBean bean = new EmployeeBean(
+                        rs.getInt("employee_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("password"),
+                        rs.getLong("phone"),
+                        rs.getString("email"),
+                        rs.getDouble("pending_reimbursement"),
+                        rs.getDouble("awarded_reimbursement"),
+                        rs.getInt("dir_supervisor_id"),
+                        rs.getInt("dept_head_id"),
+                        rs.getInt("ben_co_id")
+                );
+                beanList.add(bean);
+            }
+            LogWrapper.log(this.getClass(), "Retrieve Employees Successful", LogWrapper.Severity.DEBUG);
+            return beanList;
+        } catch (SQLException e) {
+            LogWrapper.log(this.getClass(), e);
+        }finally {
+            close(statement);
+            close(rs);
+        }
+        return null;
+
+    }
+
+    @Override
     public boolean insertEmployee(EmployeeBean bean) {
         CallableStatement statement = null;
         try(Connection conn = DatabaseConnection.getConnection()){

@@ -18,7 +18,7 @@ CREATE TABLE Employees (
     last_name varchar2(100) NOT NULL,
     password varchar2(100) NOT NULL,
     phone number(10),
-    email varchar2(100),
+    email varchar2(100) UNIQUE,
     pending_reimbursement number(6,2) NOT NULL,
     awarded_reimbursement number(6,2) NOT NULL
 );
@@ -119,7 +119,7 @@ END;
 /
 
 --The following inserts are for default values
-INSERT INTO Employees VALUES(5, 'Regular', 'Employee', 'donkey', 1111111111, 'emploreg@company.email', 102.23, 0);
+INSERT INTO Employees VALUES(5, 'Eric', 'Sundberg', 'password', 1111111111, 'sundbeed@company.email', 102.23, 0);
 INSERT INTO Employees VALUES(4, 'Super', 'Visor', 'koolaid', 2222222222, 'visorsup@company.email', 0, 127.39);
 INSERT INTO Employees VALUES(3, 'Department', 'Head', 'fancypants', 3333333333, 'headdep@company.email', 0, 0);
 INSERT INTO Employees VALUES(2, 'Benefits', 'Coordinator', 'sql', 4444444444, 'coordben@company.email', 0, 0);
@@ -151,6 +151,6 @@ SELECT * FROM Complete_Employee ;
 SELECT * FROM REIMBURSEMENT_REQUESTS a
 INNER JOIN EMPLOYEES b
 ON a.EMPLOYEE_ID = b.EMPLOYEE_ID
-WHERE a.EMPLOYEE_ID = 1774 ;
+WHERE a.EMPLOYEE_ID = 5 ;
 
 SELECT * FROM Complete_Employee a INNER JOIN Reimbursement_Requests b ON a.employee_id = b.employee_id WHERE b.request_id = 3 ;
