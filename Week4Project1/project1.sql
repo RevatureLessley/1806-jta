@@ -6,6 +6,9 @@ DROP TABLE job_type CASCADE CONSTRAINTS;
 DROP TABLE grading_format CASCADE CONSTRAINTS;
 DROP TABLE approval CASCADE CONSTRAINTS;
 
+DROP SEQUENCE emp_seq;
+DROP SEQUENCE reim_seq;
+
 CREATE TABLE approval
 (
     approval_id NUMBER(6),
@@ -63,7 +66,7 @@ CREATE TABLE employee
 CREATE TABLE reimbursement
 (
     r_id NUMBER(6),
-    event_date DATE,
+    event_date VARCHAR2(100),
     event_time VARCHAR2(100),
     event_location VARCHAR2(100),
     event_desc VARCHAR2(100),
@@ -83,6 +86,46 @@ CREATE TABLE reimbursement
     CONSTRAINT fk_doc_id FOREIGN KEY (doc_id) REFERENCES documents (doc_id),
     CONSTRAINT fk_approval_id FOREIGN KEY (approval_id) REFERENCES approval (approval_id)
 );
+/
+CREATE SEQUENCE emp_seq
+    START WITH 1
+    INCREMENT BY 1;
+/   
+CREATE SEQUENCE reim_seq
+    START WITH 1
+    INCREMENT BY 1;
+/    
+CREATE SEQUENCE doc_seq
+    START WITH 1
+    INCREMENT BY 1;
+/    
+CREATE OR REPLACE TRIGGER emp_seq_trigger
+BEFORE INSERT ON employee --NOTE: you can use BEFORE or AFTER followed by a CRUD
+FOR EACH ROW --PL/SQL for loop
+BEGIN --This keyword signifies a block for a transaction
+    IF :new.emp_id IS NULL THEN
+        SELECT emp_seq.NEXTVAL INTO :new.emp_id FROM dual;
+    END IF;
+END;
+/    
+CREATE OR REPLACE TRIGGER reim_seq_trigger
+BEFORE INSERT ON reimbursement --NOTE: you can use BEFORE or AFTER followed by a CRUD
+FOR EACH ROW --PL/SQL for loop
+BEGIN --This keyword signifies a block for a transaction
+    IF :new.r_id IS NULL THEN
+        SELECT reim_seq.NEXTVAL INTO :new.r_id FROM dual;
+    END IF;
+END;
+/
+CREATE OR REPLACE TRIGGER doc_seq_trigger
+BEFORE INSERT ON documents --NOTE: you can use BEFORE or AFTER followed by a CRUD
+FOR EACH ROW --PL/SQL for loop
+BEGIN --This keyword signifies a block for a transaction
+    IF :new.doc_id IS NULL THEN
+        SELECT doc_seq.NEXTVAL INTO :new.doc_id FROM dual;
+    END IF;
+END;
+/
 
 INSERT INTO approval
 VALUES (0, 'Declined');
@@ -126,6 +169,9 @@ VALUES (5, 'Technical Training', 90, 3);
 INSERT INTO event
 VALUES (6, 'Other', 30, 3);
 
+INSERT INTO documents
+VALUES (null, null, null);
+
 --SELECT * FROM approval;
 --SELECT * FROM grading_format;
 --SELECT * FROM job_type;
@@ -135,19 +181,17 @@ VALUES (6, 'Other', 30, 3);
 --SELECT * FROM reimbursement;
 
 INSERT INTO employee
-VALUES (1, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 5);
+VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 5);
 INSERT INTO employee
-VALUES (2, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 1000, 4);
+VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 1000, 4);
 INSERT INTO employee
-VALUES (3, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 1000, 3);
+VALUES (null, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 1000, 3);
 INSERT INTO employee
-VALUES (4, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 2);
+VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 2);
 INSERT INTO employee
-VALUES (5, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 1);
+VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 1);
 INSERT INTO reimbursement
-VALUES (1, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
-
-COMMIT;
+VALUES (null, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -156,9 +200,54 @@ BEGIN
     UPDATE employee SET amount_left = newAmountLeft WHERE emp_id = empId;
     COMMIT;
 END;
-
-
+/
+CREATE OR REPLACE PROCEDURE update_approval(empId IN reimbursement.emp_id%TYPE,
+                                            approvalId IN reimbursement.approval_id%TYPE)
+IS
+BEGIN
+    UPDATE reimbursement SET approval_id = approvalId WHERE emp_id = empId;
+    COMMIT;
+END;
+/
+CREATE OR REPLACE PROCEDURE insert_into_reimbursement(rId IN reimbursement.r_id%TYPE,
+                                                      eventDate IN reimbursement.event_date%TYPE,
+                                                      eventTime IN reimbursement.event_time%TYPE,
+                                                      eventLocation IN reimbursement.event_location%TYPE,
+                                                      eventDesc IN reimbursement.event_desc%TYPE,
+                                                      eventCost IN reimbursement.event_cost%TYPE,
+                                                      justificationVar IN reimbursement.justification%TYPE,
+                                                      gradeCutoff IN reimbursement.grade_cutoff%TYPE,
+                                                      gradeVar IN reimbursement.grade%TYPE,
+                                                      empId IN reimbursement.emp_id%TYPE,
+                                                      eventId IN reimbursement.event_id%TYPE,
+                                                      gradingFormatId IN reimbursement.grading_format_id%TYPE,
+                                                      docId IN reimbursement.doc_id%TYPE,
+                                                      approvalId IN reimbursement.approval_id%TYPE)
+IS
+BEGIN
+    INSERT INTO reimbursement (r_id, event_date,
+                               event_time, event_location,
+                               event_desc, event_cost,
+                               justification, grade_cutoff,
+                               grade, emp_id,
+                               event_id, grading_format_id,
+                               doc_id, approval_id)
+    VALUES (rId, eventDate, eventTime, eventLocation,
+            eventDesc, eventCost, justificationVar, 
+            gradeCutoff, gradeVar, empId,
+            eventId, gradingFormatId, 
+            docId, approvalId);
+    COMMIT;
+END;
+/   
+--CALL insert_into_reimbursement(null, '06-FEB-2018', '07:00', 'Arlington, TX',
+--                               'more', 50, 'do', 
+--                               0, null, 1, 4, 2, null, 0);
 --CALL update_amount_left(1, 900);
 --SELECT * FROM employee WHERE emp_accountname = 'loganbrewer';
---SELECT * FROM employee;
+--SELECT * FROM reimbursement;
 --SELECT job_type_id FROM employee WHERE emp_accountname = 'loganbrewer';
+COMMIT;
+
+--SELECT r_id FROM reimbursement WHERE rownum = 1
+--ORDER BY r_id DESC;
