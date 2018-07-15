@@ -2,28 +2,28 @@ package com.revature.beans;
 import java.util.Date;
 
 public class ReimbursementForm {
-	private Integer rfId;
-	private Date startDate;
-	private Date formsDate;
+	private String  rfId;
+	private String startDate;
+	private String formsDate;
 	private String gradeCutOff;
-	private Integer eventId;
-	private Integer eventAttachId;
-	public Integer getRfId() {
+	private String eventId;
+	private String eventAttachId;
+	public String getRfId() {
 		return rfId;
 	}
-	public void setRfId(Integer rfId) {
+	public void setRfId(String rfId) {
 		this.rfId = rfId;
 	}
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public Date getFormsDate() {
+	public String getFormsDate() {
 		return formsDate;
 	}
-	public void setFormsDate(Date formsDate) {
+	public void setFormsDate(String formsDate) {
 		this.formsDate = formsDate;
 	}
 	public String getGradeCutOff() {
@@ -32,22 +32,21 @@ public class ReimbursementForm {
 	public void setGradeCutOff(String gradeCutOff) {
 		this.gradeCutOff = gradeCutOff;
 	}
-	public Integer getEventId() {
+	public String getEventId() {
 		return eventId;
 	}
-	public void setEventId(Integer eventId) {
+	public void setEventId(String eventId) {
 		this.eventId = eventId;
 	}
-	public Integer getEventAttachId() {
+	public String getEventAttachId() {
 		return eventAttachId;
 	}
-	public void setEventAttachId(Integer eventAttachId) {
+	public void setEventAttachId(String eventAttachId) {
 		this.eventAttachId = eventAttachId;
 	}
-	public ReimbursementForm(Integer rfId, Date startDate, Date formsDate, String gradeCutOff, Integer eventId,
-			Integer eventAttachId) {
+	public ReimbursementForm( String startDate, String formsDate, String gradeCutOff, String eventId,
+			String eventAttachId) {
 		super();
-		this.rfId = rfId;
 		this.startDate = startDate;
 		this.formsDate = formsDate;
 		this.gradeCutOff = gradeCutOff;

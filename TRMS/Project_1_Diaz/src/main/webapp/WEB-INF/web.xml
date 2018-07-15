@@ -40,13 +40,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ReimbursementForm</display-name>
-    <servlet-name>ReimbursementForm</servlet-name>
-    <servlet-class>com.revature.servlets.ReimbursementForm</servlet-class>
+    <display-name>ReimbursementFormServlet</display-name>
+    <servlet-name>ReimbursementFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ReimbursementFormServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ReimbursementForm</servlet-name>
-    <url-pattern>/ReimbursementForm</url-pattern>
+    <servlet-name>ReimbursementFormServlet</servlet-name>
+    <url-pattern>/ReimbursementFormServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

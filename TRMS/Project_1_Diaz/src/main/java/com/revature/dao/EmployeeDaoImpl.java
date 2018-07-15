@@ -14,23 +14,24 @@ import com.revature.util.Connections;
 public class EmployeeDaoImpl implements EmployeeDao{
 
 	@Override
-	public Boolean insertEmployeeViaSp(Employee emp) {
-		CallableStatement stmt = null; 
+	public Boolean insertEmployee(Employee emp) {
+		
+		CallableStatement stmt = null;
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertEmployee(?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertEmployee(?,?,?,?,?,?,?,1000)}");
 			
-			stmt.setInt(1, emp.getRfId());
-			stmt.setInt(2, emp.getEmpTypeId());
+			stmt.setString(1, emp.getRfId());
+			stmt.setString(2, emp.getEmpTypeId());
 			stmt.setString(3, emp.getfName());
 			stmt.setString(4, emp.getlName());
 			stmt.setString(5, emp.getEmpPassword());
 			stmt.setString(6, emp.getEmpPhone());
 			stmt.setString(7, emp.getEmpEmail());
 			
-			stmt.execute(); 
-			return true;
+			stmt.executeUpdate(); 
+			
 			
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -55,9 +56,9 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			
 			while(rs.next()){
 				return new Employee(
-						rs.getInt(1),
-						rs.getInt(2),
-						rs.getInt(3),
+						rs.getString(1),
+						rs.getString(2),
+						rs.getString(3),
 						rs.getString(4),
 						rs.getString(5),
 						rs.getString(6),

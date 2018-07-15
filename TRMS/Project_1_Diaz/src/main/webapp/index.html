@@ -51,22 +51,22 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<h3>Create Account</h3>
-								<form action="employeeServlet">
+								<form action="employeeServlet" method="POST">
 									<div class="form-group">
-										<h6><label for="rfId">FormID(pick a number):</label> <input type="number"
+										<h6><label for="rfId">FormID(pick a number):</label> <input type="text"
 											   class="form-control" id="rfId" name="rfId"></h6>
 									</div>
 									<div class="form-group">
-										<h6><label for="EmployeeTypeId">Employee Type ID (Chose one of the numbers from the table to the right):</label> <input type="number"
-											   class="form-control" id="EmployeeTypeId" name="EmployeeTypeId"></h6>
+										<h6><label for="empTypeId">Employee Type ID (Chose one of the numbers from the table to the right):</label> <input type="text"
+											   class="form-control" id="empTypeId" name="empTypeId"></h6>
 									</div>
 									<div class="form-group">
 										<h6><label for="fname">First Name:</label> <input type="text"
 											   class="form-control" id="fname" name="fname"></h6>
 									</div>
 									<div class="form-group">
-										<h6><label for="lName">Last Name:</label> <input type="text"
-											   class="form-control" id="lName" name="lName"></h6>
+										<h6><label for="lname">Last Name:</label> <input type="text"
+											   class="form-control" id="lname" name="lname"></h6>
 									</div>
 									<div class="form-group">
 										<h6><label for="password1">Password:</label> <input type="password"
@@ -77,12 +77,12 @@
 											   class="form-control" id="password2" name="password2"></h6>
 									</div>
 									<div class="form-group">
-										<h6><label for="phone">Phone#:</label> <input type="text"
-											   class="form-control" id="phone" name="phone"></h6>
+										<h6><label for="empPhone">Phone#:</label> <input type="text"
+											   class="form-control" id="empPhone" name="empPhone"></h6>
 									</div>
 									<div class="form-group">
-										<h6><label for="email">Email:</label> <input type="text"
-											   class="form-control" id="email" name="email"></h6>
+										<h6><label for="empEmail">Email:</label> <input type="text"
+											   class="form-control" id="empEmail" name="empEmail"></h6>
 									</div>
 									
 									<button type="submit" class="btn btn-primary">Submit</button>

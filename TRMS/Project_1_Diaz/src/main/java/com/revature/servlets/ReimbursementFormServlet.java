@@ -9,24 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.services.EmployeeService;
+import com.revature.services.ReimbursementFormServices;
 import com.revature.util.HtmlTemplates;
 
 /**
- * Servlet implementation class employee
+ * Servlet implementation class ReimbursementForm
  */
-public class employeeServlet extends HttpServlet {
+public class ReimbursementFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public employeeServlet() {
+    public ReimbursementFormServlet() {
         super();
-
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(" Test: ").append(request.getContextPath());
-		
+		response.getWriter().append(" Test : ").append(request.getContextPath());
 	}
 
 
@@ -34,10 +32,10 @@ public class employeeServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		if(EmployeeService.createEmployee(request)) {
-			out.println("<h3 style='color:green'>USER:  CREATED!</h3>");
+		if(ReimbursementFormServices.createClam(request)) {
+			out.println("<h3 style='color:green'>Form has been Submitted!</h3>");
 		}else{
-			out.println("Employee already exist please try again ");
+			out.println(" ERROR ");
 		}
 		HtmlTemplates.goBackButton(out);
 	}

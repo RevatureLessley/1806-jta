@@ -1,31 +1,31 @@
 package com.revature.beans;
 
 public class Employee {
-	private Integer empId;
-	private Integer rfId;
-	private Integer empTypeId;
+	private String empId;
+	private String rfId;
+	private String empTypeId;
 	private String fName;
 	private String lName;
 	private String empPassword;
 	private String empPhone;
 	private String empEmail;
 	
-	public Integer getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
-	public void setEmpId(Integer empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
-	public Integer getRfId() {
+	public String getRfId() {
 		return rfId;
 	}
-	public void setRfId(Integer rfId) {
+	public void setRfId(String rfId) {
 		this.rfId = rfId;
 	}
-	public Integer getEmpTypeId() {
+	public String getEmpTypeId() {
 		return empTypeId;
 	}
-	public void setEmpTypeId(Integer empTypeId) {
+	public void setEmpTypeId(String empTypeId) {
 		this.empTypeId = empTypeId;
 	}
 	public String getfName() {
@@ -58,10 +58,23 @@ public class Employee {
 	public void setEmpEmail(String empEmail) {
 		this.empEmail = empEmail;
 	}
-	public Employee(Integer empId, Integer rfId, Integer empTypeId, String fName, String lName, String empPassword,
+	public Employee(String empId, String rfId, String empTypeId, String fName, String lName, String empPassword,
 			String empPhone, String empEmail) {
 		super();
 		this.empId = empId;
+		this.rfId = rfId;
+		this.empTypeId = empTypeId;
+		this.fName = fName;
+		this.lName = lName;
+		this.empPassword = empPassword;
+		this.empPhone = empPhone;
+		this.empEmail = empEmail;
+	}
+	
+	
+	public Employee(String rfId, String empTypeId, String fName, String lName, String empPassword, String empPhone,
+			String empEmail) {
+		super();
 		this.rfId = rfId;
 		this.empTypeId = empTypeId;
 		this.fName = fName;
