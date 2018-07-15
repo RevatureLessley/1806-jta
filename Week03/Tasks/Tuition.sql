@@ -215,7 +215,7 @@ CREATE OR REPLACE PROCEDURE insertNewEmployee(userN IN varchar2,
                                             lastN IN varchar2,
                                             dirS IN varchar2,
                                             depId IN number,
-                                            empT in number)
+                                            empT IN number)
 IS
 BEGIN
     INSERT INTO Employee (username,pass_word,f_name,l_name,dir_sup_id,

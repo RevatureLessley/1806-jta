@@ -16,16 +16,15 @@ public class EmployeeDaoImpl {
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertIntoEmployee(?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertNewEmployee(?,?,?,?,?,?,?)}");
 			
-			stmt.setInt(1, employee.getEmpid());
-			stmt.setString(2, employee.getUserN());
-			stmt.setString(3, employee.getPassW());
-			stmt.setString(4, employee.getFirstN());
-			stmt.setString(5, employee.getLastN());
-			stmt.setInt(6, employee.getDirSupId());
-			stmt.setInt(7, employee.getDepId());
-			stmt.setInt(8,employee.getEmpType());
+			stmt.setString(1, employee.getUserN());
+			stmt.setString(2, employee.getPassW());
+			stmt.setString(3, employee.getFirstN());
+			stmt.setString(4, employee.getLastN());
+			stmt.setInt(5, employee.getDirSupId());
+			stmt.setInt(6, employee.getDepId());
+			stmt.setInt(7,employee.getEmpType());
 			
 
 			

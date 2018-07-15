@@ -39,7 +39,7 @@
 			
 			<div class="col-sm-6">
 					<h4>Register</h4>
-					<form action="Register.do">
+					<form action="Register.do" method="POST">
 						<div class="form-group">
 						<label for="username">Username:</label> <input type="text"
 							class="form-control" id="username" name="username">
@@ -60,6 +60,18 @@
 					<div class="form-group">
 						<label for="lname">Last Name:</label> <input type="text"
 							class="form-control" id="lname" name="lname">
+					</div>
+					<div class="form-group">
+						<label for="dirsup">Direct Supervisor:</label> <input type="text"
+							class="form-control" id="dirsup" name="dirsup">
+					</div>
+					<div class="form-group">
+						<label for="dep">Department:</label> <input type="text"
+							class="form-control" id="dep" name="dep">
+					</div>
+					<div class="form-group">
+						<label for="pos">Position:</label> <input type="text"
+							class="form-control" id="pos" name="pos">
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 					</form>

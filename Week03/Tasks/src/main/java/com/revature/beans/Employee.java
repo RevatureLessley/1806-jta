@@ -43,6 +43,19 @@ public class Employee {
 		this.awarded = 0;
 		this.empType = empType;
 	}
+	public Employee(String userN, String passW, String firstN, String lastN,
+			int dirSupId, int depId, int empType) {
+		super();
+		this.userN = userN;
+		this.passW = passW;
+		this.firstN = firstN;
+		this.lastN = lastN;
+		this.dirSupId = dirSupId;
+		this.depId = depId;
+		this.pending = 0;
+		this.awarded = 0;
+		this.empType = empType;
+	}
 	/**
 	 * @return the empid
 	 */

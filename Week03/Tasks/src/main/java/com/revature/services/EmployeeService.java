@@ -7,7 +7,6 @@ import com.revature.dao.EmployeeDaoImpl;
 
 public class EmployeeService {
 	public static boolean registerEmployee(
-			int empid,
 			String usern,
 			String passw,
 			String fname,
@@ -16,9 +15,8 @@ public class EmployeeService {
 			int depid,
 			int emptype
 		){
-	Employee employee = new Employee(empid,usern,passw,fname,lname,dirsupid,depid,emptype);
+	Employee employee = new Employee(usern,passw,fname,lname,dirsupid,depid,emptype);
 	EmployeeDaoImpl empDao = new EmployeeDaoImpl();
-	
 	if(!(empDao.selectEmployeeByUserN(usern) == null)){
 		return false;
 	}
@@ -44,8 +42,6 @@ public class EmployeeService {
 		employee = empDao.selectEmployeeByUserN(usern);
 		Employee dirSup;
 		dirSup = empDao.selectEmployeeById(employee.getDirSupId());
-		DepartmentService.getDepartments();
-		EmployeeTypeService.getEmployeeTypes();
 		employee.setDepName(DepartmentService.department.getDepNameMap().get(employee.getDepId()));
 		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeMap().get(employee.getEmpType()));
 		employee.setDirSupName(dirSup.getFirstN() + " " + dirSup.getLastN());
