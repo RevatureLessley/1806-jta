@@ -52,7 +52,12 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("password", password);
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
-
+//
+//			request.getRequestDispatcher("index.html").include(request, response);
+//			out.println("<script>document.getElementById('invalidpass')"
+//					+ ".innerHTML='Invalid username or password'; </script>");
+		}
+		else {
 			request.getRequestDispatcher("index.html").include(request, response);
 			out.println("<script>document.getElementById('invalidpass')"
 					+ ".innerHTML='Invalid username or password'; </script>");
