@@ -32,9 +32,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
-		rd.forward(request, response);
 	}
 
 	/**
@@ -51,15 +48,14 @@ public class LoginServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("password", password);
-			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("username"));
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 
 		}else{
-			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
-			HtmlTemplates.goBackButton(out);
+			request.getRequestDispatcher("index.html").include(request, response);
+			out.println("<script>document.getElementById('invalidpass')"
+					+ ".innerHTML='Invalid username or password'; </script>");
 		}
-		doGet(request, response);
 	}
 
 }
