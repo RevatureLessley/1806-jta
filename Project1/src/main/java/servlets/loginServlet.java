@@ -19,7 +19,7 @@ public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public loginServlet() {
-        // TODO Auto-generated constructor stub
+        
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,10 +27,9 @@ public class loginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		PersonDaoImpl PDI = new PersonDaoImpl();
-		int test = PDI.checkPassword(request.getParameter(name), pWord)
+		int test = PDI.checkPassword(request.getParameter("name"), "pWord");
 		
-		String pass= "password"; //TODO: Replace with password retrieved via username
-		if(confirmPass(request.getParameter("password1"), pass)) {
+		if(test != -1) {
 			
 		}
 		else {
