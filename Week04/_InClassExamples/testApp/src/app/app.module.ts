@@ -1,3 +1,4 @@
+import { ExampleService } from './services/example/example.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +28,7 @@ import { approutes } from './routing';
     HttpClientModule,
     RouterModule.forRoot(approutes)
   ],
-  providers: [],
+  providers: [ExampleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
