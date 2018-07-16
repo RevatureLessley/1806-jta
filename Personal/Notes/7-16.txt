@@ -1,0 +1,9 @@
+Dependency Injection (DI) is a design pattern where one delegates the creation of new instances of objects to the application instead of the developer. Developers never use new. They are automatically created and injected into any component that requests it. Angular achieves this using private constructor variables. This decouples applications as dependencies become modular.
+
+Declare components, import modules, providers are services, and bootstrap is the root component of the application.
+
+AngularJS had filters that can pull data from the controller and modify it before presenting in the view. Angular 6 calls it piping.
+
+any is a datatype in typescript. Adding ? to typescript datatypes make it optional. 
+
+ng build --prod <- build for production
