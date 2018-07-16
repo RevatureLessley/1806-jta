@@ -9,6 +9,18 @@ import { ExampleService } from '../../services/example/example.service';
 })
 export class PokeapiComponent implements OnInit {
 
+  /*
+    Dependency Injection:
+    -Dependency Injection (DI) is the design pattern where one delegates the creation
+    of new instances of certain objects to the application instead of the developer
+    itself. IE, we never use a 'new' or assignment operator for the bellow http and
+    ex variables. These are created for us and injected into any component that requests
+    it. (Note this is done in angular via private variables in component constructors.)
+    As the name suggests, and dependencies that are required by other components can be
+    managed and supplied by angular and all we have to do is simply mention them in the
+    constructor. This vastly decouples any application, as dependenices become 
+    modular with use.
+  */
   constructor(private http: HttpClient, private ex:ExampleService) { }
 
   ngOnInit() {
