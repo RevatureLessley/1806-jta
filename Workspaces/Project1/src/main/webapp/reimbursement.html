@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous">
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+</script>
+<script src="./resources/js/main.js"></script>
+
+<title>Reimbursement Form</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<h4>REIMBURSEMENT FORM</h4>
+				<form action="ReimbursementServlet" method="post">
+				  <div class="form-group">
+				    <label for="empid">Employee ID</label>
+				    <input type="number" class="form-control" id="empid" name="empid" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="Date">Today's Date</label>
+				    <input type="date" class="form-control" id="date" name="date" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="startdate">Training Start Date</label>
+				    <input type="date" class="form-control" id="startdate" name="startdate" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="location">Training Location</label>
+				    <input type="text" class="form-control" id="location" name="location" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="description">Description</label>
+				    <input type="text" class="form-control" id="description" name="description" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="cost">Cost</label>
+				    <input type="number" class="form-control" id="cost" name="cost" required>		  
+				  </div>
+				  <div class="form-group">
+				    <label for="coverage">Projected Coverage</label>
+				    <input type="number" class="form-control" id="coverage" name="coverage" disabled=disabled>	
+				    <button type=button onclick="updateCoverage()">Update</button>
+				  </div>
+				  <div class="form-group">
+				  	<label for="gradingformat">Grading Format</label>
+				  	<select class="form-control" id="grade" name="grade" required>
+				    	<option value="1">Grade</option>
+				    	<option value="2">Presentation</option>
+				  	</select>
+				  </div>		  
+				  <div class="form-group">
+				  	<label for="train">Training Type</label>
+				  	<select class="form-control" id="train" name="train" required>
+				    	<option value="1">University Course</option>
+				    	<option value="2">Seminar</option>
+				    	<option value="3">Certification Prep</option>
+				    	<option value="4">Certification</option>
+				    	<option value="5">Technical</option>
+				    	<option value="6">Other</option>
+				  	</select>
+				  </div>
+				  <div class="form-group">
+				    <label for="passgrade">Passing Grade</label>
+				    <input type="number" class="form-control" id="gradepass" name="gradepass" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="justification">Justification</label>
+				    <input type="text" class="form-control" id="justification" name="justification" required>
+				  </div>						
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>				
+			</div>
+			<div class="col-sm-3"></div>
+		</div>				
+	</div>
+</body>
+</html>
