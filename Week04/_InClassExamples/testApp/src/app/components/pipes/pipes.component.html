@@ -1,0 +1,20 @@
+<div class="rsection">
+  <h1>PIPES</h1>
+  <p>In AngularJS there was a feature called filters. 
+    What filters did, was give you a way to modify model data before 
+    it got presented in the view. You would pull data from teh controller 
+    and alter it before it got the view.
+  </p>
+  <p>
+    Angular 6 has this feature as well. And it works just like a filter, 
+    except we call it 'piping' in angular 6.
+  </p>
+  <div *ngFor="let x of names">
+    <p>{{x | uppercase}}</p>
+    <p>'uppercase' is one of the provided pipes.</p>
+  </div>
+  <div>
+    <input [(ngModel)]="stuff">
+    <p>{{stuff | customPipe}}</p>
+  </div>
+</div>

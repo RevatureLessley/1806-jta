@@ -1,3 +1,4 @@
+import { PipesComponent } from './components/pipes/pipes.component';
 import { ExampleService } from './services/example/example.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,23 +13,27 @@ import { DirectivesComponent } from './components/directives/directives.componen
 import { CustomDirective } from './directives/custom.directive';
 import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
 import { approutes } from './routing';
+import { CustomPipePipe } from './pipes/custom-pipe.pipe';
+
 
 @NgModule({
-  declarations: [
+  declarations: [ //Your components
     AppComponent,
     NavbarComponent,
     InterpolationComponent,
     DirectivesComponent,
     CustomDirective,
-    PokeapiComponent
+    PokeapiComponent,
+    PipesComponent,
+    CustomPipePipe
   ],
-  imports: [
+  imports: [ //your modules
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(approutes)
   ],
-  providers: [ExampleService],
-  bootstrap: [AppComponent]
+  providers: [ExampleService], //your services
+  bootstrap: [AppComponent] //The root component of the application
 })
 export class AppModule { }
