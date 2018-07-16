@@ -7,3 +7,37 @@ AngularJS had filters that can pull data from the controller and modify it befor
 any is a datatype in typescript. Adding ? to typescript datatypes make it optional. 
 
 ng build --prod <- build for production
+
+AWS -Amazon Web Services
+    -Infrastructure
+     --------------
+    	--hardware
+		---servers
+		---switche boards
+    	--software
+		---Office suite
+		---Salesforce
+		---Pega
+		---Appian
+    	--network
+		---enablement
+		---firewalls
+		---security
+    -Services
+     --------
+	--platform
+		---servers
+		---database
+	--software
+		---Office suite
+		---Salesforce
+		---Pega
+		---Appian
+	--infrastructure
+		---hardware
+		---processors
+		---operating systems
+
+ssh -i revatureKeyPair.pem ec2-user@18.206.54.186
+
+sudo yum update
