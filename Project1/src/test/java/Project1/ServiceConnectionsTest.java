@@ -46,4 +46,5 @@ public class ServiceConnectionsTest {
 		PersonDaoImpl PDI = new PersonDaoImpl();
 		assertTrue(PDI.checkPassword("Salaraelris", "Password") == -1);
 	}
+	
 }

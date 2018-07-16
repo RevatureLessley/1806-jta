@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.file;
 import beans.info;
 import beans.request;
 import util.Connections;
@@ -15,7 +16,7 @@ import util.Connections;
 public class RequestDaoImpl implements RequestDao {
 
 	public ArrayList<request> getRequestsByPlayerId(Integer id){
-		ArrayList<request> list = new ArrayList();
+		ArrayList<request> list = new ArrayList<request>();
 		PreparedStatement ps = null;
 		PreparedStatement psI = null;
 		PreparedStatement psF = null;
@@ -32,11 +33,11 @@ public class RequestDaoImpl implements RequestDao {
 		String sqlI = "SELECT * FROM info_list\r\n" + 
 				"INNER JOIN info\r\n" + 
 				"on info_list.info_id = info.info_id\r\n" + 
-				"WHERE info_list.reimbursement_id = ?;";
+				"WHERE info_list.reimbursement_id = ?";
 		String sqlF = "SELECT * FROM file_list\r\n" + 
 				"INNER JOIN file_table\r\n" + 
 				"on file_list.file_table_id = file_table.file_table_id\r\n" + 
-				"WHERE file_list.reimbursement_id = ?;";
+				"WHERE file_list.reimbursement_id = ?";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -62,15 +63,29 @@ public class RequestDaoImpl implements RequestDao {
 				psI = conn.prepareStatement(sqlI);
 				psI.setInt(1, rs.getInt("reimbursement_id"));
 				rsI = psI.executeQuery(); 
-				
+
+				ArrayList<info> infos = new ArrayList<info>();
+
 				while(rsI.next()) {
-					info tempI = new info(rsI.getString("info_data"));
+					infos.add(new info(rsI.getString("info_data")));
 				}
-				
+				for(info i: infos) {
+					temp.addInfo(i);
+				}
+
 				psF = conn.prepareStatement(sqlF);
 				psF.setInt(1, rs.getInt("reimbursement_id"));
 				rsF = psF.executeQuery(); 
+				ArrayList<file> files = new ArrayList<file>();
+
+				while(rsF.next()) {
+					files.add(new file(rsF.getString("file_table_address")));
+				}
+				for(file f: files) {
+					temp.addFile(f);
+				}
 				
+				list.add(temp);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
