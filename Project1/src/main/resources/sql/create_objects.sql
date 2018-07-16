@@ -1,45 +1,6 @@
 -- Tuition Reimbursement Management System Project 1
 -- Author Nathan Edwards
 
-drop table project_1_time;
-create table project_1_time (
-    unit varchar2(30) primary key,
-    urgent_request_start_of_course number(10),
-    supervisor_auto_approve_limit number(10),
-    dept_head_auto_approve_limit number(10)
-);
-/
-insert into project_1_time values ('DAYS',14,14,21);
-commit;
-/
-
--- If the urgent request start of course time has been exceeded,
--- the Scheduler automatically approves the reimbursement request.
-create or replace procedure autoApprovalOverride(
-    )
-is
-begin
-end;
-/
-
--- If the supervisor auto approval limit has been exceeded,
--- the Scheduler automatically approves the supervisor
--- portion of th reimbursement request.
-create or replace procedure supervisorAutoApproval()
-is
-begin
-end;
-/
-
--- If the department head auto approval limit has been exceeded,
--- the Scheduler automatically approves the department head
--- portion of the reimbursement request.
-create or replace procedure deptHeadAutoApproval()
-is
-begin
-end;
-/
-
 drop table project_1_user;
 create table project_1_user (
     uuid varchar2(36) primary key,
@@ -127,16 +88,20 @@ create table project_1_reimbursement_form (
     form_uuid varchar2(36) primary key,
     employee_uuid varchar2(36),
     form_creation_date date,
+    form_comments varchar2(300),
     status varchar2(15),
     direct_supervisor_uuid varchar2(36),
     department_head_uuid varchar2(36),
     benco_uuid varchar2(36),
     benco_decision varchar2(15),
+    benco_decision_date date,
+    benco_comments varchar2(300),
     supervisor_decision varchar2(15),
     supervisor_decision_date varchar2(15),
     supervisor_comments varchar2(300),
     department_head_decision varchar2(15),
     department_head_decision_date varchar2(15),
+    department_head_comments varchar(300),
     form_closed_date date,
     present_to_management_required varchar(3),
     completed_with_satisfaction varchar2(3),
@@ -259,8 +224,8 @@ end;
 /
 
 create or replace procedure selectWithEmail(userEmail in varchar2,
-                                               userPassword in varchar2,
-                                               returnCursor out sys_refcursor)
+                                            userPassword in varchar2,
+                                            returnCursor out sys_refcursor)
 is
 begin
     open returnCursor for select * from project_1_user where email = userEmail and 

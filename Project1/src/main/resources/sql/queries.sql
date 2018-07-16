@@ -47,6 +47,8 @@ select * from project_1_role;
 
 select * from project_1_role where role_name='Supervisor';
 
+select systimestamp from dual;
+
 declare
     v_cur sys_refcursor;
     v_amount number;

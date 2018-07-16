@@ -166,10 +166,9 @@ public class FinanceDAOImpl extends Connection implements FinanceDAO {
 			int amountAvailable = financeDAO.getUserAvailableReimbursementsAmount(user.getUuid());
 			int amountPending = financeDAO.getUserPendingReimbursementsAmount(user.getUuid());
 			int amountAwarded = financeDAO.getUserAwardedReimbursementAmount(user.getUuid());
-			int amountExceeded = financeDAO.getUserAvailableReimbursementsAmount(user.getUuid());
+			int amountExceeded = financeDAO.getUserExceededReimbursementAmount(user.getUuid());
 			
-			System.out.println("User: " + user.getUuid() + "amount: " + amountAvailable + '\n'
-					           + "awarded: " + amountAwarded + "exceeded: " + amountExceeded);
+			System.out.println("User: " + user.getUuid() + " amount: " + amountAvailable + " awarded: " + amountAwarded + " exceeded: " + amountExceeded + " amount pending: " + amountPending);
 		}
 	}
 }

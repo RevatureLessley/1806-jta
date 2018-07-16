@@ -208,9 +208,6 @@ public class ApplicationForm implements Form {
 
 	@Override
 	public void appendFormComments(String comment) {
-		// TODO Auto-generated method stub
-		
+		this.formComments += "\n" + comment;
 	}
-
-	
 }

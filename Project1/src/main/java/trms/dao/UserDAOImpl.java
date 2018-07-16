@@ -197,7 +197,6 @@ public class UserDAOImpl extends Connection implements UserDAO {
 	
 	public static void main(String[] args) {
 		try {
-			// TODO: before test
 			User testUser = new User();
 			testUser.setUuid(String.valueOf(UUID.randomUUID()));
 			testUser.setUsername("test");
