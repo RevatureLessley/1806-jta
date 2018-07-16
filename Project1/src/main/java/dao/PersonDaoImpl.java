@@ -57,8 +57,10 @@ public class PersonDaoImpl implements PersonDao{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, uName);
 			rs = ps.executeQuery();
-			if(pWord.equals(rs.getString(1))) {
-				return rs.getInt(2);
+			while(rs.next()) {
+				if(pWord.equals(rs.getString(1))) {
+					return rs.getInt(2);
+				}
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

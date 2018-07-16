@@ -36,8 +36,4 @@ public class loginServlet extends HttpServlet {
 			out.println("<h1 style ='color:red'> USERNAME/PASSWORD COMBO INCORRECT!</h1>"); //TODO: Redirect to login with error message.
 		}
 	}
-	
-	public boolean confirmPass(String pass1, String pass2) {
-		return pass1.equals(pass2);
-	}
 }
