@@ -19,26 +19,11 @@ export class ExampleService {
   constructor(private http: HttpClient) { }
 
 
-  getNpc(): Observable<Npc[]>{
+  getNpc(){
 
-    let npcs: Npc[] = [];
-    this.http.get("http://localhost:8085/180618_Servlets_P2/SelectNpc")
-      .subscribe(
-        success => { 
-          npcs = <Npc[]>success
-          
-        },
-        error => { 
-          console.log("ERROR");
-          
-        }
-      )
-      /*
-        The 'of' method returns an observable of a collection of
-        Posts. Think of it as a sort of stream of data that has
-        callback functionality.
-      */
-      return of(npcs);
+    
+    return this.http.get<Npc[]>("http://localhost:8085/180618_Servlets_P2/SelectNpc");
+         
       
   }
 }
