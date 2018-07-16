@@ -1,6 +1,45 @@
 -- Tuition Reimbursement Management System Project 1
 -- Author Nathan Edwards
 
+drop table project_1_time;
+create table project_1_time (
+    unit varchar2(30) primary key,
+    urgent_request_start_of_course number(10),
+    supervisor_auto_approve_limit number(10),
+    dept_head_auto_approve_limit number(10)
+);
+/
+insert into project_1_time values ('DAYS',14,14,21);
+commit;
+/
+
+-- If the urgent request start of course time has been exceeded,
+-- the Scheduler automatically approves the reimbursement request.
+create or replace procedure autoApprovalOverride(
+    )
+is
+begin
+end;
+/
+
+-- If the supervisor auto approval limit has been exceeded,
+-- the Scheduler automatically approves the supervisor
+-- portion of th reimbursement request.
+create or replace procedure supervisorAutoApproval()
+is
+begin
+end;
+/
+
+-- If the department head auto approval limit has been exceeded,
+-- the Scheduler automatically approves the department head
+-- portion of the reimbursement request.
+create or replace procedure deptHeadAutoApproval()
+is
+begin
+end;
+/
+
 drop table project_1_user;
 create table project_1_user (
     uuid varchar2(36) primary key,
@@ -83,16 +122,6 @@ create table project_1_direct_supervisor (
 );
 /
 
-drop table project_1_finance;
-create table project_1_finance (
-    employee_uuid varchar2(36) primary key,
-    amount_available number(5),
-    amount_awarded number(5),
-    amount_pending number(5),
-    amount_exceeded number(5)
-);
-/
-
 drop table project_1_reimbursement_form;
 create table project_1_reimbursement_form (
     form_uuid varchar2(36) primary key,
@@ -132,18 +161,6 @@ create table project_1_attachment (
     attachment_data blob
 );
 /
-
-create or replace procedure retreiveUserInformation (employeeUUID in varchar2,
-                                                     returnCursor out sys_refcursor)
-is
-begin
-    open returnCursor for select * from (
-                                         (select * from project_1_user user where uuid = employeeUUID)
-                                          left outer join (select * from (
-                                                          (select * from (
-                                                                           project_1_available_reimbursement where uuid = employeeUUID)
-                                          on project_1_user.uuid = project_1_available_reimbursement.uuid);
-end;
 
 create or replace procedure selectAllRoles (returnCursor out sys_refcursor)
 as
@@ -300,49 +317,6 @@ is
 begin
     insert into project_1_role_relationship
     values (uuid, 4);
-    commit;
-end;
-/
-
-create or replace procedure selectFinancialInformation(uuid in varchar2,
-                                                       returnCursor out sys_refcursor)
-is
-begin
-    open returnCursor for select * from project_1_finance where employee_uuid = uuid;
-end;
-/
-
-create or replace procedure updateExceededAmount(uuid in varchar2,
-                                                 amount in number)
-is
-begin
-    update project_1_finance set amount_exceeded = amount where employee_uuid = uuid;
-end;
-/
-
-create or replace procedure updateAwardedAmount(uuid in varchar2,
-                                                amount in number)
-is
-begin
-    update project_1_finance set amount_awarded = amount where employee_uuid = uuid;                     
-    commit;
-end;
-/
-
-create or replace procedure updatePendingAmount(uuid in varchar2,
-                                                amount in number)
-is
-begin
-    update project_1_finance set amount_pending = amount where employee_uuid = uuid;
-    commit;
-end;
-/
-
-create or replace procedure updateAvailable(uuid in varchar2,
-                                            amount in number)
-is
-begin
-    update project_1_finance set amount_awarded = amount where employee_uuid = uuid;
     commit;
 end;
 /

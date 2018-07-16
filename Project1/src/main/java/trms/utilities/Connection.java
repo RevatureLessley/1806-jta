@@ -17,7 +17,7 @@ public class Connection {
 		try {
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			InputStream input = classLoader.getResourceAsStream("trms/utilities/database.properties");
-			System.out.println(Connection.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+			// System.out.println(Connection.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 			properties = new Properties();
 			properties.load(input);
 			Class.forName(properties.getProperty("class"));

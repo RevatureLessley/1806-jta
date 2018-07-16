@@ -19,8 +19,10 @@ public class UserDAOImpl extends Connection implements UserDAO {
 		
 		try {
 			java.sql.Connection connection = this.getConnection();
-			CallableStatement callableStatement = connection.prepareCall("{call selectAllUsers}");
-			ResultSet rs = callableStatement.executeQuery();
+			CallableStatement callableStatement = connection.prepareCall("{call selectAllUsers(?)}");
+			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
+			callableStatement.execute();
+			ResultSet rs = (ResultSet) callableStatement.getObject(1);
 			
 			while(rs.next()) {
 				User user = new User();

@@ -47,4 +47,29 @@ select * from project_1_role;
 
 select * from project_1_role where role_name='Supervisor';
 
-call selectUserByUsername('user');
+declare
+    v_cur sys_refcursor;
+    v_amount number;
+    v_uuid varchar2(36) := '2d51a67f-fcc1-40d0-8724-f35727d4f534';
+begin
+    selectAmountAvailable(v_uuid, v_cur);
+    loop
+        fetch v_cur into v_amount;
+        exit when v_cur%notfound;
+        dbms_output.put_line('Amount Available: ' || v_amount);
+    end loop;
+    close v_cur;
+end;
+
+declare
+    v_cur sys_refcursor;
+    v_amount number;
+begin
+    selectAllUsers(v_cur);
+    loop
+        fetch v_cur into v_amount;
+        exit when v_cur%notfound;
+        dbms_output.put_line('Amount Available: ' || v_amount);
+    end loop;
+    close v_cur;
+end;
