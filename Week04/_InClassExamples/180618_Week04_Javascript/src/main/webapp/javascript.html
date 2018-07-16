@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Welcome To Ryanture</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+
+<script src="./resources/js/main.js"></script>
+<script src="./resources/js/ajax.js"></script>
+
+
+</head>
+<body>
+	<!-- NAVIGATION BAR -->
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="./index.html">HOME</a></li>
+			<li class="nav-item active"><a class="nav-link"
+				href="./javascript.html">JAVASCRIPT</a></li>
+		</ul>
+	</nav>
+
+	<!-- MAIN HTML -->
+	<div class="container-fluid">
+		<div class=rsection onmouseover="changeSection()" id="magicSection">
+			<h1 >Welcome To JavaScript</h1>
+			<h3>Printing to the page</h3>
+			<!--  Inline javascript -->
+			<p id="para1" onclick="document.getElementById('para1').innerHTML += 'EXTRA TEXT<br>'">
+							No one is gonna see this text!</p>
+
+			<hr>
+			<button onclick="writeToPage()">WRITE</button>
+			<!-- Internal Javascript -->
+			<hr>
+			<button onclick="window.alert('Never Use This For Debugging!')">ALERT</button>
+			<hr>
+			<button onclick="console.log('stuff!')">Console Log</button>
+			<hr>
+			<button onclick="console.log('You have written: ' + prompt('Write something!'))">
+				PROMPT
+			</button>
+			
+			
+			<script>
+				//Javascript comment
+				document.getElementById("para1").innerHTML = "<b>ALTERED TEXT!</b>";
+				document.write("<h1>This is safe!</h1>")
+			</script>
+
+		</div>
+		<div class="rsection">
+			<h3>Dynamic Tables!</h3>
+			<ul style="list-style-type:none">
+				<li>NPC NAME</li>
+				<li>
+					<input type="text" id="NPCName">
+				</li>
+				<li>
+					NPC CLASS</li>
+				<li><input type="text" id="NPCClass"></li>
+				<li><button onclick="addNPC()">ADD NPC</button></li>
+			</ul>
+			<hr>
+			<table border="2px" id="theTable">
+				<tr>
+					<th>NPC ID</th>
+					<th>NPC NAME</th>
+					<th>NPC CLASS</th>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="rsection">
+			
+			<h3>The Pokeyman Example</h3>
+			<ul style="list-style-type:none">
+				<li>Input a Pokeyman id number</li>
+				<li><input type=text id=pkmnid placeholder="Pokeyman ID"></li>
+				<li><button onclick="retrieve()">SUBMIT</button>
+			</ul>
+			<hr>
+			<div id="pokeydiv">
+			
+			</div>
+		</div>
+		
+		<div class=rsection>
+			<h1> Bubbling and Capturing</h1>
+			<div style="padding:50px; background-color:red" id=1>
+				<div style="padding:50px; background-color:blue" id=2>
+					<div style="padding:50px; background-color:yellow; color:black" id=3>
+						<h3>Hiya!</h3>
+					</div>
+				</div>			
+			</div>
+		</div>
+		<hr>
+		<div class="rsection">
+			<table border="2px" id="npcTable">
+				<tr>
+					<th>NPC ID</th>
+					<th>NPC NAME</th>
+					<th>NPC CLASS</th>
+					<th>NPC LVL</th>
+					<th>NPC CURRENCY</th>
+				</tr>
+			</table>			
+		</div>
+	</div>
+
+</body>
+</html>
