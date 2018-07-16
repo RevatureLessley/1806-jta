@@ -1,3 +1,4 @@
+
 /*
     Routing is a feature that Angular uses to acheive true
     single Page Application format. (SPA)
@@ -18,6 +19,7 @@ import { Routes } from '@angular/router';
 import { InterpolationComponent } from './components/interpolation/interpolation.component';
 import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
 import { DirectivesComponent } from './components/directives/directives.component'
+import { PipesComponent } from './components/pipes/pipes.component';
 
 export const approutes: Routes = [
     {
@@ -34,6 +36,25 @@ export const approutes: Routes = [
         //The URL mapping
         path: 'pokeapi',
         component: PokeapiComponent
+    },
+    {
+        //The URL mapping
+        path: 'pipes',
+        component: PipesComponent
+    },
+    {
+        //This designates a 'home page'
+        path: '',
+        redirectTo: '/Interpolation',
+        pathMatch: 'full'
+    },
+    {
+        //Any path at all should lead to interpolation
+        //(Assuming the above paths are hit first)
+        //This designates how a user can be taken back to this page
+        //should they arrive at a 404
+        path: '**',
+        component: InterpolationComponent
     }
 ]
 
