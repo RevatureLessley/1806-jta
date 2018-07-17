@@ -34,6 +34,7 @@ public class UserDAOImpl extends Connection implements UserDAO {
 				user.setEmail(rs.getString("email"));
 				users.add(user);
 			}
+			
 			return users;
 				
 		} catch (SQLException sqle) {
