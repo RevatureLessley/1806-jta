@@ -24,103 +24,120 @@
 			<h1 align="center">
 				Welcome to the Tuition Reimbursement Management System
 			</h1>
-			<div class="row">
-				<div class="col-sm-6">
-					<h2>Please Register</h2>
-					<form id="registerForm" action="RegisterServlet" method="POST">
-						<div class="form-group">
-							<p id="beforeUsername" style="color:red"></p>
-							<label for="username">Username:</label> 
-							<input 
-								class="form-control" id="username" 
-								name="username" type="text" 
-								onblur="checkUsername()" required
-							>
-						</div>
-						<div class="form-group">
-							<p id="beforePassword" style="color:red"></p>
-							<label for="password">Password:</label> 
-							<input
-								class="form-control" id="password"
-								name="password" type="password" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="passwordConfirm">Confirm Password:</label> 
-							<input 
-								class="form-control" id="passwordConfirm"
-								name="passwordConfirm" type="password"
-								onblur="checkPassword()" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="firstname">First Name:</label>
-							<input 
-								class="form-control" id="firstname" 
-								name="firstname" type="text" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="lastname">Last Name:</label>
-							<input 
-								type="text" class="form-control" 
-								id="lastname" name="lastname" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="department">Department:</label>
-							<input 
-								class="form-control" id="department"
-								name="department" type="text" required
-							>
-						</div>
-						<div 
-							class="form-group">
-							<p id="beforeSupervisor" style="color:red"></p>
-							<label for="supervisor">Supervisor Username:</label>
-							<input 
-								class="form-control" id="supervisor"
-								name="supervisor" type="text" 
-								onblur="checkSupervisor()" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="benCo">
-								Are you a Benefits Coordinator?
-							</label> 
-							<input 
-								type="checkbox" id="benCo" name="benCo" 
-								value="Y"
-							>
-						</div>
-						<button class="btn btn-primary" type="submit">
-							Register
-						</button>
-					</form>
-				</div>
-				<div class="col-sm-6">
-					<h2>Please Login</h2>
-					<form id="loginForm" action="LoginServlet" method="POST">
-						<div class="form-group">
-							<label for="username">Username:</label> 
-							<input 
-								class="form-control" id="username" 
-								name="username" type="text" required
-							>
-						</div>
-						<div class="form-group">
-							<label for="password">Password:</label> 
-							<input 
-								class="form-control" id="password"
-								name="password" type="password" required 
-							>
-						</div>
-						<div><p id="beforeLogin" style="color:red"></p></div>
-						<button 
-							class="btn btn-primary" type="submit">
-							Login
-						</button>
-					</form>
+			<br>
+			<br>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-5">
+						<h2>Please Login</h2>
+						<form 
+							id="loginForm" action="LoginServlet" 
+							method="POST">
+							<div class="form-group">
+								<label for="username">Username:</label> 
+								<input 
+									class="form-control" id="username" 
+									name="username" type="text" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="password">Password:</label> 
+								<input 
+									class="form-control" id="password"
+									name="password" type="password" required 
+								>
+							</div>
+							<div>
+								<p id="beforeLogin" style="color:red"></p>
+							</div>
+							<button 
+								class="btn btn-primary" type="submit">
+								Login
+							</button>
+						</form>
+					</div>
+					<div class="col-sm-2">
+						<h2 align="center">or</h2>
+					</div>
+					<div class="col-sm-5">
+						<h2>Please Register</h2>
+						<form 
+							id="registerForm" action="RegisterServlet" 
+							method="POST">
+							<div class="form-group">
+								<p id="beforeUsername" style="color:red"></p>
+								<label for="username">Username:</label> 
+								<input 
+									class="form-control" id="username" 
+									name="username" type="text" 
+									onblur="checkUsername()" required
+								>
+							</div>
+							<div class="form-group">
+								<p id="beforePassword" style="color:red"></p>
+								<label for="password">Password:</label> 
+								<input
+									class="form-control" id="password"
+									name="password" type="password" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="passwordConfirm">
+									Confirm Password:
+								</label> 
+								<input 
+									class="form-control" id="passwordConfirm"
+									name="passwordConfirm" type="password"
+									onblur="checkPassword()" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="firstname">First Name:</label>
+								<input 
+									class="form-control" id="firstname" 
+									name="firstname" type="text" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="lastname">Last Name:</label>
+								<input 
+									type="text" class="form-control" 
+									id="lastname" name="lastname" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="department">Department:</label>
+								<input 
+									class="form-control" id="department"
+									name="department" type="text" required
+								>
+							</div>
+							<div 
+								class="form-group">
+								<p id="beforeSupervisor" style="color:red"></p>
+								<label for="supervisor">
+									Supervisor Username:
+								</label>
+								<input 
+									class="form-control" id="supervisor"
+									name="supervisor" type="text" 
+									onblur="checkSupervisor()" required
+								>
+							</div>
+							<div class="form-group">
+								<label for="benCo">
+									Are you a Benefits Coordinator?
+								</label> 
+								<input 
+									type="checkbox" id="benCo" name="benCo" 
+									value="Y"
+								>
+							</div>
+							<button class="btn btn-primary" type="submit">
+								Register
+							</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
