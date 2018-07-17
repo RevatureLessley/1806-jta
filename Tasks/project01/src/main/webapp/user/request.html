@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Request Form</title>
+<script src="./resources/js/main.js"></script>
+
+</head>
+<body>
+
+<form action = "UploadServlet" method = "post" enctype = "multipart/form-data" id="request">
+  First name:<br>
+  <input type="text" name="firstname"><br>
+  Last name:<br>
+  <input type="text" name="lastname"><br>
+  Date:<br>
+  <input type="date" name="date"><br>
+  Location:<br>
+  <input type="text" name="location"><br>
+  Grading Format:<br>
+  <input type="radio" name="gradeformat" value="letter" checked> Letter<br>
+  <input type="radio" name="gradeformat" value="passfail"> Pass/Fail<br>
+  <input type="radio" name="gradeformat" value="other"> Other<br>
+  Cost:<br>
+  <input type="text" name="cost"><br>
+  
+  <input type = "file" name = "file" size = "50" />
+  <br />
+  <input type = "submit" value = "Upload File" />
+</form>
+<textarea name="description" form="request" rows="4" cols="50">Enter a description here</textarea>
+<textarea name="event" form="request" rows="4" cols="50">What kind of event was it?</textarea>
+<textarea name="justification" form="request" rows="4" cols="50">Justification for reimbursement</textarea>
+<br><a href="/project01/index.html">Link to index</a>
+<br><br>
+	<div id="requestBox">
+			<table id="requestTable" border=2px;>
+				<tr>
+					<th>Username</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Date Submitted</th>
+					<th>Request Id</th>
+					<th>Description</th>
+					<th>Event</th>
+					<th>Justification</th>
+					<th>Cost</th>
+				</tr>
+			</table>
+		
+	</div>
+	<button onclick="getRequests()">Get info</button>
+	<br><br>
+	
+	
+<form action = "AdditionalFilesServlet" method = "POST" enctype = "multipart/form-data" id="addRequest">
+  <input type="text" name="arglblargl" form="addRequest"><br>
+  <input type = "file" name = "file" size = "50" />
+  <br />
+  <input type = "submit" value = "Upload File" />
+</form>
+
+<form action="/project01/LogoutUtil"><input type="submit" value="Logout"></form>
+
+
+
+</body>
+</html>
+
+
