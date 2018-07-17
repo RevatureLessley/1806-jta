@@ -17,7 +17,7 @@ Use private for constructor parameters.
 
 Any directive used as an attribute of an element is called an Attribute Directive.
 
-Data represents the object of a successful REAT call to the URL.
+Data represents the object of a successful REST call to the URL.
 
 CORS -Cross Origin Resource Sharing
      -browsers by default do not like the current IP grabbing data from another IP.
