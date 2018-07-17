@@ -1,0 +1,37 @@
+package Project1.Servlets;
+
+import java.io.*;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import Project1.Service.EmployeeService;
+
+/**
+ * Servlet implementation class CheckUsernameServlet
+ */
+public class CheckUsernameServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request,
+						 HttpServletResponse response) throws ServletException,
+															  IOException {
+		String username = request.getParameter("username");
+		response.setContentType("text");
+		PrintWriter out = response.getWriter();
+		out.println(EmployeeService.checkUsername(username));
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request,
+						  HttpServletResponse response) 
+								  throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

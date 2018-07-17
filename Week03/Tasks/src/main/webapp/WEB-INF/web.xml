@@ -57,4 +57,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckUsernameServlet</display-name>
+    <servlet-name>CheckUsernameServlet</servlet-name>
+    <servlet-class>Project1.Servlets.CheckUsernameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckUsernameServlet</servlet-name>
+    <url-pattern>/CheckUsernameServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

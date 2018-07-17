@@ -19,14 +19,19 @@ public class RegisterServlet extends HttpServlet {
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
 		RequestDispatcher rd  = request.getRequestDispatcher("index.html");
+		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		String password = null;
 		String passwordConfirm = null;
 		String supervisor = null;
 		
 		if(EmployeeService.checkUsername(username)) {
-			System.out.println("Caught duplicate username.");
-			rd.forward(request, response);
+			rd.include(request, response);
+			out.println("<script>" + 
+							"document.getElementById(\"beforeUsername\")" + 
+									".innerHTML=" + 
+										"\"Username already exists.\"" + 
+						"</script>");
 		}
 		
 		else {
@@ -34,16 +39,24 @@ public class RegisterServlet extends HttpServlet {
 			passwordConfirm = request.getParameter("passwordConfirm");
 			
 			if(password.compareTo(passwordConfirm) != 0) {
-				System.out.println("Caught unmatching password.");
-				rd.forward(request, response);
+				rd.include(request, response);
+				out.println("<script>" + 
+								"document.getElementById(\"beforePassword\")" + 
+										".innerHTML=" + 
+											"\"Passwords do not match.\"" + 
+							"</script>");
 			}
 			
 			else {
 				supervisor = request.getParameter("supervisor");
 				
 				if(!EmployeeService.checkUsername(supervisor)) {
-					System.out.println("Caught nonexistent supervisor.");
-					rd.forward(request, response);
+					rd.include(request, response);
+					out.println("<script>" + 
+									"document.getElementById(\"beforeSupervisor\")" + 
+											".innerHTML=" + 
+												"\"Supervisor does not exist.\"" + 
+								"</script>");
 				}
 				
 				else {

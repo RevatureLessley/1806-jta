@@ -16,6 +16,8 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
 													bootstrap.min.js">
 		</script>
+		<script src="./resources/js/ajax.js"></script>
+		<script src="./resources/js/javascript.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -26,7 +28,8 @@
 				<div class="col-sm-6">
 					<h2>Please Register</h2>
 					<form id="registerForm" action="RegisterServlet" method="POST">
-						<div class="form-group" id="beforeUsername">
+						<div class="form-group">
+							<p id="beforeUsername" style="color:red"></p>
 							<label for="username">Username:</label> 
 							<input 
 								class="form-control" id="username" 
@@ -34,7 +37,8 @@
 								onblur="checkUsername()" required
 							>
 						</div>
-						<div class="form-group" id="beforePassword">
+						<div class="form-group">
+							<p id="beforePassword" style="color:red"></p>
 							<label for="password">Password:</label> 
 							<input
 								class="form-control" id="password"
@@ -70,7 +74,9 @@
 								name="department" type="text" required
 							>
 						</div>
-						<div class="form-group" id="beforeSupervisor">
+						<div 
+							class="form-group">
+							<p id="beforeSupervisor" style="color:red"></p>
 							<label for="supervisor">Supervisor Username:</label>
 							<input 
 								class="form-control" id="supervisor"
