@@ -16,3 +16,10 @@ egrep <- grep with regex.
 regex: . means any character, $ means ends with
 find [regex] fileName <- looks for files with regex.
 find -name <- looks for file names.
+tmp folder gets purged on restart.
+var folder contains logs.
+whereis [stuff] <- prints the location of stuff.
+yum remove stuff <- uninstalls stuff
+ls */ <- ls into folders
+source .bash_profile <- reloads the environment variables in .bash_profile.
+nohup [process] <- output from process redirected to nohup.out.
