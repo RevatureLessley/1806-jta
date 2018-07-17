@@ -79,4 +79,34 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/Register.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementPageServlet</display-name>
+    <servlet-name>ReimbursementPageServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ReimbursementPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementPageServlet</servlet-name>
+    <url-pattern>/ReimbursementPage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HomePageServlet</display-name>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>com.revature.servlets.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/HomePage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewFormServlet</display-name>
+    <servlet-name>NewFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewFormServlet</servlet-name>
+    <url-pattern>/NewFormServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -248,14 +248,13 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         eventId IN number,
                                         propR IN number,
                                         just IN varchar2,
-                                        timeM IN number,
-                                        formC IN number,
-                                        applvl IN number)
+                                        filek IN varchar2,
+                                        timeM IN number)
 IS
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,deadline_date,place,info,event_id,prop_reim,
-                        justification,time_missed,form_closed,app_lvl)
-    VALUES(empId,rformD,deadlineD,pl,inf,eventId,propR,just,timeM,formC,applvl);
+                        justification,filekey,time_missed,form_closed,app_lvl)
+    VALUES(empId,rformD,deadlineD,pl,inf,eventId,propR,just,filekey,timeM,0,0);
     commit;
 END;
 /

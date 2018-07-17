@@ -14,6 +14,39 @@ public class RForm {
 	private int timeMissed;
 	private int formClosed;
 	private int appLvl;
+	
+	public RForm(int rFormId, int empid, Date rFormDate, Date deadlineDate, String place, String info, int eventId,
+			double propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
+		super();
+		this.rFormId = rFormId;
+		this.empid = empid;
+		this.rFormDate = rFormDate;
+		this.deadlineDate = deadlineDate;
+		this.place = place;
+		this.info = info;
+		this.EventId = eventId;
+		this.propReim = propReim;
+		this.justification = justification;
+		this.filekey = filekey;
+		this.timeMissed = timeMissed;
+		this.formClosed = formClosed;
+		this.appLvl = appLvl;
+	}
+	public RForm(int empid, Date rFormDate, Date deadlineDate, String place, String info, int eventId,
+			double propReim, String justification, String filekey, int timeMissed) {
+		super();
+		this.empid = empid;
+		this.rFormDate = rFormDate;
+		this.deadlineDate = deadlineDate;
+		this.place = place;
+		this.info = info;
+		this.EventId = eventId;
+		this.propReim = propReim;
+		this.justification = justification;
+		this.filekey = filekey;
+		this.timeMissed = timeMissed;
+	}
+	
 	/**
 	 * @return the rFormId
 	 */
