@@ -1,0 +1,56 @@
+<div class="rsection">
+  <h3> String Interpolation</h3>
+  <p>Angular uses a concept called databinding. This boils down
+    to how we can conenct our front end (View) to our backends.
+    (Components).
+    Any data in our components needs to have a way to be 
+    transferred to the view. One way to do this, is to use 
+    String Interpolation.
+  </p>
+  <div>The value of some componentVariable is:
+    <b style="color:red">{{componentVariable}}</b>
+  </div>
+  <p>The above example demonstrated pulling information form the 
+    component directly. We took the data and displayed it on 
+    the html. Using the double brakcets as provided by angular 
+    we can display it to the view. the transfer of data from the 
+    component to the HTML is called model.
+  </p>
+  <p>We can use interpolation like a form of expression language.
+    You can evaluate 2 + 2 = {{2 + 2}}
+  </p>
+  <p>The author of this site is: {{componentObject.author}}</p>
+
+  <p>Another data-binding option we have is called 'property binding'. 
+    It is only capable of bringing data from the component to the view as well.
+    Not vice versa.
+  </p>
+
+  <p>Property binding is a technique where we can make the value of some
+    element property equal to a result as adefined in teh typescript file. 
+    String interpolation is sueful for evaluating data form teh backend and 
+    displaying it on the fornt end.
+    Property binding is used to ttake values from the backend and apply them
+    as properties for the elements.
+  </p>
+
+  <p>EVENT BINDING<br>
+  Event binding is a form of one-way data binding that goes from the frontend
+to the components. We take action from the html and have it call a function in 
+the component.</p>
+
+    <p>Property binding uses square brackets on an element property</p>
+    <p>Event binding uses parenthesis around some event.</p>
+  <div [ngStyle]=styleObject (click)=changeStyle()>
+    I am stylish!
+  </div>
+  <div (click)="toggleVisibility()">Visible = {{visible}}</div>
+  <div [hidden]="visible">I AM VISIBLE</div>
+
+  <div>
+    <input [(ngModel)]="input" type="text"><br>
+    <p>{{input}}</p>
+  </div>
+
+
+</div>
