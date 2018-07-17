@@ -19,7 +19,7 @@ public class CheckUsernameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
-		String username = request.getParameter("rusername");
+		String username = request.getParameter("username");
 		response.setContentType("text");
 		PrintWriter out = response.getWriter();
 		out.println(EmployeeService.checkUsername(username));

@@ -3,9 +3,8 @@ function checkSupervisor() {
 	let xhr = new XMLHttpRequest();
 	let div = document.getElementById("beforeSupervisor");
 	div.innerHTML = "";
-	let usernameKey = "supervisor";
-	let usernameValue = document.getElementById(usernameKey).value;
-	let message = usernameKey + "=" + usernameValue;
+	let usernameValue = document.getElementById("supervisor").value;
+	let message = "username" + "=" + usernameValue;
 
 	
 	xhr.onreadystatechange = function() {
@@ -28,9 +27,8 @@ function checkUsername() {
 	let xhr = new XMLHttpRequest();
 	let div = document.getElementById("beforeUsername");
 	div.innerHTML = "";
-	let usernameKey = "rusername";
-	let usernameValue = document.getElementById(usernameKey).value;
-	let message = usernameKey + "=" + usernameValue;
+	let usernameValue = document.getElementById("rusername").value;
+	let message = "username" + "=" + usernameValue;
 
 	
 	xhr.onreadystatechange = function() {
