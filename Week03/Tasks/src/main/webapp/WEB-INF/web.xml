@@ -109,4 +109,8 @@
     <servlet-name>NewFormServlet</servlet-name>
     <url-pattern>/NewFormServlet</url-pattern>
   </servlet-mapping>
+  <error-page>
+  <error-code>404</error-code>
+  <location>/error.html</location>
+  </error-page>
 </web-app>
