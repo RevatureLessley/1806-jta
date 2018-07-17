@@ -209,7 +209,7 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			UserDAO userDAO = new UserDAOImpl();
 		if (userDAO.getUserByUsername(testUser.getUsername()) == null) {
 			System.out.println("No user found.");
-			System.out.println("Adding test user");
+			System.out.println("Adding test user.");
 			userDAO.registerUser(testUser);
 		}
 		} catch (Exception e) {
