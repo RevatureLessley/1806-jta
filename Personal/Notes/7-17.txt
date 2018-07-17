@@ -23,3 +23,5 @@ yum remove stuff <- uninstalls stuff
 ls */ <- ls into folders
 source .bash_profile <- reloads the environment variables in .bash_profile.
 nohup [process] <- output from process redirected to nohup.out.
+scp -i revatureKeyPair.pem ojdbc7.jar ec2-user@18.206.54.186:~/ojdbc7.jar <- secure copies
+sh startup.sh & <- starts up tomcat
