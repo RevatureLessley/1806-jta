@@ -1,0 +1,18 @@
+${PS1} contains the current prompt. \T incorporates timestamps to the prompt. 
+mkdir -p <- makes parent folders. touch creates files without opening it.
+.bash_profile contains environment variable for this specific instance.
+.bashrc contains environemnt variables for all users.
+.bash_profile first calls .bashrc.
+cmhod all == chmod ugo.
+rmdir <- removes empty folders.
+useradd -m [userName] <- creates a new user and adds a home directory.
+passwd [userName] <- changes password for user.
+su [userName] <- signs in as user.
+chown [userName] [fileName] <- changes owner of file to user.
+cat > fileName <- writes to a file in the prompt, ctrl+d exists.
+cat >> fileName <- appends to a file in the prompt.
+sort fileName <- sorts a file's contents.
+egrep <- grep with regex.
+regex: . means any character, $ means ends with
+find [regex] fileName <- looks for files with regex.
+find -name <- looks for file names.
