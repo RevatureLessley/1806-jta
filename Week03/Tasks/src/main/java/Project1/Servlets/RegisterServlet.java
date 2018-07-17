@@ -3,8 +3,8 @@ package Project1.Servlets;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import Project1.Service.EmployeeService;
+import Project1.Beans.*;
+import Project1.Service.*;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -20,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
 															  IOException {
 		RequestDispatcher rd  = request.getRequestDispatcher("index.html");
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
+		String username = request.getParameter("rusername");
 		String password = null;
 		String passwordConfirm = null;
 		String supervisor = null;
@@ -35,10 +35,11 @@ public class RegisterServlet extends HttpServlet {
 		}
 		
 		else {
-			password = request.getParameter("password");
+			password = request.getParameter("rpassword");
 			passwordConfirm = request.getParameter("passwordConfirm");
 			
-			if(password.compareTo(passwordConfirm) != 0) {
+			if((password != null) && 
+			   (password.compareTo(passwordConfirm) != 0)) {
 				rd.include(request, response);
 				out.println("<script>" + 
 								"document.getElementById(\"beforePassword\")" + 
@@ -60,19 +61,22 @@ public class RegisterServlet extends HttpServlet {
 				}
 				
 				else {
-					System.out.println("About to insert.");
 					String firstname = request.getParameter("firstname");
 					String lastname = request.getParameter("lastname");
 					String department = request.getParameter("department");
 					String isBenco = 
 							request.getParameter("benCo") == null ? "N" : "Y";
 			
-					EmployeeService.employeeRegister(username, password,
-													 firstname, lastname,
-													 department, supervisor,
-													 isBenco);
+					Employee employee = 
+							EmployeeService.employeeRegister(username, 
+															 password,
+															 firstname,
+															 lastname,
+															 department, 
+															 supervisor,
+															 isBenco);
 					HttpSession session = request.getSession();
-					session.setAttribute("username", username);
+					session.setAttribute("employee", employee);
 					rd = request.getRequestDispatcher("user/index.html");
 					rd.forward(request, response);
 				}

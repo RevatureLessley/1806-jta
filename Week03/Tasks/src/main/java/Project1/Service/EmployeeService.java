@@ -1,5 +1,6 @@
 package Project1.Service;
 
+import Project1.Beans.*;
 import Project1.DAOs.*;
 
 public class EmployeeService {
@@ -10,15 +11,15 @@ public class EmployeeService {
 		return edi.checkEmployee(username);
 	}
 	
-	public static boolean employeeLogin(String username, String password) {
-		return null != edi.selectEmployee(username, password);
+	public static Employee employeeLogin(String username, String password) {
+		return edi.selectEmployee(username, password);
 	}
 	
-	public static void employeeRegister(String username, String password,
+	public static Employee employeeRegister(String username, String password,
 										   String firstname, String lastname, 
 										   String department,
 										   String supervisor, String isBenco) {
-		edi.insertEmployee(username, password, firstname, lastname,
+		return edi.insertEmployee(username, password, firstname, lastname,
 								  department, supervisor, isBenco);
 	}
 }

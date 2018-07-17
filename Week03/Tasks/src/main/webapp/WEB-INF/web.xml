@@ -67,13 +67,14 @@
     <servlet-name>CheckUsernameServlet</servlet-name>
     <url-pattern>/CheckUsernameServlet</url-pattern>
   </servlet-mapping>
-  <filter>
-    <display-name>SecurityFilter</display-name>
-    <filter-name>SecurityFilter</filter-name>
-    <filter-class>Project1.Filters.SecurityFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>SecurityFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SessionServlet</display-name>
+    <servlet-name>SessionServlet</servlet-name>
+    <servlet-class>Project1.Servlets.SessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SessionServlet</servlet-name>
+    <url-pattern>/SessionServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

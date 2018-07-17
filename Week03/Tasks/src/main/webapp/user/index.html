@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>TRMS User</title>
+		<title>TRMS</title>
 		<link 
 			rel="stylesheet" type="text/css" 
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/
@@ -16,9 +16,15 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
 													bootstrap.min.js">
 		</script>
+		<script src="./resources/js/ajax.js"></script>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-sm navbar-light bg-primary">
+		<nav class="navbar navbar-expand-sm navbar-light bg-light">
+			<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+		        <form class="navbar-nav mr-auto" action="LogoutServlet">
+					<h3 id="welcomeMessage"></h3>
+				</form>
+		    </div>
 		    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		        <form class="navbar-nav ml-auto" action="LogoutServlet">
 					<button class="btn btn-primary" type="submit">
@@ -28,7 +34,6 @@
 		    </div>
 		</nav>
 		<div class="container-fluid">
-			<h1>WELCOME!</h1>
 		</div>
 	</body>
 </html>

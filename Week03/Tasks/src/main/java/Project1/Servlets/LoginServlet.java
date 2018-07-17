@@ -3,6 +3,7 @@ package Project1.Servlets;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import Project1.Beans.*;
 import Project1.Service.*;
 
 /**
@@ -17,15 +18,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, 
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
+		String username = request.getParameter("lusername");
+		String password = request.getParameter("lpassword");
+		Employee employee = EmployeeService.employeeLogin(username, password);
 		HttpSession session = null;
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		RequestDispatcher rd = null;
 		PrintWriter out = response.getWriter();
 
-		if(EmployeeService.employeeLogin(username, password)){
+		if(null != employee){
 			session = request.getSession();
-			session.setAttribute("username", username);
+			session.setAttribute("employee", employee);
 			rd = request.getRequestDispatcher("user/index.html");
 			rd.forward(request, response);
 		}

@@ -28,7 +28,7 @@ function checkUsername() {
 	let xhr = new XMLHttpRequest();
 	let div = document.getElementById("beforeUsername");
 	div.innerHTML = "";
-	let usernameKey = "username";
+	let usernameKey = "rusername";
 	let usernameValue = document.getElementById(usernameKey).value;
 	let message = usernameKey + "=" + usernameValue;
 
@@ -36,7 +36,7 @@ function checkUsername() {
 	xhr.onreadystatechange = function() {
 
 		if(xhr.readyState == 4) {
-
+			console.log(xhr.response.trim());
 			if(xhr.response.trim() == "true") {
 				div.innerHTML = "Username already exists.";
 			}
@@ -46,4 +46,26 @@ function checkUsername() {
 	xhr.open("POST", servlet);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(message);
+}
+
+function displayWelcome() {
+	let servlet = "SessionServlet";
+	let xhr = new XMLHttpRequest();
+	let div = document.getElementById("welcomeMessage");
+	
+	xhr.onreadystatechange = function() {
+
+		if(xhr.readyState == 4) {
+			
+			let firstname = xhr.response.trim();
+			div.innerHTML = "Hi " + firstname + ", welcome to your account.";
+		}
+	}
+
+	xhr.open("GET", servlet);
+	xhr.send();
+}
+
+window.onload = function() {
+	displayWelcome();
 }

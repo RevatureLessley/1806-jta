@@ -31,11 +31,11 @@ public class EmployeeDAOImp implements LogReference {
 			DatabaseConnection.close(ps);
 			DatabaseConnection.close(rs);
 		}
-
+		
 		return false;
 	}
 	
-	public void insertEmployee(String username, String password,
+	public Employee insertEmployee(String username, String password,
 								  String firstname, String lastname, 
 								  String department, String supervisor, 
 								  String isBenco) {
@@ -54,6 +54,10 @@ public class EmployeeDAOImp implements LogReference {
 			statement.setString(6, supervisor);
 			statement.setString(7, isBenco);
 			statement.execute();
+			
+			return new Employee(supervisor, 1000, username, password,
+								firstname, lastname, 
+								isBenco.compareTo("Y") == 0);
 		}
 
 		catch(SQLException se) {
@@ -67,6 +71,8 @@ public class EmployeeDAOImp implements LogReference {
 		           	 "Exiting insertEmployee().");
 			DatabaseConnection.close(statement);
 		}
+		
+		return null;
 	}
 	
 	public Employee selectEmployee(String username, String password) {
