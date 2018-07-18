@@ -1,0 +1,4 @@
+username: evt_revature
+password: Summer2018
+
+revaturedb.cyowlii7zfnj.us-east-1.rds.amazonaws.com
