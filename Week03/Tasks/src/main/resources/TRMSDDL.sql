@@ -128,7 +128,7 @@ CREATE TABLE Reimbursement (
   rei_isPending CHAR(1) DEFAULT 'Y' NOT NULL
     CHECK (rei_isPending IN ('N', 'Y')),
   rei_justification VARCHAR2(4000),
-  rei_reason_exeeded_max VARCHAR2(4000)
+  rei_reason_exceeded_max VARCHAR2(4000)
 );
 
 ALTER TABLE Approval   
@@ -214,9 +214,14 @@ SELECT ER.emp_username AS E_Supervisor,
        EL.emp_available_reimbursement AS E_AvailableReimbursement, 
        EL.emp_username AS E_Username, EL.emp_password AS E_Password, 
        EL.emp_firstname AS E_FirstName, EL.emp_lastname AS E_LastName, 
-       EL.emp_isBenco AS E_IsBenCo
+       EL.emp_isBenco AS E_IsBenCo, rei_id AS E_ReimbursementID,
+       rei_awarded AS E_AwardedReimbursement, rei_isCancelled AS E_IsCancelled,
+       rei_isPending AS E_IsPending,
+       rei_justification AS E_ReimbursementJustification, 
+       rei_reason_exceeded_max as E_ReasonExceededMax
 FROM Employee EL
-LEFT JOIN Employee ER ON EL.emp_supervisor = ER.emp_id;
+LEFT JOIN Employee ER ON EL.emp_supervisor = ER.emp_id
+INNER JOIN Reimbursement ON EL.emp_id = rei_emp_id;
 
 CREATE SEQUENCE app_seq
 START WITH 1
@@ -539,7 +544,7 @@ END;
 /
 
 CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science',
-                    NULL, 'N');
+                    NULL, 'Y');
 CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
                     'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
@@ -665,9 +670,10 @@ CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
                          TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
                          INTERVAL '70' DAY, 0.7, 'Revature training', 
                          'i dunno y');
---CALL insertReimbursement('swilery', 'TECHNICAL_TRAINING', 20000,
---                         TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
---                         NULL, 'Revature training', 'i dunno y');
+CALL insertReimbursement('walterx', 'CERTIFICATION', 10,
+                         TIMESTAMP '2018-06-25 9:00:00', 'Arlington, TX',
+                         INTERVAL '70' DAY, 0.7, 'Enthuware',
+                         'Not showing up on my RapidCard.');
 --CALL insertEventAttachment(1, 
 --    '10369913_267485166779577_5573839803579672783_n.jpg');
 --CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');

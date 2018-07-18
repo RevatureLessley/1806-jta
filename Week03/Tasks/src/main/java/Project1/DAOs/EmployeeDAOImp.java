@@ -83,21 +83,30 @@ public class EmployeeDAOImp implements LogReference {
 						  "WHERE E_Username = ? AND E_Password = ?";
 
 		try(Connection connection = DatabaseConnection.connect()) {
-			ps = connection.prepareStatement(sqlQuery);
+			ps = connection.prepareStatement(sqlQuery,
+											 ResultSet.TYPE_SCROLL_INSENSITIVE,
+											 ResultSet.CONCUR_UPDATABLE);
 			ps.setString(1, username);
 			ps.setString(2, password);
 			rs = ps.executeQuery();
 
-			if(rs.next()) 
-				return new Employee(rs.getString("E_Supervisor"), 
-								    rs.getDouble("E_AvailableReimbursement"),
-								    rs.getString("E_Username"), 
-								    rs.getString("E_Password"), 
-								    rs.getString("E_FirstName"),
-								    rs.getString("E_LastName"), 
-								    rs.getString("E_IsBenCo")
-								      .compareTo("Y") == 0
-								    );
+			if(rs.next()) {
+				Employee employee = 
+						new Employee(rs.getString("E_Supervisor"), 
+								     rs.getDouble("E_AvailableReimbursement"),
+								     rs.getString("E_Username"), 
+								     rs.getString("E_Password"), 
+								     rs.getString("E_FirstName"),
+								     rs.getString("E_LastName"), 
+								     rs.getString("E_IsBenCo")
+								       .compareTo("Y") == 0);
+				rs.beforeFirst();
+				ReimbursementDAOImp rdi = new ReimbursementDAOImp();
+				employee.setReimbursements(rdi.selectReimbursement(rs));
+				
+				return employee;
+			}
+			
 			else return null;
 		}
 		

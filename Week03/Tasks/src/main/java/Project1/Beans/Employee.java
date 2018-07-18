@@ -32,7 +32,7 @@ public class Employee {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.isBenco = isBenco;
-		reimbursements = new HashMap<>();
+		this.reimbursements = new HashMap<>();
 	}
 
 	public String getSupervisor() {
@@ -91,6 +91,15 @@ public class Employee {
 		this.isBenco = isBenco;
 	}
 	
+	public HashMap<BigInteger, Reimbursement> getReimbursements() {
+		return reimbursements;
+	}
+
+	public void setReimbursements(HashMap<BigInteger, 
+								  Reimbursement> reimbursements) {
+		this.reimbursements = reimbursements;
+	}
+	
 	public Reimbursement retrieveReimbursement(BigInteger index) {
 		return reimbursements.get(index);
 	}
@@ -98,5 +107,12 @@ public class Employee {
 	public Reimbursement insertReimbursement(BigInteger index, 
 											 Reimbursement reimbursement) {
 		return reimbursements.put(index, reimbursement);
+	}
+	
+	@Override
+	public String toString() {
+		return "Employee [supervisor=" + supervisor + ", availableReimbursement=" + availableReimbursement
+				+ ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", isBenco=" + isBenco + ", reimbursements=" + reimbursements + "]";
 	}
 }

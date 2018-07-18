@@ -83,4 +83,12 @@ public class Reimbursement {
 	public Approval insertApproval(String type, Approval approval) {
 		return approvals.put(type, approval);
 	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", awarded=" + awarded + ", isCancelled=" + isCancelled + ", isPending="
+				+ isPending + ", justification=" + justification + ", reasonExceededMax=" + reasonExceededMax + "]";
+	}
+	
+	
 }

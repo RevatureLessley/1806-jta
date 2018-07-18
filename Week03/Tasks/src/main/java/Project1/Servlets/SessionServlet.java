@@ -3,6 +3,7 @@ package Project1.Servlets;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import org.codehaus.jackson.map.*;
 import Project1.Beans.*;
 
 /**
@@ -21,7 +22,10 @@ public class SessionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 		Employee employee = (Employee)session.getAttribute("employee");
-		if(null != employee) out.println(employee.getFirstname());
+		if(null != employee) {
+			ObjectMapper om = new ObjectMapper();
+			out.println(om.writeValueAsString(employee));
+		}
 	}
 
 	/**

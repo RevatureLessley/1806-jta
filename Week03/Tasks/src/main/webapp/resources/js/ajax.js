@@ -55,7 +55,10 @@ function displayWelcome() {
 
 		if(xhr.readyState == 4) {
 			
-			let firstname = xhr.response.trim();
+			let employee = JSON.parse(xhr.response);
+			console.log(employee);
+			
+			let firstname = employee["firstname"];
 			div.innerHTML = "Hi " + firstname + ", welcome to your account.";
 		}
 	}
