@@ -1,15 +1,17 @@
 
 function createMessages(messages, target){
 	
-	var link = document.querySelector('link[rel="import"][href="../template/'+name+'.html"]');
-	var template = link.import.querySelector("template");;
+	console.log(messages);
+	
+	var link = document.querySelector('link[rel="import"][href="../template/message.html"]');
+	var template = link.import.querySelector("template");
 	var clone, a; 
 	
-	console.log(messages);
-	tclone = document.importNode(template.content, true);
-	
 	for(m in messages){
-
+		tclone = document.importNode(template.content, true);
+		tclone.getElementById("messageHead").innerHTML = messages[m]["sourceName"]
+		tclone.getElementById("message").innerHTML = messages[m]["notification"]["message"]
+		tclone.getElementById("messageDate").innerHTML = messages[m]["dateString"]
 	    document.querySelector(target).appendChild(tclone);
 	}
 	

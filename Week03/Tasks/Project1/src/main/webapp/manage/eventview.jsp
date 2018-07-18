@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="com.revature.service.EventService"%>
+<%@page import="com.revature.service.NotificationService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,11 +17,12 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <title>Manage Event</title>
 <script src="../resources/js/eventview.js"></script>
-<script src="../resources/js/template.js"></script>
 <script src="../resources/js/common.js"></script>
+<script src="../resources/js/messagebuilder.js"></script>
 <link rel="import" href="../template/eventview.html">
 <link rel="import" href="../template/navbar.html">
 <link rel="import" href="../template/manageevent.html">
+<link rel="import" href="../template/message.html">
 </head>
 <body>
 
@@ -41,8 +43,10 @@
 				out.print(EventService.selectUserEvent(userId, eventId));%>;
 		fillEventData(json);
 		fillEventManageData(json);		
-
-	</script>
+		
+		json = <%out.print(NotificationService.selectEventNotifications(eventId));%>;
+		createMessages(json, "#container");
+	</script>	
 
 </body>
 </html>

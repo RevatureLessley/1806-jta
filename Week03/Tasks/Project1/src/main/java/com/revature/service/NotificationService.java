@@ -1,9 +1,11 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.bean.Notificaiton;
 import com.revature.dao.NotificationDao;
+import com.revature.displaywrapper.NotificationDisplay;
 import com.revature.utils.StringManip;
 
 public class NotificationService {
@@ -23,6 +25,12 @@ public class NotificationService {
 
 	public static String selectEventNotifications(Integer eventId){
 		List<Notificaiton> notifications = new NotificationDao().selectEventNotifications(eventId);
-		return StringManip.getJSONString(notifications);
+		List<NotificationDisplay> wrappedNotificaitons = new ArrayList<>();
+		
+		for(Notificaiton n : notifications) {
+			wrappedNotificaitons.add(new NotificationDisplay(n));
+		}
+		
+		return StringManip.getJSONString(wrappedNotificaitons);
 	}
 }
