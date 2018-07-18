@@ -16,7 +16,7 @@ end;
 
 -- employeeUUID
 create or replace procedure getEmployeeUUID(formUUID in varchar2,
-                                            employeeUUID in varchar2)
+                                            employeeUUID out varchar2)
 is
 begin
     select employee_uuid into employeeUUID from project_1_reimbursement_form where form_uuid = formUUID;
@@ -117,7 +117,7 @@ create or replace procedure updateFormStatus(formUUID in varchar2,
                                              formStatus in varchar2)
 is
 begin
-    update project_1_reimbursement set status = formStatus where form_uuid = formUUID;
+    update project_1_reimbursement_form set status = formStatus where form_uuid = formUUID;
 end;
 /
 
@@ -319,7 +319,7 @@ create or replace procedure updateSupervisorDecision(formUUID in varchar2,
 is
     v_current_time date;
 begin
-    update project_1_reimbursement_form set supervisor_decision = deptDecision,
+    update project_1_reimbursement_form set supervisor_decision = supervisorDecision,
                                             supervisor_decision_date = v_current_time
                                         where form_uuid = formUUID;
     commit;
