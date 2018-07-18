@@ -2,3 +2,209 @@ username: evt_revature
 password: Summer2018
 
 revaturedb.cyowlii7zfnj.us-east-1.rds.amazonaws.com
+
+sh shutdown.sh <- shuts down tomcat
+
+Infrastructure as a Service (IaaS)
+	-handles sytem maintenance, backup, resiliency planning.
+	-resources provided are highly scalable.
+	-automation of admin tasks.
+Software as a Service (SaaS)
+	-offer the required software applications for use.
+	-IDE, Office Suite, etc...
+Platform as a Service (PaaS)
+	-hardware and software provisions.
+	-offers entire jre/jdk.
+	-provides security tools.
+
+Regions
+	-Server Centers
+	-physical locations
+	-provide availablility zones.
+		--data centers
+		--provide networks and connections
+
+EC2 -Elastic Cloud Compute
+    -create virtual machines on the cloud.
+    -pay for what is used
+    -utilizes an AMI and EBS
+		--AMI -Amazon Machine Image
+		      -actual OS provisioned by AWS
+		      -has most options
+		      -Amazon linux is based off of red hat.
+		--EBS -Elastic Block Store
+		      -storage for an EC2 instance.
+		      -persistent block storage
+		      -high availablilty, durability
+
+S3 -Simple Storage Service
+   -file server
+   -uses buckets for storage
+   -one of the first services of AWS
+   -supports version control
+   -useful for backing up databses and disaster recovery.
+   -5 GB free tier usage
+
+Autoscaling
+	-unsures enough EC2 instances for users.
+	-creates an auto-scaling group of EC2s.
+	-when one EC2 reaches capacity, another starts.
+	-when capacity drops, extra EC2s are shutdown.
+
+ELB -Elastic Load Balancers
+    -distribute traffic between multiple EC2s.
+    -maintains healthy EC2s that do not lose packets.
+    -high fault tolerance by redirecting users to safe EC2s when one fails.
+
+RDS -Relational Database Service
+    -cost efficient, resizable
+    -manages most DBA tasks.
+    -support for:
+	--Oracle
+	--mySQL
+	--SQL Server
+	--Aurora
+	--Postgres
+	--Maria
+    -automatically manages backups
+
+DynamoDB
+	-noSQL engine for AWS
+
+Route53
+	-DNS for AWS
+	-routes users to IP from name
+	-responsible for performing health checks on EC2.
+	
+VPC -Virtual Private Cloud
+    -self contained intranet for a company
+    -allows VPN connections and restrictions 
+
+DevOps -Development Operations
+       -combines devloper and operations (systadmin)
+       -aims to automate as much processes as possible throughout the development lifecycle.
+       -achieved through continuous integration/deployment/delivery
+		--CI/CD
+		--always pushing code that goes through a pipeline
+			---code is tested/analyzed
+			---code is deployed after all tests pass
+			---code is end-to-end tested.
+			---team notified every step of the way.
+			---saves time and money by identifying errors early.
+			---achieved with Jenkins.
+
+Cardinal Rules
+--------------
+-never push bad code with errors.
+-always achieve 100% test coverage.
+	--JUnit test for every method.
+-always be pushing code
+	--40 to 80 Jenkins build a day in a team of 1 to 3.
+-always fix build failures.
+	--never leave office with build failure.
+
+TDD -Test Driven Development
+    -write test first that are guaranteed to fail.
+    -write code to past test.
+
+Master(production pipeline)---------------
+	\				/
+	Dev(team pipleine)--------------
+		\		/
+		Feature---------
+
+Developers --------> SCM(Source Code Manager)-GitHub <------------------------CI Server ----------------------------------> Quality Check Server
+		push	|				1. detects change	-Jenkins		4. sends to code analyzer  /	5.analyze code
+			|				2. grabs code		-Maven						  /
+			|				3. compile		-slack notifications	6. code analyzed         /
+			|				7. unit e=tests							        /
+			|											       	       /
+		     	|												      /
+			| 8. deploy to dev server		             		       			             /	
+			| 9. front end tests			            		      			            /
+			|	end to end			           		     			           /
+			|	regression			          		    			          /	
+			|					         		   			         /
+			|					        		  			        /
+			|					       			 			       /
+			|					      						      /
+			|					     		       			             /
+			|					    		      			            /
+			|					   		     			           /
+			|					  		    			          /
+			|							 			         /
+			|							 			        /
+     			|										       /
+			|					                			      /
+			|					     	       			             /
+			|					    	      			            /
+			|					   	     			           /
+			|					  	    			          /
+			|					 	   			         /
+			|						  			        /
+                        |                                                 			       /
+			|					        			      /
+			|					      			             /
+			|					      			            /
+			|					     			           /
+			|					    			          /
+			|					   			         /
+			|					  			        /
+			|					 			       /
+			|								      /
+			|							             /
+			|						  	            /
+                        |                                                	           /
+			|					        	          /
+			|					       		         /
+			|					      		        /
+			|					     		       /
+			|					    		      /
+			|					   	             /
+			|					  	            /
+			|					 	           /
+			|						          /
+			|						         /
+			|						        /
+                        |                                                      /
+			|					              /
+			|					             /
+			|					            /
+			|					           /
+			|					          /
+			|					         /
+			|					        /
+			|					       /
+			|					      /
+			|					     /
+			|					    /
+			|					   /
+			|					  /
+			|					 /
+			|					/
+			Dev Server -------------------->Prod Server
+				-tomcat				-stakeholders
+				-actual application		-product owner
+								-users
+
+Typical Environemnt Order
+-------------------------
+dev -> tests -> integration -> maintenance -> UAT/QA -> prod
+
+Hibernate
+	-an ORM(Object Relational Mapping) framework.
+	-high performance, persistent query service.
+	-maps Java classes to SQL tables.
+	-Maps Java data types to SQL datatypes.
+	-simplies Java Database interaction.
+	-open source.
+	-advantages
+		--open source and lightweight.
+		--fast performance through internal caching.
+		--database independent.
+			---can handle most SQL.
+			---uses HQL(Hibernate Query Language).
+			---OO version of SQL.
+			---avoids database specific queries.
+		--automatically provides DDL
+		--provides database statistics
