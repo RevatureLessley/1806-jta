@@ -4,7 +4,6 @@ public class RForm {
 	private int rFormId;
 	private int empid;
 	private Date rFormDate;
-	private Date deadlineDate;
 	private String place;
 	private String info;
 	private int EventId;
@@ -15,13 +14,12 @@ public class RForm {
 	private int formClosed;
 	private int appLvl;
 	
-	public RForm(int rFormId, int empid, Date rFormDate, Date deadlineDate, String place, String info, int eventId,
+	public RForm(int rFormId, int empid, Date rFormDate, String place, String info, int eventId,
 			double propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
 		super();
 		this.rFormId = rFormId;
 		this.empid = empid;
 		this.rFormDate = rFormDate;
-		this.deadlineDate = deadlineDate;
 		this.place = place;
 		this.info = info;
 		this.EventId = eventId;
@@ -32,12 +30,11 @@ public class RForm {
 		this.formClosed = formClosed;
 		this.appLvl = appLvl;
 	}
-	public RForm(int empid, Date rFormDate, Date deadlineDate, String place, String info, int eventId,
+	public RForm(int empid, Date rFormDate, String place, String info, int eventId,
 			double propReim, String justification, String filekey, int timeMissed) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
-		this.deadlineDate = deadlineDate;
 		this.place = place;
 		this.info = info;
 		this.EventId = eventId;
@@ -82,18 +79,6 @@ public class RForm {
 	 */
 	public void setrFormDate(Date rFormDate) {
 		this.rFormDate = rFormDate;
-	}
-	/**
-	 * @return the deadlineDate
-	 */
-	public Date getDeadlineDate() {
-		return deadlineDate;
-	}
-	/**
-	 * @param deadlineDate the deadlineDate to set
-	 */
-	public void setDeadlineDate(Date deadlineDate) {
-		this.deadlineDate = deadlineDate;
 	}
 	/**
 	 * @return the place

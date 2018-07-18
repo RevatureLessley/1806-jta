@@ -2,7 +2,6 @@ DROP TABLE Employee CASCADE CONSTRAINTS;
 DROP TABLE EmployeeType CASCADE CONSTRAINTS;
 DROP TABLE Department CASCADE CONSTRAINTS;
 DROP TABLE RForm CASCADE CONSTRAINTS;
-DROP TABLE Event CASCADE CONSTRAINTS;
 DROP TABLE EventType CASCADE CONSTRAINTS;
 DROP TABLE Approval CASCADE CONSTRAINTS;
 
@@ -40,26 +39,13 @@ CREATE TABLE EventType(
     percent_reimb number(6,2)
 );
 
-CREATE TABLE Event (
-    event_id number(6) PRIMARY KEY,
-    event_name varchar2(100) NOT NULL,
-    event_type_id number(6) NOT NULL,
-    grade_format number(1) NOT NULL, --0 for presentation 1 for grade
-    cutoff_grade number(6,2) NOT NULL, --defaults to 70 if not specified (can be changed)
-    event_cost number(6,2),     --can be changed
-    
-    CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
-    
-);
 
 CREATE TABLE RForm (
     rform_id number(6) PRIMARY KEY,
     emp_id number(6) NOT NULL,
     rform_date date NOT NULL,
-    deadline_date date NOT NULL,
     place varchar2(100) NOT NULL,
     info varchar2(1000),
-    event_id number(6) NOT NULL,
     prop_reim number(6,2), --value from event is used, this is proposed value
     justification varchar2(500),
     formkey varchar2(100),
@@ -67,9 +53,13 @@ CREATE TABLE RForm (
     time_missed number(6), --hours
     form_closed number(1), --binary, edited by supervisor or benco emp
     app_lvl number(1),
+    grade_format number(1) NOT NULL, --0 for presentation 1 for grade
+    cutoff_grade number(6,2) NOT NULL, --defaults to 70 if not specified (can be changed)
+    event_type_id number(6) NOT NULL,
+    event_cost number(6,2),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
-    CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES Event(event_id)
+    CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
 );
 
 CREATE TABLE Approval (
@@ -117,23 +107,6 @@ FOR EACH ROW
 BEGIN 
     IF :new.rform_id IS NULL THEN
         SELECT rformid_seq.NEXTVAL INTO :new.rform_id FROM dual;
-    END IF;
-END;
-/
-
---Create new event id
-DROP SEQUENCE eventid_seq;
-CREATE SEQUENCE eventid_seq
-    START WITH 100
-    INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER eventid_seq_trigger
-BEFORE INSERT ON Event
-FOR EACH ROW 
-BEGIN 
-    IF :new.event_id IS NULL THEN
-        SELECT eventid_seq.NEXTVAL INTO :new.event_id FROM dual;
     END IF;
 END;
 /
@@ -225,36 +198,26 @@ BEGIN
 END;
 /
 
---insert event
-CREATE OR REPLACE PROCEDURE insertNewEvent(eventN IN varchar2,
-                                        eventT_Id IN varchar2,
-                                        gradeF IN number,
-                                        cutoffG in number,
-                                        eventC IN number)
-IS
-BEGIN
-    INSERT INTO Event (event_name,event_type_id,grade_format,cutoff_grade,event_cost)
-    VALUES(eventN,eventT_Id,gradeF,cutoffG,eventC);
-    commit;
-END;
-/
-
 --insert rform
 CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         rformD IN date,
-                                        deadlineD IN date,
                                         pl IN varchar2,
                                         inf IN varchar2,
-                                        eventId IN number,
                                         propR IN number,
                                         just IN varchar2,
                                         filek IN varchar2,
-                                        timeM IN number)
+                                        timeM IN number,
+                                        gradeF IN number,
+                                        cutoffG in number,
+                                        eventT_Id IN varchar2,
+                                        eventC IN number)
 IS
 BEGIN
-    INSERT INTO RForm (emp_id,rform_date,deadline_date,place,info,event_id,prop_reim,
-                        justification,filekey,time_missed,form_closed,app_lvl)
-    VALUES(empId,rformD,deadlineD,pl,inf,eventId,propR,just,filekey,timeM,0,0);
+    INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
+                        justification,filekey,time_missed,form_closed,app_lvl,
+                        grade_format,cutoff_grade,event_type_id,event_cost)
+    VALUES(empId,rformD,pl,inf,propR,just,filek,timeM,0,0,gradeF,cutoffG,
+                        eventT_Id,eventC);
     commit;
 END;
 /

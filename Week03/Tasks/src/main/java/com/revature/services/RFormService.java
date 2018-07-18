@@ -9,7 +9,6 @@ public class RFormService {
 	public static boolean registerRForm(
 			int empid,
 			Date rFormDate,
-			Date deadlineDate,
 			String place,
 			String info,
 			int eventId,
@@ -19,7 +18,7 @@ public class RFormService {
 			int timeMissed
 		){
 		
-	RForm rform = new RForm(empid,rFormDate,deadlineDate,place,info,eventId,propReim,justification,filekey,timeMissed);
+	RForm rform = new RForm(empid,rFormDate,place,info,eventId,propReim,justification,filekey,timeMissed);
 	RFormDaoImpl rformDao = new RFormDaoImpl();
 	
 	if(rformDao.insertRFormViaSp(rform)) return true;

@@ -14,7 +14,7 @@
 <title>New Reimbursement</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<ul class="navbar-nav">
 			<li class="nav-item active"><a class="nav-link"
 				href="HomePage.do">Home</a></li>
@@ -24,5 +24,72 @@
 				href="Logout.do">Logout</a></li>
 		</ul>
 	</nav>
+	
+	<div class="container-fluid">
+		<div class=rsection>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4>Upload a Form</h4>
+					<form action="Upload.do" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="date">Event Date:</label> <input type="date"
+								class="form-control" id="date" name="date">
+						</div>
+						<div class="form-group">
+							<label for="place">Event Location:</label> <input type="text"
+								class="form-control" id="place" name="place">
+						</div>
+						<div class="form-group">
+							<label for="info">Event Info:</label> <input type="text"
+								class="form-control" id="info" name="info">
+						</div>
+						<div class="form-group">
+							<label for="place">Event Location:</label> <input type="text"
+								class="form-control" id="place" name="place">
+						</div>
+						
+						<div class="form-group">
+							<label for="event">Event:</label> <input type="text"
+								class="form-control" id="event" name="event">
+						</div>
+						<div class="form-group">
+							<label for="propreim">Proposed Reimbursement:</label> <input type="number"
+								class="form-control" id="propreim" name="propreim">
+						</div>
+						<div class="form-group">
+							<label for="justification">Justification:</label> <input type="text"
+								class="form-control" id="justification" name="justification">
+						</div>
+						<div class="form-group">
+							<label for="fileupload">Upload a File:</label> <input type="file"
+								class="form-control-file" id="fileupload" name="fileupload">
+						</div>
+						<div class="form-group">
+							<label for="timemissed">Work Hours Missed:</label> <input type="number"
+								class="form-control" id="timemissed" name="timemissed">
+						</div>
+						<div class="form-group">
+							<label for="gradeformat">Grade Format:</label> <input type="text"
+								class="form-control" id="gradeformat" name="gradeformat">
+						</div>
+						<div class="form-group">
+							<label for="cutoff">Cutoff Grade:</label> <input type="number"
+								class="form-control" id="cutoff" name="cutoff">
+						</div>
+						<div class="form-group">
+							<label for="eventtype">Event Type:</label> <input type="text"
+								class="form-control" id="eventtype" name="eventtype">
+						</div>
+						<div class="form-group">
+							<label for="eventcost">Event Cost:</label> <input type="text"
+								class="form-control" id="eventcost" name="eventcost">
+						</div>
+						
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

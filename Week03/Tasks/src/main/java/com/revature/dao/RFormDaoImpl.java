@@ -17,18 +17,17 @@ CallableStatement stmt = null;
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?)}");
 			
 			stmt.setInt(1, rform.getEmpid());
 			stmt.setDate(2, rform.getrFormDate());
-			stmt.setDate(3, rform.getDeadlineDate());
-			stmt.setString(4, rform.getPlace());
-			stmt.setString(5, rform.getInfo());
-			stmt.setInt(6, rform.getEventId());
-			stmt.setDouble(7,rform.getPropReim());
-			stmt.setString(8,rform.getJustification());
-			stmt.setString(9,rform.getFilekey());
-			stmt.setInt(10,rform.getTimeMissed());
+			stmt.setString(3, rform.getPlace());
+			stmt.setString(4, rform.getInfo());
+			stmt.setInt(5, rform.getEventId());
+			stmt.setDouble(6,rform.getPropReim());
+			stmt.setString(7,rform.getJustification());
+			stmt.setString(8,rform.getFilekey());
+			stmt.setInt(9,rform.getTimeMissed());
 			
 
 			
