@@ -1,12 +1,86 @@
 -- formUUID
+create or replace procedure selectForm(formUUID in varchar2,
+                                       resultCursor out sys_refcursor)
+is
+begin
+    open resultCursor for select * from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure selectAllForms(resultCursor out sys_refcursor)
+is
+begin
+    open resultCursor for select * from project_1_reimbursement_form;
+end;
+/
 
 -- employeeUUID
+create or replace procedure getEmployeeUUID(formUUID in varchar2,
+                                            employeeUUID in varchar2)
+is
+begin
+    select employee_uuid into employeeUUID from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateEmployeeUUID(formUUID in varchar2,
+                                               employeeUUID in varchar2)
+is
+begin
+    update project_1_reimbursement_form set employee_uuid = employeeUUID where formUUID = form_uuid;
+end;
+/
 
 -- directSupervisorUUID
+create or replace procedure getDirectSupervisorUUID(formUUID in varchar2,
+                                                    directSupervisorUUID out varchar2)
+is
+begin
+    select direct_supervisor_uuid into directSuperVisorUUID from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateSupervisorUUID(formUUID in varchar2,
+                                                 directSupervisorUUID in varchar2)
+is
+begin
+    update project_1_reimbursement_form set direct_supervisor_uuid = directSupervisorUUID where form_uuid = formUUID;
+end;
+/
 
 -- departmentHeadUUID
+create or replace procedure getDepartmentHeadUUID(formUUID in varchar2,
+                                                  deptHeadUUID out varchar2)
+is
+begin
+    select department_head_uuid into deptHeadUUID from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateDeptHeadUUID(formUUID in varchar2,
+                                               deptHeadUUID out varchar2)
+is
+begin
+    update project_1_reimbursement_form set department_head_uuid = deptHeadUUID where form_uuid = formUUID;
+end;
+/
 
 -- benefitsCoordinatorUUID
+create or replace procedure getBenefitsCoordinatorUUID(formUUID in varchar2,
+                                                       bencoUUID out varchar2)
+is
+begin
+    select benco_uuid into bencoUUID from project_1_reimbursement_form where form_uuid = bencoUUID;
+end;
+/
+
+create or replace procedure updateBenCoUUID(formUUID in varchar2,
+                                            bencoUUID out varchar2)
+is
+begin
+    update project_1_reimbursement_form set benco_uuid = bencoUUID where form_uuid = formUUID;
+end;
+/
 
 -- firstName
 create or replace procedure getEmployeeFirstNameFromForm (formUUID in varchar2,
@@ -31,12 +105,72 @@ end;
 /
 
 -- generalStatus
+create or replace procedure getFormStatus(formUUID in varchar2,
+                                          formStatus out varchar2)
+is
+begin
+    select status into formStatus from project_1_reimbursement_form where form_uuid = form_uuid;
+end;
+/
+
+create or replace procedure updateFormStatus(formUUID in varchar2,
+                                             formStatus in varchar2)
+is
+begin
+    update project_1_reimbursement set status = formStatus where form_uuid = formUUID;
+end;
+/
 
 -- supervisorComments
+create or replace procedure getSupervisorComments(formUUID in varchar2,
+                                                  supervisorComments out varchar2)
+is
+begin
+    select supervisor_comments into supervisorComments from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateSupervisorComments(formUUID in varchar2,
+                                                     supervisorComments in varchar2)
+is
+begin
+    update project_1_reimbursement_form set supervisor_comments = supervisorComments where form_uuid = formUUID;
+end;
+/
 
 -- formComments
+create or replace procedure getFormComments(formUUID in varchar2,
+                                            formComments out varchar2)
+is
+begin
+    select form_comments into formComments from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateFormComments(formUUID in varchar2,
+                                               formComments in varchar2)
+is
+begin
+    update project_1_reimbursement_form set form_comments = formComments where form_uuid = formUUID;
+end;
+/
 
 -- isCompletedWithSatisfaction
+create or replace procedure getCompletedWithSatisfaction(formUUID in varchar2,
+                                                         isCompleted out varchar2)
+is
+begin
+    select completed_with_satisfaction into isCompleted from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateCompletedFormField(formUUID in varchar2,
+                                                     isCompleted in varchar2)
+is
+begin
+    update project_1_reimbursement_form set completed_with_satisfaction = isCompleted where form_uuid = formUUID;
+end;
+/
 
 -- isFormClosed
 create or replace procedure isFormClosed(formUUID in varchar2,
@@ -57,6 +191,18 @@ begin
 end;
 /
 
+create or replace procedure closeForm(formUUID in varchar2,
+                                      is_completed in varchar2)
+is
+    v_current_time date;
+begin
+    select systimestamp into v_current_time from dual;
+    update project_1_reimbursement_form set form_closed_date = v_current_time,
+                                            completed_with_satisfaction = is_completed 
+                                            where form_uuid = formUUID;
+end;
+/
+
 -- formClosedDate
 create or replace procedure getFormClosedDate(formUUID in varchar2,
                                               formClosedDate out date)
@@ -72,6 +218,14 @@ create or replace procedure isPresentationRequired(formUUID in varchar2,
 is
 begin
     select present_to_management_required into presentation_required from project_1_reimbursement_form;
+end;
+/
+
+create or replace procedure updatePresentationRequirements(formUUID in varchar2,
+                                                           presentation_required in varchar2)
+is
+begin
+    update project_1_reimbursement_form set present_to_management_required = presentation_required where form_uuid = formUUID;
 end;
 /
 
@@ -121,16 +275,53 @@ end;
 /
 
 -- formCreationDate
+create or replace procedure selectFormCreationDate(formUUID in varchar2,
+                                                   formCreationDate out date)
+is
+begin
+    select form_creation_date into formCreationDate from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
 
 
 -- dateFormWasClosed
 
 
 -- departmentHeadDecisionDate
-
+create or replace procedure updateDepartmentHeadDecision(formUUID in varchar2,
+                                                         deptDecision in varchar2)
+is
+    v_current_time date;
+begin
+    update project_1_reimbursement_form set department_head_decision = deptDecision,
+                                            department_head_decision_date = v_current_time
+                                        where form_uuid = formUUID;
+    commit;
+end;
+/
 
 -- benefitsCoordinatorDecisionDate
-
+create or replace procedure updateBenCoDecision(formUUID in varchar2,
+                                                benCoDecision in varchar2)
+is
+    v_current_time date;
+begin
+    update project_1_reimbursement_form set benco_decision = benCoDecision,
+                                            benco_decision_date = v_current_time
+                                        where form_uuid = formUUID;
+    commit;
+end;
+/
 
 -- directSupervisorDecisionDate
-
+create or replace procedure updateSupervisorDecision(formUUID in varchar2,
+                                                     supervisorDecision in varchar2)
+is
+    v_current_time date;
+begin
+    update project_1_reimbursement_form set supervisor_decision = deptDecision,
+                                            supervisor_decision_date = v_current_time
+                                        where form_uuid = formUUID;
+    commit;
+end;
+/
