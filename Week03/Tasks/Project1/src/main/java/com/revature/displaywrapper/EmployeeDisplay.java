@@ -14,6 +14,14 @@ public class EmployeeDisplay {
 	private String balance;
 	private String typeName;
 	
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
 	public EmployeeDisplay(Employee employee) {
 		name = employee.getFname() + " " + employee.getLname();
 		email = employee.getEmail();
@@ -56,7 +64,7 @@ public class EmployeeDisplay {
 	@Override
 	public String toString() {
 		return "EmployeeDisplay [name=" + name + ", email=" + email + ", departmentName=" + departmentName
-				+ ", supervisorName=" + supervisorName + ", balance=" + balance + "]";
+				+ ", supervisorName=" + supervisorName + ", balance=" + balance + ", typeName=" + typeName + "]";
 	}
 	
 	

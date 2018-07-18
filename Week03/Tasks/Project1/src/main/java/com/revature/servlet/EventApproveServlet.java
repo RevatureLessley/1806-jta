@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.service.EmployeeService;
-import com.revature.service.UserService;
+import com.revature.service.EventService;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class EventApprove
  */
-public class LoginServlet extends HttpServlet {
+public class EventApproveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public EventApproveServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,21 +31,13 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
 
-		response.setContentType("text/html");
+		Integer eventId = Integer.parseInt(request.getParameter("eventId"));
 		
-		new UserService();
-		Integer userId = UserService.validateLogin(username, password);
-
-		if (userId != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("userId", userId);
-			response.sendRedirect(EmployeeService.getEmployeeRedirect(userId));
-		} else {
-			response.sendRedirect("./?status=0");
-		}
+		EventService.eventUpdateApprovalFrom(eventId, userId);
+		response.sendRedirect("./");
 	}
 
 	/**

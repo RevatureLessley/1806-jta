@@ -33,10 +33,10 @@
 	   
 	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
 	    
-	
 		let json = <%
 				Integer eventId = Integer.parseInt(request.getParameter("eventId"));
 				out.print(EventService.selectUserEvent(userId, eventId));%>;
+				
 		fillEventData(json, "tableBody");
 	</script>
 

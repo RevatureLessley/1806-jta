@@ -14,22 +14,24 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Manage Event</title>
 <script src="../resources/js/eventview.js"></script>
 <script src="../resources/js/template.js"></script>
 <script src="../resources/js/common.js"></script>
 <link rel="import" href="../template/eventview.html">
 <link rel="import" href="../template/navbar.html">
+<link rel="import" href="../template/manageevent.html">
 </head>
 <body>
 
 <div id="navDiv"></div>
 	<br>	
-	<div id="container"></div>
+	<div id="container" class="container-fluid"></div>
 
 	<script>
 	 	addFromTemplate("navbar", "#navDiv");
 	    addFromTemplate("eventview", "#container");
+	    addFromTemplate("manageevent", "#container");
 	   
 	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
 	    
@@ -37,7 +39,9 @@
 		let json = <%
 				Integer eventId = Integer.parseInt(request.getParameter("eventId"));
 				out.print(EventService.selectUserEvent(userId, eventId));%>;
-		fillEventData(json, "tableBody");
+		fillEventData(json);
+		fillEventManageData(json);		
+
 	</script>
 
 </body>

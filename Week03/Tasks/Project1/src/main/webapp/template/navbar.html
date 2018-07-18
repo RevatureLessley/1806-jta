@@ -1,9 +1,10 @@
 <template>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex">
+
 	<!-- Brand -->
-	<a class="navbar-brand" href="#">Logo</a>
+	<a class="navbar-brand p-2" href="#">Logo</a>
 	<!-- Links -->
-	<ul class="navbar-nav">
+	<ul class="navbar-nav p-2 mr-auto">
 		<!-- Dropdown -->
 		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 			href="#" id="navbardrop" data-toggle="dropdown"> Dropdown link </a>
@@ -16,9 +17,11 @@
 			</div></li>
 	</ul>
 
-	<div align="right">
-		<a class="btn btn-warning " onclick="logout()">Logout</a>
-	</div>
 
+	<div class="ml-auto p-2">
+		<form action='logout.do' method="post">
+			<button type="submit" class="btn btn-warning">Logout</button>
+		</form>
+	</div>
 </nav>
 </template>

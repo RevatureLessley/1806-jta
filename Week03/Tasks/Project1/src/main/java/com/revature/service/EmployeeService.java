@@ -1,5 +1,8 @@
 package com.revature.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.revature.bean.Employee;
@@ -9,7 +12,21 @@ import com.revature.utils.StringManip;
 
 public class EmployeeService {
 
+	private static Map<Integer, String> employeeNameMap;
+
+	private static Map<Integer, String> getNameMap() {
+		if (employeeNameMap == null)
+			employeeNameMap = new HashMap<Integer, String>();
+
+		return employeeNameMap;
+	}
+
 	public static String getEmployeeName(Integer employeeId) {
+
+		getNameMap();
+
+		if (employeeNameMap.containsKey(employeeId))
+			return employeeNameMap.get(employeeId);
 
 		Employee employee = new EmployeeDao().selectById(employeeId);
 
@@ -17,6 +34,8 @@ public class EmployeeService {
 			return "none";
 
 		String name = employee.getFname() + " " + employee.getLname();
+
+		employeeNameMap.put(employeeId, name);
 
 		return name;
 	}

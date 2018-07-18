@@ -9,6 +9,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class StringManip {
 
 	public static LocalDateTime getLocalDateTime(String s) {
+		
+		if(s == null)
+			return null;
+		
 		s = s.replaceAll(" ", "T");
 
 		LocalDateTime ldt = LocalDateTime.parse(s);
@@ -43,6 +47,8 @@ public class StringManip {
 	}
 
 	public static String formatDate(LocalDateTime eventDate) {
+		if(eventDate == null)
+			return null;
 		return eventDate.getMonthValue() + "/" + eventDate.getDayOfMonth() + "/" + eventDate.getYear();
 	}
 

@@ -89,7 +89,7 @@ public class FixedDataDao {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				Department a = new Department(rs.getInt(1), rs.getString(2));
+				Department a = new Department(rs.getInt(1), rs.getString(2), rs.getInt(3));
 
 				ls.add(a);
 			}

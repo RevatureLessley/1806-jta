@@ -1,0 +1,44 @@
+<template> <br>
+<div class="rsection">
+
+	<div class="row justify-content-md-center">
+
+		<h4 style="text-align: center;">Manage Event</h4>
+		<!-- areas -->
+		<div class="col-10">
+			<div class="form-group">
+				<label class="light-label">Supervisor Approval: </label> <span
+					id="superApprove">pending</span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Department Head Approval:</label> <span
+					id="headApprove">pending</span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Benefits Coordinator Approval:</label>pending<span
+					id="bencoApprove"></span>
+			</div>
+			<form id="approveForm" action='eventApprove.do?eventId=' method="post">
+				<button type="submit" class="btn btn-success">Approve Event</button>
+			</form>
+			<br> <br>
+		</div>
+
+		<div class="col-md-10">
+			<form id="commentForm" action='eventComment.do' method="post">
+
+				<h5 style="text-align: center;">Request Additional Information</h5>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<textarea name="message" class="form-control" rows="3"
+						id="comment"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-secondary">Reset</button>
+
+
+			</form>
+
+		</div>
+	</div>
+</template>

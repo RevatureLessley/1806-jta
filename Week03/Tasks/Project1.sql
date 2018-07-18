@@ -72,8 +72,8 @@ CREATE TABLE event_document(
 
 CREATE TABLE event_reimbursement(
     ev_id NUMBER(10) PRIMARY KEY,
-    ev_r_amt VARCHAR(10) NOT NULL,
-    ev_r_confirm NUMBER(1) NOT NULL,
+    ev_r_amt VARCHAR(10),
+    ev_r_confirm TIMESTAMP,
     ev_r_message VARCHAR(200)
 );
 
@@ -89,7 +89,8 @@ CREATE TABLE notification(
 
 CREATE TABLE department(
     dp_id NUMBER(10) PRIMARY KEY,
-    dp_name VARCHAR(30)
+    dp_name VARCHAR(30),
+    dp_head NUMBER(10)
 );
 
 /*******************************************************************************
@@ -205,33 +206,58 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE EVENT_UPDATE_APPROVAL_FROM(evId IN NUMBER, otherId IN NUMBER)
+CREATE OR REPLACE PROCEDURE EVENT_UPDATE_APPROVAL_FROM(evId IN NUMBER, otherId IN NUMBER, status OUT NUMBER)
 IS
     empId NUMBER(6);
     empRel NUMBER(6);
+    temp TIMESTAMP;
 BEGIN
     SELECT emp_id INTO empId FROM event WHERE ev_id = evId;
-    empRel := GET_EMP_RELATION(empId, otherId);
+    empRel := GET_EMP_RELATION(otherId, empId);
+    
+    DBMS_OUTPUT.put_line(empRel);
     
     IF empRel = 1 THEN
         --BenCo
-         UPDATE event SET ev_benco_approve = SYSDATE WHERE ev_id = evId;
+        SELECT ev_benco_approve INTO temp FROM event WHERE ev_id = evId;
+        IF temp != NULL THEN
+            status := 0;
+            return;
+        END IF;
+        
+        UPDATE event SET ev_benco_approve = SYSDATE WHERE ev_id = evId;
+        status := 1;
     END IF;
     
     IF empRel = 2 THEN
         --Department Head
+        SELECT ev_head_approve INTO temp FROM event WHERE ev_id = evId;
+        IF temp != NULL THEN
+            status := 0;
+            return;
+        END IF;
+        
          UPDATE event SET ev_head_approve  = SYSDATE WHERE ev_id = evId;
+         status := 1;
     END IF;
     
     IF empRel = 3 THEN
         --Supervisor
+        SELECT ev_super_approve INTO temp FROM event WHERE ev_id = evId;
+        IF temp != NULL THEN
+            status := 0;
+            return;
+        END IF;
+        
          UPDATE event SET ev_super_approve = SYSDATE WHERE ev_id = evId;
+         status := 1;
     END IF;
     
+    status := 0;
 END;
 /
 
-CREATE OR REPLACE FUNCTION GET_EMP_RELATION(empId IN NUMBER, otherId IN NUMBER)
+CREATE OR REPLACE FUNCTION GET_EMP_RELATION(superId IN NUMBER, otherId IN NUMBER)
 RETURN NUMBER
 IS
     empRel NUMBER;
@@ -239,17 +265,20 @@ IS
     temp1 NUMBER;
     temp2 NUMBER;
 BEGIN
-    SELECT emp_type INTO empType FROM employee WHERE emp_id = empId;
+    SELECT emp_type INTO empType FROM employee WHERE emp_id = superId;
+    
+    DBMS_OUTPUT.put_line(empType);
     
     IF empType = 1 THEN
         return 1;
     END IF;
     
     IF empType = 2 THEN 
-        SELECT emp_department INTO temp1 FROM employee WHERE emp_id = empId;
-        SELECT emp_department INTO temp2 FROM employee WHERE emp_id = otherId;
+        SELECT emp_department INTO temp1 FROM employee WHERE emp_id = otherId;
         
-        IF temp1 = temp2 THEN
+        SELECT dp_head INTO temp2 FROM department WHERE dp_id = temp1;
+        
+        IF superId = temp2 THEN
             return 2;
         END IF;
     END IF;
@@ -258,7 +287,7 @@ BEGIN
 
         SELECT emp_supervised_by INTO temp1 FROM employee WHERE emp_id = otherId;
         
-        IF temp1 = empId THEN
+        IF temp1 = superId THEN
             return 3;
         END IF;
     END IF;
@@ -283,7 +312,7 @@ BEGIN
     
     IF empType = 2 THEN
         -- department
-        SELECT emp_department INTO department FROM employee WHERE emp_id = empId;
+        SELECT dp_id INTO department FROM department WHERE dp_head = empId;
         
         OPEN resultSet FOR 
             SELECT * FROM event WHERE emp_id IN(
@@ -302,13 +331,42 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE EVENT_UPDATE_PHASE(eventId IN NUMBER)
+IS
+BEGIN
+    INSERT INTO event_reimbursement (ev_id) VALUES (eventId);
+END;
+/
 
+CREATE OR REPLACE PROCEDURE EVENT_ADD_NOTIFICATION(eventId IN NUMBER, fromEmp IN NUMBER, message IN VARCHAR)
+IS
+toEmp NUMBER;
+BEGIN
+
+    SELECT emp_id INTO toEmp FROM event WHERE ev_id = eventId;
+    
+    INSERT INTO notification (nt_emp_target, nt_emp_source, nt_message, nt_event, nt_timestamp) 
+    VALUES (toEmp, fromEmp, message, eventId, SYSDATE);
+    
+END;
+/
+
+CREATE OR REPLACE PROCEDURE EMPLOYEE_ADD_NOTIFICATION(toEmp IN NUMBER, fromEmp IN NUMBER, message IN VARCHAR)
+IS
+BEGIN
+
+    INSERT INTO notification (nt_emp_target, nt_emp_source, nt_message, nt_timestamp) 
+    VALUES (toEmp, fromEmp, message, SYSDATE);
+    
+END;
+/
 /*******************************************************************************
    Populate Tables
 ********************************************************************************/
 
-INSERT INTO department VALUES (1, 'Human Resources');
-INSERT INTO department VALUES (57, 'Arlington Branch');
+INSERT INTO department (dp_id, dp_name) VALUES (1, 'Management');
+INSERT INTO department (dp_id, dp_name) VALUES (2, 'Human Resources');
+INSERT INTO department (dp_id, dp_name) VALUES (57, 'Arlington Branch');
 
 INSERT INTO employee_type VALUES (1, 'Benefits Coordinator');
 INSERT INTO employee_type VALUES (2, 'Department Head');
@@ -327,24 +385,58 @@ INSERT INTO grade_scale VALUES (2, 'Pass/Fail');
 INSERT INTO grade_scale VALUES (3, 'Attendance');
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (1, 'Tom', 'Bobberson', 'name@email.com', 1, NULL, 1000, 1);
-
-INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (2, 'Some', 'Guy', 'austin.molina@email.com', 2, 1, 1000, 57);
+    emp_balance, emp_department) VALUES (1, 'Tom', 'Bobberson', 'bobbert@email.com', 2, NULL, 1000, 1);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (3, 'Ryan', 'Bobson', 'austin.molina@email.com', 3, 1, 1000, 57);
+    emp_balance, emp_department) VALUES (2, 'Gai', 'Sensei', 'gai333@email.com', 1, 1, 1000, 2);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (4, 'Austin', 'Molina', 'austin.molina@email.com', 4, 1, 1000, 57);
+    emp_balance, emp_department) VALUES (3, 'Ryan', 'Bobson', 'ryan@email.com', 3, 1, 1000, 57);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (4, 'Austin', 'Molina', 'austin.molina@email.com', 4, 3, 1000, 57);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (5, 'Karen', 'Fineman', 'k.fineman@email.com', 2, 1, 1000, 2);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (6, 'Shaniqua', 'Sundberg', 's.sundberg@email.com', 3, 5, 1000, 2);
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (7, 'John', 'Bukhalo', 'jk.bukhalo@email.com', 4, 3, 1000, 57);
+  
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (8, 'Harrid', 'Brewer', 'homebrew@email.com', 4, 3, 1000, 57); 
+    
+INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
+    emp_balance, emp_department) VALUES (9, 'Larry', 'Headson', 'captain@email.com', 2, 2, 1000, 57);
    
-INSERT INTO employee_user VALUES (1, 'benco', 'admin');
-INSERT INTO employee_user VALUES (2, 'head', 'admin');
+INSERT INTO employee_user VALUES (1, 'admin', 'admin');
+INSERT INTO employee_user VALUES (2, 'benco', 'admin');
 INSERT INTO employee_user VALUES (3, 'super', 'admin');
 INSERT INTO employee_user VALUES (4, 'ausmo', 'user');
+INSERT INTO employee_user VALUES (5, 'fineman', 'admin');
+INSERT INTO employee_user VALUES (6, 'ssundberg', 'admin');
+INSERT INTO employee_user VALUES (7, 'jbu678', 'user');
+INSERT INTO employee_user VALUES (8, 'homebrew', 'user');
+INSERT INTO employee_user VALUES (9, 'head', 'admin');
 
-SELECT * FROM employee;
+UPDATE department SET dp_head = 1 WHERE dp_id = 1;
+UPDATE department SET dp_head = 5 WHERE dp_id = 2;
+UPDATE department SET dp_head = 9 WHERE dp_id = 57;
+
+--SELECT * FROM event
+--NATURAL JOIN event_reimbursement;
+
+--SELECT * FROM employee;
 --SELECT * FROM employee_user;
 --SELECT * FROM event;
+----
+--call EVENT_UPDATE_APPROVAL_FROM(1, 3);
+--call EVENT_UPDATE_APPROVAL_FROM(1, 9);
+--call EVENT_UPDATE_APPROVAL_FROM(1, 1);
+--call EVENT_UPDATE_APPROVAL_FROM(1, 2);
+
+SELECT * FROM notification;
 
 commit;

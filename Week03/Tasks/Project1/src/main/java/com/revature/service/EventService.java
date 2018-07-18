@@ -3,9 +3,9 @@ package com.revature.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
+import com.revature.bean.Employee;
 import com.revature.bean.Event;
+import com.revature.dao.EmployeeDao;
 import com.revature.dao.EventDaoImpl;
 import com.revature.displaywrapper.EventDisplay;
 import com.revature.utils.StringManip;
@@ -43,4 +43,20 @@ public class EventService {
 
 		return StringManip.getJSONString(wrappedEvents);
 	}
+
+	public static void eventUpdateApprovalFrom(Integer eventId, Integer userId) {
+		EventDaoImpl eventDao = new EventDaoImpl();
+		Integer status = eventDao.eventUpdateApprovalFrom(eventId, userId);
+
+		if (status == 1) {
+			// update was successful
+			Employee emp = new EmployeeDao().selectById(userId);
+			if (emp.getType() == 1) {
+				// employee was a benco
+				eventDao.eventUpdatePhase(eventId);
+			}
+
+		}
+	}
+
 }

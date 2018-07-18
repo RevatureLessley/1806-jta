@@ -6,11 +6,11 @@
 	<h6 style="text-align: center;">
 		Event Id: <span id="eventId"></span>
 	</h6>
-	<br>
+
 	<div class="row justify-content-md-center">
 
 		<!-- areas -->
-		<div class="col-md-5">
+		<div class="col-sm-5">
 			<div class="form-group">
 				<label class="light-label">Employee Name:</label> <span
 					id="employeeName"></span>
@@ -37,17 +37,19 @@
 					id="location"></span>
 			</div>
 		</div>
-
+		
 		<!-- text areas -->
-		<div class="col-10">
+		<div class="col-md-10">
 			<div class="form-group">
 				<label class="light-label" for="description">Description:</label>
-				<p id="description"></p>
+				<textarea name="justification" class="form-control" rows="3"
+								id="description" disabled="disabled"></textarea>
 			</div>
 
 			<div class="form-group">
 				<label class="light-label" for="justification">Justification:</label>
-				<p id="justification"></p>
+				<textarea name="justification" class="form-control" rows="3"
+								id="justification" disabled="disabled"></textarea>
 			</div>
 
 			<!-- Below text areas -->
@@ -55,7 +57,7 @@
 		<div class="col-md-5">
 			<div class="form-group">
 				<label class="light-label" for="username">Documents:</label>
-
+				<p>none</p>
 			</div>
 
 		</div>
@@ -64,13 +66,12 @@
 			<div class="form-group">
 				<label class="light-label" for="username">Pre-Approval
 					Letter</label>
+					<p>none</p>
 			</div>
 		</div>
 
 
 	</div>
-	<div align="right" style="margin: 10px;">
-		<button type="reset" class="btn btn-primary" onclick='goBack()'>Back</button>
-	</div>
 </div>
+
 </template>

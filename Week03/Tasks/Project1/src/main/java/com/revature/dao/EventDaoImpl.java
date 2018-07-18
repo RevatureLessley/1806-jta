@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.bean.Employee;
 import com.revature.bean.Event;
 import com.revature.utils.Connections;
 import com.revature.utils.StringManip;
@@ -98,7 +97,8 @@ public class EventDaoImpl {
 			while (rs.next()) {
 				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10));
+						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
+						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
 
 				ls.add(a);
 			}
@@ -129,7 +129,8 @@ public class EventDaoImpl {
 			while (rs.next()) {
 				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10));
+						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
+						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
 
 				ls.add(a);
 			}
@@ -162,8 +163,9 @@ public class EventDaoImpl {
 			if (rs.next())
 				a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10));
-			
+						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
+						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -189,15 +191,16 @@ public class EventDaoImpl {
 
 			stmt.setInt(1, userId);
 			stmt.registerOutParameter(2, OracleTypes.CURSOR);
-			
+
 			stmt.execute();
-			
-			rs = (ResultSet)stmt.getObject(2);
+
+			rs = (ResultSet) stmt.getObject(2);
 
 			while (rs.next()) {
 				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10));
+						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
+						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
 
 				ls.add(a);
 
@@ -211,5 +214,57 @@ public class EventDaoImpl {
 		}
 
 		return ls;
+	}
+
+	public Integer eventUpdateApprovalFrom(Integer eventId, Integer userId) {
+
+		CallableStatement stmt = null;
+		ResultSet rs = null;
+
+		String sql = "{CALL EVENT_UPDATE_APPROVAL_FROM(?, ?, ?)}";
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.prepareCall(sql);
+
+			stmt.setInt(1, eventId);
+			stmt.setInt(2, userId);
+			stmt.registerOutParameter(3, java.sql.Types.INTEGER);
+
+			stmt.execute();
+
+			return stmt.getInt(3);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
+		return 0;
+	}
+
+	public void eventUpdatePhase(Integer eventId) {
+		CallableStatement stmt = null;
+		ResultSet rs = null;
+
+		String sql = "{CALL EVENT_UPDATE_PHASE(?)}";
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.prepareCall(sql);
+
+			stmt.setInt(1, eventId);
+
+			stmt.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
 	}
 }

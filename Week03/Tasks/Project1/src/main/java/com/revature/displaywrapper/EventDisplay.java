@@ -17,6 +17,9 @@ public class EventDisplay {
 	private String status;
 	private String employeeName;
 	private String gradeScaleName;
+	private String superApprove;
+	private String headApprove;
+	private String bencoApprove;
 	
 	public String getGradeScaleName() {
 		return gradeScaleName;
@@ -47,10 +50,38 @@ public class EventDisplay {
 		
 		this.date = StringManip.formatDate(event.getEventDate());
 		this.status = "processing";
-		this.employeeName = "e_"+event.getEmpId();
+		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
 		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
 
 		this.event = event;
+		
+		this.superApprove = StringManip.formatDate(event.getSuperApprove());
+		this.headApprove = StringManip.formatDate(event.getHeadApprove());
+		this.bencoApprove = StringManip.formatDate(event.getBencoApprove());
+	}
+
+	public String getSuperApprove() {
+		return superApprove;
+	}
+
+	public void setSuperApprove(String superApprove) {
+		this.superApprove = superApprove;
+	}
+
+	public String getHeadApprove() {
+		return headApprove;
+	}
+
+	public void setHeadApprove(String headApprove) {
+		this.headApprove = headApprove;
+	}
+
+	public String getBencoApprove() {
+		return bencoApprove;
+	}
+
+	public void setBencoApprove(String bencoApprove) {
+		this.bencoApprove = bencoApprove;
 	}
 
 	public Integer getId() {
@@ -121,7 +152,8 @@ public class EventDisplay {
 	public String toString() {
 		return "EventDisplay [id=" + id + ", name=" + name + ", typeName=" + typeName + ", cost=" + cost
 				+ ", expectedAmount=" + expectedAmount + ", date=" + date + ", status=" + status + ", employeeName="
-				+ employeeName + ", gradeScaleName=" + gradeScaleName + ", event=" + event + "]";
+				+ employeeName + ", gradeScaleName=" + gradeScaleName + ", superApprove=" + superApprove
+				+ ", headApprove=" + headApprove + ", bencoApprove=" + bencoApprove + ", event=" + event + "]";
 	}
 	
 	

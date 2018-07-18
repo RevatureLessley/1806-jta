@@ -17,6 +17,33 @@ public class Event {
 	private LocalDateTime superApprove;
 	private LocalDateTime headApprove;
 	private LocalDateTime bencoApprove;
+	private Integer reimbursementAmount;
+	private Integer reimbursementConfirmation;
+	private String reimbursementMessage;
+
+	public Integer getReimbursementAmount() {
+		return reimbursementAmount;
+	}
+
+	public void setReimbursementAmount(Integer reimbursementAmount) {
+		this.reimbursementAmount = reimbursementAmount;
+	}
+
+	public Integer getReimbursementConfirmation() {
+		return reimbursementConfirmation;
+	}
+
+	public void setReimbursementConfirmation(Integer reimbursementConfirmation) {
+		this.reimbursementConfirmation = reimbursementConfirmation;
+	}
+
+	public String getReimbursementMessage() {
+		return reimbursementMessage;
+	}
+
+	public void setReimbursementMessage(String reimbursementMessage) {
+		this.reimbursementMessage = reimbursementMessage;
+	}
 
 	public Integer getId() {
 		return id;
@@ -122,8 +149,25 @@ public class Event {
 		this.bencoApprove = bencoApprove;
 	}
 
+//	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
+//			String location, String description, String justification, Double cost) {
+//		super();
+//		this.id = id;
+//		this.empId = empId;
+//		this.type = type;
+//		this.gradeScale = gradeScale;
+//		this.name = name;
+//		this.eventDate = eventDate;
+//		this.location = location;
+//		this.description = description;
+//		this.justification = justification;
+//		this.cost = cost;
+//	}
+
 	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
-			String location, String description, String justification, Double cost) {
+			String location, String description, String justification, Double cost, LocalDateTime superApprove,
+			LocalDateTime headApprove, LocalDateTime bencoApprove, Integer reimbursementAmount,
+			Integer reimbursementConfirmation, String reimbursementMessage) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -135,6 +179,31 @@ public class Event {
 		this.description = description;
 		this.justification = justification;
 		this.cost = cost;
+		this.superApprove = superApprove;
+		this.headApprove = headApprove;
+		this.bencoApprove = bencoApprove;
+		this.reimbursementAmount = reimbursementAmount;
+		this.reimbursementConfirmation = reimbursementConfirmation;
+		this.reimbursementMessage = reimbursementMessage;
+	}
+
+	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
+			String location, String description, String justification, Double cost, LocalDateTime superApprove,
+			LocalDateTime headApprove, LocalDateTime bencoApprove) {
+		super();
+		this.id = id;
+		this.empId = empId;
+		this.type = type;
+		this.gradeScale = gradeScale;
+		this.name = name;
+		this.eventDate = eventDate;
+		this.location = location;
+		this.description = description;
+		this.justification = justification;
+		this.cost = cost;
+		this.superApprove = superApprove;
+		this.headApprove = headApprove;
+		this.bencoApprove = bencoApprove;
 	}
 
 	@Override

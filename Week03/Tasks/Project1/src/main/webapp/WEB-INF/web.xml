@@ -28,6 +28,10 @@
     <filter-name>SecurityFilter</filter-name>
     <url-pattern>/user/*</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <url-pattern>/manage/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -77,5 +81,25 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventApproveServlet</display-name>
+    <servlet-name>EventApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EventApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventApproveServlet</servlet-name>
+    <url-pattern>/manage/EventApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventCommentServlet</display-name>
+    <servlet-name>EventCommentServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EventCommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventCommentServlet</servlet-name>
+    <url-pattern>/manage/EventCommentServlet</url-pattern>
   </servlet-mapping>
 </web-app>

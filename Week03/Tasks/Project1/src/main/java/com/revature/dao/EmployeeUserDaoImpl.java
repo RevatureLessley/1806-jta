@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.function.Function;
 
 import com.revature.bean.EmployeeUser;
 import com.revature.utils.Connections;

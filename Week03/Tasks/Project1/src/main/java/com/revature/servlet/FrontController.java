@@ -42,13 +42,23 @@ public class FrontController extends HttpServlet {
 
 		switch (action) {
 		case "login":
-			System.out.println("do login");
 			rd = request.getRequestDispatcher("LoginServlet");
 			rd.forward(request, response);
 			break;
+		case "logout":
+			rd = request.getRequestDispatcher("../LogoutServlet");
+			rd.forward(request, response);
+			break;
 		case "eventrequest":
-			System.out.println("do event req");
 			rd = request.getRequestDispatcher("EventRequestServlet");
+			rd.forward(request, response);
+			break;
+		case "eventcomment":
+			rd = request.getRequestDispatcher("EventCommentServlet");
+			rd.forward(request, response);
+			break;
+		case "eventapprove":
+			rd = request.getRequestDispatcher("EventApproveServlet");
 			rd.forward(request, response);
 			break;
 		default:

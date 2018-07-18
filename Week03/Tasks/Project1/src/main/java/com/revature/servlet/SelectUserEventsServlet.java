@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.service.EventService;
-import com.revature.service.UserService;
 
 /**
  * Servlet implementation class SelectUserEventsServlet
