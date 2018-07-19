@@ -1,6 +1,7 @@
 package com.revature.main;
 
 import com.revature.beans.Person;
+import com.revature.daos.NpcDaoImpl;
 import com.revature.daos.PersonDaoImpl;
 
 public class Driver {
@@ -9,11 +10,25 @@ public class Driver {
 		System.out.println(" =====Launching App=====");
 		
 		PersonDaoImpl pd = new PersonDaoImpl();
-		pd.insertPerson(new Person("Bobbert", "Professional Bob", 1232000));
-		pd.insertPerson(new Person("Ryan", "Lead Trainer", -16));
-		pd.insertPerson(new Person("Mehrab", "Lead Trainer", 0));
-	
+		int id3 = pd.insertPerson(new Person("Bobbert", "Professional Bob", 1232000));
+		int id2 = pd.insertPerson(new Person("Ryan", "Lead Trainer", -16));
+		int id = pd.insertPerson(new Person("Timbert", "Lead Trainer", 0));
+		//session.save() returns the id of the record to be inserted.
+		
+		
+		pd.deletePersonById(id);
+		pd.updatePersonNameById(id2, "Fragliminate");
+		pd.updatePersonByIdFull(new Person(id3,null,null,2500000));
+		
 		System.out.println(pd.getAllPersons());
+		
+		System.out.println("=====NPC DATABASE=====");
+		NpcDaoImpl nd = new NpcDaoImpl();
+		nd.populateDatabase();
+		
+		System.out.println("  =====GET VS LOAD=====");
+		
+		
 		
 		System.out.println("=====Terminating App=====");
 		System.exit(0);
