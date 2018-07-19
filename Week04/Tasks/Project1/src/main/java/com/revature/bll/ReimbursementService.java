@@ -14,17 +14,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReimbursementService {
-    public static boolean insertRequest(int id, LocalDate date, String location, String description, double amount, int type){
+    public static boolean insertRequest(int id, LocalDate date, String location, String description, double amount, int type, String url){
         //TODO: Do error checking *somehwere* that the employee exists before being able to submit a reimbursement form
         ReimbursementDaoImpl rdao = new ReimbursementDaoImpl();
         EmployeeDaoImpl edao = new EmployeeDaoImpl();
 
         return rdao.insertReimbursementForm(
                 new ReimbursementBean(
-                    id,
+                    id, //this value isn't actually inserted (And that's okay)
                     edao.retrieveEmployeeById(id),  //pulls from the database
                     date, location, description, amount, "Format?", //TODO: Figure out 'Format?'
-                    type, false
+                    type, false, url
                 )
         );
     }
@@ -55,6 +55,11 @@ public class ReimbursementService {
             }
         }
         return json;
+    }
+
+    public static String retrieveEventType(int eventId){
+        EventTypeBean bean = new ReimbursementTypeDaoImpl().selectEventType(eventId);
+        return eventTypeToJson(bean);
     }
 
     private static String eventTypeToJson(EventTypeBean bean){

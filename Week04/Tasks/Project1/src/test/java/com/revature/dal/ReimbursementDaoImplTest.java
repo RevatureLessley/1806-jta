@@ -15,7 +15,7 @@ public class ReimbursementDaoImplTest {
     private static LocalDate date = LocalDate.now();
     private static EmployeeBean ebean = new EmployeeBean(100, "Test", "Dude", "pass", 1111111111L, "testemail@test.email",
             0,0, 200, 300, 400);
-    private static ReimbursementBean rbean = new ReimbursementBean(100, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, false);
+    private static ReimbursementBean rbean = new ReimbursementBean(100, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, false, "");
     private static ReimbursementDaoImpl rdao = new ReimbursementDaoImpl();
     private static EmployeeDaoImpl edao = new EmployeeDaoImpl();
 
@@ -43,7 +43,7 @@ public class ReimbursementDaoImplTest {
 
     @Test
     public void insertReimbursementForm() {
-        ReimbursementBean bean = new ReimbursementBean(101, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, false);
+        ReimbursementBean bean = new ReimbursementBean(101, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, false, "");
 
         assertTrue(rdao.insertReimbursementForm(bean));
         ReimbursementBean testBean = rdao.retrieveReimbursementFormById(bean.getId());

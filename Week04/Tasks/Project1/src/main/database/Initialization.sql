@@ -34,6 +34,7 @@ CREATE TABLE Reimbursement_Requests (
     grading_format varchar2(100) NOT NULL,
     event_type number(1) NOT NULL,
     is_approved number(1) NOT NULL,
+    optional_file clob,
     CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES Employees (employee_id),
     CONSTRAINT fk_event_type FOREIGN KEY (event_type) REFERENCES Reimbursement_Types (reimbursement_id)
 );
@@ -131,9 +132,9 @@ INSERT INTO CLEARANCES VALUES(3, 3, 3, 2);
 INSERT INTO CLEARANCES VALUES(2, 1, 1, 1);
 INSERT INTO CLEARANCES VALUES(1, 1, 1, 1);
 
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1);
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0);
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0);
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1, '');
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0, '');
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0, '');
 
 COMMIT;
 
@@ -143,10 +144,11 @@ COMMIT;
 --INSERT INTO Reimbursement_Requests VALUES (1,1774,to_date('03/14/2017 13:30:34', 'mm/dd/yyyy hh24:mi:ss'),'Texas','Revature Training',10.11,'Format?', 5, 0);
 
 
-SELECT  * FROM EMPLOYEES ;
+SELECT * FROM EMPLOYEES ;
 SELECT * FROM REIMBURSEMENT_REQUESTS ;
 SELECT * FROM CLEARANCES ;
 SELECT * FROM Complete_Employee ;
+SELECT * FROM REIMBURSEMENT_TYPES ;
 
 SELECT * FROM REIMBURSEMENT_REQUESTS a
 INNER JOIN EMPLOYEES b

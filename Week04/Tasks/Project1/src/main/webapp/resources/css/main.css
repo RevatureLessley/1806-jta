@@ -1,6 +1,3 @@
-/*
-	This is my external stylesheet.
-*/
 
 body {
 	/*
@@ -17,4 +14,5 @@ body {
 	border: 5px outset #bb1919;
 	margin: 10px;
 	padding: 10px;
+	border-color: green
 }

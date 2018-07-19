@@ -4,16 +4,20 @@ import com.revature.beans.EmployeeBean;
 import com.revature.dal.EmployeeDaoImpl;
 import com.revature.dal.GenericDaoImpl;
 
+import java.io.IOException;
+import java.io.StringReader;
+
 public class TestMain {
     public static void main(String[] args){
-//        GenericDaoImpl<EmployeeBean> dao = new GenericDaoImpl<>();
-//        EmployeeBean bean = new EmployeeBean(3, "f", "l", 123, "email", 0,0,0,0,0);
-//        EmployeeBean notBean;
-//        //notBean = dao.select(bean, "", 3);
-//
-//        System.out.println(bean.toString() + "\n");
-//        //System.out.println(notBean.toString());
-        EmployeeDaoImpl dao = new EmployeeDaoImpl();
-        System.out.println(dao.deleteEmployeeById(1774));
+        String s = "Hello World";
+        StringReader reader = new StringReader(s);
+        try{
+            int b = 0;
+            while (( b = reader.read()) != -1){
+                System.out.println((char)b);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

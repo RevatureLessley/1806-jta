@@ -15,24 +15,39 @@
     </script>
     <title>Project 1 Webpage</title>
     <link rel="stylesheet" type="text/css" href= "../resources/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/modal.css">
     <script src="../resources/js/Home.js"></script>
+
 </head>
 <body>
-    <!-- navbar here -->
+    <!-- TODO: navbar here -->
     <div class="row">
-        <div class="col-sm-10"></div><div class="col-sm-2" id="welcome-tag">Welcome, </div>
+        <div class="col-sm-7" style="color:green;white-space:pre"><h1><i>    Snailsforce</i></h1></div>
+        <div class="col-sm-2" id="notification-tag" style="margin:auto">
+            <a class="nav-link" style="text-align:right" href="#">Notifications
+                <span class="badge badge-success">5</span>  <!-- TODO: HARDCODE -->
+            </a>
+        </div>
+
+        <div class="col-sm-2" style="margin:auto;text-align:right" id="welcome-tag-innermost">Welcome, </div>
+        <div class="col-sm-1">
+            <div style="position: relative;top: 50%;transform: translateY(-50%);">
+                <button type="button" onclick="logout()">Logout</button>
+            </div>
+        </div>
     </div>
-    <hr>
+    <hr>    <!-- Boxed stuff -->
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-7">
             <div class="bordered-section1">
                 <h3>Tuition Reimbursement Forms</h3>
                 <table border="2px" id="reimbursement-table">
                     <tr>
-                        <th>Ticket ID</th>
-                        <th>Event Type</th>
-                        <th>Amount</th>
-                        <th>Approved</th>
+                        <th><center>Ticket ID</center></th>
+                        <th><center>Event Type</center></th>
+                        <th><center>Amount</center></th>
+                        <th><center>Approved</center></th>
+                        <th><center>File</center></th>
                     </tr>
                     <!-- Handled in JavScript -->
                     <!-- TODO: Set the max size of the table, (use a scroll thingie?) -->
@@ -42,18 +57,16 @@
 
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="bordered-section1">
-
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="bordered-section1">
-                <ul class="list-style-type:none">
+        <div class="col-sm-5">
+            <div class="bordered-section1" id="user-info-block">
+                <ul style="list-style-type:none" id="user-info-list">
                     <!-- Handled in JavScript -->
                 </ul>
             </div>
         </div>
+    </div>
+    <div id="output">
+        <!-- Handled by JavaScript -->
     </div>
 </body>
 </html>
