@@ -46,6 +46,31 @@ function checkUsername() {
 	xhr.send(message);
 }
 
+function displayDetails(event, i) {
+	return "<tr>" + 
+		   	"<td>" + event["type"] + "</td>" +
+		   	"<td>" + 
+		   		new Date(event["datetime"]).toLocaleString() + 
+		   	"</td>" +
+		    "<td>" + event["location"] + "</td>" +
+		    "<td>" +
+		   	"<button " +
+		   		"class=\"btn btn-link\" " +
+		   			"data-toggle=\"collapse\" " +
+					"href=\"#details" + i + "\">" + 
+						"Toggle Details" + 
+			"</button>" + 
+		    "</td>" +
+		   "</tr>" + 
+		   "<div class=\"collapse\" id=details" + i + ">" + 
+		    "<ul style=\"list-style-type: none\">" +
+		   		"<li>First item</li>" +
+		   		"<li>Second item</li>" +
+		   		"<li>Third item</li>" +
+		   	"</ul>" + 
+		   "</div>";
+}
+
 function displayPastReimbursements(employee) {
 	let count = document.getElementById("numReimbursements");
 	let list = document.getElementById("pastReimbursements");
@@ -55,24 +80,7 @@ function displayPastReimbursements(employee) {
 	
 	for(r in reimbursements) {
 		let event = reimbursements[r]["event"];
-		list.innerHTML += "<tr>" + 
-						  	"<td>" + event["type"] + "</td>" +
-							"<td>" + 
-								new Date(event["datetime"]).toLocaleString() + 
-							"</td>" +
-							"<td>" + event["location"] + "</td>" +
-							"<td>" +
-								"<button " +
-									"class=\"btn btn-link\" " +
-									"data-toggle=\"collapse\" " +
-									"href=\"#details" + i + "\">" + 
-										"Toggle Details" + 
-								"</button>" + 
-							"</td>" +
-						  "</tr>" + 
-						  "<div class=\"collapse\" id=details" + i + ">" + 
-						  	"Cutthroat" + 
-				          "</div>";
+		list.innerHTML += displayDetails(event, i);
 		i++;
 	}
 	
