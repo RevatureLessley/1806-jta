@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> <!-- ROOT TAG -->
+	
+	<class name="com.revature.beans.Person" table="Person">
+		<meta attribute="class-description">
+			The table houses all them people
+		</meta>
+		<!-- In this element, we are describe our table's primary key.
+		Then name attribute must match the class's varible name.
+		Type is what java datatype we are mapping to.
+		Column dictates the name in the database.
+		
+		NOTE: Though there are attributes for dictating the name in the
+		database, they are completely optional. Hibernate will name it
+		itself if left to it's own devices. -->
+		
+		<id name="id" type="int" column="p_id">
+			<generator class="native">
+				<param name="sequence">MY_SEQ</param>
+			</generator>
+		</id>
+		
+		<property name="name" type="string"></property>
+		<property name="title" type="string"></property>
+		<property name="salary" type="int"></property>
+	</class>
+	
+    <!-- Generator types:
+            -assigned (Default if not assigned a type): id assigned manually
+            -increment: generates an int/short/long starting with 1
+            -sequence: will create a sequence to generate an id
+                when using sequence. defaults to HIBERNATE_SEQUENCE.
+                can use a custom name with <param name="sequence">SEQUENCE_NAME</param>
+            -hilo: uses hilo algorithm to generate id
+            -native: decides between identity, sequence, or hilo depending on vendor
+            -identity:    for Sybase, MySQL, SQLServer,DB2 or HypersonicSQL
+            -seqhilo: use hilo alogroithm with sequence object
+            -uuid: uses uui algorithm
+            -guid:
+            -select: use a primary key returned by aa database trigger
+            -foreign: use id of anotehr associated object, typically for one-to-one relationships
+            -sequence-identity: special sequence generation strategy, for oracle10g only
+            -->
+
+</hibernate-mapping>
