@@ -53,7 +53,7 @@ Mapping a bean turns it into a persistent class. There are two ways to map:
 SessionFactory is a singleton. The default method of the configuration component uses org.hibernate.cfg.
 
 For DQL that are two options:
-	-HQL, a semi-abstracted SQL that doesn't need SEELCT * since it assumes you will grab all the data to populate objects. .list() executes HQL and gets a ResultSet. .uniqueResult() gets a single result.
+	-HQL, a semi-abstracted SQL that doesn't need SELECT * since it assumes you will grab all the data to populate objects. .list() executes HQL and gets a ResultSet. .uniqueResult() gets a single result.
 	-criteria
 
 Person objects can be in three states:
@@ -65,8 +65,11 @@ Person objects can be in three states:
 session.save() returns the id of the record inserted.
 
 get() vs load()
+	-eager vs lazy
 save() vs persist()
+	-eager vs lazy
 update() vs merge()
+	-eager vs lazy
 
 Eager Fetching grabs all data related to a persistent object. Lazy Fetching grabs only primitive data and dependency data upon invoking its getter. A proxy is a pseudo implemenation of a class without methods, just a skeleton.
 
