@@ -51,7 +51,7 @@ function displayPastReimbursements(employee) {
 	let list = document.getElementById("pastReimbursements");
 	list.innerHTML = "";
 	let reimbursements = employee["reimbursements"];
-	let i = 0;
+	let i = 1;
 	
 	for(r in reimbursements) {
 		let event = reimbursements[r]["event"];
@@ -61,11 +61,22 @@ function displayPastReimbursements(employee) {
 								new Date(event["datetime"]).toLocaleString() + 
 							"</td>" +
 							"<td>" + event["location"] + "</td>" +
-						  "</tr>";
+							"<td>" +
+								"<button " +
+									"class=\"btn btn-link\" " +
+									"data-toggle=\"collapse\" " +
+									"href=\"#details" + i + "\">" + 
+										"Toggle Details" + 
+								"</button>" + 
+							"</td>" +
+						  "</tr>" + 
+						  "<div class=\"collapse\" id=details" + i + ">" + 
+						  	"Cutthroat" + 
+				          "</div>";
 		i++;
 	}
 	
-	count.innerHTML = "You have " + i + " past reimbursements:";
+	count.innerHTML = "You have " + (--i) + " past reimbursements:";
 }
 
 function displayWelcome() {
