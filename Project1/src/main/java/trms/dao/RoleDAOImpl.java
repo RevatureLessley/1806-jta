@@ -158,7 +158,6 @@ public class RoleDAOImpl extends Connection implements RoleDAO {
 		try {
 			CallableStatement callableStatement = connection.prepareCall("{call removeBenefitsCoordinator(?)}");
 			callableStatement.setString(1, user.getUuid());
-			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
 			callableStatement.execute();
 			return true;
 		} catch (SQLException e) {

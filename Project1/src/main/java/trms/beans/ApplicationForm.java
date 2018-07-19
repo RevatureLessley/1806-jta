@@ -24,6 +24,10 @@ public class ApplicationForm implements Form {
 	private Date departmentHeadDecisionDate;
 	private Date benefitsCoordinatorDecisionDate;
 	private Date directSupervisorDecisionDate;
+
+	public ApplicationForm() {
+		
+	}
 	
 	public String getGeneralStatus() {
 		return generalStatus;
@@ -135,10 +139,6 @@ public class ApplicationForm implements Form {
 
 	public void setDirectSupervisorDecisionDate(Date directSupervisorDecisionDate) {
 		this.directSupervisorDecisionDate = directSupervisorDecisionDate;
-	}
-
-	public ApplicationForm() {
-		
 	}
 	
 	@Override

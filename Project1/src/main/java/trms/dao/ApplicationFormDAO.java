@@ -10,7 +10,7 @@ public interface ApplicationFormDAO {
 	public ApplicationForm getApplicationForm(String formUUID);
 	public String getEmployeeUUID(String formUUID);
 	public boolean updateEmployeeUUID(String formUUID, String employeeUUID);
-	public String getDirectSupervisoyUUID(String formUUID);
+	public String getDirectSupervisorUUID(String formUUID);
 	public boolean updateSupervisorUUID(String formUUID, String supervisorUUID);
 	public String getDepartmentHeadUUID(String formUUID);
 	public boolean updateDepartmentHeadUUID(String formUUID, String departmentHeadUUID);
@@ -34,6 +34,9 @@ public interface ApplicationFormDAO {
 	public boolean hasSupervisorMadeADecision(String formUUID);
 	public boolean hasBenefitsCoordinatorMadeADecision(String formUUID);
 	public boolean hasDepartmentHeadMadeADecision(String formUUID);
+	public Date getSupervisorDecisionDate(String formUUID);
+	public Date getBenefitsCoordinatorDecisionDate(String formUUID);
+	public Date getDepartmentHeadDecisionDate(String formUUID);
 	public Date getFormCreationDate(String formUUID);
 	public boolean updateDepartmentHeadDecision(String formUUID, String decision);
 	public boolean updateBenefitsCoordinatorDecision(String formUUID, String decision);

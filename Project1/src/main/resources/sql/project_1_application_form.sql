@@ -284,8 +284,32 @@ end;
 /
 
 
--- dateFormWasClosed
+-- departmentHeadDecisionDate
+create or replace procedure selectDeptHeadDecisionDate(formUUID in varchar2,
+                                                       decisionDate out Date)
+is
+begin
+    select department_head_decision_date into decisionDate from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
 
+-- benefitsCoordinatorDecisionDate
+create or replace procedure selectBenCoDecisionDate(formUUID in varchar2,
+                                                    decisionDate out Date)
+is
+begin
+    select benco_decision_date into decisionDate from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+-- supervisorDecisionDate
+create or replace procedure selectSupervisorDecisionDate(formUUID in varchar2,
+                                                         decisionDate out Date)
+is
+begin
+    select benco_decision_date into decisionDate from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
 
 -- departmentHeadDecisionDate
 create or replace procedure updateDepartmentHeadDecision(formUUID in varchar2,
