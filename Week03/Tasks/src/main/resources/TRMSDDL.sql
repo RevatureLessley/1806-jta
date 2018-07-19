@@ -218,10 +218,17 @@ SELECT ER.emp_username AS E_Supervisor,
        rei_awarded AS E_AwardedReimbursement, rei_isCancelled AS E_IsCancelled,
        rei_isPending AS E_IsPending,
        rei_justification AS E_ReimbursementJustification, 
-       rei_reason_exceeded_max as E_ReasonExceededMax
+       rei_reason_exceeded_max AS E_ReasonExceededMax, eve_cost AS E_Cost,
+       eve_datetime AS E_Date, eve_description AS E_Description, 
+       eve_location AS E_Location, eve_work_missed AS E_WorkTimeMissed,
+       ET.eve_typ_coverage AS E_PercentCoverage,
+       ET.eve_typ_value AS E_EventType
+       
 FROM Employee EL
 LEFT JOIN Employee ER ON EL.emp_supervisor = ER.emp_id
-INNER JOIN Reimbursement ON EL.emp_id = rei_emp_id;
+LEFT JOIN Reimbursement ON EL.emp_id = rei_emp_id
+LEFT JOIN Event E ON rei_id = eve_id
+LEFT JOIN Event_Type ET ON E.eve_typ_id = ET.eve_typ_id;
 
 CREATE SEQUENCE app_seq
 START WITH 1

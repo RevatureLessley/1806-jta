@@ -9,6 +9,7 @@ public class Reimbursement {
 	private BigDecimal awarded;
 	private boolean isCancelled;
 	private boolean isPending;
+	private Event event;
 	private String justification;
 	private String reasonExceededMax;
 	private HashMap<String, Approval> approvals;
@@ -29,6 +30,7 @@ public class Reimbursement {
 		this.isPending = isPending;
 		this.justification = justification;
 		this.reasonExceededMax = reasonExceededMax;
+		event = null;
 		approvals = new HashMap<>();
 	}
 	
@@ -59,6 +61,14 @@ public class Reimbursement {
 	public void setPending(boolean isPending) {
 		this.isPending = isPending;
 	}
+	
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 
 	public String getJustification() {
 		return justification;
@@ -87,8 +97,7 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [id=" + id + ", awarded=" + awarded + ", isCancelled=" + isCancelled + ", isPending="
-				+ isPending + ", justification=" + justification + ", reasonExceededMax=" + reasonExceededMax + "]";
+				+ isPending + ", event=" + event + ", justification=" + justification + ", reasonExceededMax="
+				+ reasonExceededMax + ", approvals=" + approvals + "]";
 	}
-	
-	
 }

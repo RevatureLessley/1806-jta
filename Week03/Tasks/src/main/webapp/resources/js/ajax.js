@@ -46,6 +46,28 @@ function checkUsername() {
 	xhr.send(message);
 }
 
+function displayPastReimbursements(employee) {
+	let count = document.getElementById("numReimbursements");
+	let list = document.getElementById("pastReimbursements");
+	list.innerHTML = "";
+	let reimbursements = employee["reimbursements"];
+	let i = 0;
+	
+	for(r in reimbursements) {
+		let event = reimbursements[r]["event"];
+		list.innerHTML += "<tr>" + 
+						  	"<td>" + event["type"] + "</td>" +
+							"<td>" + 
+								new Date(event["datetime"]).toLocaleString() + 
+							"</td>" +
+							"<td>" + event["location"] + "</td>" +
+						  "</tr>";
+		i++;
+	}
+	
+	count.innerHTML = "You have " + i + " past reimbursements:";
+}
+
 function displayWelcome() {
 	let servlet = "SessionServlet";
 	let xhr = new XMLHttpRequest();
@@ -60,6 +82,7 @@ function displayWelcome() {
 			
 			let firstname = employee["firstname"];
 			div.innerHTML = "Hi " + firstname + ", welcome to your account.";
+			displayPastReimbursements(employee);
 		}
 	}
 

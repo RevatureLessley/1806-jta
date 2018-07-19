@@ -8,6 +8,7 @@ import Project1.ApprovalType;
 
 public class Event {
 	private String type;
+	private double coverage;
 	private BigDecimal cost;
 	private Timestamp datetime;
 	private String description;
@@ -23,9 +24,11 @@ public class Event {
 	 * @param location
 	 * @param workMissed
 	 */
-	public Event(String type, BigDecimal cost, Timestamp datetime,
-				 String description, String location, String workMissed) {
+	public Event(String type, double coverage, BigDecimal cost,
+				 Timestamp datetime, String description, String location,
+				 String workMissed) {
 		this.type = type;
+		this.coverage = coverage;
 		this.cost = cost;
 		this.datetime = datetime;
 		this.description = description;
@@ -33,9 +36,13 @@ public class Event {
 		this.workMissed = workMissed;
 		attachments = new HashMap<>();
 	}
-
+	
 	public String getType() {
 		return type;
+	}
+	
+	public double getCoverage() {
+		return coverage;
 	}
 
 	public void setType(Integer index) {
@@ -88,5 +95,12 @@ public class Event {
 
 	public Attachment insertAttachment(String name, Attachment attachment) {
 		return attachments.put(name, attachment);
+	}
+	
+	@Override
+	public String toString() {
+		return "Event [type=" + type + ", coverage=" + coverage + ", cost=" + cost + ", datetime=" + datetime
+				+ ", description=" + description + ", location=" + location + ", workMissed=" + workMissed
+				+ ", attachments=" + attachments + "]";
 	}
 }

@@ -52,10 +52,13 @@ public class ReimbursementDAOImp implements LogReference {
 		try {
 			
 			while(rs.next()) {
-				BigInteger index = 
-						new BigInteger(rs.getString("E_ReimbursementID")); 
-				Reimbursement reimbursement = 
-						new Reimbursement(index,
+				String s = rs.getString("E_ReimbursementID");
+				
+				if(s != null) {
+					BigInteger index = new BigInteger(s); 
+					Reimbursement reimbursement = 
+							new Reimbursement(
+								index,
 								rs.getBigDecimal("E_AwardedReimbursement"),
 								rs.getString("E_IsCancelled")
 								  .compareTo("Y") == 0, 
@@ -63,20 +66,20 @@ public class ReimbursementDAOImp implements LogReference {
 								  .compareTo("Y") == 0, 
 								rs.getString("E_ReimbursementJustification"),
 								rs.getString("E_ReasonExceededMax")
-						);
-				
-				reimbursements.put(index, reimbursement);
+							);
+					
+					EventDAOImp edi = new EventDAOImp();
+					reimbursement.setEvent(edi.selectEvent(rs));
+					reimbursements.put(index, reimbursement);
+				}
 			}
 			
 			return reimbursements;
 		}
 		
 		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		finally {
 			DatabaseConnection.close(rs);
+			e.printStackTrace();
 		}
 
 		return reimbursements;

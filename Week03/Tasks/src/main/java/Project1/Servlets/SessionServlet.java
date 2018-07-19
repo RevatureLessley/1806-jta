@@ -25,6 +25,7 @@ public class SessionServlet extends HttpServlet {
 		if(null != employee) {
 			ObjectMapper om = new ObjectMapper();
 			out.println(om.writeValueAsString(employee));
+//			System.out.println(employee.toString());
 		}
 	}
 
