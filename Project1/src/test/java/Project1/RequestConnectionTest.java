@@ -36,13 +36,19 @@ public class RequestConnectionTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	//Tests that there are 2 requests made by employee 1
 	@Test
 	public void RequestDataTest() {
 		assertTrue(test.size() ==2);
 	}
+	//Tests that the second request made by employee 1 has 2 info beans connected
 	@Test
 	public void RequestInfoCountTest() {
 		assertTrue(test.get(1).getInfos().size()==2);
 	}
-
+	//Tests that the second request made by employee 1 has 1 file bean connected
+	@Test
+	public void RequestFileCountTest() {
+		assertTrue(test.get(1).getFiles().size()==1);
+	}
 }
