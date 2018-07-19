@@ -46,7 +46,7 @@ The root tag <hibernate-configuration> begins configuration details for the Hibe
 
 Mapping a bean turns it into a persistent class. There are two ways to map:
 	1. Using Hibernate mapping files.
-	2. 
+	2. Using annotations.
 
 <id name="id" type="int" column="p_id"> describes the primary key. name attribute must match class's variable name, type is the Java datatype being mapped to, columns dictates the column name (optional).
 
@@ -60,3 +60,5 @@ Person objects can be in three states:
 	1. Transient: object not linked with Hibernate data.
 	2. Persistent: object linked to session an now represents database data, session.createQuery(String).
 	3. Detached: session closed and object not directly linked to database data, session.close().
+
+@Entity marks class as persistent. @Id marks a variable as the primary key. @Column is optional.
