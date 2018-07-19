@@ -1,0 +1,62 @@
+Architecture
+
+Java Application<---->Persistent Object<---->{Session Factory, Connection Provider, Session, Transaction}<---->{JNBD, JDBC, JTA}<---->Database
+
+JNBI, JDBS, JTA -core objects of Hibernate
+JTA -Java Transaction API
+JNDI -Java Naming Directory Interface
+
+Configuration
+	-first object that configures Hibernate
+Session Factory
+	-holds second level cache
+	-houses connection provider
+Session
+	-wraps JDBC connections
+	-short lived
+	-factory for transaction and criteria
+	-holds first level cache
+Connection Provider
+	-factory for JDBC connections
+Transaction
+	-atomic levels of work
+Query
+	-used for HQL
+Criteria
+	-object based queries
+
+Query and Critera are siblings.
+
+ORM -Object Relational Mapping
+    -design pattern.
+    -uses beans represent database tables.
+    -hides SQL details from OO logic.
+    -uses JDBC under the hood.
+    -avoids touching database directly.
+
+The root tag <hibernate-configuration> begins configuration details for the Hibernate application.
+<property name="hibernate.dialect"> configures the database engine, tailored to specific databases.
+<property name="hibernate.connection.pool_size"> determines the number of connections a single user can have to the database. Multiple connections allow for concurrency but risks reaching the database cap in AWS.
+<property name="show_sql">true<property> shows SQL queries Hibernate is using.
+<property name="hibernate.hbm2ddl.auto"> maps Hibernate to DDL.
+	create: wipe any existing database tables and creates it
+	update: use existing database
+	validate: creates schema, destroying old data
+	create-drop: database cleared and emptied upon server shutdown.
+
+Mapping a bean turns it into a persistent class. There are two ways to map:
+	1. Using Hibernate mapping files.
+	2. 
+
+<id name="id" type="int" column="p_id"> describes the primary key. name attribute must match class's variable name, type is the Java datatype being mapped to, columns dictates the column name (optional).
+
+SessionFactory is a singleton. The default method of the configuration component uses org.hibernate.cfg.
+
+For DQL that are two options:
+	-HQL, a semi-abstracted SQL that doesn't need SEELCT * since it assumes you will grab all the data to populate objects. .list() executes HQL and gets a ResultSet. .uniqueResult() gets a single result.
+	-criteria
+
+Person objects can be in three states:
+	1. Transient: object not linked with Hibernate data.
+	2. Persistent: object linked to session an now represents database data, session.createQuery(String).
+	3. Detached: session closed and object not directly linked to database data, session.close().
