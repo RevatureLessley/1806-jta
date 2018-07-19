@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.revature.bean.Event;
 import com.revature.dao.EmployeeDao;
 import com.revature.dao.EventDaoImpl;
 import com.revature.displaywrapper.EventDisplay;
+import com.revature.displaywrapper.EventStatus;
 import com.revature.utils.StringManip;
 
 public class EventService {
@@ -46,17 +48,34 @@ public class EventService {
 
 	public static void eventUpdateApprovalFrom(Integer eventId, Integer userId) {
 		EventDaoImpl eventDao = new EventDaoImpl();
-		Integer status = eventDao.eventUpdateApprovalFrom(eventId, userId);
+		eventDao.eventUpdateApprovalFrom(eventId, userId);
+	}
 
-		if (status == 1) {
-			// update was successful
-			Employee emp = new EmployeeDao().selectById(userId);
-			if (emp.getType() == 1) {
-				// employee was a benco
-				eventDao.eventUpdatePhase(eventId);
+	public static EventStatus getEventStatus(Event event) {
+
+		EventStatus status = EventStatus.New;
+
+		if (event.getEventDate().isBefore(LocalDateTime.now())) {
+			// event has passed
+			if (event.getReimbursementConfirmation() != null) {
+				status = EventStatus.Resolved;
+			} else if (event.getGrade() != null) {
+				status = EventStatus.UnConfirmed;
+			} else {
+				status = EventStatus.UnGraded;
 			}
-
+		} else {
+			// event is approaching
+			if (LocalDateTime.now().isAfter(event.getEventDate().minusDays(14))) {
+				status = EventStatus.Urgent;
+			} else if (event.getBencoApprove() != null) {
+				status = EventStatus.Approved;
+			} else if (event.getSuperApprove() != null || event.getHeadApprove() != null) {
+				status = EventStatus.Processing;
+			}
 		}
+
+		return status;
 	}
 
 }

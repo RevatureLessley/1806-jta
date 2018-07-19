@@ -44,6 +44,8 @@ function createEventTableSmall(data, tableName){
 	for (index in data) {
 		let row = document.createElement("tr");
 		
+		row.setAttribute("onclick",`viewEvent(${data[index]['id']})`);
+		
 		let td1 = document.createElement("td");
 		let td2 = document.createElement("td");
 		let td3 = document.createElement("td");
@@ -63,4 +65,8 @@ function createEventTableSmall(data, tableName){
 		
 		table.appendChild(row);				
 	}
+}
+
+function viewEvent(eventId){
+	window.location.href = `./eventview.jsp?eventId=${eventId}`;
 }

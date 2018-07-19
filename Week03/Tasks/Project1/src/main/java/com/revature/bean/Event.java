@@ -8,33 +8,62 @@ public class Event {
 	private Integer empId;
 	private Integer type;
 	private Integer gradeScale;
+	private Integer grade;
 	private String name;
 	private LocalDateTime eventDate;
 	private String location;
 	private String description;
 	private String justification;
 	private Double cost;
+	private Double reimbursementAmount;
 	private LocalDateTime superApprove;
 	private LocalDateTime headApprove;
 	private LocalDateTime bencoApprove;
-	private Integer reimbursementAmount;
-	private Integer reimbursementConfirmation;
+	private LocalDateTime reimbursementConfirmation;
 	private String reimbursementMessage;
+	
 
-	public Integer getReimbursementAmount() {
+	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, Integer grade, String name,
+			LocalDateTime eventDate, String location, String description, String justification, Double cost,
+			Double reimbursementAmount, LocalDateTime superApprove, LocalDateTime headApprove,
+			LocalDateTime bencoApprove, LocalDateTime reimbursementConfirmation, String reimbursementMessage) {
+		super();
+		this.id = id;
+		this.empId = empId;
+		this.type = type;
+		this.gradeScale = gradeScale;
+		this.grade = grade;
+		this.name = name;
+		this.eventDate = eventDate;
+		this.location = location;
+		this.description = description;
+		this.justification = justification;
+		this.cost = cost;
+		this.reimbursementAmount = reimbursementAmount;
+		this.superApprove = superApprove;
+		this.headApprove = headApprove;
+		this.bencoApprove = bencoApprove;
+		this.reimbursementConfirmation = reimbursementConfirmation;
+		this.reimbursementMessage = reimbursementMessage;
+	}
+
+	public Event() {
+	}
+
+	public Integer getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Integer grade) {
+		this.grade = grade;
+	}
+
+	public Double getReimbursementAmount() {
 		return reimbursementAmount;
 	}
 
-	public void setReimbursementAmount(Integer reimbursementAmount) {
+	public void setReimbursementAmount(Double reimbursementAmount) {
 		this.reimbursementAmount = reimbursementAmount;
-	}
-
-	public Integer getReimbursementConfirmation() {
-		return reimbursementConfirmation;
-	}
-
-	public void setReimbursementConfirmation(Integer reimbursementConfirmation) {
-		this.reimbursementConfirmation = reimbursementConfirmation;
 	}
 
 	public String getReimbursementMessage() {
@@ -149,68 +178,22 @@ public class Event {
 		this.bencoApprove = bencoApprove;
 	}
 
-//	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
-//			String location, String description, String justification, Double cost) {
-//		super();
-//		this.id = id;
-//		this.empId = empId;
-//		this.type = type;
-//		this.gradeScale = gradeScale;
-//		this.name = name;
-//		this.eventDate = eventDate;
-//		this.location = location;
-//		this.description = description;
-//		this.justification = justification;
-//		this.cost = cost;
-//	}
-
-	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
-			String location, String description, String justification, Double cost, LocalDateTime superApprove,
-			LocalDateTime headApprove, LocalDateTime bencoApprove, Integer reimbursementAmount,
-			Integer reimbursementConfirmation, String reimbursementMessage) {
-		super();
-		this.id = id;
-		this.empId = empId;
-		this.type = type;
-		this.gradeScale = gradeScale;
-		this.name = name;
-		this.eventDate = eventDate;
-		this.location = location;
-		this.description = description;
-		this.justification = justification;
-		this.cost = cost;
-		this.superApprove = superApprove;
-		this.headApprove = headApprove;
-		this.bencoApprove = bencoApprove;
-		this.reimbursementAmount = reimbursementAmount;
-		this.reimbursementConfirmation = reimbursementConfirmation;
-		this.reimbursementMessage = reimbursementMessage;
-	}
-
-	public Event(Integer id, Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime eventDate,
-			String location, String description, String justification, Double cost, LocalDateTime superApprove,
-			LocalDateTime headApprove, LocalDateTime bencoApprove) {
-		super();
-		this.id = id;
-		this.empId = empId;
-		this.type = type;
-		this.gradeScale = gradeScale;
-		this.name = name;
-		this.eventDate = eventDate;
-		this.location = location;
-		this.description = description;
-		this.justification = justification;
-		this.cost = cost;
-		this.superApprove = superApprove;
-		this.headApprove = headApprove;
-		this.bencoApprove = bencoApprove;
-	}
-
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", empId=" + empId + ", type=" + type + ", gradeScale=" + gradeScale + ", name="
-				+ name + ", eventDate=" + eventDate + ", location=" + location + ", cost=" + cost + ", superApprove="
-				+ superApprove + ", headApprove=" + headApprove + ", bencoApprove=" + bencoApprove + "]";
+		return "Event [id=" + id + ", empId=" + empId + ", type=" + type + ", gradeScale=" + gradeScale + ", grade="
+				+ grade + ", name=" + name + ", eventDate=" + eventDate + ", location=" + location + ", description="
+				+ description + ", justification=" + justification + ", cost=" + cost + ", reimbursementAmount="
+				+ reimbursementAmount + ", superApprove=" + superApprove + ", headApprove=" + headApprove
+				+ ", bencoApprove=" + bencoApprove + ", reimbursementConfirmation=" + reimbursementConfirmation
+				+ ", reimbursementMessage=" + reimbursementMessage + "]";
+	}
+
+	public LocalDateTime getReimbursementConfirmation() {
+		return reimbursementConfirmation;
+	}
+
+	public void setReimbursementConfirmation(LocalDateTime reimbursementConfirmation) {
+		this.reimbursementConfirmation = reimbursementConfirmation;
 	}
 
 }

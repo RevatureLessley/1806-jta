@@ -3,6 +3,7 @@ package com.revature.displaywrapper;
 import com.revature.bean.Event;
 import com.revature.bean.EventType;
 import com.revature.service.EmployeeService;
+import com.revature.service.EventService;
 import com.revature.service.FixedDataService;
 import com.revature.utils.StringManip;
 
@@ -14,7 +15,7 @@ public class EventDisplay {
 	private String cost;
 	private String expectedAmount;
 	private String date;
-	private String status;
+	private EventStatus status;
 	private String employeeName;
 	private String gradeScaleName;
 	private String superApprove;
@@ -49,7 +50,7 @@ public class EventDisplay {
 		this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
 		
 		this.date = StringManip.formatDate(event.getEventDate());
-		this.status = "processing";
+		this.status = EventService.getEventStatus(event);
 		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
 		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
 
@@ -133,10 +134,10 @@ public class EventDisplay {
 	}
 
 	public String getStatus() {
-		return status;
+		return status.name;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(EventStatus status) {
 		this.status = status;
 	}
 

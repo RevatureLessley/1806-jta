@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@page import="com.revature.service.EventService"%>
 <%@page import="com.revature.service.NotificationService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,27 +26,26 @@
 </head>
 <body>
 
-<div id="navDiv"></div>
-	<br>	
+	<div id="navDiv"></div>
+	<br>
 	<div id="container" class="container-fluid"></div>
 
 	<script>
-	 	addFromTemplate("navbar", "#navDiv");
-	    addFromTemplate("eventview", "#container");
-	    addFromTemplate("manageevent", "#container");
-	   
-	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
-	    
-	
-		let json = <%
-				Integer eventId = Integer.parseInt(request.getParameter("eventId"));
-				out.print(EventService.selectUserEvent(userId, eventId));%>;
-		fillEventData(json);
-		fillEventManageData(json);		
+		addFromTemplate("navbar", "#navDiv");
+		addFromTemplate("eventview", "#container");
+		addFromTemplate("manageevent", "#container");
 		
+		<%Integer userId = (Integer) session.getAttribute("userId");%>;
+
+		let json = <%Integer eventId = Integer.parseInt(request.getParameter("eventId"));
+			out.print(EventService.selectUserEvent(userId, eventId));%>;
+		fillEventData(json);
+		fillEventManageData(json);
+
 		json = <%out.print(NotificationService.selectEventNotifications(eventId));%>;
 		createMessages(json, "#container");
-	</script>	
+
+	</script>
 
 </body>
 </html>

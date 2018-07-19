@@ -1,6 +1,6 @@
 
 --CREATE USER projOneAdmin IDENTIFIED BY "admin";
-GRANT DBA TO projOneAdmin;
+--GRANT DBA TO projOneAdmin;
 
 DROP TABLE employee CASCADE CONSTRAINTS;
 DROP TABLE employee_user CASCADE CONSTRAINTS;
@@ -9,7 +9,6 @@ DROP TABLE event_type CASCADE CONSTRAINTS;
 DROP TABLE grade_scale CASCADE CONSTRAINTS;
 DROP TABLE event CASCADE CONSTRAINTS;
 DROP TABLE event_document CASCADE CONSTRAINTS;
-DROP TABLE event_reimbursement CASCADE CONSTRAINTS;
 DROP TABLE notification CASCADE CONSTRAINTS;
 DROP TABLE department CASCADE CONSTRAINTS;
 
@@ -51,15 +50,19 @@ CREATE TABLE event(
     emp_id NUMBER(10) NOT NULL,
     ev_type NUMBER(3) NOT NULL,
     ev_grade_scale NUMBER(3) NOT NULL,
+    ev_grade NUMBER(4),
     ev_name VARCHAR(20) NOT NULL,
     ev_date TIMESTAMP NOT NULL,
     ev_location VARCHAR(20),
     ev_description VARCHAR(200),
     ev_justification VARCHAR(200),
     ev_cost DECIMAL(10,2) NOT NULL,
+    ev_r_amt DECIMAL(10,2),
     ev_super_approve TIMESTAMP,
     ev_head_approve TIMESTAMP,
-    ev_benco_approve TIMESTAMP
+    ev_benco_approve TIMESTAMP,
+    ev_r_confirm TIMESTAMP,
+    ev_r_message VARCHAR(200)
 );
 
 CREATE TABLE event_document(
@@ -70,12 +73,7 @@ CREATE TABLE event_document(
     evdoc_is_approval NUMBER(1) NOT NULL
 );
 
-CREATE TABLE event_reimbursement(
-    ev_id NUMBER(10) PRIMARY KEY,
-    ev_r_amt VARCHAR(10),
-    ev_r_confirm TIMESTAMP,
-    ev_r_message VARCHAR(200)
-);
+
 
 CREATE TABLE notification(
     nt_id NUMBER(10) PRIMARY KEY,
@@ -111,9 +109,6 @@ ALTER TABLE event ADD CONSTRAINT fk_event_type
     
 ALTER TABLE event ADD CONSTRAINT fk_event_grade_scale
     FOREIGN KEY (ev_grade_scale) REFERENCES grade_scale (gs_id);
-    
-ALTER TABLE event_reimbursement ADD CONSTRAINT fk_event_reimb_event
-    FOREIGN KEY (ev_id) REFERENCES event (ev_id);
     
 ALTER TABLE event_document ADD CONSTRAINT fk_event_doc_event
     FOREIGN KEY (ev_id) REFERENCES event (ev_id);
@@ -331,13 +326,6 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE EVENT_UPDATE_PHASE(eventId IN NUMBER)
-IS
-BEGIN
-    INSERT INTO event_reimbursement (ev_id) VALUES (eventId);
-END;
-/
-
 CREATE OR REPLACE PROCEDURE EVENT_ADD_NOTIFICATION(eventId IN NUMBER, fromEmp IN NUMBER, message IN VARCHAR)
 IS
 toEmp NUMBER;
@@ -360,6 +348,7 @@ BEGIN
     
 END;
 /
+
 /*******************************************************************************
    Populate Tables
 ********************************************************************************/
@@ -437,6 +426,6 @@ UPDATE department SET dp_head = 9 WHERE dp_id = 57;
 --call EVENT_UPDATE_APPROVAL_FROM(1, 1);
 --call EVENT_UPDATE_APPROVAL_FROM(1, 2);
 
-SELECT * FROM notification;
+--SELECT * FROM notification;
 
 commit;

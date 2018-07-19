@@ -19,4 +19,8 @@ function createMessages(messages, target){
 		messageArea.appendChild(tclone);
 	}
 	
+	for(let i = 0; i < 12; i++){
+		let br = document.createElement("br");
+		document.querySelector(target).appendChild(br);
+	}
 }

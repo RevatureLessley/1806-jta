@@ -26,7 +26,6 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("execute logout - session inactive interval = 0");
 		HttpSession session = request.getSession();
 		session.invalidate();
 		

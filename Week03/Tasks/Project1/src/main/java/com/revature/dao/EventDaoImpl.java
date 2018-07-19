@@ -95,10 +95,12 @@ public class EventDaoImpl {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
-						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
+				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), StringManip.getLocalDateTime(rs.getString(7)), rs.getString(8),
+						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12),
+						StringManip.getLocalDateTime(rs.getString(13)), StringManip.getLocalDateTime(rs.getString(14)),
+						StringManip.getLocalDateTime(rs.getString(15)), StringManip.getLocalDateTime(rs.getString(16)),
+						rs.getString(17));
 
 				ls.add(a);
 			}
@@ -127,10 +129,12 @@ public class EventDaoImpl {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
-						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
+				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), StringManip.getLocalDateTime(rs.getString(7)), rs.getString(8),
+						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12),
+						StringManip.getLocalDateTime(rs.getString(13)), StringManip.getLocalDateTime(rs.getString(14)),
+						StringManip.getLocalDateTime(rs.getString(15)), StringManip.getLocalDateTime(rs.getString(16)),
+						rs.getString(17));
 
 				ls.add(a);
 			}
@@ -155,16 +159,18 @@ public class EventDaoImpl {
 
 		try (Connection conn = Connections.getConnection()) {
 			ps = conn.prepareStatement(sql);
-			System.out.println("selecting event id: " + id);
+
 			ps.setInt(1, id);
 
 			rs = ps.executeQuery();
 
 			if (rs.next())
-				a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
-						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
+				a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
+						StringManip.getLocalDateTime(rs.getString(7)), rs.getString(8), rs.getString(9),
+						rs.getString(10), rs.getDouble(11), rs.getDouble(12),
+						StringManip.getLocalDateTime(rs.getString(13)), StringManip.getLocalDateTime(rs.getString(14)),
+						StringManip.getLocalDateTime(rs.getString(15)), StringManip.getLocalDateTime(rs.getString(16)),
+						rs.getString(17));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,11 +202,15 @@ public class EventDaoImpl {
 
 			rs = (ResultSet) stmt.getObject(2);
 
+			// StringManip.getLocalDateTime(rs.getString(6))
+
 			while (rs.next()) {
-				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						StringManip.getLocalDateTime(rs.getString(6)), rs.getString(7), rs.getString(8),
-						rs.getString(9), rs.getDouble(10), StringManip.getLocalDateTime(rs.getString(11)),
-						StringManip.getLocalDateTime(rs.getString(12)), StringManip.getLocalDateTime(rs.getString(13)));
+				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+						rs.getString(6), StringManip.getLocalDateTime(rs.getString(7)), rs.getString(8),
+						rs.getString(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12),
+						StringManip.getLocalDateTime(rs.getString(13)), StringManip.getLocalDateTime(rs.getString(14)),
+						StringManip.getLocalDateTime(rs.getString(15)), StringManip.getLocalDateTime(rs.getString(16)),
+						rs.getString(17));
 
 				ls.add(a);
 
@@ -245,26 +255,4 @@ public class EventDaoImpl {
 		return 0;
 	}
 
-	public void eventUpdatePhase(Integer eventId) {
-		CallableStatement stmt = null;
-		ResultSet rs = null;
-
-		String sql = "{CALL EVENT_UPDATE_PHASE(?)}";
-
-		try (Connection conn = Connections.getConnection()) {
-
-			stmt = conn.prepareCall(sql);
-
-			stmt.setInt(1, eventId);
-
-			stmt.execute();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(stmt);
-			close(rs);
-		}
-
-	}
 }
