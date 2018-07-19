@@ -8,6 +8,7 @@ DROP TABLE approval_email CASCADE CONSTRAINTS;
 SELECT * FROM employee;
 SELECT * FROM contact_info;
 SELECT * FROM login_info;
+SELECT * FROM reimbursement;
 
 truncate table employee;
 
@@ -18,6 +19,11 @@ FROM branch_manager bm
 JOIN contact_info c ON bm.cont_id = c.id
 JOIN login_info l ON bm.log_id = l.id
 WHERE bm.bm_id = '100';
+
+CREATE TABLE eventCoverage (
+    type VARCHAR2(32) NOT NULL UNIQUE,
+    coverage NUMBER(10) NOT NULL
+);
 
 CREATE TABLE employee(
     id NUMBER(9) PRIMARY KEY,
@@ -58,7 +64,7 @@ CREATE TABLE reimbursement (
     doc_id NUMBER(9),
     aprov_em_id NUMBER(9),
     emp_id NUMBER(9) NOT NULL,
-    reimbursement_date DATE NOT NULL,
+    reimbursement_date VARCHAR2(32) NOT NULL,
     reimbursement_location VARCHAR2(32) NOT NULL,
     description VARCHAR2(100) NOT NULL,
     cost NUMBER(12) NOT NULL,
@@ -69,7 +75,7 @@ CREATE TABLE reimbursement (
     attachment BLOB,
     email_approval BLOB,
     
-    CONSTRAINT fk_ri_emp_id FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+    CONSTRAINT fk_ri_emp_id FOREIGN KEY (emp_id) REFERENCES employee(id)
 );
 
 CREATE TABLE grade_reference (

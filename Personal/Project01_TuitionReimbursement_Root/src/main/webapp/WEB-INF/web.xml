@@ -59,4 +59,24 @@
     <servlet-name>ReimbursementServlet</servlet-name>
     <url-pattern>/Reimburse.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetReimbursementsServlet</display-name>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <url-pattern>/GetReimbursements.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KillSessionServlet</display-name>
+    <servlet-name>KillSessionServlet</servlet-name>
+    <servlet-class>com.revature.servlets.KillSessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KillSessionServlet</servlet-name>
+    <url-pattern>/KillSession.do</url-pattern>
+  </servlet-mapping>
 </web-app>

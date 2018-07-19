@@ -1,8 +1,14 @@
 package com.revature.services;
 
+import java.util.List;
+
 import com.revature.beans.Employee;
+import com.revature.beans.Reimbursement;
 import com.revature.daos.EmployeeDao;
 import com.revature.daos.EmployeeDaoImpl;
+import com.revature.daos.ReimbursementDao;
+import com.revature.daos.ReimbursementDaoImpl;
+import com.revature.main.Driver;
 
 public class UserService {
 	public static boolean createUser(String role, int supVId, String fname, String lname, int phone,
@@ -18,17 +24,30 @@ public class UserService {
 		return true;
 	}
 	
-	public static boolean userLogin(String username, String password){
+	public static boolean createReimbursement(Reimbursement reim) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		
+		if (!reimd.insertReimbursementViaSp(reim)) return false;
+		
+		return true;
+	}
+	
+	public static Employee userLogin(String username, String password){
 		EmployeeDaoImpl empd = new EmployeeDaoImpl();
 		Employee emp = null;
 		if((emp = empd.selectEmployeeByUsername(username)) == null){
-			return false;
+			return null;
 		}
 		if(!emp.getPassword().equals(password)){
-			return false;
+			return null;
 		}
 		
-		
-		return true;
+		Driver.loggedIn = emp;
+		return emp;
+	}
+	
+	public static List<Reimbursement> getAllReimbursementsById(Integer id){
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.selectAllReimbursementById(id);
 	}
 }

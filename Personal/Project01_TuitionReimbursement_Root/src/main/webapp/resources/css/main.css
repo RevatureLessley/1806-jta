@@ -31,3 +31,14 @@ body {
 	margin: 10px;
 	padding: 10px;
 }
+table {
+	background-color: white;
+	color: black;
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid black;
+}

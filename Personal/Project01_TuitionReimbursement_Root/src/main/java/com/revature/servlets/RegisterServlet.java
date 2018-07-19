@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("===="+this.getServletName()+"====");
 		String role = request.getParameter("role");
 		int supVId = Integer.parseInt(request.getParameter("supVId"));
 		String fname = request.getParameter("fname");
