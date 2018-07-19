@@ -17,7 +17,7 @@ public class ReimbursementDao
 	public Integer selectRIdByEmpId() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT r_id FROM reimbursement WHERE rownum = 1 ORDER BY r_id DESC;";
+		String sql = "SELECT r_id FROM reimbursement WHERE rownum = 1 ORDER BY r_id DESC";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -35,17 +35,15 @@ public class ReimbursementDao
 		return null;
 	}
 	
-	public Boolean insertReimbursementViaSp(String eventDate, String eventTime,  
-											String eventLocation, String eventDesc,
-											Integer eventCost, String justification,
-											Integer gradeCutoff,
-											Integer empId, Integer eventId,
+	public Boolean insertReimbursementViaSp(String eventDate, String eventTime, String eventLocation,
+											String eventDesc, Integer eventCost, String justification,
+											Integer gradeCutoff, Integer empId, Integer eventId,
 											Integer gradingFormatId) 
 	{
 		CallableStatement stmt = null; 
 		
 		try(Connection conn = Connections.getConnection()){
-			stmt = conn.prepareCall("{call insert_into_reimbursement(?,?,?,?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insert_into_reimbursement(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			
 			stmt.setInt(1, (selectRIdByEmpId()));
 			stmt.setString(2, eventDate);

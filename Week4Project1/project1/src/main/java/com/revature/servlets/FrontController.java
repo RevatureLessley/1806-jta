@@ -1,38 +1,61 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class FrontController
- */
-public class FrontController extends HttpServlet {
+
+public class FrontController extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FrontController() {
+    public FrontController() 
+    {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String url = request.getRequestURI(); //Stores the url in a string (minues the http jargon)
+		System.out.println("url: " + url);			  //localhost:8085/something.do
+		
+		//response.setContentType("text");
+		RequestDispatcher rd;
+		
+		System.out.println("servletName: " + this.getServletName());
+		
+		String[] tokens = url.split("/");
+		String action = (tokens[tokens.length-1]); //something.do
+		
+		action = action.substring(0, action.length()-3).toLowerCase();//something
+		System.out.println("action: " + action);
+		
+		System.out.println("response before switch: " + response);
+		switch(action){
+		case "login":
+			System.out.println("inside login action switch");
+			rd = request.getRequestDispatcher("LoginServlet");
+			rd.forward(request, response);
+			break;
+		case "reimbursement":
+			System.out.println("inside reimbursement action switch");
+			//response.sendRedirect("SubmitReimbursement");
+			rd = request.getRequestDispatcher("../SubmitReimbursement");
+			rd.forward(request, response);
+			break;
+		default:
+			System.out.println("inside login default switch");
+			response.sendError(404);
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		doGet(request, response);
 	}
 
