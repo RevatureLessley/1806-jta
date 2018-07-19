@@ -16,6 +16,17 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 //UNIDIRECTIONAL VS BIDIRECTIONAL
+/*
+ * UNIDIRECITONAL tables are any tables that grab data from it's 
+ * dependencies In one direction. Where in the other direction it is 
+ * impossible.
+ * As such:
+ * Through item, i can access shops, via item.getShops()
+ * But through shops, I can NOT access time.
+ * There is not shop.getItems() method.
+ * This is what makes for UNIDIRECTIONAL TABLES.
+ * *NOTE, after this comment I am indeed making items and shops bidirectional.
+ */
 
 @Entity
 @Table
@@ -60,9 +71,10 @@ public class Item {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", price=" + price + "]";
+		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", shops=" + shops + "]";
 	}
 	public Item(Integer id, String name, Integer price) {
 		super();
