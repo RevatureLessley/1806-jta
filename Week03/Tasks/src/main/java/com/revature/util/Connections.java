@@ -9,38 +9,9 @@ import java.util.Properties;
 
 public class Connections {
 	private static Connection conn = null;
-	private final static String FILE_NAME = "dbprops.properties";
-	private static Properties prop = null;
 	
 	public static Connection getConnection() {
 		try {
-			
-			//HARD CORDED CONNECTION
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			conn = DriverManager.getConnection(
-//					"jdbc:oracle:thin:@localhost:1521:xe", //url
-//					//MAC USERS
-//					//"jdbc:oracle:thin:@{awsEndpoint}:1521:orcl"
-//					"local_180616", //username
-//					"admin" //password
-//					);
-			
-			//Connection via property file
-			/*
-			 * A property file aids in making for a more dynamic application. As
-			 * opposed to having to change the actual code for connection details,
-			 * re-compile, then redeploy, a process that could take a day in most 
-			 * enterprises. Is now simply having to change an on-computer text file.
-			 */
-			
-//			prop = new Properties();
-//			prop.load(new FileInputStream(FILE_NAME));
-//			
-//			Class.forName(prop.getProperty("class"));
-//			conn = DriverManager.getConnection(
-//					prop.getProperty("url"),
-//					prop.getProperty("username"),
-//					prop.getProperty("password"));
 			
 			String props[] = System.getenv("AWSVARS").split(";");
 			Class.forName(props[0]);

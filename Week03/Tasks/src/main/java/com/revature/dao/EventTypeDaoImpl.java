@@ -7,22 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.revature.beans.EmployeeType;
+import com.revature.beans.EventType;
 import com.revature.util.Connections;
 
-public class EmployeeTypeDaoImpl implements EmployeeTypeDao{
-	public EmployeeType getEmployeeTypes() {
+public class EventTypeDaoImpl {
+	public EventType getEventTypes() {
 		Statement stmt = null; 
 		ResultSet rs = null;
-		EmployeeType emptype = new EmployeeType();
+		EventType eventtype = new EventType();
 		try(Connection conn = Connections.getConnection()){
-			String sql = "SELECT emp_type, emp_type_id FROM EmployeeType";
+			String sql = "SELECT event_type, event_type_id, preimb FROM EventType";
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
-				emptype.insertType(rs.getString(1),rs.getInt(2));
+				eventtype.insertType(rs.getString(1),rs.getInt(2),rs.getInt(3));
 			}
 			
 		}catch(SQLException e){
@@ -31,6 +31,6 @@ public class EmployeeTypeDaoImpl implements EmployeeTypeDao{
 			close(stmt);
 			close(rs);
 		}
-		return emptype;
+		return eventtype;
 	}
 }

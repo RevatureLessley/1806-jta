@@ -48,7 +48,7 @@ CREATE TABLE RForm (
     info varchar2(1000),
     prop_reim number(6,2), --value from event is used, this is proposed value
     justification varchar2(500),
-    formkey varchar2(100),
+    filekey varchar2(100),
     --event related attatchment blobs id
     time_missed number(6), --hours
     form_closed number(1), --binary, edited by supervisor or benco emp
@@ -159,7 +159,7 @@ INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
 VALUES(1,'benefits','benefits','Bobert','Bobson',0,1,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(2,'production','production','Tommy','Droptables',0,2,0,0,2);
+VALUES(2,'production','production','Tommy','DROP TABLE Employee;',0,2,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
 VALUES(3,'finance','finance','Rich','Richman',0,3,0,0,2);
@@ -205,18 +205,17 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         inf IN varchar2,
                                         propR IN number,
                                         just IN varchar2,
-                                        filek IN varchar2,
                                         timeM IN number,
                                         gradeF IN number,
                                         cutoffG in number,
-                                        eventT_Id IN varchar2,
+                                        eventT_Id IN number,
                                         eventC IN number)
 IS
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
-                        justification,filekey,time_missed,form_closed,app_lvl,
+                        justification,time_missed,form_closed,app_lvl,
                         grade_format,cutoff_grade,event_type_id,event_cost)
-    VALUES(empId,rformD,pl,inf,propR,just,filek,timeM,0,0,gradeF,cutoffG,
+    VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
                         eventT_Id,eventC);
     commit;
 END;

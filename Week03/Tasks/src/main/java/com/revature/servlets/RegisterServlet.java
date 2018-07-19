@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.services.DepartmentService;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeTypeService;
+import com.revature.services.EventTypeService;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -52,6 +53,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		DepartmentService.getDepartments();
 		EmployeeTypeService.getEmployeeTypes();
+		EventTypeService.getEventTypes();
 		
 		HttpSession session = null;
 		if(EmployeeService.registerEmployee(username, password, fname, lname, dirsup, dep, pos)){

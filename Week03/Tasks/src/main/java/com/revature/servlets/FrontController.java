@@ -69,12 +69,16 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("LogoutServlet");
 			rd.forward(request, response);
 			break;
-		case "ReimbursementPage":
+		case "reimbursementpage":
 			rd = request.getRequestDispatcher("users/reimbursementpage.html");
 			rd.forward(request, response);
 			break;
-		case "HomePage":
+		case "homepage":
 			rd = request.getRequestDispatcher("users/emphome.html");
+			rd.forward(request, response);
+			break;
+		case "newform":
+			rd = request.getRequestDispatcher("NewFormServlet");
 			rd.forward(request, response);
 			break;
 		default:

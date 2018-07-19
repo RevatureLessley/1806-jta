@@ -6,15 +6,19 @@ public class RForm {
 	private Date rFormDate;
 	private String place;
 	private String info;
-	private int EventId;
 	private double propReim;
 	private String justification;
 	private String filekey;
 	private int timeMissed;
 	private int formClosed;
 	private int appLvl;
+	private int gradeFormat;
+	private int cutoffGrade;
+	private int eventTypeId;
+	private String eventTypeName;
+	private int eventCost;
 	
-	public RForm(int rFormId, int empid, Date rFormDate, String place, String info, int eventId,
+	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			double propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
 		super();
 		this.rFormId = rFormId;
@@ -22,7 +26,6 @@ public class RForm {
 		this.rFormDate = rFormDate;
 		this.place = place;
 		this.info = info;
-		this.EventId = eventId;
 		this.propReim = propReim;
 		this.justification = justification;
 		this.filekey = filekey;
@@ -30,20 +33,83 @@ public class RForm {
 		this.formClosed = formClosed;
 		this.appLvl = appLvl;
 	}
-	public RForm(int empid, Date rFormDate, String place, String info, int eventId,
-			double propReim, String justification, String filekey, int timeMissed) {
+	public RForm(int empid, Date rFormDate, String place, String info,
+			double propReim, String justification, int timeMissed,
+			int gradeFormat, int cutoffGrade, int eventTypeId, int eventCost) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
 		this.place = place;
 		this.info = info;
-		this.EventId = eventId;
 		this.propReim = propReim;
 		this.justification = justification;
-		this.filekey = filekey;
 		this.timeMissed = timeMissed;
+		this.gradeFormat = gradeFormat;
+		this.cutoffGrade = cutoffGrade;
+		this.eventTypeId = eventTypeId;
+		this.eventCost = eventCost;
 	}
 	
+	/**
+	 * @return the gradeFormat
+	 */
+	public int getGradeFormat() {
+		return gradeFormat;
+	}
+	/**
+	 * @param gradeFormat the gradeFormat to set
+	 */
+	public void setGradeFormat(int gradeFormat) {
+		this.gradeFormat = gradeFormat;
+	}
+	/**
+	 * @return the cutoffGrade
+	 */
+	public int getCutoffGrade() {
+		return cutoffGrade;
+	}
+	/**
+	 * @param cutoffGrade the cutoffGrade to set
+	 */
+	public void setCutoffGrade(int cutoffGrade) {
+		this.cutoffGrade = cutoffGrade;
+	}
+	/**
+	 * @return the eventTypeId
+	 */
+	public int getEventTypeId() {
+		return eventTypeId;
+	}
+	/**
+	 * @param eventTypeId the eventTypeId to set
+	 */
+	public void setEventTypeId(int eventTypeId) {
+		this.eventTypeId = eventTypeId;
+	}
+	/**
+	 * @return the eventTypeName
+	 */
+	public String getEventTypeName() {
+		return eventTypeName;
+	}
+	/**
+	 * @param eventTypeName the eventTypeName to set
+	 */
+	public void setEventTypeName(String eventTypeName) {
+		this.eventTypeName = eventTypeName;
+	}
+	/**
+	 * @return the eventCost
+	 */
+	public int getEventCost() {
+		return eventCost;
+	}
+	/**
+	 * @param eventCost the eventCost to set
+	 */
+	public void setEventCost(int eventCost) {
+		this.eventCost = eventCost;
+	}
 	/**
 	 * @return the rFormId
 	 */
@@ -103,18 +169,6 @@ public class RForm {
 	 */
 	public void setInfo(String info) {
 		this.info = info;
-	}
-	/**
-	 * @return the eventId
-	 */
-	public int getEventId() {
-		return EventId;
-	}
-	/**
-	 * @param eventId the eventId to set
-	 */
-	public void setEventId(int eventId) {
-		EventId = eventId;
 	}
 	/**
 	 * @return the propReim
@@ -194,8 +248,7 @@ public class RForm {
 	 */
 	@Override
 	public String toString() {
-		return "RForm [rFormId=" + rFormId + ", empid=" + empid + ", rFormDate=" + rFormDate + ", deadlineDate="
-				+ deadlineDate + ", place=" + place + ", info=" + info + ", EventId=" + EventId + ", propReim="
+		return "RForm [rFormId=" + rFormId + ", empid=" + empid + ", rFormDate=" + rFormDate + ", place=" + place + ", info=" + info +  ", propReim="
 				+ propReim + ", justification=" + justification + ", filekey=" + filekey + ", timeMissed=" + timeMissed
 				+ ", formClosed=" + formClosed + ", appLvl=" + appLvl + "]";
 	}

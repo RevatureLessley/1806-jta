@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.services.DepartmentService;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeTypeService;
-import com.revature.util.HtmlTemplates;
+import com.revature.services.EventTypeService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -47,15 +47,12 @@ public class LoginServlet extends HttpServlet {
 		if(EmployeeService.employeeLogin(username, password)){
 			DepartmentService.getDepartments();
 			EmployeeTypeService.getEmployeeTypes();
+			EventTypeService.getEventTypes();
 			session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("password", password);
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
-//
-//			request.getRequestDispatcher("index.html").include(request, response);
-//			out.println("<script>document.getElementById('invalidpass')"
-//					+ ".innerHTML='Invalid username or password'; </script>");
 		}
 		else {
 			request.getRequestDispatcher("index.html").include(request, response);

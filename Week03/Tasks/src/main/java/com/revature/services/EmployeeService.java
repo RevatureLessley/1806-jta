@@ -42,8 +42,8 @@ public class EmployeeService {
 		employee = empDao.selectEmployeeByUserN(usern);
 		Employee dirSup;
 		dirSup = empDao.selectEmployeeById(employee.getDirSupId());
-		employee.setDepName(DepartmentService.department.getDepNameMap().get(employee.getDepId()));
-		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeMap().get(employee.getEmpType()));
+		employee.setDepId(DepartmentService.department.getDepNameMap().get(employee.getDepName()));
+		employee.setEmpType(EmployeeTypeService.emptypes.getEmpTypeMap().get(employee.getEmpTypeName()));
 		employee.setDirSupName(dirSup.getFirstN() + " " + dirSup.getLastN());
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";

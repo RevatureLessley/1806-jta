@@ -3,27 +3,27 @@ package com.revature.beans;
 import java.util.HashMap;
 
 public class EmployeeType {
-	private HashMap<Integer,String> empTypeMap;
+	private HashMap<String,Integer> empTypeMap;
 
 	public EmployeeType() {
 		empTypeMap = new HashMap<>();
 	}
 	
-	public void insertType(int typeid, String typename) {
-		empTypeMap.put(typeid, typename);
+	public void insertType(String typename,int typeid) {
+		empTypeMap.put(typename,typeid);
 	}
 	
 	/**
 	 * @return the empTypeMap
 	 */
-	public HashMap<Integer, String> getEmpTypeMap() {
+	public HashMap<String, Integer> getEmpTypeMap() {
 		return empTypeMap;
 	}
 
 	/**
 	 * @param empTypeMap the empTypeMap to set
 	 */
-	public void setEmpTypeMap(HashMap<Integer, String> empTypeMap) {
+	public void setEmpTypeMap(HashMap<String, Integer> empTypeMap) {
 		this.empTypeMap = empTypeMap;
 	}
 	

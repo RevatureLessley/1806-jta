@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
+    <url-pattern>/Upload.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -107,7 +107,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewFormServlet</servlet-name>
-    <url-pattern>/NewFormServlet</url-pattern>
+    <url-pattern>/NewForm.do</url-pattern>
   </servlet-mapping>
   <error-page>
   <error-code>404</error-code>

@@ -63,11 +63,13 @@ public class UploadServlet extends HttpServlet {
 				InputStream is = item.getInputStream();
 				s3client.putObject(new PutObjectRequest(bucketname, item.getName(),is,new ObjectMetadata())
 										.withCannedAcl(CannedAccessControlList.PublicRead));
-				is.close();
-				String home = System.getProperty("user.home");
-				String directory = home+"/Downloads/";
-				File dest = new File(directory + item.getName());
-				s3client.getObject(new GetObjectRequest(bucketname,item.getName()),dest);
+				
+				//For downloading file from as3
+//				is.close();
+//				String home = System.getProperty("user.home");
+//				String directory = home+"/Downloads/";
+//				File dest = new File(directory + item.getName());
+//				s3client.getObject(new GetObjectRequest(bucketname,item.getName()),dest);
 			}
 			System.out.println("file uploaded");
 		} catch (FileUploadException e) {

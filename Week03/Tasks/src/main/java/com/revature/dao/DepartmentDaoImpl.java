@@ -16,13 +16,13 @@ public class DepartmentDaoImpl implements DepartmentDao{
 		ResultSet rs = null;
 		Department dep = new Department();
 		try(Connection conn = Connections.getConnection()){
-			String sql = "SELECT dep_id, dep_name FROM Department";
+			String sql = "SELECT dep_name,dep_id FROM Department";
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
-				dep.insertDep(rs.getInt(1),rs.getString(2));
+				dep.insertDep(rs.getString(1),rs.getInt(2));
 			}
 			
 		}catch(SQLException e){
