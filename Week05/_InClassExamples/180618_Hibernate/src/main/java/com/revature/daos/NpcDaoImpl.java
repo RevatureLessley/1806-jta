@@ -34,7 +34,7 @@ public class NpcDaoImpl {
 		npc.setCurrency(999999);
 		npc.setJob(job);
 		npc.setLvl(99);
-		npc.setName("Bobberto");
+		npc.setName("Bobberty");
 		shop.setOwnerId(npc);
 		item.setShops(shops);
 		

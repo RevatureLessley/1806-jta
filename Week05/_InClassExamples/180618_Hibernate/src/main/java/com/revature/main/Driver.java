@@ -1,6 +1,7 @@
 package com.revature.main;
 
 import com.revature.beans.Person;
+import com.revature.daos.ItemDaoImple;
 import com.revature.daos.NpcDaoImpl;
 import com.revature.daos.PersonDaoImpl;
 
@@ -25,6 +26,9 @@ public class Driver {
 		System.out.println("=====NPC DATABASE=====");
 		NpcDaoImpl nd = new NpcDaoImpl();
 		nd.populateDatabase();
+		
+		ItemDaoImple idi = new ItemDaoImple();
+		System.out.println(idi.getAllitems());
 		
 		System.out.println("  =====GET VS LOAD=====");
 		
