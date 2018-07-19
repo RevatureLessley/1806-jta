@@ -190,8 +190,8 @@ INSERT INTO employee
 VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 2);
 INSERT INTO employee
 VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 1);
-INSERT INTO reimbursement
-VALUES (null, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
+--INSERT INTO reimbursement
+--VALUES (null, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -240,14 +240,20 @@ BEGIN
     COMMIT;
 END;
 /   
---CALL insert_into_reimbursement(null, '06-FEB-2018', '07:00', 'Arlington, TX',
---                               'more', 50, 'do', 
---                               0, null, 1, 4, 2, null, 0);
+--CALL insert_into_reimbursement(null, '01-JAN-2018', '10:00', 'Surprise, AZ',
+--                               'Enthuware Test in Person', 14, 'get my certification', 
+--                               70, null, 1, 4, 2, null, 1);
 --CALL update_amount_left(1, 900);
 --SELECT * FROM employee WHERE emp_accountname = 'loganbrewer';
 --SELECT * FROM reimbursement;
 --SELECT job_type_id FROM employee WHERE emp_accountname = 'loganbrewer';
+
 COMMIT;
 
 --SELECT r_id FROM reimbursement WHERE rownum = 1
 --ORDER BY r_id DESC;
+--SELECT * FROM reimbursement
+--INNER JOIN employee
+--ON reimbursement.emp_id = employee.emp_id;
+--SELECT * FROM employee;
+--SELECT * FROM reimbursement;

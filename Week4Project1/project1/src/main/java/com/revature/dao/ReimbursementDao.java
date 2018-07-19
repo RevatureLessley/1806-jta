@@ -43,22 +43,19 @@ public class ReimbursementDao
 		CallableStatement stmt = null; 
 		
 		try(Connection conn = Connections.getConnection()){
-			stmt = conn.prepareCall("{call insert_into_reimbursement(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insert_into_reimbursement(null,?,?,?,?,?,?,?,null,?,?,?,null,?)}");
 			
-			stmt.setInt(1, (selectRIdByEmpId()));
-			stmt.setString(2, eventDate);
-			stmt.setString(3, eventTime);
-			stmt.setString(4, eventLocation);
-			stmt.setString(5, eventDesc);
-			stmt.setInt(6, eventCost);
-			stmt.setString(7, justification);
-			stmt.setInt(8, gradeCutoff);
-			stmt.setInt(9, 0);
-			stmt.setInt(10, empId);
-			stmt.setInt(11, eventId);
-			stmt.setInt(12, gradingFormatId);
-			stmt.setInt(13, 0);
-			stmt.setInt(14, 1);
+			stmt.setString(1, eventDate);
+			stmt.setString(2, eventTime);
+			stmt.setString(3, eventLocation);
+			stmt.setString(4, eventDesc);
+			stmt.setInt(5, eventCost);
+			stmt.setString(6, justification);
+			stmt.setInt(7, gradeCutoff);
+			stmt.setInt(8, empId);
+			stmt.setInt(9, eventId);
+			stmt.setInt(10, gradingFormatId);
+			stmt.setInt(11, 1);
 			
 			stmt.execute();
 			return true;

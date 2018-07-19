@@ -5,11 +5,22 @@ import com.revature.dao.EmployeeDao;
 
 public class EmployeeService 
 {
+	public Employee getEmployeeUsingEmpId(Integer id)
+	{
+		EmployeeDao ed = new EmployeeDao();
+		return ed.getEmployeeViaEmpId(id);
+	}
+	
+	public Integer getCurrencyByEmpId(Integer empId)
+	{
+		EmployeeDao ed = new EmployeeDao();
+		return ed.getEmployeeAmountLeftViaSp(empId);
+	}
 	
 	public boolean updateCurrencyById(Employee employee, Integer id, Integer amountLeft)
 	{
 		EmployeeDao ed = new EmployeeDao();
-		return ed.updateEmployeeAmountLeftViaSp(employee);
+		return ed.updateEmployeeAmountLeftViaSp(employee, amountLeft);
 	}
 	
 	public static boolean employeeLogin(String accountname, String password)
