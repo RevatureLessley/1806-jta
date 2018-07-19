@@ -26,14 +26,14 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 			while (rs.next()) {
 				ApplicationForm form = new ApplicationForm();
-				
+				System.out.println(rs.getString("form_uuid"));
 				form.setFirstName(this.getEmployeeFirstNameFromForm(rs.getString("form_uuid")));
 				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
 				form.setFormUUID(rs.getString("form_uuid"));
 				form.setEmployeeUUID(rs.getString("employee_uuid"));
-				form.setDirectSupervisorUUID(rs.getString("supervisor_uuid"));
+				//form.setDirectSupervisorUUID(rs.getString("supervisor_uuid"));
 				form.setDepartmentHeadUUID(rs.getString("department_head_uuid"));
-				form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
+				//form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
 				form.setGeneralStatus(rs.getString("status"));
 				form.setSupervisorComments(rs.getString("supervisor_comments"));
 				form.setFormComments(rs.getString("form_comments"));
@@ -53,8 +53,9 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			}
 			return forms;
 		} catch (SQLException sqle) {
-			return null;
+			sqle.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
@@ -654,5 +655,19 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		} catch(SQLException sqle) {
 			return null;
 		}
+	}
+	
+	public static void main(String[] args) {
+		ApplicationFormDAO applicationForm = new ApplicationFormDAOImpl();
+		ApplicationForm appForm = new ApplicationForm();
+		String formUUID = "";
+		List<ApplicationForm> forms = applicationForm.getAllForms();
+		for (ApplicationForm form : forms) {
+			formUUID = form.getFormUUID();
+			appForm = form;
+		}
+		System.out.println("getAllForms() returned a list the length of " + forms.size());
+		System.out.println("Form UUID: " + formUUID);
+		System.out.println(appForm.toString());
 	}
 }

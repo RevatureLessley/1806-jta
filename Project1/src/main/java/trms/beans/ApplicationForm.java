@@ -210,4 +210,21 @@ public class ApplicationForm implements Form {
 	public void appendFormComments(String comment) {
 		this.formComments += "\n" + comment;
 	}
+
+	@Override
+	public String toString() {
+		return "ApplicationForm [formUUID=" + formUUID + ", employeeUUID=" + employeeUUID + ", directSupervisorUUID="
+				+ directSupervisorUUID + ", departmentHeadUUID=" + departmentHeadUUID + ", benefitsCoordinatorUUID="
+				+ benefitsCoordinatorUUID + ", firstName=" + firstName + ", lastName=" + lastName + ", generalStatus="
+				+ generalStatus + ", supervisorComments=" + supervisorComments + ", formComments=" + formComments
+				+ ", isCompletedWithSatisfaction=" + isCompletedWithSatisfaction + ", isFormClosed=" + isFormClosed
+				+ ", isPresentationToManagementRequired=" + isPresentationToManagementRequired
+				+ ", isSupervisorDecisionMade=" + isSupervisorDecisionMade + ", isBenCoDecisionMade="
+				+ isBenCoDecisionMade + ", isDepartmentHeadDecisionMade=" + isDepartmentHeadDecisionMade
+				+ ", formCreationDate=" + formCreationDate + ", dateFormWasClosed=" + dateFormWasClosed
+				+ ", departmentHeadDecisionDate=" + departmentHeadDecisionDate + ", benefitsCoordinatorDecisionDate="
+				+ benefitsCoordinatorDecisionDate + ", directSupervisorDecisionDate=" + directSupervisorDecisionDate
+				+ "]";
+	}
+	
 }

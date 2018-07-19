@@ -75,3 +75,34 @@ begin
     end loop;
     close v_cur;
 end;
+
+select * from project_1_user;
+
+declare
+    v_current_time date;
+begin
+    select systimestamp into v_current_time from dual;
+    insert into project_1_reimbursement_form
+    values ('d80afbaa-d6be-4720-bda8-e249a3d8c79b', '2d51a67f-fcc1-40d0-8724-f35727d4f534', v_current_time, 'Form comments', 'Approved', 'd014c686-ddb7-44b8-bd92-68661fd25afd', '0807dbf4-0a3a-4123-b8c2-3b60e3216cb4', '4a2b19a2-4830-4e65-9cbe-3fbf6bffa42a', 'YES', v_current_time, 'Approved.', 'YES', v_current_time, 'No comments.', 'YES', v_current_time, 'No comments.', v_current_time, 'YES', 'YES');
+end;
+/
+select * from project_1_reimbursement_form;
+
+
+declare
+    v_cursor sys_refcursor;
+    v_uuid varchar2(36);
+begin
+    selectAllforms(v_cursor);
+    loop
+    exit when v_cursor%NOTFOUND;
+    fetch v_cursor into v_uuid;
+        select * from table(v_uuid);
+    end loop;
+end;
+/
+
+select * from project_1_reimbursement_form;
+select * from project_1_user;
+delete from project_1_user where username is null;
+commit;

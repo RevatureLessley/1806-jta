@@ -143,14 +143,14 @@ public class UserDAOImpl extends Connection implements UserDAO {
 
 	public User getUserByUsername(String username) {
 		try {
-			User user = null;
+			User user = new User();
 			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call selectUserByUsername(?,?)}");
 			callableStatement.setString(1, username);
 			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
-			callableStatement.executeQuery();
+			callableStatement.execute();
 			ResultSet rs = (ResultSet) callableStatement.getObject(2);
-
+			
 			while (rs.next()) {
 					user.setUuid(rs.getString("uuid"));
 					user.setUsername(rs.getString("username"));
