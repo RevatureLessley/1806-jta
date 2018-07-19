@@ -62,3 +62,14 @@ Person objects can be in three states:
 	3. Detached: session closed and object not directly linked to database data, session.close().
 
 @Entity marks class as persistent. @Id marks a variable as the primary key. @Column is optional.
+session.save() returns the id of the record inserted.
+
+get() vs load()
+save() vs persist()
+update() vs merge()
+
+Eager Fetching grabs all data related to a persistent object. Lazy Fetching grabs only primitive data and dependency data upon invoking its getter. A proxy is a pseudo implemenation of a class without methods, just a skeleton.
+
+Unidirection vs Bidirectional
+	-Unidirectional tables grab data from its dependencies in one direction where in the other direction it's impossible.
+	-Bidirectional tables grab data from its dependencies in both directions, eager toString risks automated circular dependencies.
