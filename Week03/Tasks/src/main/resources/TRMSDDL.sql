@@ -603,7 +603,7 @@ CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2,
                                         cos IN NUMBER, 
                                         dat IN VARCHAR2,
                                         loc IN VARCHAR2,
-                                        work_missed IN INTERVAL DAY TO SECOND,
+                                        work_missed IN VARCHAR2,
                                         des IN VARCHAR2)
 IS
     evetypID NUMBER;
@@ -611,7 +611,7 @@ BEGIN
     evetypID := getEventType(typ);
     INSERT INTO Event(eve_typ_id, eve_cost, eve_datetime, eve_location, 
                     eve_work_missed, eve_description)
-    VALUES(evetypID, cos, dat, loc, work_missed, des);
+    VALUES(evetypID, cos, dat, loc, TO_DSINTERVAL(work_missed), des);
 END;
 /
 
@@ -644,8 +644,8 @@ CREATE OR REPLACE PROCEDURE insertReimbursement(employee IN VARCHAR2,
                                                 cos IN NUMBER, 
                                                 dat IN VARCHAR2, 
                                                 loc IN VARCHAR2,
-                                                work_missed IN 
-                                                    INTERVAL DAY TO SECOND,
+                                                work_missed IN VARCHAR2,
+--                                                    INTERVAL DAY TO SECOND,
                                                 passingCutoff IN NUMBER,
                                                 des IN VARCHAR2,
                                                 justification IN VARCHAR2)

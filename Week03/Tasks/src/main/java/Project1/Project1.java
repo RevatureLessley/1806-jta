@@ -1,5 +1,6 @@
 package Project1;
 
+import java.math.*;
 import java.sql.*;
 
 import Project1.DAOs.*;
@@ -20,6 +21,7 @@ public class Project1 {
 		adi.insertAttachment("ApprovalAttachment");
 		adi.insertAttachment("EventAttachment");
 		gfdi.updateGradingFormatProof();
+		adi.selectAttachment("Event", "eve_att_event", new BigInteger("1"));
 	}
 
 }

@@ -1,8 +1,11 @@
 package Project1.DAOs;
 
 import java.io.*;
+import java.math.*;
 import java.sql.*;
+import java.util.*;
 import Project1.*;
+import Project1.Beans.*;
 
 public class AttachmentDAOImp implements LogReference {
 	
@@ -40,5 +43,48 @@ public class AttachmentDAOImp implements LogReference {
 		}
 		
 		return false;
+	}
+	
+	public HashMap<BigInteger, Attachment> 
+		selectAttachment(String table, String column, BigInteger foreignKey) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sqlQuery = "SELECT * " + 
+						  "FROM " + table + "_Attachment " + 
+						  "WHERE " + column + " = ?";
+		HashMap<BigInteger, Attachment> attachments = new HashMap<>();
+		
+		try(Connection connection = DatabaseConnection.connect()) {
+			ps = connection.prepareStatement(sqlQuery);
+			ps.setString(1, String.valueOf(foreignKey));
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				// Get the primary key
+				String s = rs.getString(1);
+				
+				if(s != null) {
+					BigInteger index = new BigInteger(s); 
+					Attachment attachment = 
+							new Attachment(
+								// Get the file name
+								rs.getString(3),
+								// Get the file
+								rs.getBinaryStream(4)
+							);
+					
+					attachments.put(index, attachment);
+				}
+			}
+			
+			return attachments;
+		}
+		
+		catch(SQLException e) {
+			DatabaseConnection.close(rs);
+			e.printStackTrace();
+		}
+
+		return attachments;
 	}
 }

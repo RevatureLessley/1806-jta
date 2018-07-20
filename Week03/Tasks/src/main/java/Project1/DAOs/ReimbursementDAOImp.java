@@ -17,15 +17,15 @@ public class ReimbursementDAOImp implements LogReference {
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
-			statement.setString(1, "kwang");
-			statement.setString(2, "TECHNICAL_TRAINING");
-			statement.setBigDecimal(3, new BigDecimal(20000));
+			statement.setString(1, "walterx");
+			statement.setString(2, "UNIVERSITY_COURSE");
+			statement.setBigDecimal(3, new BigDecimal(5000));
 			statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-			statement.setString(5, "Arlington, TX");
-			statement.setString(6, "7 0:0:0.0");
-			statement.setDouble(7, 0.9);
-			statement.setString(8, "Revature");
-			statement.setString(9, "My lungs!");
+			statement.setString(5, "Austin, TX");
+			statement.setString(6, "240 0:0:0.0");
+			statement.setDouble(7, 0.7);
+			statement.setString(8, "High education.");
+			statement.setString(9, "It is to be expected.");
 			
 			return statement.execute();
 		}

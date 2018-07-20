@@ -30,4 +30,9 @@ public class Attachment {
 	public void setFile(InputStream file) {
 		this.file = file;
 	}
+
+	@Override
+	public String toString() {
+		return "Attachment [filename=" + filename + ", file=" + file + "]";
+	}
 }
