@@ -23,6 +23,7 @@ public class GetEmpCurrency extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		System.out.println("IN THE GETEMPCURRENCYSERVERLET");
 		response.setContentType("text");
 		PrintWriter out = response.getWriter();
 		EmployeeService es = new EmployeeService();

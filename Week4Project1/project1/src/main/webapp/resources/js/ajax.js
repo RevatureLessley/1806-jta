@@ -7,7 +7,7 @@ function getAccountCurrency(){
 	let xhr = new XMLHttpRequest();
 	let paraTwo = document.getElementById("employeecurrencynow");
 	paraTwo.innerHTML = "";
-	let url = "GetEmpCurrency";
+	let url = "../GetEmpCurrency";
 	
 	xhr.onreadystatechange = function(){
 		//console.log("inside xhr.onreadystatechange readyState: " + xhr.readyState);
