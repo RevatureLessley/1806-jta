@@ -11,7 +11,7 @@ public class RFormService {
 			Date rFormDate,
 			String place,
 			String info,
-			double propReim,
+			int propReim,
 			String justification,
 			int timeMissed,
 			int gradeFormat,

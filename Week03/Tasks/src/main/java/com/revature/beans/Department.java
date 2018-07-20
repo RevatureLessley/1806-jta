@@ -4,13 +4,30 @@ import java.util.HashMap;
 
 public class Department {
 	private HashMap<String,Integer> depNameMap;
+	private HashMap<Integer,String> depIdMap;
 
 	public Department() {
 		depNameMap = new HashMap<>();
+		depIdMap = new HashMap<>();
 	}
 	
 	public void insertDep(String depname,int depid) {
 		depNameMap.put(depname, depid);
+		depIdMap.put(depid, depname);
+	}
+
+	/**
+	 * @return the depIdMap
+	 */
+	public HashMap<Integer, String> getDepIdMap() {
+		return depIdMap;
+	}
+
+	/**
+	 * @param depIdMap the depIdMap to set
+	 */
+	public void setDepIdMap(HashMap<Integer, String> depIdMap) {
+		this.depIdMap = depIdMap;
 	}
 
 	/**

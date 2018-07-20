@@ -23,13 +23,13 @@ CallableStatement stmt = null;
 			stmt.setDate(2, rform.getrFormDate());
 			stmt.setString(3, rform.getPlace());
 			stmt.setString(4, rform.getInfo());
-			stmt.setDouble(5,rform.getPropReim());
+			stmt.setInt(5,rform.getPropReim());
 			stmt.setString(6,rform.getJustification());
-			stmt.setInt(8,rform.getTimeMissed());
-			stmt.setInt(9,rform.getGradeFormat());
-			stmt.setInt(10,rform.getCutoffGrade());
-			stmt.setInt(11,rform.getEventTypeId());
-			stmt.setInt(12,rform.getEventCost());
+			stmt.setInt(7,rform.getTimeMissed());
+			stmt.setInt(8,rform.getGradeFormat());
+			stmt.setInt(9,rform.getCutoffGrade());
+			stmt.setInt(10,rform.getEventTypeId());
+			stmt.setInt(11,rform.getEventCost());
 			
 
 			

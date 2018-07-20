@@ -35,16 +35,24 @@ public class EmployeeService {
 		}
 		return true;
 	}
-	
+	public static Employee getEmp(String usern,String passw){
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		Employee employee;
+		employee = empDao.selectEmployeeByUserN(usern);
+		Employee dirSup = empDao.selectEmployeeById(employee.getDirSupId());
+		employee.setDirSupName(dirSup.getFirstN() + " " + dirSup.getLastN());
+		employee.setDepName(DepartmentService.department.getDepIdMap().get(employee.getDepId()));
+		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeIdMap().get(employee.getEmpType()));
+		return employee;
+	}
 	public static String getEmpInfoJSON(String usern,String passw){
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		Employee employee;
 		employee = empDao.selectEmployeeByUserN(usern);
-		Employee dirSup;
-		dirSup = empDao.selectEmployeeById(employee.getDirSupId());
-		employee.setDepId(DepartmentService.department.getDepNameMap().get(employee.getDepName()));
-		employee.setEmpType(EmployeeTypeService.emptypes.getEmpTypeMap().get(employee.getEmpTypeName()));
+		Employee dirSup = empDao.selectEmployeeById(employee.getDirSupId());
 		employee.setDirSupName(dirSup.getFirstN() + " " + dirSup.getLastN());
+		employee.setDepName(DepartmentService.department.getDepIdMap().get(employee.getDepId()));
+		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeIdMap().get(employee.getEmpType()));
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		

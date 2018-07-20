@@ -2,6 +2,8 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.services.DepartmentService;
-import com.revature.services.EmployeeService;
-import com.revature.services.EmployeeTypeService;
+import com.revature.beans.Employee;
+import com.revature.services.RFormService;
 
 /**
  * Servlet implementation class NewFormServlet
@@ -40,26 +41,28 @@ public class NewFormServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String date = request.getParameter("date");
+		System.out.println(date);
+		Date d = java.sql.Date.valueOf(date);
+		System.out.println(d);
 		String place = request.getParameter("place");
 		String info = request.getParameter("info");
-		String lname = request.getParameter("lname");
 		int propreim = Integer.parseInt(request.getParameter("propreim"));
 		String justification = request.getParameter("justification");
 		int timemissed = Integer.parseInt(request.getParameter("timemissed"));
-		String gradeformat = request.getParameter("gradeformat");
+		int gradeformat =  Integer.parseInt(request.getParameter("gradeformat"));
 		int cutoff = Integer.parseInt(request.getParameter("cutoff"));
-		String eventtype = request.getParameter("eventtype");
-		String eventcost = request.getParameter("eventcost");
+		int eventtype =  Integer.parseInt(request.getParameter("eventtype"));
+		int eventcost =  Integer.parseInt(request.getParameter("eventcost"));
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		
 		HttpSession session = null;
-		if(EmployeeService.registerEmployee(username, password, fname, lname, dirsup, dep, pos)){
+		session = request.getSession();
+		if(RFormService.registerRForm(((Employee)session.getAttribute("employee")).getEmpid(), d,
+									place, info, propreim, justification, timemissed, gradeformat, cutoff,
+									eventtype, eventcost)){
 			session = request.getSession();
-			session.setAttribute("username", username);
-			session.setAttribute("password", password);
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}else{

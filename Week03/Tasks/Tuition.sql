@@ -36,7 +36,7 @@ CREATE TABLE Employee (
 CREATE TABLE EventType(
     event_type_id number(6) PRIMARY KEY,
     event_type varchar2(100),
-    percent_reimb number(6,2)
+    percent_reimb number(3)
 );
 
 
@@ -169,17 +169,17 @@ VALUES(4,'marketing','marketing','Timmy','Turner',0,4,0,0,2);
 
 --Event types table
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(0,'University Course',0.8);
+VALUES(0,'University Course',80);
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(1,'Seminar',0.6);
+VALUES(1,'Seminar',60);
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(2,'Certification Preparation Class',0.75);
+VALUES(2,'Certification Preparation Class',75);
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(3,'Certification',1.0);
+VALUES(3,'Certification',100);
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(4,'Technical Training',0.9);
+VALUES(4,'Technical Training',90);
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
-VALUES(5,'Other',0.3);
+VALUES(5,'Other',30);
 
 --insert employee
 CREATE OR REPLACE PROCEDURE insertNewEmployee(userN IN varchar2,
@@ -233,7 +233,6 @@ BEGIN
     commit;
 END;
 /
-
 
 commit;
 

@@ -6,7 +6,7 @@ public class RForm {
 	private Date rFormDate;
 	private String place;
 	private String info;
-	private double propReim;
+	private int propReim;
 	private String justification;
 	private String filekey;
 	private int timeMissed;
@@ -19,7 +19,7 @@ public class RForm {
 	private int eventCost;
 	
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
-			double propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
+			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
 		super();
 		this.rFormId = rFormId;
 		this.empid = empid;
@@ -34,7 +34,7 @@ public class RForm {
 		this.appLvl = appLvl;
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
-			double propReim, String justification, int timeMissed,
+			int propReim, String justification, int timeMissed,
 			int gradeFormat, int cutoffGrade, int eventTypeId, int eventCost) {
 		super();
 		this.empid = empid;
@@ -173,13 +173,13 @@ public class RForm {
 	/**
 	 * @return the propReim
 	 */
-	public double getPropReim() {
+	public int getPropReim() {
 		return propReim;
 	}
 	/**
 	 * @param propReim the propReim to set
 	 */
-	public void setPropReim(double propReim) {
+	public void setPropReim(int propReim) {
 		this.propReim = propReim;
 	}
 	/**

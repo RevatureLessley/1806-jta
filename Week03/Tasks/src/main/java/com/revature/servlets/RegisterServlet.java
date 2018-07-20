@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username1");
 		String password = request.getParameter("password1");
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
@@ -60,6 +60,7 @@ public class RegisterServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("password", password);
+			session.setAttribute("employee", EmployeeService.getEmp(username, password));
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}else{

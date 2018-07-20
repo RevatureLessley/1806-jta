@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.beans.Employee;
 import com.revature.services.DepartmentService;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeTypeService;
@@ -51,6 +52,7 @@ public class LoginServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("password", password);
+			session.setAttribute("employee", EmployeeService.getEmp(username, password));
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}

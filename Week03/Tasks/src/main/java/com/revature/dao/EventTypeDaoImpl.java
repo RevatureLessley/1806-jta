@@ -16,7 +16,7 @@ public class EventTypeDaoImpl {
 		ResultSet rs = null;
 		EventType eventtype = new EventType();
 		try(Connection conn = Connections.getConnection()){
-			String sql = "SELECT event_type, event_type_id, preimb FROM EventType";
+			String sql = "SELECT event_type, event_type_id, percent_reimb FROM EventType";
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
