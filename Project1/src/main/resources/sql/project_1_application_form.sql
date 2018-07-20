@@ -1,4 +1,21 @@
 -- formUUID
+create or replace procedure newApplicationForm(formUUID in varchar2,
+                                               employeeUUID in varchar2)
+is
+    v_current_date date;
+begin
+    select systimestamp into v_current_date from dual;
+    insert into project_1_reimbursement_form (form_uuid, employee_uuid, form_creation_date, form_comments,
+    status, direct_supervisor_uuid, department_head_uuid, benco_uuid, benco_decision, benco_decision_date,
+    benco_comments, supervisor_decision, supervisor_decision_date, supervisor_comments, department_head_decision,
+    department_head_decision_date, department_head_comments, form_closed_date, present_to_management_required,
+    completed_with_satisfaction)
+    values (formUUID, employeeUUID, v_current_date, null, 'Pending', null, null, null, null, null,
+    null, null, null, null, null, null, null, null, null, null);
+    commit;
+end;
+/
+
 create or replace procedure selectForm(formUUID in varchar2,
                                        resultCursor out sys_refcursor)
 is
@@ -283,7 +300,6 @@ begin
 end;
 /
 
-
 -- departmentHeadDecisionDate
 create or replace procedure selectDeptHeadDecisionDate(formUUID in varchar2,
                                                        decisionDate out Date)
@@ -349,3 +365,23 @@ begin
     commit;
 end;
 /
+
+-- project_1_attachments
+create or replace procedure addAttachment(formUUID in varchar2,
+                                          employeeUUID in varchar2,
+                                          attachment in blob)
+is
+begin
+    insert into project_1_attachment (employee_uuid, form_uuid, attachment_data) values (employeeUUID, formUUID, attachment);
+    commit;
+end;
+/
+
+create or replace procedure addAttachment(formUUID in varchar2,
+                                          employeeUUID in varchar2)
+is
+begin
+    delete from project_1_attachment where form_uuid = formUUID and employee_uuid = employeeUUID;
+    commit;
+end;
+/                                      

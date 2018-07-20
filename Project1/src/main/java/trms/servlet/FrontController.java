@@ -44,6 +44,10 @@ public class FrontController extends HttpServlet {
 			requestDispatcher = request.getRequestDispatcher("register.jsp");
 			requestDispatcher.forward(request, response);
 			break;
+		case "applicationform":
+			requestDispatcher = request.getRequestDispatcher("/ApplicationForm");
+			requestDispatcher.forward(request, response);
+			break;
 		default:
 			response.sendError(404);
 		}

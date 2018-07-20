@@ -4,7 +4,7 @@
 <%@page import="java.util.Date" %>
 <%@page import="java.text.SimpleDateFormat" %>
 
-<form method="post">
+<form method="post" action="ApplicationForm">
 	<fieldset>
 		<legend>[ Employee information ]</legend>
 		First name: <input type="text" name="firstName" /><br/>
@@ -41,15 +41,6 @@
 		Electronic signature: <input type="text" id="electronicSignature">
 		<input type="date" id="currentDate" value=<%=currentDate%> readonly>
 	</fieldset>
-</form>
-<br />
-<input type="submit" value="submit application" action="NewForm" />
-</form>
-<form method="post">
-    <fieldset id="EmployeeSignature">
-        <% SimpleDateFormat simpleDate1 = new SimpleDateFormat("yyyy-MM-dd");
-               Date now1 = new Date();
-              String currentDate1 = "\"" + simpleDate1.format(now1) +"\""; %>
-               Electronic signature: <input type="text" id="electronicSignature"> <input type="date" id="currentDate" value=<%=currentDate1%> readonly>
-    </fieldset>
+	<br />
+	<input type="submit" value="submitApplication"/>
 </form>
