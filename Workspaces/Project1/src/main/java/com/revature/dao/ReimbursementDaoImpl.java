@@ -94,7 +94,202 @@ public class ReimbursementDaoImpl {
 		return res;
 	}
 	
+	public List<Reimbursement> selectSupervisorReimbursements(int suId){
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT r.*, e.first_name, e.last_name FROM reimbursement r\r\n" + 
+				"INNER JOIN employee e\r\n" + 
+				"ON r.employee_id = e.employee_id\r\n" + 
+				"WHERE e.supervisor_id = ? AND ds_approval = 0";
+		List<Reimbursement> res = new ArrayList<>();
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, suId);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement(
+										rs.getInt(1),
+										rs.getInt(2),
+										rs.getDate(3),
+										rs.getDate(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getInt(7),
+										rs.getInt(8),
+										rs.getInt(9),
+										rs.getInt(11),
+										rs.getString(10),
+										rs.getBoolean(12),
+										rs.getBoolean(13),
+										rs.getBoolean(14),
+										rs.getString(15),
+										rs.getString(16));
+				res.add(r);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+			close(rs);
+		}
+		return res;
+	}
 	
+	public List<Reimbursement> selectDeptHeadReimbursements(int dhId){
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT r.*, e.first_name,e.last_name FROM reimbursement r\r\n" + 
+				"INNER JOIN employee e\r\n" + 
+				"ON r.employee_id = e.employee_id\r\n" + 
+				"WHERE e.d_head_id = ? AND dh_approval = 0";
+		
+		List<Reimbursement> res = new ArrayList<>();
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, dhId);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement(
+										rs.getInt(1),
+										rs.getInt(2),
+										rs.getDate(3),
+										rs.getDate(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getInt(7),
+										rs.getInt(8),
+										rs.getInt(9),
+										rs.getInt(11),
+										rs.getString(10),
+										rs.getBoolean(12),
+										rs.getBoolean(13),
+										rs.getBoolean(14),
+										rs.getString(15),
+										rs.getString(16));
+				res.add(r);
+			}			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+			close(rs);
+		}
+		return res;
+	}
 	
-
+	public List<Reimbursement> selectBencoReimbursements(int bencoId){
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT r.*, e.first_name,e.last_name FROM reimbursement r\r\n" + 
+				"INNER JOIN employee e\r\n" + 
+				"ON r.employee_id = e.employee_id\r\n" + 
+				"WHERE e.benco_id = ? AND benco_approval = 0";
+		
+		List<Reimbursement> res = new ArrayList<>();
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, bencoId);
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement(
+										rs.getInt(1),
+										rs.getInt(2),
+										rs.getDate(3),
+										rs.getDate(4),
+										rs.getString(5),
+										rs.getString(6),
+										rs.getInt(7),
+										rs.getInt(8),
+										rs.getInt(9),
+										rs.getInt(11),
+										rs.getString(10),
+										rs.getBoolean(12),
+										rs.getBoolean(13),
+										rs.getBoolean(14),
+										rs.getString(15),
+										rs.getString(16));
+				res.add(r);
+			}			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+			close(rs);
+		}
+		return res;
+	}		
+	
+	public int updateSupervisorApproval(int reimId) {
+		PreparedStatement stmt = null;
+		String sql = "UPDATE reimbursement SET ds_approval = 1 WHERE reim_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, reimId);
+			
+			return stmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+		}
+		return 0;
+	}
+	
+	public int updateDeptHeadApproval(int reimId) {
+		PreparedStatement stmt = null;
+		String sql = "UPDATE reimbursement SET dh_approval = 1 WHERE reim_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, reimId);
+			
+			return stmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+		}
+		return 0;		
+	}
+	
+	public int updateBencoApproval(int reimId) {
+		PreparedStatement stmt = null;
+		String sql = "UPDATE reimbursement SET benco_approval = 1 WHERE reim_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setInt(1, reimId);
+			
+			return stmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(stmt);
+		}
+		return 0;
+	}
 }
+

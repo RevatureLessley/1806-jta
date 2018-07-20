@@ -17,7 +17,33 @@ public class Reimbursement {
 	private boolean dsApproval;
 	private boolean dhApproval;
 	private boolean bencoApproval;
+	private String firstName;
+	private String lastName;
 	
+	
+	
+	public Reimbursement(int id, int empId, Date reimDate, Date startDate, String location, String description,
+			int cost, int gradeId, int trainId, int passGrade, String justification, boolean dsApproval,
+			boolean dhApproval, boolean bencoApproval, String firstName, String lastName) {
+		super();
+		this.id = id;
+		this.empId = empId;
+		this.reimDate = reimDate;
+		this.startDate = startDate;
+		this.location = location;
+		this.description = description;
+		this.cost = cost;
+		this.gradeId = gradeId;
+		this.trainId = trainId;
+		this.passGrade = passGrade;
+		this.justification = justification;
+		this.dsApproval = dsApproval;
+		this.dhApproval = dhApproval;
+		this.bencoApproval = bencoApproval;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
 	public Reimbursement(int id, int empId, Date reimDate, Date startDate, String location, String description,
 			int cost, int gradeId, int trainId, int passGrade, String justification, boolean dsApproval,
 			boolean dhApproval, boolean bencoApproval) {
@@ -185,6 +211,22 @@ public class Reimbursement {
 	}
 	public void setBencoApproval(boolean bencoApproval) {
 		this.bencoApproval = bencoApproval;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 }

@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee</title>
+<title>Supervisor</title>
 <script src="./resources/js/ajax.js"></script>
 </head>
-<body>
+<body>	
 	<h2 id=welcome></h2>
 	<div>
 		<table border="2px" id="empTable">
@@ -16,7 +16,7 @@
 				<th>AVAILABLE REIMBURSEMENT</th>
 				<th>PENDING REIMBURSEMENT</th>
 				<th>AWARDED REIMBURSEMENT</th>
-			</tr>
+			</tr>			
 		</table>
 		<a href='reimbursement.html'><button>Submit Tuition</button></a>
 	</div>
@@ -29,10 +29,23 @@
 			</tr>
 		</table>
 	</div>
+	<div>		
+		<table border="2px" id="subTable">
+		<tr>
+			<th>ID</th>
+			<th>EMPLOYEE ID</th>
+			<th>FIRST NAME</th>
+			<th>LAST NAME</th>
+			<th>DESCRIPTION</th>
+			<th>APPROVE?</th>
+		</tr>
+		</table>		
+	</div>
 	<div>
 		<form action="LogoutServlet">
 			<button type="submit">LOGOUT</button>
 		</form>
 	</div>
+
 </body>
 </html>

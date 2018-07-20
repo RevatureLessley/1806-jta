@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee</title>
+<title>Benefit Coordinator</title>
 <script src="./resources/js/ajax.js"></script>
 </head>
 <body>
-	<h2 id=welcome></h2>
+		<h2 id=welcome></h2>
 	<div>
 		<table border="2px" id="empTable">
 			<tr>
@@ -16,7 +16,7 @@
 				<th>AVAILABLE REIMBURSEMENT</th>
 				<th>PENDING REIMBURSEMENT</th>
 				<th>AWARDED REIMBURSEMENT</th>
-			</tr>
+			</tr>			
 		</table>
 		<a href='reimbursement.html'><button>Submit Tuition</button></a>
 	</div>
@@ -28,6 +28,18 @@
 				<th>APPROVED</th>
 			</tr>
 		</table>
+	</div>
+	<div>		
+		<table border="2px" id="bencoTable">
+		<tr>
+			<th>ID</th>
+			<th>EMPLOYEE ID</th>
+			<th>FIRST NAME</th>
+			<th>LAST NAME</th>
+			<th>DESCRIPTION</th>
+			<th>APPROVE?</th>
+		</tr>
+		</table>		
 	</div>
 	<div>
 		<form action="LogoutServlet">

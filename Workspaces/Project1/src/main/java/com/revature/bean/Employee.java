@@ -5,45 +5,34 @@ public class Employee {
 	private String email;
 	private String password;
 	private int role;
-	private int reportsto;
 	private String firstName;
 	private String lastName;
 	private long phoneNumber;
 	private int availReim;
 	private int pendingReim;
 	private int awardedReim;
+	private int superVisorId;
+	private int dHeadId;
+	private int bencoId;	
 	
-	
-	
-	public Employee(int id, String email, String password, int role, int reportsto, String firstName, String lastName,
-			long phoneNumber, int availReim, int pendingReim, int awardedReim) {
+	public Employee(int id, String email, String password, int role, String firstName, String lastName,
+			long phoneNumber, int availReim, int pendingReim, int awardedReim, int superVisorId, int dHeadId,
+			int bencoId) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.reportsto = reportsto;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.availReim = availReim;
 		this.pendingReim = pendingReim;
 		this.awardedReim = awardedReim;
+		this.superVisorId = superVisorId;
+		this.dHeadId = dHeadId;
+		this.bencoId = bencoId;
 	}
-
-	public Employee(int id, String email, String password, int role, int reportsto, String firstName, String lastName,
-			long phoneNumber) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.role = role;
-		this.reportsto = reportsto;
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-	}	
 	
 	public Employee() {
 		super();
@@ -79,14 +68,6 @@ public class Employee {
 
 	public void setRole(int role) {
 		this.role = role;
-	}
-
-	public int getReportsto() {
-		return reportsto;
-	}
-
-	public void setReportsto(int reportsto) {
-		this.reportsto = reportsto;
 	}
 
 	public String getFirstName() {
@@ -135,9 +116,29 @@ public class Employee {
 
 	public void setAwardedReim(int awardedReim) {
 		this.awardedReim = awardedReim;
-	};
-	
-	
-	
+	}
 
+	public int getSuperVisorId() {
+		return superVisorId;
+	}
+
+	public void setSuperVisorId(int superVisorId) {
+		this.superVisorId = superVisorId;
+	}
+
+	public int getdHeadId() {
+		return dHeadId;
+	}
+
+	public void setdHeadId(int dHeadId) {
+		this.dHeadId = dHeadId;
+	}
+
+	public int getBencoId() {
+		return bencoId;
+	}
+
+	public void setBencoId(int bencoId) {
+		this.bencoId = bencoId;
+	};
 }

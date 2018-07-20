@@ -53,14 +53,21 @@ public class LoginServlet extends HttpServlet {
 			
 			if(e.getRole() == 1) {
 				response.sendRedirect("employee.html");
-//				RequestDispatcher rd = request.getRequestDispatcher("employee.html");
-//				rd.forward(request, response);
+			}
+			else if(e.getRole() == 2) {
+				response.sendRedirect("supervisor.html");
+			}
+			else if (e.getRole() == 3) {
+				response.sendRedirect("depthead.html");
+			}
+			else if(e.getRole() == 4) {
+				response.sendRedirect("benco.html");
 			}
 			else {
 				RequestDispatcher rd = request.getRequestDispatcher("test.html");
 				rd.include(request, response);
 				
-				out.println("<h3>Incorrect login</h3>");
+				out.println("<h3>Login was correct but didn't send to the right page</h3>");
 				HtmlTemplates.goBackButton(out);
 				
 			}

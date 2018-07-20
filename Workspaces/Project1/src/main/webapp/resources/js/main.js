@@ -28,3 +28,15 @@ function updateCoverage(){
 	
 	cov.setAttribute("placeholder", coverage);
 }
+
+function disableGrade(){
+	let gradeFormat = document.getElementById('grade').value;
+	let grade = document.getElementById('gradepass');
+	
+	if(gradeFormat == 2){
+		grade.setAttribute("disabled", "disabled");
+	}
+	else{
+		grade.removeAttribute("disabled");
+	}
+}

@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.revature.bean.Employee;
 import com.revature.bean.Reimbursement;
+import com.revature.service.EmployeeService;
 import com.revature.service.ReimbursementService;
 import com.revature.util.DateConversions;
 import com.revature.util.HtmlTemplates;
@@ -67,10 +69,27 @@ public class ReimbursementServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
+		HttpSession session = request.getSession();
+		int id = (int)session.getAttribute("id");
+		Employee e = EmployeeService.getEmployeeById(id);
+		
 		if(ReimbursementService.insertReimbursement(r)){
-			out.println("<p style='color:green'>Reimbursement submitted successfully</p>");
-			RequestDispatcher rd = request.getRequestDispatcher("employee.html");
-			rd.include(request, response);
+//			out.println("<p style='color:green'>Reimbursement submitted successfully</p>");
+//			RequestDispatcher rd = request.getRequestDispatcher("employee.html");
+//			rd.include(request, response);
+			if(e.getRole() == 1) {
+				response.sendRedirect("employee.html");
+			}
+			else if(e.getRole() == 2) {
+				response.sendRedirect("supervisor.html");
+			}
+			else if(e.getRole() == 3) {
+				response.sendRedirect("depthead.html");
+			}
+			else if(e.getRole() == 4) {
+				response.sendRedirect("benco.html");
+			}
+			
 		}else{
 			response.sendError(418);
 		}
