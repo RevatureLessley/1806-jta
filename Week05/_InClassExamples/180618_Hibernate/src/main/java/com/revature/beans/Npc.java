@@ -8,8 +8,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+@NamedQueries({
+			@NamedQuery(name="getAllNpcs", query="FROM Npc"),
+			@NamedQuery(name="getNpc", query="FROM Npc WHERE id = :grapes")
+		})
+@NamedNativeQueries({
+	@NamedNativeQuery(
+			/*
+			 * Within a NativeQuery you are writing the ACTUAL
+			 * SQL that your engine is using. NOT HQL.
+			 */
+				name="originalSql",
+				query="SELECT * FROM Npc WHERE npc_lvl > :bananas",
+				resultClass=Npc.class
+			)
+})
+
+		
+
 
 @Entity
 @Table
