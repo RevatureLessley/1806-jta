@@ -209,27 +209,30 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         gradeF IN number,
                                         cutoffG in number,
                                         eventT_Id IN number,
-                                        eventC IN number)
+                                        eventC IN number,
+                                        supId IN number)
 IS
+rformid number;
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
                         justification,time_missed,form_closed,app_lvl,
                         grade_format,cutoff_grade,event_type_id,event_cost)
     VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
                         eventT_Id,eventC);
+    SELECT rformid_seq.CURRVAL INTO rformid from dual;
+    insertNewApproval(rformid,empId,supId);
     commit;
 END;
 /
 
+    
 CREATE OR REPLACE PROCEDURE insertNewApproval(rformid IN number,
-                                            isapp IN number,
-                                            applvl IN number,
                                             appr IN number,
                                             req IN number)
 IS
 BEGIN
     INSERT INTO Approval(rform_id,is_app,app_lvl,approver_id,requester_id)
-    VALUES(rformid,isapp,applvl,appr,req);
+    VALUES(rformid,0,0,appr,req);
     commit;
 END;
 /

@@ -17,6 +17,7 @@ public class RForm {
 	private int eventTypeId;
 	private String eventTypeName;
 	private int eventCost;
+	private int supid;
 	
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
@@ -34,8 +35,8 @@ public class RForm {
 		this.appLvl = appLvl;
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
-			int propReim, String justification, int timeMissed,
-			int gradeFormat, int cutoffGrade, int eventTypeId, int eventCost) {
+			int propReim, String justification, int timeMissed, int gradeFormat,
+			int cutoffGrade, int eventTypeId, int eventCost, int supid) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
@@ -48,8 +49,21 @@ public class RForm {
 		this.cutoffGrade = cutoffGrade;
 		this.eventTypeId = eventTypeId;
 		this.eventCost = eventCost;
+		this.supid = supid;
 	}
 	
+	/**
+	 * @return the supid
+	 */
+	public int getSupid() {
+		return supid;
+	}
+	/**
+	 * @param supid the supid to set
+	 */
+	public void setSupid(int supid) {
+		this.supid = supid;
+	}
 	/**
 	 * @return the gradeFormat
 	 */

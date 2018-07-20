@@ -17,7 +17,7 @@ CallableStatement stmt = null;
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?,?,?,?)}");
 			
 			stmt.setInt(1, rform.getEmpid());
 			stmt.setDate(2, rform.getrFormDate());
@@ -30,7 +30,7 @@ CallableStatement stmt = null;
 			stmt.setInt(9,rform.getCutoffGrade());
 			stmt.setInt(10,rform.getEventTypeId());
 			stmt.setInt(11,rform.getEventCost());
-			
+			stmt.setInt(12, rform.getSupid());
 
 			
 			stmt.execute(); //Returns amount rows effected;

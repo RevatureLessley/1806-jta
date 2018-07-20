@@ -17,11 +17,12 @@ public class RFormService {
 			int gradeFormat,
 			int cutoffGrade,
 			int eventTypeId,
-			int eventCost
+			int eventCost,
+			int supid
 		){
 		
 	RForm rform = new RForm(empid,rFormDate,place,info,propReim,justification,timeMissed,
-			gradeFormat, cutoffGrade, eventTypeId, eventCost);
+			gradeFormat, cutoffGrade, eventTypeId, eventCost,supid);
 	RFormDaoImpl rformDao = new RFormDaoImpl();
 	
 	if(rformDao.insertRFormViaSp(rform)) return true;

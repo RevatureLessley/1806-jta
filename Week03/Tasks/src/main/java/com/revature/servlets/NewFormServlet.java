@@ -40,10 +40,10 @@ public class NewFormServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String date = request.getParameter("date");
-		System.out.println(date);
-		Date d = java.sql.Date.valueOf(date);
-		System.out.println(d);
+		HttpSession session = null;
+		session = request.getSession();
+		String d = request.getParameter("date");
+		Date date = java.sql.Date.valueOf(d);
 		String place = request.getParameter("place");
 		String info = request.getParameter("info");
 		int propreim = Integer.parseInt(request.getParameter("propreim"));
@@ -53,15 +53,14 @@ public class NewFormServlet extends HttpServlet {
 		int cutoff = Integer.parseInt(request.getParameter("cutoff"));
 		int eventtype =  Integer.parseInt(request.getParameter("eventtype"));
 		int eventcost =  Integer.parseInt(request.getParameter("eventcost"));
+		int empid = ((Employee)session.getAttribute("employee")).getEmpid();
+		int supid = ((Employee)session.getAttribute("employee")).getDirSupId();
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		HttpSession session = null;
-		session = request.getSession();
-		if(RFormService.registerRForm(((Employee)session.getAttribute("employee")).getEmpid(), d,
-									place, info, propreim, justification, timemissed, gradeformat, cutoff,
-									eventtype, eventcost)){
+		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
+										timemissed, gradeformat, cutoff, eventtype, eventcost,supid)){
 			session = request.getSession();
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
