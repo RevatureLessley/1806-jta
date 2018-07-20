@@ -47,7 +47,6 @@ public class FrontController extends HttpServlet {
 		String action = (tokens[tokens.length-1]); //something.do
 		
 		action = action.substring(0, action.length()-3).toLowerCase();//something
-		
 		switch(action){
 		case "login":
 			rd = request.getRequestDispatcher("LoginServlet");
@@ -70,7 +69,7 @@ public class FrontController extends HttpServlet {
 			rd.forward(request, response);
 			break;
 		case "reimbursementpage":
-			rd = request.getRequestDispatcher("users/reimbursementpage.html");
+			rd = request.getRequestDispatcher("ReimbursementPageServlet");
 			rd.forward(request, response);
 			break;
 		case "homepage":
@@ -79,6 +78,10 @@ public class FrontController extends HttpServlet {
 			break;
 		case "newform":
 			rd = request.getRequestDispatcher("NewFormServlet");
+			rd.forward(request, response);
+			break;
+		case "getreimbursements":
+			rd = request.getRequestDispatcher("GetReimbursementsServlet");
 			rd.forward(request, response);
 			break;
 		default:

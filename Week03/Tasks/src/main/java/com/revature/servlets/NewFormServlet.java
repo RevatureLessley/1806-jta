@@ -55,12 +55,13 @@ public class NewFormServlet extends HttpServlet {
 		int eventcost =  Integer.parseInt(request.getParameter("eventcost"));
 		int empid = ((Employee)session.getAttribute("employee")).getEmpid();
 		int supid = ((Employee)session.getAttribute("employee")).getDirSupId();
+		String eventname = request.getParameter("eventname");
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
+		System.out.println("oiefoie");
 		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
-										timemissed, gradeformat, cutoff, eventtype, eventcost,supid)){
+										timemissed, gradeformat, cutoff, eventtype, eventcost,supid,eventname)){
 			session = request.getSession();
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);

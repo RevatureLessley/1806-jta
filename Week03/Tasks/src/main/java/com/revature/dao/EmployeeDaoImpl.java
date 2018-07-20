@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.Employee;
+import com.revature.beans.RForm;
 import com.revature.util.Connections;
 public class EmployeeDaoImpl {
 	public Boolean insertEmployeeViaSp(Employee employee) {
@@ -104,4 +107,28 @@ public class EmployeeDaoImpl {
 		}
 		return null;
 	}
+	
+	public List<RForm> selectRformByEmployeeId(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT rform_id,event_name FROM RForm WHERE emp_id = ?";
+		List<RForm> rforms = new ArrayList<>();
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				rforms.add(new RForm(rs.getInt(1),rs.getString(2)));
+			}
+			return rforms;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+	
+	
 }

@@ -57,6 +57,7 @@ CREATE TABLE RForm (
     cutoff_grade number(6,2) NOT NULL, --defaults to 70 if not specified (can be changed)
     event_type_id number(6) NOT NULL,
     event_cost number(6,2),
+    event_name varchar2(100),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
     CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
@@ -210,15 +211,16 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         cutoffG in number,
                                         eventT_Id IN number,
                                         eventC IN number,
-                                        supId IN number)
+                                        supId IN number,
+                                        eventname IN varchar2)
 IS
 rformid number;
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
                         justification,time_missed,form_closed,app_lvl,
-                        grade_format,cutoff_grade,event_type_id,event_cost)
+                        grade_format,cutoff_grade,event_type_id,event_cost,event_name)
     VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
-                        eventT_Id,eventC);
+                        eventT_Id,eventC,eventname);
     SELECT rformid_seq.CURRVAL INTO rformid from dual;
     insertNewApproval(rformid,empId,supId);
     commit;

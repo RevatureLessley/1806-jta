@@ -1,8 +1,11 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.revature.beans.Employee;
+import com.revature.beans.RForm;
 import com.revature.dao.EmployeeDaoImpl;
 
 public class EmployeeService {
@@ -62,6 +65,19 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
+		return json;
+	}
+	public static String getEmpRFormsJSON(int empid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<RForm> rforms = empDao.selectRformByEmployeeId(empid);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try {
+			json = mapper.writeValueAsString(rforms);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return json;
 	}
 }

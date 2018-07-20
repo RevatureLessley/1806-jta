@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/Upload.do</url-pattern>
+    <url-pattern>/UploadServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/Login.do</url-pattern>
+    <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/Logout.do</url-pattern>
+    <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SelectEmployeeServlet</servlet-name>
-    <url-pattern>/SelectEmployee.do</url-pattern>
+    <url-pattern>/SelectEmployeeServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -77,7 +77,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/Register.do</url-pattern>
+    <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -87,7 +87,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ReimbursementPageServlet</servlet-name>
-    <url-pattern>/ReimbursementPage.do</url-pattern>
+    <url-pattern>/ReimbursementPageServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -97,7 +97,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePageServlet</servlet-name>
-    <url-pattern>/HomePage.do</url-pattern>
+    <url-pattern>/HomePageServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -107,10 +107,20 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewFormServlet</servlet-name>
-    <url-pattern>/NewForm.do</url-pattern>
+    <url-pattern>/NewFormServlet</url-pattern>
   </servlet-mapping>
   <error-page>
-  <error-code>404</error-code>
-  <location>/error.html</location>
+    <error-code>404</error-code>
+    <location>/error.html</location>
   </error-page>
+  <servlet>
+    <description></description>
+    <display-name>GetReimbursementsServlet</display-name>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetReimbursementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <url-pattern>/GetReimbursementsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,5 +1,24 @@
 window.onload = function(){
 	getEmp();
+	getReimb();
+}
+
+function getReimb(){
+	let xhr = new XMLHttpRequest();
+	let list = document.getElementById("empreimb");
+	list.innerHTML = "";
+	
+	let url = "GetReimbursements.do";
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4){
+			let data = JSON.parse(xhr.response);
+			console.log(data);
+		}
+	}
+	
+	xhr.open("GET", url);
+	xhr.send();
 }
 
 function getEmp(){

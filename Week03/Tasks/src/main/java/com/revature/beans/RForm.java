@@ -18,6 +18,7 @@ public class RForm {
 	private String eventTypeName;
 	private int eventCost;
 	private int supid;
+	private String eventName;
 	
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
@@ -36,7 +37,7 @@ public class RForm {
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, int timeMissed, int gradeFormat,
-			int cutoffGrade, int eventTypeId, int eventCost, int supid) {
+			int cutoffGrade, int eventTypeId, int eventCost, int supid,String eventName) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
@@ -50,8 +51,26 @@ public class RForm {
 		this.eventTypeId = eventTypeId;
 		this.eventCost = eventCost;
 		this.supid = supid;
+		this.eventName = eventName;
+	}
+	public RForm(int rFormId, String eventName) {
+		super();
+		this.rFormId = rFormId;
+		this.eventName = eventName;
 	}
 	
+	/**
+	 * @return the eventName
+	 */
+	public String getEventName() {
+		return eventName;
+	}
+	/**
+	 * @param eventName the eventName to set
+	 */
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
 	/**
 	 * @return the supid
 	 */
