@@ -32,7 +32,9 @@ public class Driver {
 		
 		System.out.println("  =====GET VS LOAD=====");
 		
-		
+		idi.getVsLoad();
+		idi.SaveVsPersist();
+		idi.mergeVsUpdate();
 		
 		System.out.println("=====Terminating App=====");
 		System.exit(0);
