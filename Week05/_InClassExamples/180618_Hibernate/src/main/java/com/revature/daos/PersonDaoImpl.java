@@ -74,4 +74,108 @@ public class PersonDaoImpl {
 		}
 		return persons;
 	}
+	/**
+	 * When invoking this update, be sure that the Person object you pass has
+	 * the id field set to the id you want to update. After that, fill in any
+	 * fields that you wish to be changed. Null will be ignored.
+	 * @param Person p
+	 * @return Person
+	 */
+	public Person updatePersonByIdFull(Person p){
+		Person person = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try{
+			tx = session.beginTransaction();
+			person = (Person)session.get(Person.class, p.getId());
+			if(person!=null){
+				if(p.getName()!=null){
+					person.setName(p.getName());
+				}
+				if(p.getSalary()!=null){
+					person.setSalary(p.getSalary());
+				}
+				if(p.getTitle()!=null){
+					person.setTitle(p.getTitle());
+				}
+				session.save(person);
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+		}finally{
+			session.close(); 
+		}
+		return person;
+	}
+	
+	public Person updatePersonNameById(Integer id, String name){
+		Person person = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+
+		try{
+			tx = session.beginTransaction();
+			person = (Person)session.get(Person.class, id);
+			if(person!=null){
+				person.setName(name);
+				session.save(person);
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+		}finally{
+			session.close(); 
+		}
+		return person;
+	}
+	
+	public Person getPersonById(Integer id){
+		Person person = null;
+		Session session = HibernateUtil.getSession();
+
+		try{
+			person = (Person)session.get(Person.class, id);
+		}catch(HibernateException e){
+			e.printStackTrace();
+		}finally{
+			session.close(); 
+		}
+		return person;
+	}
+	
+	public Boolean deletePersonById(Integer id){
+		Person person = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		Boolean result = false;
+
+		try{
+			tx = session.beginTransaction();
+			person = (Person)session.get(Person.class, id);
+			if(person!=null){
+				session.delete(person);
+				result = true;
+			}
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+		}finally{
+			session.close(); 
+		}
+		return result;
+	}
 }

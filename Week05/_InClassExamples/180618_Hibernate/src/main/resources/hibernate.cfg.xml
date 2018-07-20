@@ -56,6 +56,10 @@
 
 		<!-- <mapping resource="person.hbm.xml" /> -->
 		<mapping class="com.revature.beans.Person"/>
+		<mapping class="com.revature.beans.Item"/>
+		<mapping class="com.revature.beans.Shop"/>
+		<mapping class="com.revature.beans.Npc"/>
+		<mapping class="com.revature.beans.Job"/>
 
 	</session-factory>
 </hibernate-configuration>
