@@ -104,6 +104,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	public void updateEmployeeRequests(employee e) {
 		e.clearRequests();
+		RequestDaoImpl RDI = new RequestDaoImpl();
+		for(request r: RDI.getRequestsByEmployeeId(e.getEmpId())) {
+			e.addRequest(r);
+		}
 	}
 
 }

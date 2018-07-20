@@ -17,12 +17,13 @@ public class request {
 	private String eventLocation;
 	private double typeValue;
 	private String typeName;
+	private int typeId;
 	private ArrayList<file> files;
 	private ArrayList<info> infos;
 	
 	public request(int id, double fullAmmount, double cooperateAmmount, int status, Date approvealDate,
 			Date creationDate, Date eventDate, String gradingFormat, String eventDescription,
-			String eventJustification, String eventLocation, double typeValue, String typeName) {
+			String eventJustification, String eventLocation, double typeValue, String typeName, int typeId) {
 		this.id = id;
 		this.fullAmmount = fullAmmount;
 		this.cooperateAmmount = cooperateAmmount;
@@ -36,6 +37,7 @@ public class request {
 		this.eventLocation = eventLocation;
 		this.typeValue = typeValue;
 		this.typeName = typeName;
+		this.typeId = typeId;
 		this.files = new ArrayList<file>();
 		this.infos = new ArrayList<info>();
 	}
@@ -62,6 +64,9 @@ public class request {
 	}
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+	public int getTypeId() {
+		return typeId;
 	}
 	public int getId() {
 		return id;

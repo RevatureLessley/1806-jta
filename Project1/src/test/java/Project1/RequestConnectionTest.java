@@ -20,7 +20,7 @@ public class RequestConnectionTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		for(request r: RDI.getRequestsByPlayerId(1)) {
+		for(request r: RDI.getRequestsByEmployeeId(1)) {
 			test.add(r);
 		}
 	}
