@@ -68,6 +68,29 @@ public class EmployeeDao
 		return 0;
 	}
 	
+	public Integer selectAmountLeftByAccountName(String accountName) 
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT amount_left FROM employee WHERE emp_accountname = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, accountName);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return rs.getInt(1);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+	
 	public Boolean updateEmployeeAmountLeftViaSp(Employee employee, Integer amountLeft) 
 	{
 		CallableStatement stmt = null; 

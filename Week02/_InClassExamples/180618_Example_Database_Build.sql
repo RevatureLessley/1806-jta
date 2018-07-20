@@ -158,5 +158,3 @@ END;
 /
 
 commit;
-
-select * from npc;

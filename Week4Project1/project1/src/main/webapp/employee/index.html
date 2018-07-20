@@ -12,6 +12,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="../resources/css/main.css">
+	
+	<script src="../resources/js/ajax.js"></script>
 
 	<title>Tuition Reimbursement Management System</title>
 </head>
@@ -44,7 +46,8 @@
 	<div class="container py-5">
 		
 		<div>
-			<h2>You have an amount of reimbursement left</h2>
+			<h2 onload="getAccountCurrency()">You have the amount below of reimbursement left</h2>
+			<p id="employeecurrencynow"></p>
 		</div>
 		<br>
 		<div>

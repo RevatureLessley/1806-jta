@@ -257,3 +257,4 @@ COMMIT;
 --ON reimbursement.emp_id = employee.emp_id;
 --SELECT * FROM employee;
 --SELECT * FROM reimbursement;
+--SELECT amount_left FROM employee WHERE emp_accountname = 'loganbrewer';

@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDao;
 
@@ -15,6 +17,30 @@ public class EmployeeService
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ed.getEmployeeAmountLeftViaSp(empId);
+	}
+	
+	public String getCurrencyWithJSON(String accountname)
+	{
+		Integer currency = getCurrencyByAccountname(accountname);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try
+		{
+			json = mapper.writeValueAsString(currency);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
+	public Integer getCurrencyByAccountname(String accountname)
+	{
+		EmployeeDao ed = new EmployeeDao();
+		return ed.selectAmountLeftByAccountName(accountname);
 	}
 	
 	public boolean updateCurrencyById(Employee employee, Integer id, Integer amountLeft)
@@ -72,5 +98,22 @@ public class EmployeeService
 			return 0;
 		}
 	}
+	
+//	public String getEmpCurrencyJSON()
+//	{
+//		HttpSession session = null;
+//		session = request.
+//		Integer currency = getAllNpcsWithClass();
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = "";
+//		
+//		try{
+//			json = mapper.writeValueAsString(npcs);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		
+//		return json;
+//	}
 	
 }
