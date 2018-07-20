@@ -46,29 +46,37 @@ function checkUsername() {
 	xhr.send(message);
 }
 
-function displayDetails(event, i) {
+function displayDetails(reimbursement, i) {
+	let event = reimbursement["event"];
+	
 	return "<tr>" + 
-		   	"<td>" + event["type"] + "</td>" +
-		   	"<td>" + 
+		   	"<th>" + event["type"] + "</th>" +
+		   	"<th>" + 
 		   		new Date(event["datetime"]).toLocaleString() + 
-		   	"</td>" +
-		    "<td>" + event["location"] + "</td>" +
-		    "<td>" +
+		   	"</th>" +
+		    "<th>" +
 		   	"<button " +
 		   		"class=\"btn btn-link\" " +
 		   			"data-toggle=\"collapse\" " +
-					"href=\"#details" + i + "\">" + 
+					"data-target=\".collapse" + i + "\" " +
+			">" + 
 						"Toggle Details" + 
 			"</button>" + 
-		    "</td>" +
+		    "</th>" +
 		   "</tr>" + 
-		   "<div class=\"collapse\" id=details" + i + ">" + 
-		    "<ul style=\"list-style-type: none\">" +
-		   		"<li>First item</li>" +
-		   		"<li>Second item</li>" +
-		   		"<li>Third item</li>" +
-		   	"</ul>" + 
-		   "</div>";
+		   "<tr class=\"collapse collapse" + i + "\">" + 
+		   	"<td>Cost: $" + event["cost"] + "</td>" +
+		   	"<td>" + event["location"] + "</td>" +
+		   	"<td>" + event["workMissed"].split(" ")[0] + " days</td>" +
+		   "<tr class=\"collapse collapse" + i + "\">" +
+		   	"<td>Description:</td>" +
+		   	"<td colspan=\"3\">" + event["description"] + "</td>" +
+		   "</tr>" +
+		   "<tr class=\"collapse collapse" + i + "\">" +
+		   	"<td>Justification:</td>" +
+		   	"<td colspan=\"3\">" + reimbursement["justification"] + "</td>" +
+		   "</tr>" +
+		   "</tr>";
 }
 
 function displayPastReimbursements(employee) {
@@ -79,8 +87,7 @@ function displayPastReimbursements(employee) {
 	let i = 1;
 	
 	for(r in reimbursements) {
-		let event = reimbursements[r]["event"];
-		list.innerHTML += displayDetails(event, i);
+		list.innerHTML += displayDetails(reimbursements[r], i);
 		i++;
 	}
 	
