@@ -98,14 +98,15 @@ public class RequestDaoImpl implements RequestDao{
 	}
 
 	@Override
-	public void approvalTable(int id) {
+	public void approvalTable(int id, Date date) {
 		
 		PreparedStatement stmt = null; 
 		try(Connection conn = Connections.getConnection())
 		{
-			String sql = "call rdy_App (?)";
+			String sql = "call rdy_App (?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt   (1, id);
+			stmt.setDate  (2, date);
 			stmt.executeQuery();
 			
 		}catch(SQLException e){
@@ -210,7 +211,6 @@ public class RequestDaoImpl implements RequestDao{
 	@Override
 	public void directSupervisorApproval(String id) {
 		PreparedStatement stmt = null; 
-		System.out.println("Request DAO hit ID: " + id);
 		try(Connection conn = Connections.getConnection())
 		{
 			String sql = "UPDATE project1_approval SET direct_supervisor_app = 1 WHERE request_id = ?";
@@ -218,7 +218,209 @@ public class RequestDaoImpl implements RequestDao{
 			stmt.setString(1, id);
 			stmt.executeQuery();
 
-			System.out.println("FINISHED QUERY");
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Something went wrong with connecting");
+		}finally{
+			try {stmt.close();} 
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Couldn't Close the Connection");
+			}
+		}
+	}
+
+	//Adds additional file to the database
+	@Override
+	public void createAdditionalFiles(String id, String fileName) {
+		PreparedStatement stmt = null; 
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "insert into project1_file_location values(?, ?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.setString(2, fileName);
+			stmt.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Something went wrong with connecting");
+		}finally{
+			try {stmt.close();} 
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Couldn't Close the Connection");
+			}
+		}		
+	}
+
+	
+	/**
+	 * Returns a list of all the files with the given id
+	 * */
+	@Override
+	public List<String> getListOfFileNames(String id) {
+		System.out.println("DAO HIT");
+		System.out.println(id);
+		ResultSet rs = null;
+		List<String> fileList = new ArrayList<>();
+		PreparedStatement stmt = null;
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "select * from project1_file_location where request_id = "+ id; 
+			stmt = conn.prepareStatement(sql);
+			//stmt.setString (1, id);
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()){
+				fileList.add(rs.getString("file_location"));
+			}
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			try {stmt.close();} 
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Couldn't Close the Connection");
+			}
+		}
+		
+		return fileList;
+	}
+
+	@Override
+	public List<Request> getListOfRequestsDS() {
+			ResultSet rs = null;
+			List<Request> requestList = new ArrayList<>();
+			Statement stmt = null;
+			try(Connection conn = Connections.getConnection())
+			{
+				String sql = "select project1_reimbursement.username, project1_reimbursement.fname, project1_reimbursement.lname, " + 
+						"project1_reimbursement_details.date_sub, project1_reimbursement_details.request_id, " + 
+						"project1_reimbursement_details.description,project1_reimbursement_details.event, " + 
+						"project1_reimbursement_details.justification, project1_reimbursement.cost from project1_reimbursement " + 
+						"full outer join project1_reimbursement_details on " + 
+						"project1_reimbursement.request_id = project1_reimbursement_details.request_id " + 
+						"where project1_reimbursement.request_id in " + 
+						"(select request_id from project1_approval where project1_approval.direct_supervisor_app = 1) " + 
+						"order by project1_reimbursement.lname";
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql);
+
+				while(rs.next()){
+
+					Request request = new Request(rs.getString("fname"), 
+											  rs.getString("lname"), 
+											  rs.getString("username"), 
+											  rs.getString("description"), 
+											  rs.getString("event"), 
+											  rs.getString("justification"), 
+											  rs.getFloat("cost"), 
+											  rs.getInt("request_id"),
+											  rs.getDate("date_sub"));
+					
+					requestList.add(request);
+				}
+				
+				
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{
+				try {stmt.close();} 
+				catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Couldn't Close the Connection");
+				}
+			}
+			
+			return requestList;
+		
+	}
+
+	@Override
+	public void departmentHeadApproval(String id) {
+		PreparedStatement stmt = null; 
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "UPDATE project1_approval SET department_head_app = 1 WHERE request_id = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.executeQuery();
+
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Something went wrong with connecting");
+		}finally{
+			try {stmt.close();} 
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Couldn't Close the Connection");
+			}
+		}		
+	}
+
+	@Override
+	public List<Request> getListOfRequestsBC() {
+		ResultSet rs = null;
+		List<Request> requestList = new ArrayList<>();
+		Statement stmt = null;
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "select project1_reimbursement.username, project1_reimbursement.fname, project1_reimbursement.lname, " + 
+					"project1_reimbursement_details.date_sub, project1_reimbursement_details.request_id, " + 
+					"project1_reimbursement_details.description,project1_reimbursement_details.event, " + 
+					"project1_reimbursement_details.justification, project1_reimbursement.cost from project1_reimbursement " + 
+					"full outer join project1_reimbursement_details on " + 
+					"project1_reimbursement.request_id = project1_reimbursement_details.request_id " + 
+					"where project1_reimbursement.request_id in " + 
+					"(select request_id from project1_approval where project1_approval.department_head_app = 1) " + 
+					"order by project1_reimbursement.lname";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			while(rs.next()){
+
+				Request request = new Request(rs.getString("fname"), 
+										  rs.getString("lname"), 
+										  rs.getString("username"), 
+										  rs.getString("description"), 
+										  rs.getString("event"), 
+										  rs.getString("justification"), 
+										  rs.getFloat("cost"), 
+										  rs.getInt("request_id"),
+										  rs.getDate("date_sub"));
+				
+				requestList.add(request);
+			}
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			try {stmt.close();} 
+			catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Couldn't Close the Connection");
+			}
+		}
+		
+		return requestList;
+	}
+
+	@Override
+	public void bCApproval(String id) {
+		PreparedStatement stmt = null; 
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "UPDATE project1_approval SET benefits_co_app = 1 WHERE request_id = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.executeQuery();
+
 			
 		}catch(SQLException e){
 			e.printStackTrace();

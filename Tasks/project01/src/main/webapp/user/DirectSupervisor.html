@@ -4,6 +4,8 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script src="./resources/js/main.js"></script>
+<script src="./resources/js/main2.js"></script>
+
 </head>
 <body>
 <h1>DIRECT SUPERVISOR PAGE</h1>
@@ -25,7 +27,18 @@
 		
 	</div>
 	<button onclick="getInfo()">Get info</button>
+<br>
+<div id="selectTable"></div>
+<br> 
 
+
+	<form id="form2">
+	  Request Id:<br>
+	  <input type="number" name="reqId" id="reqId"><br>
+	</form >
+	
+	 <button onclick="getFiles()">Get Files</button> 
+	
 	
 	<form action="/project01/LogoutUtil"><input type="submit" value="Logout"></form>
 	

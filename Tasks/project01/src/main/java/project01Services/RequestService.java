@@ -12,7 +12,7 @@ public class RequestService {
 	{
 		  int reqId = reqDao.getNumberOf();
 	      reqDao.setReimbursement(username,event,justify,location,firstname,lastname,description,fileName,cost,reqId,theDate);
-	      reqDao.approvalTable(reqId);
+	      reqDao.approvalTable(reqId, theDate);
 	      reqId++;
 	      reqDao.updateNumberof(reqId);
 	      

@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import project01Dao.RequestDaoImpl;
 import project01Services.RequestService;
 
 /**
@@ -105,6 +106,8 @@ public class AdditionalFilesServlet extends HttpServlet {
 	                // Write the file
 	                file = new File( "c:\\temp\\" + fileName) ;
 	                fi.write( file ) ;
+	                RequestDaoImpl reqDao = new RequestDaoImpl();
+	                reqDao.createAdditionalFiles(reqId, fileName);
 	                out.println("Additional File Added!");
 	             }
 	             else {reqId = fi.getString();}

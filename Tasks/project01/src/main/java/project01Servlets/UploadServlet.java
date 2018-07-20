@@ -99,20 +99,28 @@ public class UploadServlet extends HttpServlet {
 	    
 	          while ( i.hasNext () ) {
 	             FileItem fi = (FileItem)i.next();
-	             if ( !fi.isFormField () ) {
+	             if ( !fi.isFormField ()) {
 	                // Get the uploaded file parameters
 	         		HttpSession session = request.getSession();
+
 	                String fieldName = fi.getFieldName();
-	                fileName = (String)session.getAttribute("username")+"_"+reqId+"_"+fi.getName();
-	                String contentType = fi.getContentType();
-	                boolean isInMemory = fi.isInMemory();
-	                long sizeInBytes = fi.getSize();
-	                
-	             
-	                // Write the file
-	                file = new File( "c:\\temp\\" + fileName) ;
-	                fi.write( file ) ;
-	                out.println("Request made!");
+	                if (fi.getName()=="") {
+	                	fileName = "No file given";
+		                out.println("Request made no file given!");
+
+	                }
+	                else {
+	                	fileName = (String)session.getAttribute("username")+"_"+reqId+"_"+fi.getName();
+		                String contentType = fi.getContentType();
+		                boolean isInMemory = fi.isInMemory();
+		                long sizeInBytes = fi.getSize();
+		                
+		             
+		                // Write the file
+		                file = new File( "c:\\temp\\" + fileName) ;
+		                fi.write( file ) ;
+	                }
+
 	             }
 	             else {map.put(fi.getFieldName(), fi.getString());}
 	          }
@@ -127,6 +135,7 @@ public class UploadServlet extends HttpServlet {
    	      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
    	      java.sql.Date theDate = null;
    	      theDate = theDate.valueOf(map.get("date"));
+   	      map.put("location", fileName);
    	      
    	      
 	      reqSer.createRequest((String)session.getAttribute("username"),map.get("event"),map.get("justification"), 
