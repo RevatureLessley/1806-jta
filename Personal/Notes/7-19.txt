@@ -1,8 +1,8 @@
 Architecture
 
-Java Application<---->Persistent Object<---->{Session Factory, Connection Provider, Session, Transaction}<---->{JNBD, JDBC, JTA}<---->Database
+Java Application<---->Persistent Object<---->{Session Factory, Connection Provider, Session, Transaction}<---->{JNDI, JDBC, JTA}<---->Database
 
-JNBI, JDBS, JTA -core objects of Hibernate
+JNDI, JDBS, JTA -core objects of Hibernate
 JTA -Java Transaction API
 JNDI -Java Naming Directory Interface
 

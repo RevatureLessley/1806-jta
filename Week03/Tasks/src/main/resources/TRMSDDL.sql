@@ -45,6 +45,7 @@ CREATE TABLE Approval_Additional_Info (
     app_addinf_id NUMBER PRIMARY KEY,
     app_addinf_approval NUMBER,
     app_addinf_name VARCHAR2(4000),
+    app_addinf_size NUMBER,
     app_addinf_file BLOB DEFAULT EMPTY_BLOB()
 );
 
@@ -52,6 +53,7 @@ CREATE TABLE Approval_Attachment (
     app_att_id NUMBER PRIMARY KEY,
     app_att_approval NUMBER,
     app_att_name VARCHAR2(4000),
+    app_att_size NUMBER,
     app_att_file BLOB DEFAULT EMPTY_BLOB()
 );
 
@@ -95,6 +97,7 @@ CREATE TABLE Event_Attachment (
     eve_att_id NUMBER PRIMARY KEY,
     eve_att_event NUMBER,
     eve_att_name VARCHAR2(4000),
+    eve_att_size NUMBER,
     eve_att_file BLOB DEFAULT EMPTY_BLOB()
 );
 
@@ -115,6 +118,7 @@ CREATE TABLE Grading_Format (
     gra_for_confirmed CHAR(1)
         CHECK (gra_for_confirmed IN ('N', 'Y')),
     gra_for_filename VARCHAR2(4000),
+    gra_for_filesize NUMBER,
     gra_for_file BLOB DEFAULT EMPTY_BLOB(),
     gra_for_passing_cutoff NUMBER DEFAULT NULL
 );
@@ -559,42 +563,50 @@ CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
 
 CREATE OR REPLACE PROCEDURE insertApprovalAdditionalInfo(info IN NUMBER, 
                                                          filename IN VARCHAR2,
+                                                         filesize IN NUMBER,
                                                          fil IN BLOB)
 IS
 BEGIN
     INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name,
-                                         app_addinf_file)
-    VALUES (info, filename, fil);
+                                         app_addinf_size, app_addinf_file)
+    VALUES (info, filename, filesize, fil);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE insertApprovalAttachment(approval IN NUMBER,
                                                      filename IN VARCHAR2,
+                                                     filesize IN NUMBER,
                                                      fil IN BLOB)
 IS
 BEGIN
-    INSERT INTO Approval_Attachment (app_att_approval, app_att_name, app_att_file)
-    VALUES (approval, filename, fil);
+    INSERT INTO Approval_Attachment (app_att_approval, app_att_name,
+                                     app_att_size, app_att_file)
+    VALUES (approval, filename, filesize, fil);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, 
                                                   filename IN VARCHAR2,
+                                                  filesize IN NUMBER,
                                                   fil IN BLOB)
 IS
 BEGIN
-    INSERT INTO Event_Attachment (eve_att_event, eve_att_name, eve_att_file)
-    VALUES (event, filename, fil);
+    INSERT INTO Event_Attachment (eve_att_event, eve_att_name, eve_att_size,
+                                  eve_att_file)
+    VALUES (event, filename, filesize, fil);
 END;
 /
 
 CREATE OR REPLACE PROCEDURE updateGradingFormatProof(graforID IN NUMBER, 
                                                      filename IN VARCHAR2,
+                                                     filesize IN NUMBER,
                                                      fil IN BLOB)
 IS
 BEGIN
     UPDATE Grading_Format
-    SET gra_for_filename = filename, gra_for_file = fil
+    SET gra_for_filename = filename, 
+        gra_for_filesize = filesize,
+        gra_for_file = fil
     WHERE gra_for_id = graforID;
 END;
 /

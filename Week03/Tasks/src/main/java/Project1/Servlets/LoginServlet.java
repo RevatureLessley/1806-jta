@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 		Employee employee = EmployeeService.employeeLogin(username, password);
 		HttpSession session = null;
 		RequestDispatcher rd = null;
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		if(null != employee){

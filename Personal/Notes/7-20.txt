@@ -1,0 +1,33 @@
+Get vs Load
+-Get is eager, it will fetch all data from the database on the spot, replacing non-existing data with null.
+-Load is lazy, it gives us a proxy of an object, a proxy is a pseudo-implementation of the object structure, database is only hit when the actual data is accessed, risks ObjectNotFound Exception
+
+session.persist() is not guaranteed an id immediately so it returns nothing.
+
+Save vs Persist
+-neither lazy nor eager
+-save an object writes it to the database, thus it returns a number that uniquely identifies a record.
+-persist does not write immediately, a position is saved without an id.
+
+Update vs Merge
+-they re-attach a detached object to a persistent state.
+-update throws an NonUniqueObject exception of you a session already has a persistent object for a record.
+-merge still follows through by overwriting the contents of the current consistent object with the one attempting to update.
+
+HQL is like SQL without column selections. Projections allow statistical queries on the database.
+
+Criteria is an OO-based query. SQL is written inside NativeQuery.
+
+Hibernate Caching
+-2 Levels
+	--Mandatory Cache
+		---First L1 Cache
+		---cached in each session object
+	--Optional Cache
+		---Second L2 Cache
+		---provided by vendors
+		---requires configuration
+		---stored in session factory
+		---ehcache
+	--Query Cache
+		---cache HQL query results

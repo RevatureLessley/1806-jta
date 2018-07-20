@@ -19,12 +19,17 @@ function handleFileSelect(evt) {
       // Closure to capture the file information.
       reader.onload = (function(theFile) {
         return function(e) {
-          document.getElementById('list').innerHTML = ['<object width="600" height="800" data="', e.target.result,
+        	console.log(escape(theFile.name));
+        	console.log(e);
+        	console.log(e.size);
+        	console.log(e.type);
+          document.getElementById('list').innerHTML = ['<object data="', e.target.result,
               '" title="', escape(theFile.name), '"/>'].join('');
         };
       })(f);
 
       // Read in the image file as a data URL.
       reader.readAsDataURL(f);
+      console.log(f.size);
     }
 }

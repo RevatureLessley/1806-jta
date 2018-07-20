@@ -116,6 +116,39 @@ function displayWelcome() {
 	xhr.send();
 }
 
+function getAttachment() {
+	let servlet = "AttachmentServlet";
+	let xhr = new XMLHttpRequest();
+	xhr.responseType = "blob";
+	
+	xhr.onreadystatechange = function() {
+
+		if(xhr.readyState == 4) {
+			let buffer = xhr.response;
+			
+			if(buffer) {
+				var reader = new FileReader();
+			      // Closure to capture the file information.
+			      reader.onload = (function(theFile) {
+			    	 
+			        return function(e) {
+			        	console.log(typeof e.target.result);
+			        	document.getElementById('list').innerHTML = ['<object data="', e.target.result,
+			                '" title="', escape(theFile.name), '"/>'].join('');
+			        };
+			      })(buffer);
+
+			      // Read in the image file as a data URL.
+			      reader.readAsDataURL(buffer);
+			}
+		}
+	}
+	
+	xhr.open("GET", servlet);
+	xhr.send();
+}
+
 window.onload = function() {
 	displayWelcome();
+	getAttachment();
 }

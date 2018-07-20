@@ -8,20 +8,23 @@ import Project1.*;
 import Project1.Beans.*;
 
 public class AttachmentDAOImp implements LogReference {
+	Connection connection;
 	
 	// Note: Remember to batch this.
 	public boolean insertAttachment(String table) {
 		logger.debug("Project1/DAO/ApplicationDAOImp.java: " + 
            	 "Entered insertAttachment().");
-		String sqlInsert = "{call insert" + table + "(?, ?, ?)}";
+		String sqlInsert = "{call insert" + table + "(?, ?, ?, ?)}";
 		CallableStatement statement = null;
 		String filename = "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf";
+		String filesize = "970411";
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
 			statement.setInt(1, 1);
 			statement.setString(2, filename);
-			statement.setBinaryStream(3, new FileInputStream(filename));
+			statement.setString(3, filesize);
+			statement.setBinaryStream(4, new FileInputStream(filename));
 			
 			return statement.execute();
 		}
@@ -54,7 +57,8 @@ public class AttachmentDAOImp implements LogReference {
 						  "WHERE " + column + " = ?";
 		HashMap<BigInteger, Attachment> attachments = new HashMap<>();
 		
-		try(Connection connection = DatabaseConnection.connect()) {
+		try {
+			connection = DatabaseConnection.connect();
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, String.valueOf(foreignKey));
 			rs = ps.executeQuery();
@@ -69,8 +73,10 @@ public class AttachmentDAOImp implements LogReference {
 							new Attachment(
 								// Get the file name
 								rs.getString(3),
+								// Get the file size
+								new BigInteger(rs.getString(4)),
 								// Get the file
-								rs.getBinaryStream(4)
+								rs.getBinaryStream(5)
 							);
 					
 					attachments.put(index, attachment);

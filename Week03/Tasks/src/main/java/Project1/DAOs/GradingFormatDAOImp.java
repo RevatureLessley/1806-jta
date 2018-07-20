@@ -10,15 +10,17 @@ public class GradingFormatDAOImp implements LogReference {
 	public boolean updateGradingFormatProof() {
 		logger.debug("Project1/DAO/GradingFormatDAOImp.java: " + 
            	 "Entered updateGradingFormatProof().");
-		String sqlInsert = "{call updateGradingFormatProof(?, ?, ?)}";
+		String sqlInsert = "{call updateGradingFormatProof(?, ?, ?, ?)}";
 		CallableStatement statement = null;
 		String filename = "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf";
+		String filesize = "970411";
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
 			statement.setInt(1, 1);
 			statement.setString(2, filename);
-			statement.setBinaryStream(3, new FileInputStream(filename));
+			statement.setString(3, filesize);
+			statement.setBinaryStream(4, new FileInputStream(filename));
 			
 			return statement.execute();
 		}

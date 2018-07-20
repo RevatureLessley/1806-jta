@@ -19,6 +19,7 @@ public class RegisterServlet extends HttpServlet {
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
 		RequestDispatcher rd  = request.getRequestDispatcher("index.html");
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("rusername");
 		String password = null;
