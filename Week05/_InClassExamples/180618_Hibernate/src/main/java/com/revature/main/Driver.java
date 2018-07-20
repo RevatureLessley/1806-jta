@@ -32,7 +32,16 @@ public class Driver {
 		
 		System.out.println("  =====GET VS LOAD=====");
 		
+		idi.getVsLoad();
+		idi.SaveVsPersist();
+		idi.mergeVsUpdate();
 		
+		NpcDaoImpl ndi = new NpcDaoImpl();
+		ndi.HQLExample();
+		ndi.projections();
+		
+		ndi.criterias();
+		ndi.executeNamedQueries();
 		
 		System.out.println("=====Terminating App=====");
 		System.exit(0);
