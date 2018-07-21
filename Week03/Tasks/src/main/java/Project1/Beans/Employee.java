@@ -10,6 +10,7 @@ public class Employee {
 	private String password;
 	private String firstname;
 	private String lastname;
+	private String email;
 	private boolean isBenco;
 	private HashMap<BigInteger, Reimbursement> reimbursements; 
 	
@@ -24,13 +25,14 @@ public class Employee {
 	 */
 	public Employee(String supervisor, double availableReimbursement,
 					String username, String password, String firstname,
-					String lastname, boolean isBenco) {
+					String lastname, String email, boolean isBenco) {
 		this.supervisor = supervisor;	// Think about this.
 		this.availableReimbursement = availableReimbursement;
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.email = email;
 		this.isBenco = isBenco;
 		this.reimbursements = new HashMap<>();
 	}
@@ -82,6 +84,14 @@ public class Employee {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public boolean isBenco() {
 		return isBenco;
@@ -108,11 +118,11 @@ public class Employee {
 											 Reimbursement reimbursement) {
 		return reimbursements.put(index, reimbursement);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Employee [supervisor=" + supervisor + ", availableReimbursement=" + availableReimbursement
 				+ ", username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", isBenco=" + isBenco + ", reimbursements=" + reimbursements + "]";
+				+ lastname + ", email=" + email + ", isBenco=" + isBenco + ", reimbursements=" + reimbursements + "]";
 	}
 }

@@ -65,6 +65,7 @@ public class RegisterServlet extends HttpServlet {
 					String firstname = request.getParameter("firstname");
 					String lastname = request.getParameter("lastname");
 					String department = request.getParameter("department");
+					String email = request.getParameter("email");
 					String isBenco = 
 							request.getParameter("benCo") == null ? "N" : "Y";
 			
@@ -73,7 +74,8 @@ public class RegisterServlet extends HttpServlet {
 															 password,
 															 firstname,
 															 lastname,
-															 department, 
+															 department,
+															 email,
 															 supervisor,
 															 isBenco);
 					HttpSession session = request.getSession();

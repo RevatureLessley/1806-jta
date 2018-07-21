@@ -82,6 +82,7 @@ CREATE TABLE Employee (
     emp_password VARCHAR2(4000),
     emp_firstname VARCHAR2(4000),
     emp_lastname VARCHAR2(4000),
+    emp_email VARCHAR(4000),
     emp_isBenCo CHAR(1) DEFAULT 'N' NOT NULL
         CHECK (emp_isBenCo IN ('N', 'Y'))
 );
@@ -240,9 +241,9 @@ SELECT ER.emp_username AS E_Supervisor,
        EL.emp_available_reimbursement AS E_AvailableReimbursement, 
        EL.emp_username AS E_Username, EL.emp_password AS E_Password, 
        EL.emp_firstname AS E_FirstName, EL.emp_lastname AS E_LastName, 
-       EL.emp_isBenco AS E_IsBenCo, rei_id AS E_ReimbursementID,
-       rei_awarded AS E_AwardedReimbursement, rei_isCancelled AS E_IsCancelled,
-       rei_isPending AS E_IsPending,
+       EL.emp_email AS E_Email, EL.emp_isBenco AS E_IsBenCo,
+       rei_id AS E_ReimbursementID, rei_awarded AS E_AwardedReimbursement,
+       rei_isCancelled AS E_IsCancelled, rei_isPending AS E_IsPending,
        rei_justification AS E_ReimbursementJustification, 
        rei_reason_exceeded_max AS E_ReasonExceededMax, eve_cost AS E_Cost,
        eve_datetime AS E_Date, eve_description AS E_Description, 
@@ -659,7 +660,8 @@ CREATE OR REPLACE PROCEDURE insertEmployee(username IN VARCHAR2,
                                            pas IN VARCHAR2, 
                                            firstname IN VARCHAR2, 
                                            lastname IN VARCHAR2, 
-                                           department IN VARCHAR2, 
+                                           department IN VARCHAR2,
+                                           email IN VARCHAR2,
                                            supervisor IN VARCHAR2, 
                                            isBenCo IN CHAR)
 IS
@@ -675,17 +677,17 @@ BEGIN
     END IF;
 
     INSERT INTO Employee(emp_username, emp_password, emp_firstname,
-                         emp_lastname, emp_department, emp_supervisor,
-                         emp_isBenco)
-    VALUES(username, pas, firstname, lastname, depID, supID, isBenCo);
+                         emp_lastname, emp_department, emp_email,
+                         emp_supervisor, emp_isBenco)
+    VALUES(username, pas, firstname, lastname, depID, email, supID, isBenCo);
     COMMIT;
 END;
 /
 
 CALL insertEmployee('swilery', 'swilery', 'Walter', 'Xia', 'Computer Science',
-                    NULL, 'Y');
+                    'swilery@gmail.com', NULL, 'Y');
 CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
-                    'swilery', 'N');
+                    'swilery@utexas.edu', 'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
 --                    'bobbertb', 'Y');
 

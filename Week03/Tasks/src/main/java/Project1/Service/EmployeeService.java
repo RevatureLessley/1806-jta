@@ -17,9 +17,9 @@ public class EmployeeService {
 	
 	public static Employee employeeRegister(String username, String password,
 										   String firstname, String lastname, 
-										   String department,
+										   String department, String email,
 										   String supervisor, String isBenco) {
 		return edi.insertEmployee(username, password, firstname, lastname,
-								  department, supervisor, isBenco);
+								  department, email, supervisor, isBenco);
 	}
 }
