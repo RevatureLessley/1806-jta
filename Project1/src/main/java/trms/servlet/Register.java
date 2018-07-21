@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,8 +60,11 @@ public class Register extends HttpServlet {
 		
 		if (creationSuccess != null) {
 			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-			request.setAttribute("username", creationSuccess.getUsername());
-			request.setAttribute("name", creationSuccess.getFirstName());
+			response.addCookie(new Cookie("username", creationSuccess.getUsername()));
+			response.addCookie(new Cookie("name", creationSuccess.getFirstName()));
+			response.addCookie(new Cookie("last", creationSuccess.getLastName()));
+			response.addCookie(new Cookie("email", creationSuccess.getEmail()));
+			
 			rs.forward(request, response);
 		} else {
 			out.println("An error occurred while creating the user account.");

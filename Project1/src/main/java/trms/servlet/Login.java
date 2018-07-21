@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,8 +49,11 @@ public class Login extends HttpServlet {
 		if (user != null) {
 			User isLoggedIn = userDAO.getUserByUsername(user.getUsername());
 			String name = isLoggedIn.getFirstName();
-			request.setAttribute("username", isLoggedIn.getUsername());
-			request.setAttribute("name", isLoggedIn.getFirstName());
+			response.addCookie(new Cookie("username", isLoggedIn.getUsername()));
+			response.addCookie(new Cookie("name", isLoggedIn.getFirstName()));
+			response.addCookie(new Cookie("last", isLoggedIn.getLastName()));
+			response.addCookie(new Cookie("email", isLoggedIn.getEmail()));
+			
 			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			rs.forward(request, response);
 		} else {

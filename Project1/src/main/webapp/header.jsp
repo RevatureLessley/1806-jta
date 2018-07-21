@@ -13,7 +13,21 @@
 	<title>Tuition Reimbursement Management System</title>
 </head>
 <body id="page-top" class="index">
-
+	  <% 
+	   Cookie[] cookies = request.getCookies();
+	   String name = "";
+	   if (cookies != null) {
+		   for (Cookie cookie : cookies) {
+			   	String cookieName = cookie.getName();
+			   	switch (cookieName) {
+			   		case "name":
+			   			name = cookie.getValue();
+			   		break;
+			   		default:
+			   		break;
+			   	}
+		   }
+	   }%>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -48,12 +62,12 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                              <% if (request.getAttribute("username") == null) { %>
+
+                              <% if (name.equals("")) { %>
                               	<li ><a href="login.jsp">Login</a></li>
                               	<li><a href="register.jsp">Register a new account</a></li>
-                              <% } else {  %>
-                              	  <% String name = (String) request.getAttribute("name"); %>	
-	                     		  <li><label><%=name%></label></li>
+                              <% } else {  %>	
+	                     		  <li><%=name%></li>
 		                          <li><a href="Manage">Manage Profile</a></li>
 		                          <li><a href="Logout">Logout</a></li>
 		                          <% if (request.isUserInRole("Admin")) { %>

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,11 +36,12 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = null;
-		session = request.getSession();
-		session.setAttribute("username", "");
-		session.setAttribute("name", "");
-		session.removeAttribute("username");
-		session.removeAttribute("name");
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			cookie.setMaxAge(0);
+			cookie.setValue("");
+			response.addCookie(cookie);
+		}
 		RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 		rs.forward(request, response);
 	}
