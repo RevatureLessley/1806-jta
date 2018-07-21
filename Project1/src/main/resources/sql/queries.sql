@@ -104,5 +104,6 @@ end;
 
 select * from project_1_reimbursement_form;
 select * from project_1_user;
+alter table project_1_user modify email varchar2(100);
 delete from project_1_user where username is null;
 commit;

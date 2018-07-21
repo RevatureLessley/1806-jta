@@ -134,13 +134,6 @@ begin
 end;
 /
 
-create or replace procedure selectAllUsers (returnCursor out sys_refcursor)
-as
-begin
-    open returnCursor for select * from project_1_user inner join project_1_finance on project_1_user.uuid = project_1_finance.employee_uuid;
-end;
-/
-
 create or replace procedure selectUserByUsername (userHandle in varchar2,
                                                   returnCursor out sys_refcursor)
 is
@@ -320,7 +313,7 @@ create or replace procedure removeBenefitsCoordinator(userUUID in varchar2)
 is
     v_role_number number := 2;
 begin
-    select role_number into v_role_number from project_1_role where role_name='BenefitsCoordinator';
+    select role_number into v_role_number from project_1_role where role_name='Benefits Coordinator';
     delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;
@@ -340,7 +333,7 @@ create or replace procedure removeDepartmentHead(userUUID in varchar2)
 is
     v_role_number number := 4;
 begin
-    select role_number into v_role_number from project_1_role where role_name='DepartmentHead';
+    select role_number into v_role_number from project_1_role where role_name='Department Head';
     delete from project_1_role_relationship where employee_uuid = userUUID and employee_role = v_role_number;
     commit;
 end;

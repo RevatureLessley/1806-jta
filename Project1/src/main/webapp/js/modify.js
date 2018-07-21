@@ -6,6 +6,7 @@ function addAttachment() {
 	
 	addAttachment.setAttribute("type", "file");
 	addAttachment.setAttribute("id", uuid);
+	addAttachment.setAttribute("name", uuid);
 	addAttachment.setAttribute("accept", ".pdf,.png,.jpeg,.txt,.doc,.msg");
 	
 	delButton.setAttribute("type", "button");
@@ -27,28 +28,7 @@ function removeRow(x) {
 	document.getElementById(x).remove();
 }
 
-function currentDate() {
-	var date = new Date();
-	var dd = date.getDate();
-	var mm = date.getMonth();
-	var yyyy = date.getYear();
+function AJAXSubmit() {
+	var formData = new FormData();
 	
-	if (dd < 10) {
-		dd = '0' + dd;
-	}
-	
-	if (mm < 10 ) {
-		mm = '0' + mm;
-	}
-	
-	var currentDate = yyyy + '-' + mm +'-' + dd;
-	document.getElementById('currentDate').value = currentDate();
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-	currentDate();
-}, false);
-
-window.onload = function() {
-	currentDate();
 };

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import trms.beans.User;
 import trms.dao.UserDAO;
@@ -32,11 +33,12 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+		HttpSession session = null;
 		String signin = request.getParameter("signin");
 		String password = request.getParameter("password");
 		UserDAO userDAO = new UserDAOImpl();
 		User user = null;
+		
 		if (signin.contains("@")) {
 			user = userDAO.userLoginWithEmail(signin, password);
 		} else {
@@ -44,13 +46,17 @@ public class Login extends HttpServlet {
 		}
 		
 		if (user != null) {
-			RequestDispatcher rs = request.getRequestDispatcher("Welcome");
+			User isLoggedIn = userDAO.getUserByUsername(user.getUsername());
+			String name = isLoggedIn.getFirstName();
+			request.setAttribute("username", isLoggedIn.getUsername());
+			request.setAttribute("name", isLoggedIn.getFirstName());
+			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			rs.forward(request, response);
 		} else {
 			out.println("Username or password is incorrect.");
 			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			rs.include(request, response);
-		}
+		}	
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

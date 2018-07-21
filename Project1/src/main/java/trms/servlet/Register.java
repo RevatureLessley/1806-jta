@@ -53,12 +53,14 @@ public class Register extends HttpServlet {
 		newUser.setLastName(lastName);
 		newUser.setPhoneNumber(phoneNumber);
 		UserDAO userDAO = new UserDAOImpl();
-		Boolean creationSuccess = userDAO.registerUser(newUser);
+		userDAO.registerUser(newUser);
 		
-		if (creationSuccess) {
+		User creationSuccess = userDAO.getUserByUsername(newUser.getUsername());
+		
+		if (creationSuccess != null) {
 			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-			HttpSession session = request.getSession();
-			session.setAttribute("username", username);
+			request.setAttribute("username", creationSuccess.getUsername());
+			request.setAttribute("name", creationSuccess.getFirstName());
 			rs.forward(request, response);
 		} else {
 			out.println("An error occurred while creating the user account.");

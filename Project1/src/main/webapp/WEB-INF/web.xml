@@ -4,27 +4,40 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-
-    <servlet>
-	    <description></description>
-	    <display-name>FrontController</display-name>
-	    <servlet-name>FrontController</servlet-name>
-	    <servlet-class>trms.servlet.FrontController</servlet-class>
-	    <load-on-startup>1</load-on-startup>
-  	</servlet>
-  	<servlet>
-  		<servlet-name>ApplicationForm</servlet-name>
-  		<servlet-class>trms.servlet.ApplicationForm</servlet-class>
-  	</servlet>
-  
-   <!-- <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>trms.servlet.Login</servlet-class>
+  <servlet>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>trms.servlet.FrontController</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ApplicationForm</servlet-name>
+    <servlet-class>trms.servlet.ApplicationForm</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>trms.servlet.Register</servlet-class>
   </servlet>
+  <servlet>
+  	<display-name>Login</display-name>
+  	<servlet-name>Login</servlet-name>
+  	<servlet-class>trms.servlet.Login</servlet-class>
+  </servlet>
+    <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>trms.servlet.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>/FrontController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ApplicationForm</servlet-name>
+    <url-pattern>/ApplicationForm</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
@@ -32,13 +45,9 @@
   <servlet-mapping>
   	<servlet-name>Login</servlet-name>
   	<url-pattern>/Login</url-pattern>
-  </servlet-mapping> -->
-  <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>/FrontController</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>ApplicationForm</servlet-name>
-  	<url-pattern>/ApplicationForm</url-pattern>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
 </web-app>

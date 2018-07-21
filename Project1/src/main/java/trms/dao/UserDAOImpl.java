@@ -48,12 +48,15 @@ public class UserDAOImpl extends Connection implements UserDAO {
 		try {
 			User user = null;
 			java.sql.Connection connection = this.getConnection();
-			CallableStatement callableStatement = connection.prepareCall("{call selectWithUsername(?,?)}");
+			CallableStatement callableStatement = connection.prepareCall("{call selectWithUsername(?,?,?)}");
 			callableStatement.setString(1, username);
 			callableStatement.setString(2, password);
-			ResultSet rs = callableStatement.executeQuery();
+			callableStatement.registerOutParameter(3, OracleTypes.CURSOR);
+			callableStatement.execute();
+			ResultSet rs = (ResultSet) callableStatement.getObject(3);
 			
 			while (rs.next()) {
+				user = new User();
 				user.setUuid(rs.getString("uuid"));
 				user.setUsername(rs.getString("username"));
 				user.setFirstName(rs.getString("first_name"));
@@ -74,12 +77,16 @@ public class UserDAOImpl extends Connection implements UserDAO {
 		try {
 			User user = null;
 			java.sql.Connection connection = this.getConnection();
-			CallableStatement callableStatement = connection.prepareCall("{call selectWithEmail(?,?)}");
+			CallableStatement callableStatement = connection.prepareCall("{call selectWithEmail(?,?,?)}");
 			callableStatement.setString(1, email);
 			callableStatement.setString(2, password);
-			ResultSet rs = callableStatement.executeQuery();
+			callableStatement.registerOutParameter(3, OracleTypes.CURSOR);
+			callableStatement.execute();
+			
+			ResultSet rs = (ResultSet) callableStatement.getObject(3);
 			
 			while (rs.next()) {
+				user = new User();
 				user.setUuid(rs.getString("uuid"));
 				user.setUsername(rs.getString("username"));
 				user.setFirstName(rs.getString("first_name"));
@@ -119,7 +126,7 @@ public class UserDAOImpl extends Connection implements UserDAO {
 	}
 
 	public boolean registerUser(User user) {
-		if (getUserByUsername(user.getUsername()) == null) {
+		if (getUserByUsername(user.getUsername()).getUuid() == null) {
 			try {
 				java.sql.Connection connection = this.getConnection();
 				CallableStatement callableStatement = connection.prepareCall("{call insertIntoUser(?,?,?,?,?,?,?)}");
@@ -212,6 +219,10 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			System.out.println("No user found.");
 			System.out.println("Adding test user.");
 			userDAO.registerUser(testUser);
+		} else {
+			User registeredUser = userDAO.getUserByUsername(testUser.getUsername());
+			String uuid = registeredUser.getUuid();
+			System.out.println(uuid);
 		}
 		} catch (Exception e) {
 			e.printStackTrace();

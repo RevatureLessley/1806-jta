@@ -40,6 +40,10 @@ public class FrontController extends HttpServlet {
 			requestDispatcher = request.getRequestDispatcher("login.jsp");
 			requestDispatcher.forward(request, response);
 			break;
+		case "logout":
+			requestDispatcher = request.getRequestDispatcher("/Logout");
+			requestDispatcher.forward(request, response);
+			break;
 		case "register":
 			requestDispatcher = request.getRequestDispatcher("register.jsp");
 			requestDispatcher.forward(request, response);

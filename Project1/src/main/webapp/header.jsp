@@ -48,19 +48,18 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <c:choose>
-                              <c:when test="${empty username}">
+                              <% if (request.getAttribute("username") == null) { %>
                               	<li ><a href="login.jsp">Login</a></li>
                               	<li><a href="register.jsp">Register a new account</a></li>
-                              </c:when>
-                              <c:otherwise>
-	                          <li><a href="Manage">Manage Profile</a></li>
-	                          <li class="divider"></li>
-	                          <% if (request.isUserInRole("Admin")) { %>
-	                          <li><a href="#">Modify user accounts</a></li>
+                              <% } else {  %>
+                              	  <% String name = (String) request.getAttribute("name"); %>	
+	                     		  <li><label><%=name%></label></li>
+		                          <li><a href="Manage">Manage Profile</a></li>
+		                          <li><a href="Logout">Logout</a></li>
+		                          <% if (request.isUserInRole("Admin")) { %>
+		                          <li><a href="#">Modify user accounts</a></li>
+		                          <% } %>
 	                          <% } %>
-                          	  </c:otherwise>
-                          </c:choose>
                         </ul>
                     </li>           
                 </ul>
