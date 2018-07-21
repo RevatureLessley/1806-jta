@@ -4,6 +4,15 @@ public class GradeScale {
 
 	private Integer id;
 	private String name;
+	private Integer presentation;
+
+	public Integer getPresentation() {
+		return presentation;
+	}
+
+	public void setPresentation(Integer presentation) {
+		this.presentation = presentation;
+	}
 
 	public Integer getId() {
 		return id;
@@ -23,7 +32,7 @@ public class GradeScale {
 
 	@Override
 	public String toString() {
-		return "GradeScale [id=" + id + ", name=" + name + "]";
+		return "GradeScale [id=" + id + ", name=" + name + ", presentation=" + presentation + "]";
 	}
 
 	public GradeScale(Integer id, String name) {

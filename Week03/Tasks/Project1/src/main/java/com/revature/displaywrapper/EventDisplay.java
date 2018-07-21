@@ -21,7 +21,52 @@ public class EventDisplay {
 	private String superApprove;
 	private String headApprove;
 	private String bencoApprove;
-	
+	private EventPhase phase;
+	private boolean requiresPresentation;
+	private String reimbursementAmount;
+
+	public EventDisplay(Event event) {
+		this.id = event.getId();
+		this.name = event.getName();
+
+		EventType eventType = FixedDataService.getEventType(event);
+		this.typeName = eventType.getName();
+		this.cost = StringManip.formatCurrency(event.getCost());
+		this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
+		this.reimbursementAmount = StringManip.formatCurrency(event.getReimbursementAmount());
+
+		this.date = StringManip.formatDate(event.getEventDate());
+		this.status = EventService.getEventStatus(event);
+		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
+		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
+
+		this.event = event;
+
+		this.superApprove = StringManip.formatDate(event.getSuperApprove());
+		this.headApprove = StringManip.formatDate(event.getHeadApprove());
+		this.bencoApprove = StringManip.formatDate(event.getBencoApprove());
+
+		this.phase = EventService.getPhase(event);
+
+		this.requiresPresentation = (FixedDataService.getGradeScale(event.getGradeScale()).getPresentation() == 1);
+	}
+
+	public String getReimbursementAmount() {
+		return reimbursementAmount;
+	}
+
+	public void setReimbursementAmount(String reimbursementAmount) {
+		this.reimbursementAmount = reimbursementAmount;
+	}
+
+	public boolean isRequiresPresentation() {
+		return requiresPresentation;
+	}
+
+	public void setRequiresPresentation(boolean requiresPresentation) {
+		this.requiresPresentation = requiresPresentation;
+	}
+
 	public String getGradeScaleName() {
 		return gradeScaleName;
 	}
@@ -38,27 +83,6 @@ public class EventDisplay {
 
 	public void setEvent(Event event) {
 		this.event = event;
-	}
-
-	public EventDisplay(Event event) {
-		this.id = event.getId();
-		this.name = event.getName();
-
-		EventType eventType = FixedDataService.getEventType(event);
-		this.typeName = eventType.getName();
-		this.cost = StringManip.formatCurrency(event.getCost());
-		this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
-		
-		this.date = StringManip.formatDate(event.getEventDate());
-		this.status = EventService.getEventStatus(event);
-		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
-		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
-
-		this.event = event;
-		
-		this.superApprove = StringManip.formatDate(event.getSuperApprove());
-		this.headApprove = StringManip.formatDate(event.getHeadApprove());
-		this.bencoApprove = StringManip.formatDate(event.getBencoApprove());
 	}
 
 	public String getSuperApprove() {
@@ -133,8 +157,8 @@ public class EventDisplay {
 		this.date = date;
 	}
 
-	public String getStatus() {
-		return status.name;
+	public EventStatus getStatus() {
+		return status;
 	}
 
 	public void setStatus(EventStatus status) {
@@ -156,6 +180,13 @@ public class EventDisplay {
 				+ employeeName + ", gradeScaleName=" + gradeScaleName + ", superApprove=" + superApprove
 				+ ", headApprove=" + headApprove + ", bencoApprove=" + bencoApprove + ", event=" + event + "]";
 	}
-	
-	
+
+	public EventPhase getPhase() {
+		return phase;
+	}
+
+	public void setPhase(EventPhase phase) {
+		this.phase = phase;
+	}
+
 }

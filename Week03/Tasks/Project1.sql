@@ -42,7 +42,8 @@ CREATE TABLE event_type(
 
 CREATE TABLE grade_scale(
     gs_id NUMBER(3) PRIMARY KEY,
-    gs_name VARCHAR(10) NOT NULL
+    gs_name VARCHAR(10) NOT NULL,
+    gs_presentation NUMBER(1) NOT NULL
 );
 
 CREATE TABLE event(
@@ -369,9 +370,9 @@ INSERT INTO event_type VALUES (4, 'Cert. Preparation Class', 75);
 INSERT INTO event_type VALUES (5, 'Technical Training', 90);
 INSERT INTO event_type VALUES (6, 'Other', 30);
 
-INSERT INTO grade_scale VALUES (1, 'Standard');
-INSERT INTO grade_scale VALUES (2, 'Pass/Fail');
-INSERT INTO grade_scale VALUES (3, 'Attendance');
+INSERT INTO grade_scale VALUES (1, 'Standard', 0);
+INSERT INTO grade_scale VALUES (2, 'Pass/Fail', 0);
+INSERT INTO grade_scale VALUES (3, 'Attendance', 1);
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
     emp_balance, emp_department) VALUES (1, 'Tom', 'Bobberson', 'bobbert@email.com', 2, NULL, 1000, 1);

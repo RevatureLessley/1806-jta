@@ -4,11 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.bean.Employee;
 import com.revature.bean.Event;
-import com.revature.dao.EmployeeDao;
 import com.revature.dao.EventDaoImpl;
 import com.revature.displaywrapper.EventDisplay;
+import com.revature.displaywrapper.EventPhase;
 import com.revature.displaywrapper.EventStatus;
 import com.revature.utils.StringManip;
 
@@ -62,20 +61,36 @@ public class EventService {
 			} else if (event.getGrade() != null) {
 				status = EventStatus.UnConfirmed;
 			} else {
-				status = EventStatus.UnGraded;
+				status = EventStatus.Pending;
 			}
 		} else {
 			// event is approaching
-			if (LocalDateTime.now().isAfter(event.getEventDate().minusDays(14))) {
-				status = EventStatus.Urgent;
-			} else if (event.getBencoApprove() != null) {
+			if (event.getBencoApprove() != null) {
 				status = EventStatus.Approved;
+			} else if (LocalDateTime.now().isAfter(event.getEventDate().minusDays(14))) {
+				status = EventStatus.Urgent;
 			} else if (event.getSuperApprove() != null || event.getHeadApprove() != null) {
 				status = EventStatus.Processing;
 			}
 		}
 
 		return status;
+	}
+
+	public static EventPhase getPhase(Event event) {
+		EventStatus status = getEventStatus(event);
+
+		switch (status) {
+		case Resolved:
+			return EventPhase.Resolved;
+		case UnConfirmed:
+		case Pending:
+			return EventPhase.Confirmation;
+		case Approved:
+			return EventPhase.Wait;
+		default:
+			return EventPhase.Approval;
+		}
 	}
 
 }

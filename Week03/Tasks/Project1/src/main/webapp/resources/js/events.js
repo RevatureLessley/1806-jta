@@ -93,7 +93,7 @@ function createEventTableWithEmpName(data, tableName){
 }
 
 function viewEvent(eventId){
-	window.location.href = `./eventview.jsp?eventId=${eventId}`;
+	window.location.href = `../manage/eventview.jsp?eventId=${eventId}`;
 }
 
 

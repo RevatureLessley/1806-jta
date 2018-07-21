@@ -25,7 +25,7 @@
 			enctype="multipart/form-data">
 			<div class="rsection">
 				<h4 style="text-align: center;">Reimbursement Request</h4>
-		
+
 				<div class="row justify-content-md-center">
 
 					<!-- areas -->
@@ -58,8 +58,8 @@
 
 					<div class="col-5">
 						<div class="form-group">
-							<label for="date">Date</label> <input class="form-control"
-								type="date" name="date" required="required">
+							<label for="date">Date</label> <input id="datefield"
+								class="form-control" type="date" name="date" required="required">
 						</div>
 						<div class="form-group">
 
@@ -129,11 +129,20 @@
 	</div>
 
 	<script>
-	 	addFromTemplate("navbar", "#navDiv");
-	 	
-		function goBack() {
-			window.history.back();
-		}
+		addFromTemplate("navbar", "#navDiv");
+
+		let today = new Date();
+		let dd = today.getDate();
+		let mm = today.getMonth() + 1;
+		let yyyy = today.getFullYear();
+
+		if (dd < 10)
+			dd = "0" + dd;
+		if (mm < 10)
+			mm = "0" + mm;
+
+		document.getElementById("datefield").setAttribute("max",
+				yyyy + '-' + mm + '-' + dd);
 	</script>
 
 </body>

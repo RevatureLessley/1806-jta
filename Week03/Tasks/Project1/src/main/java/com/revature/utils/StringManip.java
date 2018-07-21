@@ -9,10 +9,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class StringManip {
 
 	public static LocalDateTime getLocalDateTime(String s) {
-		
-		if(s == null)
+
+		if (s == null)
 			return null;
-		
+
 		s = s.replaceAll(" ", "T");
 
 		LocalDateTime ldt = LocalDateTime.parse(s);
@@ -27,7 +27,10 @@ public class StringManip {
 		return stamp;
 	}
 
-	public static String formatCurrency(double a) {
+	public static String formatCurrency(Double a) {
+
+		if (a == null)
+			return null;
 
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		String s = nf.format(a);
@@ -47,7 +50,7 @@ public class StringManip {
 	}
 
 	public static String formatDate(LocalDateTime eventDate) {
-		if(eventDate == null)
+		if (eventDate == null)
 			return null;
 		return eventDate.getMonthValue() + "/" + eventDate.getDayOfMonth() + "/" + eventDate.getYear();
 	}

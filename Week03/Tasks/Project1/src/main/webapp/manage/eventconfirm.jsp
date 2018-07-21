@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.revature.service.EventService"%>
-<%@page import="com.revature.service.EmployeeService"%>
 <%@page import="com.revature.service.NotificationService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,19 +33,13 @@
 	<script>
 		addFromTemplate("navbar", "#navDiv");
 		addFromTemplate("eventview", "#container");
+		addFromTemplate("manageevent", "#container");
 		
 		<%Integer userId = (Integer) session.getAttribute("userId");%>;
 
 		let json = <%Integer eventId = Integer.parseInt(request.getParameter("eventId"));
 			out.print(EventService.selectUserEvent(userId, eventId));%>;
-		let empData = <%out.print(EmployeeService.getEmployeeDisplay(userId));%>;
-			
 		fillEventData(json);
-		fillEventManageData(json, empData);
-
-		json = <%out.print(NotificationService.selectEventNotifications(eventId));%>;
-		
-		createMessages(json, "#container");
 
 	</script>
 

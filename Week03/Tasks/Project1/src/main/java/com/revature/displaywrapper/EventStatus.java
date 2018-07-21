@@ -6,14 +6,19 @@ public enum EventStatus{
 	Processing("Processing"), 
 	Urgent("Urgent"), 
 	Approved("Approved"), 
-	UnGraded("Awaiting Grade"), 
+	Pending("Pending"), 
 	UnConfirmed("Awaiting Confirmation"), 
 	Resolved("Resolved");
 
-	public final String name;
+	private final String name;
 	
 	EventStatus(String name) {
 		this.name= name;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 
 }

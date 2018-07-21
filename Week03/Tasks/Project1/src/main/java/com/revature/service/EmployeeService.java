@@ -1,9 +1,8 @@
 package com.revature.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.revature.bean.Employee;
 import com.revature.dao.EmployeeDao;
@@ -50,20 +49,13 @@ public class EmployeeService {
 		Employee employee = new EmployeeDao().selectById(userId);
 		EmployeeDisplay employeeDisplay = new EmployeeDisplay(employee);
 
-		ObjectMapper mapper = new ObjectMapper();
-		String json = null;
-
-		try {
-			json = mapper.writeValueAsString(employeeDisplay);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return json;
+		return StringManip.getJSONString(employeeDisplay);
 	}
 
 	public static String getEmployeeRedirect(Integer userId) {
 		Employee employee = new EmployeeDao().selectById(userId);
+		
+		Arrays.asList("shop");
 
 		switch (employee.getType()) {
 		case 1:
