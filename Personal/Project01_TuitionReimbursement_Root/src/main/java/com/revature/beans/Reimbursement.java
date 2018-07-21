@@ -4,6 +4,7 @@ public class Reimbursement {
 	int id;
 	int docId;
 	int empId;
+	int approverId;
 	String date;
 	String location;
 	String description;
@@ -17,12 +18,13 @@ public class Reimbursement {
 		super();
 	}
 	
-	public Reimbursement(int id, int docId, int empId, String date, String location, String description, double cost,
+	public Reimbursement(int id, int docId, int empId, int approverId, String date, String location, String description, double cost,
 			String gradingFormat, String type, double coveragePercent, String justification) {
 		super();
 		this.id = id;
 		this.docId = docId;
 		this.empId = empId;
+		this.approverId = approverId;
 		this.date = date;
 		this.location = location;
 		this.description = description;
@@ -33,9 +35,10 @@ public class Reimbursement {
 		this.justification = justification;
 	}
 	
-	public Reimbursement(int empId, String date, String location, String description, 
+	public Reimbursement(int empId, int approverId, String date, String location, String description, 
 			double cost, String gradingFormat, String type, double coveragePercent, String justification) {
 		this.empId = empId;
+		this.approverId = approverId;
 		this.date = date;
 		this.location = location;
 		this.description = description;
@@ -44,6 +47,29 @@ public class Reimbursement {
 		this.type = type;
 		this.coveragePercent = coveragePercent;
 		this.justification = justification;
+	}
+	
+	public Reimbursement(int id, int empId, int approverId, String date, String location, String description, 
+			double cost, String gradingFormat, String type, double coveragePercent, String justification) {
+		this.id = id;
+		this.empId = empId;
+		this.approverId = approverId;
+		this.date = date;
+		this.location = location;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.type = type;
+		this.coveragePercent = coveragePercent;
+		this.justification = justification;
+	}
+	
+	public int getApproverId() {
+		return approverId;
+	}
+
+	public void setApproverId(int approverId) {
+		this.approverId = approverId;
 	}
 
 	public int getId() {
@@ -111,6 +137,14 @@ public class Reimbursement {
 	}
 	public void setJustification(String justification) {
 		this.justification = justification;
+	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", docId=" + docId + ", empId=" + empId + ", approverId=" + approverId
+				+ ", date=" + date + ", location=" + location + ", description=" + description + ", cost=" + cost
+				+ ", gradingFormat=" + gradingFormat + ", type=" + type + ", coveragePercent=" + coveragePercent
+				+ ", justification=" + justification + "]";
 	}
 	
 }

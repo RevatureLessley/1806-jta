@@ -8,9 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
+import com.revature.main.Driver;
 import com.revature.services.UserService;
 
 /**
@@ -32,22 +33,39 @@ public class GetReimbursementsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("======"+this.getServletName()+"======");
-		HttpSession session = request.getSession();
-		int id = (Integer)session.getAttribute("id");
-		List<Reimbursement> reims = UserService.getAllReimbursementsById(id);
+		Employee loggedIn = Driver.loggedIn;
+		int id = loggedIn.getId();
+		
+		List<Reimbursement> reims = UserService.getAllReimbursementsByEmpId(id);
+		Driver.loggedIn.setReims(reims);
 		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
-		out.println("<table>");
-		out.println("<tr><td>Reimbursement ID</td><td>Employee ID</td><td>Type</td>"
-				+ "<td>Description</td><td>Justification</td></tr>");
-		for(Reimbursement reim : reims) {
-			out.println("<tr><td>"+reim.getId()+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
-					+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
+		if (!reims.isEmpty()) {	
+			out.println("<h3>Recent Reimbursements</h3><table class='table table-hover'>"+
+					"<thead><tr><th>Reimbursement ID</th><th>Employee ID</th><th>Type</th>"
+					+ "<th>Description</th><th>Justification</th></tr></thead><tbody>");
+			for(Reimbursement reim : reims) {
+				out.println("<tr onclick='openReimbursement("+reim.getId()+")'><td>"+reim.getId()+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
+						+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
+			}
+			out.print("</body></table>");
 		}
-		out.print("</table>");
+		
+		if (loggedIn.getRole() != "employee") {
+			reims = UserService.getAllReimbursementsByApproverId(id);
+				if (!reims.isEmpty()) {
+					out.println("<table>");
+					out.println("<tr><td>Reimbursement ID</td><td>Employee ID</td><td>Type</td>"
+							+ "<td>Description</td><td>Justification</td></tr>");
+					for(Reimbursement reim : reims) {
+						out.println("<tr onclick='openReimbursement("+reim.getId()+")'><td>"+reim.getId()+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
+								+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
+					}
+					out.print("</table>");
+				}
+		}
 	}
 
 	/**

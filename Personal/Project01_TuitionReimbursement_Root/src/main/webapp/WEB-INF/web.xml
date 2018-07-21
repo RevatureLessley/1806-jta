@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/Register.do</url-pattern>
+    <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/Login.do</url-pattern>
+    <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ReimbursementServlet</servlet-name>
-    <url-pattern>/Reimburse.do</url-pattern>
+    <url-pattern>/ReimbursementServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>GetReimbursementsServlet</servlet-name>
-    <url-pattern>/GetReimbursements.do</url-pattern>
+    <url-pattern>/GetReimbursementsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -77,6 +77,26 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>KillSessionServlet</servlet-name>
-    <url-pattern>/KillSession.do</url-pattern>
+    <url-pattern>/KillSessionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OpenReimbursementServlet</display-name>
+    <servlet-name>OpenReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlets.OpenReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OpenReimbursementServlet</servlet-name>
+    <url-pattern>/OpenReimbursementServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>UpdateReimbursementServlet</display-name>
+    <servlet-name>UpdateReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateReimbursementServlet</servlet-name>
+    <url-pattern>/UpdateReimbursementServlet</url-pattern>
   </servlet-mapping>
 </web-app>

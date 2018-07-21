@@ -14,6 +14,8 @@ truncate table employee;
 
 commit;
 
+truncate table reimbursement;
+
 SELECT * 
 FROM branch_manager bm
 JOIN contact_info c ON bm.cont_id = c.id
@@ -154,22 +156,54 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE insertReimbursement(
-	empId IN NUMBER,
-	reimbursementDate IN DATE,
-	reimbursementLocation VARCHAR2,
-	description IN VARCHAR2,
-	cost IN NUMBER,
-	gradingFormat IN VARCHAR2,
-	eventType IN VARCHAR2,
-	coverage IN NUMBER, 
-	justification IN VARCHAR2)
+	p_empId IN NUMBER,
+    p_approverId IN NUMBER, 
+	p_reimbursementDate IN VARCHAR2,
+	p_reimbursementLocation VARCHAR2,
+	p_description IN VARCHAR2,
+	p_cost IN NUMBER,
+	p_gradingFormat IN VARCHAR2,
+	p_eventType IN VARCHAR2,
+	p_coverage IN NUMBER, 
+	p_justification IN VARCHAR2)
 IS
 BEGIN 
-	INSERT INTO reimbursement (emp_id, reimbursement_date, reimbursement_location,
+	INSERT INTO reimbursement (emp_id, approver_id, reimbursement_date, reimbursement_location,
 		description, cost, grading_format, event_type, coverage, justification)
-	VALUES (empId, reimbursementDate, reimbursementLocation, description, cost,
-		gradingFormat, eventType, coverage, justification);
+	VALUES (p_empId, p_approverId, p_reimbursementDate, p_reimbursementLocation, p_description, p_cost,
+		p_gradingFormat, p_eventType, p_coverage, p_justification);
 
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE updateReimbursement(
+	p_empId IN NUMBER,
+    p_approverId IN NUMBER, 
+	p_reimbursementDate IN VARCHAR2,
+	p_reimbursementLocation VARCHAR2,
+	p_description IN VARCHAR2,
+	p_cost IN NUMBER,
+	p_gradingFormat IN VARCHAR2,
+	p_eventType IN VARCHAR2,
+	p_coverage IN NUMBER, 
+	p_justification IN VARCHAR2,
+    p_reimbursementId IN NUMBER)
+IS
+BEGIN 
+	UPDATE reimbursement
+    SET 
+		emp_id = p_empId,
+		reimbursement_date = p_reimbursementDate,
+		reimbursement_location = p_reimbursementLocation,
+		description = p_description,
+		cost = p_cost,
+		grading_format = p_gradingFormat,
+		event_type = p_eventType,
+		coverage = p_coverage,
+		justification = p_justification
+    WHERE reimbursement_id = p_reimbursementId;    
+		
 	COMMIT;
 END;
 /

@@ -22,6 +22,10 @@ body {
 	color:white;
 }
 
+textarea, select, input{
+	color: black;
+}
+
 .rsection{
 	background: darkgrey;
 	color:aliceblue;
@@ -31,6 +35,17 @@ body {
 	margin: 10px;
 	padding: 10px;
 }
+
+.rsectionOn{
+	background: grey;
+	color:aliceblue;
+	
+	border-radius:1px;
+	border: 2px outset #c0c0c0;
+	margin: 10px;
+	padding: 10px;
+}
+
 table {
 	background-color: white;
 	color: black;

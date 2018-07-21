@@ -1,5 +1,8 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Employee {
 	private int id;
 	private int supVId;
@@ -12,6 +15,7 @@ public class Employee {
 	private String location;
 	private String username;
 	private String password;
+	List<Reimbursement> reims;
 	
 	public Employee(int id, String role, int supVId, String firstName, String lastName, int phone, String email, String address,
 			String location, String username, String password) {
@@ -27,6 +31,7 @@ public class Employee {
 		this.location = location;
 		this.username = username;
 		this.password = password;
+		reims = new ArrayList<Reimbursement>();
 	}
 	public Employee(String role, int supVId, String firstName, String lastName, int phone, String email, String address,
 			String location, String username, String password) {
@@ -41,12 +46,19 @@ public class Employee {
 		this.location = location;
 		this.username = username;
 		this.password = password;
+		reims = new ArrayList<Reimbursement>();
 	}
 	
 	public Employee() {
 		super();
 	}
 	
+	public List<Reimbursement> getReims() {
+		return reims;
+	}
+	public void setReims(List<Reimbursement> reims) {
+		this.reims = reims;
+	}
 	public int getId() {
 		return id;
 	}

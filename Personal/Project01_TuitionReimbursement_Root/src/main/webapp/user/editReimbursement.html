@@ -14,7 +14,7 @@
 <script src="/Project01_TuitionReimbursement/resources/js/processReimUrl.js"></script>
 
 </head>
-<body>
+<body onload="setForm()">
 
 	<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -22,13 +22,13 @@
 		      <a class="navbar-brand">Tuition Reimbursement</a>
 		    </div>
 		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="/Project01_TuitionReimbursement/index.html">Home</a></li>		   
+		      <li class="active"><a href="/Project01_TuitionReimbursement/user/index.html">Home</a></li>		   
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
 		    <li class="dropdown">
 			      <a href="/Project01_TuitionReimbursement/register.html" class="dropdown-toggle" data-toggle="dropdown"><span id="navbardrop"></span></a>		      
 			      <ul class="dropdown-menu">
-			      	<li><a href="/Project01_TuitionReimbursement/user/index.html" class="glyphicon glyphicon-log-out" onclick="inValidate()"> Logout</a></li>
+			      	<li><a href="/Project01_TuitionReimbursement/index.html" class="glyphicon glyphicon-log-out" onclick="inValidate()"> Logout</a></li>
 			      </ul>
 		      </li>
 		    </ul>
@@ -40,10 +40,10 @@
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4 rsection">
 				<h4>Reimbursement Form</h4>
-				<form action="/Project01_TuitionReimbursement/Reimburse.do">
+				<form action="/Project01_TuitionReimbursement/UpdateReimbursement.do">
 					<div class="form-group">
 						<label for="eventType">Event Type:</label><br> 
-						 <select name="eventTypes">
+						 <select name="eventTypes" id="eventTypes">
 						  <option value="universityCourse">University Course</option>
 						  <option value="seminar">Seminar</option>
 						  <option value="certificationPrep">Certification Prep Class</option>
@@ -54,7 +54,7 @@
 					<hr>
 					<div class="form-group">
 						<label for="gradeFormat">Grade Format:</label><br> 
-						 <select name="formats">
+						 <select name="formats" id="formats">
 						  <option value="format1">Format 1</option>
 						  <option value="format2">Format 2</option>
 						  <option value="format3">Format 3</option>
@@ -69,7 +69,7 @@
 					<hr>
 					<div class="form-group">
 						<label for="eventLocation">Event Location:</label> 
-						 <select name="locations">
+						 <select name="locations" id="locations">
 						  <option value="virginia">Virginia</option>
 						  <option value="texas">Texas</option>
 						  <option value="florida">Florida</option>
@@ -79,20 +79,23 @@
 					<hr>
 					<div class="form-group">
 						<label for="eventDescription">Event Description:</label>
-						<textarea name="eventDescription" rows="10" cols="30"></textarea> 
+						<textarea name="eventDescription" rows="10" cols="30" id="eventDescription"></textarea> 
 					</div>
 					<hr>
 					<div class="form-group">
 						<label for="eventJustification">Event Justification:</label>
-						<textarea name="eventJustification" rows="10" cols="30"></textarea> 
+						<textarea name="eventJustification" rows="10" cols="30" id="eventJustification"></textarea> 
 					</div>
 					<hr>
 					<div class="form-group">
 						<label for="eventCost">Event Cost:</label> <input type="text"
 							class="form-control" id="eventCost" name="eventCost">
 					</div>
+					<div class="form-group">
+						<input type="hidden" id="id" name="id">
+					</div>
 					<hr>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary">Save</button>
 					<button type="reset" class="btn btn-primary">Reset</button>
 				</form>
 			</div>
@@ -100,7 +103,4 @@
 		</div>
 	</div>
 </body>
-<script>
-	setForm();
-</script>
 </html>

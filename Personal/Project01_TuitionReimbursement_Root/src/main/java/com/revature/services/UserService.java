@@ -32,6 +32,14 @@ public class UserService {
 		return true;
 	}
 	
+	public static boolean updateReimbursement(Reimbursement reim) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		
+		if (!reimd.updateReimbursementViaSp(reim)) return false;
+		
+		return true;
+	}
+	
 	public static Employee userLogin(String username, String password){
 		EmployeeDaoImpl empd = new EmployeeDaoImpl();
 		Employee emp = null;
@@ -46,8 +54,18 @@ public class UserService {
 		return emp;
 	}
 	
-	public static List<Reimbursement> getAllReimbursementsById(Integer id){
+	public static List<Reimbursement> getAllReimbursementsByEmpId(Integer id){
 		ReimbursementDao reimd = new ReimbursementDaoImpl();
-		return reimd.selectAllReimbursementById(id);
+		return reimd.selectAllReimbursementByEmpId(id);
+	}
+	
+	public static List<Reimbursement> getAllReimbursementsByApproverId(Integer id){
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.selectAllReimbursementByApproverId(id);
+	}
+	
+	public static Reimbursement getReimbursementById(Integer id) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.selectReimbursementById(id);
 	}
 }

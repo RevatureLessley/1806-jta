@@ -15,6 +15,19 @@ function showReimbursements(str) {
 	
 }
 
+function openReimbursement(reimId){
+	var httpReq = "";
+	var url = "/Project01_TuitionReimbursement/OpenReimbursement.do?reimId="+reimId;
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.onreadystatechange = function(){
+		if ((xhr.readyState == 4) || (xhr.status == 200)){
+			document.location = xhr.responseURL
+		}
+	}
+	xhr.send(httpReq);
+}
+
 function onLoad(){
 	var httpReq = null;
 	var url = "/Project01_TuitionReimbursement/GetReimbursements.do";
@@ -39,6 +52,7 @@ function inValidate(){
 	xhr.onreadystatechange = function () {
 		if ((xhr.readyState == 4) || (xhr.status == 200)) {
 			console.log("session invalidated");
+			window.location.href = "/Project01_TuitionReimbursement/index.html";
 		} 
 	}
 	xhr.send(httpReq);

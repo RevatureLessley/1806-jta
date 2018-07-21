@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
 import com.revature.main.Driver;
 import com.revature.services.UserService;
@@ -38,14 +39,16 @@ public class ReimbursementServlet extends HttpServlet {
 		String evDesc = request.getParameter("eventDescription");
 		double evCost = Double.parseDouble(request.getParameter("eventCost"));
 		String evGForm = request.getParameter("formats");;
-		String evType = request.getParameter("eventType");
+		String evType = request.getParameter("eventTypes");
 		double evCover = 0.0; // poll database for info
 		String evJust = request.getParameter("eventJustification");
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		if(UserService.createReimbursement(new Reimbursement(empId, evDate, evLoc, evDesc,
+		Employee loggedIn = Driver.loggedIn;
+		
+		if(UserService.createReimbursement(new Reimbursement(empId, loggedIn.getSupVId(), evDate, evLoc, evDesc,
 				evCost, evGForm, evType, evCover, evJust))){
 			out.println("<h3 style='color:green'>Reimbursement " + evType + " CREATED!</h3>");
 		}else{

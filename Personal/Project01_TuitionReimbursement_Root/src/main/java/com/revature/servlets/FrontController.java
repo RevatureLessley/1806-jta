@@ -74,6 +74,14 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("KillSessionServlet");
 			rd.forward(request, response);
 			break;
+		case "openreimbursement":
+			rd = request.getRequestDispatcher("OpenReimbursementServlet");
+			rd.forward(request, response);
+			break;
+		case "updatereimbursement":
+			rd = request.getRequestDispatcher("UpdateReimbursementServlet");
+			rd.forward(request, response);
+			break;
 		default:
 			response.sendError(404);
 		}
