@@ -11,20 +11,20 @@ public class AttachmentDAOImp implements LogReference {
 	Connection connection;
 	
 	// Note: Remember to batch this.
-	public boolean insertAttachment(String table) {
+	public boolean insertAttachment(String category, String filename, String filesize) {
 		logger.debug("Project1/DAO/ApplicationDAOImp.java: " + 
            	 "Entered insertAttachment().");
-		String sqlInsert = "{call insert" + table + "(?, ?, ?, ?)}";
+		String sqlInsert = "{call insertAttachment(?, ?, ?, ?, ?, ?)}";
 		CallableStatement statement = null;
-		String filename = "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf";
-		String filesize = "970411";
-
+	
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
-			statement.setInt(1, 1);
-			statement.setString(2, filename);
-			statement.setString(3, filesize);
-			statement.setBinaryStream(4, new FileInputStream(filename));
+			statement.setString(1, category);
+			statement.setInt(2, 1);
+			statement.setString(3, filename);
+			statement.setString(4, "." + filename.split("\\.")[1]);
+			statement.setString(5, filesize);
+			statement.setBinaryStream(6, new FileInputStream(filename));
 			
 			return statement.execute();
 		}
@@ -49,38 +49,39 @@ public class AttachmentDAOImp implements LogReference {
 	}
 	
 	public HashMap<BigInteger, Attachment> 
-		selectAttachment(String table, String column, BigInteger foreignKey) {
+		selectAttachment(BigInteger foreignKey, String category) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sqlQuery = "SELECT * " + 
-						  "FROM " + table + "_Attachment " + 
-						  "WHERE " + column + " = ?";
+						  "FROM Attachment_View " + 
+						  "WHERE A_AttachmentFK = ? AND " +
+						  "A_AttachmentCategory = ?";
 		HashMap<BigInteger, Attachment> attachments = new HashMap<>();
 		
 		try {
 			connection = DatabaseConnection.connect();
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, String.valueOf(foreignKey));
+			ps.setString(2, category);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				// Get the primary key
-				String s = rs.getString(1);
+				String s = rs.getString("A_ATTACHMENTID");
 				
-				if(s != null) {
-					BigInteger index = new BigInteger(s); 
-					Attachment attachment = 
-							new Attachment(
-								// Get the file name
-								rs.getString(3),
-								// Get the file size
-								new BigInteger(rs.getString(4)),
-								// Get the file
-								rs.getBinaryStream(5)
-							);
-					
-					attachments.put(index, attachment);
-				}
+				BigInteger index = new BigInteger(s); 
+				Attachment attachment = 
+						new Attachment(
+							category,
+							rs.getString("A_AttachmentMIME"),
+							rs.getString("A_AttachmentName"),
+							new BigInteger(
+									rs.getString("A_AttachmentSize")
+							),
+							rs.getBlob("A_AttachmentFile")
+						);
+				
+				attachments.put(index, attachment);
 			}
 			
 			return attachments;

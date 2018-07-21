@@ -1,23 +1,47 @@
 package Project1.Beans;
 
-import java.io.*;
 import java.math.*;
+import java.sql.*;
+import org.codehaus.jackson.annotate.*;
 
 public class Attachment {
+	private String category;
+	private String mime;
 	private String filename;
 	private BigInteger filesize;
-	private InputStream file;
+	@JsonIgnore
+	private Blob file;
 	
 	/**
 	 * @param filename
 	 * @param file
 	 */
-	public Attachment(String filename, BigInteger filesize, InputStream file) {
+	
+	public Attachment(String category, String mime, String filename,
+					  BigInteger filesize, Blob file) {
+		this.category = category;
+		this.mime = mime;
 		this.filename = filename;
 		this.filesize = filesize;
 		this.file = file;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	public String getMime() {
+		return mime;
+	}
+
+	public void setMime(String mime) {
+		this.mime = mime;
+	}
+	
 	public String getFilename() {
 		return filename;
 	}
@@ -34,16 +58,17 @@ public class Attachment {
 		this.filesize = filesize;
 	}
 
-	public InputStream getFile() {
+	public Blob getFile() {
 		return file;
 	}
 
-	public void setFile(InputStream file) {
+	public void setFile(Blob file) {
 		this.file = file;
 	}
 
 	@Override
 	public String toString() {
-		return "Attachment [filename=" + filename + ", filesize=" + filesize + ", file=" + file + "]";
+		return "Attachment [category=" + category + ", mime=" + mime + ", filename=" + filename + ", filesize="
+				+ filesize + ", file=" + file + "]";
 	}
 }

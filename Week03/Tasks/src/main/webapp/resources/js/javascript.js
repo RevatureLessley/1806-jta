@@ -19,17 +19,13 @@ function handleFileSelect(evt) {
       // Closure to capture the file information.
       reader.onload = (function(theFile) {
         return function(e) {
-        	console.log(escape(theFile.name));
-        	console.log(e);
-        	console.log(e.size);
-        	console.log(e.type);
-          document.getElementById('list').innerHTML = ['<object data="', e.target.result,
-              '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('fileDisplay').innerHTML = 
+        	  ['<object data="' , e.target.result , '" title="' , 
+        	   escape(theFile.name) , '"/>'].join('');
         };
       })(f);
 
       // Read in the image file as a data URL.
       reader.readAsDataURL(f);
-      console.log(f.size);
     }
 }

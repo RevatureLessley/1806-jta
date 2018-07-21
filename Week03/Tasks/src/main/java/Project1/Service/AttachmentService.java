@@ -10,8 +10,8 @@ public class AttachmentService {
 	private static AttachmentDAOImp adi = new AttachmentDAOImp();
 	
 	public static HashMap<BigInteger, Attachment> 
-		getAttachments(String table, String column, BigInteger foreignKey) {
+		getAttachments(BigInteger foreignKey, String category) {
 		
-		return adi.selectAttachment(table, column, foreignKey);
+		return adi.selectAttachment(foreignKey, category);
 	}
 }

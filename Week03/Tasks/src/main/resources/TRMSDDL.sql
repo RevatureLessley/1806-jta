@@ -1,10 +1,10 @@
 DROP TABLE Approval 
 CASCADE CONSTRAINTS;
-DROP TABLE Approval_Additional_Info 
-CASCADE CONSTRAINTS;
-DROP TABLE Approval_Attachment 
-CASCADE CONSTRAINTS;
 DROP TABLE Approval_Type 
+CASCADE CONSTRAINTS;
+DROP TABLE Attachment 
+CASCADE CONSTRAINTS;
+DROP TABLE Attachment_Category
 CASCADE CONSTRAINTS;
 DROP TABLE Department 
 CASCADE CONSTRAINTS;
@@ -12,24 +12,24 @@ DROP TABLE Employee
 CASCADE CONSTRAINTS;
 DROP TABLE Event 
 CASCADE CONSTRAINTS;
-DROP TABLE Event_Attachment 
-CASCADE CONSTRAINTS;
 DROP TABLE Event_Type 
 CASCADE CONSTRAINTS;
 DROP TABLE Grading_Format 
 CASCADE CONSTRAINTS;
+DROP TABLE MIME_Type 
+CASCADE CONSTRAINTS;
 DROP TABLE Reimbursement 
 CASCADE CONSTRAINTS;
 DROP SEQUENCE app_seq;
-DROP SEQUENCE app_addinf_seq;
-DROP SEQUENCE app_att_seq;
 DROP SEQUENCE app_typ_seq;
+DROP SEQUENCE att_seq;
+DROP SEQUENCE att_cat_seq;
 DROP SEQUENCE dep_seq;
 DROP SEQUENCE emp_seq;
 DROP SEQUENCE eve_seq;
-DROP SEQUENCE eve_att_seq;
 DROP SEQUENCE eve_typ_seq;
 DROP SEQUENCE gra_for_seq;
+DROP SEQUENCE mim_typ_seq;
 DROP SEQUENCE rei_seq;
 
 CREATE TABLE Approval (
@@ -41,28 +41,31 @@ CREATE TABLE Approval (
     app_reason VARCHAR2(4000)
 );
 
-CREATE TABLE Approval_Additional_Info (
-    app_addinf_id NUMBER PRIMARY KEY,
-    app_addinf_approval NUMBER,
-    app_addinf_name VARCHAR2(4000),
-    app_addinf_size NUMBER,
-    app_addinf_file BLOB DEFAULT EMPTY_BLOB()
-);
-
-CREATE TABLE Approval_Attachment (
-    app_att_id NUMBER PRIMARY KEY,
-    app_att_approval NUMBER,
-    app_att_name VARCHAR2(4000),
-    app_att_size NUMBER,
-    app_att_file BLOB DEFAULT EMPTY_BLOB()
-);
-
 CREATE TABLE Approval_Type (
     app_typ_id NUMBER PRIMARY KEY,
     app_typ_value CHAR(20) NOT NULL
         CHECK (app_typ_value IN ('BENEFITS_COORDINATOR', 
                                  'DEPARTMENT_HEAD', 
                                  'DIRECT_SUPERVISOR'))
+);
+
+CREATE TABLE Attachment (
+    att_id NUMBER PRIMARY KEY,
+    att_fk NUMBER,
+    att_category NUMBER,
+    att_mime NUMBER,
+    att_name VARCHAR2(4000),
+    att_size NUMBER,
+    att_file BLOB DEFAULT EMPTY_BLOB()
+);
+
+CREATE TABLE Attachment_Category (
+    att_cat_id NUMBER PRIMARY KEY,
+    att_cat_value VARCHAR2(4000) NOT NULL
+        CHECK (att_cat_value IN ('ADDITIONAL_INFO',
+                                 'APPROVAL',
+                                 'EVENT', 
+                                 'GRADING_FORMAT'))
 );
 
 CREATE TABLE Department (
@@ -93,14 +96,6 @@ CREATE TABLE Event (
     eve_work_missed INTERVAL DAY(9) TO SECOND(0)
 );
 
-CREATE TABLE Event_Attachment (
-    eve_att_id NUMBER PRIMARY KEY,
-    eve_att_event NUMBER,
-    eve_att_name VARCHAR2(4000),
-    eve_att_size NUMBER,
-    eve_att_file BLOB DEFAULT EMPTY_BLOB()
-);
-
 CREATE TABLE Event_Type (
     eve_typ_id NUMBER PRIMARY KEY,
     eve_typ_coverage NUMBER
@@ -117,10 +112,13 @@ CREATE TABLE Grading_Format (
     gra_for_id NUMBER PRIMARY KEY,
     gra_for_confirmed CHAR(1)
         CHECK (gra_for_confirmed IN ('N', 'Y')),
-    gra_for_filename VARCHAR2(4000),
-    gra_for_filesize NUMBER,
-    gra_for_file BLOB DEFAULT EMPTY_BLOB(),
     gra_for_passing_cutoff NUMBER DEFAULT NULL
+);
+
+CREATE TABLE MIME_Type (
+    mim_typ_id NUMBER PRIMARY KEY,
+    mim_typ_extension VARCHAR2(5),
+    mim_typ_value VARCHAR2(4000)
 );
 
 CREATE TABLE Reimbursement (
@@ -147,16 +145,34 @@ FOREIGN KEY (app_typ_id)
 REFERENCES Approval_Type(app_typ_id)
 DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE Approval_Additional_Info   
-ADD CONSTRAINT fk_app_addinf 
-FOREIGN KEY (app_addinf_approval) 
+ALTER TABLE Attachment
+ADD CONSTRAINT fk_att_cat
+FOREIGN KEY (att_fk)
+REFERENCES Attachment_Category(att_cat_id)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Attachment
+ADD CONSTRAINT fk_att_app
+FOREIGN KEY (att_fk)
 REFERENCES Approval(app_id)
 DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE Approval_Attachment    
-ADD CONSTRAINT fk_app_att 
-FOREIGN KEY (app_att_approval) 
-REFERENCES Approval(app_id)
+ALTER TABLE Attachment
+ADD CONSTRAINT fk_att_eve
+FOREIGN KEY (att_fk)
+REFERENCES Event(eve_id)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Attachment
+ADD CONSTRAINT fk_att_gra_for
+FOREIGN KEY (att_fk)
+REFERENCES Grading_Format(gra_for_id)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Attachment
+ADD CONSTRAINT fk_att_mim_typ
+FOREIGN KEY (att_mime)
+REFERENCES MIME_Type(mim_typ_id)
 DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE Employee    
@@ -183,12 +199,6 @@ FOREIGN KEY (eve_typ_id)
 REFERENCES Event_Type(eve_typ_id)
 DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE Event_Attachment    
-ADD CONSTRAINT fk_eve_att 
-FOREIGN KEY (eve_att_event) 
-REFERENCES Event(eve_id)
-DEFERRABLE INITIALLY DEFERRED;
-
 ALTER TABLE Grading_Format    
 ADD CONSTRAINT fk_gra_for_rei 
 FOREIGN KEY (gra_for_id) 
@@ -213,6 +223,18 @@ FOREIGN KEY (rei_id)
 REFERENCES Grading_Format(gra_for_id)
 DEFERRABLE INITIALLY DEFERRED;
 
+CREATE OR REPLACE VIEW Attachment_View AS
+SELECT att_id AS A_AttachmentID,
+       att_fk AS A_AttachmentFK,
+       att_name AS A_AttachmentName,
+       att_size AS A_AttachmentSize,
+       att_cat_value AS A_AttachmentCategory,
+       mim_typ_value AS A_AttachmentMIME,
+       att_file AS A_AttachmentFile
+FROM Attachment 
+INNER JOIN MIME_Type ON att_mime = mim_typ_id
+INNER JOIN Attachment_Category ON att_category = att_cat_id;
+
 CREATE OR REPLACE VIEW Employee_View AS
 SELECT ER.emp_username AS E_Supervisor, 
        EL.emp_available_reimbursement AS E_AvailableReimbursement, 
@@ -227,7 +249,6 @@ SELECT ER.emp_username AS E_Supervisor,
        eve_location AS E_Location, eve_work_missed AS E_WorkTimeMissed,
        ET.eve_typ_coverage AS E_PercentCoverage,
        ET.eve_typ_value AS E_EventType
-       
 FROM Employee EL
 LEFT JOIN Employee ER ON EL.emp_supervisor = ER.emp_id
 LEFT JOIN Reimbursement ON EL.emp_id = rei_emp_id
@@ -250,39 +271,6 @@ BEGIN
 END;
 /
 
-CREATE SEQUENCE app_addinf_seq
-START WITH 1
-INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER app_addinf_tri
-BEFORE INSERT ON Approval_Additional_Info
-FOR EACH ROW
-BEGIN
-    IF :new.app_addinf_id IS NULL THEN
-        SELECT app_addinf_seq.NEXTVAL 
-        INTO :new.app_addinf_id FROM dual;
-    END IF;
-END;
-/
-
-CREATE SEQUENCE app_att_seq
-START WITH 1
-INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER app_att_tri
-BEFORE INSERT ON Approval_Attachment
-FOR EACH ROW
-BEGIN
-    IF :new.app_att_id IS NULL THEN
-        SELECT app_att_seq.NEXTVAL 
-        INTO :new.app_att_id FROM dual;
-    END IF;
-END;
-/
-
-
 CREATE SEQUENCE app_typ_seq
 START WITH 1
 INCREMENT BY 1;
@@ -295,6 +283,38 @@ BEGIN
     IF :new.app_typ_id IS NULL THEN
         SELECT app_typ_seq.NEXTVAL 
         INTO :new.app_typ_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE att_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER att_tri
+BEFORE INSERT ON Attachment
+FOR EACH ROW
+BEGIN
+    IF :new.att_id IS NULL THEN
+        SELECT att_seq.NEXTVAL 
+        INTO :new.att_id FROM dual;
+    END IF;
+END;
+/
+
+CREATE SEQUENCE att_cat_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER att_cat_tri
+BEFORE INSERT ON Attachment_Category
+FOR EACH ROW
+BEGIN
+    IF :new.att_cat_id IS NULL THEN
+        SELECT att_cat_seq.NEXTVAL 
+        INTO :new.att_cat_id FROM dual;
     END IF;
 END;
 /
@@ -347,22 +367,6 @@ BEGIN
 END;
 /
 
-CREATE SEQUENCE eve_att_seq
-START WITH 1
-INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER eve_att_tri
-BEFORE INSERT ON Event_Attachment
-FOR EACH ROW
-BEGIN
-    IF :new.eve_att_id IS NULL THEN
-        SELECT eve_att_seq.NEXTVAL 
-        INTO :new.eve_att_id FROM dual;
-    END IF;
-END;
-/
-
 CREATE SEQUENCE eve_typ_seq
 START WITH 1
 INCREMENT BY 1;
@@ -395,6 +399,22 @@ BEGIN
 END;
 /
 
+CREATE SEQUENCE mim_typ_seq
+START WITH 1
+INCREMENT BY 1;
+/
+
+CREATE OR REPLACE TRIGGER mim_typ_tri
+BEFORE INSERT ON MIME_Type
+FOR EACH ROW
+BEGIN
+    IF :new.mim_typ_id IS NULL THEN
+        SELECT mim_typ_seq.NEXTVAL 
+        INTO :new.mim_typ_id FROM dual;
+    END IF;
+END;
+/
+
 CREATE SEQUENCE rei_seq
 START WITH 1
 INCREMENT BY 1;
@@ -418,6 +438,15 @@ VALUES ('DEPARTMENT_HEAD');
 INSERT INTO Approval_Type(app_typ_value)
 VALUES ('DIRECT_SUPERVISOR');
 
+INSERT INTO Attachment_Category(att_cat_value)
+VALUES('ADDITIONAL_INFO');
+INSERT INTO Attachment_Category(att_cat_value)
+VALUES('APPROVAL');
+INSERT INTO Attachment_Category(att_cat_value)
+VALUES('EVENT');
+INSERT INTO Attachment_Category(att_cat_value)
+VALUES('GRADING_FORMAT');
+
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('CERTIFICATION', 1);
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
@@ -428,6 +457,38 @@ INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('TECHNICAL_TRAINING', 0.3);
 INSERT INTO Event_Type(eve_typ_value, eve_typ_coverage)
 VALUES('UNIVERSITY_COURSE', 0.8);
+
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.doc', 'application/msword');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.docx', 
+       'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.jpg', 'image/jpeg');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.jpeg', 'image/jpeg');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.msg', 'application/vnd.ms-outlook');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.odp', 'application/vnd.oasis.opendocument.presentation');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.odt', 'application/vnd.oasis.opendocument.text');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.png', 'image/png');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.pdf', 'application/pdf');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.ppt', 'application/vnd.ms-powerpoint');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.pptx',
+       'application/vnd.openxmlformats-officedocument.presentationml.presentation');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.txt', 'text/plain');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.xls', 'application/vnd.ms-excel');
+INSERT INTO MIME_Type(mim_typ_extension, mim_typ_value)
+VALUES('.xlsx',
+       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
 CREATE OR REPLACE FUNCTION getEmployee(username IN VARCHAR2)
 RETURN NUMBER
@@ -519,6 +580,73 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE FUNCTION getCategory(cat IN VARCHAR2)
+RETURN NUMBER
+IS
+    catID NUMBER;
+    NONEXISTENT_ATTACH_CATEGORY EXCEPTION;
+    
+    CURSOR cur IS
+    SELECT att_cat_id
+    FROM Attachment_Category
+    WHERE att_cat_value = cat;
+BEGIN
+    OPEN cur;
+    FETCH cur INTO catID;
+    
+    IF cur%NOTFOUND THEN
+      RAISE NONEXISTENT_ATTACH_CATEGORY;
+    END IF;
+    
+    CLOSE cur;
+    
+    RETURN catID;
+END;
+/
+
+CREATE OR REPLACE FUNCTION getMIME(extension IN VARCHAR2)
+RETURN NUMBER
+IS
+    mimID NUMBER;
+    NONEXISTENT_MIME_TYPE EXCEPTION;
+    
+    CURSOR cur IS
+    SELECT mim_typ_id
+    FROM MIME_Type
+    WHERE mim_typ_extension = extension;
+BEGIN
+    OPEN cur;
+    FETCH cur INTO mimID;
+    
+    IF cur%NOTFOUND THEN
+      RAISE NONEXISTENT_MIME_TYPE;
+    END IF;
+    
+    CLOSE cur;
+    
+    RETURN mimID;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertAttachment(cat IN VARCHAR2,
+                                             fk IN NUMBER, 
+                                             filename IN VARCHAR2,
+                                             extension IN VARCHAR2,
+                                             filesize IN NUMBER,
+                                             fil IN BLOB)
+IS
+    catID NUMBER;
+    mimID NUMBER;
+BEGIN
+    catID := getCategory(cat);
+    mimID := getMIME(extension);
+    INSERT INTO Attachment(att_fk, att_category, att_mime, att_name, att_size,
+                           att_file)
+    VALUES (fk, catID, mimID, filename, filesize, fil);
+    COMMIT;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE insertDepartment(department IN VARCHAR2)
 IS
 BEGIN
@@ -560,56 +688,6 @@ CALL insertEmployee('walterx', 'walterx', 'Walter', 'Xia', 'Computer Science',
                     'swilery', 'N');
 --CALL insertEmployee('ryanl', 'ryanl', 'Ryan', 'Lessley', 'Computer Science',
 --                    'bobbertb', 'Y');
-
-CREATE OR REPLACE PROCEDURE insertApprovalAdditionalInfo(info IN NUMBER, 
-                                                         filename IN VARCHAR2,
-                                                         filesize IN NUMBER,
-                                                         fil IN BLOB)
-IS
-BEGIN
-    INSERT INTO Approval_Additional_Info(app_addinf_approval, app_addinf_name,
-                                         app_addinf_size, app_addinf_file)
-    VALUES (info, filename, filesize, fil);
-END;
-/
-
-CREATE OR REPLACE PROCEDURE insertApprovalAttachment(approval IN NUMBER,
-                                                     filename IN VARCHAR2,
-                                                     filesize IN NUMBER,
-                                                     fil IN BLOB)
-IS
-BEGIN
-    INSERT INTO Approval_Attachment (app_att_approval, app_att_name,
-                                     app_att_size, app_att_file)
-    VALUES (approval, filename, filesize, fil);
-END;
-/
-
-CREATE OR REPLACE PROCEDURE insertEventAttachment(event IN NUMBER, 
-                                                  filename IN VARCHAR2,
-                                                  filesize IN NUMBER,
-                                                  fil IN BLOB)
-IS
-BEGIN
-    INSERT INTO Event_Attachment (eve_att_event, eve_att_name, eve_att_size,
-                                  eve_att_file)
-    VALUES (event, filename, filesize, fil);
-END;
-/
-
-CREATE OR REPLACE PROCEDURE updateGradingFormatProof(graforID IN NUMBER, 
-                                                     filename IN VARCHAR2,
-                                                     filesize IN NUMBER,
-                                                     fil IN BLOB)
-IS
-BEGIN
-    UPDATE Grading_Format
-    SET gra_for_filename = filename, 
-        gra_for_filesize = filesize,
-        gra_for_file = fil
-    WHERE gra_for_id = graforID;
-END;
-/
 
 CREATE OR REPLACE PROCEDURE insertEvent(typ IN VARCHAR2, 
                                         cos IN NUMBER, 

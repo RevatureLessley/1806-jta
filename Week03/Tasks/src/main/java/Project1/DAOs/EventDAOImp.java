@@ -1,6 +1,9 @@
 package Project1.DAOs;
 
+import java.math.*;
 import java.sql.*;
+import java.util.HashMap;
+
 import Project1.*;
 import Project1.Beans.*;
 
@@ -19,6 +22,14 @@ public class EventDAOImp implements LogReference {
 							   rs.getString("E_Location"),
 							   rs.getString("E_WorkTimeMissed")
 						 );
+			
+			AttachmentDAOImp adi = new AttachmentDAOImp();
+			HashMap<BigInteger, Attachment> attachments = 
+					adi.selectAttachment(
+							new BigInteger(rs.getString("E_ReimbursementID")),  
+							"EVENT"
+					);
+			event.setAttachments(attachments);
 			
 			return event;
 		}

@@ -46,8 +46,24 @@ function checkUsername() {
 	xhr.send(message);
 }
 
-function displayDetails(reimbursement, i) {
+function displayDetails(reimbursement, r, i) {
 	let event = reimbursement["event"];
+	let files = event["attachments"];
+	let l = "";
+	
+	for(let f in files) {
+		let file = event["attachments"][f];
+		l += "<tr class=\"collapse collapse" + i + "\">" +
+			 	"<td " +
+			 		"class=\"file-link\" " +
+			 		"colspan=\"4\" " +
+			 		"onclick=\"getAttachment(\'EventAttachmentServlet\', " + 
+			 								 r + ", " + f + ")\"" +
+			 	">" + 
+			 		"<p>" + file["filename"] + "</p>" +  
+			 	"</td>" +
+			 "</tr>";
+	}
 	
 	return "<tr>" + 
 		   	"<th>" + event["type"] + "</th>" +
@@ -75,7 +91,7 @@ function displayDetails(reimbursement, i) {
 		   "<tr class=\"collapse collapse" + i + "\">" +
 		   	"<td>Justification:</td>" +
 		   	"<td colspan=\"3\">" + reimbursement["justification"] + "</td>" +
-		   "</tr>" +
+		   "</tr>" + l +
 		   "</tr>";
 }
 
@@ -86,8 +102,8 @@ function displayPastReimbursements(employee) {
 	let reimbursements = employee["reimbursements"];
 	let i = 1;
 	
-	for(r in reimbursements) {
-		list.innerHTML += displayDetails(reimbursements[r], i);
+	for(let r in reimbursements) {
+		list.innerHTML += displayDetails(reimbursements[r], r, i);
 		i++;
 	}
 	
@@ -116,10 +132,11 @@ function displayWelcome() {
 	xhr.send();
 }
 
-function getAttachment() {
-	let servlet = "AttachmentServlet";
+function getAttachment(servlet, r, f) {
 	let xhr = new XMLHttpRequest();
+	let message = "paramr=" + r + "&paramf=" + f;
 	xhr.responseType = "blob";
+	console.log(message);
 	
 	xhr.onreadystatechange = function() {
 
@@ -127,13 +144,13 @@ function getAttachment() {
 			let buffer = xhr.response;
 			
 			if(buffer) {
-				var reader = new FileReader();
+				let reader = new FileReader();
 			      // Closure to capture the file information.
 			      reader.onload = (function(theFile) {
 			    	 
 			        return function(e) {
-			        	console.log(typeof e.target.result);
-			        	document.getElementById('list').innerHTML = ['<object data="', e.target.result,
+			        	document.getElementById('fileDisplay').innerHTML = 
+			        		['<object width=100% height=100% data="', e.target.result,
 			                '" title="', escape(theFile.name), '"/>'].join('');
 			        };
 			      })(buffer);
@@ -144,11 +161,12 @@ function getAttachment() {
 		}
 	}
 	
-	xhr.open("GET", servlet);
-	xhr.send();
+	xhr.open("POST", servlet);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(message);
 }
 
 window.onload = function() {
-	displayWelcome();
-	getAttachment();
+	displayWelcome("EventAttachmentServlet");
+//	getAttachment();
 }

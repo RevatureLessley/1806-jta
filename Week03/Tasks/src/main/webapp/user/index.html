@@ -16,6 +16,9 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
 													bootstrap.min.js">
 		</script>
+		<link 
+			rel="stylesheet" type="text/css" href="./resources/css/style.css"
+		>
 		<script src="./resources/js/ajax.js"></script>
 	</head>
 	<body>
@@ -43,6 +46,9 @@
 					<table class="table">
 						<tbody id="pastReimbursements"></tbody>
 					</table>
+					<div class="embed-responsive embed-responsive-16by9">
+  						<output id="fileDisplay"></output>
+					</div>
 				</div>
 				<div class="col-sm-2">
 					<h4>or</h4>
@@ -52,5 +58,6 @@
 				</div>
 			</div>
 		</div>
+		<!-- <input type="file" id="files" name="files[]" onchange="handleFileSelect(event)" multiple /> -->
 	</body>
 </html>

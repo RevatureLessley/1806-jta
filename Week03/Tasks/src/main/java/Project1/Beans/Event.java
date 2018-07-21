@@ -13,8 +13,8 @@ public class Event {
 	private Timestamp datetime;
 	private String description;
 	private String location;
-	private String workMissed;	//Note to Self: INTERVALDS?
-	private HashMap<String, Attachment> attachments;
+	private String workMissed;
+	private HashMap<BigInteger, Attachment> attachments;
 	
 	/**
 	 * @param type
@@ -89,12 +89,21 @@ public class Event {
 		this.workMissed = workMissed;
 	}
 	
-	public Attachment retrieveAttachment(String name) {
-		return attachments.get(name);
+	public HashMap<BigInteger, Attachment> getAttachments() {
+		return attachments;
 	}
 
-	public Attachment insertAttachment(String name, Attachment attachment) {
-		return attachments.put(name, attachment);
+	public void setAttachments(HashMap<BigInteger, 
+								  Attachment> attachments) {
+		this.attachments = attachments;
+	}
+	
+	public Attachment retrieveAttachment(BigInteger index) {
+		return attachments.get(index);
+	}
+
+	public Attachment insertAttachment(BigInteger index, Attachment attachment) {
+		return attachments.put(index, attachment);
 	}
 	
 	@Override

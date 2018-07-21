@@ -79,12 +79,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AttachmentServlet</display-name>
-    <servlet-name>AttachmentServlet</servlet-name>
-    <servlet-class>Project1.Servlets.AttachmentServlet</servlet-class>
+    <display-name>EventAttachmentServlet</display-name>
+    <servlet-name>EventAttachmentServlet</servlet-name>
+    <servlet-class>Project1.Servlets.EventAttachmentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AttachmentServlet</servlet-name>
-    <url-pattern>/AttachmentServlet</url-pattern>
+    <servlet-name>EventAttachmentServlet</servlet-name>
+    <url-pattern>/EventAttachmentServlet</url-pattern>
   </servlet-mapping>
 </web-app>

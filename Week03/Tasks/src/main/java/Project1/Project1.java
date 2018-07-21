@@ -17,11 +17,20 @@ public class Project1 {
 		AttachmentDAOImp adi = new AttachmentDAOImp();
 		GradingFormatDAOImp gfdi = new GradingFormatDAOImp();
 		rdi.insertReimbursement();
-		adi.insertAttachment("ApprovalAdditionalInfo");
-		adi.insertAttachment("ApprovalAttachment");
-		adi.insertAttachment("EventAttachment");
-		gfdi.updateGradingFormatProof();
-		adi.selectAttachment("Event", "eve_att_event", new BigInteger("1"));
+		adi.insertAttachment("EVENT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf", "970411");
+		adi.insertAttachment("APPROVAL", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf", "970411");
+		adi.insertAttachment("ADDITIONAL_INFO", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf", "970411");
+		adi.insertAttachment("GRADING_FORMAT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Poems.pdf", "970411");
+		adi.insertAttachment("EVENT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Journey to the West Vocabulary.odt", "24044");
+		adi.insertAttachment("APPROVAL", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Journey to the West Vocabulary.odt", "24044");
+		adi.insertAttachment("ADDITIONAL_INFO", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Journey to the West Vocabulary.odt", "24044");
+		adi.insertAttachment("GRADING_FORMAT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\Journey to the West Vocabulary.odt", "24044");
+		adi.insertAttachment("EVENT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\10369913_267485166779577_5573839803579672783_n.jpg", "47906");
+		adi.insertAttachment("APPROVAL", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\10369913_267485166779577_5573839803579672783_n.jpg", "47906");
+		adi.insertAttachment("ADDITIONAL_INFO", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\10369913_267485166779577_5573839803579672783_n.jpg", "47906");
+		adi.insertAttachment("GRADING_FORMAT", "C:\\Users\\Swilery\\Documents\\Walter\\Revature\\FromFS\\10369913_267485166779577_5573839803579672783_n.jpg", "47906");
+//		gfdi.updateGradingFormatProof();
+		adi.selectAttachment(new BigInteger("1"), "EVENT");
 	}
 
 }

@@ -1,0 +1,11 @@
+.file-link {
+	color: #0080ff;
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.file-link:hover, .file-link:active {
+	background-color: #0080ff;
+	color: black;
+    text-shadow: 1px 1px black;
+} 
