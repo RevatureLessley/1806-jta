@@ -17,7 +17,7 @@ public class RFormService {
 			int gradeFormat,
 			int cutoffGrade,
 			int eventTypeId,
-			int eventCost,
+			double eventCost,
 			int supid,
 			String eventname
 		){

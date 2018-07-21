@@ -5,17 +5,34 @@ import java.util.HashMap;
 
 public class EventType {
 	private HashMap<String,ArrayList<Integer>> eventTypeMap;
-
+	private HashMap<Integer,String> eventTypeNameMap;
 	public EventType() {
 		eventTypeMap = new HashMap<>();
+		eventTypeNameMap = new HashMap<>();
 	}
+	
 	public void insertType(String typename,int typeid,int preimb) {
 		ArrayList<Integer> al = new ArrayList<>();
 		al.add(typeid);
 		al.add(preimb);
 		eventTypeMap.put(typename,al);
+		eventTypeNameMap.put(typeid, typename);
 	}
 	
+	/**
+	 * @return the eventTypeNameMap
+	 */
+	public HashMap<Integer, String> getEventTypeNameMap() {
+		return eventTypeNameMap;
+	}
+
+	/**
+	 * @param eventTypeNameMap the eventTypeNameMap to set
+	 */
+	public void setEventTypeNameMap(HashMap<Integer, String> eventTypeNameMap) {
+		this.eventTypeNameMap = eventTypeNameMap;
+	}
+
 	/**
 	 * @return the eventTypeMap
 	 */

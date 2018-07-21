@@ -46,7 +46,7 @@ CREATE TABLE RForm (
     rform_date date NOT NULL,
     place varchar2(100) NOT NULL,
     info varchar2(1000),
-    prop_reim number(6,2), --value from event is used, this is proposed value
+    prop_reim number(6), --value from event is used, this is proposed value
     justification varchar2(500),
     filekey varchar2(100),
     --event related attatchment blobs id
@@ -54,7 +54,7 @@ CREATE TABLE RForm (
     form_closed number(1), --binary, edited by supervisor or benco emp
     app_lvl number(1),
     grade_format number(1) NOT NULL, --0 for presentation 1 for grade
-    cutoff_grade number(6,2) NOT NULL, --defaults to 70 if not specified (can be changed)
+    cutoff_grade number(6) NOT NULL, --defaults to 70 if not specified (can be changed)
     event_type_id number(6) NOT NULL,
     event_cost number(6,2),
     event_name varchar2(100),

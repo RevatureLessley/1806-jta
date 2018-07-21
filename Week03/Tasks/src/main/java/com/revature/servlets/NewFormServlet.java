@@ -52,7 +52,7 @@ public class NewFormServlet extends HttpServlet {
 		int gradeformat =  Integer.parseInt(request.getParameter("gradeformat"));
 		int cutoff = Integer.parseInt(request.getParameter("cutoff"));
 		int eventtype =  Integer.parseInt(request.getParameter("eventtype"));
-		int eventcost =  Integer.parseInt(request.getParameter("eventcost"));
+		double eventcost =  Double.parseDouble(request.getParameter("eventcost"));
 		int empid = ((Employee)session.getAttribute("employee")).getEmpid();
 		int supid = ((Employee)session.getAttribute("employee")).getDirSupId();
 		String eventname = request.getParameter("eventname");

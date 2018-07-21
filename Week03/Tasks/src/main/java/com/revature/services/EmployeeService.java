@@ -70,6 +70,10 @@ public class EmployeeService {
 	public static String getEmpRFormsJSON(int empid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformByEmployeeId(empid);
+		for (RForm form: rforms) {
+			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
+					.get(form.getEventTypeId()));
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		

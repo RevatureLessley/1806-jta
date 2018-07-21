@@ -16,10 +16,31 @@ public class RForm {
 	private int cutoffGrade;
 	private int eventTypeId;
 	private String eventTypeName;
-	private int eventCost;
+	private double eventCost;
 	private int supid;
 	private String eventName;
 	
+	public RForm(int rFormId, int empid, Date rFormDate, String place, String info, int propReim, String justification,
+			String filekey, int timeMissed, int formClosed, int appLvl, int gradeFormat, int cutoffGrade,
+			int eventTypeId, double eventCost, String eventName) {
+		super();
+		this.rFormId = rFormId;
+		this.empid = empid;
+		this.rFormDate = rFormDate;
+		this.place = place;
+		this.info = info;
+		this.propReim = propReim;
+		this.justification = justification;
+		this.filekey = filekey;
+		this.timeMissed = timeMissed;
+		this.formClosed = formClosed;
+		this.appLvl = appLvl;
+		this.gradeFormat = gradeFormat;
+		this.cutoffGrade = cutoffGrade;
+		this.eventTypeId = eventTypeId;
+		this.eventCost = eventCost;
+		this.eventName = eventName;
+	}
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
 		super();
@@ -37,7 +58,7 @@ public class RForm {
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, int timeMissed, int gradeFormat,
-			int cutoffGrade, int eventTypeId, int eventCost, int supid,String eventName) {
+			int cutoffGrade, int eventTypeId, double eventCost, int supid,String eventName) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
@@ -134,13 +155,13 @@ public class RForm {
 	/**
 	 * @return the eventCost
 	 */
-	public int getEventCost() {
+	public double getEventCost() {
 		return eventCost;
 	}
 	/**
 	 * @param eventCost the eventCost to set
 	 */
-	public void setEventCost(int eventCost) {
+	public void setEventCost(double eventCost) {
 		this.eventCost = eventCost;
 	}
 	/**

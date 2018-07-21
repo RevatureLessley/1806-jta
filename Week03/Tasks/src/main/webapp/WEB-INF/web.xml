@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
+  <!-- <servlet>
     <description></description>
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
@@ -19,7 +19,7 @@
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
     <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   <filter>
     <display-name>SecurityFilter</display-name>
     <filter-name>SecurityFilter</filter-name>
@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UploadServlet</servlet-name>
-    <url-pattern>/UploadServlet</url-pattern>
+    <url-pattern>/Upload.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <url-pattern>/Login.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/LogoutServlet</url-pattern>
+    <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SelectEmployeeServlet</servlet-name>
-    <url-pattern>/SelectEmployeeServlet</url-pattern>
+    <url-pattern>/SelectEmployee.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -77,7 +77,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
+    <url-pattern>/Register.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -87,7 +87,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ReimbursementPageServlet</servlet-name>
-    <url-pattern>/ReimbursementPageServlet</url-pattern>
+    <url-pattern>/ReimbursementPage.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -97,7 +97,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>HomePageServlet</servlet-name>
-    <url-pattern>/HomePageServlet</url-pattern>
+    <url-pattern>/HomePage.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -107,7 +107,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>NewFormServlet</servlet-name>
-    <url-pattern>/NewFormServlet</url-pattern>
+    <url-pattern>/NewForm.do</url-pattern>
   </servlet-mapping>
   <error-page>
     <error-code>404</error-code>
@@ -121,6 +121,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>GetReimbursementsServlet</servlet-name>
-    <url-pattern>/GetReimbursementsServlet</url-pattern>
+    <url-pattern>/GetReimbursements.do</url-pattern>
   </servlet-mapping>
 </web-app>

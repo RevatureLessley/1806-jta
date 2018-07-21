@@ -29,7 +29,7 @@ CallableStatement stmt = null;
 			stmt.setInt(8,rform.getGradeFormat());
 			stmt.setInt(9,rform.getCutoffGrade());
 			stmt.setInt(10,rform.getEventTypeId());
-			stmt.setInt(11,rform.getEventCost());
+			stmt.setDouble(11,rform.getEventCost());
 			stmt.setInt(12, rform.getSupid());
 			stmt.setString(13, rform.getEventName());
 
