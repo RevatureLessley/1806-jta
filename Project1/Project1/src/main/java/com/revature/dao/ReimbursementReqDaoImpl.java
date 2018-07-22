@@ -233,4 +233,45 @@ public class ReimbursementReqDaoImpl {
 		
 		return null;
 	}
+	
+	/**
+	 * This function should be called immediately after any change is made to
+	 * the reimbursement request to ensure that the database remains current
+	 * @param req
+	 * @param table
+	 * @return
+	 */
+	public Integer updateReq(ReimbursementReq req, String table)
+	{
+		PreparedStatement stmt = null; 
+				
+		try(Connection conn = Connections.getConnection())
+		{
+			String sql = "Update " + table + " set emp_id = ?, event_id = ?, amnt_req = ?, "
+						+ "ds_approve = ?, ds_approve_date = ?, dh_approve =?, dh_approve_date = ?, bc_approve = ?, "
+						+ "bc_approve_date = ?, exceed_amount_exception = ?, WHERE reimbursement_id=?";
+					stmt = conn.prepareStatement(sql);
+					
+					stmt.setInt(1, req.getReimbursementId());
+					stmt.setInt(2, req.getEmpId());
+					stmt.setInt(3,  req.getEventId());
+					stmt.setFloat(4, req.getAmountReq());
+					stmt.setString(5, req.isDsApprove() == true? "yes":"no");
+					stmt.setDate(6, req.getDsApproveDate());
+					stmt.setString(7, req.isDhApprove() == true? "yes":"no");
+					stmt.setDate(8, req.getDhApproveDate());
+					stmt.setString(9, req.isBcApprove() == true? "yes":"no");
+					stmt.setDate(10, req.getBcApproveDate());
+					stmt.setString(11, req.isExceedAmountApproved() == true? "yes":"no");
+					
+					return stmt.executeUpdate(); //Returns amount rows effected;
+					
+				}catch(SQLException e){
+					e.printStackTrace();
+				}finally{
+					close(stmt);
+				}
+		System.out.println("Update is a success!");
+				return 0;
+	}
 }
