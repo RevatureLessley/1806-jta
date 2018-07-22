@@ -40,9 +40,13 @@ function getCutoff() {
 	div.innerHTML = "";
 	let format = document.getElementById("grading").value;
 	
-	if(format == "Passing Grade") {
-		console.log("Displaying cutoff.");
-		div.innerHTML = "<br><label for=\"cutoff\">Passing Grade:</label>" + 
+	if(format == "Presentation") {
+		div.innerHTML = "";
+	}
+	
+	else {
+		div.innerHTML = "<br>" +
+						"<label for=\"cutoff\">Passing Grade:</label>" + 
 						"<input " +  
 							"class=\"form-control\" id=\"cutoff\" " +
 							"name=\"cutoff\" type=\"number\" min=\"0\" " +

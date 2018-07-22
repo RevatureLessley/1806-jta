@@ -108,4 +108,14 @@
     <servlet-name>InitializerServlet</servlet-name>
     <url-pattern>/InitializerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementServlet</display-name>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <servlet-class>Project1.Servlets.ReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <url-pattern>/ReimbursementServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
