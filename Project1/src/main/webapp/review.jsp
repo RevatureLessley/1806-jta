@@ -5,7 +5,7 @@
 <%@page import="trms.dao.ApplicationFormDAOImpl" %>
 <%@page import="trms.beans.ApplicationForm" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+	<form method="post" action="Review">
     <c:if test="${not empty selectedForm}">
 	<%  String formUUID = request.getParameter("form");
 	ApplicationFormDAO applicationFormDAO = new ApplicationFormDAOImpl();
@@ -45,6 +45,8 @@
 		<input type="radio" id="deny" name="supervisorApproval" value="NO" required/><br/>
 		<button>update decision</button>
 	<% } %>
+	<input type="submit" value="update">
+	</form>
 	General comments: <textarea cols="90" rows="25" name="formComments" id="formComments" readonly><%=formComments %></textarea><br/>
 	<hr>
 	Benefits Coordinator: <textarea cols="90" rows="25" name="benCoComments" id="benCoComments" readonly><%=benCoComments %></textarea><br/>

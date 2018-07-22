@@ -60,4 +60,14 @@
     <servlet-name>Pending</servlet-name>
     <url-pattern>/Pending</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Review</display-name>
+    <servlet-name>Review</servlet-name>
+    <servlet-class>trms.servlet.Review</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Review</servlet-name>
+    <url-pattern>/Review</url-pattern>
+  </servlet-mapping>
 </web-app>
