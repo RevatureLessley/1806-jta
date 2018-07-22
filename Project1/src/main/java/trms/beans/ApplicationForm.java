@@ -11,7 +11,9 @@ public class ApplicationForm implements Form {
 	private String firstName;
 	private String lastName;
 	private String generalStatus;
+	private String benCoComments;
 	private String supervisorComments;
+	private String departmentHeadComments;
 	private String formComments;
 	private boolean isCompletedWithSatisfaction;
 	private boolean isFormClosed;
@@ -34,6 +36,9 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setGeneralStatus(String generalStatus) {
+		if (generalStatus == null) {
+			this.generalStatus = "Not filled.";
+		}
 		this.generalStatus = generalStatus;
 	}
 
@@ -42,6 +47,9 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setSupervisorComments(String supervisorComments) {
+		if (supervisorComments == null) {
+			this.supervisorComments = "Not filled.";
+		}
 		this.supervisorComments = supervisorComments;
 	}
 
@@ -50,6 +58,9 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setFormComments(String formComments) {
+		if (formComments == null) {
+			this.formComments = "Not filled.";
+		}
 		this.formComments = formComments;
 	}
 
@@ -114,6 +125,11 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setDateFormWasClosed(Date dateFormWasClosed) {
+		if (dateFormWasClosed == null) {
+			Date fillDate = new Date("1999-01-01");
+			this.dateFormWasClosed = fillDate;
+			return;
+		}
 		this.dateFormWasClosed = dateFormWasClosed;
 	}
 
@@ -122,6 +138,11 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setDepartmentHeadDecisionDate(Date departmentHeadDecisionDate) {
+		if (departmentHeadDecisionDate == null) {
+			Date fillDate = new Date("1999-01-01");
+			this.departmentHeadDecisionDate = fillDate;
+			return;
+		}
 		this.departmentHeadDecisionDate = departmentHeadDecisionDate;
 	}
 
@@ -130,6 +151,11 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setBenefitsCoordinatorDecisionDate(Date benefitsCoordinatorDecisionDate) {
+		if (benefitsCoordinatorDecisionDate == null) {
+			Date fillDate = new Date("1999-01-01");
+			this.benefitsCoordinatorDecisionDate = fillDate;
+			return;
+		}
 		this.benefitsCoordinatorDecisionDate = benefitsCoordinatorDecisionDate;
 	}
 
@@ -138,6 +164,11 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setDirectSupervisorDecisionDate(Date directSupervisorDecisionDate) {
+		if (directSupervisorDecisionDate == null) {
+			Date fillDate = new Date("1999-01-01");
+			this.directSupervisorDecisionDate = fillDate;
+			return;
+		}
 		this.directSupervisorDecisionDate = directSupervisorDecisionDate;
 	}
 	
@@ -148,6 +179,10 @@ public class ApplicationForm implements Form {
 
 	@Override
 	public void setFormUUID(String uuid) {
+		if (uuid == null) {
+			this.formUUID = "Not filled.";
+			return;
+		}
 		this.formUUID = uuid;
 
 	}
@@ -159,6 +194,10 @@ public class ApplicationForm implements Form {
 
 	@Override
 	public void setEmployeeUUID(String uuid) {
+		if (uuid == null) {
+			this.employeeUUID = "Not filled.";
+			return;
+		}
 		this.employeeUUID = uuid;
 	}
 
@@ -169,6 +208,10 @@ public class ApplicationForm implements Form {
 
 	@Override
 	public void setFirstName(String firstName) {
+		if (firstName == null) {
+			this.firstName = "Not filled.";
+			return;
+		}
 		this.firstName = firstName;
 	}
 
@@ -179,6 +222,10 @@ public class ApplicationForm implements Form {
 	
 	@Override
 	public void setLastName(String lastName) {
+		if (lastName == null) {
+			this.lastName = "Not filled.";
+			return;
+		}
 		this.lastName = lastName;
 	}
 
@@ -187,6 +234,10 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setDirectSupervisorUUID(String directSupervisorUUID) {
+		if (directSupervisorUUID == null) {
+			this.directSupervisorUUID = "Not filled.";
+			return;
+		}
 		this.directSupervisorUUID = directSupervisorUUID;
 	}
 
@@ -195,6 +246,10 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setDepartmentHeadUUID(String departmentHeadUUID) {
+		if (departmentHeadUUID == null) {
+			this.departmentHeadUUID = "Not filled.";
+			return;
+		}
 		this.departmentHeadUUID = departmentHeadUUID;
 	}
 
@@ -203,12 +258,43 @@ public class ApplicationForm implements Form {
 	}
 
 	public void setBenefitsCoordinatorUUID(String benefitsCoordinatorUUID) {
+		if (benefitsCoordinatorUUID == null) {
+			this.benefitsCoordinatorUUID = "Not filled.";
+			return;
+		}
 		this.benefitsCoordinatorUUID = benefitsCoordinatorUUID;
 	}
 
 	@Override
 	public void appendFormComments(String comment) {
+		if (comment == null) {
+			return;
+		}
 		this.formComments += "\n" + comment;
+	}
+
+	public String getBenCoComments() {
+		return benCoComments;
+	}
+
+	public void setBenCoComments(String benCoComments) {
+		if (benCoComments == null) {
+			this.benCoComments = "Not filled.";
+			return;
+		}
+		this.benCoComments = benCoComments;
+	}
+
+	public String getDepartmentHeadComments() {
+		return departmentHeadComments;
+	}
+
+	public void setDepartmentHeadComments(String departmentHeadComments) {
+		if (departmentHeadComments == null) {
+			this.departmentHeadComments = "Not filled.";
+			return;
+		}
+		this.departmentHeadComments = departmentHeadComments;
 	}
 
 	@Override
@@ -216,7 +302,8 @@ public class ApplicationForm implements Form {
 		return "ApplicationForm [formUUID=" + formUUID + ", employeeUUID=" + employeeUUID + ", directSupervisorUUID="
 				+ directSupervisorUUID + ", departmentHeadUUID=" + departmentHeadUUID + ", benefitsCoordinatorUUID="
 				+ benefitsCoordinatorUUID + ", firstName=" + firstName + ", lastName=" + lastName + ", generalStatus="
-				+ generalStatus + ", supervisorComments=" + supervisorComments + ", formComments=" + formComments
+				+ generalStatus + ", benCoComments=" + benCoComments + ", supervisorComments=" + supervisorComments
+				+ ", departmentHeadComments=" + departmentHeadComments + ", formComments=" + formComments
 				+ ", isCompletedWithSatisfaction=" + isCompletedWithSatisfaction + ", isFormClosed=" + isFormClosed
 				+ ", isPresentationToManagementRequired=" + isPresentationToManagementRequired
 				+ ", isSupervisorDecisionMade=" + isSupervisorDecisionMade + ", isBenCoDecisionMade="
@@ -226,5 +313,5 @@ public class ApplicationForm implements Form {
 				+ benefitsCoordinatorDecisionDate + ", directSupervisorDecisionDate=" + directSupervisorDecisionDate
 				+ "]";
 	}
-	
+
 }

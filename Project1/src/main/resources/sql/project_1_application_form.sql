@@ -1,6 +1,7 @@
 -- formUUID
 create or replace procedure newApplicationForm(formUUID in varchar2,
-                                               employeeUUID in varchar2)
+                                               employeeUUID in varchar2,
+                                               formComments in varchar2)
 is
     v_current_date date;
 begin
@@ -10,7 +11,7 @@ begin
     benco_comments, supervisor_decision, supervisor_decision_date, supervisor_comments, department_head_decision,
     department_head_decision_date, department_head_comments, form_closed_date, present_to_management_required,
     completed_with_satisfaction)
-    values (formUUID, employeeUUID, v_current_date, null, 'Pending', null, null, null, null, null,
+    values (formUUID, employeeUUID, v_current_date, formComments, 'Pending', null, null, null, null, null,
     null, null, null, null, null, null, null, null, null, null);
     commit;
 end;
@@ -21,6 +22,14 @@ create or replace procedure selectForm(formUUID in varchar2,
 is
 begin
     open resultCursor for select * from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure selectFormWithUserUUID(userUUID in varchar2,
+                                                   resultCursor out sys_refcursor)
+is
+begin
+    open resultCursor for select * from project_1_reimbursement_form where employee_uuid = userUUID;
 end;
 /
 

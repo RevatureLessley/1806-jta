@@ -8,6 +8,7 @@ import trms.beans.ApplicationForm;
 public interface ApplicationFormDAO {
 	public List<ApplicationForm> getAllForms();
 	public ApplicationForm getApplicationForm(String formUUID);
+	public List<ApplicationForm> getUserApplicationForms(String userUUID);
 	public String getEmployeeUUID(String formUUID);
 	public boolean updateEmployeeUUID(String formUUID, String employeeUUID);
 	public String getDirectSupervisorUUID(String formUUID);
@@ -41,4 +42,5 @@ public interface ApplicationFormDAO {
 	public boolean updateDepartmentHeadDecision(String formUUID, String decision);
 	public boolean updateBenefitsCoordinatorDecision(String formUUID, String decision);
 	public boolean updateSupervisorDecision(String formUUID, String decision);
+	public boolean submitNewApplicationForm(String formUUID, String employeeUUID, String formComments);
 }

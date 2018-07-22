@@ -215,6 +215,8 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			testUser.setLoginPassword("test");
 			
 			UserDAO userDAO = new UserDAOImpl();
+			int usersFound = userDAO.getAllUsers().size();
+			System.out.println(usersFound + " users were found.");
 		if (userDAO.getUserByUsername(testUser.getUsername()) == null) {
 			System.out.println("No user found.");
 			System.out.println("Adding test user.");

@@ -20,11 +20,11 @@
     <servlet-class>trms.servlet.Register</servlet-class>
   </servlet>
   <servlet>
-  	<display-name>Login</display-name>
-  	<servlet-name>Login</servlet-name>
-  	<servlet-class>trms.servlet.Login</servlet-class>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>trms.servlet.Login</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>Logout</display-name>
     <servlet-name>Logout</servlet-name>
@@ -43,11 +43,21 @@
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>Login</servlet-name>
-  	<url-pattern>/Login</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Pending</display-name>
+    <servlet-name>Pending</servlet-name>
+    <servlet-class>trms.servlet.Pending</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pending</servlet-name>
+    <url-pattern>/Pending</url-pattern>
   </servlet-mapping>
 </web-app>

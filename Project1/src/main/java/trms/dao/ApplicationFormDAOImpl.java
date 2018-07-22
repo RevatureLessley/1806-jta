@@ -371,6 +371,10 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		
 		String result = callableStatement.getString(2);
 		
+		if (result == null) {
+			return false;
+		}
+		
 		if (result.equals("YES")){
 			return true;
 		} else if (result.equals("NO")) {
@@ -669,5 +673,66 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		System.out.println("getAllForms() returned a list the length of " + forms.size());
 		System.out.println("Form UUID: " + formUUID);
 		System.out.println(appForm.toString());
+	}
+
+	@Override
+	public boolean submitNewApplicationForm(String formUUID, String employeeUUID, String formComments) {
+		
+		try {
+			java.sql.Connection connection = this.getConnection();
+			CallableStatement callableStatement = connection.prepareCall("{call newApplicationForm(?,?,?)}");
+			callableStatement.setString(1, formUUID);
+			callableStatement.setString(2, employeeUUID);
+			callableStatement.setString(3, formComments);
+			callableStatement.execute();
+			
+			return true;
+		} catch (SQLException sqle) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<ApplicationForm> getUserApplicationForms(String userUUID) {
+		List<ApplicationForm> forms = new ArrayList<ApplicationForm>();
+		try {
+			
+			java.sql.Connection connection = this.getConnection();
+			CallableStatement callableStatement = connection.prepareCall("{call selectFormWithUserUUID(?,?)}");
+			callableStatement.setString(1, userUUID);
+			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+			callableStatement.execute();
+			
+			ResultSet rs = (ResultSet) callableStatement.getObject(2);
+			while (rs.next()) {
+				ApplicationForm form = new ApplicationForm();
+				form.setFirstName(this.getEmployeeFirstNameFromForm(rs.getString("form_uuid")));
+				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
+				form.setFormUUID(rs.getString("form_uuid"));
+				form.setEmployeeUUID(rs.getString("employee_uuid"));
+				form.setDirectSupervisorUUID(rs.getString("supervisor_uuid"));
+				form.setDepartmentHeadUUID(rs.getString("department_head_uuid"));
+				form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
+				form.setGeneralStatus(rs.getString("status"));
+				form.setSupervisorComments(rs.getString("supervisor_comments"));
+				form.setFormComments(rs.getString("form_comments"));
+				form.setCompletedWithSatisfaction(this.getCompletedWithSatisfaction(rs.getString("form_uuid")));
+				form.setFormClosed(this.isFormClosed(rs.getString("form_uuid")));
+				form.setPresentationToManagementRequired(this.isPresentationRequired(rs.getString("form_uuid")));
+				form.setSupervisorDecisionMade(this.hasSupervisorMadeADecision(rs.getString("form_uuid")));
+				form.setBenCoDecisionMade(this.hasBenefitsCoordinatorMadeADecision(rs.getString("form_uuid")));
+				form.setDepartmentHeadDecisionMade(this.hasDepartmentHeadMadeADecision(rs.getString("form_uuid")));
+				form.setFormCreationDate(this.getFormCreationDate(rs.getString("form_uuid")));
+				form.setDateFormWasClosed(this.getFormClosedDate(rs.getString("form_uuid")));
+				form.setDepartmentHeadDecisionDate(this.getDepartmentHeadDecisionDate(rs.getString("form_uuid")));
+				form.setBenefitsCoordinatorDecisionDate(this.getBenefitsCoordinatorDecisionDate(rs.getString("form_uuid")));
+				form.setDirectSupervisorDecisionDate(this.getSupervisorDecisionDate(rs.getString("form_uuid")));
+				
+				forms.add(form);
+			}
+			return forms;
+		} catch (SQLException sqle) {
+			return forms;
+		}
 	}
 }

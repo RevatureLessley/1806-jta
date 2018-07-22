@@ -8,8 +8,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<!--  <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 	<title>Tuition Reimbursement Management System</title>
 </head>
 <body id="page-top" class="index">
@@ -56,7 +58,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tuition Reimbursement Forms<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="application.jsp">Start a new form</a></li>
-					      <li><a href="pending.jsp">View pending forms</a></li>
+					      <li><a href="Pending">View pending forms</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

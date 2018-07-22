@@ -20,6 +20,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
+import trms.dao.ApplicationFormDAO;
+import trms.dao.ApplicationFormDAOImpl;
 import trms.dao.UserDAO;
 import trms.dao.UserDAOImpl;
 
@@ -47,8 +49,10 @@ public class ApplicationForm extends HttpServlet {
 			}
 		}
 		UserDAO userDAO = new UserDAOImpl();
+		ApplicationFormDAO applicationFormDAO = new ApplicationFormDAOImpl();
 		String formUUID = String.valueOf(UUID.randomUUID());
 		String employeeUUID = userDAO.getUserUUIDByUsername(username);
+		
 		// provide employee UUID
 		// generate form UUID
 		// for each attachment, 
@@ -206,7 +210,7 @@ public class ApplicationForm extends HttpServlet {
 		} catch (IOException io) {
 			io.printStackTrace();
 		}
-		
+		applicationFormDAO.submitNewApplicationForm(formUUID, employeeUUID, formComments.toString());
 	    stringBuilder.append("</ul>\n" +    "</body>" + "</html>");
 	    out.println(stringBuilder);
 	    out.println(formComments.toString());
