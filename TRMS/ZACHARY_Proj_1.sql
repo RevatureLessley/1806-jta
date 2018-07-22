@@ -119,13 +119,15 @@ SELECT * FROM Employee;
 -----------------------------------------------------------------------------------------------
 Drop VIEW V_test;
 CREATE VIEW V_Test
-AS SELECT * 
+AS 
+SELECT *
 FROM ReimbursementForm;
+
 /
 
 Select * FROM V_Test;
 
 
 SELECT * FROM EMPLOYEE;
-SELECT * FROM REIMBURSEMENTFORM;
+SELECT * FROM ReimbursementForm;
 commit;

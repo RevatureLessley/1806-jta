@@ -24,13 +24,13 @@ import com.revature.util.HtmlTemplates;
 /**
  * Servlet implementation class updateReimbursementFormServlet
  */
-public class updateReimbursementFormServlet extends HttpServlet {
+public class updateReimbursementFormServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateReimbursementFormServlet() {
+    public updateReimbursementFormServlet2() {
         super();
     }
 
@@ -40,7 +40,7 @@ public class updateReimbursementFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		if(ReimbursementFormService.updateStatusBenCo(request)) {
+		if(ReimbursementFormService.updateStatusDepoHead(request)) {
 			out.println("<h3 style='color:green'>Clam Update</h3>");
 		}else{
 			out.println("Employee already exist please try again ");

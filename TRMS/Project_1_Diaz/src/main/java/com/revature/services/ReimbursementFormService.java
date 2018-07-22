@@ -72,16 +72,46 @@ public class ReimbursementFormService {
 	}
 	public static boolean updateStatusBenCo(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		ReimbursementFormDao rfd = new ReimbursementFormDaoImpl();
-		List<ReimbursementForm> rfs = rfd.selectAllReimbursementForm();
 		ReimbursementFormDaoImpl rfi = new ReimbursementFormDaoImpl();
 		ReimbursementForm rf = new ReimbursementForm();
+		
 		rf = new ReimbursementForm(
 				Integer.parseInt(request.getParameter("Rf_Id")),
 				request.getParameter("Form_Status3")
 				);	
 		
 		rfi.updateReimbursementForm(rf);
+		return true;
+		
+	}
+	public static boolean updateStatusDepoHead(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		ReimbursementFormDaoImpl rfi = new ReimbursementFormDaoImpl();
+		ReimbursementForm rf = new ReimbursementForm();
+		
+		rf = new ReimbursementForm(
+				Integer.parseInt(request.getParameter("Rf_Id")),
+				request.getParameter("Form_Status2"),
+				request.getParameter("Event_Type")
+				);	
+		
+		rfi.updateReimbursementForm2(rf);
+		return true;
+		
+	}
+	public static boolean updateStatusAdmin(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		ReimbursementFormDaoImpl rfi = new ReimbursementFormDaoImpl();
+		ReimbursementForm rf = new ReimbursementForm();
+		
+		rf = new ReimbursementForm(
+				Integer.parseInt(request.getParameter("Rf_Id")),
+				request.getParameter("FORM_STATUS"),
+				request.getParameter("Event_Type"),
+				request.getParameter("Event_Location")
+				);	
+		
+		rfi.updateReimbursementForm3(rf);
 		return true;
 		
 	}
