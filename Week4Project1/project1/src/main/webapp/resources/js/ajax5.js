@@ -37,31 +37,33 @@ function getReimbursements()
 				let td4t = document.createTextNode(data[index]["eventLocation"]);
 				let td5t = document.createTextNode(data[index]["eventCost"]);
 				
-				let td6t = document.createElement('button');
-				let att1 = document.createAttribute('type');
-				att1.value = 'submit';
-				let att2 = document.createAttribute('value');
-				att2.value = 'ApproveServlet';
-				let att3 = document.createAttribute('onclick');
-				att3.value = 'form.action="ApproveServlet"';
-				td6t.innerHTML='&#10003;';
+				var approveForm = document.createElement("form");
+				approveForm.setAttribute('method',"post");
+				approveForm.setAttribute('action',"ApproveServlet");
 				
-				let td7t = document.createElement('button');
-				let att6 = document.createAttribute('type');
-				att6.value = 'submit';
-				let att7 = document.createAttribute('value');
-				att7.value = 'DeclineServlet';
-				let att8 = document.createAttribute('onclick');
-				att8.value = 'form.action="DeclineServlet"';
-				td7t.innerHTML='&#10005;';
+				var approveSubmit = document.createElement("input"); //input element, Submit button
+				approveSubmit.setAttribute('type',"submit");
+				approveSubmit.setAttribute('value',"approve");
+				
+				approveForm.appendChild(approveSubmit);
+				
+				var declineForm = document.createElement("form");
+				declineForm.setAttribute('method',"post");
+				declineForm.setAttribute('action',"DeclineServlet");
+				
+				var declineSubmit = document.createElement("input"); //input element, Submit button
+				declineSubmit.setAttribute('type',"submit");
+				declineSubmit.setAttribute('value',"decline");
+				
+				declineForm.appendChild(declineSubmit);
 				
 				td1.appendChild(td1t);
 				td2.appendChild(td2t);
 				td3.appendChild(td3t);
 				td4.appendChild(td4t);
 				td5.appendChild(td5t);
-				td6.appendChild(td6t);
-				td7.appendChild(td7t);
+				td6.appendChild(approveForm);
+				td7.appendChild(declineForm);
 				
 				row.appendChild(td1);
 				row.appendChild(td2);
