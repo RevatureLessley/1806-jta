@@ -68,4 +68,14 @@
     <servlet-name>GetReimbursements</servlet-name>
     <url-pattern>/GetReimbursements</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApprovedReimbursements</display-name>
+    <servlet-name>ApprovedReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.ApprovedReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApprovedReimbursements</servlet-name>
+    <url-pattern>/ApprovedReimbursements</url-pattern>
+  </servlet-mapping>
 </web-app>

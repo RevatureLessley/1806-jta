@@ -181,7 +181,7 @@ VALUES (null, null, null);
 --SELECT * FROM reimbursement;
 
 INSERT INTO employee
-VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 5);
+VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 500, 5);
 INSERT INTO employee
 VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 1000, 4);
 INSERT INTO employee
@@ -190,8 +190,16 @@ INSERT INTO employee
 VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 2);
 INSERT INTO employee
 VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 1);
---INSERT INTO reimbursement
---VALUES (null, '05-JAN-2018', '15:00', 'Arlington, TX', 'learn stuff', 100, 'gotta learn', 0, 0, 1, 5, 2, null, 0);
+INSERT INTO reimbursement
+VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'Im gonna get declined', 100, 'get declined', 0, 0, 1, 5, 1, null, 0);
+INSERT INTO reimbursement
+VALUES (null, '02-FEB-2018', '01:00', 'Arlington, TX', 'I need a supervisor', 100, 'need Supervisor approval', 0, 0, 1, 4, 2, null, 1);
+INSERT INTO reimbursement
+VALUES (null, '03-MAR-2018', '02:00', 'Arlington, TX', 'I need a department head', 100, 'need DepHead approval', 0, 0, 1, 3, 3, null, 2);
+INSERT INTO reimbursement
+VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'I need a BenCo', 100, 'need BenCo approval', 0, 0, 1, 2, 1, null, 3);
+INSERT INTO reimbursement
+VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 1, 1, 2, null, 4);
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -269,3 +277,4 @@ COMMIT;
 --ON reimbursement.emp_id = employee.emp_id
 --WHERE reimbursement.emp_id = 1;
 --SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = 1 AND reimbursement.approval_id = 1;
+--SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = 1 AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3);

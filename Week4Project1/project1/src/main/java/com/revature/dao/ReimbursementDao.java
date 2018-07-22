@@ -80,7 +80,48 @@ public class ReimbursementDao
 		ResultSet rs = null;
 		List<Reimbursement> reims = new ArrayList<>();
 		
-		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND reimbursement.approval_id = 1";
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3)";
+		
+		try(Connection conn = Connections.getConnection()){
+			System.out.println("INSIDE Connection loop in ReimbursementDao");
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Reimbursement reim = new Reimbursement(
+							rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getInt(5)
+						);
+				System.out.println("NEW REIMBURSEMENT ADDED");
+				System.out.println("new reim toString: " + reim);
+				reims.add(reim);
+				System.out.println("ADDED reim TO reims");
+				System.out.println("new reims:" + reims);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return reims;
+	}
+	
+	public List<Reimbursement> selectApprovedReimbursementInfo(String accountname)
+	{
+		System.out.println("inside selectReimbursementInfo inside ReimbursementDao");
+		EmployeeDao ed = new EmployeeDao();
+		Integer empId = ed.selectEmpIdByAccountName(accountname);
+		System.out.println("empId in selectReimbursementInfo inside ReimbursementDao: " + empId);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Reimbursement> reims = new ArrayList<>();
+		
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND reimbursement.approval_id = 4";
 		
 		try(Connection conn = Connections.getConnection()){
 			System.out.println("INSIDE Connection loop in ReimbursementDao");
