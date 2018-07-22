@@ -166,8 +166,24 @@ function getAttachment(servlet, r, f) {
 	xhr.send(message);
 }
 
-function checkEventAttachments() {
+function checkAttachment(fil, extensions) {
+
+	for(let e in extensions) {
+			let ext = extensions[e][0];
+			
+			if(fil == ext) {
+				return true;
+			}
+	}
+	
+	return false;
+}
+
+function checkEventAttachments(eveAtts) {
 	let servlet = "MIMEServlet";
+	let div = document.getElementById("afterEventAttachments");
+	div.innerHTML = "";
+	let files = eveAtts.target.files;
 	let xhr = new XMLHttpRequest();
 	
 	xhr.onreadystatechange = function() {
@@ -175,7 +191,21 @@ function checkEventAttachments() {
 		if(xhr.readyState == 4) {
 			
 			let extensions = JSON.parse(xhr.response);
-			console.log(extensions);
+			
+			for(let f in files) {
+				let name = files[f].name;
+				
+				if(name != undefined) {
+					let fil = "." + name.split(".")[1];
+					
+					if(fil != ".undefined") {
+						if(!checkAttachment(fil, extensions)) {
+							div.innerHTML = 
+								fil + " file extensions not supported.";
+						}
+					}
+				}
+			}
 		}
 	}
 

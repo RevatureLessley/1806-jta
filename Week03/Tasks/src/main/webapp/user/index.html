@@ -136,7 +136,7 @@
 							<input 
 								class="form-control" id="eventAttachments"
 								name="eventAttachments" type="file" 
-								onchange="checkEventAttachments()" multiple
+								onchange="checkEventAttachments(event)" multiple
 							>
 							<p id="afterEventAttachments" style="color:red"></p>
 						</div>
@@ -144,14 +144,55 @@
 							<label for="approvalAttachments">
 								Already Approved Attachments:
 							</label>
-							<select 
+							<!-- <select 
 								class="form-control" id="approvalAttachments" 
 								name="approvalAttachments" onblur="displayFileInput()"
 							>
 								<option>DIRECT_SUPERVISOR</option>
 								<option>DEPARTMENT_HEAD</option>
 								<option>BENFITS_COORDINATOR</option>
-							</select>
+							</select> -->
+							<p id="beforeApprovalType" style="color:red"></p>
+								<ul style="list-style-type: none">
+									<li>
+										<label for="benCo">
+												DIRECT_SUPERVISOR
+										</label> 
+										<input 
+											type="checkbox" 
+											id="directSupervisor" 
+											name="benCo" 
+											value="DIRECT_SUPERVISOR"
+										>
+									</li>
+									<li>
+										<label for="benCo">
+												DEPARTMENT_HEAD
+										</label> 
+										<input 
+											type="checkbox" id="departmentHead"
+											name="benCo" 
+											value="DEPARTMENT_HEAD"
+										>
+									</li>
+									<li>
+										<label for="benCo">
+												BENEFITS_COORDINATOR
+										</label> 
+										<input 
+											type="checkbox" 
+											id="benefitsCoordinator" 
+											name="benCo" 
+											value="BENEFITS_COORDINATOR"
+										>
+									</li>
+								</ul>
+							<input 
+							class="form-control" id="approvalAttachments"
+								name="approvalAttachments" type="file" 
+								onchange="checkApprovalAttachments(event)" 
+								multiple
+							>
 							<p id="afterApprovalType" style="color:red"></p>
 						</div>
 						<button class="btn btn-primary" type="submit">

@@ -1,3 +1,15 @@
+function checkApprovalAttachments() {
+	let div = document.getElementById("beforeApprovalType");
+	div.innerHTML = "";
+	let b = document.getElementById("directSupervisor").checked;
+	let c = document.getElementById("departmentHead").checked;
+	let d = document.getElementById("benefitsCoordinator").checked;
+	
+	if(!(b || c || d)) {
+		div.innerHTML = "At least one of the checkboxes must be checked.";
+	}
+}
+
 function checkDatetime() {
 	let div = document.getElementById("beforeDatetime");
 	div.innerHTML = "";
