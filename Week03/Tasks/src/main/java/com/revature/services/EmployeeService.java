@@ -73,6 +73,8 @@ public class EmployeeService {
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
+			form.setEmpName(empDao.selectEmployeeById(form.getEmpid()).getFirstN()
+					+ " " + empDao.selectEmployeeById(form.getEmpid()).getLastN());
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
@@ -84,4 +86,26 @@ public class EmployeeService {
 		}
 		return json;
 	}
+	
+	public static String getSupRFormsJSON(int supid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<RForm> rforms = empDao.selectRformBySupId(supid);
+		for (RForm form: rforms) {
+			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
+					.get(form.getEventTypeId()));
+			form.setEmpName(empDao.selectEmployeeById(form.getEmpid()).getFirstN()
+					+ " " + empDao.selectEmployeeById(form.getEmpid()).getLastN());
+			form.setIsSup(1);
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try {
+			json = mapper.writeValueAsString(rforms);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
 }

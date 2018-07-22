@@ -9,17 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <!-- <servlet>
-    <description></description>
-    <display-name>FrontController</display-name>
-    <servlet-name>FrontController</servlet-name>
-    <servlet-class>com.revature.servlets.FrontController</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping> -->
   <filter>
     <display-name>SecurityFilter</display-name>
     <filter-name>SecurityFilter</filter-name>
@@ -122,5 +111,15 @@
   <servlet-mapping>
     <servlet-name>GetReimbursementsServlet</servlet-name>
     <url-pattern>/GetReimbursements.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSupReimbersementsServlet</display-name>
+    <servlet-name>GetSupReimbersementsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetSupReimbersementsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSupReimbersementsServlet</servlet-name>
+    <url-pattern>/GetSupReimbersements.do</url-pattern>
   </servlet-mapping>
 </web-app>

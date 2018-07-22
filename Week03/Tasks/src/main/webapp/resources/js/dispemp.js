@@ -1,6 +1,7 @@
 window.onload = function(){
 	getEmp();
 	getReimb();
+	dispSupRForms();
 }
 
 function getReimb(){
@@ -13,19 +14,11 @@ function getReimb(){
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4){
 			let data = JSON.parse(xhr.response);
-			console.log(data);
 			for(index in data){
-				let applvl = data[index]["appLvl"];
-				if (applvl == 3) {
-					applvl = "Approved";
-				}else if (applvl == 9){
-					applvl = "Denied";
-				}else{
-					applvl = "Pending";
-				}
 				let l1 = document.createElement('li');
 				l1.setAttribute("id",data[index]["rFormId"]);
-				l1.appendChild(document.createTextNode(data[index]["eventName"]	+ ": " + applvl + "     "));
+				l1.appendChild(document.createTextNode(data[index]["empName"]
+						+ ": " + data[index]["eventName"]	+ "   "));
 				let b1 = document.createElement('button');
 				let jsonobj = JSON.stringify(data[index]);
 				b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
@@ -121,15 +114,8 @@ function rformDetails(jsonobj){
 function delRFormDetails(jsonobj){
 	let l = document.getElementById(jsonobj["rFormId"]);
 	l.innerHTML = "";
-	let applvl = jsonobj["appLvl"];
-	if (applvl == 3) {
-		applvl = "Approved";
-	}else if (applvl == 9){
-		applvl = "Denied";
-	}else{
-		applvl = "Pending";
-	}
-	l.appendChild(document.createTextNode(jsonobj["eventName"]	+ ": " + applvl + "     "));
+	l.appendChild(document.createTextNode(jsonobj["empName"]
+	+ ": " + jsonobj["eventName"]	+ "   "));
 	let b1 = document.createElement('button');
 	let jsonobj2 = JSON.stringify(jsonobj);
 	b1.setAttribute("onclick","rformDetails(" + jsonobj2 + ")");
@@ -147,8 +133,6 @@ function getEmp(){
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4){
 			let data = JSON.parse(xhr.response);
-			console.log(data);
-			
 			list.innerHTML += "<li>Employee ID: "
 				+ data["empid"] + "</li>";
 			list.innerHTML += "<li>Employee Name: "
@@ -165,7 +149,37 @@ function getEmp(){
 				+ data["pending"] + "</li>";
 			list.innerHTML += "<li>Available Reimbursements Total: "
 				+ data["awarded"] + "</li>";
-			
+		}
+	}
+	xhr.open("GET", url);
+	xhr.send();
+}
+function dispSupRForms(){
+	let xhr = new XMLHttpRequest();
+	let list = document.getElementById("pendingapps");
+	list.innerHTML = "";
+	
+	let url = "GetSupReimbersements.do";
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState==4){
+			let data = JSON.parse(xhr.response);
+			for(index in data){
+				if(data[index]["isSup"] == 1){
+					header = document.getElementById("Pending Approvals");
+					header.innerHTML = "Subordinate Reimbursements";
+					let l1 = document.createElement('li');
+					l1.setAttribute("id",data[index]["rFormId"]);
+					l1.appendChild(document.createTextNode(data[index]["empName"]
+							+ ": " + data[index]["eventName"]	+ "   "));
+					let b1 = document.createElement('button');
+					let jsonobj = JSON.stringify(data[index]);
+					b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
+					b1.appendChild(document.createTextNode("+"));
+					l1.appendChild(b1);
+					list.appendChild(l1);
+				}
+			}
 		}
 	}
 	xhr.open("GET", url);

@@ -58,6 +58,7 @@ CREATE TABLE RForm (
     event_type_id number(6) NOT NULL,
     event_cost number(6,2),
     event_name varchar2(100),
+    dir_sup_id number(6),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
     CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
@@ -157,7 +158,7 @@ INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
 VALUES(0,'executive','executive','Boss','Man',0,0,0,3);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(1,'benefits','benefits','Bobert','Bobson',0,1,0,0,2);
+VALUES(1,'benefits','benefits','Bobbert','Bobson',0,1,0,0,2);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
                             dep_id,pending_reim,awarded_reim,emp_type_id)
 VALUES(2,'production','production','Tommy','DROP TABLE Employee;',0,2,0,0,2);
@@ -218,9 +219,10 @@ rformid number;
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
                         justification,time_missed,form_closed,app_lvl,
-                        grade_format,cutoff_grade,event_type_id,event_cost,event_name)
+                        grade_format,cutoff_grade,event_type_id,event_cost,
+                        dir_sup_id,event_name)
     VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
-                        eventT_Id,eventC,eventname);
+                        eventT_Id,eventC,supId,eventname);
     SELECT rformid_seq.CURRVAL INTO rformid from dual;
     insertNewApproval(rformid,empId,supId);
     commit;

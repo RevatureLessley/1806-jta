@@ -134,7 +134,48 @@ public class EmployeeDaoImpl {
 						rs.getInt(13),
 						rs.getInt(14),
 						rs.getDouble(15),
-						rs.getString(16)
+						rs.getString(16),
+						rs.getInt(17)
+						));
+			}
+			return rforms;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+	
+	public List<RForm> selectRformBySupId(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM RForm WHERE dir_sup_id= ? AND app_lvl = 0";
+		List<RForm> rforms = new ArrayList<>();
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				rforms.add(new RForm(
+						rs.getInt(1),
+						rs.getInt(2),
+						rs.getDate(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getInt(6),
+						rs.getString(7),
+						rs.getString(8),
+						rs.getInt(9),
+						rs.getInt(10),
+						rs.getInt(11),
+						rs.getInt(12),
+						rs.getInt(13),
+						rs.getInt(14),
+						rs.getDouble(15),
+						rs.getString(16),
+						rs.getInt(17)
 						));
 			}
 			return rforms;
