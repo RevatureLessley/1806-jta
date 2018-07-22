@@ -9,29 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.services.EmployeeService;
+import com.revature.services.ReimbursementService;
 
 
-public class GetEmpCurrency extends HttpServlet 
+public class GetReimbursements extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-    
-    public GetEmpCurrency() 
+
+    public GetReimbursements() 
     {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		System.out.println("INSIDE GetReimbursements.java");
 		response.setContentType("text");
 		PrintWriter out = response.getWriter();
-		EmployeeService es = new EmployeeService();
+		ReimbursementService rs = new ReimbursementService();
 		HttpSession session = request.getSession();
 		String accountName = "";
 		
 		accountName = (String) session.getAttribute("accountname");
+		System.out.println("accountName in GetReimbursement.java: " + accountName);
 		
-		out.println(es.getCurrencyWithJSON(accountName));
+		out.println(rs.getReimbursementWithJSON(accountName));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

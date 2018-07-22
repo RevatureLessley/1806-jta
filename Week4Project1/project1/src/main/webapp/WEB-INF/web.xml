@@ -58,4 +58,14 @@
     <servlet-name>GetEmpCurrency</servlet-name>
     <url-pattern>/GetEmpCurrency</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetReimbursements</display-name>
+    <servlet-name>GetReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetReimbursements</servlet-name>
+    <url-pattern>/GetReimbursements</url-pattern>
+  </servlet-mapping>
 </web-app>

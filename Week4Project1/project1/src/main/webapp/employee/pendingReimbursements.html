@@ -13,6 +13,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="../resources/css/main.css">
 
+	<script src="../resources/js/ajax2.js"></script>
+
 	<title>Tuition Reimbursement Management System</title>
 </head>
 
@@ -41,8 +43,22 @@
 	
 	<br>
 	
-	<div class="container-fluid">
+	<div class="container py-5">
 		
+		<div>
+			<h2 id="pendingreimbursementhead" onload="getReimbursements()">Pending Reimbursement Requests</h2>
+			<table id="employeependingreimbursementtable" border=2px;>
+				<tr>
+					<th>EventDesc</th>
+					<th>EventDate</th>
+					<th>EventTime</th>
+					<th>EventLocation</th>
+					<th>EventCost</th>
+					<!-- <th>ApprovalName</th> -->
+				</tr>
+			</table>
+		</div>
+		<br>
 	</div>
 	
 </body>

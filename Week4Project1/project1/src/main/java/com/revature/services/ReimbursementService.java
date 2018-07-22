@@ -1,7 +1,11 @@
 package com.revature.services;
 
 import java.sql.Date;
+import java.util.List;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import com.revature.beans.Reimbursement;
 import com.revature.dao.ReimbursementDao;
 
 public class ReimbursementService 
@@ -18,4 +22,27 @@ public class ReimbursementService
 										   gradeCutoff, empId, eventId, gradingFormatId);
 	}
 	
+	public List<Reimbursement> getReimbursementInfo(String accountname)
+	{
+		System.out.println("inside getReimbursementInfo inside ReimbursementService");
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectReimbursementInfo(accountname);
+	}
+	
+	public String getReimbursementWithJSON(String accountname)
+	{
+		System.out.println("INSIDE getReimbursementWithJSON in ReimbursementService");
+		List<Reimbursement> reims = getReimbursementInfo(accountname);
+		System.out.println("reims after getReimbursementInfo in getReimbursementWithJSON: " + reims);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
 }

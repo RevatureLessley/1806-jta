@@ -256,5 +256,16 @@ COMMIT;
 --INNER JOIN employee
 --ON reimbursement.emp_id = employee.emp_id;
 --SELECT * FROM employee;
+--SELECT * FROM approval;
 --SELECT * FROM reimbursement;
 --SELECT amount_left FROM employee WHERE emp_accountname = 'loganbrewer';
+--SELECT reimbursement.event_desc,
+--       reimbursement.event_date,
+--       reimbursement.event_time,
+--       reimbursement.event_location,
+--       reimbursement.event_cost
+--       FROM reimbursement 
+--INNER JOIN employee
+--ON reimbursement.emp_id = employee.emp_id
+--WHERE reimbursement.emp_id = 1;
+--SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = 1 AND reimbursement.approval_id = 1;

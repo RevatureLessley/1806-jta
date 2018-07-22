@@ -60,6 +60,17 @@ public class Reimbursement
 		this.approvalId = approvalId;
 	}
 	
+	public Reimbursement(String eventDesc, String eventDate, String eventTime, 
+						 String eventLocation, Integer eventCost) 
+	{
+		super();
+		this.eventDesc = eventDesc;
+		this.eventDate = eventDate;
+		this.eventTime = eventTime;
+		this.eventLocation = eventLocation;
+		this.eventCost = eventCost;
+	}
+	
 	public Reimbursement() 
 	{
 		super();
