@@ -31,11 +31,28 @@ public class EventType {
 		}
 	}
 	
+	
 	public static Pair insertType(Integer index, String type, double coverage) {
 		return eventTypes.put(index, new Pair(type, coverage));
 	}
 	
-	public static Pair retrieveType(Integer index) {
-		return eventTypes.get(index);
+	public static double getCoverage(String type) {
+		
+		for(Pair p : eventTypes.values()) {
+			
+			if(p.getType().equals(type)) return p.getCoverage();
+		}
+		
+		return -1;
+	}
+	
+	public static String getType(double coverage) {
+
+		for(Pair p : eventTypes.values()) {
+			
+			if(p.getCoverage() == coverage) return p.getType();
+		}
+		
+		return null;
 	}
 }

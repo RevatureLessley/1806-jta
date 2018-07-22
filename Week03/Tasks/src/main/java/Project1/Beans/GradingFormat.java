@@ -2,7 +2,7 @@ package Project1.Beans;
 
 public class GradingFormat {
 	private boolean confirmed;
-	private double cutoff;
+	private Double cutoff;
 	private Attachment proof;
 	
 	/**
@@ -10,7 +10,7 @@ public class GradingFormat {
 	 * @param filename
 	 * @param file
 	 */
-	public GradingFormat(boolean confirmed, double cutoff, Attachment proof) {
+	public GradingFormat(boolean confirmed, Double cutoff, Attachment proof) {
 		this.confirmed = confirmed;
 		this.cutoff = cutoff;
 		this.proof = proof;
@@ -24,11 +24,11 @@ public class GradingFormat {
 		this.confirmed = confirmed;
 	}
 	
-	public double getCutoff() {
+	public Double getCutoff() {
 		return cutoff;
 	}
 
-	public void setCutoff(double cutoff) {
+	public void setCutoff(Double cutoff) {
 		this.cutoff = cutoff;
 	}
 	

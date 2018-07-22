@@ -14,11 +14,23 @@ public class MIMEType {
 		return mimeTypes;
 	}
 	
-	public static String retrieveType(Integer index, String extension) {
-		return mimeTypes.get(index)[0];
+	public static String retrieveType(String extension) {
+		
+		for(String[] s : mimeTypes.values()) {
+			
+			if(extension.equals(s[1])) return s[0];
+		}
+		
+		return null;
 	}
 	
-	public static String retrieveExtension(Integer index, String type) {
-		return mimeTypes.get(index)[1];
+	public static String retrieveExtension(String type) {
+		
+		for(String[] s : mimeTypes.values()) {
+			
+			if(type.equals(s[0])) return s[1];
+		}
+		
+		return null;
 	}
 }

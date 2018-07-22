@@ -731,13 +731,13 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE insertReimbursement(employee IN VARCHAR2, 
+CREATE OR REPLACE PROCEDURE insertReimbursement(rID OUT NUMBER,
+                                                employee IN VARCHAR2, 
                                                 typ IN VARCHAR2, 
                                                 cos IN NUMBER, 
                                                 dat IN VARCHAR2, 
                                                 loc IN VARCHAR2,
                                                 work_missed IN VARCHAR2,
---                                                    INTERVAL DAY TO SECOND,
                                                 passingCutoff IN NUMBER,
                                                 des IN VARCHAR2,
                                                 justification IN VARCHAR2)
@@ -761,18 +761,23 @@ BEGIN
     INTO reiID
     FROM dual;
     insertApproval(reiID);
+    rID := reiID;
     COMMIT;
 END;
 /
 
-CALL insertReimbursement('walterx', 'TECHNICAL_TRAINING', 20000,
+DECLARE
+    rID NUMBER;
+BEGIN
+insertReimbursement(rID, 'walterx', 'TECHNICAL_TRAINING', 20000,
                          TIMESTAMP '2018-06-18 8:30:00', 'Arlington, TX',
                          INTERVAL '70' DAY, 0.7, 'Revature training', 
                          'i dunno y');
-CALL insertReimbursement('walterx', 'CERTIFICATION', 10,
+insertReimbursement(rID, 'walterx', 'CERTIFICATION', 10,
                          TIMESTAMP '2018-06-25 9:00:00', 'Arlington, TX',
                          INTERVAL '70' DAY, 0.7, 'Enthuware',
                          'Not showing up on my RapidCard.');
+END;
 --CALL insertEventAttachment(1, 
 --    '10369913_267485166779577_5573839803579672783_n.jpg');
 --CALL insertApprovalAttachment(1, 'Interview Prep Handbook.doc');

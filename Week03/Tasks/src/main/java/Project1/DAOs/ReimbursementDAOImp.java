@@ -8,26 +8,44 @@ import Project1.Beans.*;
 
 public class ReimbursementDAOImp implements LogReference {
 	
-	public boolean insertReimbursement() {
+	public Reimbursement insertReimbursement(String username, String type, 
+									   		 BigDecimal cost, 
+									   		 Timestamp datetime, 
+									   		 String location,
+									   		 String workMissed, 
+									   		 Double cutoff, String description, 
+									   		 String justification) {
 		logger.debug("Project1/DAO/ReimbursementDAOImp.java: " + 
            	 "Entered insertEmployee().");
 		String sqlInsert = 
-				"{call insertReimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+				"{call insertReimbursement(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 		CallableStatement statement = null;
 
 		try(Connection connection = DatabaseConnection.connect()) {
 			statement = connection.prepareCall(sqlInsert);
-			statement.setString(1, "walterx");
-			statement.setString(2, "UNIVERSITY_COURSE");
-			statement.setBigDecimal(3, new BigDecimal(5000));
-			statement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-			statement.setString(5, "Austin, TX");
-			statement.setString(6, "240 0:0:0.0");
-			statement.setDouble(7, 0.7);
-			statement.setString(8, "High education.");
-			statement.setString(9, "It is to be expected.");
+			statement.registerOutParameter(1, Types.INTEGER);
+			statement.setString(2, username);
+			statement.setString(3, type);
+			statement.setBigDecimal(4, cost);
+			statement.setTimestamp(5, datetime);
+			statement.setString(6, location);
+			statement.setString(7, workMissed);
 			
-			return statement.execute();
+			if(cutoff == null) statement.setNull(8, Types.DOUBLE);
+				
+			else statement.setDouble(8, cutoff);
+			
+			statement.setString(9, description);
+			statement.setString(10, justification);
+			statement.execute();
+			
+			Event event = new Event(type, EventType.getCoverage(type), cost,
+									datetime, description, location, workMissed);
+			BigInteger bi = new BigInteger(statement.getString(1));
+			Reimbursement reimbursement = new Reimbursement(bi, justification);
+			reimbursement.setEvent(event);
+			
+			return reimbursement;
 		}
 
 		catch(SQLException se) {
@@ -42,7 +60,7 @@ public class ReimbursementDAOImp implements LogReference {
 			DatabaseConnection.close(statement);
 		}
 		
-		return false;
+		return null;
 	}
 	
 	public HashMap<BigInteger, Reimbursement> selectReimbursement(ResultSet rs)

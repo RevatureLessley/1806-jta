@@ -21,6 +21,24 @@ public class Reimbursement {
 	 * @param justification
 	 * @param reasonExceededMax
 	 */
+	public Reimbursement(BigInteger id, String justification) {
+		this.id = id;
+		this.awarded = new BigDecimal(0);
+		this.isCancelled = false;
+		this.isPending = true;
+		this.justification = justification;
+		this.reasonExceededMax = null;
+		event = null;
+		approvals = new HashMap<>();
+	}
+	
+	/**
+	 * @param awarded
+	 * @param isCancelled
+	 * @param isPending
+	 * @param justification
+	 * @param reasonExceededMax
+	 */
 	public Reimbursement(BigInteger id, BigDecimal awarded,
 						 boolean isCancelled, boolean isPending, 
 						 String justification, String reasonExceededMax) {
