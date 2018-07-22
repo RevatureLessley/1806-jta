@@ -12,22 +12,24 @@
 
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
+<script src="./resources/js/login.js"> </script>
 
 <title>Tuition Reimbursement Login</title>
 </head>
 <body>
 	<div class="row">
 		<div class="col-sm-5 rsection">
-			<form action="GetVsPost" method ="POST">
+			<form action="LoginServlet" method ="POST">
 				<hr>
 				<h4>Input Login Credentials</h4>
 				<ul style="list-style-type: none">
 					<li><label for="username"><b>USERNAME</b></label></li>
 					<li><input type="text" id="username" name="username" required></li>
 					<li><b>PASSWORD</b></li>
-					<li><input type="password" name="password" required></li>
-					<li><input type="submit" value="submit"><input
-						type="reset" value="reset"></li>
+					<li><input type="password" id="password" name="password" required></li>
+					<li><input type="submit" value="login">
+					<input type="reset" value="reset"></li>
 				</ul>
 			</form>
 		</div>

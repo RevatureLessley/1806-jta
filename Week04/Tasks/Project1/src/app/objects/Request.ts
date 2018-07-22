@@ -1,13 +1,18 @@
 export class Request{
-    dateCreated: string;
-    ammount: number;
-    eventLocation: string;
+    id: number;
+    fullAmmount: number;
+    cooperateAmmount: number;
+    status: number;
+    approvalDate: string;
+    creationDate: string;
     eventDate: string;
-    eventJustification: string;
-    eventDescription: string;
-    eventCost: number;
     gradingFormat: string;
-    eventType: string;
-    info: string[];
-    files: string[];
+    eventDescription: string;
+    eventJustification: string;
+    eventLocation: string;
+    typeValue: number;
+    typeName: string;
+    typeId: number;
+    files: { file }[];
+    info: { info }[];
 }

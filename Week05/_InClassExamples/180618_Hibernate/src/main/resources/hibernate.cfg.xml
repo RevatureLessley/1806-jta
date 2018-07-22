@@ -54,6 +54,20 @@
 		 validate: creates the schema, destroying old data
 		 create-drop: database is cleared and emptied upon server shutdown.-->
 
+		<!-- 2nd level cache properties -->
+		<property name="hibernate.cache.region.factory_class">
+			org.hibernate.cache.ehchache.EhCacheRegionFactory
+		</property>
+		<property name="hibernate.cache.use_second_level_cache">
+			true	
+		</property>
+		<property name="hibernate.cache.use_query_cache">
+			true
+			<!-- Though there are TWO levels of cache, there is technically a 3rd
+			level called 'query cache'. However all it does is cache HQL query
+			results, so it is not considered along side L1 and L2 -->
+		</property>
+		
 		<!-- <mapping resource="person.hbm.xml" /> -->
 		<mapping class="com.revature.beans.Person"/>
 		<mapping class="com.revature.beans.Item"/>

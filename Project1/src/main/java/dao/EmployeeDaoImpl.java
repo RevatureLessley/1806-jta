@@ -16,36 +16,6 @@ import util.Connections;
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
-	public ArrayList<employee> getEmployeesBySupervisor(Integer id) {
-		ArrayList<employee> temp = new ArrayList<employee>();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		String sql = "SELECT employee.employee_id, employee.max_reimbursement FROM person\r\n" + 
-				"INNER JOIN employee\r\n" + 
-				"on employee.person_id = person.person_id\r\n" + 
-				"WHERE person.person_superior = ?";
-		
-		try(Connection conn = Connections.getConnection()){
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			rs = ps.executeQuery();
-			
-			while(rs.next()){
-				PersonDaoImpl PDI = new PersonDaoImpl();
-				
-				temp.add(new employee(rs.getInt(1), rs.getDouble(2), PDI.getPersonByUserId(rs.getInt(3))));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			close(rs);
-			close(ps);
-		}
-		return temp;
-	}
-
-	@Override
 	public ArrayList<person> getPeopleBySuperior(Integer id) {
 		ArrayList<person> temp = new ArrayList<person>();
 		PreparedStatement ps = null;
@@ -71,8 +41,43 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			close(rs);
 			close(ps);
 		}
-		System.out.println("getPeopleBySuperior with id: " + id + " size=" +temp.size());
 		return temp;
+	}
+	
+	@Override
+	public ArrayList<employee> getEmployeesBySupervisor(Integer id) {
+		ArrayList<employee> result = new ArrayList<employee>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT employee.employee_id, employee.max_reimbursement FROM person\r\n" + 
+				"INNER JOIN employee\r\n" + 
+				"on employee.person_id = person.person_id\r\n" + 
+				"WHERE person.person_superior = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				PersonDaoImpl PDI = new PersonDaoImpl();
+				RequestDaoImpl RDI = new RequestDaoImpl();
+				
+				employee temp = new employee(rs.getInt(1), rs.getDouble(2), PDI.getPersonByUserId(rs.getInt(3)));
+				for(request r : RDI.getRequestsByEmployeeId(temp.getEmpId())) {
+					temp.addRequest(r);
+				}
+				result.add(temp);
+				
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return result;
 	}
 
 	@Override
@@ -108,6 +113,40 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		for(request r: RDI.getRequestsByEmployeeId(e.getEmpId())) {
 			e.addRequest(r);
 		}
+	}
+
+	@Override
+	public employee getEmployeeByID(Integer id) {
+		employee temp = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT employee.employee_id, employee.max_reimbursement FROM person\r\n" + 
+				"INNER JOIN employee\r\n" + 
+				"on employee.person_id = person.person_id\r\n" + 
+				"WHERE person.person_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){				
+				PersonDaoImpl PDI = new PersonDaoImpl();
+				RequestDaoImpl RDI = new RequestDaoImpl();
+				
+				temp = new employee(rs.getInt(1), rs.getDouble(2), PDI.getPersonByUserId(rs.getInt(3)));
+				for(request r : RDI.getRequestsByEmployeeId(temp.getEmpId())) {
+					temp.addRequest(r);
+				}
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return temp;
 	}
 
 }

@@ -43,6 +43,11 @@ public class Driver {
 		ndi.criterias();
 		ndi.executeNamedQueries();
 		
+		System.out.println("=====L2 CACHE=====");
+		
+		System.out.println(ndi.selectNpc(3).getName());
+		System.out.println(ndi.selectNpc(3).getName());
+		
 		System.out.println("=====Terminating App=====");
 		System.exit(0);
 	}

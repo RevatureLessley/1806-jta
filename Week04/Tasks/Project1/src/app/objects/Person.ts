@@ -1,8 +1,6 @@
 export class Person{
     name: string;
+    secLevel: number;
     pId: number;
-    remaningBalance: number;
     maxBalance: number;
-    securityLevel: number;
-    requests: { Request }[];
 }

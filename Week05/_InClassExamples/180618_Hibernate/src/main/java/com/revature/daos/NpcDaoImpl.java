@@ -147,4 +147,28 @@ public class NpcDaoImpl {
 		System.out.println(query2.list());
 		System.out.println(query3.list());
 	}
+	
+	public Npc selectNpc(Integer id){
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		Npc npc = null;
+		
+		try {
+			tx = session.beginTransaction();
+			
+			npc= (Npc)session.get(Npc.class, id);
+			
+			tx.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			if(tx!=null) {
+				tx.rollback();
+			}
+		}finally {
+			session.close();
+		}
+		
+		
+		return npc;
+	}
 }	
