@@ -78,4 +78,44 @@
     <servlet-name>ApprovedReimbursements</servlet-name>
     <url-pattern>/ApprovedReimbursements</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeclinedReimbursements</display-name>
+    <servlet-name>DeclinedReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.DeclinedReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeclinedReimbursements</servlet-name>
+    <url-pattern>/DeclinedReimbursements</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveOrDeny</display-name>
+    <servlet-name>ApproveOrDeny</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveOrDeny</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveOrDeny</servlet-name>
+    <url-pattern>/ApproveOrDeny</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveServlet</display-name>
+    <servlet-name>ApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveServlet</servlet-name>
+    <url-pattern>/ApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeclineServlet</display-name>
+    <servlet-name>DeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeclineServlet</servlet-name>
+    <url-pattern>/DeclineServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
