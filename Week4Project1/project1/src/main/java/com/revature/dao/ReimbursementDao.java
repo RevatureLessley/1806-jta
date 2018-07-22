@@ -309,7 +309,7 @@ public class ReimbursementDao
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "UPDATE reimbursement SET approval_id = 3 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		String sql = "UPDATE reimbursement SET approval_id = 3 WHERE reimbursement.approval_id = 2 AND rownum = 1";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -327,7 +327,25 @@ public class ReimbursementDao
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "UPDATE reimbursement SET approval_id = 4 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		String sql = "UPDATE reimbursement SET approval_id = 4 WHERE reimbursement.approval_id = 3 AND rownum = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+	}
+	
+	public void updateApprovalToLevelFive()
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "UPDATE reimbursement SET approval_id = 5 WHERE (reimbursement.approval_id = 3 OR reimbursement.approval_id = 4) AND rownum = 1";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);

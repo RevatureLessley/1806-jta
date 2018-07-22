@@ -128,4 +128,34 @@
     <servlet-name>GetAllLevelOnePendingReimbursements</servlet-name>
     <url-pattern>/GetAllLevelOnePendingReimbursements</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelTwoPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelTwoPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelTwoPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelTwoPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelTwoPendingReimbursements</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepHeadApproveServlet</display-name>
+    <servlet-name>DepHeadApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DepHeadApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepHeadApproveServlet</servlet-name>
+    <url-pattern>/DepHeadApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepHeadDeclineServlet</display-name>
+    <servlet-name>DepHeadDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DepHeadDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepHeadDeclineServlet</servlet-name>
+    <url-pattern>/DepHeadDeclineServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

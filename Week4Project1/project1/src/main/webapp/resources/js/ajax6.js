@@ -1,14 +1,14 @@
 window.onload = function()
 {
-	getReimbursements();
+	getLevelTwoReimbursements();
 }
 
-function getReimbursements()
+function getLevelTwoReimbursements()
 {
 	let xhr = new XMLHttpRequest();
-	let reimTable = document.getElementById("employeependingreimbursementtable");
-	let head = document.getElementById("pendingreimbursementhead");	
-	let url = "../GetAllLevelOnePendingReimbursements";
+	let reimTable = document.getElementById("employeependingleveltworeimbursementtable");
+	let head = document.getElementById("pendingleveltworeimbursementhead");
+	let url = "../GetAllLevelTwoPendingReimbursements";
 	
 	xhr.onreadystatechange = function()
 	{
@@ -36,7 +36,7 @@ function getReimbursements()
 				
 				var approveForm = document.createElement("form");
 				approveForm.setAttribute('method',"post");
-				approveForm.setAttribute('action',"../ApproveServlet");
+				approveForm.setAttribute('action',"../DepHeadApproveServlet");
 				
 				var approveSubmit = document.createElement("input"); //input element, Submit button
 				approveSubmit.setAttribute('type',"submit");
@@ -46,7 +46,7 @@ function getReimbursements()
 				
 				var declineForm = document.createElement("form");
 				declineForm.setAttribute('method',"post");
-				declineForm.setAttribute('action',"../DeclineServlet");
+				declineForm.setAttribute('action',"../DepHeadDeclineServlet");
 				
 				var declineSubmit = document.createElement("input"); //input element, Submit button
 				declineSubmit.setAttribute('type',"submit");

@@ -228,7 +228,7 @@ INSERT INTO reimbursement
 VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'both approved', 100, 'both approved', 0, 0, 4, 1, 2, null, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '06-JUN-2018', '05:00', 'Arlington, TX', 'benco approved', 100, 'benco approved', 0, 0, 3, 1, 2, null, 5);
+VALUES (null, '06-JUN-2018', '05:00', 'Arlington, TX', 'benco approved', 100, 'benco approved', 0, 0, 5, 1, 2, null, 5);
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -321,3 +321,5 @@ COMMIT;
 --SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
 --SELECT approval_id FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
 --UPDATE reimbursement SET approval_id = 2 WHERE reimbursement.approval_id = 1 AND rownum = 1; 
+--SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 2;
+--SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 2;
