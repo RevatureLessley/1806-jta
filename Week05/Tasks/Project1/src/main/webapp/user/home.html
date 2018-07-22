@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+    </script>
+    <title>Project 1 Webpage</title>
+    <link rel="stylesheet" type="text/css" href= "../resources/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/modal.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/home.css">
+    <script src="../resources/js/Home.js"></script>
+
+</head>
+<body>
+    <!-- TODO: navbar here -->
+    <div class="row">
+        <div class="col-sm-7" style="color:green;white-space:pre"><h1><i>    Snailsforce</i></h1></div>
+
+        <div class="col-sm-4" style="margin:auto;text-align:right" id="welcome-tag-innermost">
+            <div class="dropdown" >
+                <button class="dropbtn" onclick="location.href='./notifications.html'">Notifications <span id="badge" class="badge badge-success"></span></button>
+                <div class="dropdown-content" style="text-align:left">
+                    <!--<a href="#">Link 1</a>-->   <!-- TODO: Future Development. -->
+                </div>
+            </div>
+            Welcome, </div>
+        <div class="col-sm-1">
+            <div style="position: relative;top: 50%;transform: translateY(-50%);">
+                <form action="../Logout.Servlet">
+                    <input type="submit" value="Logout">
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>    <!-- Boxed stuff -->
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="bordered-section1">
+                <h3>Tuition Reimbursement Forms</h3>
+                <table border="2px" id="reimbursement-table">
+                    <tr>
+                        <th><center>Ticket ID</center></th>
+                        <th><center>Event Type</center></th>
+                        <th><center>Description</center></th>
+                        <th><center>Location</center></th>
+                        <th><center>Evaluation Format</center></th>
+                        <th><center>Amount</center></th>
+                        <th><center>Approved</center></th>
+                        <th><center>File</center></th>
+                    </tr>
+                    <!-- Handled in JavScript -->
+                    <!-- TODO: Set the max size of the table, (use a scroll thingie?) -->
+                </table>
+
+                <a class="nav-link" style="display:inline" href="./reimbursements.html">New Reimbursement Request</a>
+
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="bordered-section1" id="user-info-block">
+                <ul style="list-style-type:none" id="user-info-list">
+                    <!-- Handled in JavScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="output">
+        <!-- Handled by JavaScript -->
+    </div>
+</body>
+</html>

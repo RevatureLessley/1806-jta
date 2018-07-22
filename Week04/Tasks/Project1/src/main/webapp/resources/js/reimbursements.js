@@ -43,6 +43,31 @@ function onSubmitClicked(date, location, description, cost, file){
                 'type=' +type+ '&' +
                 'picUrl='+data);
         }
+        let xhr2 = new XMLHttpRequest();
+        xhr2.onreadystatechange = function(){
+            if (Notification.permission === "granted") {
+                if (xhr2.readyState == 4){
+                    let jsonObject1 = JSON.parse(xhr2.response);
+                    let xhr3 = new XMLHttpRequest();
+                    xhr3.onreadystatechange = function(){
+                        if (xhr3.readyState == 4){
+                            let jsonObject2 = JSON.parse(xhr3.response);
+                            for (employee in jsonObject2){
+                                if (jsonObject2[employee].id == jsonObject1['data'][0].employeeId){
+                                    var notification = new Notification('Snailsforce', { body: 'New reimbursement request from '+ jsonObject2[employee].firstName + ' ' + jsonObject2[employee].lastName,
+                                        icon: '../resources/icons/info_icon.png'});
+                                    setTimeout(notification.close.bind(notification), 8000);
+                                }
+                            }
+                        }
+                    }
+                    xhr3.open("GET", "../GetEmployees.Servlet");
+                    xhr3.send();
+                }
+            }
+        }
+        xhr2.open("GET", "../Session.Servlet");
+        xhr2.send();
     }
 
 }

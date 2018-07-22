@@ -50,7 +50,7 @@ public class ReimbursementServlet extends HttpServlet {
         double cost = 0;
         LocalDate date = null;
         try {
-            idNum = (Integer)req.getSession().getAttribute("employeeId");
+            idNum = (Integer)req.getSession(false).getAttribute("employeeId");
             date = LocalDate.parse(req.getParameter("date"));
             cost = Double.parseDouble(req.getParameter("cost"));
             type = Integer.parseInt(req.getParameter("type")) + 1;  //convert from 0-based to 1-based

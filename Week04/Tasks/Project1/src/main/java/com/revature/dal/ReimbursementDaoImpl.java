@@ -53,7 +53,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
                         rs.getDouble("reimbursement"),
                         rs.getString("grading_format"),
                         rs.getInt("event_type"),
-                        rs.getInt("is_approved") != 0,
+                        rs.getInt("status"),
                         sb.toString()
                 );
                 beanList.add(bean);
@@ -106,7 +106,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
                         rs.getDouble("reimbursement"),
                         rs.getString("grading_format"),
                         rs.getInt("event_type"),
-                        rs.getInt("is_approved") != 0,
+                        rs.getInt("status"),
                         sb.toString()
                 );
                 LogWrapper.log(this.getClass(), "Retrieve Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
@@ -123,13 +123,13 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
     }
 
     @Override
-    public boolean insertReimbursementForm(ReimbursementBean bean) {
-        PreparedStatement statement = null;
+    public boolean insertReimbursementForm(ReimbursementBean bean, int supervisorId) {
+        CallableStatement statement = null;
+
         try(Connection conn = DatabaseConnection.getConnection()){
-            String sql = "INSERT INTO Reimbursement_Requests VALUES (?,?,?,?,?,?,?,?,?,?)";
-            statement = conn.prepareStatement(sql);
+            String sql = "{call Insert_Reimbursement_Request(?,?,?,?,?,?,?,?,?,?,?,?)}";
+            statement = conn.prepareCall(sql);
             statement.setNull(1, Types.INTEGER);
-            //statement.setInt(1, bean.getId());
             statement.setInt(2, bean.getEmployee().getId());
             statement.setDate(3, java.sql.Date.valueOf(bean.getDate())); //date
             statement.setString(4, bean.getLocation());
@@ -137,8 +137,10 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
             statement.setDouble(6, bean.getReimbursement());
             statement.setString(7, bean.getGradingFormat());
             statement.setInt(8, bean.getEventType());
-            statement.setInt(9, bean.isApproved() ? 1 : 0);
+            statement.setInt(9, bean.getStatus());
             statement.setCharacterStream(10, new StringReader(bean.getFileUrl()));
+            statement.setNull(11, Types.INTEGER);
+            statement.setInt(12, supervisorId);
             statement.execute();
             LogWrapper.log(this.getClass(), "Insert Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
             return true;
@@ -150,6 +152,28 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
             close(statement);
         }
         return false;
+    }
+
+    @Override
+    public boolean updateReimbursementStatus(int id, int status) {
+        PreparedStatement statement = null;
+        try(Connection conn = DatabaseConnection.getConnection()){
+            String sql = "UPDATE Reimbursement_Requests SET status=? WHERE request_id=?";
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1, status);
+            statement.setInt(2, id);
+            statement.execute();
+            LogWrapper.log(this.getClass(), "Update Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
+            return true;
+
+        } catch (SQLException e) {
+            LogWrapper.log(this.getClass(), e);
+        }
+        finally {
+            close(statement);
+        }
+        return false;
+        
     }
 
     @Override

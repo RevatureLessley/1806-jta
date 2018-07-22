@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+    </script>
+    <title>Project 1 Webpage</title>
+    <link rel="stylesheet" type="text/css" href= "../resources/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../resources/css/modal.css">
+    <script src ="../resources/js/notifications.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10">
+                <h3 style="color:green">Pending Reimbursement Requests</h3>
+            </div>
+            <div class="col-sm-2">
+                <div style="position: relative;top: 40%;left: 40%">
+                    <button type="button" onclick="location.href='./home.html'">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bordered-section1">
+            <table border="2px" id="notification-table">
+                <tr>
+                    <th><center>ID</center></th>
+                    <th><center>Name</center></th>
+                    <th><center>Amount</center></th>
+                    <th><center>Event</center></th>
+                    <th><center>Description</center></th>
+                    <th><center>Location</center></th>
+                    <th><center>Evaluation Format</center></th>
+                    <th><center>Additional File</center></th>
+                    <th><center>Action</center></th>
+                </tr>
+            </table>
+        </div>
+        <div id="output">
+
+        </div>
+    </div>
+</body>

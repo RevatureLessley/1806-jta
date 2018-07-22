@@ -1,5 +1,8 @@
 window.onload = function(){
     getUserInfo();
+    Notification.requestPermission().then(function(result) {
+      console.log(result);
+    });
 }
 
 function setWelcomeTag(username){
@@ -20,11 +23,17 @@ function getReimbursementRequests(userInfo){
                 let td3 = document.createElement('td');
                 let td4 = document.createElement('td');
                 let td5 = document.createElement('td');
+                td1.setAttribute("style", "text-align:center");
+                td4.setAttribute("style", "text-align:center");
                 let a = document.createElement('a');
                 let td1t = document.createTextNode(jsonObject[record]['id']);
                 let td2t = document.createTextNode(jsonObject[record]['eventType']['description']);
                 let td3t = document.createTextNode('$' + jsonObject[record]['reimbursement']);
-                let td4t = document.createTextNode(jsonObject[record]['approved'] ? 'Yes' : 'No');
+                let value = jsonObject[record]['status'];
+                let string = "Pending";
+                if (value == 1) string = "Yes";
+                else if (value == 2) string = "No";
+                let td4t = document.createTextNode(string);
                 let td5t = document.createTextNode(jsonObject[record]['fileUrl']);
                 a.setAttribute("class", "nav-link");
                 arrayPic[record] = jsonObject[record]['fileUrl'];
@@ -195,5 +204,4 @@ function displayModal(input){
 
     output = document.getElementById("output");
     output.appendChild(div);
-
 }

@@ -18,7 +18,7 @@ public class GetReimbursementsServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         try{
-            out.println(ReimbursementService.retrieveRequestsAsJSON((Integer) req.getSession().getAttribute("employeeId")));
+            out.println(ReimbursementService.retrieveRequestsAsJSON((Integer) req.getSession(false).getAttribute("employeeId")));
         }catch(ClassCastException e)
         {
             LogWrapper.log(this.getClass(), e);

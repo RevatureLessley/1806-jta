@@ -2,8 +2,10 @@ package com.revature.bll;
 
 import com.revature.beans.EmployeeBean;
 import com.revature.beans.EventTypeBean;
+import com.revature.beans.NotificationBean;
 import com.revature.beans.ReimbursementBean;
 import com.revature.dal.EmployeeDaoImpl;
+import com.revature.dal.NotificationDaoImpl;
 import com.revature.dal.ReimbursementDaoImpl;
 import com.revature.dal.ReimbursementTypeDaoImpl;
 import com.revature.utils.LogWrapper;
@@ -19,14 +21,18 @@ public class ReimbursementService {
         ReimbursementDaoImpl rdao = new ReimbursementDaoImpl();
         EmployeeDaoImpl edao = new EmployeeDaoImpl();
 
-        return rdao.insertReimbursementForm(
-                new ReimbursementBean(
-                    id, //this value isn't actually inserted (And that's okay)
-                    edao.retrieveEmployeeById(id),  //pulls from the database
-                    date, location, description, amount, "Format?", //TODO: Figure out 'Format?'
-                    type, false, url
-                )
+        EmployeeBean ebean = edao.retrieveEmployeeById(id);  //pulls from the database
+
+        ReimbursementBean rbean = new ReimbursementBean(
+                id, //this value isn't actually inserted (And that's okay)
+                ebean,
+                date, location, description, amount, "Format?", //TODO: Figure out 'Format?'
+                type, 0, url
         );
+        boolean success = true;
+        if (!rdao.insertReimbursementForm(rbean, ebean.getSupervisorId())) success = false;
+        //if (!new NotificationDaoImpl().insertNotification( new NotificationBean(-1, rbean, ebean.supervisor, true, false, false))) success = false;
+        return success;
     }
 
     public static ArrayList<ReimbursementBean> selectRequests(int employeeId){

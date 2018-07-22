@@ -5,7 +5,6 @@ function checkValidation(){
 }
 
 function checkPasswords() {
-    console.log("password function triggered!");
     let e = null;
 	if( e = document.getElementById("error-passwords")) e.remove();
 

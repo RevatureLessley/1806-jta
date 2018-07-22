@@ -13,7 +13,7 @@ public class SessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text");
-        resp.getWriter().println(sessionToJson(req.getSession()));
+        resp.getWriter().println(sessionToJson(req.getSession(false)));
     }
 
     private String sessionToJson(HttpSession session){

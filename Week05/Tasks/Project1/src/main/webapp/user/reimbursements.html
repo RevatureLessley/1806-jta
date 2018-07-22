@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- The character encoding scheme -->
+        <meta charset="UTF-8">
+        <!-- the bootstrap external stylesheet -->
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- JQuery -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <!-- More bootstrap stuff -->
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+        </script>
+        <script src="../resources/js/reimbursements.js"></script>
+
+        <title>Tuition Reimbursement Form</title>
+        <!-- Link to external stylesheet -->
+        <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
+        <link rel="stylesheet" type="text/css" href="../resources/css/modal.css">
+    </head>
+    <!-- --------------------------------------------------------------------------------- -->
+    <body>
+        <div class="container-fluid">
+            <div class="col-sm-6">
+                <div class="bordered-section1">
+                    <h1>Tuition Reimbursement Form</h1>
+                    <hr>    <!-- Line separator -->
+                    <form> <!-- action="Reimbursement.Servlet" method="Post" -->
+                        <ul style="list-style-type:none">
+                            <li><b>Date of Event</b></li>
+                            <li><input type="date" name="date"></li>
+                            <li><b>State</b></li>
+                            <li><input type="text" name="location"></li>
+                            <li><b>Description</b></li>
+                            <li><input type="text" name="description"></li>
+                            <li style="white-space:pre"><b>Cost</b>                                   <b>Expected Return</b></li>
+                            <li><input type="number" onblur="return onTypeSelected(cost.value)" step="0.01" name="cost"> <input type="number" step="0.01" name="expected-return" id="expected-return" readonly></li>
+                            <li><b>Event Type</b></li>
+                            <li><select name="type" id="type" onchange="return onTypeSelected(cost.value)" required>
+                                <!-- TODO: fill these dynamically -->
+                                <option>University Courses</option>
+                                <option>Seminars</option>
+                                <option>Certification Preparation Classes</option>
+                                <option>Certification</option>
+                                <option>Technical Training</option>
+                                <option>Other</option>
+                            </select>
+                            </li>
+                            <li><b>Evaluation Format</b></li>
+                            <li><select name="format" id="format" required>
+                                <!-- TODO: fill these dynamically (REQUIRED) -->
+                                <option>Letter Grade</option>
+                                <option>Certificate</option>
+                                <option>Presentation</option>
+                            </select></li>
+
+                            <li><br/></li>
+                            <li><b>Additional Files</b></li>
+                            <li>
+                                <input type="file" name="file" id="file-selector" accept="image/*">
+                                <input type="button" value="Preview" onclick="displayModal(file.files[0])">
+                            </li>
+                            <li><br/></li>
+                            <li><button type="button" onclick="return onSubmitClicked(date.value, location.value, description.value, cost.value, file.files[0])">Submit</button>
+                                <input type="reset" value="Reset">
+                            </li>
+                        </ul>
+                    </form>
+                    <!--onclick="onFileUpload(file.files[0])"-->
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div id="output">
+                    <!-- Handled by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
