@@ -7,12 +7,26 @@ public class ReimbursementForm {
 	private Integer  rfId;
 	private Integer empId;
 	private String formStatus;
+	private String formStatus2;
+	private String formStatus3;
 	private String eventType;
 	private String eventLocation;
 	private String eventDescribtion;
 	private Integer eventCost;
 	private Date formsDate;
 	private Date startDate;
+	public String getFormStatus2() {
+		return formStatus2;
+	}
+	public void setFormStatus2(String formStatus2) {
+		this.formStatus2 = formStatus2;
+	}
+	public String getFormStatus3() {
+		return formStatus3;
+	}
+	public void setFormStatus3(String formStatus3) {
+		this.formStatus3 = formStatus3;
+	}
 	private Timestamp startTime;
 	private String gradeFormat;
 	public String getGradeFormat() {
@@ -178,10 +192,55 @@ public class ReimbursementForm {
 		this.gradeCutOff = gradeCutOff;
 		this.workTimeMissed = workTimeMissed;
 	}
+	
+	public ReimbursementForm(String formStatus, String formStatus2, String formStatus3, String eventType,
+			String eventLocation, String eventDescribtion, Integer eventCost, Date formsDate, Date startDate,
+			String gradeFormat, String gradeCutOff, String workTimeMissed) {
+		super();
+		this.formStatus = formStatus;
+		this.formStatus2 = formStatus2;
+		this.formStatus3 = formStatus3;
+		this.eventType = eventType;
+		this.eventLocation = eventLocation;
+		this.eventDescribtion = eventDescribtion;
+		this.eventCost = eventCost;
+		this.formsDate = formsDate;
+		this.startDate = startDate;
+		this.gradeFormat = gradeFormat;
+		this.gradeCutOff = gradeCutOff;
+		this.workTimeMissed = workTimeMissed;
+	}
+	
+	public ReimbursementForm(Integer rfId, Integer empId, String formStatus, String formStatus2, String formStatus3,
+			String eventType, String eventLocation, String eventDescribtion, Integer eventCost, Date formsDate,
+			Date startDate, String gradeFormat, String gradeCutOff, String workTimeMissed) {
+		super();
+		this.rfId = rfId;
+		this.empId = empId;
+		this.formStatus = formStatus;
+		this.formStatus2 = formStatus2;
+		this.formStatus3 = formStatus3;
+		this.eventType = eventType;
+		this.eventLocation = eventLocation;
+		this.eventDescribtion = eventDescribtion;
+		this.eventCost = eventCost;
+		this.formsDate = formsDate;
+		this.startDate = startDate;
+		this.gradeFormat = gradeFormat;
+		this.gradeCutOff = gradeCutOff;
+		this.workTimeMissed = workTimeMissed;
+	}
+	
+	public ReimbursementForm(Integer rfId, String formStatus3) {
+		super();
+		this.rfId = rfId;
+		this.formStatus3 = formStatus3;
+	}
 	public ReimbursementForm() {
 		super();
 		
 	}
+	
 	@Override
 	public String toString() {
 		return "ReimbursementForm [rfId=" + rfId + ", empId=" + empId + ", formStatus=" + formStatus + ", eventType="

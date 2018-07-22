@@ -7,6 +7,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.revature.beans.Employee;
 import com.revature.util.Connections;
@@ -71,8 +72,37 @@ public class EmployeeDaoImpl implements EmployeeDao{
 						);
 			}
 			log.info("CHECK IS GOOD");
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.info("CHECK FAIL");
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+
+	@Override
+	public Employee selectEmployeeByRole(String Employee_Role) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Employee emp = new Employee();
+		
+		try(Connection conn = Connections.getConnection()){
+			String sql = "SELECT * FROM Employee WHERE Employee_Role = ?";
+			ps= conn.prepareStatement(sql);
+			ps.setString(1, Employee_Role);
+			rs = ps.executeQuery();
+			String temp = null;
+			
+			while(rs.next()) {
+				return new Employee(
+						temp = rs.getString("Employee_Role")
+						);
+			}
+			log.info(temp+"IS GOOD");
+		} catch (SQLException e) {
+			log.info("FAIL");
 			e.printStackTrace();
 		}finally {
 			close(rs);

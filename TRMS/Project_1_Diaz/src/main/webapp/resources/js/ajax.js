@@ -26,18 +26,22 @@ function getClams(){
 				let td10 = document.createElement('td');
 				let td11 = document.createElement('td');
 				let td12 = document.createElement('td');
+				let td13 = document.createElement('td');
+				let td14 = document.createElement('td');
 				let td1t = document.createTextNode(data[index]["rfId"]);
 				let td2t = document.createTextNode(data[index]["empId"]);
 				let td3t = document.createTextNode(data[index]["formStatus"]);
-				let td4t = document.createTextNode(data[index]["eventType"]);
-				let td5t = document.createTextNode(data[index]["eventLocation"]);
-				let td6t = document.createTextNode(data[index]["eventDescribtion"]);
-				let td7t = document.createTextNode(data[index]["eventCost"]);
-				let td8t = document.createTextNode(data[index]["formsDate"]);
-				let td9t = document.createTextNode(data[index]["startDate"]);
-				let td10t = document.createTextNode(data[index]["gradeFormat"]);
-				let td11t = document.createTextNode(data[index]["gradeCutOff"]);
-				let td12t = document.createTextNode(data[index]["workTimeMissed"]);
+				let td4t = document.createTextNode(data[index]["formStatus2"]);
+				let td5t = document.createTextNode(data[index]["formStatus3"]);
+				let td6t = document.createTextNode(data[index]["eventType"]);
+				let td7t = document.createTextNode(data[index]["eventLocation"]);
+				let td8t = document.createTextNode(data[index]["eventDescribtion"]);
+				let td9t = document.createTextNode(data[index]["eventCost"]);
+				let td10t = document.createTextNode(data[index]["formsDate"]);
+				let td11t = document.createTextNode(data[index]["startDate"]);
+				let td12t = document.createTextNode(data[index]["gradeFormat"]);
+				let td13t = document.createTextNode(data[index]["gradeCutOff"]);
+				let td14t = document.createTextNode(data[index]["workTimeMissed"]);
 				td1.appendChild(td1t);
 				td2.appendChild(td2t);
 				td3.appendChild(td3t);
@@ -50,6 +54,8 @@ function getClams(){
 				td10.appendChild(td10t);
 				td11.appendChild(td11t);
 				td12.appendChild(td12t);
+				td13.appendChild(td13t);
+				td14.appendChild(td14t);
 				row.appendChild(td1);
 				row.appendChild(td2);
 				row.appendChild(td3);
@@ -62,6 +68,8 @@ function getClams(){
 				row.appendChild(td10);
 				row.appendChild(td11);
 				row.appendChild(td12);
+				row.appendChild(td13);
+				row.appendChild(td14);
 				table.appendChild(row);
 			}
 			

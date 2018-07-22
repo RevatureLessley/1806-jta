@@ -139,6 +139,11 @@ public class Employee {
 		this.empEmail = empEmail;
 		this.empDept = empDept;
 	}
+	
+	public Employee(String role) {
+		super();
+		this.role = role;
+	}
 	public Employee() {
 		super();
 	}

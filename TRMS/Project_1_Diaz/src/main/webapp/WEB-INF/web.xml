@@ -14,10 +14,11 @@
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.revature.servlets.FrontController</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
-    <url-pattern>/FrontController</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>SecurityFilter</display-name>
@@ -77,5 +78,15 @@
   <servlet-mapping>
     <servlet-name>SelectClams</servlet-name>
     <url-pattern>/SelectClams</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>updateReimbursementFormServlet</display-name>
+    <servlet-name>updateReimbursementFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.updateReimbursementFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateReimbursementFormServlet</servlet-name>
+    <url-pattern>/updateReimbursementFormServlet</url-pattern>
   </servlet-mapping>
 </web-app>

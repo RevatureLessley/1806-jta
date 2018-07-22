@@ -31,7 +31,9 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("Employee_UserName1");
-		String password = request.getParameter("Employee_Password1");	
+		String password = request.getParameter("Employee_Password1");
+		String role = request.getParameter("Employee_Role");
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
@@ -40,8 +42,10 @@ public class LoginServlet extends HttpServlet {
 			session = request.getSession();
 			session.setAttribute("Employee_UserName1", userName);
 			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("Employee_UserName1"));
+			
 			RequestDispatcher rd = request.getRequestDispatcher("emp.html");
 			rd.forward(request, response);
+				
 		}else{
 			out.println("<h3 style='color:red'>Invalid Names and Password!!</h3>");
 			HtmlTemplates.goBackButton(out);

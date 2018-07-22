@@ -70,5 +70,20 @@ public class ReimbursementFormService {
 		
 		return json;
 	}
+	public static boolean updateStatusBenCo(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		ReimbursementFormDao rfd = new ReimbursementFormDaoImpl();
+		List<ReimbursementForm> rfs = rfd.selectAllReimbursementForm();
+		ReimbursementFormDaoImpl rfi = new ReimbursementFormDaoImpl();
+		ReimbursementForm rf = new ReimbursementForm();
+		rf = new ReimbursementForm(
+				Integer.parseInt(request.getParameter("Rf_Id")),
+				request.getParameter("Form_Status3")
+				);	
+		
+		rfi.updateReimbursementForm(rf);
+		return true;
+		
+	}
 }
 	

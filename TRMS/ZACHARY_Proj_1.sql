@@ -24,11 +24,13 @@ CREATE TABLE ReimbursementForm (
     Rf_Id NUMBER(6)PRIMARY KEY,
     Employee_Id NUMBER(10),
     Form_Status VARCHAR2(100) NOT NULL,
+    Form_Status2 VARCHAR2(100) NOT NULL,
+    Form_Status3 VARCHAR2(100) NOT NULL,
     Event_Type VARCHAR2(100) NOT NULL,
     Event_Location VARCHAR2(100) NOT NULL,
     Event_Description VARCHAR2(100),
     Event_Cost NUMBER(10),
-    Forms_Date TIMESTAMP(),
+    Forms_Date TIMESTAMP,
     Start_Date TIMESTAMP,
     Grade_Format VARCHAR2(20) NOT NULL,
     Grade_Cut_Off VARCHAR2(20) NOT NULL,
@@ -115,10 +117,10 @@ CALL InsertEmployee ('Hot', 'Dog', 'HotDog', 'HotDog', '999-999-9999', 'Test@tes
 SELECT * FROM Employee;
 /
 -----------------------------------------------------------------------------------------------
-
+Drop VIEW V_test;
 CREATE VIEW V_Test
 AS SELECT * 
-FROM REIMBURSEMENTFORM;
+FROM ReimbursementForm;
 /
 
 Select * FROM V_Test;

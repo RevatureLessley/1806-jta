@@ -54,4 +54,16 @@ public class EmployeeService {
 		log.info("Login True");
 		return true;
 	}
+	public static boolean employeeRole(String Employee_Role){
+		EmployeeDaoImpl edi = new EmployeeDaoImpl();
+		Employee emp = null;
+		emp = edi.selectEmployeeByRole(Employee_Role);
+		if(Employee_Role == "Direct Supper"){
+			log.info(Employee_Role + "Role true");
+			return true;
+		}
+		
+		log.info("Role false");
+		return false;
+	}
 }
