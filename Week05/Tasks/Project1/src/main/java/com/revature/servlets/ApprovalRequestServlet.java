@@ -16,8 +16,7 @@ import java.io.IOException;
 public class ApprovalRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        NotificationService.updateNotification(Integer.parseInt(req.getParameter("notificationId")), 1);
-        //TODO: do something with the return value of the above.
-
+        boolean result = NotificationService.updateNotification(Integer.parseInt(req.getParameter("notificationId")), 1);
+        LogWrapper.log(this.getClass(), "Updating of the Notification: Approval returned: " + result, LogWrapper.Severity.DEBUG);
     }
 }

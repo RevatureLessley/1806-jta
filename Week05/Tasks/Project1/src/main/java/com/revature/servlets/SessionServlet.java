@@ -44,7 +44,6 @@ public class SessionServlet extends HttpServlet {
 
         sb.append("}");
 
-
         return sb.toString();
     }
 }

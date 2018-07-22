@@ -1,5 +1,7 @@
 package com.revature.servlets;
 
+import com.revature.utils.LogWrapper;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +18,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().invalidate();
 
-        System.out.println("Session Invalidated");
+        LogWrapper.log(this.getClass(), "Session Invalidated.");
 
         resp.sendRedirect("index.html");
     }

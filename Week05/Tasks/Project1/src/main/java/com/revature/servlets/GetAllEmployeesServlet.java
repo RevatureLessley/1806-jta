@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import com.revature.bll.EmployeeService;
+import com.revature.utils.LogWrapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +20,6 @@ public class GetAllEmployeesServlet extends HttpServlet {
         //super.doGet(req, resp);
         resp.setContentType("text");
         PrintWriter out = resp.getWriter();
-
-
         out.println(EmployeeService.getAllEmployeesJSON());
     }
 

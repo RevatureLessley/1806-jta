@@ -54,6 +54,8 @@ public class AuthenticationServlet extends HttpServlet {
             }
         }
 
+        LogWrapper.log(this.getClass(), "Credentials Validation returned: " + validUser, LogWrapper.Severity.DEBUG);
+
         HttpSession session = null;
         if (validUser) {
             session = req.getSession();
