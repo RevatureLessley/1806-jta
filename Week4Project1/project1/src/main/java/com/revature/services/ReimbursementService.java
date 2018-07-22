@@ -32,6 +32,48 @@ public class ReimbursementService
 		return json;
 	}
 	
+	public List<Reimbursement> getLevelTwoReimbursementInfo(String accountname)
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectLevelTwoReimbursementInfo(accountname);
+	}
+	
+	public String getLevelTwoReimbursementWithJSON(String accountname)
+	{
+		List<Reimbursement> reims = getLevelTwoReimbursementInfo(accountname);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
+	public List<Reimbursement> getAllLevelsReimbursementInfo(String accountname)
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectAllLevelsReimbursementInfo(accountname);
+	}
+	
+	public String getAllLevelsReimbursementWithJSON(String accountname)
+	{
+		List<Reimbursement> reims = getAllLevelsReimbursementInfo(accountname);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
 	public boolean insertReimbursement(String eventDate, String eventTime, String eventLocation,
 									   String eventDesc, Integer eventCost, String justification,
 									   Integer gradeCutoff, Integer empId, Integer eventId,
@@ -66,16 +108,13 @@ public class ReimbursementService
 	
 	public List<Reimbursement> getApprovedReimbursementInfo(String accountname)
 	{
-		//System.out.println("inside getReimbursementInfo inside ReimbursementService");
 		ReimbursementDao rd = new ReimbursementDao();
 		return rd.selectApprovedReimbursementInfo(accountname);
 	}
 	
 	public String getApprovedReimbursementWithJSON(String accountname)
 	{
-		//System.out.println("INSIDE getReimbursementWithJSON in ReimbursementService");
 		List<Reimbursement> reims = getApprovedReimbursementInfo(accountname);
-		//System.out.println("reims after getReimbursementInfo in getReimbursementWithJSON: " + reims);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
@@ -97,9 +136,7 @@ public class ReimbursementService
 	
 	public String getDeclinedReimbursementWithJSON(String accountname)
 	{
-		//System.out.println("INSIDE getReimbursementWithJSON in ReimbursementService");
 		List<Reimbursement> reims = getDeclinedReimbursementInfo(accountname);
-		//System.out.println("reims after getReimbursementInfo in getReimbursementWithJSON: " + reims);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		

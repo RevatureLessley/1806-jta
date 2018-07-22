@@ -190,4 +190,27 @@ public class EmployeeDao
 		}
 		return 0;
 	}
+	
+	public int selectJobTypeIdByEmpId(Integer empId) 
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT job_type_id FROM employee WHERE emp_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, empId);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return rs.getInt(1);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return 0;
+	}
 }

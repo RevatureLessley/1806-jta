@@ -136,7 +136,9 @@ VALUES (2, 'Need Department Head');
 INSERT INTO approval
 VALUES (3, 'Need Coordinator');
 INSERT INTO approval
-VALUES (4, 'Approved');
+VALUES (4, 'Need Coordinator');
+INSERT INTO approval
+VALUES (5, 'Approved');
 
 INSERT INTO grading_format
 VALUES (1, 'Letter Grade', 0);
@@ -146,15 +148,15 @@ INSERT INTO grading_format
 VALUES (3, 'Attend', 1);
 
 INSERT INTO job_type
-VALUES (1, 'Benefit Coordinator');
+VALUES (1, 'Normal Employee');
 INSERT INTO job_type
-VALUES (2, 'Direct Supervisor and Department Head');
+VALUES (2, 'Direct Supervisor');
 INSERT INTO job_type
 VALUES (3, 'Department Head');
 INSERT INTO job_type
-VALUES (4, 'Direct Supervisor');
+VALUES (4, 'Direct Supervisor and Department Head');
 INSERT INTO job_type
-VALUES (5, 'Normal Employee');
+VALUES (5, 'Benefit Coordinator');
 
 INSERT INTO event
 VALUES (1, 'University Course', 80, 1);
@@ -181,52 +183,52 @@ VALUES (null, null, null);
 --SELECT * FROM reimbursement;
 
 INSERT INTO employee
-VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 600, 5);
+VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 600, 1);
 INSERT INTO employee
-VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 700, 4);
+VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 700, 2);
 INSERT INTO employee
 VALUES (null, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 800, 3);
 INSERT INTO employee
-VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 800, 2);
+VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 800, 4);
 INSERT INTO employee
-VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 900, 1);
+VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 900, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'Im gonna get declined', 100, 'get declined', 0, 0, 1, 5, 1, null, 0);
+VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'employee declined', 100, 'emp declined', 0, 0, 1, 5, 1, null, 0);
 INSERT INTO reimbursement
-VALUES (null, '02-FEB-2018', '01:00', 'Arlington, TX', 'I need a supervisor', 100, 'need Supervisor approval', 0, 0, 1, 4, 2, null, 1);
+VALUES (null, '02-FEB-2018', '01:00', 'Arlington, TX', 'employee need a supervisor', 100, 'emp need Supervisor approval', 0, 0, 1, 4, 2, null, 1);
 INSERT INTO reimbursement
-VALUES (null, '03-MAR-2018', '02:00', 'Arlington, TX', 'I need a department head', 100, 'need DepHead approval', 0, 0, 1, 3, 3, null, 2);
+VALUES (null, '03-MAR-2018', '02:00', 'Arlington, TX', 'employee need a department head', 100, 'emp need DepHead approval', 0, 0, 1, 3, 3, null, 2);
 INSERT INTO reimbursement
-VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'I need a BenCo', 100, 'need BenCo approval', 0, 0, 1, 2, 1, null, 3);
+VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'employee need a BenCo', 100, 'emp need BenCo approval', 0, 0, 1, 2, 1, null, 3);
 INSERT INTO reimbursement
-VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 1, 1, 2, null, 4);
+VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'employee approved', 100, 'emp approved', 0, 0, 1, 1, 2, null, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'Im gonna get declined', 100, 'get declined', 0, 0, 2, 5, 1, null, 0);
+VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'supervisor declined', 100, 'sup declined', 0, 0, 2, 5, 1, null, 0);
 INSERT INTO reimbursement
-VALUES (null, '03-MAR-2018', '02:00', 'Arlington, TX', 'I need a department head', 100, 'need DepHead approval', 0, 0, 2, 3, 3, null, 2);
+VALUES (null, '03-MAR-2018', '02:00', 'Arlington, TX', 'supervisor need a department head', 100, 'sup need DepHead approval', 0, 0, 2, 3, 3, null, 2);
 INSERT INTO reimbursement
-VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'I need a BenCo', 100, 'need BenCo approval', 0, 0, 2, 2, 1, null, 3);
+VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'supervisor need a BenCo', 100, 'sup need BenCo approval', 0, 0, 2, 2, 1, null, 3);
 INSERT INTO reimbursement
-VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 2, 1, 2, null, 4);
+VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'supervisor approved', 100, 'sup get approved', 0, 0, 2, 1, 2, null, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'Im gonna get declined', 100, 'get declined', 0, 0, 3, 5, 1, null, 0);
+VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'dephead declined', 100, 'dephead declined', 0, 0, 3, 5, 1, null, 0);
 INSERT INTO reimbursement
-VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'I need a BenCo', 100, 'need BenCo approval', 0, 0, 3, 2, 1, null, 3);
+VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'dephead need a BenCo', 100, 'dephead need BenCo approval', 0, 0, 3, 2, 1, null, 3);
 INSERT INTO reimbursement
-VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 3, 1, 2, null, 4);
+VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'dephead approved', 100, 'dephead get approved', 0, 0, 3, 1, 2, null, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'Im gonna get declined', 100, 'get declined', 0, 0, 4, 5, 1, null, 0);
+VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'both declined', 100, 'both declined', 0, 0, 4, 5, 1, null, 0);
 INSERT INTO reimbursement
-VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'I need a BenCo', 100, 'need BenCo approval', 0, 0, 4, 2, 1, null, 3);
+VALUES (null, '04-APR-2018', '03:00', 'Arlington, TX', 'both need a BenCo', 100, 'both need BenCo approval', 0, 0, 4, 2, 1, null, 4);
 INSERT INTO reimbursement
-VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 4, 1, 2, null, 4);
+VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'both approved', 100, 'both approved', 0, 0, 4, 1, 2, null, 5);
 
 INSERT INTO reimbursement
-VALUES (null, '05-MAY-2018', '04:00', 'Arlington, TX', 'Im gonna get approved', 100, 'get approved', 0, 0, 3, 1, 2, null, 4);
+VALUES (null, '06-JUN-2018', '05:00', 'Arlington, TX', 'benco approved', 100, 'benco approved', 0, 0, 3, 1, 2, null, 5);
 
 CREATE OR REPLACE PROCEDURE update_amount_left(empId IN employee.emp_id%TYPE,
                                                newAmountLeft IN employee.amount_left%TYPE)
@@ -313,7 +315,8 @@ COMMIT;
 --WHERE reimbursement.emp_id = 2 AND (reimbursement.approval_id = 2 OR reimbursement.approval_id = 3);
 --SELECT emp_id FROM employee WHERE emp_accountname = 'loganbrewer;
 --SELECT * FROM employee;
---SELECT * FROM reimbursement;
+--SELECT * FROM approval;
+--SELECT event_desc, approval_id FROM reimbursement;
 --SELECT * FROM reimbursement WHERE approval_id = 1;
 --SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
 --SELECT approval_id FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;

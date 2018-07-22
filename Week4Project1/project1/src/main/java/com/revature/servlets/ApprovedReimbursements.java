@@ -23,7 +23,6 @@ public class ApprovedReimbursements extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		//System.out.println("INSIDE GetReimbursements.java");
 		response.setContentType("text");
 		PrintWriter out = response.getWriter();
 		ReimbursementService rs = new ReimbursementService();
@@ -31,7 +30,6 @@ public class ApprovedReimbursements extends HttpServlet
 		String accountName = "";
 		
 		accountName = (String) session.getAttribute("accountname");
-		//System.out.println("accountName in GetReimbursement.java: " + accountName);
 		
 		out.println(rs.getApprovedReimbursementWithJSON(accountName));
 	}

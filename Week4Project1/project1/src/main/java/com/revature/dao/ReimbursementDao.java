@@ -79,7 +79,7 @@ public class ReimbursementDao
 		ResultSet rs = null;
 		List<Reimbursement> reims = new ArrayList<>();
 		
-		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3)";
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3 OR reimbursement.approval_id = 4)";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -137,6 +137,70 @@ public class ReimbursementDao
 		return reims;
 	}
 	
+	public List<Reimbursement> selectLevelTwoReimbursementInfo(String accountname)
+	{
+		EmployeeService es = new EmployeeService();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Reimbursement> reims = new ArrayList<>();
+		
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 2";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Reimbursement reim = new Reimbursement(
+							rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getInt(5)
+						);
+				reims.add(reim);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return reims;
+	}
+	
+	public List<Reimbursement> selectAllLevelsReimbursementInfo(String accountname)
+	{
+		EmployeeService es = new EmployeeService();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Reimbursement> reims = new ArrayList<>();
+		
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3 OR reimbursement.approval_id = 4)";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Reimbursement reim = new Reimbursement(
+							rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getInt(5)
+						);
+				reims.add(reim);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return reims;
+	}
+	
 	public List<Reimbursement> selectApprovedReimbursementInfo(String accountname)
 	{
 		EmployeeService es = new EmployeeService();
@@ -145,7 +209,7 @@ public class ReimbursementDao
 		ResultSet rs = null;
 		List<Reimbursement> reims = new ArrayList<>();
 		
-		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND reimbursement.approval_id = 4";
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND reimbursement.approval_id = 5";
 		
 		try(Connection conn = Connections.getConnection()){
 			ps = conn.prepareStatement(sql);
