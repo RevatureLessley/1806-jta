@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.beans.Reimbursement;
+import com.revature.services.EmployeeService;
 import com.revature.util.Connections;
 
 public class ReimbursementDao
@@ -57,7 +58,7 @@ public class ReimbursementDao
 			stmt.setInt(8, empId);
 			stmt.setInt(9, eventId);
 			stmt.setInt(10, gradingFormatId);
-			stmt.setInt(11, 1);
+			stmt.setInt(11, empId);
 			
 			stmt.execute();
 			return true;
@@ -72,10 +73,8 @@ public class ReimbursementDao
 	
 	public List<Reimbursement> selectReimbursementInfo(String accountname)
 	{
-		System.out.println("inside selectReimbursementInfo inside ReimbursementDao");
-		EmployeeDao ed = new EmployeeDao();
-		Integer empId = ed.selectEmpIdByAccountName(accountname);
-		System.out.println("empId in selectReimbursementInfo inside ReimbursementDao: " + empId);
+		EmployeeService es = new EmployeeService();
+		Integer empId = es.getEmpIdByAccountname(accountname);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Reimbursement> reims = new ArrayList<>();
@@ -83,9 +82,8 @@ public class ReimbursementDao
 		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3)";
 		
 		try(Connection conn = Connections.getConnection()){
-			System.out.println("INSIDE Connection loop in ReimbursementDao");
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
+			ps.setInt(1, empId);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Reimbursement reim = new Reimbursement(
@@ -95,11 +93,7 @@ public class ReimbursementDao
 							rs.getString(4),
 							rs.getInt(5)
 						);
-				System.out.println("NEW REIMBURSEMENT ADDED");
-				System.out.println("new reim toString: " + reim);
 				reims.add(reim);
-				System.out.println("ADDED reim TO reims");
-				System.out.println("new reims:" + reims);
 			}
 			
 		}catch(SQLException e){
@@ -113,10 +107,8 @@ public class ReimbursementDao
 	
 	public List<Reimbursement> selectApprovedReimbursementInfo(String accountname)
 	{
-		System.out.println("inside selectReimbursementInfo inside ReimbursementDao");
-		EmployeeDao ed = new EmployeeDao();
-		Integer empId = ed.selectEmpIdByAccountName(accountname);
-		System.out.println("empId in selectReimbursementInfo inside ReimbursementDao: " + empId);
+		EmployeeService es = new EmployeeService();
+		Integer empId = es.getEmpIdByAccountname(accountname);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Reimbursement> reims = new ArrayList<>();
@@ -124,9 +116,8 @@ public class ReimbursementDao
 		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = ? AND reimbursement.approval_id = 4";
 		
 		try(Connection conn = Connections.getConnection()){
-			System.out.println("INSIDE Connection loop in ReimbursementDao");
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
+			ps.setInt(1, empId);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				Reimbursement reim = new Reimbursement(
@@ -136,11 +127,7 @@ public class ReimbursementDao
 							rs.getString(4),
 							rs.getInt(5)
 						);
-				System.out.println("NEW REIMBURSEMENT ADDED");
-				System.out.println("new reim toString: " + reim);
 				reims.add(reim);
-				System.out.println("ADDED reim TO reims");
-				System.out.println("new reims:" + reims);
 			}
 			
 		}catch(SQLException e){

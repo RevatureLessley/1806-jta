@@ -45,6 +45,29 @@ public class EmployeeDao
 		return null;
 	}
 	
+	public Integer getEmpIdByAccountnameDao(String accountname)
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT emp_id FROM employee WHERE emp_accountname = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, accountname);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return rs.getInt(1);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return 0;
+	}
+	
 	public Integer getEmployeeAmountLeftViaSp(Integer empId)
 	{
 		PreparedStatement ps = null;
@@ -145,7 +168,7 @@ public class EmployeeDao
 		return null;
 	}
 	
-	public int selectEmpIdByAccountName(String accountName) 
+	public int selectJobTypeIdByAccountName(String accountName) 
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;

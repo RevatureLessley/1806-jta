@@ -7,6 +7,12 @@ import com.revature.dao.EmployeeDao;
 
 public class EmployeeService 
 {
+	public Integer getEmpIdByAccountname(String accountname)
+	{
+		EmployeeDao ed = new EmployeeDao();
+		return ed.getEmpIdByAccountnameDao(accountname);
+	}
+	
 	public Employee getEmployeeUsingEmpId(Integer id)
 	{
 		EmployeeDao ed = new EmployeeDao();
@@ -66,12 +72,12 @@ public class EmployeeService
 		return true;
 	}
 	
-	public int checkEmpId(String accountname)
+	public int checkJobTypeId(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		int empId = 0;
 		
-		empId = ed.selectEmpIdByAccountName(accountname);
+		empId = ed.selectJobTypeIdByAccountName(accountname);
 		
 		if ( empId == 1 )
 		{

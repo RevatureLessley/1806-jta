@@ -31,9 +31,6 @@ public class LoginServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 		
-		System.out.println("accountname: " + accountname);
-		System.out.println("password: " + password);
-		
 		EmployeeService es = new EmployeeService();
 		
 		RequestDispatcher rd = null;
@@ -42,31 +39,31 @@ public class LoginServlet extends HttpServlet
 		{
 			session = request.getSession();
 			session.setAttribute("accountname", accountname);
-			if ( es.checkEmpId(accountname) == 1 )
+			if ( es.checkJobTypeId(accountname) == 1 )
 			{
 				//rd = request.getRequestDispatcher("./benefitscoordinator/index.html");
 				//rd.forward(request, response);
 				response.sendRedirect("./benefitscoordinator/index.html");
 			}
-			else if ( es.checkEmpId(accountname) == 2 )
+			else if ( es.checkJobTypeId(accountname) == 2 )
 			{
 				//rd = request.getRequestDispatcher("./supandhead/index.html");
 				//rd.forward(request, response);
 				response.sendRedirect("./supandhead/index.html");
 			}
-			else if ( es.checkEmpId(accountname) == 3 )
+			else if ( es.checkJobTypeId(accountname) == 3 )
 			{
 				//rd = request.getRequestDispatcher("./departmenthead/index.html");
 				//rd.forward(request, response);
 				response.sendRedirect("./departmenthead/index.html");
 			}
-			else if ( es.checkEmpId(accountname) == 4 )
+			else if ( es.checkJobTypeId(accountname) == 4 )
 			{
 				//rd = request.getRequestDispatcher("./supervisor/index.html");
 				//rd.forward(request, response);
 				response.sendRedirect("./supervisor/index.html");
 			}
-			else if ( es.checkEmpId(accountname) == 5 )
+			else if ( es.checkJobTypeId(accountname) == 5 )
 			{
 				//rd = request.getRequestDispatcher("./employee/index.html");
 				//rd.forward(request, response);
