@@ -227,6 +227,62 @@ public class EmployeeDaoImpl {
 		}
 		return null;
 	}
+	public List<RForm> selectRformBenHead(int id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM RForm WHERE emp_id != ? AND app_lvl = 2";
+		List<RForm> rforms = new ArrayList<>();
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				rforms.add(new RForm(
+						rs.getInt(1),
+						rs.getInt(2),
+						rs.getDate(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getInt(6),
+						rs.getString(7),
+						rs.getString(8),
+						rs.getInt(9),
+						rs.getInt(10),
+						rs.getInt(11),
+						rs.getInt(12),
+						rs.getInt(13),
+						rs.getInt(14),
+						rs.getDouble(15),
+						rs.getString(16),
+						rs.getInt(17)
+						));
+			}
+			return rforms;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
 	
-	
+	public Boolean updatePending(double amount,int empid) {
+		PreparedStatement ps = null;
+		String sql = "UPDATE Employee SET pending_reim = ? WHERE emp_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, amount);
+			ps.setInt(2, empid);
+			ps.executeUpdate();
+			return true;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		
+		return false;
+	}
 }

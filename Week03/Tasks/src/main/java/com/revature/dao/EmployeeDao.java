@@ -10,4 +10,6 @@ public interface EmployeeDao {
 	public Boolean selectEmployeeByUserN(String userN);
 	public Boolean selectEmployeeById(int id);
 	public List<RForm> selectRformByEmployeeId(int id);
+	public List<RForm> selectRformBenHead(int id);
+	public Boolean updatePending(double amount,int empid);
 }

@@ -111,7 +111,6 @@ function rformDetails(jsonobj){
 	if(jsonobj["isSup"] == 1){
 		let b2 = document.createElement('button');
 		b2.setAttribute("onclick","approveRForm(" + jsonobj["rFormId"] +"," + jsonobj["appLvl"] + ")");
-		b2.setAttribute("id",jsonobj["rFormId"] + "approval")
 		b2.appendChild(document.createTextNode("Approve"));
 		ul1.appendChild(b2);
 	}
@@ -200,8 +199,6 @@ function dispSupRForms(){
 	xhr.send();
 }
 function approveRForm(rformid,applvl){
-	console.log(rformid);
-	console.log(applvl);
 	$.ajax({
 	    url: 'ApproveRForm.do',
 	    data: {
@@ -210,5 +207,6 @@ function approveRForm(rformid,applvl){
 	        
 	    },
 	    type: 'POST'});
+	document.getElementById(rformid).remove();
 
 }

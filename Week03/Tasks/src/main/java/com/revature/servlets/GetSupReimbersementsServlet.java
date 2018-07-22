@@ -34,8 +34,9 @@ public class GetSupReimbersementsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		HttpSession session = request.getSession(false);
-		if(((Employee)session.getAttribute("employee")).getDepId() == 1)
-		{
+		if(((Employee)session.getAttribute("employee")).getEmpid() == 1) {
+			out.println(EmployeeService.getSupRFormsJSON(((Employee)session.getAttribute("employee")).getEmpid()));
+		}else if(((Employee)session.getAttribute("employee")).getDepId() == 1){
 			out.println(EmployeeService.getBenRFormsJSON(((Employee)session.getAttribute("employee")).getEmpid()));
 		}else if(((Employee)session.getAttribute("employee")).getEmpType() >= 1) {
 			out.println(EmployeeService.getSupRFormsJSON(((Employee)session.getAttribute("employee")).getEmpid()));

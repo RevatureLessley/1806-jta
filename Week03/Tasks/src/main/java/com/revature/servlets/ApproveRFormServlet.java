@@ -5,7 +5,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.revature.beans.Employee;
 import com.revature.services.RFormService;
 
 /**
@@ -28,8 +30,13 @@ public class ApproveRFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text");
 		int currFormId = Integer.parseInt(request.getParameter("currFormId"));
-		int currapplvl = Integer.parseInt(request.getParameter("currapplvl")) + 1;
-		RFormService.approveRForm(currapplvl, currFormId);
+		int currapplvl = Integer.parseInt(request.getParameter("currapplvl"));
+		HttpSession session = request.getSession(false);
+		if(((Employee)session.getAttribute("employee")).getDepId() == 1) {
+			RFormService.approveRForm(currapplvl + 2, currFormId);
+		}else {
+			RFormService.approveRForm(currapplvl + 1, currFormId);
+		}
 	}
 
 	/**

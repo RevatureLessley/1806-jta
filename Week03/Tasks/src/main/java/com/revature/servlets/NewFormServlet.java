@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Employee;
+import com.revature.services.EmployeeService;
+import com.revature.services.EmployeeTypeService;
+import com.revature.services.EventTypeService;
 import com.revature.services.RFormService;
 
 /**
@@ -58,10 +61,16 @@ public class NewFormServlet extends HttpServlet {
 		String eventname = request.getParameter("eventname");
 		
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
 										timemissed, gradeformat, cutoff, eventtype, eventcost,supid,eventname)){
 			session = request.getSession();
+			EventTypeService.getEventTypes();
+			String eventtypename = EventTypeService.eventtypes.getEventTypeNameMap().get(eventtype);
+			Employee employee = (Employee)session.getAttribute("employee");
+			employee.setPending(((Employee)session.getAttribute("employee")).getPending()
+					+ (0.01*eventcost)*EventTypeService.eventtypes.getEventTypeMap().get(eventtypename).get(1));
+			session.setAttribute("employee", employee);
+			EmployeeService.updatePendingReim(employee.getPending(),empid);
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}else{

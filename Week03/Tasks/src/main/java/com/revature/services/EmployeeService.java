@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.revature.beans.Employee;
 import com.revature.beans.RForm;
 import com.revature.dao.EmployeeDaoImpl;
+import com.revature.dao.RFormDaoImpl;
 
 public class EmployeeService {
 	public static boolean registerEmployee(
@@ -48,6 +49,7 @@ public class EmployeeService {
 		employee.setEmpTypeName(EmployeeTypeService.emptypes.getEmpTypeIdMap().get(employee.getEmpType()));
 		return employee;
 	}
+
 	public static String getEmpInfoJSON(String usern,String passw){
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		Employee employee;
@@ -126,6 +128,33 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	public static String getBenHeadRFormsJSON(int benid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<RForm> rforms = empDao.selectRformBenHead(benid);
+		for (RForm form: rforms) {
+			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
+					.get(form.getEventTypeId()));
+			form.setEmpName(empDao.selectEmployeeById(form.getEmpid()).getFirstN()
+					+ " " + empDao.selectEmployeeById(form.getEmpid()).getLastN());
+			form.setIsSup(1);
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try {
+			json = mapper.writeValueAsString(rforms);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	public static boolean updatePendingReim(double amount,int empid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		if(empDao.updatePending(amount, empid)) return true;
+		return false;
 	}
 	
 }
