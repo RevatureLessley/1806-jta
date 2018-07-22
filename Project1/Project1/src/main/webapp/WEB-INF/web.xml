@@ -48,4 +48,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>tester</display-name>
+    <servlet-name>tester</servlet-name>
+    <servlet-class>com.revature.servlets.tester</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tester</servlet-name>
+    <url-pattern>/tester</url-pattern>
+  </servlet-mapping>
 </web-app>

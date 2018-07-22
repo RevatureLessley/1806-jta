@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import com.revature.beans.Employee;
@@ -39,7 +38,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 						rs.getString(3),
 						rs.getString(4),
 						rs.getString(5),
-						rs.getFloat(6)
+						rs.getFloat(6),
+						rs.getString(7)
 						);
 				
 			}

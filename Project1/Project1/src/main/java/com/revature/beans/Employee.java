@@ -7,13 +7,16 @@ public class Employee {
 	private String lName;
 	private String address;
 	private float remainingReimbursement;
+	private String empRole;
 	
 	///////////////////////////////////////////////
 	// Constructors ///////////////////////////////
 	///////////////////////////////////////////////
+
 	
 	public Employee(int userId, String password, String fName, String lName, String address,
-			float remainingReimbursement) {
+			float remainingReimbursement, String empRole)
+	{
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -21,8 +24,11 @@ public class Employee {
 		this.lName = lName;
 		this.address = address;
 		this.remainingReimbursement = remainingReimbursement;
+		this.empRole = empRole;
 	}
-	public Employee() {
+
+	public Employee()
+	{
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -31,53 +37,86 @@ public class Employee {
 // Getters and Setters ////////////////////////
 ///////////////////////////////////////////////
 	
-	public int getUserId() {
+	public int getUserId()
+	{
 		return userId;
 	}
-	public void setUserId(int userId) {
+
+	public void setUserId(int userId)
+	{
 		this.userId = userId;
 	}
-	public String getPassword() {
+
+	public String getPassword()
+	{
 		return password;
 	}
-	public void setPassword(String password) {
+
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
-	public String getfName() {
+
+	public String getfName()
+	{
 		return fName;
 	}
-	public void setfName(String fName) {
+
+	public void setfName(String fName)
+	{
 		this.fName = fName;
 	}
-	public String getlName() {
+
+	public String getlName()
+	{
 		return lName;
 	}
-	public void setlName(String lName) {
+
+	public void setlName(String lName)
+	{
 		this.lName = lName;
 	}
-	public String getAddress() {
+
+	public String getAddress()
+	{
 		return address;
 	}
-	public void setAddress(String address) {
+
+	public void setAddress(String address)
+	{
 		this.address = address;
 	}
-	public float getRemainingReimbursement() {
+
+	public float getRemainingReimbursement()
+	{
 		return remainingReimbursement;
 	}
-	public void setRemainingReimbursement(float remainingReimbursement) {
+
+	public void setRemainingReimbursement(float remainingReimbursement)
+	{
 		this.remainingReimbursement = remainingReimbursement;
 	}
+	
+	public String getEmpRole()
+	{
+		return empRole;
+	}
+
+	public void setEmpRole(String empRole)
+	{
+		this.empRole = empRole;
+	}
+
 	
 ///////////////////////////////////////////////
 // toString ///////////////////////////////////
 ///////////////////////////////////////////////
 	
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Employee [userId=" + userId + ", password=" + password + ", fName=" + fName + ", lName=" + lName
 				+ ", address=" + address + ", remainingReimbursement=" + remainingReimbursement + "]";
 	}
-	
-
 
 }

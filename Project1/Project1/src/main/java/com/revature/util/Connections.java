@@ -25,9 +25,6 @@ public static Connection getConnection() {
 		{
 			e.printStackTrace();
 		}
-		
-		
-		
 		System.out.println("Database connected!");
 		return conn;
 	}

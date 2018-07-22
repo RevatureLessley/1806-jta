@@ -34,11 +34,11 @@ public class LoginServlet extends HttpServlet {
 		if(EmployeeService.employeeLogin(username, password)){
 			session = request.getSession();
 			session.setAttribute("username", username);
-			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("userid"));
+			System.out.println("LOGIN STARTED: " + session.getAttribute("username"));
 			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
 			rd.forward(request, response);
 		}else{
-			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE?</h3>");
+			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE!</h3>");
 			HtmlTemplates.goBackButton(out);
 		}
 	
