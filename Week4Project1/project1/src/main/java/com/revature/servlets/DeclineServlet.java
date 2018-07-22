@@ -32,7 +32,7 @@ public class DeclineServlet extends HttpServlet
 		
 		rs.updateApprovalToLevel0();
 		
-		response.sendRedirect("./supervisor/index.html");
+		response.sendRedirect("./supervisor/approveOrDenyReimbursements.html");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

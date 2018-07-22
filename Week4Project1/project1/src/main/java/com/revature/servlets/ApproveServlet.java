@@ -31,7 +31,7 @@ public class ApproveServlet extends HttpServlet
 		
 		rs.updateApprovalToLevel2();
 		
-		response.sendRedirect("./supervisor/index.html");
+		response.sendRedirect("./supervisor/approveOrDenyReimbursements.html");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
