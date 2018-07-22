@@ -158,4 +158,34 @@
     <servlet-name>DepHeadDeclineServlet</servlet-name>
     <url-pattern>/DepHeadDeclineServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BothApproveServlet</display-name>
+    <servlet-name>BothApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BothApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BothApproveServlet</servlet-name>
+    <url-pattern>/BothApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BothDeclineServlet</display-name>
+    <servlet-name>BothDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BothDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BothDeclineServlet</servlet-name>
+    <url-pattern>/BothDeclineServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelOneOrTwoPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelOneOrTwoPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelOneOrTwoPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelOneOrTwoPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelOneOrTwoPendingReimbursements</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -12,8 +12,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="../resources/css/main.css">
-	
-	<script src="../resources/js/ajax.js"></script>
+
+	<script src="../resources/js/ajax3.js"></script>
 
 	<title>Tuition Reimbursement Management System</title>
 </head>
@@ -46,33 +46,19 @@
 	<div class="container py-5">
 		
 		<div>
-			<h2 onload="getAccountCurrency()">You have the amount below of reimbursement left</h2>
-			<p id="employeecurrencynow"></p>
+			<h2 id="approvedreimbursementhead" onload="getApprovedReimbursements()">Approved Reimbursement Requests</h2>
+			<table id="employeeapprovedreimbursementtable" border=2px;>
+				<tr>
+					<th>EventDesc</th>
+					<th>EventDate</th>
+					<th>EventTime</th>
+					<th>EventLocation</th>
+					<th>EventCost</th>
+					<!-- <th>ApprovalName</th> -->
+				</tr>
+			</table>
 		</div>
 		<br>
-		<div>
-			<ul style="list-style-type: none">
-		    	<li>
-		      		<a href="./requestReimbursements.html" class="btn btn-info" role="button">Request Reimbursement</a>
-		      	</li>
-		      	<br><br>
-		      	<li>
-		      		<a href="./pendingReimbursements.html" class="btn btn-info" role="button">Pending Reimbursements</a>
-		      	</li>
-		      	<br><br>
-		      	<li>
-		      		<a href="./approvedReimbursements.html" class="btn btn-info" role="button">Approved Reimbursements</a>
-		      	</li>
-		      	<br><br>
-		      	<li>
-		      		<a href="./deniedReimbursements.html" class="btn btn-info" role="button">Denied Reimbursements</a>
-		      	</li>
-		      	<br><br>
-		      	<li>
-		      		<a href="./approveOrDenyReimbursements.html" class="btn btn-info" role="button">Approve or Deny Reimbursements</a>
-		      	</li>
-		    </ul>
-		</div>
 	</div>
 	
 </body>

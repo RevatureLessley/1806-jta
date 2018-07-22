@@ -53,6 +53,27 @@ public class ReimbursementService
 		return json;
 	}
 	
+	public List<Reimbursement> getLevelOneOrTwoReimbursementInfo(String accountname)
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectLevelOneOrTwoReimbursementInfo(accountname);
+	}
+	
+	public String getLevelOneOrTwoReimbursementWithJSON(String accountname)
+	{
+		List<Reimbursement> reims = getLevelOneOrTwoReimbursementInfo(accountname);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
 	public List<Reimbursement> getAllLevelsReimbursementInfo(String accountname)
 	{
 		ReimbursementDao rd = new ReimbursementDao();
