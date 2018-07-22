@@ -13,7 +13,6 @@ public class EventDisplay {
 	private String name;
 	private String typeName;
 	private String cost;
-	private String expectedAmount;
 	private String date;
 	private EventStatus status;
 	private String employeeName;
@@ -24,6 +23,7 @@ public class EventDisplay {
 	private EventPhase phase;
 	private boolean requiresPresentation;
 	private String reimbursementAmount;
+	private String finalGrade;
 
 	public EventDisplay(Event event) {
 		this.id = event.getId();
@@ -32,14 +32,15 @@ public class EventDisplay {
 		EventType eventType = FixedDataService.getEventType(event);
 		this.typeName = eventType.getName();
 		this.cost = StringManip.formatCurrency(event.getCost());
-		this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
+		//this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
 		this.reimbursementAmount = StringManip.formatCurrency(event.getReimbursementAmount());
 
 		this.date = StringManip.formatDate(event.getEventDate());
 		this.status = EventService.getEventStatus(event);
 		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
 		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
-
+		this.finalGrade = EventService.getEventGrade(event.getGrade());
+		
 		this.event = event;
 
 		this.superApprove = StringManip.formatDate(event.getSuperApprove());
@@ -49,6 +50,25 @@ public class EventDisplay {
 		this.phase = EventService.getPhase(event);
 
 		this.requiresPresentation = (FixedDataService.getGradeScale(event.getGradeScale()).getPresentation() == 1);
+		
+		
+	}
+
+	@Override
+	public String toString() {
+		return "EventDisplay [id=" + id + ", name=" + name + ", typeName=" + typeName + ", cost=" + cost + ", date="
+				+ date + ", status=" + status + ", employeeName=" + employeeName + ", gradeScaleName=" + gradeScaleName
+				+ ", superApprove=" + superApprove + ", headApprove=" + headApprove + ", bencoApprove=" + bencoApprove
+				+ ", phase=" + phase + ", requiresPresentation=" + requiresPresentation + ", reimbursementAmount="
+				+ reimbursementAmount + ", finalGrade=" + finalGrade + ", event=" + event + "]";
+	}
+
+	public String getFinalGrade() {
+		return finalGrade;
+	}
+
+	public void setFinalGrade(String finalGrade) {
+		this.finalGrade = finalGrade;
 	}
 
 	public String getReimbursementAmount() {
@@ -141,14 +161,6 @@ public class EventDisplay {
 		this.cost = cost;
 	}
 
-	public String getExpectedAmount() {
-		return expectedAmount;
-	}
-
-	public void setExpectedAmount(String expectedAmount) {
-		this.expectedAmount = expectedAmount;
-	}
-
 	public String getDate() {
 		return date;
 	}
@@ -171,14 +183,6 @@ public class EventDisplay {
 
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
-	}
-
-	@Override
-	public String toString() {
-		return "EventDisplay [id=" + id + ", name=" + name + ", typeName=" + typeName + ", cost=" + cost
-				+ ", expectedAmount=" + expectedAmount + ", date=" + date + ", status=" + status + ", employeeName="
-				+ employeeName + ", gradeScaleName=" + gradeScaleName + ", superApprove=" + superApprove
-				+ ", headApprove=" + headApprove + ", bencoApprove=" + bencoApprove + ", event=" + event + "]";
 	}
 
 	public EventPhase getPhase() {

@@ -131,17 +131,19 @@
 	<script>
 		addFromTemplate("navbar", "#navDiv");
 
-		let today = new Date();
-		let dd = today.getDate();
-		let mm = today.getMonth() + 1;
-		let yyyy = today.getFullYear();
+		var date = new Date();
+		date.setDate(date.getDate()+7);
+	
+		let dd = date.getDate();
+		let mm = date.getMonth() + 1;
+		let yyyy = date.getFullYear();
 
 		if (dd < 10)
 			dd = "0" + dd;
 		if (mm < 10)
 			mm = "0" + mm;
 
-		document.getElementById("datefield").setAttribute("max",
+		document.getElementById("datefield").setAttribute("min",
 				yyyy + '-' + mm + '-' + dd);
 	</script>
 

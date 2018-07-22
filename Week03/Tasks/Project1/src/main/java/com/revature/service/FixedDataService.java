@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import com.revature.bean.EmployeeType;
 import com.revature.bean.Event;
 import com.revature.bean.EventType;
 import com.revature.bean.GradeScale;
+import com.revature.bean.GradeValue;
 import com.revature.dao.FixedDataDao;
 
 public class FixedDataService {
@@ -18,6 +20,7 @@ public class FixedDataService {
 	private static Map<Integer, EventType> eventTypeMap;
 	private static Map<Integer, Department> departmentMap;
 	private static Map<Integer, GradeScale> gradeScaleMap;
+	private static Map<Integer, GradeValue> gradeValueMap;
 
 	private static Map<Integer, EmployeeType> getEmployeeTypeMap() {
 		if (employeeTypeMap == null) {
@@ -58,6 +61,16 @@ public class FixedDataService {
 		}
 		return gradeScaleMap;
 	}
+	
+	private static Map<Integer, GradeValue> getGradeValueMap() {
+		if (gradeValueMap == null) {
+			List<GradeValue> list = new FixedDataDao().selectAllGradeValues();
+			gradeValueMap = new HashMap<>();
+			for (GradeValue i : list)
+				gradeValueMap.put(i.getId(), i);
+		}
+		return gradeValueMap;
+	}
 
 	public static EventType getEventType(Integer id) {
 		return getEventTypeMap().get(id);
@@ -85,6 +98,22 @@ public class FixedDataService {
 
 	public static GradeScale getGradeScale(Integer id) {
 		return getGradeScaleMap().get(id);
+	}
+	
+	public static GradeValue getGradeValue(Integer id) {
+		return getGradeValueMap().get(id);
+	}
+	
+	public static List<GradeValue> gradeScaleGetValues(Integer gsId){
+		List<GradeValue> ls = new ArrayList<>();
+		getGradeValueMap();
+		
+		for(GradeValue v : gradeValueMap.values()) {
+			if(v.getScale() == gsId)
+				ls.add(v);
+		}
+		
+		return ls;
 	}
 
 	

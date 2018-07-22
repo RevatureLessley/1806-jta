@@ -31,6 +31,7 @@ public class TestStatus {
 		assertEquals(EventStatus.Urgent, EventService.getEventStatus(event));
 		
 		event = new Event();
+		event.setBencoApprove(LocalDateTime.now());
 		event.setEventDate(LocalDateTime.now().minusDays(10));
 		assertEquals(EventStatus.Pending, EventService.getEventStatus(event));
 		

@@ -1,15 +1,17 @@
-<template>
+<template> 
 <div id="changeAward" class="col-md-10">
-	<form id="changeAwardForm" action='eventComment.do' method="post">
+	<br><br>
+	<form id="changeAwardForm" action='changeAward.do' method="post">
 
 		<h5 style="text-align: center;">Modify Award</h5>
 		<div class="form-group">
-			<label for="eventname">Award Amount</label> <input class="form-control"
-				type="number" name="amount" required="required">
+			<label for="eventname">Award Amount</label> <input
+				class="form-control" type="number" name="amount" required="required">
 		</div>
 		<div class="form-group">
-			<label for="description">Justification</label>
-			<textarea name="message" class="form-control" rows="3" id="comment"></textarea>
+			<label for="message">Justification</label>
+			<textarea name="message" class="form-control" rows="3" id="comment"
+				required="required"></textarea>
 		</div>
 		<button type="Apply" class="btn btn-primary">Apply</button>
 	</form>

@@ -102,4 +102,44 @@
     <servlet-name>EventCommentServlet</servlet-name>
     <url-pattern>/manage/EventCommentServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventChangeAwardServlet</display-name>
+    <servlet-name>EventChangeAwardServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EventChangeAwardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventChangeAwardServlet</servlet-name>
+    <url-pattern>/manage/EventChangeAwardServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradeValueServlet</display-name>
+    <servlet-name>GradeValueServlet</servlet-name>
+    <servlet-class>com.revature.servlet.GradeValueServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradeValueServlet</servlet-name>
+    <url-pattern>/GradeValueServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventGradeServlet</display-name>
+    <servlet-name>EventGradeServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EventGradeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventGradeServlet</servlet-name>
+    <url-pattern>/user/EventGradeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EventConfirmServlet</display-name>
+    <servlet-name>EventConfirmServlet</servlet-name>
+    <servlet-class>com.revature.servlet.EventConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EventConfirmServlet</servlet-name>
+    <url-pattern>/manage/EventConfirmServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

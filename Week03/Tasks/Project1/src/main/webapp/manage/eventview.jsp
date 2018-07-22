@@ -22,8 +22,10 @@
 <script src="../resources/js/messagebuilder.js"></script>
 <link rel="import" href="../template/eventview.html">
 <link rel="import" href="../template/navbar.html">
-<link rel="import" href="../template/manageevent.html">
+<link rel="import" href="../template/eventmanage.html">
+<link rel="import" href="../template/eventconfirm.html">
 <link rel="import" href="../template/message.html">
+<link rel="import" href="../template/eventchangeaward.html">
 </head>
 <body>
 
@@ -31,23 +33,29 @@
 	<br>
 	<div id="container" class="container-fluid"></div>
 
+	
 	<script>
 		addFromTemplate("navbar", "#navDiv");
 		addFromTemplate("eventview", "#container");
-		
-		<%Integer userId = (Integer) session.getAttribute("userId");%>;
+	<%Integer userId = (Integer) session.getAttribute("userId");%>
+		;
 
-		let json = <%Integer eventId = Integer.parseInt(request.getParameter("eventId"));
-			out.print(EventService.selectUserEvent(userId, eventId));%>;
-		let empData = <%out.print(EmployeeService.getEmployeeDisplay(userId));%>;
-			
+		let json =
+	<%Integer eventId = Integer.parseInt(request.getParameter("eventId"));
+			out.print(EventService.selectUserEvent(userId, eventId));%>
+		;
+		let empData =
+	<%out.print(EmployeeService.getEmployeeDisplay(userId));%>
+		;
+
 		fillEventData(json);
 		fillEventManageData(json, empData);
 
-		json = <%out.print(NotificationService.selectEventNotifications(eventId));%>;
-		
-		createMessages(json, "#container");
+		json =
+	<%out.print(NotificationService.selectEventNotifications(eventId));%>
+		;
 
+		createMessages(json, "#container");
 	</script>
 
 </body>

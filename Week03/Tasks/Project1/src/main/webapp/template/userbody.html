@@ -1,10 +1,17 @@
 <template>
 <div class="row justify-content-center">
 	<div class="col-sm-5">
-		<h5>Reimbursements</h5>
+
 		<div class="rsection">
-			<h6 id="amountRemaining">Amount Remaining:</h6>
-			<hr>
+			<h5>Reimbursements</h5>
+			<div class="form-group">
+				<label class="light-label">Amount Remaining: </label> <span
+					id="amountRemaining"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Amount Awarded: </label> <span
+					id="amountAwarded"></span>
+			</div>
 			<a class="btn btn-primary" href="../user/request.html">Make
 				Request</a>
 		</div>
@@ -26,9 +33,27 @@
 
 	<div class="col-sm-5">
 
-		<h5>User Info</h5>
 
-		<div id="userInfo" class="rsection"></div>
+
+		<div class="rsection">
+			<h5>User Info</h5>
+			<div class="form-group">
+				<label class="light-label">Name:</label> <span id="empName"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Role:</label> <span id="empRole"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Email:</label> <span id="empEmail"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Department:</label> <span id="empDept"></span>
+			</div>
+			<div class="form-group">
+				<label class="light-label">Supervisor:</label> <span id="empSuper"></span>
+			</div>
+
+		</div>
 	</div>
 </div>
 </template>

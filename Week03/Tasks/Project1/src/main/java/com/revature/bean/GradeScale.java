@@ -35,10 +35,11 @@ public class GradeScale {
 		return "GradeScale [id=" + id + ", name=" + name + ", presentation=" + presentation + "]";
 	}
 
-	public GradeScale(Integer id, String name) {
+	public GradeScale(Integer id, String name, Integer presentation) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.presentation = presentation;
 	}
 
 }

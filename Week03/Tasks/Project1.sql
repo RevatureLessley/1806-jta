@@ -7,9 +7,11 @@ DROP TABLE employee_user CASCADE CONSTRAINTS;
 DROP TABLE employee_type CASCADE CONSTRAINTS;
 DROP TABLE event_type CASCADE CONSTRAINTS;
 DROP TABLE grade_scale CASCADE CONSTRAINTS;
+DROP TABLE grade_value CASCADE CONSTRAINTS;
 DROP TABLE event CASCADE CONSTRAINTS;
 DROP TABLE event_document CASCADE CONSTRAINTS;
 DROP TABLE notification CASCADE CONSTRAINTS;
+DROP TABLE notification_flag CASCADE CONSTRAINTS;
 DROP TABLE department CASCADE CONSTRAINTS;
 
 CREATE TABLE employee(
@@ -20,6 +22,7 @@ CREATE TABLE employee(
     emp_type NUMBER(3) NOT NULL,
     emp_supervised_by NUMBER(10),
     emp_balance DECIMAL(12, 4) NOT NULL,
+    emp_reimbursement_available DECIMAL(12, 4) NOT NULL,
     emp_department NUMBER(10)
 );
 
@@ -42,8 +45,14 @@ CREATE TABLE event_type(
 
 CREATE TABLE grade_scale(
     gs_id NUMBER(3) PRIMARY KEY,
-    gs_name VARCHAR(10) NOT NULL,
+    gs_name VARCHAR(12) NOT NULL,
     gs_presentation NUMBER(1) NOT NULL
+);
+
+CREATE TABLE grade_value(
+    gv_id NUMBER(1) PRIMARY KEY,
+    gv_scale NUMBER(3),
+    gv_name VARCHAR(12)
 );
 
 CREATE TABLE event(
@@ -71,10 +80,8 @@ CREATE TABLE event_document(
     ev_id NUMBER(10) NOT NULL,
     evdoc_name VARCHAR(50) NOT NULL,
     evdoc_file BLOB NOT NULL,
-    evdoc_is_approval NUMBER(1) NOT NULL
+    evdoc_type NUMBER(1) NOT NULL
 );
-
-
 
 CREATE TABLE notification(
     nt_id NUMBER(10) PRIMARY KEY,
@@ -83,7 +90,13 @@ CREATE TABLE notification(
     nt_message VARCHAR(200) NOT NULL,
     nt_event NUMBER(10),
     nt_read NUMBER(1),
-    nt_timestamp TIMESTAMP
+    nt_timestamp TIMESTAMP,
+    nt_flag NUMBER(10)
+);
+
+CREATE TABLE notification_flag(
+    nf_id NUMBER(10) PRIMARY KEY,
+    nf_name VARCHAR(20)
 );
 
 CREATE TABLE department(
@@ -182,6 +195,25 @@ END;
    PL/SQL: Stored Procedures/Functions
 ********************************************************************************/
 
+CREATE OR REPLACE FUNCTION CALC_REIMB_AMOUT(evId IN NUMBER)
+RETURN NUMBER
+IS
+evtPercent NUMBER;
+evCost NUMBER;
+evType NUMBER;
+empId NUMBER;
+empRemain NUMBER;
+BEGIN
+
+SELECT ev_cost, emp_id, ev_type INTO evCost, empId, evType FROM event WHERE ev_id = evId;
+SELECT et_percent INTO evtPercent FROM event_type WHERE et_id = evType;
+SELECT emp_reimbursement_available INTO empRemain FROM employee WHERE emp_id = empId;
+
+return LEAST(empRemain*100, evCost*evtPercent);
+
+END;
+/
+
 CREATE OR REPLACE PROCEDURE ADD_NEW_EVENT(empId IN NUMBER, evType IN NUMBER, evGradeScale IN NUMBER, evName IN VARCHAR, evDate IN TIMESTAMP, evLocation IN VARCHAR, evDescription IN VARCHAR, evJustification IN VARCHAR, evCost IN DECIMAL, evId OUT NUMBER)
 IS
 BEGIN
@@ -189,15 +221,16 @@ BEGIN
     INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_date, ev_location, ev_description, ev_justification, ev_cost) 
                 VALUES(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost);
 
+    SELECT MAX(ev_id) INTO evId FROM event WHERE emp_id = empId;
 END;
 /
 
-CREATE OR REPLACE PROCEDURE ADD_DOCUMENT(evId IN NUMBER, evName IN VARCHAR, evFile IN BLOB, evApproval IN NUMBER)
+CREATE OR REPLACE PROCEDURE ADD_DOCUMENT(evId IN NUMBER, evName IN VARCHAR, evFile IN BLOB, docType IN NUMBER)
 IS
 BEGIN
 
-    INSERT INTO event_document (ev_id, evdoc_name, evdoc_file, evdoc_is_approval)
-        VALUES (evId, evName, evFile, evApproval);
+    INSERT INTO event_document (ev_id, evdoc_name, evdoc_file, evdoc_type)
+        VALUES (evId, evName, evFile, docType);
 
 END;
 /
@@ -207,6 +240,7 @@ IS
     empId NUMBER(6);
     empRel NUMBER(6);
     temp TIMESTAMP;
+    reimb NUMBER;
 BEGIN
     SELECT emp_id INTO empId FROM event WHERE ev_id = evId;
     empRel := GET_EMP_RELATION(otherId, empId);
@@ -221,7 +255,9 @@ BEGIN
             return;
         END IF;
         
-        UPDATE event SET ev_benco_approve = SYSDATE WHERE ev_id = evId;
+        reimb := CALC_REIMB_AMOUT(evId)/100;
+        UPDATE event SET ev_benco_approve = SYSDATE, ev_r_amt = reimb WHERE ev_id = evId;
+        UPDATE employee SET emp_reimbursement_available = emp_reimbursement_available-reimb WHERE emp_id = empId;
         status := 1;
     END IF;
     
@@ -350,8 +386,39 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE ADD_APPROVED_EVENT(empId IN NUMBER, evType IN NUMBER, evGradeScale IN NUMBER, evName IN VARCHAR, evDate IN TIMESTAMP, evLocation IN VARCHAR, evDescription IN VARCHAR, evJustification IN VARCHAR, evCost IN DECIMAL)
+IS
+evId NUMBER;
+temp NUMBER;
+BEGIN
+--    INSERT INTO department VALUES (1, 'Human Resources');
+    INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_date, ev_location, ev_description, ev_justification, ev_cost) 
+                VALUES(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost);
+
+    SELECT MAX(ev_id) INTO evId FROM event WHERE emp_id = empId;
+    
+    EVENT_UPDATE_APPROVAL_FROM(evId, 2, temp);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE EVENT_CONFIRM(eventId IN NUMBER, managerId IN NUMBER)
+IS
+    reimb NUMBER;
+    empId NUMBER;
+    evName VARCHAR(20);
+BEGIN
+
+    SELECT emp_id, ev_r_amt, ev_name INTO empId, reimb, evName FROM event WHERE ev_id = eventId;
+
+    UPDATE event SET ev_r_confirm = SYSDATE WHERE ev_id = eventId;
+    UPDATE employee SET emp_balance = emp_balance+reimb WHERE emp_id = empId;
+
+    EMPLOYEE_ADD_NOTIFICATION(empId, managerId,'Event '||evName||' has been confirmed.');
+END;
+/
+
 /*******************************************************************************
-   Populate Tables
+   Populate Tables: Core
 ********************************************************************************/
 
 INSERT INTO department (dp_id, dp_name) VALUES (1, 'Management');
@@ -371,35 +438,50 @@ INSERT INTO event_type VALUES (5, 'Technical Training', 90);
 INSERT INTO event_type VALUES (6, 'Other', 30);
 
 INSERT INTO grade_scale VALUES (1, 'Standard', 0);
+INSERT INTO grade_value VALUES (1, 1, 'A');
+INSERT INTO grade_value VALUES (2, 1, 'B');
+INSERT INTO grade_value VALUES (3, 1, 'C');
+INSERT INTO grade_value VALUES (4, 1, 'D');
+INSERT INTO grade_value VALUES (5, 1, 'F');
 INSERT INTO grade_scale VALUES (2, 'Pass/Fail', 0);
-INSERT INTO grade_scale VALUES (3, 'Attendance', 1);
+INSERT INTO grade_value VALUES (6, 2, 'Pass');
+INSERT INTO grade_value VALUES (7, 2, 'Fail');
+INSERT INTO grade_scale VALUES (3, 'Presentation', 1);
+INSERT INTO grade_value VALUES (8, 3, 'Presentation');
+
+INSERT INTO notification_flag VALUES (1, 'Escalated');
+INSERT INTO notification_flag VALUES (2, 'Requires Grade');
+
+/*******************************************************************************
+   Populate Tables: Users 
+********************************************************************************/
 
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (1, 'Tom', 'Bobberson', 'bobbert@email.com', 2, NULL, 1000, 1);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (1, 'Tom', 'Bobberson', 'bobbert@email.com', 2, NULL, 0, 1000, 1);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (2, 'Gai', 'Sensei', 'gai333@email.com', 1, 1, 1000, 2);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (2, 'Gai', 'Sensei', 'gai333@email.com', 1, 1, 0, 1000, 2);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (3, 'Ryan', 'Bobson', 'ryan@email.com', 3, 1, 1000, 57);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (3, 'Ryan', 'Bobson', 'ryan@email.com', 3, 1, 0, 1000, 57);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (4, 'Austin', 'Molina', 'austin.molina@email.com', 4, 3, 1000, 57);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (4, 'Austin', 'Molina', 'austin.molina@email.com', 4, 3, 0, 1000, 57);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (5, 'Karen', 'Fineman', 'k.fineman@email.com', 2, 1, 1000, 2);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (5, 'Karen', 'Fineman', 'k.fineman@email.com', 2, 1, 0, 1000, 2);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (6, 'Shaniqua', 'Sundberg', 's.sundberg@email.com', 3, 5, 1000, 2);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (6, 'Shaniqua', 'Sundberg', 's.sundberg@email.com', 3, 5, 0, 1000, 2);
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (7, 'John', 'Bukhalo', 'jk.bukhalo@email.com', 4, 3, 1000, 57);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (7, 'John', 'Bukhalo', 'jk.bukhalo@email.com', 4, 3, 0, 1000, 57);
   
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (8, 'Harrid', 'Brewer', 'homebrew@email.com', 4, 3, 1000, 57); 
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (8, 'Harrid', 'Brewer', 'homebrew@email.com', 4, 3, 0, 1000, 57); 
     
 INSERT INTO employee (emp_id, emp_first_name, emp_last_name, emp_email, emp_type, emp_supervised_by,
-    emp_balance, emp_department) VALUES (9, 'Larry', 'Headson', 'captain@email.com', 2, 2, 1000, 57);
+    emp_balance, emp_reimbursement_available, emp_department) VALUES (9, 'Larry', 'Headson', 'captain@email.com', 2, 2, 0, 1000, 57);
    
 INSERT INTO employee_user VALUES (1, 'admin', 'admin');
 INSERT INTO employee_user VALUES (2, 'benco', 'admin');
@@ -415,18 +497,29 @@ UPDATE department SET dp_head = 1 WHERE dp_id = 1;
 UPDATE department SET dp_head = 5 WHERE dp_id = 2;
 UPDATE department SET dp_head = 9 WHERE dp_id = 57;
 
---SELECT * FROM event
---NATURAL JOIN event_reimbursement;
+/*******************************************************************************
+   Populate Tables: Test Data
+********************************************************************************/
 
---SELECT * FROM employee;
+DECLARE
+    temp NUMBER;
+BEGIN
+    ADD_APPROVED_EVENT(4, 4, 1, 'Enthuware', TO_TIMESTAMP('2018-07-16', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Arlington', 'Online study tool', 'Extra training to earn OTA certification', 20);
+    ADD_APPROVED_EVENT(4, 2, 3, 'Seminar', TO_TIMESTAMP('2018-07-16', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Arlington', 'Online study tool', 'Extra training to earn OTA certification', 20);
+    
+    ADD_NEW_EVENT(8, 4, 1, 'Urgent/Escalated', TO_TIMESTAMP('2018-07-16', 'YYYY-MM-DD HH24:MI:SS.FF'), 'Arlington', 'Online study tool', 'Extra training to earn OTA certification', 20, temp);
+END;
+/
+
+--SELECT * FROM notification;
+SELECT * FROM employee;
 --SELECT * FROM employee_user;
---SELECT * FROM event;
+SELECT * FROM event;
+--SELECT * FROM event_document;
 ----
 --call EVENT_UPDATE_APPROVAL_FROM(1, 3);
 --call EVENT_UPDATE_APPROVAL_FROM(1, 9);
 --call EVENT_UPDATE_APPROVAL_FROM(1, 1);
 --call EVENT_UPDATE_APPROVAL_FROM(1, 2);
-
---SELECT * FROM notification;
 
 commit;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@page import="com.revature.service.EventService"%>
 <%@page import="com.revature.service.NotificationService"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,33 +17,37 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <script src="../resources/js/eventview.js"></script>
-<script src="../resources/js/template.js"></script>
 <script src="../resources/js/common.js"></script>
 <script src="../resources/js/messagebuilder.js"></script>
 <link rel="import" href="../template/eventview.html">
 <link rel="import" href="../template/navbar.html">
 <link rel="import" href="../template/message.html">
+<link rel="import" href="../template/eventgrade.html">
 </head>
 <body>
 
-<div id="navDiv"></div>
-	<br>	
+	<div id="navDiv"></div>
+	<br>
 	<div id="container"></div>
 	<div id="commentContainer" class="container-fluid"></div>
 
 	<script>
-	 	addFromTemplate("navbar", "#navDiv");
-	    addFromTemplate("eventview", "#container");
-	   
-	    <%Integer userId = (Integer) session.getAttribute("userId");%>;
-	    
-		let json = <%
-				Integer eventId = Integer.parseInt(request.getParameter("eventId"));
-				out.print(EventService.selectUserEvent(userId, eventId));%>;
-				
+		addFromTemplate("navbar", "#navDiv");
+		addFromTemplate("eventview", "#container");
+	<%Integer userId = (Integer) session.getAttribute("userId");%>
+		;
+
+		let json =
+	<%Integer eventId = Integer.parseInt(request.getParameter("eventId"));
+			out.print(EventService.selectUserEvent(userId, eventId));%>
+		;
+
 		fillEventData(json, "tableBody");
-		
-		json = <%out.print(NotificationService.selectEventNotifications(eventId));%>;
+		userfillConfirmationPhaseData(json);
+
+		json =
+	<%out.print(NotificationService.selectEventNotifications(eventId));%>
+		;
 		createMessages(json, "#commentContainer");
 	</script>
 

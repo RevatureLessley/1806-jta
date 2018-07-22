@@ -7,7 +7,7 @@ import com.revature.dao.EventDaoImpl;
 
 public class EventRequestService {
 
-	public Integer submitEvent(Integer empId, String eventName, Integer type, Integer gradeScale, LocalDateTime date,
+	public static Integer submitEvent(Integer empId, String eventName, Integer type, Integer gradeScale, LocalDateTime date,
 			Double cost, String location, String description, String justification) {
 
 		EventDaoImpl evDao = new EventDaoImpl();
@@ -15,10 +15,10 @@ public class EventRequestService {
 		return evDao.addNewEvent(empId, type, gradeScale, eventName, date, location, description, justification, cost);
 	}
 
-	public void submitImage(Integer eventId, String docName, InputStream fileData, Integer isApproval) {
+	public static void submitImage(Integer eventId, String docName, InputStream fileData, Integer type) {
 		EventDaoImpl evDao = new EventDaoImpl();
 
-		evDao.addDocument(eventId, docName, fileData, isApproval);
+		evDao.addDocument(eventId, docName, fileData, type);
 	}
 
 }

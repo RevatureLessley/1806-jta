@@ -1,0 +1,31 @@
+<template> <br>
+
+<div class="rsection">
+
+	<div id="manageRow" class="row justify-content-md-center">
+		<div class="col-md-10">
+			<h5 style="text-align: center;">Grade Submission</h5>
+		</div>
+		<div class="col-md-10">
+			<form id="gradeForm" action='eventGrade.do' method="post"
+				enctype='multipart/form-data'>
+
+				<div class="form-group">
+					<label for="description">Grade</label> <select id="gradeSelect"
+						name="grade" class="form-control" required="required">
+					</select>
+				</div>
+				<input id="eventIdField" name="eventId" hidden="true">
+				<div id="presDiv" class="form-group">
+					<label for="presentationFile">Presentation</label> <input
+						name="file" type="file" required="required" multiple="multiple">
+				</div>
+
+				<input type="submit" class="btn btn-primary" value="Submit">
+
+			</form>
+		</div>
+	</div>
+</div>
+
+</template>

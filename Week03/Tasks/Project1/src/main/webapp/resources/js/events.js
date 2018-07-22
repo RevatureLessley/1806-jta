@@ -9,7 +9,7 @@ function createEventTable(data, tableName){
 	for (index in data) {
 		let row = document.createElement("tr");
 		
-		row.setAttribute("onclick",`viewEvent(${data[index]['id']})`);
+		row.setAttribute("onclick",`userViewEvent(${data[index]['id']})`);
 		
 		let td1 = document.createElement("td");
 		let td2 = document.createElement("td");
@@ -22,7 +22,7 @@ function createEventTable(data, tableName){
 		let t1 = document.createTextNode(data[index]["id"]);
 		let t2 = document.createTextNode(data[index]["name"]);
 		let t3 = document.createTextNode(data[index]["typeName"]);
-		let t4 = document.createTextNode(data[index]["expectedAmount"]);
+		let t4 = document.createTextNode(data[index]["reimbursementAmount"]);
 		let t5 = document.createTextNode(data[index]["date"]);
 		let t6 = document.createTextNode(data[index]["status"]);
 		
@@ -68,7 +68,7 @@ function createEventTableWithEmpName(data, tableName){
 		let t2 = document.createTextNode(data[index]["employeeName"]);
 		let t3 = document.createTextNode(data[index]["name"]);
 		let t4 = document.createTextNode(data[index]["typeName"]);
-		let t5 = document.createTextNode(data[index]["expectedAmount"]);
+		let t5 = document.createTextNode(data[index]["reimbursementAmount"]);
 		let t6 = document.createTextNode(data[index]["date"]);
 		let t7 = document.createTextNode(data[index]["status"]);
 		
@@ -91,11 +91,6 @@ function createEventTableWithEmpName(data, tableName){
 		table.appendChild(row);				
 	}
 }
-
-function viewEvent(eventId){
-	window.location.href = `../manage/eventview.jsp?eventId=${eventId}`;
-}
-
 
 
 

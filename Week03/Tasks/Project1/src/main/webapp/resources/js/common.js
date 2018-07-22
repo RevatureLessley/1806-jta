@@ -12,7 +12,10 @@ function goBack() {
 	window.history.back();
 }
 
-function logout(){
-	
-	
+function viewEvent(eventId){
+	window.location.href = `../manage/eventview.jsp?eventId=${eventId}`;
+}
+
+function userViewEvent(eventId){
+	window.location.href = `../user/eventview.jsp?eventId=${eventId}`;
 }

@@ -26,7 +26,7 @@ public class EmployeeDao {
 			rs = ps.executeQuery();
 
 			if (rs.next())
-				a = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7), rs.getInt(8));
+				a = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getDouble(7), rs.getDouble(8), rs.getInt(9));
 
 		} catch (SQLException e) {
 			e.printStackTrace();

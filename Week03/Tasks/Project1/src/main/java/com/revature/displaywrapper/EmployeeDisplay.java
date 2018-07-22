@@ -12,6 +12,7 @@ public class EmployeeDisplay {
 	private String departmentName;
 	private String supervisorName;
 	private String balance;
+	private String reimbursementAvailable;
 	private String typeName;
 	
 	public String getTypeName() {
@@ -22,12 +23,21 @@ public class EmployeeDisplay {
 		this.typeName = typeName;
 	}
 
+	public String getReimbursementAvailable() {
+		return reimbursementAvailable;
+	}
+
+	public void setReimbursementAvailable(String reimbursementAvailable) {
+		this.reimbursementAvailable = reimbursementAvailable;
+	}
+
 	public EmployeeDisplay(Employee employee) {
 		name = employee.getFname() + " " + employee.getLname();
 		email = employee.getEmail();
 		departmentName = FixedDataService.getDepartment(employee.getDepartment()).getName();
 		supervisorName = EmployeeService.getEmployeeName(employee.getSupervisedBy());
 		balance = StringManip.formatCurrency(employee.getBalance());
+		reimbursementAvailable = StringManip.formatCurrency(employee.getReimbursementAvailable());
 		typeName = FixedDataService.getEmployeeType(employee).getName();
 	}
 	

@@ -1,11 +1,12 @@
 package com.revature.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +50,6 @@ public class EventRequestServlet extends HttpServlet {
 
 		// String path = getServletContext().getRealPath("/resources/files/");
 
-		EventRequestService requestEventService = new EventRequestService();
-
 		// EventRequestServlet
 		// PrintWriter out = response.getWriter();
 		// String values = "";
@@ -85,32 +84,30 @@ public class EventRequestServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		String justification = request.getParameter("justification");
 
-		Integer event = requestEventService.submitEvent(userId, eventName, eventType, gradeFormat, date, cost, location,
+		Integer event = EventRequestService.submitEvent(userId, eventName, eventType, gradeFormat, date, cost, location,
 				description, justification);
 
 		// upload images
-//		for (Part filePart : fileParts) {
-//			
-//			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//			System.out.println(fileName);
-//			InputStream fileContent = filePart.getInputStream();
-//
-//			// ... (do your job here)
-//			// byte[] buffer = new byte[fileContent.available()];
-//			// fileContent.read(buffer);
-//			// System.out.println(buffer);
-//			// File targetFile = new File(path + fileName);
-//			// System.out.println(targetFile.getPath());
-//			// OutputStream outStream = new FileOutputStream(targetFile);
-//			// outStream.write(buffer);
-//			// outStream.close();
-//
-//			requestEventService.submitImage(event, fileName, fileContent, 0);
-//		}
+		for (Part filePart : fileParts) {
+			
+			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+			System.out.println(fileName);
+			InputStream fileContent = filePart.getInputStream();
+
+			// ... (do your job here)
+			// byte[] buffer = new byte[fileContent.available()];
+			// fileContent.read(buffer);
+			// System.out.println(buffer);
+			// File targetFile = new File(path + fileName);
+			// System.out.println(targetFile.getPath());
+			// OutputStream outStream = new FileOutputStream(targetFile);
+			// outStream.write(buffer);
+			// outStream.close();
+
+			//EventRequestService.submitImage(event, fileName, fileContent, 0);
+		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/user/requestSuccess.html");
-		rd.forward(request, response);
-		
+		response.sendRedirect("./requestSuccess.html");
 	}
 
 	/**

@@ -202,8 +202,6 @@ public class EventDaoImpl {
 
 			rs = (ResultSet) stmt.getObject(2);
 
-			// StringManip.getLocalDateTime(rs.getString(6))
-
 			while (rs.next()) {
 				Event a = new Event(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
 						rs.getString(6), StringManip.getLocalDateTime(rs.getString(7)), rs.getString(8),
@@ -229,7 +227,6 @@ public class EventDaoImpl {
 	public Integer eventUpdateApprovalFrom(Integer eventId, Integer userId) {
 
 		CallableStatement stmt = null;
-		ResultSet rs = null;
 
 		String sql = "{CALL EVENT_UPDATE_APPROVAL_FROM(?, ?, ?)}";
 
@@ -249,10 +246,75 @@ public class EventDaoImpl {
 			e.printStackTrace();
 		} finally {
 			close(stmt);
-			close(rs);
 		}
 
 		return 0;
+	}
+
+	public void eventChangeAward(Integer eventId, String message, Integer amount) {
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE event SET ev_r_amt = ?, ev_r_message = ? WHERE ev_id = ?";
+
+		try (Connection conn = Connections.getConnection()) {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, amount);
+			ps.setString(2, message);
+			ps.setInt(3, eventId);
+
+			ps.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		}
+
+	}
+
+	public void eventSubmitGrade(Integer userId, Integer eventId, Integer grade) {
+		PreparedStatement ps = null;
+
+		String sql = "UPDATE event SET ev_grade = ? WHERE ev_id = ? AND emp_id = ?";
+
+		try (Connection conn = Connections.getConnection()) {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, grade);
+			ps.setInt(2, eventId);
+			ps.setInt(3, userId);
+			
+			ps.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		}
+	}
+
+	public void eventConfirm(Integer eventId, Integer userId) {
+		CallableStatement stmt = null;
+
+		String sql = "{CALL EVENT_CONFIRM(?, ?)}";
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.prepareCall(sql);
+
+			stmt.setInt(1, eventId);
+			stmt.setInt(2, userId);
+			
+			stmt.execute();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		
 	}
 
 }

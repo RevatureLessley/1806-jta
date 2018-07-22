@@ -39,7 +39,8 @@ public class FrontController extends HttpServlet {
 
 		action = action.substring(0, action.length() - 3).toLowerCase();
 		System.out.println("front controller: " + action);
-
+		System.out.println(request.getParameterMap().keySet());
+		
 		switch (action) {
 		case "login":
 			rd = request.getRequestDispatcher("LoginServlet");
@@ -59,6 +60,18 @@ public class FrontController extends HttpServlet {
 			break;
 		case "eventapprove":
 			rd = request.getRequestDispatcher("EventApproveServlet");
+			rd.forward(request, response);
+			break;
+		case "eventchangeaward":
+			rd = request.getRequestDispatcher("EventChangeAwardServlet");
+			rd.forward(request, response);
+			break;
+		case "eventgrade":
+			rd = request.getRequestDispatcher("EventGradeServlet");
+			rd.forward(request, response);
+			break;
+		case "eventconfirm":
+			rd = request.getRequestDispatcher("EventConfirmServlet");
 			rd.forward(request, response);
 			break;
 		default:

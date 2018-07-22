@@ -8,13 +8,8 @@ public class Employee {
 	private Integer type;
 	private Integer supervisedBy;
 	private Double balance;
+	private Double reimbursementAvailable;
 	private Integer department;
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", type=" + type
-				+ ", supervisedBy=" + supervisedBy + ", balance=" + balance + ", department=" + department + "]";
-	}
 
 	public Integer getId() {
 		return id;
@@ -72,6 +67,14 @@ public class Employee {
 		this.balance = balance;
 	}
 
+	public Double getReimbursementAvailable() {
+		return reimbursementAvailable;
+	}
+
+	public void setReimbursementAvailable(Double reimbursementAvailable) {
+		this.reimbursementAvailable = reimbursementAvailable;
+	}
+
 	public Integer getDepartment() {
 		return department;
 	}
@@ -80,8 +83,15 @@ public class Employee {
 		this.department = department;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", type=" + type
+				+ ", supervisedBy=" + supervisedBy + ", balance=" + balance + ", reimbursementAvailable="
+				+ reimbursementAvailable + ", department=" + department + "]";
+	}
+
 	public Employee(Integer id, String fname, String lname, String email, Integer type, Integer supervisedBy,
-			Double balance, Integer department) {
+			Double balance, Double reimbursementAvailable, Integer department) {
 		super();
 		this.id = id;
 		this.fname = fname;
@@ -90,6 +100,7 @@ public class Employee {
 		this.type = type;
 		this.supervisedBy = supervisedBy;
 		this.balance = balance;
+		this.reimbursementAvailable = reimbursementAvailable;
 		this.department = department;
 	}
 

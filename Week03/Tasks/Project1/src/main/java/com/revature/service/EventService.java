@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.bean.Event;
+import com.revature.bean.GradeValue;
 import com.revature.dao.EventDaoImpl;
 import com.revature.displaywrapper.EventDisplay;
 import com.revature.displaywrapper.EventPhase;
@@ -55,16 +56,18 @@ public class EventService {
 		EventStatus status = EventStatus.New;
 
 		if (event.getEventDate().isBefore(LocalDateTime.now())) {
-			// event has passed
-			if (event.getReimbursementConfirmation() != null) {
+			// event date has passed
+			if (event.getBencoApprove() == null) {
+				status = EventStatus.Urgent;
+			} else if (event.getReimbursementConfirmation() != null) {
 				status = EventStatus.Resolved;
-			} else if (event.getGrade() != null) {
+			} else if (event.getGrade() != null && event.getGrade() != 0) {
 				status = EventStatus.UnConfirmed;
 			} else {
 				status = EventStatus.Pending;
 			}
 		} else {
-			// event is approaching
+			// event date is approaching
 			if (event.getBencoApprove() != null) {
 				status = EventStatus.Approved;
 			} else if (LocalDateTime.now().isAfter(event.getEventDate().minusDays(14))) {
@@ -91,6 +94,30 @@ public class EventService {
 		default:
 			return EventPhase.Approval;
 		}
+	}
+
+	public static void eventChangeAward(Integer eventId, String message, Integer amount) {
+		new EventDaoImpl().eventChangeAward(eventId, message, amount);
+
+	}
+
+	public static void eventSubmitGrade(Integer userId, Integer eventId, Integer grade) {
+		new EventDaoImpl().eventSubmitGrade(userId, eventId, grade);
+
+	}
+
+	public static void eventConfirm(Integer eventId, Integer userId) {
+		new EventDaoImpl().eventConfirm(eventId, userId);
+	}
+
+	public static String getEventGrade(Integer grade) {
+
+		GradeValue gv = FixedDataService.getGradeValue(grade);
+		if (gv == null)
+			return "ungraded";
+		else
+			return gv.getName();
+
 	}
 
 }
