@@ -51,7 +51,7 @@ function httpGet(){
 	var url = new URL(url_string);
 	var c = url.searchParams.get("username");
 
-	if (getCookie("username") != c)
+	if (c != null && getCookie("username") != c)
 		setCookie("username", c, 1);
 	
 }

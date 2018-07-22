@@ -44,11 +44,12 @@ public class GetReimbursementsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (!reims.isEmpty()) {	
 			out.println("<h3>Recent Reimbursements</h3><table class='table table-hover'>"+
-					"<thead><tr><th>Reimbursement ID</th><th>Employee ID</th><th>Type</th>"
+					"<thead><tr><th>Reimbursement ID</th><th>Employee Name</th><th>Type</th>"
 					+ "<th>Description</th><th>Justification</th></tr></thead><tbody>");
 			for(Reimbursement reim : reims) {
-				out.println("<tr onclick='openReimbursement("+reim.getId()+")'><td>"+reim.getId()+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
-						+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
+				out.println("<tr onclick='openReimbursement("+reim.getId()+")'><td>"+reim.getId()
+				+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"+ "<td>"+reim.getDescription()
+				+"</td><td>"+reim.getJustification()+"</td></tr>");
 			}
 			out.print("</body></table>");
 		}
@@ -56,14 +57,15 @@ public class GetReimbursementsServlet extends HttpServlet {
 		if (loggedIn.getRole() != "employee") {
 			reims = UserService.getAllReimbursementsByApproverId(id);
 				if (!reims.isEmpty()) {
-					out.println("<table>");
-					out.println("<tr><td>Reimbursement ID</td><td>Employee ID</td><td>Type</td>"
-							+ "<td>Description</td><td>Justification</td></tr>");
+					
+					out.println("<h3>All Unapproved Reimbursements</h3><table class='table table-hover'>"+
+					"<thead><tr><td>Reimbursement ID</td><td>Employee ID</td><td>Type</td>"
+							+ "<td>Description</td><td>Justification</td></tr></thead><tbody>");
 					for(Reimbursement reim : reims) {
-						out.println("<tr onclick='openReimbursement("+reim.getId()+")'><td>"+reim.getId()+"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
-								+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
+						out.println("<tr onclick='goToDisplayReimPage("+reim.getId()+")'><td>"+reim.getId() +"</td><td>"+reim.getEmpId()+"</td><td>"+reim.getType()+"</td>"
+					+ "<td>"+reim.getDescription()+"</td><td>"+reim.getJustification()+"</td></tr>");
 					}
-					out.print("</table>");
+					out.print("</body></table>");
 				}
 		}
 	}

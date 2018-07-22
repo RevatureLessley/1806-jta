@@ -89,7 +89,7 @@
     <servlet-name>OpenReimbursementServlet</servlet-name>
     <url-pattern>/OpenReimbursementServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>UpdateReimbursementServlet</display-name>
     <servlet-name>UpdateReimbursementServlet</servlet-name>
@@ -98,5 +98,15 @@
   <servlet-mapping>
     <servlet-name>UpdateReimbursementServlet</servlet-name>
     <url-pattern>/UpdateReimbursementServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayReimbursementServlet</display-name>
+    <servlet-name>DisplayReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DisplayReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayReimbursementServlet</servlet-name>
+    <url-pattern>/DisplayReimbursementServlet</url-pattern>
   </servlet-mapping>
 </web-app>

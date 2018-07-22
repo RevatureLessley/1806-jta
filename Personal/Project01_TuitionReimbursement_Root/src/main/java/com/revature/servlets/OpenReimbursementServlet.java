@@ -34,13 +34,6 @@ public class OpenReimbursementServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("reimId"));
 		Reimbursement reim = UserService.getReimbursementById(id);
 		
-		request.setAttribute("type", reim.getGradingFormat());
-		request.setAttribute("date", reim.getDate());
-		request.setAttribute("location", reim.getLocation());
-		request.setAttribute("description", reim.getDescription());
-		request.setAttribute("justification", reim.getJustification());
-		request.setAttribute("cost", reim.getCost());
-		
 		response.sendRedirect("/Project01_TuitionReimbursement/user/editReimbursement.html?"
 				+ "type="+reim.getType()+"&"
 				+ "format="+reim.getGradingFormat()+"&"
