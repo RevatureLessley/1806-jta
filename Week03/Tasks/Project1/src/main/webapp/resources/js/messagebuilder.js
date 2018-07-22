@@ -15,7 +15,16 @@ function createMessages(messages, target){
 		tclone.getElementById("messageHead").innerHTML = messages[m]["sourceName"]
 		tclone.getElementById("message").innerHTML = messages[m]["notification"]["message"]
 		tclone.getElementById("messageDate").innerHTML = messages[m]["dateString"]
-	   
+		
+		let messageBox = tclone.getElementById("messageBox");
+		messageBox.setAttribute("id", `messageBox${messages[m]['notification']['id']}`);
+		
+		if(messages[m]["notification"]["read"]){
+			messageBox.setAttribute("class", "alert alert-secondary");
+		}else{
+			messageBox.setAttribute("onmouseenter", `setMessageReadFromEvent("${messages[m]['notification']['id']}")`);
+		}
+		
 		messageArea.appendChild(tclone);
 	}
 	
@@ -23,4 +32,13 @@ function createMessages(messages, target){
 		let br = document.createElement("br");
 		document.querySelector(target).appendChild(br);
 	}
+}
+
+
+function setMessageReadFromEvent(id){
+	messageBox = document.getElementById(`messageBox${id}`)
+	messageBox.setAttribute("class", "alert alert-secondary");
+	messageBox.setAttribute("onmouseenter", "");
+	
+	setMessageRead(id);	
 }

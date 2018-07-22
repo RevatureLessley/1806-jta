@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -44,13 +45,8 @@
 		createEmployeeSummary(json);
 		setAmountRemaining(json);
 		
-		json = <%out.print(EventService.selectUserEvents(userId));%>;
-		createEventTableSmall(json, "tableBody");
-		
-		json = <%out.print(EventService.selectSubordinateEvents(userId));%>;
-		console.log(json);
-		
-		createEventTableWithEmpName(json, "subTableBody");
+		fetchEvents("all", "subTableBody", createEventTableWithEmpName, true);
+		fetchEvents("all", "tableBody", createEventTableSmall, false);
 	</script>
 	
 </body>

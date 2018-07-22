@@ -89,7 +89,7 @@ CREATE TABLE notification(
     nt_emp_source NUMBER(10) NOT NULL,
     nt_message VARCHAR(200) NOT NULL,
     nt_event NUMBER(10),
-    nt_read NUMBER(1),
+    nt_read NUMBER(1) DEFAULT 0,
     nt_timestamp TIMESTAMP,
     nt_flag NUMBER(10)
 );
@@ -210,6 +210,23 @@ SELECT et_percent INTO evtPercent FROM event_type WHERE et_id = evType;
 SELECT emp_reimbursement_available INTO empRemain FROM employee WHERE emp_id = empId;
 
 return LEAST(empRemain*100, evCost*evtPercent);
+
+END;
+/
+
+CREATE OR REPLACE FUNCTION HAS_NOTIF(userId IN NUMBER, evId IN NUMBER)
+RETURN NUMBER
+IS
+cnt NUMBER;
+BEGIN
+
+SELECT count(*) INTO cnt FROM notification WHERE nt_event = evId AND nt_emp_target = userId AND nt_read = 0;
+
+IF cnt > 0 THEN
+    return 1;
+ELSE
+    return 0;
+END IF;
 
 END;
 /
@@ -513,10 +530,12 @@ BEGIN
 END;
 /
 
+--UPDATE notification SET nt_read = 0;
+
 --SELECT * FROM notification;
 SELECT * FROM employee;
 --SELECT * FROM employee_user;
-SELECT * FROM event;
+SELECT HAS_NOTIF(4, ev_id), event.* FROM event;
 --SELECT * FROM event_document;
 ----
 --call EVENT_UPDATE_APPROVAL_FROM(1, 3);

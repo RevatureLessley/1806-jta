@@ -24,6 +24,7 @@ public class EventDisplay {
 	private boolean requiresPresentation;
 	private String reimbursementAmount;
 	private String finalGrade;
+	private boolean isUpdated;
 
 	public EventDisplay(Event event) {
 		this.id = event.getId();
@@ -32,26 +33,28 @@ public class EventDisplay {
 		EventType eventType = FixedDataService.getEventType(event);
 		this.typeName = eventType.getName();
 		this.cost = StringManip.formatCurrency(event.getCost());
-		//this.expectedAmount = StringManip.formatCurrency(event.getCost() * eventType.getPercent() / 100.0);
 		this.reimbursementAmount = StringManip.formatCurrency(event.getReimbursementAmount());
-
 		this.date = StringManip.formatDate(event.getEventDate());
 		this.status = EventService.getEventStatus(event);
+		this.phase = EventService.getPhase(event);
 		this.employeeName = EmployeeService.getEmployeeName(event.getEmpId());
 		this.gradeScaleName = FixedDataService.getGradeScale(event.getGradeScale()).getName();
 		this.finalGrade = EventService.getEventGrade(event.getGrade());
-		
 		this.event = event;
-
 		this.superApprove = StringManip.formatDate(event.getSuperApprove());
 		this.headApprove = StringManip.formatDate(event.getHeadApprove());
 		this.bencoApprove = StringManip.formatDate(event.getBencoApprove());
-
-		this.phase = EventService.getPhase(event);
-
 		this.requiresPresentation = (FixedDataService.getGradeScale(event.getGradeScale()).getPresentation() == 1);
+		this.isUpdated = false;
 		
-		
+	}
+
+	public boolean isUpdated() {
+		return isUpdated;
+	}
+
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 	@Override

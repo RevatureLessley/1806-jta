@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -37,6 +39,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th></th>
 							<th>Event Id</th>
 							<th>Name</th>
 							<th>Type</th>
@@ -57,10 +60,7 @@
 	</div>
 
 	<script>
-		let jsonStr = <%Integer userId = (Integer) session.getAttribute("userId");
-			out.print(EventService.selectUserEvents(userId));%>;
-
-		createEventTable(jsonStr, "tableBody");
+		fetchEvents("all", "tableBody", createEventTable, false);
 		createNavbar();
 	</script>
 

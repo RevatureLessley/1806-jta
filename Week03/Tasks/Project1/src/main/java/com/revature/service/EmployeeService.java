@@ -54,12 +54,9 @@ public class EmployeeService {
 
 	public static String getEmployeeRedirect(Integer userId) {
 		Employee employee = new EmployeeDao().selectById(userId);
-		
-		Arrays.asList("shop");
 
 		switch (employee.getType()) {
 		case 1:
-			return "./benco/";
 		case 2:
 		case 3:
 			return "./manage/";

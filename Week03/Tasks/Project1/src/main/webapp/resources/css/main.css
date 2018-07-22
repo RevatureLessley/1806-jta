@@ -18,9 +18,26 @@ body {
 	box-shadow: 0px 10px 8px rgba(127,127,127, .2);
 	color: #474c55;
 	padding: 10px;
+	overflow: hidden;
+}
+
+.msection{
+	padding: 0px;
+	box-shadow: 0px 10px 8px rgba(127,127,127, .2);
+	max-width: 800px;
+	width: 600px;
+	overflow: hidden;
 }
 
 .light-label{
 	color: #b9bbbe;
 	font-weight: 400;
+}
+
+.borderless tbody td {
+    border: none;
+    
+}
+.borderless{
+	margin: 0px;
 }

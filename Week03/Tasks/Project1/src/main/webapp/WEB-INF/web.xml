@@ -146,4 +146,34 @@
     <servlet-name>EventConfirmServlet</servlet-name>
     <url-pattern>/manage/EventConfirmServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchEventServlet</display-name>
+    <servlet-name>FetchEventServlet</servlet-name>
+    <servlet-class>com.revature.servlet.FetchEventServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchEventServlet</servlet-name>
+    <url-pattern>/FetchEventServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NotificationReadServlet</display-name>
+    <servlet-name>NotificationReadServlet</servlet-name>
+    <servlet-class>com.revature.servlet.NotificationReadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotificationReadServlet</servlet-name>
+    <url-pattern>/user/NotificationReadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserNotificationsServlet</display-name>
+    <servlet-name>UserNotificationsServlet</servlet-name>
+    <servlet-class>com.revature.servlet.UserNotificationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserNotificationsServlet</servlet-name>
+    <url-pattern>/user/UserNotificationsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

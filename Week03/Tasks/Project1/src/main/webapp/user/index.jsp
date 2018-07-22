@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="../resources/css/main.css">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -22,6 +23,7 @@
 <title>Welcome to Project1</title>
 <script src="../resources/js/employeeHome.js"></script>
 <script src="../resources/js/common.js"></script>
+<script src="../resources/js/events.js"></script>
 <link rel="import" href="../template/userbody.html">
 <link rel="import" href="../template/navbar.html">
 </head>
@@ -41,8 +43,7 @@
 		createEmployeeSummary(json);
 		setAmountRemaining(json);
 		
-		json = <%out.print(EventService.selectUserEvents(userId));%>;
-		createEventTableSmall(json, "tableBody");
+		fetchEvents("all", "tableBody", createEventTableSmall, false);
 	</script>
 	
 </body>
