@@ -1,17 +1,19 @@
 package Project1.Servlets;
 
 import java.io.*;
-import javax.servlet.*;
+import java.util.*;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import org.codehaus.jackson.map.*;
 import Project1.Beans.*;
+import Project1.Service.*;
 
 /**
- * Servlet implementation class SessionServlet
+ * Servlet implementation class FileExtensionServlet
  */
-public class SessionServlet extends HttpServlet {
+public class MIMEServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -19,13 +21,10 @@ public class SessionServlet extends HttpServlet {
 						 HttpServletResponse response) throws ServletException,
 															  IOException {
 		response.setContentType("text");
-		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		Employee employee = (Employee)session.getAttribute("employee");
-		if(null != employee) {
-			ObjectMapper om = new ObjectMapper();
-			out.println(om.writeValueAsString(employee));
-		}
+		HashMap<Integer, String[]> mimetypes = AttachmentService.getMIMETypes();
+		ObjectMapper om = new ObjectMapper();
+		out.println(om.writeValueAsString(mimetypes));
 	}
 
 	/**

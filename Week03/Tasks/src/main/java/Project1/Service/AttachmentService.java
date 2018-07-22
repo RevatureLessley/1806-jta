@@ -1,8 +1,9 @@
 package Project1.Service;
 
 import java.math.BigInteger;
-import java.util.HashMap;
+import java.util.*;
 
+import Project1.MIMEType;
 import Project1.Beans.*;
 import Project1.DAOs.*;
 
@@ -13,5 +14,10 @@ public class AttachmentService {
 		getAttachments(BigInteger foreignKey, String category) {
 		
 		return adi.selectAttachment(foreignKey, category);
+	}
+	
+	public static HashMap<Integer, String[]> getMIMETypes() {
+		
+		return MIMEType.getTypes();
 	}
 }

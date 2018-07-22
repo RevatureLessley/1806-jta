@@ -1,4 +1,17 @@
-function checkPassword(){
+function checkDatetime() {
+	let div = document.getElementById("beforeDatetime");
+	div.innerHTML = "";
+	let datestring = document.getElementById("datetime").value;
+	let enteredDate = new Date(datestring);
+	let cutoffDate = new Date();
+	cutoffDate.setDate(cutoffDate.getDate() + 7);
+	if(cutoffDate > enteredDate) {
+		div.innerHTML = 
+			"You must submit this form at least 1 week before the event.";
+	}
+}
+
+function checkPassword() {
 	let div = document.getElementById("beforePassword");
 	div.innerHTML = "";
 	let password1 = document.getElementById("rpassword").value;
@@ -6,6 +19,23 @@ function checkPassword(){
 
 	if(password1 != password2){
 		div.innerHTML = "Passwords do not match.";
+	}
+}
+
+function getCutoff() {
+	console.log("Getting cutoff.");
+	let div = document.getElementById("afterGrade");
+	div.innerHTML = "";
+	let format = document.getElementById("grading").value;
+	
+	if(format == "Passing Grade") {
+		console.log("Displaying cutoff.");
+		div.innerHTML = "<br><label for=\"cutoff\">Passing Grade:</label>" + 
+						"<input " +  
+							"class=\"form-control\" id=\"cutoff\" " +
+							"name=\"cutoff\" type=\"number\" min=\"0\" " +
+							"max=\"1\" step=\"0.01\" required" + 
+						">";
 	}
 }
 

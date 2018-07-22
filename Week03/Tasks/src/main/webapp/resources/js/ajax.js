@@ -166,7 +166,24 @@ function getAttachment(servlet, r, f) {
 	xhr.send(message);
 }
 
+function checkEventAttachments() {
+	let servlet = "MIMEServlet";
+	let xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function() {
+
+		if(xhr.readyState == 4) {
+			
+			let extensions = JSON.parse(xhr.response);
+			console.log(extensions);
+		}
+	}
+
+	xhr.open("GET", servlet);
+	xhr.send();
+}
+
 window.onload = function() {
-	displayWelcome("EventAttachmentServlet");
+	displayWelcome();
 //	getAttachment();
 }

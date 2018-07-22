@@ -87,4 +87,25 @@
     <servlet-name>EventAttachmentServlet</servlet-name>
     <url-pattern>/EventAttachmentServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MIMEServlet</display-name>
+    <servlet-name>MIMEServlet</servlet-name>
+    <servlet-class>Project1.Servlets.MIMEServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MIMEServlet</servlet-name>
+    <url-pattern>/MIMEServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InitializerServlet</display-name>
+    <servlet-name>InitializerServlet</servlet-name>
+    <servlet-class>Project1.Servlets.InitializerServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InitializerServlet</servlet-name>
+    <url-pattern>/InitializerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
