@@ -1,13 +1,11 @@
 package com.revature.services;
 
-import java.util.List;
+import static com.revature.util.LogFourJ.log;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.revature.beans.Employee;
-import com.revature.dao.EmployeeDao;
 import com.revature.dao.EmployeeDaoImpl;
-import static com.revature.util.LogFourJ.log;
 
 public class EmployeeService {
 	

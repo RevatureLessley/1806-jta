@@ -1,6 +1,7 @@
 package com.revature.beans;
+import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 public class ReimbursementForm {
 	private Integer  rfId;
@@ -10,8 +11,8 @@ public class ReimbursementForm {
 	private String eventLocation;
 	private String eventDescribtion;
 	private Integer eventCost;
-	private Timestamp formsDate;
-	private Timestamp startDate;
+	private Date formsDate;
+	private Date startDate;
 	private Timestamp startTime;
 	private String gradeFormat;
 	public String getGradeFormat() {
@@ -64,16 +65,16 @@ public class ReimbursementForm {
 	public void setEventCost(Integer eventCost) {
 		this.eventCost = eventCost;
 	}
-	public Timestamp getFormsDate() {
+	public Date getFormsDate() {
 		return formsDate;
 	}
-	public void setFormsDate(Timestamp formsDate) {
+	public void setFormsDate(Date formsDate) {
 		this.formsDate = formsDate;
 	}
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	public Timestamp getStartTime() {
@@ -95,7 +96,7 @@ public class ReimbursementForm {
 		this.workTimeMissed = workTimeMissed;
 	}
 	public ReimbursementForm(Integer rfId, Integer empId, String formStatus, String eventType, String eventLocation,
-			String eventDescribtion, Integer eventCost, Timestamp formsDate, Timestamp startDate, Timestamp startTime,
+			String eventDescribtion, Integer eventCost, Date formsDate, Date startDate, Timestamp startTime,
 			String gradeCutOff, String workTimeMissed) {
 		super();
 		this.rfId = rfId;
@@ -113,7 +114,7 @@ public class ReimbursementForm {
 	}
 	
 	public ReimbursementForm(String formStatus, String eventType, String eventLocation, String eventDescribtion,
-			Integer eventCost, Timestamp formsDate, Timestamp startDate, Timestamp startTime, String gradeCutOff,
+			Integer eventCost, Date formsDate, Date startDate, Timestamp startTime, String gradeCutOff,
 			String workTimeMissed) {
 		super();
 		this.formStatus = formStatus;
@@ -129,7 +130,7 @@ public class ReimbursementForm {
 	}
 	
 	public ReimbursementForm(Integer empId, String eventType, String eventLocation, String eventDescribtion,
-			Integer eventCost, Timestamp startDate, Timestamp startTime, String gradeFormat, String gradeCutOff,
+			Integer eventCost, Date startDate, Timestamp startTime, String gradeFormat, String gradeCutOff,
 			String workTimeMissed) {
 		super();
 		this.empId = empId;
@@ -139,6 +140,40 @@ public class ReimbursementForm {
 		this.eventCost = eventCost;
 		this.startDate = startDate;
 		this.startTime = startTime;
+		this.gradeFormat = gradeFormat;
+		this.gradeCutOff = gradeCutOff;
+		this.workTimeMissed = workTimeMissed;
+	}
+	
+	public ReimbursementForm(Integer rfId, Integer empId, String formStatus, String eventType, String eventLocation,
+			String eventDescribtion, Integer eventCost, Date formsDate, Date startDate,
+			String gradeFormat, String gradeCutOff, String workTimeMissed) {
+		super();
+		this.rfId = rfId;
+		this.empId = empId;
+		this.formStatus = formStatus;
+		this.eventType = eventType;
+		this.eventLocation = eventLocation;
+		this.eventDescribtion = eventDescribtion;
+		this.eventCost = eventCost;
+		this.formsDate = formsDate;
+		this.startDate = startDate;
+		this.gradeFormat = gradeFormat;
+		this.gradeCutOff = gradeCutOff;
+		this.workTimeMissed = workTimeMissed;
+	}
+	
+	public ReimbursementForm(Integer empId, String eventType, String eventLocation, String eventDescribtion,
+			Integer eventCost, Date formsDate, Date startDate, String gradeFormat, String gradeCutOff,
+			String workTimeMissed) {
+		super();
+		this.empId = empId;
+		this.eventType = eventType;
+		this.eventLocation = eventLocation;
+		this.eventDescribtion = eventDescribtion;
+		this.eventCost = eventCost;
+		this.formsDate = formsDate;
+		this.startDate = startDate;
 		this.gradeFormat = gradeFormat;
 		this.gradeCutOff = gradeCutOff;
 		this.workTimeMissed = workTimeMissed;

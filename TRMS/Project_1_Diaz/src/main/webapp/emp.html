@@ -17,10 +17,12 @@
 		<body>
 			<nav class="navbar navbar-expand-sm bg-light navbar-light">
 				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link" href="#">Clams</a></li>		
-						
-						
-					<li class="nav-item active"><a class="nav-link" href="./index.html">Log Out</a></li>	
+					<li class="nav-item active"><a class="nav-link" href="clams.html">Clams</a></li>		
+					
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="logout"><a href="Logout"> <span class="glyphicon glyphicon-log-out"></span> Logout
+					</a></li>
 				</ul>
 			</nav>
 			<div class="container-fluid">
@@ -42,10 +44,11 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<h3>Create Clam</h3>
-								<form action="#">
+								<form action="ReimbursementFormServlet" method="POST">
 									<div class="form-group">
-										<h6><label for="Event_Type">Event Type:</label> <input type="text"
-											   class="form-control" id="Event_Type" name="Event_Type									</div>
+										<h6><label for="Event_Type">Event Type(Chose from the Table on the left):</label> <input type="text"
+											   class="form-control" id="Event_Type" name="Event_Type">
+									</div>
 									<div class="form-group">
 										<h6><label for="Event_Location">Event Location :</label> <input type="text"
 											   class="form-control" id="Event_Location" name="Event_Location"></h6>
@@ -55,17 +58,17 @@
 											   class="form-control" id="Event_Description" name="Event_Description"></h6>
 									</div>
 									<div class="form-group">
-										<h6><label for="Eventid">Event Id :</label> <input type="text"
-											   class="form-control" id="Eventid" name="Eventid"></h6>
-									</div>
-									<div class="form-group">
 										<h6><label for="Event_Cost">Event Cost :</label> <input type="text"
 											   class="form-control" id="Event_Cost" name="Event_Cost"></h6>
 									</div>
-									
-									
-									
-									
+									<div class="form-group">
+										<h6><label for="Start_Date">Start Date(dd/mm/yy) :</label> <input type="text"
+											   class="form-control" id="Start_Date" name="Start_Date"></h6>
+									</div>
+									<div class="form-group">
+										<h6><label for="Forms_Date">Forms Date(dd/mm/yy) :</label> <input type="text"
+											   class="form-control" id="Forms_Date" name="Forms_Date"></h6>
+									</div>
 									<div class="form-group">
 										<h6><label for="Grade_Format">Grade Format :</label> <input type="text"
 											   class="form-control" id="Grade_Format" name="Grade_Format"></h6>
@@ -133,5 +136,7 @@
 						</div>	
 					</div>
 				</div>
+				
+				
 		</body>
 </html>

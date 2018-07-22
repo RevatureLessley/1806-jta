@@ -8,31 +8,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.revature.services.EmployeeService;
 import com.revature.services.ReimbursementFormService;
-import com.revature.util.HtmlTemplates;
 
 /**
- * Servlet implementation class ReimbursementForm
+ * Servlet implementation class SelectClams
  */
-public class ReimbursementFormServlet extends HttpServlet {
+public class SelectClams extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public ReimbursementFormServlet() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SelectClams() {
         super();
     }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append(" Test : ").append(request.getContextPath());
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		response.setContentType("text");
 		PrintWriter out = response.getWriter();
-		if(ReimbursementFormService.createFormEntry(request)) {
-			out.println("<h3 style='color:green'>Clam Submitted</h3>");
-		}else{
-			out.println("Employee already exist please try again ");
-		}
-		HtmlTemplates.goBackButton(out);
+		ReimbursementFormService rfs = new ReimbursementFormService();
+		
+		out.println(rfs.getAllJSON());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

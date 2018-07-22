@@ -58,4 +58,24 @@
     <servlet-name>employeeServlet</servlet-name>
     <url-pattern>/employeeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.revature.servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectClams</display-name>
+    <servlet-name>SelectClams</servlet-name>
+    <servlet-class>com.revature.servlets.SelectClams</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectClams</servlet-name>
+    <url-pattern>/SelectClams</url-pattern>
+  </servlet-mapping>
 </web-app>

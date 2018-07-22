@@ -28,9 +28,8 @@ CREATE TABLE ReimbursementForm (
     Event_Location VARCHAR2(100) NOT NULL,
     Event_Description VARCHAR2(100),
     Event_Cost NUMBER(10),
-    Forms_Date TIMESTAMP,
+    Forms_Date TIMESTAMP(),
     Start_Date TIMESTAMP,
-    Start_Time TIMESTAMP,
     Grade_Format VARCHAR2(20) NOT NULL,
     Grade_Cut_Off VARCHAR2(20) NOT NULL,
     Work_Time_Missed VARCHAR2(100) NOT NULL,
@@ -105,7 +104,7 @@ CALL InsertEmployee ('Zack', 'Diaz', 'ZackDiaz', 'ZackDiaz', '999-999-9999', 'Te
 CALL InsertEmployee ('Tony', 'Diaz', 'TonyDiaz', 'TonyDiaz', '999-999-9999', 'Test@test.com', 'Hr', 'Benefit Coordinator', null,  1000);
 
 CALL InsertEmployee ('Mike', 'Diaz', 'MilkDiaz', 'MilkDiaz', '999-999-9999', 'Test@test.com', 'Math', 'Direct Supper', null,  1000);
-CALL InsertEmployee ('Jhon', 'Do', 'JhonDo', 'JhonDo', '999-999-9999', 'Test@test.com', 'Math', 'Department Head', null, null, 1000);
+CALL InsertEmployee ('Jhon', 'Do', 'JhonDo', 'JhonDo', '999-999-9999', 'Test@test.com', 'Math', 'Department Head', null, 1000);
 CALL InsertEmployee ('Watter', 'Dog', 'WaterDog', 'WaterDog', '999-999-9999', 'Test@test.com', 'Math', 'Benefit Coordinator', null,  1000);
 
 CALL InsertEmployee ('Tree', 'Frog', 'TreeFrog', 'TreeFrog', '999-999-9999', 'Test@test.com', 'History', 'Direct Supper', null,  1000);
@@ -117,7 +116,14 @@ SELECT * FROM Employee;
 /
 -----------------------------------------------------------------------------------------------
 
+CREATE VIEW V_Test
+AS SELECT * 
+FROM REIMBURSEMENTFORM;
+/
+
+Select * FROM V_Test;
+
 
 SELECT * FROM EMPLOYEE;
-
+SELECT * FROM REIMBURSEMENTFORM;
 commit;

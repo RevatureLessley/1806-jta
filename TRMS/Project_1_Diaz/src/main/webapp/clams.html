@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<title>Benefits Coordinator</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<script src="./resources/js/ajax.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="clams.html">Clams</a></li>
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li id="logout"><a href="Logout"> <span
+					class="glyphicon glyphicon-log-out"></span> Logout
+			</a></li>
+		</ul>
+	</nav>
+	<div class="container-fluid">
+		<div class=ZacksBackGround>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>======Welcome to the Reimbursement Clam Center======</h3>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class=ZacksBackGround>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Current Clams</h3>
+					<button onclick="getClams()">REFRESH</button>
+					<table id="table"class="table table-striped table-light table-hover" border = 2px>
+						<tr>
+							<th>Rf Id</th>
+							<th>Emp Id</th>
+							<th>Form Status</th>
+							<th>Event Type</th>
+							<th>Event Location</th>
+							<th>Event Describtion</th>
+							<th>Event Cost</th>
+							<th>Forms Date</th>
+							<th>Start Date</th>
+							<th>Grade Format</th>
+							<th>Grade CutOff</th>
+							<th>Work Time Missed</th>
+						</tr>
+					</table>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
