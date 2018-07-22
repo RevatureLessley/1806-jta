@@ -62,7 +62,7 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("EventApproveServlet");
 			rd.forward(request, response);
 			break;
-		case "eventchangeaward":
+		case "changeaward":
 			rd = request.getRequestDispatcher("EventChangeAwardServlet");
 			rd.forward(request, response);
 			break;

@@ -216,12 +216,16 @@ END;
 
 CREATE OR REPLACE PROCEDURE ADD_NEW_EVENT(empId IN NUMBER, evType IN NUMBER, evGradeScale IN NUMBER, evName IN VARCHAR, evDate IN TIMESTAMP, evLocation IN VARCHAR, evDescription IN VARCHAR, evJustification IN VARCHAR, evCost IN DECIMAL, evId OUT NUMBER)
 IS
+    reimb NUMBER;
 BEGIN
 --    INSERT INTO department VALUES (1, 'Human Resources');
     INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_date, ev_location, ev_description, ev_justification, ev_cost) 
                 VALUES(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost);
 
     SELECT MAX(ev_id) INTO evId FROM event WHERE emp_id = empId;
+    
+    reimb := CALC_REIMB_AMOUT(evId)/100;
+    UPDATE event SET ev_r_amt = reimb WHERE ev_id = evId;
 END;
 /
 
@@ -255,8 +259,8 @@ BEGIN
             return;
         END IF;
         
-        reimb := CALC_REIMB_AMOUT(evId)/100;
-        UPDATE event SET ev_benco_approve = SYSDATE, ev_r_amt = reimb WHERE ev_id = evId;
+        SELECT ev_r_amt INTO reimb FROM event WHERE ev_id = evId;
+        UPDATE event SET ev_benco_approve = SYSDATE WHERE ev_id = evId;
         UPDATE employee SET emp_reimbursement_available = emp_reimbursement_available-reimb WHERE emp_id = empId;
         status := 1;
     END IF;
@@ -392,11 +396,9 @@ evId NUMBER;
 temp NUMBER;
 BEGIN
 --    INSERT INTO department VALUES (1, 'Human Resources');
-    INSERT INTO event (emp_id, ev_type, ev_grade_scale, ev_name, ev_date, ev_location, ev_description, ev_justification, ev_cost) 
-                VALUES(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost);
 
-    SELECT MAX(ev_id) INTO evId FROM event WHERE emp_id = empId;
-    
+    ADD_NEW_EVENT(empId, evType, evGradeScale, evName, evDate, evLocation, evDescription, evJustification, evCost, evId);
+        
     EVENT_UPDATE_APPROVAL_FROM(evId, 2, temp);
 END;
 /

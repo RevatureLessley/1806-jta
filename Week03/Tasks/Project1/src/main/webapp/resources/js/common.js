@@ -19,3 +19,7 @@ function viewEvent(eventId){
 function userViewEvent(eventId){
 	window.location.href = `../user/eventview.jsp?eventId=${eventId}`;
 }
+
+function createNavbar(){
+	addFromTemplate("navbar", "#navDiv");
+}

@@ -32,7 +32,7 @@
 	<div id="container"></div>
 
 	<script>
-	 	addFromTemplate("navbar", "#navDiv");
+	 	createNavbar()
 	    addFromTemplate("userbody", "#container");
 	   
 	    <%Integer userId = (Integer) session.getAttribute("userId");%>;

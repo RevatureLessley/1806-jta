@@ -96,9 +96,12 @@ public class EventService {
 		}
 	}
 
-	public static void eventChangeAward(Integer eventId, String message, Integer amount) {
-		new EventDaoImpl().eventChangeAward(eventId, message, amount);
-
+	public static void eventChangeAward(Integer userId, Integer eventId, String message, Double amount) {
+		
+		new EventDaoImpl().eventChangeAward(eventId, amount);
+		
+		NotificationService.eventAddNotification(eventId, userId, "The awarded amount has been changed to "
+				+ StringManip.formatCurrency(amount) + " for event " + EventService.getEventName(eventId) + " -- " + message);
 	}
 
 	public static void eventSubmitGrade(Integer userId, Integer eventId, Integer grade) {
@@ -118,6 +121,10 @@ public class EventService {
 		else
 			return gv.getName();
 
+	}
+
+	public static String getEventName(Integer eventId) {
+		return new EventDaoImpl().selectById(eventId).getName();
 	}
 
 }

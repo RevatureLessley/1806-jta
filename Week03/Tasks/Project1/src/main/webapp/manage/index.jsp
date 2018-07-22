@@ -34,7 +34,7 @@
 	<div id="container" class="container-fluid"></div>
 
 	<script>
-	 	addFromTemplate("navbar", "#navDiv");
+		createNavbar();
 	    addFromTemplate("userbody", "#container");
 	    addFromTemplate("subevents", "#container");
 	   

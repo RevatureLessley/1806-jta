@@ -72,6 +72,10 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/HomeServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>LogoutServlet</display-name>

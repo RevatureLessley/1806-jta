@@ -61,7 +61,7 @@
 			out.print(EventService.selectUserEvents(userId));%>;
 
 		createEventTable(jsonStr, "tableBody");
-		addFromTemplate("navbar", "#navDiv");
+		createNavbar();
 	</script>
 
 </body>

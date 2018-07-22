@@ -8,7 +8,7 @@ function fillEventData(data) {
 	document.getElementById("employeeName").innerHTML = data["employeeName"];
 	document.getElementById("eventType").innerHTML = data["typeName"];
 	document.getElementById("gradeFormat").innerHTML = data["gradeScaleName"];
-	document.getElementById("finalGrade").innerHTML = data["gradeScaleName"];
+	document.getElementById("finalGrade").innerHTML = data["finalGrade"];
 	document.getElementById("date").innerHTML = data["date"];
 	document.getElementById("cost").innerHTML = data["cost"];
 	document.getElementById("reimbursement").innerHTML = data["reimbursementAmount"];
@@ -23,7 +23,7 @@ function fillEventManageData(data, empData) {
 	console.log(data["phase"]);
 	if (data["phase"] == "Approval")
 		fillApprovalPhaseData(data, empData);
-	if (data["phase"] == "Confirmation") {
+	if (data["status"] == "UnConfirmed") {
 		fillConfirmationPhaseData(data, empData);
 	}
 }

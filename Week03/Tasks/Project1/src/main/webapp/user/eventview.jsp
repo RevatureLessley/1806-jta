@@ -32,7 +32,7 @@
 	<div id="commentContainer" class="container-fluid"></div>
 
 	<script>
-		addFromTemplate("navbar", "#navDiv");
+		createNavbar();
 		addFromTemplate("eventview", "#container");
 	<%Integer userId = (Integer) session.getAttribute("userId");%>
 		;

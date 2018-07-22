@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.revature.service.EventService;
 import com.revature.service.NotificationService;
+import com.revature.utils.StringManip;
 
 /**
  * Servlet implementation class EventChangeAwardServlet
@@ -33,10 +34,10 @@ public class EventChangeAwardServlet extends HttpServlet {
 
 		Integer eventId = Integer.parseInt(request.getParameter("eventId"));
 		String message = request.getParameter("message");
-		Integer amount = Integer.parseInt(request.getParameter("amount"));
+		Double amount = Double.parseDouble(request.getParameter("amount"));
 		
-		//TODO create notification
-		EventService.eventChangeAward(eventId, message, amount);
+		EventService.eventChangeAward(userId, eventId, message, amount);
+		
 		response.sendRedirect(".");
 	}
 

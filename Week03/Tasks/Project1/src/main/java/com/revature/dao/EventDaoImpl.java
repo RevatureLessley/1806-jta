@@ -251,17 +251,16 @@ public class EventDaoImpl {
 		return 0;
 	}
 
-	public void eventChangeAward(Integer eventId, String message, Integer amount) {
+	public void eventChangeAward(Integer eventId, Double amount) {
 		PreparedStatement ps = null;
 
-		String sql = "UPDATE event SET ev_r_amt = ?, ev_r_message = ? WHERE ev_id = ?";
+		String sql = "UPDATE event SET ev_r_amt = ? WHERE ev_id = ?";
 
 		try (Connection conn = Connections.getConnection()) {
 			ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, amount);
-			ps.setString(2, message);
-			ps.setInt(3, eventId);
+			ps.setDouble(1, amount);
+			ps.setInt(2, eventId);
 
 			ps.execute();
 
