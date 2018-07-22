@@ -8,12 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.beans.Employee;
 import com.revature.beans.RForm;
 import com.revature.util.Connections;
 
 public class RFormDaoImpl {
 	public Boolean insertRFormViaSp(RForm rform) {
-CallableStatement stmt = null; 
+		CallableStatement stmt = null; 
 		
 		try(Connection conn = Connections.getConnection()){
 
@@ -42,6 +43,25 @@ CallableStatement stmt = null;
 		}finally{
 			close(stmt);
 		}		
+		return false;
+	}
+	
+	public Boolean approveRForm(int applvl, int rformid) {
+		PreparedStatement ps = null;
+		String sql = "UPDATE RForm SET app_lvl = ? WHERE rform_id = ?";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, applvl);
+			ps.setInt(2, rformid);
+			ps.executeUpdate();
+			return true;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		
 		return false;
 	}
 }

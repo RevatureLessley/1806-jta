@@ -30,4 +30,9 @@ public class RFormService {
 	
 	return false;
 	}
+	public static boolean approveRForm(int applvl, int rformid) {
+		RFormDaoImpl rformDao = new RFormDaoImpl();
+		if(rformDao.approveRForm(applvl, rformid)) return true;
+		return false;
+	}
 }

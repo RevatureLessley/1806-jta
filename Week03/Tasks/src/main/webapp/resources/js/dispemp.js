@@ -1,7 +1,6 @@
 window.onload = function(){
 	getEmp();
 	getReimb();
-	dispSupRForms();
 }
 
 function getReimb(){
@@ -54,6 +53,8 @@ function rformDetails(jsonobj){
 		applvl = "Approved";
 	}else if (applvl == 9){
 		applvl = "Denied";
+	}else if (applvl == 4){
+		applvl = "Reimbursed";
 	}else{
 		applvl = "Pending";
 	}
@@ -107,6 +108,14 @@ function rformDetails(jsonobj){
 	l12.appendChild(document.createTextNode("Justification: " + jsonobj["justification"]));
 	ul1.appendChild(l12);
 	
+	if(jsonobj["isSup"] == 1){
+		let b2 = document.createElement('button');
+		b2.setAttribute("onclick","approveRForm(" + jsonobj["rFormId"] +"," + jsonobj["appLvl"] + ")");
+		b2.setAttribute("id",jsonobj["rFormId"] + "approval")
+		b2.appendChild(document.createTextNode("Approve"));
+		ul1.appendChild(b2);
+	}
+	
 	l.appendChild(ul1);
 	
 	
@@ -149,6 +158,9 @@ function getEmp(){
 				+ data["pending"] + "</li>";
 			list.innerHTML += "<li>Available Reimbursements Total: "
 				+ data["awarded"] + "</li>";
+			if(data["empType"] > 0){
+				dispSupRForms();
+			}
 		}
 	}
 	xhr.open("GET", url);
@@ -178,10 +190,25 @@ function dispSupRForms(){
 					b1.appendChild(document.createTextNode("+"));
 					l1.appendChild(b1);
 					list.appendChild(l1);
+					
+					
 				}
 			}
 		}
 	}
 	xhr.open("GET", url);
 	xhr.send();
+}
+function approveRForm(rformid,applvl){
+	console.log(rformid);
+	console.log(applvl);
+	$.ajax({
+	    url: 'ApproveRForm.do',
+	    data: {
+	    	currFormId: rformid,
+	        currapplvl: applvl
+	        
+	    },
+	    type: 'POST'});
+
 }

@@ -59,7 +59,6 @@ public class NewFormServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		System.out.println("oiefoie");
 		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
 										timemissed, gradeformat, cutoff, eventtype, eventcost,supid,eventname)){
 			session = request.getSession();

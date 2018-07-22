@@ -107,5 +107,25 @@ public class EmployeeService {
 		}
 		return json;
 	}
+	public static String getBenRFormsJSON(int benid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<RForm> rforms = empDao.selectRformBen(benid);
+		for (RForm form: rforms) {
+			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
+					.get(form.getEventTypeId()));
+			form.setEmpName(empDao.selectEmployeeById(form.getEmpid()).getFirstN()
+					+ " " + empDao.selectEmployeeById(form.getEmpid()).getLastN());
+			form.setIsSup(1);
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try {
+			json = mapper.writeValueAsString(rforms);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 	
 }

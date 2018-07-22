@@ -5,4 +5,5 @@ import com.revature.beans.RForm;
 
 public interface RFormDao {
 	public Boolean insertEmployeeViaSp(Employee employee);
+	public Boolean approveRForm(int applvl, int rformid);
 }

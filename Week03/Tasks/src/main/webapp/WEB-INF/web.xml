@@ -122,4 +122,14 @@
     <servlet-name>GetSupReimbersementsServlet</servlet-name>
     <url-pattern>/GetSupReimbersements.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveRFormServlet</display-name>
+    <servlet-name>ApproveRFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveRFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveRFormServlet</servlet-name>
+    <url-pattern>/ApproveRForm.do</url-pattern>
+  </servlet-mapping>
 </web-app>

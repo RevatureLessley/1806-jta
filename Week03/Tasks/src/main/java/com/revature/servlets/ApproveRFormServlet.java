@@ -1,27 +1,23 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.revature.beans.Employee;
-import com.revature.services.EmployeeService;
+import com.revature.services.RFormService;
 
 /**
- * Servlet implementation class GetSupReimbersementsServlet
+ * Servlet implementation class ApproveRFormServlet
  */
-public class GetSupReimbersementsServlet extends HttpServlet {
+public class ApproveRFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetSupReimbersementsServlet() {
+    public ApproveRFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +27,9 @@ public class GetSupReimbersementsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text");
-		PrintWriter out = response.getWriter();
-		
-		HttpSession session = request.getSession(false);
-		if(((Employee)session.getAttribute("employee")).getDepId() == 1)
-		{
-			out.println(EmployeeService.getBenRFormsJSON(((Employee)session.getAttribute("employee")).getEmpid()));
-		}else if(((Employee)session.getAttribute("employee")).getEmpType() >= 1) {
-			out.println(EmployeeService.getSupRFormsJSON(((Employee)session.getAttribute("employee")).getEmpid()));
-		}
+		int currFormId = Integer.parseInt(request.getParameter("currFormId"));
+		int currapplvl = Integer.parseInt(request.getParameter("currapplvl")) + 1;
+		RFormService.approveRForm(currapplvl, currFormId);
 	}
 
 	/**
