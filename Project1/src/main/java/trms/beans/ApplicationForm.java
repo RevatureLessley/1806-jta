@@ -38,6 +38,7 @@ public class ApplicationForm implements Form {
 	public void setGeneralStatus(String generalStatus) {
 		if (generalStatus == null) {
 			this.generalStatus = "Not filled.";
+			return;
 		}
 		this.generalStatus = generalStatus;
 	}
@@ -49,6 +50,7 @@ public class ApplicationForm implements Form {
 	public void setSupervisorComments(String supervisorComments) {
 		if (supervisorComments == null) {
 			this.supervisorComments = "Not filled.";
+			return;
 		}
 		this.supervisorComments = supervisorComments;
 	}
@@ -60,6 +62,7 @@ public class ApplicationForm implements Form {
 	public void setFormComments(String formComments) {
 		if (formComments == null) {
 			this.formComments = "Not filled.";
+			return;
 		}
 		this.formComments = formComments;
 	}
@@ -126,8 +129,6 @@ public class ApplicationForm implements Form {
 
 	public void setDateFormWasClosed(Date dateFormWasClosed) {
 		if (dateFormWasClosed == null) {
-			Date fillDate = new Date("1999-01-01");
-			this.dateFormWasClosed = fillDate;
 			return;
 		}
 		this.dateFormWasClosed = dateFormWasClosed;
@@ -139,8 +140,6 @@ public class ApplicationForm implements Form {
 
 	public void setDepartmentHeadDecisionDate(Date departmentHeadDecisionDate) {
 		if (departmentHeadDecisionDate == null) {
-			Date fillDate = new Date("1999-01-01");
-			this.departmentHeadDecisionDate = fillDate;
 			return;
 		}
 		this.departmentHeadDecisionDate = departmentHeadDecisionDate;
@@ -152,8 +151,6 @@ public class ApplicationForm implements Form {
 
 	public void setBenefitsCoordinatorDecisionDate(Date benefitsCoordinatorDecisionDate) {
 		if (benefitsCoordinatorDecisionDate == null) {
-			Date fillDate = new Date("1999-01-01");
-			this.benefitsCoordinatorDecisionDate = fillDate;
 			return;
 		}
 		this.benefitsCoordinatorDecisionDate = benefitsCoordinatorDecisionDate;
@@ -165,8 +162,6 @@ public class ApplicationForm implements Form {
 
 	public void setDirectSupervisorDecisionDate(Date directSupervisorDecisionDate) {
 		if (directSupervisorDecisionDate == null) {
-			Date fillDate = new Date("1999-01-01");
-			this.directSupervisorDecisionDate = fillDate;
 			return;
 		}
 		this.directSupervisorDecisionDate = directSupervisorDecisionDate;

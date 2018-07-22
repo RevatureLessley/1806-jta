@@ -42,8 +42,6 @@ public class Pending extends HttpServlet {
 		request.setAttribute("users", users);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("pending.jsp");
 		dispatcher.forward(request, response);*/
-		request.removeAttribute("users");
-		request.removeAttribute("forms");
 		listContent(request, response);
 	}
 	
@@ -54,23 +52,64 @@ public class Pending extends HttpServlet {
 		response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");*/
 		request.setAttribute("users", users);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("pending.jsp");
+		RequestDispatcher dispatcher = null;
+		if (request.getAttribute("formData") != null) {
+			System.out.println("Form data is not null.");
+			dispatcher = request.getRequestDispatcher("review.jsp");
+		} else {
+			dispatcher = request.getRequestDispatcher("pending.jsp");
+		}
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		trms.beans.ApplicationForm formData = null;
 		UserDAO userDAO = new UserDAOImpl();
 		ApplicationFormDAO applicationFormDAO = new ApplicationFormDAOImpl();
 		List<User> users = userDAO.getAllUsers();
 		List<trms.beans.ApplicationForm> applicationForms = applicationFormDAO.getAllForms();
 		String userUUID = request.getParameter("user");
-		applicationForms = applicationFormDAO.getUserApplicationForms(userUUID);
+		String formUUID = request.getParameter("form");
+		String selectedUserUUID = request.getParameter("selectedId");
+		String selectedFormUUID = request.getParameter("selectedForm");
 		
+		if (selectedFormUUID != null) {
+			formData = applicationFormDAO.getApplicationForm(selectedFormUUID);
+		} 
+		
+		if (formUUID != null){
+			formData = applicationFormDAO.getApplicationForm(formUUID);
+		}
+		
+		if (selectedUserUUID != null) {
+			applicationForms = applicationFormDAO.getUserApplicationForms(selectedUserUUID);
+		} 
+		
+		if (userUUID != null) {
+			applicationForms = applicationFormDAO.getUserApplicationForms(userUUID);
+		}
+		
+		System.out.println(applicationForms.size() + " forms found.");
+		if (formData != null) {
+			System.out.println(formData.getFormUUID());
+		}
+		if (userUUID != null ) {
+		request.setAttribute("selectedId", userUUID);
+		}
+		if (applicationForms != null) {
 		request.setAttribute("forms", applicationForms);
+		}
+		if (formUUID != null) {
+			request.setAttribute("selectedForm", formUUID);
+		}
+		if (formData != null) {
+			System.out.println(formData.toString());
+			request.setAttribute("formData", formData);
+		}
+		
 		listContent(request, response);
 	}
 

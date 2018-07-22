@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class Connection {
@@ -32,5 +34,41 @@ public class Connection {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static void close(Statement resource){
+		if(resource!=null){
+			try{
+				resource.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void close(ResultSet resource){
+		if(resource!=null){
+			try{
+				resource.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void close(FileInputStream resource){
+		if(resource!=null){
+			try{
+				resource.close();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void close(java.sql.Connection resource){
+		if(resource!=null){
+			try{
+				resource.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
 	}
 }

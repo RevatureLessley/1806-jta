@@ -15,10 +15,10 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 
 	@Override
 	public List<ApplicationForm> getAllForms() {
+		java.sql.Connection connection = this.getConnection();
 		ArrayList<ApplicationForm> forms = new ArrayList<ApplicationForm>();
 		
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call selectAllForms(?)}");
 			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
 			callableStatement.execute();
@@ -26,8 +26,7 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 			while (rs.next()) {
 				ApplicationForm form = new ApplicationForm();
-				System.out.println(rs.getString("form_uuid"));
-				form.setFirstName(this.getEmployeeFirstNameFromForm(rs.getString("form_uuid")));
+				/*form.setFirstName(this.getEmployeeFirstNameFromForm(rs.getString("form_uuid")));
 				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
 				form.setFormUUID(rs.getString("form_uuid"));
 				form.setEmployeeUUID(rs.getString("employee_uuid"));
@@ -47,13 +46,36 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 				form.setDateFormWasClosed(this.getFormClosedDate(rs.getString("form_uuid")));
 				form.setDepartmentHeadDecisionDate(this.getDepartmentHeadDecisionDate(rs.getString("form_uuid")));
 				form.setBenefitsCoordinatorDecisionDate(this.getBenefitsCoordinatorDecisionDate(rs.getString("form_uuid")));
+				form.setDirectSupervisorDecisionDate(this.getSupervisorDecisionDate(rs.getString("form_uuid")));*/
+
+				form.setFirstName(this.getEmployeeFirstNameFromForm(rs.getString("form_uuid")));
+				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
+				form.setFormUUID(rs.getString("form_uuid"));
+				form.setEmployeeUUID(rs.getString("employee_uuid"));
+				form.setDirectSupervisorUUID(rs.getString("direct_supervisor_uuid"));
+				form.setDepartmentHeadUUID(rs.getString("department_head_uuid"));
+				form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
+				form.setGeneralStatus(rs.getString("status"));
+				form.setSupervisorComments(rs.getString("supervisor_comments"));
+				form.setFormComments(rs.getString("form_comments"));
+				form.setCompletedWithSatisfaction(this.getCompletedWithSatisfaction(rs.getString("form_uuid")));
+				form.setFormClosed(this.isFormClosed(rs.getString("form_uuid")));
+				form.setPresentationToManagementRequired(this.isPresentationRequired(rs.getString("form_uuid")));
+				form.setSupervisorDecisionMade(this.hasSupervisorMadeADecision(rs.getString("form_uuid")));
+				form.setBenCoDecisionMade(this.hasBenefitsCoordinatorMadeADecision(rs.getString("form_uuid")));
+				form.setDepartmentHeadDecisionMade(this.hasDepartmentHeadMadeADecision(rs.getString("form_uuid")));
+				form.setFormCreationDate(this.getFormCreationDate(rs.getString("form_uuid")));
+				form.setDateFormWasClosed(this.getFormClosedDate(rs.getString("form_uuid")));
+				form.setDepartmentHeadDecisionDate(this.getDepartmentHeadDecisionDate(rs.getString("form_uuid")));
+				form.setBenefitsCoordinatorDecisionDate(this.getBenefitsCoordinatorDecisionDate(rs.getString("form_uuid")));
 				form.setDirectSupervisorDecisionDate(this.getSupervisorDecisionDate(rs.getString("form_uuid")));
-				
 				forms.add(form);
 			}
 			return forms;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+		} finally {
+			close(connection);
 		}
 		return null;
 	}
@@ -76,7 +98,7 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
 				form.setFormUUID(rs.getString("form_uuid"));
 				form.setEmployeeUUID(rs.getString("employee_uuid"));
-				form.setDirectSupervisorUUID(rs.getString("supervisor_uuid"));
+				form.setDirectSupervisorUUID(rs.getString("direct_supervisor_uuid"));
 				form.setDepartmentHeadUUID(rs.getString("department_head_uuid"));
 				form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
 				form.setGeneralStatus(rs.getString("status"));
@@ -102,6 +124,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		
 		} catch (Exception sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -118,6 +142,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return (String) callableStatement.getString(2);
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -134,6 +160,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -149,6 +177,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return (String) callableStatement.getString(2);
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -165,6 +195,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -180,6 +212,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return (String) callableStatement.getString(2);
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
  
@@ -196,6 +230,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -212,6 +248,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return (String) callableStatement.getString(2);
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -228,6 +266,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -247,6 +287,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -265,6 +307,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return lastName;
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -282,6 +326,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -298,6 +344,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -313,6 +361,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return callableStatement.getString(2);
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -327,7 +377,9 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			 return true;
 		 } catch (SQLException sqle) {
 			 return false;
-		 }
+		 } finally {
+				close(connection);
+			}
 	}
 
 	@Override
@@ -343,6 +395,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -357,7 +411,9 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			 return true;
 		 } catch (SQLException sqle) {
 			 return false;
-		 }
+		 } finally {
+				close(connection);
+			}
 	}
 
 	@Override
@@ -385,6 +441,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 		
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -409,13 +467,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean isFormClosed(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call isFormClosed(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
@@ -423,11 +483,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean closeForm(String formUUID, boolean isCompleted) {
+		java.sql.Connection connection = this.getConnection();
+
 		try {
 			
 			String value = null;
@@ -437,7 +501,6 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 				value = "NO";
 			}
 			
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call closeForm(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, value);
@@ -445,29 +508,38 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public Date getFormClosedDate(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
+
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call getFormClosedDate(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.DATE);
 			callableStatement.execute();
 			
+			if (callableStatement.getDate(2) == null) {
+				return null;
+			}
+			
 			return callableStatement.getDate(2);
 			
 		} catch (SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean isPresentationRequired(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call isPresentationRequired(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(1, OracleTypes.VARCHAR);
@@ -481,11 +553,14 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean updatePresentationRequirements(String formUUID, boolean isPresentationRequired) {
+		java.sql.Connection connection = this.getConnection();
 		try {
 			String value = null;
 			
@@ -495,7 +570,6 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 				value = "NO";
 			}
 			
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call updatePresentationRequirements(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, value);
@@ -503,13 +577,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		}finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean hasSupervisorMadeADecision(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call hasSupervisorMadeADecision(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
@@ -518,18 +594,26 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean hasBenefitsCoordinatorMadeADecision(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
+
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call hasBenCoMadeADecision(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
 			callableStatement.execute();
 			String result = callableStatement.getString(2);
+			
+			if (result == null) {
+				return false;
+			}
+			
 			if (result.equals("YES")) {
 				return true;
 			} else {
@@ -537,18 +621,25 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			}
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean hasDepartmentHeadMadeADecision(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call hasDeptHeadMadeADecision(?,?))}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.VARCHAR);
 			callableStatement.execute();
 			String result = callableStatement.getString(2);
+			
+			if (result == null) {
+				return false;
+			}
+			
 			if (result.equals("YES")) {
 				return true;
 			} else {
@@ -556,13 +647,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			}
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public Date getFormCreationDate(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call selectFormCreationDate(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.DATE);
@@ -571,13 +664,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch(SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean updateDepartmentHeadDecision(String formUUID, String decision) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call updateDepartmentHeadDecision(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, decision);
@@ -585,13 +680,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean updateBenefitsCoordinatorDecision(String formUUID, String decision) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call updateBenCoDecision(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, decision);
@@ -599,13 +696,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public boolean updateSupervisorDecision(String formUUID, String decision) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call updateSupervisorDecision(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, decision);
@@ -613,13 +712,15 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
 	}
 
 	@Override
 	public Date getSupervisorDecisionDate(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call selectSupervisorDecisionDate(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.DATE);
@@ -628,6 +729,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch(SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 
@@ -648,8 +751,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 
 	@Override
 	public Date getDepartmentHeadDecisionDate(String formUUID) {
+		java.sql.Connection connection = this.getConnection();
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call selectDeptHeadDecisionDate(?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.registerOutParameter(2, OracleTypes.DATE);
@@ -658,6 +761,8 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			
 		} catch(SQLException sqle) {
 			return null;
+		} finally {
+			close(connection);
 		}
 	}
 	
@@ -677,9 +782,9 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 
 	@Override
 	public boolean submitNewApplicationForm(String formUUID, String employeeUUID, String formComments) {
-		
+		java.sql.Connection connection = this.getConnection();
+
 		try {
-			java.sql.Connection connection = this.getConnection();
 			CallableStatement callableStatement = connection.prepareCall("{call newApplicationForm(?,?,?)}");
 			callableStatement.setString(1, formUUID);
 			callableStatement.setString(2, employeeUUID);
@@ -689,7 +794,10 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return true;
 		} catch (SQLException sqle) {
 			return false;
+		} finally {
+			close(connection);
 		}
+		
 	}
 
 	@Override
@@ -710,7 +818,7 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 				form.setLastName(this.getEmployeeLastNameFromForm(rs.getString("form_uuid")));			
 				form.setFormUUID(rs.getString("form_uuid"));
 				form.setEmployeeUUID(rs.getString("employee_uuid"));
-				form.setDirectSupervisorUUID(rs.getString("supervisor_uuid"));
+				form.setDirectSupervisorUUID(rs.getString("direct_supervisor_uuid"));
 				form.setDepartmentHeadUUID(rs.getString("department_head_uuid"));
 				form.setBenefitsCoordinatorUUID(rs.getString("benco_uuid"));
 				form.setGeneralStatus(rs.getString("status"));
