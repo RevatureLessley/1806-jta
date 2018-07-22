@@ -16,20 +16,13 @@ import com.revature.util.HtmlTemplates;
  */
 public class employeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
+      
     public employeeServlet() {
         super();
-
     }
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append(" Test: ").append(request.getContextPath());
-		
 	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -41,5 +34,4 @@ public class employeeServlet extends HttpServlet {
 		}
 		HtmlTemplates.goBackButton(out);
 	}
-
 }

@@ -1,125 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
-			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			crossorigin="anonymous"></script>
-	<script
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<title>Welcome</title>
-	<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 
-	</head>
-		<body>
-			<nav class="navbar navbar-expand-sm bg-light navbar-light">
-				<ul class="navbar-nav">
-					<li class="nav-item active"><a class="nav-link"
-						href="./index.html">HOME</a></li>
-				</ul>
-			</nav>
-			<div class="container-fluid">
-				<div class=ZacksBackGround>
-					<div class="row">
-						<div class="col-sm-6">
-							<h3>LOGIN</h3>
-							<form action="LoginServlet" method="POST">
-								<div class="form-group">
-									<h6><label for="first">First Name:</label> <input type="text"
-									   class="form-control" id="first" name="first"></h6>
-								</div>
-								<div class="form-group">
-									<h6><label for="last">Last Name:</label> <input type="text"
-									   class="form-control" id="last" name="last"></h6>
-								</div>
-								<div class="form-group">
-									<h6><label for="password">Password:</label> <input type="password"
-									   class="form-control" id="password" name="password"></h6>
-								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<button type="reset" class="btn btn-primary">Reset</button>
-							</form>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-light navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a class="nav-link"
+				href="./index.html">HOME</a></li>
+		</ul>
+	</nav>
+	<div class="container-fluid">
+		<div class=ZacksBackGround>
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>LOGIN</h3>
+					<form action="LoginServlet" method="POST">
+						<div class="form-group">
+							<h6>
+								<label for="Employee_UserName1">UserName : </label> <input type="text"
+									class="form-control" id="Employee_UserName" name="Employee_UserName1">
+							</h6>
 						</div>
-								
-					</div>
+						<div class="form-group">
+							<h6>
+								<label for="Employee_Password1">Password:</label> <input type="password"
+									class="form-control" id="Employee_Password1" name="Employee_Password1">
+							</h6>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="reset" class="btn btn-primary">Reset</button>
+					</form>
 				</div>
-				<div>
-					<div class=ZacksBackGround>
-						<div class="row">
-							<div class="col-sm-6">
-								<h3>Create Account</h3>
-								<form action="employeeServlet" method="POST">
-									<div class="form-group">
-										<h6><label for="rfId">FormID(pick a number):</label> <input type="text"
-											   class="form-control" id="rfId" name="rfId"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="empTypeId">Employee Type ID (Chose one of the numbers from the table to the right):</label> <input type="text"
-											   class="form-control" id="empTypeId" name="empTypeId"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="fname">First Name:</label> <input type="text"
-											   class="form-control" id="fname" name="fname"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="lname">Last Name:</label> <input type="text"
-											   class="form-control" id="lname" name="lname"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="password1">Password:</label> <input type="password"
-											   class="form-control" id="password1" name="password1"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="password2">Confirm Password:</label> <input type="password"
-											   class="form-control" id="password2" name="password2"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="empPhone">Phone#:</label> <input type="text"
-											   class="form-control" id="empPhone" name="empPhone"></h6>
-									</div>
-									<div class="form-group">
-										<h6><label for="empEmail">Email:</label> <input type="text"
-											   class="form-control" id="empEmail" name="empEmail"></h6>
-									</div>
-									
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" class="btn btn-primary">Reset</button>
-								</form>
-							</div>	
-								<div class="col-sm-6">
-								<h3> Account Types </h3>	
-								<br>
-								<table class="table table-striped table-light table-hover" border = 5px>
-									<thead class="thead-dark">
-										<tr>
-											<th><b>Type ID</b></th>
-											<th><b>Title</b></th>
-										</tr>
-									</thead>
-									<tr>
-										<td> 1 </td>
-										<td> Direct Supervisor</td>
-									</tr>
-									<tr>
-										<td> 2 </td>
-										<td> Department Head</td>
-									</tr>
-									<tr>
-										<td> 3 </td>
-										<td> Benefits Coordinator</td>
-									</tr>
-									<tr>
-										<td> 4 </td>
-										<td> Other(Basic Account)</td>
-									</tr>
-								</table>
-							</div>	
-						</div>	
+
+			</div>
+		</div>
+		<div>
+			<div class=ZacksBackGround>
+				<div class="row">
+					<div class="col-sm-6">
+						<h3>Create Account</h3>
+						<form action="employeeServlet" method="POST">
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Fname">First Name:</label> <input
+										type="text" class="form-control" id="Employee_Fname" name="Employee_Fname">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Lname">Last Name:</label> <input
+										type="text" class="form-control" id="Employee_Lname" name="Employee_Lname">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_UserName">UserName:</label> <input
+										type="text" class="form-control" id="Employee_UserName" name="Employee_UserName">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Password1">Password:</label> <input
+										type="password" class="form-control" id="Employee_Password" name="Employee_Password">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Phone">Phone:</label> <input
+										type="text" class="form-control" id="Employee_Phone" name="Employee_Phone">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Email">Email:</label> <input
+										type="text" class="form-control" id="Employee_Email" name="Employee_Email">
+								</h6>
+							</div>
+							<div class="form-group">
+								<h6>
+									<label for="Employee_Dept">Department:</label> <input
+										type="text" class="form-control" id="Employee_Dept" name="Employee_Dept">
+								</h6>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="reset" class="btn btn-primary">Reset</button>
+						</form>
+					</div>
+					<div class="col-sm-6">
+						<h3>Account Types</h3>
+						<br>
+						<table class="table table-striped table-light table-hover"
+							border=5px>
+							<thead class="thead-dark">
+								<tr>
+									<th><b>Departments</b></th>
+								</tr>
+							</thead>
+							<tr>
+								<td>Hr</td>
+							</tr>
+							<tr>
+								<td>Math</td>
+							</tr>
+							<tr>
+								<td>History</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>
-		</body>
+		</div>
+	</div>
+</body>
 </html>

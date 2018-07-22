@@ -5,6 +5,8 @@ import com.revature.beans.ReimbursementForm;
 import java.util.List;
 
 public interface ReimbursementFormDao {
-	public Boolean insertReimbursementForm(ReimbursementForm rf);
-	public Employee selectReimbursementForm(String rfId);
+	public void insertReimbursementForm(ReimbursementForm rf);
+	public void updateReimbursementForm(ReimbursementForm urf);
+	public void deleteReimbursementForm(ReimbursementForm drf);
+	public void attachment(ReimbursementForm rf, String file);
 }

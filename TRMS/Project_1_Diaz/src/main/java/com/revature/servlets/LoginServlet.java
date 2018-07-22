@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.dao.EmployeeDaoImpl;
 import com.revature.services.EmployeeService;
 import com.revature.util.HtmlTemplates;
 
@@ -26,29 +25,29 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String first = request.getParameter("first");
-		String last = request.getParameter("last");
-		String password = request.getParameter("password");	
+		response.getWriter().append("Test: ").append(request.getContextPath());
+	
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userName = request.getParameter("Employee_UserName1");
+		String password = request.getParameter("Employee_Password1");	
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession session = null;
 
-		if(EmployeeService.employeeLogin(first, last, password)){
+		if(EmployeeService.employeeLogin( userName, password)){
 			session = request.getSession();
-			session.setAttribute("first", first);
-			session.setAttribute("last", last);
-			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("fisrt")+(String)session.getAttribute("last"));
+			session.setAttribute("Employee_UserName1", userName);
+			System.out.println("LOGIN STARTED: " + (String)session.getAttribute("Employee_UserName1"));
 			RequestDispatcher rd = request.getRequestDispatcher("emp.html");
 			rd.forward(request, response);
 		}else{
 			out.println("<h3 style='color:red'>Invalid Names and Password!!</h3>");
 			HtmlTemplates.goBackButton(out);
 		}
-	
-	}
+			
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }
