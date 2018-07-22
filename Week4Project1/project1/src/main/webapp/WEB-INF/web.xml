@@ -118,4 +118,14 @@
     <servlet-name>DeclineServlet</servlet-name>
     <url-pattern>/DeclineServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelOnePendingReimbursements</display-name>
+    <servlet-name>GetAllLevelOnePendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelOnePendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelOnePendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelOnePendingReimbursements</url-pattern>
+  </servlet-mapping>
 </web-app>

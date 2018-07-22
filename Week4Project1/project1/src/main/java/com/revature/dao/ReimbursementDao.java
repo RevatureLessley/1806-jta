@@ -105,6 +105,38 @@ public class ReimbursementDao
 		return reims;
 	}
 	
+	public List<Reimbursement> selectLevelOneReimbursementInfo(String accountname)
+	{
+		EmployeeService es = new EmployeeService();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Reimbursement> reims = new ArrayList<>();
+		
+		String sql = "SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Reimbursement reim = new Reimbursement(
+							rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getInt(5)
+						);
+				reims.add(reim);
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+		return reims;
+	}
+	
 	public List<Reimbursement> selectApprovedReimbursementInfo(String accountname)
 	{
 		EmployeeService es = new EmployeeService();
@@ -173,4 +205,75 @@ public class ReimbursementDao
 		return reims;
 	}
 	
+	public void updateApprovalToLevelTwo()
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "UPDATE reimbursement SET approval_id = 2 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+	}
+	
+	public void updateApprovalToLevelZero()
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "UPDATE reimbursement SET approval_id = 0 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+	}
+	
+	public void updateApprovalToLevelThree()
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "UPDATE reimbursement SET approval_id = 3 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+	}
+	
+	public void updateApprovalToLevelFour()
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "UPDATE reimbursement SET approval_id = 4 WHERE reimbursement.approval_id = 1 AND rownum = 1";
+		
+		try(Connection conn = Connections.getConnection()){
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(ps);
+		}
+	}
 }

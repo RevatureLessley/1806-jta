@@ -11,6 +11,27 @@ import com.revature.dao.ReimbursementDao;
 public class ReimbursementService 
 {
 	
+	public List<Reimbursement> getLevelOneReimbursementInfo(String accountname)
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectLevelOneReimbursementInfo(accountname);
+	}
+	
+	public String getLevelOneReimbursementWithJSON(String accountname)
+	{
+		List<Reimbursement> reims = getLevelOneReimbursementInfo(accountname);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
 	public boolean insertReimbursement(String eventDate, String eventTime, String eventLocation,
 									   String eventDesc, Integer eventCost, String justification,
 									   Integer gradeCutoff, Integer empId, Integer eventId,
@@ -24,16 +45,13 @@ public class ReimbursementService
 	
 	public List<Reimbursement> getReimbursementInfo(String accountname)
 	{
-		System.out.println("inside getReimbursementInfo inside ReimbursementService");
 		ReimbursementDao rd = new ReimbursementDao();
 		return rd.selectReimbursementInfo(accountname);
 	}
 	
 	public String getReimbursementWithJSON(String accountname)
 	{
-		System.out.println("INSIDE getReimbursementWithJSON in ReimbursementService");
 		List<Reimbursement> reims = getReimbursementInfo(accountname);
-		System.out.println("reims after getReimbursementInfo in getReimbursementWithJSON: " + reims);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
@@ -92,5 +110,29 @@ public class ReimbursementService
 		}
 		
 		return json;
+	}
+	
+	public void updateApprovalToLevel2()
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		rd.updateApprovalToLevelTwo();
+	}
+	
+	public void updateApprovalToLevel0()
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		rd.updateApprovalToLevelZero();
+	}
+	
+	public void updateApprovalToLevel3()
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		rd.updateApprovalToLevelThree();
+	}
+	
+	public void updateApprovalToLevel4()
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		rd.updateApprovalToLevelFour();
 	}
 }

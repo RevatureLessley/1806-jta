@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 import com.revature.services.ReimbursementService;
 
 
-public class GetReimbursements extends HttpServlet 
+public class GetAllLevelOnePendingReimbursements extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
 
-    public GetReimbursements() 
+    public GetAllLevelOnePendingReimbursements() 
     {
         super();
     }
@@ -31,7 +31,7 @@ public class GetReimbursements extends HttpServlet
 		
 		accountName = (String) session.getAttribute("accountname");
 		
-		out.println(rs.getReimbursementWithJSON(accountName));
+		out.println(rs.getLevelOneReimbursementWithJSON(accountName));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

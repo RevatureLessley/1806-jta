@@ -10,13 +10,12 @@ function getReimbursements()
 	let head = document.getElementById("pendingreimbursementhead");
 	//reimTable.innerHTML = "";
 	head.innterHTML = "";
-	let url = "../GetReimbursements";
+	let url = "../GetAllLevelOnePendingReimbursements";
 	
 	xhr.onreadystatechange = function()
 	{
 		if(xhr.readyState==4)
 		{
-			console.log(JSON.parse(xhr.response));
 			let data = JSON.parse(xhr.response);
 			
 			for(index in data)
@@ -39,7 +38,7 @@ function getReimbursements()
 				
 				var approveForm = document.createElement("form");
 				approveForm.setAttribute('method',"post");
-				approveForm.setAttribute('action',"ApproveServlet");
+				approveForm.setAttribute('action',"../ApproveServlet");
 				
 				var approveSubmit = document.createElement("input"); //input element, Submit button
 				approveSubmit.setAttribute('type',"submit");
@@ -49,7 +48,7 @@ function getReimbursements()
 				
 				var declineForm = document.createElement("form");
 				declineForm.setAttribute('method',"post");
-				declineForm.setAttribute('action',"DeclineServlet");
+				declineForm.setAttribute('action',"../DeclineServlet");
 				
 				var declineSubmit = document.createElement("input"); //input element, Submit button
 				declineSubmit.setAttribute('type',"submit");

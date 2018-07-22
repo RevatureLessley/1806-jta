@@ -314,3 +314,7 @@ COMMIT;
 --SELECT emp_id FROM employee WHERE emp_accountname = 'loganbrewer;
 --SELECT * FROM employee;
 --SELECT * FROM reimbursement;
+--SELECT * FROM reimbursement WHERE approval_id = 1;
+--SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
+--SELECT approval_id FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
+--UPDATE reimbursement SET approval_id = 2 WHERE reimbursement.approval_id = 1 AND rownum = 1; 
