@@ -312,3 +312,5 @@ COMMIT;
 --reimbursement.event_location, reimbursement.event_cost FROM reimbursement 
 --WHERE reimbursement.emp_id = 2 AND (reimbursement.approval_id = 2 OR reimbursement.approval_id = 3);
 --SELECT emp_id FROM employee WHERE emp_accountname = 'loganbrewer;
+--SELECT * FROM employee;
+--SELECT * FROM reimbursement;

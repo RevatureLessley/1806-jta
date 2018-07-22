@@ -69,4 +69,28 @@ public class ReimbursementService
 		
 		return json;
 	}
+	
+	public List<Reimbursement> getDeclinedReimbursementInfo(String accountname)
+	{
+		//System.out.println("inside getReimbursementInfo inside ReimbursementService");
+		ReimbursementDao rd = new ReimbursementDao();
+		return rd.selectDeclinedReimbursementInfo(accountname);
+	}
+	
+	public String getDeclinedReimbursementWithJSON(String accountname)
+	{
+		//System.out.println("INSIDE getReimbursementWithJSON in ReimbursementService");
+		List<Reimbursement> reims = getDeclinedReimbursementInfo(accountname);
+		//System.out.println("reims after getReimbursementInfo in getReimbursementWithJSON: " + reims);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(reims);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
 }
