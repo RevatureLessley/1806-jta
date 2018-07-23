@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import static com.revature.util.CloseStreams.close;
 
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import com.revature.beans.Reimbursement;
 import com.revature.main.Driver;
@@ -269,6 +272,27 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 			stmt = conn.prepareCall("{call updateReimBencoApprov(?)}");
 						
 			stmt.setInt(1, id);
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+	}
+	
+	public Boolean updateReimbursementDocumentByIdViaSp(Integer id, byte[] rawBytes) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call updateReimDocById(?, ?)}");
+			Blob blob = new SerialBlob(rawBytes);
+			stmt.setInt(1, id);
+			stmt.setBlob(2, blob);
 			
 			stmt.execute(); //Returns amount rows effected;
 			return true;

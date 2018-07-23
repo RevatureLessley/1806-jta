@@ -1,7 +1,11 @@
 package com.revature.servlets;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +16,6 @@ import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
 import com.revature.main.Driver;
 import com.revature.services.UserService;
-import com.revature.util.HtmlTemplates;
 
 /**
  * Servlet implementation class ReimbursementServlet
@@ -112,8 +115,7 @@ public class ReimbursementServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

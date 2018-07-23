@@ -129,4 +129,14 @@
     <servlet-name>GetHigherUpsServlet</servlet-name>
     <url-pattern>/GetHigherUpsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProcessDocServlet</display-name>
+    <servlet-name>ProcessDocServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ProcessDocServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProcessDocServlet</servlet-name>
+    <url-pattern>/ProcessDocServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -224,7 +224,7 @@ BEGIN
 	COMMIT;
 END;
 /
-commit;
+
 CREATE OR REPLACE PROCEDURE updateReimbursement(
 	p_empId IN NUMBER,
     p_approverId IN NUMBER, 

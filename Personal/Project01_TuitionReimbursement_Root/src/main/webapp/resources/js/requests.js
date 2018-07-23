@@ -1,10 +1,52 @@
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#attchImg')
+                .attr('src', e.target.result)
+                .width(150)
+                .height(200);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function goToDocUpload(){
+	document.location = "/Project01_TuitionReimbursement/user/documentUpload.html";
+}
+
+function createReimbursementDoc(){
+	var input = document.getElementById("attachment");
+	if(input.files && input.files[0]){
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			processDoc(e.target.result);
+		};
+		reader.readAsArrayBuffer(input.files[0]);
+	}
+}
+
+function processDoc(data){
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			document.innerHTML = xhttp.responseText;
+		}
+	};
+	xhttp.open("POST", "/Project01_TuitionReimbursement/ProcessDoc.do", true);
+	xhttp.send(data);
+}
+
 function showReimbursements(str) {
 	var http;
 	if (str == ""){
 		document.getElementById("reimbursementsHolder").innerHTML = "";
 		return;
 	}
-	xhttp = new XHMLHttpRequest();
+	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200){
 			document.getElementById("reimbursementsHolder").innerHTML = this.responseText;

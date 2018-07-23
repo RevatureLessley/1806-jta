@@ -15,6 +15,7 @@ public class Employee {
 	private String location;
 	private String username;
 	private String password;
+	private Reimbursement selectedReimbursement;
 	List<Reimbursement> reims;
 	
 	public Employee(int id, String role, int supVId, String firstName, String lastName, int phone, String email, String address,
@@ -53,6 +54,12 @@ public class Employee {
 		super();
 	}
 	
+	public Reimbursement getSelectedReimbursement() {
+		return selectedReimbursement;
+	}
+	public void setSelectedReimbursement(Reimbursement selectedReimbursement) {
+		this.selectedReimbursement = selectedReimbursement;
+	}
 	public List<Reimbursement> getReims() {
 		return reims;
 	}

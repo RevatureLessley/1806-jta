@@ -86,4 +86,9 @@ public class UserService {
 		ReimbursementDao reimd = new ReimbursementDaoImpl();
 		return reimd.updateReimbursementBencoApprovalByIdViaSP(id);
 	}
+	
+	public static Boolean updateReimDocById(Integer id, byte[] rawBytes) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.updateReimbursementDocumentByIdViaSp(id, rawBytes);
+	}
 }

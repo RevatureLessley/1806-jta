@@ -40,6 +40,7 @@ public class DisplayReimbursementServlet extends HttpServlet {
 		
 		int reimId = Integer.parseInt(request.getParameter("reimId"));
 		Reimbursement reim = UserService.getReimbursementById(reimId);
+		Driver.loggedIn.setSelectedReimbursement(reim);
 		
 		out.println("<h4>Reimbursement Id: </h4><h6 id='reimId'>"+reim.getId()+"</h6><br>");
 		out.println("<h4>Employee Id: </h4><h6>"+reim.getEmpId()+"</h6><br>");

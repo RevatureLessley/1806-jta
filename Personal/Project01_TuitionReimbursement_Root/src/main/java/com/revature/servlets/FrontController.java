@@ -94,6 +94,10 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("GetHigherUpsServlet");
 			rd.forward(request, response);
 			break;
+		case "processdoc":
+			rd = request.getRequestDispatcher("ProcessDocServlet");
+			rd.forward(request, response);
+			break;
 		default:
 			response.sendError(404);
 		}
