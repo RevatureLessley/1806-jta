@@ -6,8 +6,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<!--  <link rel="stylesheet" type="text/css"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -43,6 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    MENU
                 </button>
                 <a class="navbar-brand" href="${pageContext.request.contextPath }">Tuition Reimbursement Management System</a>            
             </div>
@@ -73,7 +74,7 @@
                               	<li><a href="register.jsp">Register a new account</a></li>
                               <% } else {  %>	
 	                     		  <li><%=name%></li>
-		                          <li><a href="Manage">Manage Profile</a></li>
+		                          <li><a href="#">Manage Profile</a></li>
 		                          <li><a href="Logout">Logout</a></li>
 		                          <% if (isAdmin) { %>
 		                          <li><a href="#">Modify user accounts</a></li>

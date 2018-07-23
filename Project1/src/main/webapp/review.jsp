@@ -31,6 +31,9 @@
 			   		case "DepartmentHead":
 			   			isDepartmentHead = true;
 			   		break;
+			   		case "DeparmentHead":
+			   			isDepartmentHead = true;
+			   		break;
 			   		default:
 			   		break;
 			   	}
@@ -53,28 +56,37 @@
 	<% if (request.isUserInRole("Admin")) { %>
 	<% } %>
 	<% if (isBenefitsCoordinator) { %>
+	<div>
+	<label for="benCoComments">Modify Benefits Coordinator Comments</label>
 	<textarea cols="90" rows="25" name="benCoComments" id="benCoComments"><%=benCoComments %></textarea><br/>
-	<label for="approve">approve</label>
+	<label for="approve">Approve form as a Benefits Coordinator? </label>
 		<input type="radio" id="approve" name="benCoApproval" value="YES" /><br/>	
 		<label for="deny">deny</label>
 		<input type="radio" id="deny" name="benCoApproval" value="NO" required/><br/>
 		<button>update decision</button>
+	</div>
 	<% } %>
 	<% if (isDepartmentHead) { %>
-	<textarea cols="90" rows="25" name="departmentHeadComments" id="supervisoComments"><%=supervisorComments %></textarea><br/>
-		<label for="approve">approve</label>
+		<div>
+		<label for=departmentHeadComments>Modify Department Head Comments</label>
+		<textarea cols="90" rows="25" name="departmentHeadComments" id="departmenHeadComments"><%=departmentHeadComments %></textarea><br/>
+		<label for="approve">Approve form as a Department Head?</label>
 		<input type="radio" id="approve" name="deptHeadApproval" value="YES" /><br/>	
 		<label for="deny">deny</label>
 		<input type="radio" id="deny" name="deptHeadApproval" value="NO" required/><br/>
 		<button>update decision</button>
+		</div>
 	<% } %>
 	<% if (isDirectSupervisor) { %>
+	<div>
+	<label for="supervisorComments">Modify Supervisor Comments</label>
 	<textareacols="90" rows="25" name="supervisorComments" id="departmentHeadComments"><%=departmentHeadComments %></textarea><br/>
-		<label for="approve">approve</label>
+		<label for="approve">Approve form as a Supervisor?</label>
 		<input type="radio" id="approve" name="supervisorApproval" value="YES" /><br/>	
 		<label for="deny">deny</label>
 		<input type="radio" id="deny" name="supervisorApproval" value="NO" required/><br/>
 		<button>update decision</button>
+	</div>
 	<% } %>
 	<input type="submit" value="update">
 	</form>

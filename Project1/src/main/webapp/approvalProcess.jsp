@@ -1,6 +1,6 @@
 <jsp:include page="header.jsp" />
 
-<p>
+<div class="container">
 	Reimbursements do not cover course materials such as books.
 	
 	Employee's must supply the passing grade cutoff for the course
@@ -20,4 +20,4 @@
 	As an employee, you may optionally provide additional documents
 	for the event-related attachment you are requesting reimbursement.
 	
-</p>
+</div>

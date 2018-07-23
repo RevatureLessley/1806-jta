@@ -374,6 +374,7 @@ create or replace procedure updateDepartmentHeadDecision(formUUID in varchar2,
 is
     v_current_time date;
 begin
+    select systimestamp into v_current_time from dual;
     update project_1_reimbursement_form set department_head_decision = deptDecision,
                                             department_head_decision_date = v_current_time
                                         where form_uuid = formUUID;
@@ -387,6 +388,7 @@ create or replace procedure updateBenCoDecision(formUUID in varchar2,
 is
     v_current_time date;
 begin
+    select systimestamp into v_current_time from dual;
     update project_1_reimbursement_form set benco_decision = benCoDecision,
                                             benco_decision_date = v_current_time
                                         where form_uuid = formUUID;
@@ -400,6 +402,7 @@ create or replace procedure updateSupervisorDecision(formUUID in varchar2,
 is
     v_current_time date;
 begin
+    select systimestamp into v_current_time from dual;
     update project_1_reimbursement_form set supervisor_decision = supervisorDecision,
                                             supervisor_decision_date = v_current_time
                                         where form_uuid = formUUID;
