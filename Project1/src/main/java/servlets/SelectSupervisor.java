@@ -18,24 +18,23 @@ public class SelectSupervisor extends HttpServlet {
         super();
     }
 
-	/**
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text");
+		PrintWriter out = response.getWriter();
 		
+		
+		out.println(getServletContext().getAttribute("curUser"));
+		System.out.println(getServletContext().getAttribute("curUser"));
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text");
-		PrintWriter out = response.getWriter();
-		EmployeeService es = new EmployeeService();
-		
-		//TODO: get proper Person ID
-		int id = Integer.parseInt(request.getParameter("foundID"));
-		out.println(es.getEmployeeJSON(id));
+		doGet(request,response);
 	}
 
 }

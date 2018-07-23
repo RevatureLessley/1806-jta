@@ -21,7 +21,7 @@ public class UpdateRequest extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request.getAttribute("x"));
+		System.out.println(request.getParameter("x"));
 		
 //		int id = Integer.parseInt(request.getAttribute("id").toString());
 //		double fullAmount = Double.parseDouble(request.getAttribute("x[fullAmount]").toString());

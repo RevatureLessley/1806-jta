@@ -68,6 +68,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				for(request r : RDI.getRequestsByEmployeeId(temp.getEmpId())) {
 					temp.addRequest(r);
 				}
+				System.out.println(temp.getEmpId());
 				result.add(temp);
 				
 			}

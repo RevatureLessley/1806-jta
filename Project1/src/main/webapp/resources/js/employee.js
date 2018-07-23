@@ -390,14 +390,15 @@ function updateRequest(x){
 	x["status"] = 2;
 	let xhr = new XMLHttpRequest();
 	let url = "../UpdateRequest";
-
-	
+	let stuff = JSON.stringify(x);
+	console.log(x);
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState== 4){
 
 			
 		}
 	}
-	xhr.open("GET", url);
-	xhr.send();
+	xhr.open("POST", url) //Or GET
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("x="+stuff);
 }
