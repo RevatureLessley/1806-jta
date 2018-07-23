@@ -15,6 +15,14 @@ public class employee {
 		this.pers = p;
 	}
 	
+	public person getPers() {
+		return pers;
+	}
+
+	public void setPers(person pers) {
+		this.pers = pers;
+	}
+
 	public void addRequest(request r) {
 		requests.add(r);
 	}

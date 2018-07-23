@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class request {
 	private int id;
-	private double fullAmmount;
-	private double cooperateAmmount;
+	private double fullAmount;
+	private double cooperateAmount;
 	private int status;
 	private Date approvealDate;
 	private Date creationDate;
@@ -21,12 +21,12 @@ public class request {
 	private ArrayList<file> files;
 	private ArrayList<info> infos;
 	
-	public request(int id, double fullAmmount, double cooperateAmmount, int status, Date approvealDate,
+	public request(int id, double fullAmount, double cooperateAmount, int status, Date approvealDate,
 			Date creationDate, Date eventDate, String gradingFormat, String eventDescription,
 			String eventJustification, String eventLocation, double typeValue, String typeName, int typeId) {
 		this.id = id;
-		this.fullAmmount = fullAmmount;
-		this.cooperateAmmount = cooperateAmmount;
+		this.fullAmount = fullAmount;
+		this.cooperateAmount = cooperateAmount;
 		this.status = status;
 		this.approvealDate = approvealDate;
 		this.creationDate = creationDate;
@@ -74,17 +74,17 @@ public class request {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public double getFullAmmount() {
-		return fullAmmount;
+	public double getFullAmount() {
+		return fullAmount;
 	}
-	public void setFullAmmount(double fullAmmount) {
-		this.fullAmmount = fullAmmount;
+	public void setFullAmount(double fullAmount) {
+		this.fullAmount = fullAmount;
 	}
-	public double getCooperateAmmount() {
-		return cooperateAmmount;
+	public double getCooperateAmount() {
+		return cooperateAmount;
 	}
-	public void setCooperateAmmount(double cooperateAmmount) {
-		this.cooperateAmmount = cooperateAmmount;
+	public void setCooperateAmount(double cooperateAmount) {
+		this.cooperateAmount = cooperateAmount;
 	}
 	public int getStatus() {
 		return status;

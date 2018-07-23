@@ -135,7 +135,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				PersonDaoImpl PDI = new PersonDaoImpl();
 				RequestDaoImpl RDI = new RequestDaoImpl();
 				
-				temp = new employee(rs.getInt(1), rs.getDouble(2), PDI.getPersonByUserId(rs.getInt(3)));
+				temp = new employee(rs.getInt(1), rs.getDouble(2), PDI.getPersonByUserId(id));
 				for(request r : RDI.getRequestsByEmployeeId(temp.getEmpId())) {
 					temp.addRequest(r);
 				}

@@ -48,14 +48,26 @@ public class RequestDaoImpl implements RequestDao {
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
+				Date aa = null;
+				Date cd = null;
+				Date ed = null;
+				if(rs.getDate("auto_approval") != null) {
+					aa =addDays(rs.getDate("auto_approval"),0);
+				}
+				if(rs.getDate("auto_approval") != null) {
+					cd =addDays(rs.getDate("created_date"),0);
+				}
+				if(rs.getDate("auto_approval") != null) {
+					ed =addDays(rs.getDate("event_date"),0);
+				}
 				request temp = new request(
 						rs.getInt("reimbursement_id"),
 						rs.getDouble("full_ammount"),
 						rs.getDouble("cooperate_ammount"),
 						rs.getInt("status"),
-						addDays(rs.getDate("auto_approval"),0),
-						addDays(rs.getDate("created_date"),0),
-						addDays(rs.getDate("event_date"),0),
+						aa,
+						cd,
+						ed,
 						rs.getString("grading_format"),
 						rs.getString("event_description"),
 						rs.getString("event_justification"),
@@ -116,7 +128,7 @@ public class RequestDaoImpl implements RequestDao {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1,r.getStatus());
-			ps.setDouble(2, r.getCooperateAmmount());
+			ps.setDouble(2, r.getCooperateAmount());
 			if(r.getStatus()==2 ||r.getStatus() == 3) {
 				java.sql.Date temp = new java.sql.Date(addDays(newRequestDate(), 3).getTime());
 				ps.setDate(3, temp);
@@ -141,7 +153,7 @@ public class RequestDaoImpl implements RequestDao {
 		try(Connection conn = Connections.getConnection()){
 			cs = conn.prepareCall(sql);
 			
-			cs.setDouble(1, r.getFullAmmount());
+			cs.setDouble(1, r.getFullAmount());
 			cs.setInt(2, r.getTypeId());
 			cs.setDate(3, newRequestDate());
 			cs.setDate(4, convertDate(r.getCreationDate()));

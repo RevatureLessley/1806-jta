@@ -29,4 +29,54 @@
   	<servlet-name>SelectEmployee</servlet-name>
   	<url-pattern>/SelectEmployee</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<description></description>
+  	<display-name>SelectSupervisor</display-name>
+  	<servlet-name>SelectSupervisor</servlet-name>
+  	<servlet-class>servlets.SelectSupervisor</servlet-class>
+  </servlet>	
+  <servlet-mapping>
+  	<servlet-name>SelectSupervisor</servlet-name>
+  	<url-pattern>/SelectSupervisor</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description></description>
+  	<display-name>SelectHead</display-name>
+  	<servlet-name>SelectHead</servlet-name>
+  	<servlet-class>servlets.SelectHead</servlet-class>
+  </servlet>	
+  <servlet-mapping>
+  	<servlet-name>SelectHead</servlet-name>
+  	<url-pattern>/SelectHead</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description></description>
+  	<display-name>SelectHeadSupervisor</display-name>
+  	<servlet-name>SelectHeadSupervisor</servlet-name>
+  	<servlet-class>servlets.SelectHeadSupervisor</servlet-class>
+  </servlet>	
+  <servlet-mapping>
+  	<servlet-name>SelectHeadSupervisor</servlet-name>
+  	<url-pattern>/SelectHeadSupervisor</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description></description>
+  	<display-name>SelectCooperate</display-name>
+  	<servlet-name>SelectCooperate</servlet-name>
+  	<servlet-class>servlets.SelectCooperate</servlet-class>
+  </servlet>	
+  <servlet-mapping>
+  	<servlet-name>SelectCooperate</servlet-name>
+  	<url-pattern>/SelectCooperate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description></description>
+  	<display-name>UpdateRequest</display-name>
+  	<servlet-name>UpdateRequest</servlet-name>
+  	<servlet-class>servlets.UpdateRequest</servlet-class>
+  </servlet>	
+  <servlet-mapping>
+  	<servlet-name>UpdateRequest</servlet-name>
+  	<url-pattern>/UpdateRequest</url-pattern>
+  </servlet-mapping>
 </web-app>
