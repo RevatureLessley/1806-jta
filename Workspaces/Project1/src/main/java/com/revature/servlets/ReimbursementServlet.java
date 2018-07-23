@@ -49,11 +49,20 @@ public class ReimbursementServlet extends HttpServlet {
 		String loc = request.getParameter("location");
 		String desc = request.getParameter("description");
 		int cost = Integer.parseInt(request.getParameter("cost"));
-		int gradeForm = Integer.parseInt(request.getParameter("grade"));
+		int gradeForm = Integer.parseInt(request.getParameter("grade"));		
 		int train = Integer.parseInt(request.getParameter("train"));
-		int grade = Integer.parseInt(request.getParameter("gradepass"));
+		
+		int grade;
+		if(request.getParameter("gradepass") != null) {
+			grade = Integer.parseInt(request.getParameter("gradepass"));
+		}
+		else {
+			grade = 0;
+		}
+		
+		
 		String just = request.getParameter("justification");
-			
+					
 		Reimbursement r = new Reimbursement(empId, 
 											tdate, 
 											sdate, 
@@ -74,9 +83,6 @@ public class ReimbursementServlet extends HttpServlet {
 		Employee e = EmployeeService.getEmployeeById(id);
 		
 		if(ReimbursementService.insertReimbursement(r)){
-//			out.println("<p style='color:green'>Reimbursement submitted successfully</p>");
-//			RequestDispatcher rd = request.getRequestDispatcher("employee.html");
-//			rd.include(request, response);
 			if(e.getRole() == 1) {
 				response.sendRedirect("employee.html");
 			}
@@ -91,11 +97,9 @@ public class ReimbursementServlet extends HttpServlet {
 			}
 			
 		}else{
-			response.sendError(418);
-		}
-		HtmlTemplates.goBackButton(out);
-		                                         
-		
+			request.getRequestDispatcher("badReimbursement.html").include(request, response);
+			HtmlTemplates.goBackButton(out);
+		}                             	
 	}
 
 }

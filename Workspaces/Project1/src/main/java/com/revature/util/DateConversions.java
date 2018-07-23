@@ -12,7 +12,7 @@ public class DateConversions {
 	
 	public static java.util.Date stringToDate(String s){
 		try {
-			java.util.Date date = new SimpleDateFormat("yyyy-mm-dd").parse(s);
+			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(s);
 			return date;
 		} catch (ParseException e) {
 			e.printStackTrace();

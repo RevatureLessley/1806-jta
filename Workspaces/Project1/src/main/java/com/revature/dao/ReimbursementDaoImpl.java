@@ -25,7 +25,7 @@ public class ReimbursementDaoImpl {
 			
 			java.sql.Date tsqlDate = DateConversions.javaToSql(r.getReimDate());
 			java.sql.Date ssqlDate = DateConversions.javaToSql(r.getStartDate());
-			
+						
 			stmt.setInt(1, r.getEmpId());
 			stmt.setDate(2, tsqlDate);
 			stmt.setDate(3, ssqlDate);
@@ -78,7 +78,9 @@ public class ReimbursementDaoImpl {
 										rs.getString(10),
 										rs.getBoolean(12),
 										rs.getBoolean(13),
-										rs.getBoolean(14));
+										rs.getBoolean(14),
+										rs.getBoolean(15),
+										rs.getInt(16));
 				res.add(r);
 			}
 			 
@@ -124,8 +126,11 @@ public class ReimbursementDaoImpl {
 										rs.getBoolean(12),
 										rs.getBoolean(13),
 										rs.getBoolean(14),
-										rs.getString(15),
-										rs.getString(16));
+										rs.getBoolean(15),
+										rs.getInt(16),
+										rs.getString(17),
+										rs.getString(18)
+										);
 				res.add(r);
 			}
 		}
@@ -145,7 +150,7 @@ public class ReimbursementDaoImpl {
 		String sql = "SELECT r.*, e.first_name,e.last_name FROM reimbursement r\r\n" + 
 				"INNER JOIN employee e\r\n" + 
 				"ON r.employee_id = e.employee_id\r\n" + 
-				"WHERE e.d_head_id = ? AND dh_approval = 0";
+				"WHERE e.d_head_id = ? AND dh_approval = 0 AND (ds_approval = 1 OR e.d_head_id = r.employee_id)";
 		
 		List<Reimbursement> res = new ArrayList<>();
 		
@@ -170,8 +175,10 @@ public class ReimbursementDaoImpl {
 										rs.getBoolean(12),
 										rs.getBoolean(13),
 										rs.getBoolean(14),
-										rs.getString(15),
-										rs.getString(16));
+										rs.getBoolean(15),
+										rs.getInt(16),
+										rs.getString(17),
+										rs.getString(18));
 				res.add(r);
 			}			
 		}
@@ -191,7 +198,7 @@ public class ReimbursementDaoImpl {
 		String sql = "SELECT r.*, e.first_name,e.last_name FROM reimbursement r\r\n" + 
 				"INNER JOIN employee e\r\n" + 
 				"ON r.employee_id = e.employee_id\r\n" + 
-				"WHERE e.benco_id = ? AND benco_approval = 0";
+				"WHERE e.benco_id = ? AND benco_approval = 0 AND (dh_approval = 1 OR e.benco_id = r.employee_id)";
 		
 		List<Reimbursement> res = new ArrayList<>();
 		
@@ -217,8 +224,10 @@ public class ReimbursementDaoImpl {
 										rs.getBoolean(12),
 										rs.getBoolean(13),
 										rs.getBoolean(14),
-										rs.getString(15),
-										rs.getString(16));
+										rs.getBoolean(15),
+										rs.getInt(16),
+										rs.getString(17),
+										rs.getString(18));
 				res.add(r);
 			}			
 		}

@@ -2,49 +2,69 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <title>Department Head</title>
 <script src="./resources/js/ajax.js"></script>
 </head>
-<body>
-		<h2 id=welcome></h2>
-	<div>
-		<table border="2px" id="empTable">
-			<tr>
-				<th>EMPLOYEE ID</th>
-				<th>FIRST NAME</th>
-				<th>LAST NAME</th>
-				<th>AVAILABLE REIMBURSEMENT</th>
-				<th>PENDING REIMBURSEMENT</th>
-				<th>AWARDED REIMBURSEMENT</th>
-			</tr>			
-		</table>
-		<a href='reimbursement.html'><button>Submit Tuition</button></a>
+<body>	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" id="navbar-brand"></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    <ul class="navbar-nav">	      
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          REIMBURSEMENTS
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	          <a class="dropdown-item" href="#" onclick="selectReimbursement()">Show My Reimbursements</a>
+	          <a class="dropdown-item" href="#" onclick="selectDeptHeadReimbursements()">Show Subordinate Reimbursements</a>
+	          <a class="dropdown-item" href="reimbursement.html">Submit Reimbursement Form</a>
+	        </div>
+	      </li> 
+	      <li>
+	      	<form action="LogoutServlet">
+	      		<button type="submit" class="btn btn-link">Logout</button>
+	      	</form>
+	      </li>    	
+	    </ul>
+	  </div>
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="employee">
+					<ul id=empList style="list-style-type:none">
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-7">
+				<div class="employeeTable">
+					<table class="table" id=money>
+						<tr>
+							<th>AVAILABLE REIMBURSEMENT</th>
+							<th>PENDING REIMBURSEMENT</th>
+							<th>AWARDED REIMBURSEMENT</th>
+						</tr>
+					</table>
+				</div>					
+			</div>
+		</div>	
 	</div>
-	<div>
-		<table border="2px" id="reimTable">
-			<tr>
-				<th>ID</th>
-				<th>DESCRIPTION</th>
-				<th>APPROVED</th>
-			</tr>
-		</table>
+	<div id=reim class=reim>
 	</div>
-	<div>		
-		<table border="2px" id="dhTable">
-		<tr>
-			<th>ID</th>
-			<th>EMPLOYEE ID</th>
-			<th>FIRST NAME</th>
-			<th>LAST NAME</th>
-			<th>DESCRIPTION</th>
-			<th>APPROVE?</th>
-		</tr>
-		</table>		
-	</div>
-	<div>
-		<form action="LogoutServlet">
-			<button type="submit">LOGOUT</button>
-		</form>
+	<div id="sub" class=reim>				
 	</div>
 </body>
 </html>

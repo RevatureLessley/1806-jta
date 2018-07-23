@@ -33,9 +33,9 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		out.println("<h1 style='color:green'>Successfully Logged Out</h1>");
 		RequestDispatcher rd = request.getRequestDispatcher("index.html");
-		rd.include(request, response);
+		rd.forward(request, response);
+		
 		
 		
 		

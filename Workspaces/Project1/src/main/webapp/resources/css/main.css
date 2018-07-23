@@ -1,0 +1,62 @@
+
+.login-page{
+	width: 360px;
+	padding: 15% 0 0;
+	margin: auto;
+	text-align: center;	
+}
+
+.form{
+	background:white;
+	padding:45px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form button{
+	width: 100%;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.employee{
+	font-size: 18px;
+	width: 360px;
+	padding: 10px;
+	margin-left: 5%;
+	margin-top: 5%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.employeeTable{
+	text-align: center;
+	margin-top: 5%;
+	font-size: 18px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.reim{
+	text-align: center;
+	width: 65%;
+	margin-left: 10%; 
+	margin-top: 5%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.benco{
+	text-align: center;
+	width: 85%;
+	margin-left: 5%; 
+	margin-top: 5%;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.reimbursement{
+	background:white;
+	padding:45px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
+
+
+
+

@@ -37,7 +37,6 @@ public class BencoApproval extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("rId"));
-		System.out.println(id);
 		
 		ReimbursementService.updateBencoReimbursement(id);
 		RequestDispatcher rd = request.getRequestDispatcher("benco.html");

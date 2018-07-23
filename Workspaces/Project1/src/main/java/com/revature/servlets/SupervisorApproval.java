@@ -38,7 +38,6 @@ public class SupervisorApproval extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reimId = Integer.parseInt(request.getParameter("rId"));
-		System.out.println(reimId);
 		
 		ReimbursementService.updateSupervisorReimbursement(reimId);
 		RequestDispatcher rd = request.getRequestDispatcher("supervisor.html");

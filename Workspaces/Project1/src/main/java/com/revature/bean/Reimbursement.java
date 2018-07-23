@@ -19,12 +19,14 @@ public class Reimbursement {
 	private boolean bencoApproval;
 	private String firstName;
 	private String lastName;
+	private boolean urgent;
+	private int coverage;
 	
 	
 	
 	public Reimbursement(int id, int empId, Date reimDate, Date startDate, String location, String description,
 			int cost, int gradeId, int trainId, int passGrade, String justification, boolean dsApproval,
-			boolean dhApproval, boolean bencoApproval, String firstName, String lastName) {
+			boolean dhApproval, boolean bencoApproval,boolean urgent, int coverage, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -42,6 +44,30 @@ public class Reimbursement {
 		this.bencoApproval = bencoApproval;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.urgent = urgent;
+		this.coverage = coverage;
+	}
+	
+	public Reimbursement(int id, int empId, Date reimDate, Date startDate, String location, String description,
+			int cost, int gradeId, int trainId, int passGrade, String justification, boolean dsApproval,
+			boolean dhApproval, boolean bencoApproval,boolean urgent, int coverage) {
+		super();
+		this.id = id;
+		this.empId = empId;
+		this.reimDate = reimDate;
+		this.startDate = startDate;
+		this.location = location;
+		this.description = description;
+		this.cost = cost;
+		this.gradeId = gradeId;
+		this.trainId = trainId;
+		this.passGrade = passGrade;
+		this.justification = justification;
+		this.dsApproval = dsApproval;
+		this.dhApproval = dhApproval;
+		this.bencoApproval = bencoApproval;
+		this.urgent = urgent;
+		this.coverage = coverage;
 	}
 
 	public Reimbursement(int id, int empId, Date reimDate, Date startDate, String location, String description,
@@ -227,6 +253,22 @@ public class Reimbursement {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public boolean isUrgent() {
+		return urgent;
+	}
+
+	public void setUrgent(boolean urgent) {
+		this.urgent = urgent;
+	}
+
+	public int getCoverage() {
+		return coverage;
+	}
+
+	public void setCoverage(int coverage) {
+		this.coverage = coverage;
 	}
 	
 }
