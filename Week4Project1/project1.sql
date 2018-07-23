@@ -100,27 +100,27 @@ CREATE SEQUENCE doc_seq
     INCREMENT BY 1;
 /    
 CREATE OR REPLACE TRIGGER emp_seq_trigger
-BEFORE INSERT ON employee --NOTE: you can use BEFORE or AFTER followed by a CRUD
-FOR EACH ROW --PL/SQL for loop
-BEGIN --This keyword signifies a block for a transaction
+BEFORE INSERT ON employee
+FOR EACH ROW
+BEGIN
     IF :new.emp_id IS NULL THEN
         SELECT emp_seq.NEXTVAL INTO :new.emp_id FROM dual;
     END IF;
 END;
 /    
 CREATE OR REPLACE TRIGGER reim_seq_trigger
-BEFORE INSERT ON reimbursement --NOTE: you can use BEFORE or AFTER followed by a CRUD
-FOR EACH ROW --PL/SQL for loop
-BEGIN --This keyword signifies a block for a transaction
+BEFORE INSERT ON reimbursement
+FOR EACH ROW
+BEGIN
     IF :new.r_id IS NULL THEN
         SELECT reim_seq.NEXTVAL INTO :new.r_id FROM dual;
     END IF;
 END;
 /
 CREATE OR REPLACE TRIGGER doc_seq_trigger
-BEFORE INSERT ON documents --NOTE: you can use BEFORE or AFTER followed by a CRUD
-FOR EACH ROW --PL/SQL for loop
-BEGIN --This keyword signifies a block for a transaction
+BEFORE INSERT ON documents
+FOR EACH ROW
+BEGIN
     IF :new.doc_id IS NULL THEN
         SELECT doc_seq.NEXTVAL INTO :new.doc_id FROM dual;
     END IF;
@@ -173,14 +173,6 @@ VALUES (6, 'Other', 30, 3);
 
 INSERT INTO documents
 VALUES (null, null, null);
-
---SELECT * FROM approval;
---SELECT * FROM grading_format;
---SELECT * FROM job_type;
---SELECT * FROM documents;
---SELECT * FROM event;
---SELECT * FROM employee;
---SELECT * FROM reimbursement;
 
 INSERT INTO employee
 VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 600, 1);
@@ -277,50 +269,5 @@ BEGIN
     COMMIT;
 END;
 /   
---CALL insert_into_reimbursement(null, '01-JAN-2018', '10:00', 'Surprise, AZ',
---                               'Enthuware Test in Person', 14, 'get my certification', 
---                               70, null, 1, 4, 2, null, 1);
---CALL update_amount_left(1, 900);
---SELECT * FROM employee WHERE emp_accountname = 'loganbrewer';
---SELECT * FROM reimbursement;
---SELECT job_type_id FROM employee WHERE emp_accountname = 'loganbrewer';
 
 COMMIT;
-
---SELECT r_id FROM reimbursement WHERE rownum = 1
---ORDER BY r_id DESC;
---SELECT * FROM reimbursement
---INNER JOIN employee
---ON reimbursement.emp_id = employee.emp_id;
---SELECT * FROM employee;
---SELECT * FROM approval;
---SELECT * FROM reimbursement;
---SELECT amount_left FROM employee WHERE emp_accountname = 'loganbrewer';
---SELECT reimbursement.event_desc,
---       reimbursement.event_date,
---       reimbursement.event_time,
---       reimbursement.event_location,
---       reimbursement.event_cost,
---       employee.fname
---       FROM reimbursement 
---INNER JOIN employee
---ON reimbursement.emp_id = employee.emp_id;
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, 
---reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.emp_id = 1 AND reimbursement.approval_id = 1;
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, 
---reimbursement.event_location, reimbursement.event_cost FROM reimbursement 
---WHERE reimbursement.emp_id = 1 AND (reimbursement.approval_id = 1 OR reimbursement.approval_id = 2 OR reimbursement.approval_id = 3);
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, 
---reimbursement.event_location, reimbursement.event_cost FROM reimbursement 
---WHERE reimbursement.emp_id = 2 AND (reimbursement.approval_id = 2 OR reimbursement.approval_id = 3);
---SELECT emp_id FROM employee WHERE emp_accountname = 'loganbrewer;
---SELECT * FROM employee;
---SELECT * FROM approval;
---SELECT event_desc, approval_id FROM reimbursement;
---SELECT event_desc, approval_id FROM reimbursement WHERE (approval_id = 1 OR approval_id = 2);
---SELECT event_desc, approval_id FROM reimbursement WHERE (approval_id = 4);
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
---SELECT approval_id FROM reimbursement WHERE reimbursement.approval_id = 1 AND rownum = 1;
---UPDATE reimbursement SET approval_id = 2 WHERE reimbursement.approval_id = 1 AND rownum = 1; 
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 2;
---SELECT reimbursement.event_desc, reimbursement.event_date, reimbursement.event_time, reimbursement.event_location, reimbursement.event_cost FROM reimbursement WHERE reimbursement.approval_id = 2;

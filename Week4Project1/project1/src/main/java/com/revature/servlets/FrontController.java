@@ -21,35 +21,26 @@ public class FrontController extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String url = request.getRequestURI(); //Stores the url in a string (minues the http jargon)
-		System.out.println("url: " + url);			  //localhost:8085/something.do
-		
-		//response.setContentType("text");
+		String url = request.getRequestURI();
+		System.out.println("url: " + url);
+
 		RequestDispatcher rd;
 		
-		System.out.println("servletName: " + this.getServletName());
-		
 		String[] tokens = url.split("/");
-		String action = (tokens[tokens.length-1]); //something.do
+		String action = (tokens[tokens.length-1]);
 		
-		action = action.substring(0, action.length()-3).toLowerCase();//something
-		System.out.println("action: " + action);
-		
-		System.out.println("response before switch: " + response);
+		action = action.substring(0, action.length()-3).toLowerCase();
+
 		switch(action){
 		case "login":
-			System.out.println("inside login action switch");
 			rd = request.getRequestDispatcher("LoginServlet");
 			rd.forward(request, response);
 			break;
 		case "reimbursement":
-			System.out.println("inside reimbursement action switch");
-			//response.sendRedirect("SubmitReimbursement");
 			rd = request.getRequestDispatcher("../SubmitReimbursement");
 			rd.forward(request, response);
 			break;
 		default:
-			System.out.println("inside login default switch");
 			response.sendError(404);
 		}
 	}

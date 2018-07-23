@@ -193,4 +193,10 @@ public class ReimbursementService
 		ReimbursementDao rd = new ReimbursementDao();
 		rd.updateApprovalToLevelFour();
 	}
+	
+	public void updateApprovalToLevel5()
+	{
+		ReimbursementDao rd = new ReimbursementDao();
+		rd.updateApprovalToLevelFive();
+	}
 }

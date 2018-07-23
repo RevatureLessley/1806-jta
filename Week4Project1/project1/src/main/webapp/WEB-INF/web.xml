@@ -188,4 +188,44 @@
     <servlet-name>GetAllLevelOneOrTwoPendingReimbursements</servlet-name>
     <url-pattern>/GetAllLevelOneOrTwoPendingReimbursements</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BenCoApproveServlet</display-name>
+    <servlet-name>BenCoApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoApproveServlet</servlet-name>
+    <url-pattern>/BenCoApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BenCoDeclineServlet</display-name>
+    <servlet-name>BenCoDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoDeclineServlet</servlet-name>
+    <url-pattern>/BenCoDeclineServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelPendingReimbursements</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BenCoSubmitReimbursement</display-name>
+    <servlet-name>BenCoSubmitReimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoSubmitReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoSubmitReimbursement</servlet-name>
+    <url-pattern>/BenCoSubmitReimbursement</url-pattern>
+  </servlet-mapping>
 </web-app>
