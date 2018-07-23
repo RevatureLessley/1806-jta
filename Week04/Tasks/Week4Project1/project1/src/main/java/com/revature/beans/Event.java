@@ -1,5 +1,15 @@
 package com.revature.beans;
 
+/**
+ * Event Bean class with the following attributes:
+ * <br>-Integer eventId
+ * <br>-String  eventName
+ * <br>-Integer reimbursementPercent
+ * <br>-Integer gradingFormatId
+ * <br>
+ * @author Logan Brewer
+ *
+ */
 public class Event 
 {
 	private Integer eventId;

@@ -1,5 +1,19 @@
 package com.revature.beans;
 
+/**
+ * Employee Bean class with the following attributes:
+ * <br>-Integer employeeId
+ * <br>-String  employeeAccountName
+ * <br>-String  employeePassword
+ * <br>-String  employeeFName
+ * <br>-String  employeeLName
+ * <br>-String  employeeEmail
+ * <br>-Integer employeeAmountLeft
+ * <br>-Integer employeeJobTypeId
+ * <br>
+ * @author Logan Brewer
+ *
+ */
 public class Employee 
 {
 	private Integer employeeId;

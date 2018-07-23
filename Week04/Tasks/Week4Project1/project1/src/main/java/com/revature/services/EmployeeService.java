@@ -5,27 +5,55 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDao;
 
+
+/**
+ * Service class that makes calls to the EmployeeDao.
+ * @author Logan Brewer
+ *
+ */
 public class EmployeeService 
 {
-	
+	/**
+	 * Return an employees ID by entering their account name.
+	 * @param accountname
+	 * @return
+	 */
 	public Integer getEmpIdByAccountname(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ed.getEmpIdByAccountnameDao(accountname);
 	}
 	
+	/**
+	 * Return a full employees information by entering their
+	 * ID.
+	 * @param id
+	 * @return
+	 */
 	public Employee getEmployeeUsingEmpId(Integer id)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ed.getEmployeeViaEmpId(id);
 	}
 	
+	/**
+	 * Return the amount an employee has left to request for 
+	 * given their employee ID. 
+	 * @param empId
+	 * @return
+	 */
 	public Integer getCurrencyByEmpId(Integer empId)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ed.getEmployeeAmountLeftViaSp(empId);
 	}
 	
+	/**
+	 * Return a JSON string that represents the amount of currency an
+	 * employee has left to request for.
+	 * @param accountname
+	 * @return
+	 */
 	public String getCurrencyWithJSON(String accountname)
 	{
 		Integer currency = getCurrencyByAccountname(accountname);
@@ -44,12 +72,24 @@ public class EmployeeService
 		return json;
 	}
 	
+	/**
+	 * Return the calculation of the amount an employee has left in their account and the
+	 * amount of pending reimbursements they have pending or approved.
+	 * @param accountname
+	 * @return
+	 */
 	public Integer getCurrencyByAccountname(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ((getAmountInAccountByAccountname(accountname))-(ed.selectAmountLeftByAccountName(accountname)));
 	}
 	
+	/**
+	 * Return the amount an employee has left in their account
+	 * by entering their account name.
+	 * @param accountName
+	 * @return
+	 */
 	public Integer getAmountInAccountByAccountname(String accountName)
 	{
 		EmployeeDao ed = new EmployeeDao();
@@ -58,12 +98,27 @@ public class EmployeeService
 		return amountInAccount;
 	}
 	
+	/**
+	 * Used to update an employees amount left by entering an Employee object,
+	 * that employees ID and the amount they will have left.
+	 * @param employee
+	 * @param id
+	 * @param amountLeft
+	 * @return
+	 */
 	public boolean updateCurrencyById(Employee employee, Integer id, Integer amountLeft)
 	{
 		EmployeeDao ed = new EmployeeDao();
 		return ed.updateEmployeeAmountLeftViaSp(employee, amountLeft);
 	}
 	
+	/**
+	 * Used to return false if the account name + password doesn't exist,
+	 * otherwise returns true.
+	 * @param accountname
+	 * @param password
+	 * @return
+	 */
 	public static boolean employeeLogin(String accountname, String password)
 	{
 		EmployeeDao ed = new EmployeeDao();
@@ -81,6 +136,12 @@ public class EmployeeService
 		return true;
 	}
 	
+	/**
+	 * Used to get an integer representing the employees
+	 * job type ID by entering a employees account name.
+	 * @param accountname
+	 * @return
+	 */
 	public int checkJobTypeId(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();

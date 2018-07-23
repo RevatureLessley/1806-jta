@@ -9,8 +9,22 @@ import java.sql.SQLException;
 
 import com.revature.util.Connections;
 
+/**
+ * Event Data Access Object
+ * <br>Used to grab information regarding 
+ * events from the database.
+ * <br>
+ * @author Logan Brewer
+ *
+ */
 public class EventDao 
 {
+	/**
+	 * Grab the reimbursement percent for an event given
+	 * an events ID.
+	 * @param eventId
+	 * @return
+	 */
 	public Integer getReimbursementPercent(Integer eventId)
 	{
 		PreparedStatement ps = null;

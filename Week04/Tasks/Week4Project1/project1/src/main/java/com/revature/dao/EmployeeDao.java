@@ -11,8 +11,22 @@ import java.sql.SQLException;
 import com.revature.beans.Employee;
 import com.revature.util.Connections;
 
+/**
+ * Employee Data Access Object
+ * <br>Used to grab information regarding an Employee from
+ * the database.
+ * <br>
+ * @author Logan Brewer
+ *
+ */
 public class EmployeeDao 
 {
+	/**
+	 * Grab all data to make an employee from the database
+	 * using an employees ID.
+	 * @param id
+	 * @return
+	 */
 	public Employee getEmployeeViaEmpId(Integer id)
 	{
 		PreparedStatement ps = null;
@@ -50,6 +64,11 @@ public class EmployeeDao
 		return null;
 	}
 	
+	/**
+	 * Grab an employees ID from the database using that employees accountname.
+	 * @param accountname
+	 * @return
+	 */
 	public Integer getEmpIdByAccountnameDao(String accountname)
 	{
 		PreparedStatement ps = null;
@@ -78,6 +97,12 @@ public class EmployeeDao
 		return 0;
 	}
 	
+	/**
+	 * Grab the amount left in an employees account using that employees
+	 * ID.
+	 * @param empId
+	 * @return
+	 */
 	public Integer getEmployeeAmountLeftViaSp(Integer empId)
 	{
 		PreparedStatement ps = null;
@@ -106,6 +131,12 @@ public class EmployeeDao
 		return 0;
 	}
 	
+	/**
+	 * Grab the sum of the cost of an employees pending and accepted reimbursements
+	 * for every reimbursement under an employees accountname.
+	 * @param accountName
+	 * @return
+	 */
 	public Integer selectAmountLeftByAccountName(String accountName) 
 	{
 		PreparedStatement ps = null;
@@ -142,6 +173,12 @@ public class EmployeeDao
 		return null;
 	}
 	
+	/**
+	 * Grab the amount left in an employees account using that employees
+	 * account name.
+	 * @param accountName
+	 * @return
+	 */
 	public Integer selectAmountInAccount(String accountName)
 	{
 		PreparedStatement ps = null;
@@ -170,6 +207,13 @@ public class EmployeeDao
 		return null;
 	}
 	
+	/**
+	 * Call the update_amount_left stored procedure by entering an employee
+	 * ID and the amount to update the employees amount_left calue to.
+	 * @param employee
+	 * @param amountLeft
+	 * @return
+	 */
 	public Boolean updateEmployeeAmountLeftViaSp(Employee employee, Integer amountLeft) 
 	{
 		CallableStatement stmt = null; 
@@ -195,6 +239,12 @@ public class EmployeeDao
 		return false;
 	}
 	
+	/**
+	 * Grab everything to make an employee from the database
+	 * by using an employees account name.
+	 * @param accountName
+	 * @return
+	 */
 	public Employee selectEmployeeByAccountName(String accountName) 
 	{
 		PreparedStatement ps = null;
@@ -232,6 +282,12 @@ public class EmployeeDao
 		return null;
 	}
 	
+	/**
+	 * Grab the job type id from the database for a specific employee
+	 * by using that employees account name.
+	 * @param accountName
+	 * @return
+	 */
 	public int selectJobTypeIdByAccountName(String accountName) 
 	{
 		PreparedStatement ps = null;
@@ -260,6 +316,12 @@ public class EmployeeDao
 		return 0;
 	}
 	
+	/**
+	 * Grab the job type id from the database for a specific employee
+	 * by using that employees ID.
+	 * @param empId
+	 * @return
+	 */
 	public int selectJobTypeIdByEmpId(Integer empId) 
 	{
 		PreparedStatement ps = null;

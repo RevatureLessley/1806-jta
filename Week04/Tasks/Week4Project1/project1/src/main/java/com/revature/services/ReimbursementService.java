@@ -7,6 +7,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.revature.beans.Reimbursement;
 import com.revature.dao.ReimbursementDao;
 
+
+/**
+ * Service class that makes calls to the ReimbursementDao.
+ * @author Logan Brewer
+ *
+ */
 public class ReimbursementService 
 {
 	

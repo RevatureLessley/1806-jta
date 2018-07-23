@@ -1,6 +1,25 @@
 package com.revature.beans;
 
-
+/**
+ * Employee Bean class with the following attributes:
+ * <br>-Integer rId
+ * <br>-String  eventDate
+ * <br>-String  eventTime
+ * <br>-String  eventLocation
+ * <br>-String  eventDesc
+ * <br>-Integer eventCost
+ * <br>-String  justification
+ * <br>-Integer gradeCutoff
+ * <br>-Integer grade
+ * <br>-Integer empId
+ * <br>-Integer eventId
+ * <br>-Integer gradingFormatId
+ * <br>-Integer docId
+ * <br>-Integer approvalId
+ * <br>
+ * @author Logan Brewer
+ *
+ */
 public class Reimbursement 
 {
 	Integer rId;
