@@ -7,8 +7,11 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.revature.bean.Employee;
 import com.revature.bean.Event;
 import com.revature.bean.GradeValue;
+import com.revature.dao.EmployeeDao;
+import com.revature.dao.EmployeeUserDaoImpl;
 import com.revature.dao.EventDaoImpl;
 import com.revature.dao.NotificationDao;
 import com.revature.displaywrapper.EventDisplay;
@@ -308,6 +311,25 @@ public class EventService {
 			if (evNotifMap.get(e.getId()) == 1)
 				e.setUpdated(true);
 
+		}
+
+	}
+
+	public static boolean validateApproval(Integer eventId, Integer userId) {
+		EmployeeDao empDao = new EmployeeDao();
+		Employee empA = empDao.selectById(userId);
+
+		if (empA.getType() == 1) {
+			Event ev = new EventDaoImpl().selectById(eventId);
+			Employee empB = empDao.selectById(ev.getEmpId());
+			if (empB.getReimbursementAvailable() < ev.getReimbursementAmount()) {
+				MasterLogger.warn(EventService.class,
+						"User " + userId + " attempted to approve an incorrect reimbursement amount through tampering");
+				return false;
+			} else
+				return true;
+		} else {
+			return true;
 		}
 
 	}

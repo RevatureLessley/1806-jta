@@ -57,11 +57,44 @@ function fillApprovalPhaseData(data, empData) {
 	}
 
 	if (empData["typeName"] == "Benefits Coordinator") {
-		addFromTemplate("eventchangeaward", "#manageRow");
-		approveForm = document.getElementById("changeAwardForm");
-		approveForm.setAttribute("action", "changeAward.do?eventId="
-				+ data["id"])
+		prepareEventAwardChange(data)
 	}
+
+}
+
+function prepareEventAwardChange(data) {
+
+	let xhr = new XMLHttpRequest();
+	let url = `/Project1/FetchEmployeeServlet?empId=${data["event"]["empId"]}`
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let empData = JSON.parse(xhr.response);
+
+			addFromTemplate("eventchangeaward", "#manageRow");
+			approveForm = document.getElementById("changeAwardForm");
+			approveForm.setAttribute("action",
+					`changeAward.do?eventId=${data["id"]}`);
+
+			document.getElementById("amountPossible").innerHTML = empData["reimbursementAvailable"];
+			document.getElementById("inputAward").setAttribute("max",
+					empData["employee"]["reimbursementAvailable"]);
+
+			console.log(data["event"]["reimbursementAmount"]);
+			console.log(parseFloat(empData["employee"]["reimbursementAvailable"]));
+
+			if (data["event"]["reimbursementAmount"] > empData["employee"]["reimbursementAvailable"]) {
+
+				let approveButton = document.getElementById("approveButton");
+				approveButton.setAttribute("disabled", "disabled");
+				approveButton.innerHTML = "Invalid Award";
+			}
+		}
+
+	}
+
+	xhr.open("GET", url);
+	xhr.send();
 
 }
 
@@ -139,7 +172,7 @@ function fetchDocuments(eventId) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			let data = JSON.parse(xhr.response);
-			console.log(data);
+
 			fillDocuments(data);
 		}
 	}
@@ -162,7 +195,7 @@ function fillDocuments(data) {
 		a.setAttribute("href",
 				`/Project1/DownloadEventDocServlet?evdocId=${data[d]["id"]}`)
 		a.setAttribute("download", data[d]["name"]);
-		
+
 		let dl = document.createElement("i");
 		dl.setAttribute("class", "material-icons mat_middle");
 		a.appendChild(dl);

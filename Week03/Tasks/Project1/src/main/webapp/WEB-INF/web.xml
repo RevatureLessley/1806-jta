@@ -206,4 +206,14 @@
     <servlet-name>CalcReimbServlet</servlet-name>
     <url-pattern>/CalcReimbServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchEmployeeServlet</display-name>
+    <servlet-name>FetchEmployeeServlet</servlet-name>
+    <servlet-class>com.revature.servlet.FetchEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchEmployeeServlet</servlet-name>
+    <url-pattern>/FetchEmployeeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

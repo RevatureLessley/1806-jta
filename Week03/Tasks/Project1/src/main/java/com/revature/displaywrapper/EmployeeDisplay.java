@@ -14,6 +14,7 @@ public class EmployeeDisplay {
 	private String balance;
 	private String reimbursementAvailable;
 	private String typeName;
+	private Employee employee;
 	
 	public String getTypeName() {
 		return typeName;
@@ -39,8 +40,17 @@ public class EmployeeDisplay {
 		balance = StringManip.formatCurrency(employee.getBalance());
 		reimbursementAvailable = StringManip.formatCurrency(employee.getReimbursementAvailable());
 		typeName = FixedDataService.getEmployeeType(employee).getName();
+		this.employee = employee;
 	}
 	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public String getName() {
 		return name;
 	}

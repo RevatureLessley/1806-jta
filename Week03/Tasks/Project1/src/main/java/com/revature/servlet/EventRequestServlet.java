@@ -47,11 +47,14 @@ public class EventRequestServlet extends HttpServlet {
 
 		List<Part> fileParts = request.getParts().stream().filter(part -> "file".equals(part.getName()))
 				.collect(Collectors.toList());
+		List<Part> fileParts2 = request.getParts().stream().filter(part -> "file2".equals(part.getName()))
+				.collect(Collectors.toList());
+
 		System.out.println(fileParts);
 
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
-		
+
 		System.out.println("userId: " + userId);
 
 		String eventName = request.getParameter("eventName");
@@ -67,16 +70,29 @@ public class EventRequestServlet extends HttpServlet {
 		Integer event = EventRequestService.submitEvent(userId, eventName, eventType, gradeFormat, date, cost, location,
 				description, justification);
 
-		// upload images
+		// upload files
 		for (Part filePart : fileParts) {
-			
+
 			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-			System.out.println(fileName);
 			InputStream fileContent = filePart.getInputStream();
+
+			if (fileName.trim().length() < 1)
+				continue;
 
 			DocumentService.submitDocument(event, fileName, fileContent, 0);
 		}
-		
+		// upload files2
+		for (Part filePart : fileParts2) {
+
+			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+			InputStream fileContent = filePart.getInputStream();
+
+			if (fileName.trim().length() < 1)
+				continue;
+
+			DocumentService.submitDocument(event, fileName, fileContent, 1);
+		}
+
 		response.sendRedirect("./requestSuccess.html");
 	}
 
