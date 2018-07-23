@@ -48,11 +48,11 @@
 
 	<script>
 		let invalid =
-	<%String s = request.getParameter("eventId");
-			if (s != null)
-				out.print(1);
+	<%String s = request.getParameter("status");
+			if (s == null)
+				out.print(0);
 			else
-				out.print(0);%>
+				out.print(1);%>
 				
 		if (invalid) {
 			let div = document.getElementById("invalidDiv");

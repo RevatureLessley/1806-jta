@@ -51,7 +51,7 @@ CREATE TABLE grade_scale(
 
 CREATE TABLE grade_value(
     gv_id NUMBER(1) PRIMARY KEY,
-    gv_scale NUMBER(3),
+    gv_scale NUMBER(3) NOT NULL,
     gv_name VARCHAR(12)
 );
 
@@ -112,6 +112,9 @@ CREATE TABLE department(
 ALTER TABLE employee ADD CONSTRAINT fk_employee_supervised_by
     FOREIGN KEY (emp_supervised_by) REFERENCES employee (emp_id);
     
+ALTER TABLE employee ADD CONSTRAINT fk_employee_type
+    FOREIGN KEY (emp_type) REFERENCES employee_type (et_id);
+    
 ALTER TABLE employee_user ADD CONSTRAINT fk_employee_user
     FOREIGN KEY (emp_id) REFERENCES employee (emp_id);
     
@@ -123,6 +126,9 @@ ALTER TABLE event ADD CONSTRAINT fk_event_type
     
 ALTER TABLE event ADD CONSTRAINT fk_event_grade_scale
     FOREIGN KEY (ev_grade_scale) REFERENCES grade_scale (gs_id);
+    
+ALTER TABLE event ADD CONSTRAINT fk_event_grade
+    FOREIGN KEY (ev_grade) REFERENCES grade_value (gv_id);
     
 ALTER TABLE event_document ADD CONSTRAINT fk_event_doc_event
     FOREIGN KEY (ev_id) REFERENCES event (ev_id);
@@ -136,8 +142,14 @@ ALTER TABLE notification ADD CONSTRAINT fk_notif_emp_source
 ALTER TABLE notification ADD CONSTRAINT fk_notif_event
     FOREIGN KEY (nt_event) REFERENCES event (ev_id);
     
+ALTER TABLE notification ADD CONSTRAINT fk_notif_flag
+    FOREIGN KEY (nt_flag) REFERENCES notification_flag (nf_id);
+    
 ALTER TABLE employee ADD CONSTRAINT fk_emp_department
     FOREIGN KEY (emp_department) REFERENCES department (dp_id);
+    
+ALTER TABLE grade_value ADD CONSTRAINT fk_gv_grade_scale
+    FOREIGN KEY (gv_scale) REFERENCES grade_scale (gs_id);
     
 /*******************************************************************************
    PL/SQL: Triggers/Sequences
@@ -533,10 +545,10 @@ END;
 --UPDATE notification SET nt_read = 0;
 
 --SELECT * FROM notification;
-SELECT * FROM employee;
+--SELECT * FROM employee;
 --SELECT * FROM employee_user;
-SELECT HAS_NOTIF(4, ev_id), event.* FROM event;
---SELECT * FROM event_document;
+--SELECT HAS_NOTIF(4, ev_id), event.* FROM event;
+SELECT * FROM event_document;
 ----
 --call EVENT_UPDATE_APPROVAL_FROM(1, 3);
 --call EVENT_UPDATE_APPROVAL_FROM(1, 9);

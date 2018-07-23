@@ -18,6 +18,14 @@ import com.revature.utils.StringManip;
 
 public class NotificationDao {
 
+	/**
+	 * Adds a notification from a given user to a user that owns the given event.
+	 * The notification is accompanied by a message and associated with an event
+	 * 
+	 * @param eventId
+	 * @param userId
+	 * @param message
+	 */
 	public void eventAddNotification(Integer eventId, Integer userId, String message) {
 		CallableStatement stmt = null;
 		ResultSet rs = null;
@@ -43,6 +51,14 @@ public class NotificationDao {
 
 	}
 
+	/**
+	 * Adds a notification from a given user to another user. The notification is
+	 * accompanied by a message
+	 * 
+	 * @param targetId
+	 * @param sourceId
+	 * @param message
+	 */
 	public void employeeAddNotification(Integer targetId, Integer sourceId, String message) {
 		CallableStatement stmt = null;
 		ResultSet rs = null;
@@ -68,6 +84,13 @@ public class NotificationDao {
 
 	}
 
+	/**
+	 * Select all notifications that are associated with a given user. Stores data
+	 * in a list of beans
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public List<Notificaiton> selectUserNotifications(Integer userId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -100,6 +123,13 @@ public class NotificationDao {
 		return ls;
 	}
 
+	/**
+	 * Select all notifications that are associated with a given event. Stores data
+	 * in a list of beans
+	 * 
+	 * @param eventId
+	 * @return
+	 */
 	public List<Notificaiton> selectEventNotifications(Integer eventId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -131,7 +161,14 @@ public class NotificationDao {
 
 		return ls;
 	}
-	
+
+	/**
+	 * Select all UNREAD notifications that are associated with a given event.
+	 * Stores data in a list of beans
+	 * 
+	 * @param eventId
+	 * @return
+	 */
 	public List<Notificaiton> selectUnreadEventUserNotifications(Integer eventId, Integer userId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -164,7 +201,14 @@ public class NotificationDao {
 
 		return ls;
 	}
-	
+
+	/**
+	 * Generates a hashmap of all event ids and whether or not they have unread
+	 * notifications.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public Map<Integer, Integer> selectUserEventUpdatedMap(Integer userId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -178,7 +222,7 @@ public class NotificationDao {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setInt(1, userId);
-			
+
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -195,15 +239,21 @@ public class NotificationDao {
 		return map;
 	}
 
-	public void notificationMarkAsRead(Integer ntId) {
+	/**
+	 * Updates a notification with the given id and sets it as 'read'
+	 * @param ntId
+	 * @param userId 
+	 */
+	public void notificationMarkAsRead(Integer ntId, Integer userId) {
 		PreparedStatement ps = null;
 
-		String sql = "UPDATE notification SET nt_read = 1 WHERE nt_id = ?";
+		String sql = "UPDATE notification SET nt_read = 1 WHERE nt_id = ? AND nt_emp_target = ?";
 
 		try (Connection conn = Connections.getConnection()) {
 			ps = conn.prepareStatement(sql);
 
 			ps.setInt(1, ntId);
+			ps.setInt(2, userId);
 			
 			ps.execute();
 
@@ -212,6 +262,6 @@ public class NotificationDao {
 		} finally {
 			close(ps);
 		}
-		
+
 	}
 }

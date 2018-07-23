@@ -13,7 +13,11 @@ import com.revature.utils.Connections;
 public class EmployeeUserDaoImpl {
 	
 	
-
+	/**
+	 * Access DB to select an employeeUser by name, values stored in EmployeeUser bean
+	 * @param username
+	 * @return
+	 */
 	public EmployeeUser selectByUsername(String username) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -41,6 +45,11 @@ public class EmployeeUserDaoImpl {
 		return user;
 	}
 
+	/**
+	 * Access DB to select an employeeUser by id, values stored in EmployeeUser bean
+	 * @param id
+	 * @return
+	 */
 	public EmployeeUser selectById(Integer id) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;

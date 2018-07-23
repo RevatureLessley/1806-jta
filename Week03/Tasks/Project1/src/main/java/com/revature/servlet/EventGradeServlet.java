@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.revature.service.DocumentService;
 import com.revature.service.EventRequestService;
 import com.revature.service.EventService;
 
@@ -51,7 +52,7 @@ public class EventGradeServlet extends HttpServlet {
 			String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 			InputStream fileContent = filePart.getInputStream();
 			System.out.println(fileName);
-			EventRequestService.submitImage(eventId, fileName, fileContent, 2);
+			DocumentService.submitDocument(eventId, fileName, fileContent, 2);
 		}
 
 

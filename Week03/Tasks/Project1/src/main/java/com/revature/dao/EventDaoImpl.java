@@ -2,7 +2,6 @@ package com.revature.dao;
 
 import static com.revature.utils.CloseStreams.close;
 
-import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +20,21 @@ import oracle.jdbc.internal.OracleTypes;
 
 public class EventDaoImpl {
 
+	/**
+	 * Creates a new event by using a stored procedure. Passes in values that are
+	 * required and known at the time of event creation
+	 * 
+	 * @param empId
+	 * @param type
+	 * @param gradeScale
+	 * @param name
+	 * @param date
+	 * @param location
+	 * @param des
+	 * @param jus
+	 * @param cost
+	 * @return
+	 */
 	public Integer addNewEvent(Integer empId, Integer type, Integer gradeScale, String name, LocalDateTime date,
 			String location, String des, String jus, Double cost) {
 		CallableStatement stmt = null;
@@ -55,29 +69,13 @@ public class EventDaoImpl {
 
 	}
 
-	public boolean addDocument(Integer evId, String docName, InputStream fileData, Integer isApproval) {
-		CallableStatement stmt = null;
-
-		try (Connection conn = Connections.getConnection()) {
-
-			stmt = conn.prepareCall("{CALL ADD_DOCUMENT(?, ?, ?, ?)}");
-
-			stmt.setInt(1, evId);
-			stmt.setString(2, docName);
-			stmt.setBlob(3, fileData);
-			stmt.setInt(4, isApproval);
-
-			stmt.execute();
-			return true;
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(stmt);
-		}
-		return false;
-	}
-
+	/**
+	 * Selects all events associated with the given employee/user id. Data is placed
+	 * in an event bean.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public List<Event> selectUserEvents(Integer userId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -115,6 +113,12 @@ public class EventDaoImpl {
 		return ls;
 	}
 
+	/**
+	 * Selects all events from the database. Data is placed in an event bean.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public List<Event> selectAllEvents() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -149,6 +153,12 @@ public class EventDaoImpl {
 		return ls;
 	}
 
+	/**
+	 * Selects an event by id. Data is placed in an event bean.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public Event selectById(Integer id) {
 
 		PreparedStatement ps = null;
@@ -183,6 +193,14 @@ public class EventDaoImpl {
 
 	}
 
+	/**
+	 * Selects all events that belong to employees that are subordinates to the
+	 * employee with the given id. The query is performed via stored procedure
+	 * depending on the employee's type. Data is placed in an event bean.
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public List<Event> selectSubordinateEvents(Integer userId) {
 		CallableStatement stmt = null;
 		ResultSet rs = null;
@@ -224,6 +242,16 @@ public class EventDaoImpl {
 		return ls;
 	}
 
+	/**
+	 * Calls a stored procedure that updates approval of an event. There are 3
+	 * fields for approval (supervisor, head, benefits coordinator). The procedure
+	 * determines the relationship that the user has to the event and updates
+	 * appropriately
+	 * 
+	 * @param eventId
+	 * @param userId
+	 * @return
+	 */
 	public Integer eventUpdateApprovalFrom(Integer eventId, Integer userId) {
 
 		CallableStatement stmt = null;
@@ -251,6 +279,12 @@ public class EventDaoImpl {
 		return 0;
 	}
 
+	/**
+	 * Updates the reimbursement amount of an event.
+	 * 
+	 * @param eventId
+	 * @param amount
+	 */
 	public void eventChangeAward(Integer eventId, Double amount) {
 		PreparedStatement ps = null;
 
@@ -272,6 +306,13 @@ public class EventDaoImpl {
 
 	}
 
+	/**
+	 * Updates the final grade for an event.
+	 * 
+	 * @param userId
+	 * @param eventId
+	 * @param grade
+	 */
 	public void eventSubmitGrade(Integer userId, Integer eventId, Integer grade) {
 		PreparedStatement ps = null;
 
@@ -283,7 +324,7 @@ public class EventDaoImpl {
 			ps.setInt(1, grade);
 			ps.setInt(2, eventId);
 			ps.setInt(3, userId);
-			
+
 			ps.execute();
 
 		} catch (SQLException e) {
@@ -293,6 +334,12 @@ public class EventDaoImpl {
 		}
 	}
 
+	/**
+	 * Updates confirmation of an event
+	 * 
+	 * @param eventId
+	 * @param userId
+	 */
 	public void eventConfirm(Integer eventId, Integer userId) {
 		CallableStatement stmt = null;
 
@@ -304,16 +351,15 @@ public class EventDaoImpl {
 
 			stmt.setInt(1, eventId);
 			stmt.setInt(2, userId);
-			
-			stmt.execute();
 
+			stmt.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(stmt);
 		}
-		
+
 	}
 
 }

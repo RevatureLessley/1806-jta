@@ -10,14 +10,9 @@ public class Connections {
 
 	public static Connection getConnection() {
 
-		
 		try {
-			//System.out.println(System.getenv("DBPropsProj1"));
-			
 			String props[] = System.getenv("DBPropsProj1").split(";");
 
-			//System.out.println("connection success");
-			
 			Class.forName(props[0]);
 			con = DriverManager.getConnection(props[1], props[2], props[3]);
 

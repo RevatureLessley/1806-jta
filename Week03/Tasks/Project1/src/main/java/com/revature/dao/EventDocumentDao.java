@@ -4,6 +4,7 @@ import static com.revature.utils.CloseStreams.close;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,47 @@ import com.revature.utils.Connections;
 
 public class EventDocumentDao {
 
+	/**
+	 * Add a document to the eventDocument table. Documents are associated with
+	 * specific event. They also include an InputStream which is converted to a
+	 * blob; the input stream is byte data of an uploaded file
+	 * 
+	 * @param evId
+	 * @param docName
+	 * @param fileData
+	 * @param isApproval
+	 * @return
+	 */
+	public boolean addDocument(Integer evId, String docName, InputStream fileData, Integer isApproval) {
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()) {
+
+			stmt = conn.prepareCall("{CALL ADD_DOCUMENT(?, ?, ?, ?)}");
+
+			stmt.setInt(1, evId);
+			stmt.setString(2, docName);
+			stmt.setBlob(3, fileData);
+			stmt.setInt(4, isApproval);
+
+			stmt.execute();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return false;
+	}
+
+	/**
+	 * Select All documents associated with the given event id. Does not read the
+	 * blob into EventDocument bean.
+	 * 
+	 * @param eventId
+	 * @return
+	 */
 	public List<EventDocument> selectAllEventDocuments(Integer eventId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -48,6 +90,13 @@ public class EventDocumentDao {
 		return ls;
 	}
 
+	/**
+	 * Accesses the database and gets an array of bytes associated with the blob
+	 * stored for the specified event document.
+	 * 
+	 * @param evdocId
+	 * @return
+	 */
 	public byte[] selectDocumentOutputSream(Integer evdocId) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

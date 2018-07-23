@@ -12,6 +12,11 @@ import com.revature.utils.Connections;
 
 public class EmployeeDao {
 
+	/**
+	 * Access DB to select an employee by id, values stored in Employee bean
+	 * @param id
+	 * @return
+	 */
 	public Employee selectById(Integer id) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;

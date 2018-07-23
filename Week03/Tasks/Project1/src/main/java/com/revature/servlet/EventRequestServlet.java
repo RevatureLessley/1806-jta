@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.revature.service.DocumentService;
 import com.revature.service.EventRequestService;
 import com.revature.utils.StringManip;
 
@@ -48,27 +49,6 @@ public class EventRequestServlet extends HttpServlet {
 				.collect(Collectors.toList());
 		System.out.println(fileParts);
 
-		// String path = getServletContext().getRealPath("/resources/files/");
-
-		// EventRequestServlet
-		// PrintWriter out = response.getWriter();
-		// String values = "";
-		// Map<String, String[]> inputs = request.getParameterMap();
-		// out.println("<h3>GET PARAMETERS</h3>");
-		// out.println("<table border=2px><tr><th>PARAMETER</th><th>VALUE</th></tr>");
-		//
-		// for (String key : inputs.keySet()) {
-		// out.println("<tr><td>" + key + "</td><td>");
-		// values = "";
-		//
-		// for (String val : inputs.get(key)) {
-		// values += (val + " ");
-		// }
-		// out.println(values + "</td></tr>");
-		// }
-		//
-		// out.println("</table>");
-
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 		
@@ -94,7 +74,7 @@ public class EventRequestServlet extends HttpServlet {
 			System.out.println(fileName);
 			InputStream fileContent = filePart.getInputStream();
 
-			EventRequestService.submitImage(event, fileName, fileContent, 0);
+			DocumentService.submitDocument(event, fileName, fileContent, 0);
 		}
 		
 		response.sendRedirect("./requestSuccess.html");

@@ -33,7 +33,7 @@ public class NotificationReadServlet extends HttpServlet {
 
 		Integer ntId = Integer.parseInt(request.getParameter("ntId"));
 
-		NotificationService.notificationMarkAsRead(ntId);
+		NotificationService.notificationMarkAsRead(ntId, userId);
 	}
 
 	/**

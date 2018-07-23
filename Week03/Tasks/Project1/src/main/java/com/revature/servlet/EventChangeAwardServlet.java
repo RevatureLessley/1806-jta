@@ -38,7 +38,7 @@ public class EventChangeAwardServlet extends HttpServlet {
 		
 		EventService.eventChangeAward(userId, eventId, message, amount);
 		
-		response.sendRedirect(".");
+		response.sendRedirect(request.getHeader("Referer"));
 	}
 
 	/**

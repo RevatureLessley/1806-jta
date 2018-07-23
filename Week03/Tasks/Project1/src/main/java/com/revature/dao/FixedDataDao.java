@@ -18,6 +18,11 @@ import com.revature.utils.Connections;
 
 public class FixedDataDao {
 
+	/** 
+	 * Select all event types from the db and stores values in list of beans 
+	 * 
+	 * @return
+	 */
 	public List<EventType> selectAllEventTypes() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -47,6 +52,11 @@ public class FixedDataDao {
 		return ls;
 	}
 
+	/** 
+	 * Select all employee types from the db and stores values in list of beans 
+	 * 
+	 * @return
+	 */
 	public List<EmployeeType> selectAllEmployeeTypes() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -76,6 +86,11 @@ public class FixedDataDao {
 		return ls;
 	}
 
+	/** 
+	 * Select all departments from the db and stores values in list of beans 
+	 * 
+	 * @return
+	 */
 	public List<Department> selectAllDepartments() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -105,6 +120,11 @@ public class FixedDataDao {
 		return ls;
 	}
 
+	/** 
+	 * Select all grade scale types (e.g Standard, Pass/Fail) from the db and stores values in list of beans 
+	 * 
+	 * @return
+	 */
 	public List<GradeScale> selectAllGradeScales() {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -134,6 +154,11 @@ public class FixedDataDao {
 		return ls;
 	}
 	
+	/** 
+	 * Select all grade values (e.g 'A', 'Pass', 'Presentation') from the db and stores values in list of beans 
+	 * 
+	 * @return
+	 */
 	public List<GradeValue> selectAllGradeValues() {
 		Statement stmt = null;
 		ResultSet rs = null;

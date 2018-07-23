@@ -34,6 +34,8 @@ public class EventConfirmServlet extends HttpServlet {
 		//TODO validate Event Confirm
 		
 		EventService.eventConfirm(eventId, userId);
+		
+		response.sendRedirect("./");
 	}
 
 	/**
