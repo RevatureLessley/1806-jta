@@ -19,11 +19,13 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT * FROM employee WHERE emp_id = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return new Employee(
 						rs.getInt(1),
 						rs.getString(2),
@@ -35,10 +37,13 @@ public class EmployeeDao
 						rs.getInt(8)
 						);
 			}
-			
-		}catch(SQLException e){
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -51,17 +56,22 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT emp_id FROM employee WHERE emp_accountname = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, accountname);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return rs.getInt(1);
 			}
-			
-		}catch(SQLException e){
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -74,17 +84,22 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT amount_left FROM employee WHERE emp_id = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, empId);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return rs.getInt(1);
-			}
-			
-		}catch(SQLException e){
+			}	
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -97,17 +112,22 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT amount_left FROM employee WHERE emp_accountname = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, accountName);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return rs.getInt(1);
-			}
-			
-		}catch(SQLException e){
+			}	
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -118,19 +138,22 @@ public class EmployeeDao
 	{
 		CallableStatement stmt = null; 
 		
-		try(Connection conn = Connections.getConnection()){
-
+		try(Connection conn = Connections.getConnection())
+		{
 			stmt = conn.prepareCall("{call update_amount_left(?,?)}");
 			
 			stmt.setInt(1, employee.getEmployeeId());
 			stmt.setInt(2, amountLeft);
 
 			stmt.execute();
-			return true;
-			
-		}catch(SQLException e){
+			return true;	
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(stmt);
 		}		
 		return false;
@@ -142,11 +165,13 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT * FROM employee WHERE emp_accountname = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, accountName);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return new Employee(
 						rs.getInt(1),
 						rs.getString(2),
@@ -157,11 +182,14 @@ public class EmployeeDao
 						rs.getInt(7),
 						rs.getInt(8)
 						);
-			}
-			
-		}catch(SQLException e){
+			}	
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -174,17 +202,22 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT job_type_id FROM employee WHERE emp_accountname = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, accountName);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return rs.getInt(1);
 			}
-			
-		}catch(SQLException e){
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}
@@ -197,17 +230,22 @@ public class EmployeeDao
 		ResultSet rs = null;
 		String sql = "SELECT job_type_id FROM employee WHERE emp_id = ?";
 		
-		try(Connection conn = Connections.getConnection()){
+		try(Connection conn = Connections.getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, empId);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				return rs.getInt(1);
 			}
-			
-		}catch(SQLException e){
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		}finally{
+		}
+		finally
+		{
 			close(rs);
 			close(ps);
 		}

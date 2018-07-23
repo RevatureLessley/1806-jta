@@ -1,13 +1,11 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Employee;
 import com.revature.services.EmployeeService;
@@ -25,10 +23,8 @@ public class SubmitReimbursement extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		PrintWriter out = response.getWriter();
 		ReimbursementService rs = new ReimbursementService();
 		EmployeeService es = new EmployeeService();
-		HttpSession session = null;
 		Integer availableAmount = 0;
 		Employee employee = null;
 		
@@ -42,8 +38,6 @@ public class SubmitReimbursement extends HttpServlet
 		Integer empId = Integer.parseInt(request.getParameter("empid"));
 		Integer eventId = Integer.parseInt(request.getParameter("eventid"));
 		Integer gradingFormatId = Integer.parseInt(request.getParameter("gradingformatid"));
-		
-		session = request.getSession();
 		
 		rs.insertReimbursement(eventDate, eventTime, eventLocation, eventDesc, 
 							   eventCost, justification, gradeCutoff, empId, 

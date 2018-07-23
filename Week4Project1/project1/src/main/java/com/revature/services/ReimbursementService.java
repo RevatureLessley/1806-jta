@@ -1,6 +1,5 @@
 package com.revature.services;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -23,9 +22,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -44,9 +46,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -65,9 +70,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -86,9 +94,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -101,9 +112,11 @@ public class ReimbursementService
 									   Integer gradingFormatId)
 	{
 		ReimbursementDao rd = new ReimbursementDao();
-		return rd.insertReimbursementViaSp(eventDate, eventTime, eventLocation, 
-										   eventDesc, eventCost, justification, 
-										   gradeCutoff, empId, eventId, gradingFormatId);
+		return rd.insertReimbursementViaSp(
+				eventDate, eventTime, eventLocation, 
+				eventDesc, eventCost, justification, 
+				gradeCutoff, empId, eventId, gradingFormatId
+				);
 	}
 	
 	public List<Reimbursement> getReimbursementInfo(String accountname)
@@ -118,9 +131,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -139,9 +155,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -150,7 +169,6 @@ public class ReimbursementService
 	
 	public List<Reimbursement> getDeclinedReimbursementInfo(String accountname)
 	{
-		//System.out.println("inside getReimbursementInfo inside ReimbursementService");
 		ReimbursementDao rd = new ReimbursementDao();
 		return rd.selectDeclinedReimbursementInfo(accountname);
 	}
@@ -161,9 +179,12 @@ public class ReimbursementService
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		try{
+		try
+		{
 			json = mapper.writeValueAsString(reims);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -199,4 +220,5 @@ public class ReimbursementService
 		ReimbursementDao rd = new ReimbursementDao();
 		rd.updateApprovalToLevelFive();
 	}
+	
 }

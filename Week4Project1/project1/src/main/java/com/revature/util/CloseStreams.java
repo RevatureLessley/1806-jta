@@ -7,41 +7,67 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CloseStreams {
-	public static void close(Statement resource){
-		if(resource!=null){
-			try{
+public class CloseStreams 
+{
+	
+	public static void close(Statement resource)
+	{
+		if(resource!=null)
+		{
+			try
+			{
 				resource.close();
-			}catch(SQLException e){
+			}
+			catch(SQLException e)
+			{
 				e.printStackTrace();
 			}
 		}
 	}
-	public static void close(ResultSet resource){
-		if(resource!=null){
-			try{
+	
+	public static void close(ResultSet resource)
+	{
+		if(resource!=null)
+		{
+			try
+			{
 				resource.close();
-			}catch(SQLException e){
+			}
+			catch(SQLException e)
+			{
 				e.printStackTrace();
 			}
 		}
 	}
-	public static void close(FileInputStream resource){
-		if(resource!=null){
-			try{
+	
+	public static void close(FileInputStream resource)
+	{
+		if(resource!=null)
+		{
+			try
+			{
 				resource.close();
-			}catch(IOException e){
+			}
+			catch(IOException e)
+			{
 				e.printStackTrace();
 			}
 		}
 	}
-	public static void close(Connection resource){
-		if(resource!=null){
-			try{
+	
+	public static void close(Connection resource)
+	{
+		if(resource!=null)
+		{
+			try
+			{
 				resource.close();
-			}catch(SQLException e){
+			}
+			catch(SQLException e)
+			{
 				e.printStackTrace();
 			}
 		}
 	}
+	
 }

@@ -25,7 +25,8 @@ public class Employee
 		this.employeeJobTypeId = employeeJobTypeId;
 	}
 	
-	public Employee() {
+	public Employee() 
+	{
 		super();
 	}
 	
@@ -110,7 +111,8 @@ public class Employee
 	}
 	
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Employee [employeeId=" + employeeId + ", employeeAccountName=" + employeeAccountName
 				+ ", employeePassword=" + employeePassword + ", employeeFName=" + employeeFName + ", employeeLName="
 				+ employeeLName + ", employeeEmail=" + employeeEmail + ", employeeJobTypeId=" + employeeJobTypeId + "]";

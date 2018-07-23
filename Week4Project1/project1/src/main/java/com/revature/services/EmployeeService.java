@@ -7,6 +7,7 @@ import com.revature.dao.EmployeeDao;
 
 public class EmployeeService 
 {
+	
 	public Integer getEmpIdByAccountname(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();
@@ -104,22 +105,5 @@ public class EmployeeService
 			return 0;
 		}
 	}
-	
-//	public String getEmpCurrencyJSON()
-//	{
-//		HttpSession session = null;
-//		session = request.
-//		Integer currency = getAllNpcsWithClass();
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = "";
-//		
-//		try{
-//			json = mapper.writeValueAsString(npcs);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		
-//		return json;
-//	}
 	
 }

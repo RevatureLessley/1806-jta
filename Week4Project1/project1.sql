@@ -8,6 +8,15 @@ DROP TABLE approval CASCADE CONSTRAINTS;
 
 DROP SEQUENCE emp_seq;
 DROP SEQUENCE reim_seq;
+DROP SEQUENCE doc_seq;
+
+DROP TRIGGER emp_seq_trigger;
+DROP TRIGGER reim_seq_trigger;
+DROP TRIGGER doc_seq_trigger;
+
+DROP PROCEDURE update_amount_left;
+DROP PROCEDURE update_approval;
+DROP PROCEDURE insert_into_reimbursement;
 
 CREATE TABLE approval
 (

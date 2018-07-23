@@ -1,6 +1,5 @@
 package com.revature.beans;
 
-import java.sql.Date;
 
 public class Reimbursement 
 {
@@ -217,7 +216,8 @@ public class Reimbursement
 	}
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Reimbursement [rId=" + rId + ", eventDate=" + eventDate + ", eventTime=" + eventTime
 				+ ", eventLocation=" + eventLocation + ", eventDesc=" + eventDesc + ", eventCost=" + eventCost
 				+ ", justification=" + justification + ", gradeCutoff=" + gradeCutoff + ", grade=" + grade + ", empId="

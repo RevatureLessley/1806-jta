@@ -3,7 +3,6 @@ package com.revature.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,47 +32,35 @@ public class LoginServlet extends HttpServlet
 		
 		EmployeeService es = new EmployeeService();
 		
-		RequestDispatcher rd = null;
-		
 		if ( EmployeeService.employeeLogin(accountname, password) )
 		{
 			session = request.getSession();
 			session.setAttribute("accountname", accountname);
 			if ( es.checkJobTypeId(accountname) == 5 )
 			{
-				//rd = request.getRequestDispatcher("./benefitscoordinator/index.html");
-				//rd.forward(request, response);
 				response.sendRedirect("./benefitscoordinator/index.html");
 			}
 			else if ( es.checkJobTypeId(accountname) == 4 )
 			{
-				//rd = request.getRequestDispatcher("./supandhead/index.html");
-				//rd.forward(request, response);
 				response.sendRedirect("./supandhead/index.html");
 			}
 			else if ( es.checkJobTypeId(accountname) == 3 )
 			{
-				//rd = request.getRequestDispatcher("./departmenthead/index.html");
-				//rd.forward(request, response);
 				response.sendRedirect("./departmenthead/index.html");
 			}
 			else if ( es.checkJobTypeId(accountname) == 2 )
 			{
-				//rd = request.getRequestDispatcher("./supervisor/index.html");
-				//rd.forward(request, response);
 				response.sendRedirect("./supervisor/index.html");
 			}
 			else if ( es.checkJobTypeId(accountname) == 1 )
 			{
-				//rd = request.getRequestDispatcher("./employee/index.html");
-				//rd.forward(request, response);
 				response.sendRedirect("./employee/index.html");
 			}
 			
 		}
 		else
 		{
-			out.println("<h3 style='color:red'>GET OUT</h3>");
+			out.println("<h3 style='color:red'>Invalid Login</h3>");
 			HtmlTemplates.goBackButton(out);
 		}
 	}

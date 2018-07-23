@@ -31,17 +31,18 @@ public class FrontController extends HttpServlet
 		
 		action = action.substring(0, action.length()-3).toLowerCase();
 
-		switch(action){
-		case "login":
-			rd = request.getRequestDispatcher("LoginServlet");
-			rd.forward(request, response);
-			break;
-		case "reimbursement":
-			rd = request.getRequestDispatcher("../SubmitReimbursement");
-			rd.forward(request, response);
-			break;
-		default:
-			response.sendError(404);
+		switch(action)
+		{
+			case "login":
+				rd = request.getRequestDispatcher("LoginServlet");
+				rd.forward(request, response);
+				break;
+			case "reimbursement":
+				rd = request.getRequestDispatcher("../SubmitReimbursement");
+				rd.forward(request, response);
+				break;
+			default:
+				response.sendError(404);
 		}
 	}
 

@@ -38,7 +38,7 @@ function getLevelTwoReimbursements()
 				approveForm.setAttribute('method',"post");
 				approveForm.setAttribute('action',"../BothApproveServlet");
 				
-				var approveSubmit = document.createElement("input"); //input element, Submit button
+				var approveSubmit = document.createElement("input");
 				approveSubmit.setAttribute('type',"submit");
 				approveSubmit.setAttribute('value',"approve");
 				
@@ -48,7 +48,7 @@ function getLevelTwoReimbursements()
 				declineForm.setAttribute('method',"post");
 				declineForm.setAttribute('action',"../BothDeclineServlet");
 				
-				var declineSubmit = document.createElement("input"); //input element, Submit button
+				var declineSubmit = document.createElement("input");
 				declineSubmit.setAttribute('type',"submit");
 				declineSubmit.setAttribute('value',"decline");
 				
