@@ -16,25 +16,28 @@ import com.revature.util.Connections;
 
 public class ReimbursementReqDaoImpl {
 	
+	
 	public void insertReq(ReimbursementReq req, String table)
 	{	
 			CallableStatement stmt = null; 
 			
 			try(Connection conn = Connections.getConnection()){
 
-				stmt = conn.prepareCall("{call insertInto" + table + " (?,?,?,?,?,?,?,?,?,?,?)}");
+				stmt = conn.prepareCall("{call insertIntoreimbursement" + table + " (?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 				
 				stmt.setInt(1, req.getReimbursementId());
 				stmt.setInt(2, req.getEmpId());
 				stmt.setInt(3,  req.getEventId());
-				stmt.setFloat(4, req.getAmountReq());
-				stmt.setString(5, req.isDsApprove() == true? "yes":"no");
-				stmt.setDate(6, req.getDsApproveDate());
-				stmt.setString(7, req.isDhApprove() == true? "yes":"no");
-				stmt.setDate(8, req.getDhApproveDate());
-				stmt.setString(9, req.isBcApprove() == true? "yes":"no");
-				stmt.setDate(10, req.getBcApproveDate());
-				stmt.setString(11, req.isExceedAmountApproved() == true? "yes":"no");
+				stmt.setInt(4,  req.getEventType());
+				stmt.setDate(5, req.getEventDate());
+				stmt.setFloat(6, req.getAmountReq());
+				stmt.setString(7, req.isDsApprove() == true? "yes":"no");
+				stmt.setDate(8, req.getDsApproveDate());
+				stmt.setString(9, req.isDhApprove() == true? "yes":"no");
+				stmt.setDate(10, req.getDhApproveDate());
+				stmt.setString(11, req.isBcApprove() == true? "yes":"no");
+				stmt.setDate(12, req.getBcApproveDate());
+				stmt.setString(13, req.isExceedAmountApproved() == true? "yes":"no");
 
 				
 				stmt.execute(); //Returns amount rows effected;
@@ -51,7 +54,66 @@ public class ReimbursementReqDaoImpl {
 				close(stmt);
 			}		
 		}
-	
+	public void insertNewReq(ReimbursementReq req)
+	{	
+			CallableStatement stmt = null; 
+			CallableStatement stmt2 = null; 
+			try(Connection conn = Connections.getConnection()){
+
+				stmt = conn.prepareCall("{call insertIntoreimbursementshort (?,?,?,?,?,?,?,?,?)}");
+				
+				stmt.setInt(1, req.getEmpId());
+				stmt.setInt(2,  req.getEventId());
+				stmt.setInt(3,  req.getEventType());
+				stmt.setDate(4, req.getEventDate());
+				stmt.setFloat(5, req.getAmountReq());
+				stmt.setString(6, req.isDsApprove() == true? "yes":"no");
+				stmt.setString(7, req.isDhApprove() == true? "yes":"no");
+				stmt.setString(8, req.isBcApprove() == true? "yes":"no");
+				stmt.setString(9, req.isExceedAmountApproved() == true? "yes":"no");
+
+				stmt.execute(); //Returns amount rows effected;
+				System.out.println("executed fine");
+				
+				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				close(stmt);
+			}		
+			
+			try(Connection conn = Connections.getConnection()){
+
+				stmt = conn.prepareCall("{call insertIntoreimbursementds (?,?,?,?,?,?,?,?,?)}");
+				
+				stmt.setInt(1, req.getEmpId());
+				stmt.setInt(2,  req.getEventId());
+				stmt.setInt(3,  req.getEventType());
+				stmt.setDate(4, req.getEventDate());
+				stmt.setFloat(5, req.getAmountReq());
+				stmt.setString(6, req.isDsApprove() == true? "yes":"no");
+				stmt.setString(7, req.isDhApprove() == true? "yes":"no");
+				stmt.setString(8, req.isBcApprove() == true? "yes":"no");
+				stmt.setString(9, req.isExceedAmountApproved() == true? "yes":"no");
+
+				stmt.execute(); //Returns amount rows effected;
+				System.out.println("executed fine");
+				
+				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+			finally
+			{
+				close(stmt);
+			}		
+		}
 	// TODO Consider passing just the reqId instead of the entire req since we are just using the id anyway.
 	public Integer deleteReq(ReimbursementReq req, String table)
 	{
@@ -64,7 +126,7 @@ public class ReimbursementReqDaoImpl {
 		// First we will make sure that the req is actually in the table
 		try(Connection conn = Connections.getConnection())
 		{
-			String sql = "SELECT * FROM " + table + " where reimbursement_id = " + req.getReimbursementId();
+			String sql = "SELECT * FROM reimbursement" + table + " where reimbursement_id = " + req.getReimbursementId();
 					stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 					rs = stmt.executeQuery(sql);
 		// If the result set is not null, go to the last record in the result set and return that row number
@@ -103,7 +165,8 @@ public class ReimbursementReqDaoImpl {
 	{
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = ("Select * from " + table);
+		String sql = ("Select * from reimbursement" + table );
+		System.out.println(sql);
 		List<ReimbursementReq> reqs = new ArrayList<>();
 		ReimbursementReq req = null;
 		
@@ -117,14 +180,16 @@ public class ReimbursementReqDaoImpl {
 				req = new ReimbursementReq(rs.getInt(1), 
 						rs.getInt(2),
 						rs.getInt(3),
-						rs.getFloat(4),
-						rs.getString(5) == "yes" ? true : false,
-						rs.getDate(6),
+						rs.getInt(4),
+						rs.getDate(5),
+						rs.getFloat(6),
 						rs.getString(7) == "yes" ? true : false,
 						rs.getDate(8),
 						rs.getString(9) == "yes" ? true : false,
 						rs.getDate(10),
-						rs.getString(11) == "yes" ? true : false);
+						rs.getString(11) == "yes" ? true : false,
+						rs.getDate(12),
+						rs.getString(13) == "yes" ? true : false);
 				
 				reqs.add(req);
 			}
@@ -166,14 +231,16 @@ public class ReimbursementReqDaoImpl {
 						rs.getInt(1),
 						rs.getInt(2),
 						rs.getInt(3),
-						rs.getFloat(4),
-						rs.getString(5) == "yes"? true:false,
-						rs.getDate(6),
+						rs.getInt(4),
+						rs.getDate(5),
+						rs.getFloat(6),
 						rs.getString(7) == "yes"? true:false,
 						rs.getDate(8),
-						rs.getString(9) == "yes"?true:false,
+						rs.getString(9) == "yes"? true:false,
 						rs.getDate(10),
-						rs.getString(11) == "yes"?true:false
+						rs.getString(11) == "yes"?true:false,
+						rs.getDate(12),
+						rs.getString(13) == "yes"?true:false
 						);
 				
 				reqs.add(req);
@@ -209,14 +276,16 @@ public class ReimbursementReqDaoImpl {
 						rs.getInt(1),
 						rs.getInt(2),
 						rs.getInt(3),
-						rs.getFloat(4),
-						rs.getString(5) == "yes"? true:false,
-						rs.getDate(6),
+						rs.getInt(4),
+						rs.getDate(5),
+						rs.getFloat(6),
 						rs.getString(7) == "yes"? true:false,
 						rs.getDate(8),
-						rs.getString(9) == "yes"?true:false,
+						rs.getString(9) == "yes"? true:false,
 						rs.getDate(10),
-						rs.getString(11) == "yes"?true:false
+						rs.getString(11) == "yes"?true:false,
+						rs.getDate(12),
+						rs.getString(13) == "yes"?true:false
 						);
 			}
 			
@@ -247,7 +316,7 @@ public class ReimbursementReqDaoImpl {
 				
 		try(Connection conn = Connections.getConnection())
 		{
-			String sql = "Update " + table + " set emp_id = ?, event_id = ?, amnt_req = ?, "
+			String sql = "Update reimbursement" + table + " set emp_id = ?, event_id = ?, amnt_req = ?, "
 						+ "ds_approve = ?, ds_approve_date = ?, dh_approve =?, dh_approve_date = ?, bc_approve = ?, "
 						+ "bc_approve_date = ?, exceed_amount_exception = ?, WHERE reimbursement_id=?";
 					stmt = conn.prepareStatement(sql);

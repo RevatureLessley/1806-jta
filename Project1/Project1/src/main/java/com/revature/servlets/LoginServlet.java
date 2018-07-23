@@ -31,12 +31,22 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = null;
 		
 		// Checks to see if the login process was successful
-		if(EmployeeService.employeeLogin(username, password)){
+		if(EmployeeService.employeeLogin(username, password) != null){
 			session = request.getSession();
 			session.setAttribute("username", username);
-			System.out.println("LOGIN STARTED: " + session.getAttribute("username"));
-			RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
-			rd.forward(request, response);
+			session.setAttribute("role", EmployeeService.employeeLogin(username, password).getEmpRole());
+			System.out.println("LOGIN STARTED: " + session.getAttribute("role"));
+			if(session.getAttribute("role").equals(" "))
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("user/index.html");
+				rd.forward(request, response);
+			}
+			else
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("user/superindex.html");
+				rd.forward(request, response);
+			}
+			
 		}else{
 			out.println("<h3 style='color:red'>GET OOOOOUTTA HERE!</h3>");
 			HtmlTemplates.goBackButton(out);

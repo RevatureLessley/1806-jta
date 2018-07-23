@@ -58,4 +58,24 @@
     <servlet-name>tester</servlet-name>
     <url-pattern>/tester</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectReq</display-name>
+    <servlet-name>SelectReq</servlet-name>
+    <servlet-class>com.revature.servlets.SelectReq</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectReq</servlet-name>
+    <url-pattern>/SelectReq</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateReqServlet</display-name>
+    <servlet-name>CreateReqServlet</servlet-name>
+    <servlet-class>com.revature.servlets.CreateReqServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateReqServlet</servlet-name>
+    <url-pattern>/CreateReqServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

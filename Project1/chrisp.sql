@@ -1,10 +1,11 @@
 ---------------------------------------------------------------------------------------------
 -----------  DROP/CREATE Tables and Constraints ---------------------------------------------
 ---------------------------------------------------------------------------------------------
-DROP TABLE employee;
+DROP TABLE employee cascade constraints;
 DROP TABLE reimbursement;
 DROP TABLE event cascade constraints;
 DROP TABLE event_type;
+
 
 CREATE TABLE employee (
     emp_id NUMBER(7) UNIQUE,
@@ -41,6 +42,8 @@ CREATE TABLE reimbursement (
     reimbursement_id NUMBER(10) PRIMARY KEY,
     emp_id NUMBER(7,2) NOT NULL,
     event_id NUMBER(6),
+    event_type_id NUMBER(6),
+    event_date DATE,
     amnt_req NUMBER(7,2) NOT NULL,
     ds_approve VARCHAR2(3),
     ds_approve_date DATE,
@@ -50,9 +53,7 @@ CREATE TABLE reimbursement (
     bc_approve_date DATE,
     exceed_amount_exception VARCHAR2(3),
     CONSTRAINT fk_emp_id FOREIGN KEY ( emp_id )
-        REFERENCES employee ( emp_id ),
-    CONSTRAINT fk_req_event_id FOREIGN KEY ( event_id )
-        REFERENCES event ( event_id )
+        REFERENCES employee ( emp_id )
 );
 
 CREATE TABLE reimbursement_ds (
@@ -191,32 +192,65 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE insertintoreimbursementds (
-    reqid IN NUMBER,
+create or replace PROCEDURE insertintoreimbursementshort (
+    
     empid IN NUMBER,
     eventid IN NUMBER,
+    eventtype in number,
+    eventdate in date,
     amntreq IN NUMBER,
     dsapprove IN VARCHAR2,
-    dsapprovedate IN DATE,
     dhapprove IN VARCHAR2,
-    dhapprovedate IN DATE,
     bcapprove IN VARCHAR2,
-    bcapprovedate IN DATE,
     exceedamountexception IN VARCHAR2
 )
     IS
 BEGIN
-    INSERT INTO reimbursement_ds VALUES (
-        reqid,
+    INSERT INTO reimbursement (emp_id, event_id, 
+                event_type_id, event_date, amnt_req, ds_approve, dh_approve, 
+                bc_approve, exceed_amount_exception)
+    VALUES (
+
         empid,
         eventid,
+        eventtype,
+        eventdate,
         amntreq,
         dsapprove,
-        dsapprovedate,
         dhapprove,
-        dhapprovedate,
         bcapprove,
-        bcapprovedate,
+        exceedamountexception
+    );
+
+    COMMIT;
+END;
+
+CREATE OR REPLACE PROCEDURE insertintoreimbursementds (
+    empid IN NUMBER,
+    eventid IN NUMBER,
+    eventtype in number,
+    eventdate in date,
+    amntreq IN NUMBER,
+    dsapprove IN VARCHAR2,
+    dhapprove IN VARCHAR2,
+    bcapprove IN VARCHAR2,
+    exceedamountexception IN VARCHAR2
+)
+    IS
+BEGIN
+    INSERT INTO reimbursement (emp_id, event_id, 
+                event_type_id, event_date, amnt_req, ds_approve, dh_approve, 
+                bc_approve, exceed_amount_exception)
+    VALUES (
+
+        empid,
+        eventid,
+        eventtype,
+        eventdate,
+        amntreq,
+        dsapprove,
+        dhapprove,
+        bcapprove,
         exceedamountexception
     );
 
@@ -343,7 +377,7 @@ INSERT INTO employee VALUES (
     'parsons',
     '1405 trip St',
     950,
-    'user'
+    ' '
 );
 
 INSERT INTO employee VALUES (
@@ -353,7 +387,7 @@ INSERT INTO employee VALUES (
     'Trihard',
     '4356 segwauy Dr',
     1000,
-    'bc'
+    '_bc'
 );
 
 INSERT INTO employee VALUES (
@@ -363,7 +397,7 @@ INSERT INTO employee VALUES (
     'Slickerson',
     '93028 Baker St',
     543.23,
-    'dh'
+    '_dh'
 );
 
 INSERT INTO employee VALUES (
@@ -373,7 +407,7 @@ INSERT INTO employee VALUES (
     'Harlott',
     '1405 Harrower St',
     950,
-    'ds'
+    '_ds'
 );
 
 INSERT INTO employee VALUES (
@@ -383,8 +417,45 @@ INSERT INTO employee VALUES (
     'Blop',
     '0000 Bloop St',
     25,
-    'user'
+    ' '
 );
 
+insert into event (event_id)
+values(1);
+end;
+
+insert into event (event_id)
+values (230)
+
+INSERT INTO reimbursement VALUES (
+    10002,
+    1000,
+    1,
+    350,
+    'no',
+    TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no',
+     TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no',
+     TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no'
+);
+
+INSERT INTO reimbursement_ds VALUES (
+    10002,
+    1000,
+    100,
+    1,
+    TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    350,
+    'no',
+    TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no',
+     TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no',
+     TO_DATE('2003/05/03', 'yyyy/mm/dd'),
+    'no'
+);
+    
 commit;
 

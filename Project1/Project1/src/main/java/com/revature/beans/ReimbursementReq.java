@@ -7,6 +7,8 @@ public class ReimbursementReq {
 	private int reimbursementId;
 	private int empId;
 	private int eventId;
+	private int eventType;
+	private Date eventDate;
 	private float amountReq;
 	private boolean isDsApprove;
 	private Date dsApproveDate;
@@ -20,22 +22,6 @@ public class ReimbursementReq {
 // Constructors ///////////////////////////////
 ///////////////////////////////////////////////
 	
-	public ReimbursementReq(int reimbursementId, int empId, int eventId, float amountReq, boolean isDsApprove,
-			Date dsApproveDate, boolean isDhApprove, Date dhApproveDate, boolean isBcApprove, Date bcApproveDate, boolean isExceedAmountApproved) 
-	{
-		super();
-		this.reimbursementId = reimbursementId;
-		this.empId = empId;
-		this.eventId = eventId;
-		this.amountReq = amountReq;
-		this.isDsApprove = isDsApprove;
-		this.dsApproveDate = dsApproveDate;
-		this.isDhApprove = isDhApprove;
-		this.dhApproveDate = dhApproveDate;
-		this.isBcApprove = isBcApprove;
-		this.bcApproveDate = bcApproveDate;
-		this.isExceedAmountApproved = isExceedAmountApproved;
-	}
 	public ReimbursementReq() 
 	{
 		super();
@@ -44,10 +30,51 @@ public class ReimbursementReq {
 	
 	
 	
+public ReimbursementReq(int empId, int eventId, int eventType, Date eventDate, float amountReq, boolean isDsApprove,
+		boolean isDhApprove, boolean isBcApprove, boolean isExceedAmountApproved)
+{
+	super();
+	this.empId = empId;
+	this.eventId = eventId;
+	this.eventType = eventType;
+	this.eventDate = eventDate;
+	this.amountReq = amountReq;
+	this.isDsApprove = isDsApprove;
+	this.isDhApprove = isDhApprove;
+	this.isBcApprove = isBcApprove;
+	this.isExceedAmountApproved = isExceedAmountApproved;
+}
+
+
+
+public ReimbursementReq(int reimbursementId, int empId, int eventId, int eventType, Date eventDate, float amountReq,
+		boolean isDsApprove, Date dsApproveDate, boolean isDhApprove, Date dhApproveDate, boolean isBcApprove,
+		Date bcApproveDate, boolean isExceedAmountApproved)
+{
+	super();
+	this.reimbursementId = reimbursementId;
+	this.empId = empId;
+	this.eventId = eventId;
+	this.eventType = eventType;
+	this.eventDate = eventDate;
+	this.amountReq = amountReq;
+	this.isDsApprove = isDsApprove;
+	this.dsApproveDate = dsApproveDate;
+	this.isDhApprove = isDhApprove;
+	this.dhApproveDate = dhApproveDate;
+	this.isBcApprove = isBcApprove;
+	this.bcApproveDate = bcApproveDate;
+	this.isExceedAmountApproved = isExceedAmountApproved;
+}
+
+
+
 ///////////////////////////////////////////////
 //Getters and Setters ////////////////////////
 ///////////////////////////////////////////////
-	
+
+
+
 	public int getReimbursementId()
 	{
 		return reimbursementId;
@@ -77,6 +104,24 @@ public class ReimbursementReq {
 	{
 		this.eventId = eventId;
 	}
+	
+	public int getEventType()
+	{
+		return eventType;
+	}
+	public void setEventType(int eventType)
+	{
+		this.eventType = eventType;
+	}
+	public Date getEventDate()
+	{
+		return eventDate;
+	}
+	public void setEventDate(Date eventDate)
+	{
+		this.eventDate = eventDate;
+	}
+
 
 	public float getAmountReq()
 	{
