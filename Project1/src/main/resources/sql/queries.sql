@@ -101,12 +101,17 @@ begin
     end loop;
 end;
 /
+select * from project_1_role_relationship;
 select * from project_1_role;
+update project_1_role set role_name='Department Head' where role_number=4;
 select role_name from (select * from project_1_role inner join project_1_role_relationship on employee_role = role_number);
 exec insertAdmin('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
 exec insertSupervisor('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
 exec insertDepartmentHead('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
 exec insertBenefitsCoordinator('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
+exec insertBenefitsCoordinator('e6d61039-5528-4374-9514-af9c3cf99421');
+exec insertSupervisor('65a6c92b-3a1e-4477-93fd-0437e8815e92');
+exec insertDepartmentHead('8dd39d0a-37e0-4adf-98d2-27229f28cdae');
 select * from project_1_reimbursement_form;
 select * from project_1_user;
 alter table project_1_user modify email varchar2(100);

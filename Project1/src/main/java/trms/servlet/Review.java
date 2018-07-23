@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -131,7 +132,8 @@ public class Review extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    out.println(stringBuilder.toString());
+	    RequestDispatcher rs = request.getRequestDispatcher("pending.jsp");
+		rs.include(request, response);
 	}
 
 }

@@ -3,6 +3,7 @@
 
 <!-- If Benefits Coordinator, Department Head, Supervisor, or Admin -->
 <!-- See All -->
+<div class=container>
 <form action="Pending" method="post">
 	<c:if test="${not empty users }" >
 	<select name="user">
@@ -28,6 +29,7 @@
 	</c:if>
 	<input type="submit" value="select" />
 </form>
+</div>
 <!-- See Assigned -->
 	<!-- Select  -->
 

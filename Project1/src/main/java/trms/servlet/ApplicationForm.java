@@ -60,7 +60,7 @@ public class ApplicationForm extends HttpServlet {
 		Enumeration paramNames = request.getParameterNames();
 		List<FileItem> fileItems = null;
 		
-		String title = "Reading Data";
+		String title = "Application Submitted";
 		StringBuilder stringBuilder = new StringBuilder();
 		StringBuilder formComments = new StringBuilder();
 		
@@ -211,7 +211,7 @@ public class ApplicationForm extends HttpServlet {
 			io.printStackTrace();
 		}
 		applicationFormDAO.submitNewApplicationForm(formUUID, employeeUUID, formComments.toString());
-	    stringBuilder.append("</ul>\n" +    "</body>" + "</html>");
+	    stringBuilder.append("</ul>\n" + "<form action=\"index.jsp\" method=\"get\"><input type=\"submit\" value=\"return\"></input></form>"  +  "</body>" + "</html>");
 	    out.println(stringBuilder);
 	    out.println(formComments.toString());
 	}

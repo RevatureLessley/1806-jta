@@ -24,7 +24,7 @@
    		 break;
    	}
    }%>
-
+<div class="container">
 <form enctype="multipart/form-data" method="post" action="ApplicationForm" id="form">
 	<fieldset>
 		<legend>[ Employee information ]</legend>
@@ -75,3 +75,4 @@
 	<br />
 	<input type="submit" value="submit application"/>
 </form>
+</div>
