@@ -11,31 +11,156 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
-  <!--
-CORS -> Cross Origin Resource Sharing
-        Browsers hate it when you grab resources outside of the current
-        environment that you are connected to. It poses a risk of websites
-        grabbing data from unknown sources and using them on their own site.
-        This leaves for possibilities malicious resources.
-        However, if we want to use resources, or supply resources from other
-        urls/uris we need to make an exception in the browser to allow it.
-        Below is a filter servlet that sets header details to allow resource
-        sharing for other locations. In this case, a generic angular 4 application.
-        We allow from an angular application on localhost form port 4200. -->
+  <servlet>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.trms.servlet.FrontController</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
   <filter>
-    <filter-name>corsFilter</filter-name>
-    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-    <init-param>
-      <param-name>cors.allowed.origins</param-name>
-      <param-value>http://localhost:4200</param-value>
-    </init-param>
-    <init-param>
-      <param-name>cors.allowed.methods</param-name>
-      <param-value>GET, POST, PUT, DELETE, OPTIONS, HEAD</param-value>
-    </init-param>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>com.revature.trms.filter.SecurityFilter</filter-class>
   </filter>
+
   <filter-mapping>
-    <filter-name>corsFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <filter-name>SecurityFilter</filter-name>
+    <url-pattern>/user/*</url-pattern>
   </filter-mapping>
+
+
+
+
+
+
+
+
+  <servlet>
+    <servlet-name>NewRequestServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.NewRequestServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>NewRequestServlet</servlet-name>
+    <url-pattern>/NewRequestServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ActiveRequestsServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ActiveRequestsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ActiveRequestsServlet</servlet-name>
+    <url-pattern>/ActiveRequestsServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ClosedRequestsServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ClosedRequestsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ClosedRequestsServlet</servlet-name>
+    <url-pattern>/ClosedRequestsServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PendingRequestsServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.PendingRequestsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PendingRequestsServlet</servlet-name>
+    <url-pattern>/PendingRequestsServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>FileAttachmentServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.FileAttachmentServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>FileAttachmentServlet</servlet-name>
+    <url-pattern>/FileAttachmentServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GradeAttachmentServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.GradeAttachmentServlet</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>GradeAttachmentServlet</servlet-name>
+    <url-pattern>/GradeAttachmentServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Servlets for Navigation -->
+
+  <!--  Servlets for Ajax -->
+  <servlet>
+    <servlet-name>AuthenticationServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.AuthenticationServlet</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>AuthenticationServlet</servlet-name>
+    <url-pattern>/Auth</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EventTypeServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.EventTypeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>EventTypeServlet</servlet-name>
+    <url-pattern>/EventTypeServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GradeFormatServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.GradeFormatServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>GradeFormatServlet</servlet-name>
+    <url-pattern>/GradeFormatServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RequestDetailsServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.RequestDetailsServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RequestDetailsServlet</servlet-name>
+    <url-pattern>/RequestDetailsServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ApprovalServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ApprovalServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ApprovalServlet</servlet-name>
+    <url-pattern>/ApprovalServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
 </web-app>
