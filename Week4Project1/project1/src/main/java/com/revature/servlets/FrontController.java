@@ -22,7 +22,6 @@ public class FrontController extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String url = request.getRequestURI();
-		System.out.println("url: " + url);
 
 		RequestDispatcher rd;
 		

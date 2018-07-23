@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.revature.beans.Employee;
 import com.revature.services.EmployeeService;
+import com.revature.services.EventService;
 import com.revature.services.ReimbursementService;
 
 
@@ -25,7 +26,10 @@ public class BenCoSubmitReimbursement extends HttpServlet
 	{
 		ReimbursementService rs = new ReimbursementService();
 		EmployeeService es = new EmployeeService();
+		EventService evs = new EventService();
+		
 		Integer availableAmount = 0;
+		Integer finalSubtract = 0;
 		Employee employee = null;
 		
 		String eventDate = request.getParameter("eventdate");
@@ -44,7 +48,10 @@ public class BenCoSubmitReimbursement extends HttpServlet
 							   eventId, gradingFormatId);
 		
 		availableAmount = es.getCurrencyByEmpId(empId);
-		availableAmount -= eventCost;
+		
+		finalSubtract = evs.calculateAmountLeft(eventCost, eventId);
+		
+		availableAmount -= finalSubtract;
 		employee = es.getEmployeeUsingEmpId(empId);
 		
 		es.updateCurrencyById(employee, empId, availableAmount);
