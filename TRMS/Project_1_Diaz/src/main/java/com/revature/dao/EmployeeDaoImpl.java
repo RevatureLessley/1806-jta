@@ -8,8 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.Employee;
+import com.revature.beans.ReimbursementForm;
 import com.revature.util.Connections;
 
 public class EmployeeDaoImpl implements EmployeeDao{
@@ -109,6 +112,45 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			close(ps);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Employee> selectAllEmployee() {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Employee> emp = new ArrayList<>();
+
+		try (Connection conn = Connections.getConnection()) {
+			String sql = "Select * FROM V_Tes1t";
+
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Employee emp2 = new Employee(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5),
+						rs.getString(6),
+						rs.getString(7),
+						rs.getString(8),
+						rs.getString(9),
+						rs.getString(10),
+						rs.getInt(11),
+						rs.getInt(12));
+				emp.add(emp2);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rs);
+		}
+
+		return emp;
 	}
 
 	

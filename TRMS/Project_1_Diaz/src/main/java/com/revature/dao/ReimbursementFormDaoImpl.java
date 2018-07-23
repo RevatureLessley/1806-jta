@@ -71,9 +71,20 @@ public class ReimbursementFormDaoImpl implements ReimbursementFormDao {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				ReimbursementForm rf2 = new ReimbursementForm(rs.getInt(1), rs.getInt(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-						rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getString(12), rs.getString(13),
+				ReimbursementForm rf2 = new ReimbursementForm(
+						rs.getInt(1), 
+						rs.getInt(2), 
+						rs.getString(3),
+						rs.getString(4), 
+						rs.getString(5), 
+						rs.getString(6), 
+						rs.getString(7), 
+						rs.getString(8),
+						rs.getInt(9), 
+						rs.getDate(10), 
+						rs.getDate(11), 
+						rs.getString(12), 
+						rs.getString(13),
 						rs.getString(14));
 				rfs.add(rf2);
 			}

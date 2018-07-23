@@ -63,6 +63,19 @@ BEGIN
     END IF;
 END;
 /
+--DROP SEQUENCE Employee12_seq;
+--CREATE SEQUENCE Employee12_seq
+--    START WITH 100001
+--    INCREMENT BY 1; 
+-- / 
+--CREATE OR REPLACE TRIGGER Employee12_seq_seq_Triger
+--BEFORE INSERT ON ReimbursementForm 
+--FOR EACH ROW
+--BEGIN 
+--    IF :new.Employee_Id IS NULL THEN
+--        SELECT Employee12_seq.NEXTVAL INTO :new.Employee_Id FROM dual;
+--    END IF;
+--END;
 
 ---------------------------------------------------------------------------------
 
@@ -124,7 +137,14 @@ SELECT *
 FROM ReimbursementForm;
 
 /
+Drop VIEW V_tes1t;
+CREATE VIEW V_Tes1t
+AS 
+SELECT *
+FROM EMPLOYEE;
 
+/
+  Select * FROM V_Tes1t;                              
 Select * FROM V_Test;
 
 

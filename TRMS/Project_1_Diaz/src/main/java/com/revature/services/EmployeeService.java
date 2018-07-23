@@ -2,9 +2,15 @@ package com.revature.services;
 
 import static com.revature.util.LogFourJ.log;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.revature.beans.Employee;
+import com.revature.beans.ReimbursementForm;
+import com.revature.dao.EmployeeDao;
 import com.revature.dao.EmployeeDaoImpl;
 
 public class EmployeeService {
@@ -65,5 +71,23 @@ public class EmployeeService {
 		
 		log.info("Role false");
 		return false;
+	}
+	public List<Employee> getAllClams2(){
+		EmployeeDao ed = new EmployeeDaoImpl();
+		List<Employee> eds = ed.selectAllEmployee();
+		return eds;
+	}
+	public String getAllJSON2(){
+		List<Employee> es = getAllClams2();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(es);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 }
