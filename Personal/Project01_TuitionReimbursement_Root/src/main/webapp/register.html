@@ -9,9 +9,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Tuition Reimbursement</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<script src="/Project01_TuitionReimbursement/resources/js/requests.js"></script>
 
 </head>
-<body>
+<body onload="getSupervisor()">
 
 	<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
@@ -45,7 +46,7 @@
 					<hr>
 					<div class="form-group">
 						<label for="role">Select Role:</label><br>
-						<select name="roles">
+						<select name="roles" onchange="getSupervisor()" id="roles">
 						  <option value="employee">Employee</option>
 						  <option value="supervisor">Supervisor</option>
 						  <option value="head">Head</option>
@@ -54,8 +55,7 @@
 					</div>
 					<div class="form-group">
 						<label for="supervisor">Select Supervisor:</label><br>
-						<select name="supervisors">
-						  <option value="140">Tyson Dominguez</option>
+						<select name="supervisors" id="supervisors">
 						</select> 
 					</div>
 					<div class="form-group">

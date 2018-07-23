@@ -53,6 +53,34 @@ function openReimbursement(reimId){
 	xhr.send(httpReq);
 }
 
+function approveReimbursement(){
+	var httpReq = "";
+	var reimId = document.getElementById("reimId").innerHTML;
+	var url = "/Project01_TuitionReimbursement/ApproveReimbursement.do?reimId="+reimId;
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.onreadystatechange = function(){
+		if ((xhr.readyState == 4) || (xhr.status == 200)){
+			document.getElementById("responseHolder").innerHTML = xhr.responseText;
+		}
+	}
+	xhr.send(httpReq);
+}
+
+function getSupervisor(){
+	var httpReq = "";
+	var role = document.getElementById("roles").value;
+	var url = "/Project01_TuitionReimbursement/GetHigherUps.do?role="+role;
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.onreadystatechange = function(){
+		if ((xhr.readyState == 4) || (xhr.status == 200)){
+			document.getElementById("supervisors").innerHTML = xhr.responseText;
+		}
+	}
+	xhr.send(httpReq);
+}
+
 function onLoad(){
 	var httpReq = null;
 	var url = "/Project01_TuitionReimbursement/GetReimbursements.do";

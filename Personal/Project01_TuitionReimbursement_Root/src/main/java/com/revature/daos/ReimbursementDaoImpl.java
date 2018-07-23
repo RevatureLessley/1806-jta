@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.beans.Reimbursement;
+import com.revature.main.Driver;
 import com.revature.util.Connections;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
@@ -117,7 +118,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 					+ "reimbursement_location, description, cost, grading_format, event_type,"
 					+ "coverage, justification "
 					+ "FROM reimbursement "
-					+ "WHERE approver_id=?";
+					+ "WHERE approver_id=? AND supervisor_appr = 0";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -206,6 +207,68 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 			stmt.setString(10, reim.getJustification());
 			stmt.setInt(11, reim.getId());
 
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+	}
+	
+	public Boolean updateReimbursementSupervisorApprovalByIdViaSP(Integer id) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call updateReimSupvApprov(?,?)}");
+						
+			stmt.setInt(1, id);
+			stmt.setInt(2, Driver.loggedIn.getSupVId());
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+	}
+	
+	public Boolean updateReimbursementHeadApprovalByIdViaSP(Integer id) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call updateReimHeadApprov(?,?)}");
+						
+			stmt.setInt(1, id);
+			stmt.setInt(2, Driver.loggedIn.getSupVId());
+			
+			stmt.execute(); //Returns amount rows effected;
+			return true;
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(stmt);
+		}		
+		return false;
+	}
+	
+	public Boolean updateReimbursementBencoApprovalByIdViaSP(Integer id) {
+		CallableStatement stmt = null; 
+		
+		try(Connection conn = Connections.getConnection()){
+
+			stmt = conn.prepareCall("{call updateReimBencoApprov(?)}");
+						
+			stmt.setInt(1, id);
 			
 			stmt.execute(); //Returns amount rows effected;
 			return true;

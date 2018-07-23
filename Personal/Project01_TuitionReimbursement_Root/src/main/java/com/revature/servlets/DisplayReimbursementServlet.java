@@ -34,8 +34,6 @@ public class DisplayReimbursementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("===="+this.getServletName()+"====");
 		
-		System.out.println(request.getParameter("reimId"));
-		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
@@ -43,14 +41,14 @@ public class DisplayReimbursementServlet extends HttpServlet {
 		int reimId = Integer.parseInt(request.getParameter("reimId"));
 		Reimbursement reim = UserService.getReimbursementById(reimId);
 		
-		out.println("<h4>Reimbursement Id: "+reim.getId()+"</h4><br>");
-		out.println("<h4>Employee Id: "+reim.getEmpId()+"</h4><br>");
-		out.println("<h4>Location: "+reim.getLocation()+"</h4><br>");
-		out.println("<h4>Type: "+reim.getType()+"</h4><br>");
-		out.println("<h4>Date: "+reim.getDate()+"</h4><br>");
-		out.println("<h4>Description: "+reim.getDescription()+"</h4><br>");
-		out.println("<h4>Justification: "+reim.getJustification()+"</h4><br>");
-		out.println("<h4>Cost: "+reim.getCost()+"</h4><br>");
+		out.println("<h4>Reimbursement Id: </h4><h6 id='reimId'>"+reim.getId()+"</h6><br>");
+		out.println("<h4>Employee Id: </h4><h6>"+reim.getEmpId()+"</h6><br>");
+		out.println("<h4>Location: </h4><h6>"+reim.getLocation()+"</h6><br>");
+		out.println("<h4>Type: </h4><h6>"+reim.getType()+"</h6><br>");
+		out.println("<h4>Date: </h4><h6>"+reim.getDate()+"</h6><br>");
+		out.println("<h4>Description: </h4><h6>"+reim.getDescription()+"</h6><br>");
+		out.println("<h4>Justification: </h4><h6>"+reim.getJustification()+"</h6><br>");
+		out.println("<h4>Cost: </h4><h6>"+reim.getCost()+"</h6><br>");
 	}
 
 	/**

@@ -109,4 +109,24 @@
     <servlet-name>DisplayReimbursementServlet</servlet-name>
     <url-pattern>/DisplayReimbursementServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveReimbursementServlet</display-name>
+    <servlet-name>ApproveReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveReimbursementServlet</servlet-name>
+    <url-pattern>/ApproveReimbursementServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetHigherUpsServlet</display-name>
+    <servlet-name>GetHigherUpsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetHigherUpsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHigherUpsServlet</servlet-name>
+    <url-pattern>/GetHigherUpsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

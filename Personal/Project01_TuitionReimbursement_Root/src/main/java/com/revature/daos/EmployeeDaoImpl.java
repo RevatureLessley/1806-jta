@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.beans.Employee;
@@ -19,7 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return null;
 	}
 
-	public List<Employee> selectAllEmployee() {
+	public List<Employee> selectAllEmployees() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,12 +36,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public Boolean insertEmployeeViaSp(Employee emp) {
-		CallableStatement stmt = null; 
-		
-		try(Connection conn = Connections.getConnection()){
+		CallableStatement stmt = null;
+
+		try (Connection conn = Connections.getConnection()) {
 
 			stmt = conn.prepareCall("{call insertEmployee(?,?,?,?,?,?,?,?,?,?)}");
-			
+
 			stmt.setString(1, emp.getRole());
 			stmt.setInt(2, emp.getSupVId());
 			stmt.setString(3, emp.getFirstName());
@@ -52,50 +53,64 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			stmt.setString(9, emp.getUsername());
 			stmt.setString(10, emp.getPassword());
 
-			
-			stmt.execute(); //Returns amount rows effected;
+			stmt.execute(); // Returns amount rows effected;
 			return true;
-			
-		}catch(SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(stmt);
-		}		
+		}
 		return false;
 	}
 
-public Employee selectEmployeeByUsername(String username) {
+	public Employee selectEmployeeByUsername(String username) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM employee WHERE username = ?";
-		
-		try(Connection conn = Connections.getConnection()){
+
+		try (Connection conn = Connections.getConnection()) {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
-			while(rs.next()){
-				return new Employee(
-						rs.getInt(1),
-						rs.getString(2),
-						rs.getInt(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getInt(6),
-						rs.getString(7),
-						rs.getString(8),
-						rs.getString(9),
-						rs.getString(10),
-						rs.getString(11)
-						);
+			while (rs.next()) {
+				return new Employee(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
+						rs.getString(11));
 			}
-			
-		}catch(SQLException e){
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(rs);
 			close(ps);
 		}
 		return null;
+	}
+
+	public List<Employee> selectAllEmployeesByRole(String role) {
+		List<Employee> emps = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM employee WHERE role = ?";
+
+		try (Connection conn = Connections.getConnection()) {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, role);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				emps.add(new Employee(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+						rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
+						rs.getString(11)));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		return emps;
 	}
 
 }

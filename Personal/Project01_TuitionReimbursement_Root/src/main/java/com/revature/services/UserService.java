@@ -64,8 +64,26 @@ public class UserService {
 		return reimd.selectAllReimbursementByApproverId(id);
 	}
 	
+	public static List<Employee> getAllEmployeesByRole(String role) {
+		EmployeeDao empd = new EmployeeDaoImpl();
+		return empd.selectAllEmployeesByRole(role);
+	}
+	
 	public static Reimbursement getReimbursementById(Integer id) {
 		ReimbursementDao reimd = new ReimbursementDaoImpl();
 		return reimd.selectReimbursementById(id);
+	}
+	
+	public static Boolean updateReimbursementSupervisorApprovalById(Integer id) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.updateReimbursementSupervisorApprovalByIdViaSP(id);
+	}
+	public static Boolean updateReimbursementHeadApprovalById(Integer id) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.updateReimbursementHeadApprovalByIdViaSP(id);
+	}
+	public static Boolean updateReimbursementBencoApprovalById(Integer id) {
+		ReimbursementDao reimd = new ReimbursementDaoImpl();
+		return reimd.updateReimbursementBencoApprovalByIdViaSP(id);
 	}
 }

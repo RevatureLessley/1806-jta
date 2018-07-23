@@ -11,5 +11,8 @@ public interface ReimbursementDao {
 	public Integer deleteReimbursementById(Integer id);
 	public Boolean insertReimbursementViaSp(Reimbursement reim);
 	public Boolean updateReimbursementViaSp(Reimbursement reim);
+	public Boolean updateReimbursementSupervisorApprovalByIdViaSP(Integer id);
+	public Boolean updateReimbursementHeadApprovalByIdViaSP(Integer id);
+	public Boolean updateReimbursementBencoApprovalByIdViaSP(Integer id);
 	public Reimbursement selectReimbursementByName(String name);
 }

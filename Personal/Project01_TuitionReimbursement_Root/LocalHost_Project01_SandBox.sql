@@ -66,6 +66,7 @@ CREATE TABLE reimbursement (
     doc_id NUMBER(9),
     aprov_em_id NUMBER(9),
     emp_id NUMBER(9) NOT NULL,
+    approver_id NUMBER(9) NOT NULL,
     reimbursement_date VARCHAR2(32) NOT NULL,
     reimbursement_location VARCHAR2(32) NOT NULL,
     description VARCHAR2(100) NOT NULL,
@@ -74,10 +75,13 @@ CREATE TABLE reimbursement (
     event_type VARCHAR(32) NOT NULL,
     coverage NUMBER(9) NOT NULL,
     justification VARCHAR(100) NOT NULL,
+    supervisor_appr NUMBER(1),
+    head_appr NUMBER(1),
+    benco_appr NUMBER(1),
     attachment BLOB,
     email_approval BLOB,
     
-    CONSTRAINT fk_ri_emp_id FOREIGN KEY (emp_id) REFERENCES employee(id)
+    CONSTRAINT fk_ri_emp_id FOREIGN KEY (emp_id) REFERENCES employee(id)   
 );
 
 CREATE TABLE grade_reference (
@@ -169,14 +173,58 @@ CREATE OR REPLACE PROCEDURE insertReimbursement(
 IS
 BEGIN 
 	INSERT INTO reimbursement (emp_id, approver_id, reimbursement_date, reimbursement_location,
-		description, cost, grading_format, event_type, coverage, justification)
+		description, cost, grading_format, event_type, coverage, justification, supervisor_appr,
+        head_appr, benco_appr)
 	VALUES (p_empId, p_approverId, p_reimbursementDate, p_reimbursementLocation, p_description, p_cost,
-		p_gradingFormat, p_eventType, p_coverage, p_justification);
+		p_gradingFormat, p_eventType, p_coverage, p_justification, 0, 0, 0);
 
 	COMMIT;
 END;
 /
 
+CREATE OR REPLACE PROCEDURE updateReimSupvApprov(
+    p_reimbursementId IN NUMBER,
+    p_approverId IN NUMBER)
+IS
+BEGIN 
+	UPDATE reimbursement
+    SET 
+		supervisor_appr = 1,
+        approver_id = p_approverId
+    WHERE reimbursement_id = p_reimbursementId;    
+		
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE updateReimHeadApprov(
+    p_reimbursementId IN NUMBER,
+    p_approverId IN NUMBER)
+IS
+BEGIN 
+	UPDATE reimbursement
+    SET 
+		head_appr = 1,
+        approver_id = p_approverId
+    WHERE reimbursement_id = p_reimbursementId;    
+		
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE updateReimBencoApprov(
+    p_reimbursementId IN NUMBER)
+IS
+BEGIN 
+	UPDATE reimbursement
+    SET 
+		benco_appr = 1
+    WHERE reimbursement_id = p_reimbursementId;    
+		
+	COMMIT;
+END;
+/
+commit;
 CREATE OR REPLACE PROCEDURE updateReimbursement(
 	p_empId IN NUMBER,
     p_approverId IN NUMBER, 
@@ -214,7 +262,7 @@ CREATE OR REPLACE PROCEDURE insertGradeReference(
 	gradeRequirement IN VARCHAR2)
 IS
 BEGIN 
-	INSERT INTO grade_reference (format, requirement, grade_requirement)
+	INSERT into grade_reference (format, requirement, grade_requirement)
 	VALUES (format, requirement, gradeRequirement);
 
 	COMMIT;
