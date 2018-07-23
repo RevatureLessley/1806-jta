@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  
+  <display-name>project1</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <filter>
+    <display-name>SecurityFilter</display-name>
+    <filter-name>SecurityFilter</filter-name>
+    <filter-class>com.revature.filters.SecurityFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SecurityFilter</filter-name>
+    <url-pattern>/SecurityFilter</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>SubmitReimbursement</display-name>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <url-pattern>/SubmitReimbursement</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetEmpCurrency</display-name>
+    <servlet-name>GetEmpCurrency</servlet-name>
+    <servlet-class>com.revature.servlets.GetEmpCurrency</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEmpCurrency</servlet-name>
+    <url-pattern>/GetEmpCurrency</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetReimbursements</display-name>
+    <servlet-name>GetReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetReimbursements</servlet-name>
+    <url-pattern>/GetReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ApprovedReimbursements</display-name>
+    <servlet-name>ApprovedReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.ApprovedReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApprovedReimbursements</servlet-name>
+    <url-pattern>/ApprovedReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>DeclinedReimbursements</display-name>
+    <servlet-name>DeclinedReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.DeclinedReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeclinedReimbursements</servlet-name>
+    <url-pattern>/DeclinedReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ApproveOrDeny</display-name>
+    <servlet-name>ApproveOrDeny</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveOrDeny</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveOrDeny</servlet-name>
+    <url-pattern>/ApproveOrDeny</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ApproveServlet</display-name>
+    <servlet-name>ApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveServlet</servlet-name>
+    <url-pattern>/ApproveServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>DeclineServlet</display-name>
+    <servlet-name>DeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeclineServlet</servlet-name>
+    <url-pattern>/DeclineServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelOnePendingReimbursements</display-name>
+    <servlet-name>GetAllLevelOnePendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelOnePendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelOnePendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelOnePendingReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelTwoPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelTwoPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelTwoPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelTwoPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelTwoPendingReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>DepHeadApproveServlet</display-name>
+    <servlet-name>DepHeadApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DepHeadApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepHeadApproveServlet</servlet-name>
+    <url-pattern>/DepHeadApproveServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>DepHeadDeclineServlet</display-name>
+    <servlet-name>DepHeadDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DepHeadDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepHeadDeclineServlet</servlet-name>
+    <url-pattern>/DepHeadDeclineServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>BothApproveServlet</display-name>
+    <servlet-name>BothApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BothApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BothApproveServlet</servlet-name>
+    <url-pattern>/BothApproveServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>BothDeclineServlet</display-name>
+    <servlet-name>BothDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BothDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BothDeclineServlet</servlet-name>
+    <url-pattern>/BothDeclineServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelOneOrTwoPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelOneOrTwoPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelOneOrTwoPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelOneOrTwoPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelOneOrTwoPendingReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>BenCoApproveServlet</display-name>
+    <servlet-name>BenCoApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoApproveServlet</servlet-name>
+    <url-pattern>/BenCoApproveServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>BenCoDeclineServlet</display-name>
+    <servlet-name>BenCoDeclineServlet</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoDeclineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoDeclineServlet</servlet-name>
+    <url-pattern>/BenCoDeclineServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GetAllLevelPendingReimbursements</display-name>
+    <servlet-name>GetAllLevelPendingReimbursements</servlet-name>
+    <servlet-class>com.revature.servlets.GetAllLevelPendingReimbursements</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllLevelPendingReimbursements</servlet-name>
+    <url-pattern>/GetAllLevelPendingReimbursements</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>BenCoSubmitReimbursement</display-name>
+    <servlet-name>BenCoSubmitReimbursement</servlet-name>
+    <servlet-class>com.revature.servlets.BenCoSubmitReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BenCoSubmitReimbursement</servlet-name>
+    <url-pattern>/BenCoSubmitReimbursement</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

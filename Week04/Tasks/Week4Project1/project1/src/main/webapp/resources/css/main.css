@@ -1,0 +1,39 @@
+body{
+	background-color:#c2f0c2;
+	text-align:center;
+}
+
+.card-header{
+	background:#287a45;	
+}
+
+.navbar-brand {
+  line-height: 15px;
+  font-size:25px;
+}
+
+.navbar{
+	background:#28a745;
+}
+
+.btn{
+	background:#287a45;
+	border:#287a45;
+}
+
+.btn:hover{
+	background:#28ba45
+}
+
+a{
+	color:black;
+}
+
+.lsection{
+	align: center;
+}
+
+table{
+	margin-left:auto; 
+	margin-right:auto;
+}
