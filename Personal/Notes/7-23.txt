@@ -1,0 +1,17 @@
+UST Global
+Anthem
+
+SDLC -Software Development Life Cycle
+     -Waterfall
+	--Requirements <-> Design <-> Implementation <-> Test <-> Deploy <-> Maintenance
+	--Business/System Analysts (BA/SA), Developers, Testers
+     -V-Model
+	--Requirements -> High Level -> Low Level -> Coding <- Unit <- Integration <- System
+     -Spiral
+	--Risk Analysis -> Code Test Engineering -> Eval -> Planning Areas
+     -BigBang
+	--Requirements, Design, Code, "Test", Deploy all together.
+     -Iterative
+	--Circular Waterfall then deploy at the end
+     -Agile
+	--Core Team{BA/SA, Devs, Test}, Scrum Master, {Product Owner(PO), Project Manager(PM)}
