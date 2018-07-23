@@ -12,4 +12,7 @@ public interface EmployeeDao {
 	public List<RForm> selectRformByEmployeeId(int id);
 	public List<RForm> selectRformBenHead(int id);
 	public Boolean updatePending(double amount,int empid);
+	public List<RForm> selectRformHead(int id,int depid);
+	public Boolean updateAvailableReim(double amount,int empid);
+	public List<Employee> selectEmployeeByDep(int dep);
 }

@@ -11,15 +11,15 @@ import com.revature.beans.Employee;
 import com.revature.services.RFormService;
 
 /**
- * Servlet implementation class ApproveRFormServlet
+ * Servlet implementation class DenyRFormServlet
  */
-public class ApproveRFormServlet extends HttpServlet {
+public class DenyRFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApproveRFormServlet() {
+    public DenyRFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +30,8 @@ public class ApproveRFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text");
 		int currFormId = Integer.parseInt(request.getParameter("currFormId"));
-		int currapplvl = Integer.parseInt(request.getParameter("currapplvl"));
-		HttpSession session = request.getSession(false);
-		if(((Employee)session.getAttribute("employee")).getDepId() == 1) {
-			RFormService.approveRForm(4, currFormId);
-		}else {
-			RFormService.approveRForm(currapplvl + 1, currFormId);
-		}
+
+		RFormService.approveRForm(9, currFormId);
 	}
 
 	/**

@@ -14,9 +14,10 @@ public class Employee {
 	private double awarded;
 	private int empType;
 	private String empTypeName;
+	private double available;
 	
 	public Employee(int empid, String userN, String passW, String firstN, String lastN, int dirSupId, int depId,
-			double pending, double awarded, int empType) {
+			double pending, double awarded, int empType, double available) {
 		super();
 		this.empid = empid;
 		this.userN = userN;
@@ -28,6 +29,7 @@ public class Employee {
 		this.pending = pending;
 		this.awarded = awarded;
 		this.empType = empType;
+		this.available = available;
 	}
 	public Employee(int empid, String userN, String passW, String firstN, String lastN,
 			int dirSupId, int depId, int empType) {
@@ -42,6 +44,7 @@ public class Employee {
 		this.pending = 0;
 		this.awarded = 0;
 		this.empType = empType;
+		this.available = 1000;
 	}
 	public Employee(String userN, String passW, String firstN, String lastN,
 			int dirSupId, int depId, int empType) {
@@ -55,6 +58,20 @@ public class Employee {
 		this.pending = 0;
 		this.awarded = 0;
 		this.empType = empType;
+		this.available = 1000;
+	}
+	
+	/**
+	 * @return the available
+	 */
+	public double getAvailable() {
+		return available;
+	}
+	/**
+	 * @param available the available to set
+	 */
+	public void setAvailable(double available) {
+		this.available = available;
 	}
 	/**
 	 * @return the empid
@@ -224,7 +241,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [empid=" + empid + ", userN=" + userN + ", passW=" + passW + ", firstN=" + firstN + ", lastN="
 				+ lastN + ", dirSupId=" + dirSupId + ", dirSupName=" + dirSupName + ", depId=" + depId + ", pending="
-				+ pending + ", awarded=" + awarded + ", empType=" + empType + ", empTypeName=" + empTypeName;
+				+ pending + ", empType=" + empType + ", empTypeName=" + empTypeName;
 	}
 	/**
 	 * @return the dirSupName

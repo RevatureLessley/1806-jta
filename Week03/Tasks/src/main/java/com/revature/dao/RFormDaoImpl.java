@@ -18,7 +18,7 @@ public class RFormDaoImpl {
 		
 		try(Connection conn = Connections.getConnection()){
 
-			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			stmt = conn.prepareCall("{call insertNewRForm(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			
 			stmt.setInt(1, rform.getEmpid());
 			stmt.setDate(2, rform.getrFormDate());
@@ -33,6 +33,7 @@ public class RFormDaoImpl {
 			stmt.setDouble(11,rform.getEventCost());
 			stmt.setInt(12, rform.getSupid());
 			stmt.setString(13, rform.getEventName());
+			stmt.setInt(14, rform.getDepid());
 
 			
 			stmt.execute(); //Returns amount rows effected;

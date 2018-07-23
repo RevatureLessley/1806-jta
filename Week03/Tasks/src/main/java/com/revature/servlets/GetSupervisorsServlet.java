@@ -1,25 +1,26 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.beans.Employee;
-import com.revature.services.RFormService;
+import com.revature.services.EmployeeService;
 
 /**
- * Servlet implementation class ApproveRFormServlet
+ * Servlet implementation class GetSupervisorsServlet
  */
-public class ApproveRFormServlet extends HttpServlet {
+public class GetSupervisorsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApproveRFormServlet() {
+    public GetSupervisorsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +30,9 @@ public class ApproveRFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text");
-		int currFormId = Integer.parseInt(request.getParameter("currFormId"));
-		int currapplvl = Integer.parseInt(request.getParameter("currapplvl"));
-		HttpSession session = request.getSession(false);
-		if(((Employee)session.getAttribute("employee")).getDepId() == 1) {
-			RFormService.approveRForm(4, currFormId);
-		}else {
-			RFormService.approveRForm(currapplvl + 1, currFormId);
-		}
+		int currdepid = Integer.parseInt(request.getParameter("currdepid"));
+		PrintWriter out = response.getWriter();
+		out.println(EmployeeService.getEmpSupJSON(currdepid));
 	}
 
 	/**

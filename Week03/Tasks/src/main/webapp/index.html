@@ -12,6 +12,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <title>Tuition Reimbursement System</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<script src="./resources/js/loginjs.js"></script>
 </head>
 
 <body>
@@ -62,16 +63,26 @@
 							class="form-control" id="lname" name="lname">
 					</div>
 					<div class="form-group">
-						<label for="dirsup">Direct Supervisor:</label> <input type="text"
-							class="form-control" id="dirsup" name="dirsup">
+						<label for="dep">Department:</label> 
+						<select class="form-control" id="dep" name="dep" onchange="getSup()">
+								<option value="1">Benefits</option>
+								<option value="2">Production</option>
+								<option value="3">Finance</option>
+								<option value="4">Marketing</option>
+							</select>
 					</div>
 					<div class="form-group">
-						<label for="dep">Department:</label> <input type="text"
-							class="form-control" id="dep" name="dep">
+						<label for="dirsup">Direct Supervisor:</label>
+							<select class="form-control" id="dirsup" name="dirsup">
+								
+							</select>
 					</div>
 					<div class="form-group">
-						<label for="pos">Position:</label> <input type="text"
-							class="form-control" id="pos" name="pos">
+						<label for="pos">Position:</label>
+							<select class="form-control" id="pos" name="pos">
+								<option value="0">Standard</option>
+								<option value="1">Supervisor</option>
+							</select>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 					</form>

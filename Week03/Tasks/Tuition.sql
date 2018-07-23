@@ -3,7 +3,6 @@ DROP TABLE EmployeeType CASCADE CONSTRAINTS;
 DROP TABLE Department CASCADE CONSTRAINTS;
 DROP TABLE RForm CASCADE CONSTRAINTS;
 DROP TABLE EventType CASCADE CONSTRAINTS;
-DROP TABLE Approval CASCADE CONSTRAINTS;
 
 --Tables
 CREATE TABLE EmployeeType (
@@ -28,6 +27,7 @@ CREATE TABLE Employee (
     pending_reim number(6,2) NOT NULL,
     awarded_reim number(6,2) NOT NULL,
     emp_type_id number(6) NOT NULL,
+    available_reim number (6,2) NOT NULL,
     
     CONSTRAINT fk_emp_type_id FOREIGN KEY (emp_type_id) REFERENCES EmployeeType (emp_type_id), 
     CONSTRAINT fk_dep_id FOREIGN KEY (dep_id) REFERENCES Department(dep_id)
@@ -59,22 +59,11 @@ CREATE TABLE RForm (
     event_cost number(6,2),
     event_name varchar2(100),
     dir_sup_id number(6),
+    dep_id number(3),
+    more_info number(1),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
     CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
-);
-
-CREATE TABLE Approval (
-    app_id number(6) PRIMARY KEY,
-    rform_id number(6),
-    is_app number(1),
-    app_lvl number(1),
-    approver_id number(6),
-    requester_id number(6),
-    
-    CONSTRAINT fk_rform_id FOREIGN KEY (rform_id) REFERENCES RForm(rform_id),
-    CONSTRAINT fk_approver FOREIGN KEY (approver_id) REFERENCES Employee(emp_id),
-    CONSTRAINT fk_requester FOREIGN KEY (requester_id) REFERENCES Employee(emp_id)
 );
 
 --Sequencers and their triggers
@@ -120,16 +109,6 @@ CREATE SEQUENCE appid_seq
     INCREMENT BY 1;
 /
 
-CREATE OR REPLACE TRIGGER appid_seq_trigger
-BEFORE INSERT ON Approval
-FOR EACH ROW 
-BEGIN 
-    IF :new.app_id IS NULL THEN
-        SELECT appid_seq.NEXTVAL INTO :new.app_id FROM dual;
-    END IF;
-END;
-/
-
 --Employee types table
 INSERT INTO EmployeeType (emp_type_id,emp_type)
 VALUES(0,'Regular');
@@ -154,20 +133,20 @@ VALUES(4,'Marketing',4);
 
 --Department heads
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(0,'executive','executive','Boss','Man',0,0,0,3);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+VALUES(0,'executive','executive','Boss','Man',0,0,0,3,1000);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(1,'benefits','benefits','Bobbert','Bobson',0,1,0,0,2);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+VALUES(1,'benefits','benefits','Bobbert','Bobson',0,1,0,0,2,1000);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(2,'production','production','Tommy','DROP TABLE Employee;',0,2,0,0,2);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+VALUES(2,'production','production','Tommy','DROP TABLE Employee;',0,2,0,0,2,1000);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(3,'finance','finance','Rich','Richman',0,3,0,0,2);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+VALUES(3,'finance','finance','Rich','Richman',0,3,0,0,2,1000);
 INSERT INTO Employee (emp_id,username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-VALUES(4,'marketing','marketing','Timmy','Turner',0,4,0,0,2);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+VALUES(4,'marketing','marketing','Timmy','Turner',0,4,0,0,2,1000);
 
 --Event types table
 INSERT INTO EventType(event_type_id,event_type,percent_reimb)
@@ -194,8 +173,8 @@ CREATE OR REPLACE PROCEDURE insertNewEmployee(userN IN varchar2,
 IS
 BEGIN
     INSERT INTO Employee (username,pass_word,f_name,l_name,dir_sup_id,
-                            dep_id,pending_reim,awarded_reim,emp_type_id)
-    VALUES(userN,userP,firstN,lastN,dirS,depId,0,0,empT);
+                            dep_id,pending_reim,awarded_reim,emp_type_id,available_reim)
+    VALUES(userN,userP,firstN,lastN,dirS,depId,0,0,empT,1000);
     commit;
 END;
 /
@@ -213,30 +192,40 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         eventT_Id IN number,
                                         eventC IN number,
                                         supId IN number,
-                                        eventname IN varchar2)
+                                        eventname IN varchar2,
+                                        depId IN number)
 IS
 rformid number;
+emptype number;
+dirsup number;
+dirsuptype number;
+
+cursor c1 is SELECT emp_type_id FROM Employee WHERE emp_id = empId;
+cursor c2 is SELECT emp_type_id FROM Employee WHERE emp_id = dirsup;
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
                         justification,time_missed,form_closed,app_lvl,
                         grade_format,cutoff_grade,event_type_id,event_cost,
-                        dir_sup_id,event_name)
+                        dir_sup_id,event_name,more_info)
     VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
-                        eventT_Id,eventC,supId,eventname);
-    SELECT rformid_seq.CURRVAL INTO rformid from dual;
-    insertNewApproval(rformid,empId,supId);
-    commit;
-END;
-/
+                        eventT_Id,eventC,supId,eventname,0);
 
-    
-CREATE OR REPLACE PROCEDURE insertNewApproval(rformid IN number,
-                                            appr IN number,
-                                            req IN number)
-IS
-BEGIN
-    INSERT INTO Approval(rform_id,is_app,app_lvl,approver_id,requester_id)
-    VALUES(rformid,0,0,appr,req);
+    SELECT rformid_seq.CURRVAL INTO rformid from dual;
+    --open c1;
+    --fetch c1 into emptype;
+    --close c1;
+    SELECT emp_type_id INTO emptype FROM Employee WHERE emp_id = empId;
+    SELECT dir_sup_id INTO dirsup FROM Employee WHERE emp_id = empId;
+    --open c2;
+    --fetch c2 into dirsuptype;
+    --close c2;
+    --dbms_output.put_line(emptype);
+    SELECT emp_type_id INTO dirsuptype FROM Employee WHERE emp_id = dirsup;
+    IF emptype >= 2 THEN
+        UPDATE RForm SET app_lvl = 2 WHERE rform_id = rformid;
+    ELSIF dirsuptype >= 2 THEN
+        UPDATE RForm SET app_lvl = 1 WHERE rform_id = rformid;
+    END IF;
     commit;
 END;
 /

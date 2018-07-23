@@ -132,4 +132,24 @@
     <servlet-name>ApproveRFormServlet</servlet-name>
     <url-pattern>/ApproveRForm.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DenyRFormServlet</display-name>
+    <servlet-name>DenyRFormServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DenyRFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DenyRFormServlet</servlet-name>
+    <url-pattern>/DenyRForm.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSupervisorsServlet</display-name>
+    <servlet-name>GetSupervisorsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetSupervisorsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSupervisorsServlet</servlet-name>
+    <url-pattern>/GetSupervisors.do</url-pattern>
+  </servlet-mapping>
 </web-app>

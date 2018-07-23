@@ -21,10 +21,12 @@ public class RForm {
 	private String eventName;
 	private String empName;
 	private int isSup;
+	private int depid;
+	
 	
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info, int propReim, String justification,
 			String filekey, int timeMissed, int formClosed, int appLvl, int gradeFormat, int cutoffGrade,
-			int eventTypeId, double eventCost, String eventName,int supid) {
+			int eventTypeId, double eventCost, String eventName,int supid,int depid) {
 		super();
 		this.rFormId = rFormId;
 		this.empid = empid;
@@ -43,6 +45,7 @@ public class RForm {
 		this.eventCost = eventCost;
 		this.eventName = eventName;
 		this.supid = supid;
+		this.depid = depid;
 	}
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
@@ -61,7 +64,7 @@ public class RForm {
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, int timeMissed, int gradeFormat,
-			int cutoffGrade, int eventTypeId, double eventCost, int supid,String eventName) {
+			int cutoffGrade, int eventTypeId, double eventCost, int supid,String eventName,int depid) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
@@ -76,8 +79,21 @@ public class RForm {
 		this.eventCost = eventCost;
 		this.supid = supid;
 		this.eventName = eventName;
+		this.depid = depid;
 	}
 	
+	/**
+	 * @return the depid
+	 */
+	public int getDepid() {
+		return depid;
+	}
+	/**
+	 * @param depid the depid to set
+	 */
+	public void setDepid(int depid) {
+		this.depid = depid;
+	}
 	/**
 	 * @return the isSup
 	 */

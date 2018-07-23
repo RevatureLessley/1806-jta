@@ -69,6 +69,20 @@ public class EmployeeService {
 		
 		return json;
 	}
+	public static String getEmpSupJSON(int depid){
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<Employee> employees = empDao.selectEmployeeByDep(depid);
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try{
+			json = mapper.writeValueAsString(employees);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
 	public static String getEmpRFormsJSON(int empid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformByEmployeeId(empid);
@@ -109,9 +123,30 @@ public class EmployeeService {
 		}
 		return json;
 	}
+	public static String getHeadRFormsJSON(int headid,int depid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		List<RForm> rforms = empDao.selectRformHead(headid,depid);
+		for (RForm form: rforms) {
+			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
+					.get(form.getEventTypeId()));
+			form.setEmpName(empDao.selectEmployeeById(form.getEmpid()).getFirstN()
+					+ " " + empDao.selectEmployeeById(form.getEmpid()).getLastN());
+			form.setIsSup(1);
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		try {
+			json = mapper.writeValueAsString(rforms);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 	public static String getBenRFormsJSON(int benid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformBen(benid);
+		rforms = empDao.selectRformGraded(benid, rforms);
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
@@ -156,5 +191,12 @@ public class EmployeeService {
 		if(empDao.updatePending(amount, empid)) return true;
 		return false;
 	}
+	
+	public static boolean updateAvailableReim(double amount,int empid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		if(empDao.updateAvailableReim(amount, empid)) return true;
+		return false;
+	}
+	
 	
 }

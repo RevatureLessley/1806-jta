@@ -44,7 +44,9 @@ public class NewFormServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = null;
+		response.setContentType("text/html");
 		session = request.getSession();
+		Employee employee = (Employee)session.getAttribute("employee");
 		String d = request.getParameter("date");
 		Date date = java.sql.Date.valueOf(d);
 		String place = request.getParameter("place");
@@ -56,21 +58,25 @@ public class NewFormServlet extends HttpServlet {
 		int cutoff = Integer.parseInt(request.getParameter("cutoff"));
 		int eventtype =  Integer.parseInt(request.getParameter("eventtype"));
 		double eventcost =  Double.parseDouble(request.getParameter("eventcost"));
-		int empid = ((Employee)session.getAttribute("employee")).getEmpid();
-		int supid = ((Employee)session.getAttribute("employee")).getDirSupId();
+		int empid = employee.getEmpid();
+		int supid = employee.getDirSupId();
 		String eventname = request.getParameter("eventname");
-		
-		response.setContentType("text/html");
 		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
-										timemissed, gradeformat, cutoff, eventtype, eventcost,supid,eventname)){
-			session = request.getSession();
-			EventTypeService.getEventTypes();
+										timemissed, gradeformat, cutoff, eventtype,
+										eventcost,supid,eventname,employee.getDepId())){
 			String eventtypename = EventTypeService.eventtypes.getEventTypeNameMap().get(eventtype);
-			Employee employee = (Employee)session.getAttribute("employee");
-			employee.setPending(((Employee)session.getAttribute("employee")).getPending()
+			employee.setPending(employee.getPending()
 					+ (0.01*eventcost)*EventTypeService.eventtypes.getEventTypeMap().get(eventtypename).get(1));
+			employee.setAvailable(employee.getAvailable()
+					- employee.getPending()
+					- employee.getAwarded());
+			if(employee.getAvailable() < 0) {
+				employee.setAvailable(0);
+			}
 			session.setAttribute("employee", employee);
 			EmployeeService.updatePendingReim(employee.getPending(),empid);
+			EmployeeService.updateAvailableReim(employee.getAvailable(), empid);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}else{

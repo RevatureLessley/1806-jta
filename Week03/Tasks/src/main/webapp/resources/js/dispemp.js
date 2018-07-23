@@ -14,10 +14,27 @@ function getReimb(){
 		if(xhr.readyState==4){
 			let data = JSON.parse(xhr.response);
 			for(index in data){
+				let applvl = data[index]["appLvl"];
+				let gformat = "";
+				if (applvl == 4) {
+					if(data[index]["gradeFormat"] == 0){
+						applvl = "Approved, pending grade";
+					}else{
+						applvl = "Approved, pending presentation";
+					}
+				}else if (applvl == 9){
+					applvl = "Denied";
+				}else if (applvl == 5){
+					applvl = "Reimbursed";
+				}else{
+					applvl = "Pending";
+				}
+				let urgent = "    ";
 				let l1 = document.createElement('li');
 				l1.setAttribute("id",data[index]["rFormId"]);
 				l1.appendChild(document.createTextNode(data[index]["empName"]
-						+ ": " + data[index]["eventName"]	+ "   "));
+				+ ": " + data[index]["eventName"]	+ ": "
+				+ applvl + urgent));
 				let b1 = document.createElement('button');
 				let jsonobj = JSON.stringify(data[index]);
 				b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
@@ -49,11 +66,15 @@ function rformDetails(jsonobj){
 	ul1.appendChild(l1);
 	
 	let applvl = jsonobj["appLvl"];
-	if (applvl == 3) {
-		applvl = "Approved";
+	if (applvl == 4) {
+		if(jsonobj["gradeFormat"] == 0){
+			applvl = "Approved, pending grade";
+		}else{
+			applvl = "Approved, pending presentation";
+		}
 	}else if (applvl == 9){
 		applvl = "Denied";
-	}else if (applvl == 4){
+	}else if (applvl == 5){
 		applvl = "Reimbursed";
 	}else{
 		applvl = "Pending";
@@ -113,6 +134,11 @@ function rformDetails(jsonobj){
 		b2.setAttribute("onclick","approveRForm(" + jsonobj["rFormId"] +"," + jsonobj["appLvl"] + ")");
 		b2.appendChild(document.createTextNode("Approve"));
 		ul1.appendChild(b2);
+		
+		let b3 = document.createElement('button');
+		b3.setAttribute("onclick","denyRForm(" + jsonobj["rFormId"] + ")");
+		b3.appendChild(document.createTextNode("Deny"));
+		ul1.appendChild(b3);
 	}
 	
 	l.appendChild(ul1);
@@ -156,6 +182,8 @@ function getEmp(){
 			list.innerHTML += "<li>Pending Reimbursements Total: "
 				+ data["pending"] + "</li>";
 			list.innerHTML += "<li>Available Reimbursements Total: "
+				+ data["available"] + "</li>";
+			list.innerHTML += "<li>Awarded Reimbursements Total: "
 				+ data["awarded"] + "</li>";
 			if(data["empType"] > 0){
 				dispSupRForms();
@@ -177,12 +205,28 @@ function dispSupRForms(){
 			let data = JSON.parse(xhr.response);
 			for(index in data){
 				if(data[index]["isSup"] == 1){
+					let applvl = data[index]["appLvl"];
+					if (applvl == 4) {
+						if(data[index]["gradeFormat"] == 0){
+							applvl = "Approved, pending grade";
+						}else{
+							applvl = "Approved, pending presentation";
+						}
+					}else if (applvl == 9){
+						applvl = "Denied";
+					}else if (applvl == 5){
+						applvl = "Reimbursed";
+					}else{
+						applvl = "Pending";
+					}
+
 					header = document.getElementById("Pending Approvals");
 					header.innerHTML = "Subordinate Reimbursements";
 					let l1 = document.createElement('li');
 					l1.setAttribute("id",data[index]["rFormId"]);
 					l1.appendChild(document.createTextNode(data[index]["empName"]
-							+ ": " + data[index]["eventName"]	+ "   "));
+							+ ": " + data[index]["eventName"]	+ ": "
+							+ applvl + "    "));
 					let b1 = document.createElement('button');
 					let jsonobj = JSON.stringify(data[index]);
 					b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
@@ -204,6 +248,17 @@ function approveRForm(rformid,applvl){
 	    data: {
 	    	currFormId: rformid,
 	        currapplvl: applvl
+	        
+	    },
+	    type: 'POST'});
+	document.getElementById(rformid).remove();
+
+}
+function denyRForm(rformid){
+	$.ajax({
+	    url: 'DenyRForm.do',
+	    data: {
+	    	currFormId: rformid
 	        
 	    },
 	    type: 'POST'});
