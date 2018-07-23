@@ -179,7 +179,7 @@ INSERT INTO Department VALUES (2, 'Information Technology', 'IT', 2);
 
 INSERT INTO Employee VALUES (1, 'Benefit', 'Coordinator', 'benco@email.com', 4, 1, NULL);
 INSERT INTO Employee VALUES (2, 'IT', 'Department Head', 'depthead@email.com', 3, 2, NULL);
-INSERT INTO Employee VALUES (3, 'IT', 'Supervisor', 'supervisor@revature.com', 2, 2, 2);
+INSERT INTO Employee VALUES (3, 'IT', 'Supervisor', 'supervisor@email.com', 2, 2, 2);
 INSERT INTO Employee VALUES (4, 'IT', 'Associate1', 'test11@email.com', 1, 2, 3);
 INSERT INTO Employee VALUES (5, 'IT', 'Associate2', 'test2@email.com', 1, 2, 3);
 INSERT INTO Employee VALUES (6, 'IT', 'Associate3', 'test3@email.com', 1, 2, 3);
@@ -192,4 +192,3 @@ INSERT INTO Password VALUES (5, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd
 INSERT INTO Password VALUES (6, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8');
 
 COMMIT;
-
