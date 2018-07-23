@@ -18,6 +18,7 @@ function populateTable(){
                 jsonObject[record].id,
                 jsonObject[record].reimbursement.employee.firstName +" "+ jsonObject[record].reimbursement.employee.lastName,
                 '$' + parseFloat(jsonObject[record].reimbursement.reimbursement).toFixed(2),
+                jsonObject[record].reimbursement['date'].monthValue + "/" + jsonObject[record].reimbursement['date'].dayOfMonth + "/" + jsonObject[record].reimbursement['date'].year,
                 jsonObject[record].reimbursement.eventType.description,
                 jsonObject[record].reimbursement.description,
                 jsonObject[record].reimbursement.location,
@@ -25,7 +26,7 @@ function populateTable(){
                 ];
 
                 let tr = document.createElement('tr');
-                for (var i = 0; i < 7; i++){
+                for (var i = 0; i < 8; i++){    //TODO: Hardcode
                     let td = document.createElement('td');
                     td.setAttribute("style", "text-align:center");
                     let element = document.createTextNode(data[i]);
@@ -134,12 +135,11 @@ function populateTable(){
                 textArea2.setAttribute('id', 'textArea2');
                 textArea2.setAttribute('rows', 4);
                 textArea2.setAttribute('cols', 40);
-                console.log(jsonObject[record]);
                 dropDiv2.appendChild(textArea1Copy);
                 dropDiv2.appendChild(textArea2);
                 divDrop2.appendChild(but6);
                 divDrop2.appendChild(dropDiv2);
-
+                console.log(jsonObject[record]);
                 if (jsonObject[record].atSupervisor || jsonObject[record].atDeptHead || jsonObject[record].atBenCo) {
                     dropDiv.appendChild(but4);
                     dropDiv.appendChild(but5);
@@ -176,7 +176,6 @@ function showDrop2(show){
 }
 
 function disableButtons(record){
-    console.out.println(record);
     let button1 = document.getElementById('button'+record+'A');
     let button2 = document.getElementById('button'+record+'B');
     let button3 = document.getElementById('button'+record+'C');
@@ -218,8 +217,8 @@ function requestMoreInfo(isResponse, record, text){
 function approveButton(record){
     disableButtons(record);
     var approves = jsonObject[record].approvalCount;
-    var iconImg = (approves < 2) ? '../resources/images/info_icon.png' : '../resources/images/approved_icon.png'
-    var message = (approves < 2)
+    var iconImg = (approves <= 3) ? '../resources/images/info_icon.png' : '../resources/images/approved_icon.png'
+    var message = (approves <= 3)
         ? 'New reimbursement request from '+ jsonObject[record].reimbursement.employee.firstName + ' ' + jsonObject[record].reimbursement.employee.lastName + '\n' +
           '(' + jsonObject[record].notifiee.firstName + ' ' + jsonObject[record].notifiee.lastName + ' just gave their approval)'
         : 'Request '+ jsonObject[record].id +' Approved!'

@@ -191,9 +191,9 @@ INSERT INTO CLEARANCES VALUES(3, 3, 3, 2);
 INSERT INTO CLEARANCES VALUES(2, 1, 1, 1);
 INSERT INTO CLEARANCES VALUES(1, 1, 1, 1);
 
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1, '', '');
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0, '', '');
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0, '', '');
+--INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1, '', '');
+--INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0, '', '');
+--INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0, '', '');
 
 COMMIT;
 

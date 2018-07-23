@@ -33,6 +33,7 @@ function getReimbursementRequests(userInfo){
             for(record in jsonObject){
                 let row = document.createElement('tr');
                 let td1 = document.createElement('td');
+                let td1a = document.createElement('td');
                 let td2 = document.createElement('td');
                 let td3 = document.createElement('td');
                 let td4 = document.createElement('td');
@@ -41,6 +42,7 @@ function getReimbursementRequests(userInfo){
                 let td7 = document.createElement('td');
                 let td8 = document.createElement('td');
                 td1.setAttribute("style", "text-align:center");
+                td1a.setAttribute("style", "text-align:center");
                 td2.setAttribute("style", "text-align:center");
                 td3.setAttribute("style", "text-align:center");
                 td4.setAttribute("style", "text-align:center");
@@ -50,6 +52,8 @@ function getReimbursementRequests(userInfo){
                 td8.setAttribute("style", "text-align:center");
                 let a1 = document.createElement('a');
                 let td1t = document.createTextNode(jsonObject[record]['id']);
+                let date = jsonObject[record]['date'];
+                let td1at = document.createTextNode(date.monthValue + "/" + date.dayOfMonth + "/" + date.year);
                 let td2t = document.createTextNode(jsonObject[record]['eventType']['description']);
                 let td3t = document.createTextNode(jsonObject[record]['description']);
                 let td4t = document.createTextNode(jsonObject[record]['location']);
@@ -83,6 +87,7 @@ function getReimbursementRequests(userInfo){
                 div.appendChild(button);
                 div.appendChild(innerDiv);
                 td1.appendChild(td1t);
+                td1a.appendChild(td1at);
                 td2.appendChild(td2t);
                 td3.appendChild(td3t);
                 td4.appendChild(td4t);
@@ -97,6 +102,7 @@ function getReimbursementRequests(userInfo){
                     td8.appendChild(p);
                 }
                 row.appendChild(td1);
+                row.appendChild(td1a);
                 row.appendChild(td2);
                 row.appendChild(td3);
                 row.appendChild(td4);

@@ -45,7 +45,7 @@ public class NotificationService {
             bean.setAtDeptHead(false);
             bean.setAtBenCo(false);
             bean.setNotifiee(bean.getReimbursement().getEmployee());
-            bean.setApprovalCount(-1);  //will become 0 prior to insertion
+            bean.setApprovalCount(-2);  //will become -1 prior to insertion, 0 upon reaching supervisor.
             bean.setAdditionalInfo(text);
             return new NotificationDaoImpl().updateNotifiee(bean);
         }
@@ -77,7 +77,6 @@ public class NotificationService {
 
         }
         else{
-            System.out.println("Checkpoint");
             bean.setAtSupervisor(true);
             bean.setAtDeptHead(false);
             bean.setAtBenCo(false);

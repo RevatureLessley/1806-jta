@@ -51,6 +51,7 @@ public class EmploymentServlet extends HttpServlet {
 
             if (EmployeeService.addEmployee(id, firstname, lastname, password, phoneNum, email, 0,0, getSupervisor(), getDeptHead(), getBenCo())){
                 req.getSession();   //create a new session;
+                req.getSession().setAttribute("employeeId", id);
                 LogWrapper.log(this.getClass(), "Logging user in.");
                 resp.sendRedirect("/user/home.html"); //sendRedirect to invalidate sensitive information
             }
