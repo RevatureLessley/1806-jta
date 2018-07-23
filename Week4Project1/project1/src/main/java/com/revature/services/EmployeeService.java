@@ -47,7 +47,15 @@ public class EmployeeService
 	public Integer getCurrencyByAccountname(String accountname)
 	{
 		EmployeeDao ed = new EmployeeDao();
-		return ed.selectAmountLeftByAccountName(accountname);
+		return ((getAmountInAccountByAccountname(accountname))-(ed.selectAmountLeftByAccountName(accountname)));
+	}
+	
+	public Integer getAmountInAccountByAccountname(String accountName)
+	{
+		EmployeeDao ed = new EmployeeDao();
+		Integer amountInAccount = 0;
+		amountInAccount = ed.selectAmountInAccount(accountName);
+		return amountInAccount;
 	}
 	
 	public boolean updateCurrencyById(Employee employee, Integer id, Integer amountLeft)

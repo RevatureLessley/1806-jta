@@ -184,15 +184,15 @@ INSERT INTO documents
 VALUES (null, null, null);
 
 INSERT INTO employee
-VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 600, 1);
+VALUES (null, 'loganbrewer', 'password', 'Logan', 'Brewer', 'logan@logan.com', 1000, 1);
 INSERT INTO employee
-VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 700, 2);
+VALUES (null, 'supervisor', 'password', 'Supervisor', 'Guy', 'surpervisor@supervisor.com', 1000, 2);
 INSERT INTO employee
-VALUES (null, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 800, 3);
+VALUES (null, 'dephead', 'password', 'Department', 'Head', 'dephead@dephead.com', 1000, 3);
 INSERT INTO employee
-VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 800, 4);
+VALUES (null, 'both', 'password', 'Both', 'Things', 'both@both.com', 1000, 4);
 INSERT INTO employee
-VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 900, 5);
+VALUES (null, 'benco', 'password', 'Ben', 'Co', 'benco@benco.com', 1000, 5);
 
 INSERT INTO reimbursement
 VALUES (null, '01-JAN-2018', '00:00', 'Arlington, TX', 'employee declined', 100, 'emp declined', 0, 0, 1, 5, 1, null, 0);

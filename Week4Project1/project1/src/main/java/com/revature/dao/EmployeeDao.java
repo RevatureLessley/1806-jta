@@ -110,6 +110,42 @@ public class EmployeeDao
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String sql = "SELECT SUM(reimbursement.event_cost) FROM employee\r\n" + 
+				"INNER JOIN reimbursement\r\n" + 
+				"ON employee.emp_id = reimbursement.emp_id\r\n" + 
+				"WHERE employee.emp_accountname = ? AND \r\n" + 
+				"(reimbursement.approval_id = 1 OR \r\n" + 
+				"reimbursement.approval_id = 2 OR \r\n" + 
+				"reimbursement.approval_id = 3 OR \r\n" + 
+				"reimbursement.approval_id = 4 OR \r\n" + 
+				"reimbursement.approval_id = 5)";
+		
+		try(Connection conn = Connections.getConnection())
+		{
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, accountName);
+			rs = ps.executeQuery();
+			while(rs.next())
+			{
+				return rs.getInt(1);
+			}	
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(ps);
+		}
+		return null;
+	}
+	
+	public Integer selectAmountInAccount(String accountName)
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		String sql = "SELECT amount_left FROM employee WHERE emp_accountname = ?";
 		
 		try(Connection conn = Connections.getConnection())
