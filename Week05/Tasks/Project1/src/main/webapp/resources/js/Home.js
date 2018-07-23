@@ -30,7 +30,6 @@ function getReimbursementRequests(userInfo){
         if (xhr.readyState == 4){
             let jsonObject = JSON.parse(xhr.response);
             let table = document.getElementById('reimbursement-table');
-            console.log(jsonObject);
             for(record in jsonObject){
                 let row = document.createElement('tr');
                 let td1 = document.createElement('td');
@@ -49,24 +48,40 @@ function getReimbursementRequests(userInfo){
                 td6.setAttribute("style", "text-align:center");
                 td7.setAttribute("style", "text-align:center");
                 td8.setAttribute("style", "text-align:center");
-                let a = document.createElement('a');
+                let a1 = document.createElement('a');
                 let td1t = document.createTextNode(jsonObject[record]['id']);
                 let td2t = document.createTextNode(jsonObject[record]['eventType']['description']);
                 let td3t = document.createTextNode(jsonObject[record]['description']);
                 let td4t = document.createTextNode(jsonObject[record]['location']);
                 let td5t = document.createTextNode(jsonObject[record]['gradingFormat']);
-                let td6t = document.createTextNode('$' + jsonObject[record]['reimbursement']);
+                let td6t = document.createTextNode('$' + parseFloat(jsonObject[record]['reimbursement']).toFixed(2));
                 let value = jsonObject[record]['status'];
                 let string = "Pending";
                 if (value == 1) string = "Yes";
                 else if (value == 2) string = "No";
                 let td7t = document.createTextNode(string);
                 let td8t = document.createTextNode(jsonObject[record]['fileUrl']);
-                a.setAttribute("class", "nav-link");
+                a1.setAttribute("class", "nav-link");
                 arrayPic[record] = jsonObject[record]['fileUrl'];
-                a.setAttribute("onclick", "displayModal("+record+");return false;");
-                a.setAttribute("href", "#");
-                a.innerHTML = "View Attachment";
+                a1.setAttribute("onclick", "displayModal("+record+");return false;");
+                a1.setAttribute("href", "#");
+                a1.innerHTML = "Preview Attachment";
+                let a2 = document.createElement('a');
+                a2.setAttribute("download", jsonObject[record]['fileName']);
+                a2.setAttribute("href", jsonObject[record]['fileUrl']);
+                a2.innerHTML = "Download";
+                let div = document.createElement('div');
+                div.setAttribute('class', 'file-dropdown');
+                let button = document.createElement('button');
+                button.setAttribute("class", "file-dropbtn");
+                button.innerHTML = jsonObject[record]['fileName'];
+                let innerDiv = document.createElement('div');
+                innerDiv.setAttribute("class", "file-dropdown-content");
+                innerDiv.setAttribute("style", "text:align:center");
+                innerDiv.appendChild(a1);
+                innerDiv.appendChild(a2);
+                div.appendChild(button);
+                div.appendChild(innerDiv);
                 td1.appendChild(td1t);
                 td2.appendChild(td2t);
                 td3.appendChild(td3t);
@@ -74,7 +89,13 @@ function getReimbursementRequests(userInfo){
                 td5.appendChild(td5t);
                 td6.appendChild(td6t);
                 td7.appendChild(td7t);
-                td8.appendChild(a);
+                if (jsonObject[record]['fileName']){td8.appendChild(div);}
+                else {
+                    let p = document.createElement('p');
+                    p.setAttribute("style", "font-style:italic;");
+                    p.innerHTML = "No file uploaded"
+                    td8.appendChild(p);
+                }
                 row.appendChild(td1);
                 row.appendChild(td2);
                 row.appendChild(td3);

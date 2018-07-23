@@ -62,7 +62,8 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
                         rs.getString("grading_format"),
                         rs.getInt("event_type"),
                         rs.getInt("status"),
-                        sb.toString()
+                        sb.toString(),
+                        rs.getString("file_name")
                 );
                 beanList.add(bean);
             }
@@ -120,7 +121,8 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
                         rs.getString("grading_format"),
                         rs.getInt("event_type"),
                         rs.getInt("status"),
-                        sb.toString()
+                        sb.toString(),
+                        rs.getString("file_name")
                 );
                 LogWrapper.log(this.getClass(), "Retrieve Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
                 return bean;
@@ -146,7 +148,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
         CallableStatement statement = null;
 
         try(Connection conn = DatabaseConnection.getConnection()){
-            String sql = "{call Insert_Reimbursement_Request(?,?,?,?,?,?,?,?,?,?,?,?)}";
+            String sql = "{call Insert_Reimbursement_Request(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             statement = conn.prepareCall(sql);
             statement.setNull(1, Types.INTEGER);
             statement.setInt(2, bean.getEmployee().getId());
@@ -158,8 +160,9 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
             statement.setInt(8, bean.getEventType());
             statement.setInt(9, bean.getStatus());
             statement.setCharacterStream(10, new StringReader(bean.getFileUrl()));
-            statement.setNull(11, Types.INTEGER);
-            statement.setInt(12, supervisorId);
+            statement.setString(11, bean.getFileName());
+            statement.setNull(12, Types.INTEGER);
+            statement.setInt(13, supervisorId);
             statement.execute();
             LogWrapper.log(this.getClass(), "Insert Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
             return true;

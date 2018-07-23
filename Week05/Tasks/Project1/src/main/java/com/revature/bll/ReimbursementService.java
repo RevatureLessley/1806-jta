@@ -34,20 +34,25 @@ public class ReimbursementService {
      * @param url the URL of an attached file
      * @return true if insertion was successful, false otherwise
      */
-    public static boolean insertRequest(int id, LocalDate date, String location, String description, double amount, int type, String format, String url){
+    public static boolean insertRequest(int id, LocalDate date, String location, String description, double amount, int type, String format, String url, String fileName){
         //TODO: Do error checking *somehwere* that the employee exists before being able to submit a reimbursement form
         ReimbursementDaoImpl rdao = new ReimbursementDaoImpl();
         EmployeeDaoImpl edao = new EmployeeDaoImpl();
-
         EmployeeBean ebean = edao.retrieveEmployeeById(id);  //pulls from the database
-        if (ebean.getAwardedReimbursements() + ebean.getPendingReimbursements() + amount > MAX_AWARD) return false; //Checks if employee is overdrawing
+
+        EventTypeBean typeBean = retrieveEventType(type);
+        amount = (amount * typeBean.getPercent()) / (double)100;
+
+        double cap = MAX_AWARD - (ebean.getPendingReimbursements() + ebean.getAwardedReimbursements());
+        if (cap == 0) return false; //Reject Employee from submitting
+        if (amount > cap) amount = cap; //Checks if employee is overdrawing
         ebean.setPendingReimbursements(ebean.getPendingReimbursements() + amount);
 
         ReimbursementBean rbean = new ReimbursementBean(
                 id, //this value isn't actually inserted (And that's okay)
                 ebean,
                 date, location, description, amount, format, //TODO: Figure out 'Format?'
-                type, 0, url
+                type, 0, url, fileName
         );
         boolean success = true;
         if (!rdao.insertReimbursementForm(rbean, ebean.getSupervisorId())) success = false;
@@ -98,10 +103,20 @@ public class ReimbursementService {
      * @param eventId the ID of the Event Type
      * @return a String containing the JSON Object of the Event (uses a helper method for the conversion)
      */
-    public static String retrieveEventType(int eventId){
+    public static String retrieveEventTypeJSON(int eventId){
         EventTypeBean bean = new ReimbursementTypeDaoImpl().selectEventType(eventId);
         return eventTypeToJson(bean);
     }
+
+    /**
+     * Asks the DAL for an EventType Bean of the supplied eventID
+     * @param eventId the Event Type requested
+     * @return the Event Type Bean of the requested ID
+     */
+    public static EventTypeBean retrieveEventType(int eventId){
+        return new ReimbursementTypeDaoImpl().selectEventType(eventId);
+    }
+
 
     /**
      * A helper method to convert an Event Type to JSON String

@@ -12,7 +12,6 @@ function authenticate(){
     xhr.onreadystatechange = function(){
         if (xhr.readyState == 4){
             let jsonObject = JSON.parse(xhr.response);
-            console.log(jsonObject);
             var validCredentials = false;
             for (record in jsonObject){
                 if (jsonObject[record].email == username){
@@ -29,7 +28,6 @@ function authenticate(){
 
             }
             if (!validCredentials){
-                console.log("How unfortunate.");
                 let errorText = document.createTextNode("Username or password is incorrect.");
                 let errorDiv = document.createElement('div');
                 errorDiv.setAttribute("class", "alert alert-danger");
@@ -37,7 +35,6 @@ function authenticate(){
                 errorDiv.appendChild(errorText);
                 document.getElementById("password").appendChild(errorDiv);
             }
-            else console.log("Yippee!");
         }
     }
     xhr.open("GET", "../GetAllEmployees.Servlet");

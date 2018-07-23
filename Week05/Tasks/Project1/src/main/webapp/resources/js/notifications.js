@@ -17,7 +17,7 @@ function populateTable(){
                 let data = [
                 jsonObject[record].id,
                 jsonObject[record].reimbursement.employee.firstName +" "+ jsonObject[record].reimbursement.employee.lastName,
-                '$' + jsonObject[record].reimbursement.reimbursement,
+                '$' + parseFloat(jsonObject[record].reimbursement.reimbursement).toFixed(2),
                 jsonObject[record].reimbursement.eventType.description,
                 jsonObject[record].reimbursement.description,
                 jsonObject[record].reimbursement.location,
@@ -25,7 +25,7 @@ function populateTable(){
                 ];
 
                 let tr = document.createElement('tr');
-                for (var i = 0; i < 6; i++){
+                for (var i = 0; i < 7; i++){
                     let td = document.createElement('td');
                     td.setAttribute("style", "text-align:center");
                     let element = document.createTextNode(data[i]);
@@ -34,13 +34,36 @@ function populateTable(){
                 }
                 let td = document.createElement('td');
                 td.setAttribute("style", "text-align:center");
+
                 let a = document.createElement('a');
                 a.setAttribute("class", "nav-link");
                 arrayPic[record] = jsonObject[record].reimbursement.fileUrl;
                 a.setAttribute("onclick", "displayModal("+record+");return false;");
                 a.setAttribute("href", "#");
-                a.innerHTML = "View Attachment";
-                td.appendChild(a);
+                a.innerHTML = "Preview Attachment";
+                let a2 = document.createElement('a');
+                a2.setAttribute("download", jsonObject[record].reimbursement['fileName']);
+                a2.setAttribute("href", jsonObject[record].reimbursement['fileUrl']);
+                a2.innerHTML = "Download";
+                let div = document.createElement('div');
+                div.setAttribute('class', 'file-dropdown');
+                let button = document.createElement('button');
+                button.setAttribute("class", "file-dropbtn");
+                button.innerHTML = jsonObject[record].reimbursement['fileName'];
+                let innerDiv = document.createElement('div');
+                innerDiv.setAttribute("class", "file-dropdown-content");
+                innerDiv.setAttribute("style", "text:align:center");
+                innerDiv.appendChild(a);
+                innerDiv.appendChild(a2);
+                div.appendChild(button);
+                div.appendChild(innerDiv);
+                if (jsonObject[record].reimbursement['fileName']){td.appendChild(div);}
+                else {
+                    let p = document.createElement('p');
+                    p.setAttribute("style", "font-style:italic;");
+                    p.innerHTML = "No file uploaded"
+                    td.appendChild(p);
+                }
                 tr.appendChild(td);
 
                 let td2 = document.createElement('td');
@@ -50,12 +73,15 @@ function populateTable(){
                 but1.setAttribute('type', 'button');
                 but1.setAttribute('id', 'button'+record+'A');
                 but1.setAttribute('onclick', 'approveButton('+record+')');
+                but1.setAttribute("style", "margin:5px");
                 but1.innerHTML = "Approve";
                 but2.setAttribute('type', 'button');
                 but2.setAttribute('id', 'button'+record+'B');
                 but2.setAttribute('onclick', 'denyButton('+record+')');
+                but2.setAttribute("style", "margin:5px");
                 but2.innerHTML = "Deny";
                 td2.appendChild(but1);
+
                 td2.appendChild(but2);
                 tr.appendChild(td2);
                 table.appendChild(tr);
@@ -76,8 +102,8 @@ function approveButton(record){
     var iconImg = (approves < 2) ? '../resources/icons/info_icon.png' : '../resources/icons/approved_icon.png'
     var message = (approves < 2)
         ? 'New reimbursement request from '+ jsonObject[record].reimbursement.employee.firstName + ' ' + jsonObject[record].reimbursement.employee.lastName + '\n' +
-          '(' + jsonObject[record].notifiee.firstName + ' ' + jsonObject[record].notifiee.lastName + ' just gave their approval)';
-        : 'Request '+ jsonObject[record].id +' Appoved!'
+          '(' + jsonObject[record].notifiee.firstName + ' ' + jsonObject[record].notifiee.lastName + ' just gave their approval)'
+        : 'Request '+ jsonObject[record].id +' Approved!'
     var notification = new Notification('Snailsforce', { body: message, icon: iconImg});
     setTimeout(notification.close.bind(notification), 8000);
     let xhr = new XMLHttpRequest();

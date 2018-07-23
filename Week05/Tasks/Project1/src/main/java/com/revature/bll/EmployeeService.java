@@ -52,6 +52,15 @@ public class EmployeeService {
     }
 
     /**
+     * Calls the DAL to retrieve an Employee from the database, based on the supplied ID
+     * @param id the ID of the Employee being retrieved
+     * @return the Employee associated with the ID
+     */
+    public static EmployeeBean getEmployeeById(int id){
+        return new EmployeeDaoImpl().retrieveEmployeeById(id);
+    }
+
+    /**
      * Helper method to grab all the Employees from the database.
      * @return An ArrayList of EmployeeBean Objects; all the Employees in the database
      */

@@ -1,32 +1,60 @@
+rejectRequest = false;
 
 function onTypeSelected(cost){
+    let e = null;
+    if( e = document.getElementById("atCap")) e.remove();
     let thing = document.getElementById("type");
-
     xhr = new XMLHttpRequest();
     let type = document.getElementById("type").selectedIndex;
 
     xhr.onreadystatechange = function(){
         if (xhr.readyState == 4){
             let json = JSON.parse(xhr.response);
-            let expected = json.percent * cost / 100.0;
-            let output = document.getElementById('expected-return');
-            output.value = expected.toFixed(2);
+            xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4){
+                    let jsonObject = JSON.parse(xhr.response);
+                    let expected = json.percent * cost / 100.0;
+                    let cap = 1000 - (parseFloat(jsonObject.pendingReimbursements) + parseFloat(jsonObject.awardedReimbursements));
+                    if (cap == 0) rejectRequest = true;
+                    if (expected > cap) {
+                        expected = cap;
+                        let text = document.createTextNode("You are at your reimbursement cap of $1000.");
+                        let div = document.createElement('div');
+                        div.setAttribute("class", "alert alert-warning");
+                        div.setAttribute("id", "atCap");
+                        div.appendChild(text);
+                        document.getElementById("list-item-amounts").appendChild(div);
+                    }
+                    let output = document.getElementById('expected-return');
+                    output.value = expected.toFixed(2);
+                }
+            }
+            xhr.open("GET", "../GetEmployee.Servlet");
+            xhr.send();
         }
     }
-
-
     xhr.open("POST", "../GetReimbursementTypes.Servlet");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send('&type='+type);
 }
 
-function onSubmitClicked(date, location, description, cost, file){
+function onSubmitClicked(date, location, description, cost, file, filename){
     let xhr = {};
     function sendForm(data){
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4){
                 document.write(xhr.response);
+                xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(){
+                    if (xhr.readyState == 4){
+                        let json = JSON.parse(xhr.response);
+                        sendNotification(json.firstName + ' ' + json.lastName);
+                    }
+                }
+                xhr.open("GET", "../GetEmployee.Servlet");
+                xhr.send();
             }
         }
         let type = document.getElementById("type").selectedIndex;
@@ -39,7 +67,8 @@ function onSubmitClicked(date, location, description, cost, file){
             'cost=' +cost+ '&' +
             'type=' +type+ '&' +
             'format=' +format+ '&' +
-            'picUrl='+data);
+            'picUrl='+data+ '&' +
+            'fileName='+filename);
     }
     if (file) {
         var reader = new FileReader();
@@ -52,33 +81,16 @@ function onSubmitClicked(date, location, description, cost, file){
     else {
         sendForm('');
     }
-    let xhr2 = new XMLHttpRequest();
-    xhr2.onreadystatechange = function(){
-        if (Notification.permission === "granted") {
-            if (xhr2.readyState == 4){
-                let jsonObject1 = JSON.parse(xhr2.response);
-                let xhr3 = new XMLHttpRequest();
-                xhr3.onreadystatechange = function(){
-                    if (xhr3.readyState == 4){
-                        let jsonObject2 = JSON.parse(xhr3.response);
-                        for (employee in jsonObject2){
-                            if (jsonObject2[employee].id == jsonObject1['data'][0].employeeId){
-                                var notification = new Notification('Snailsforce', { body: 'New reimbursement request from '+ jsonObject2[employee].firstName + ' ' + jsonObject2[employee].lastName,
-                                    icon: '../resources/icons/info_icon.png'});
-                                setTimeout(notification.close.bind(notification), 8000);
-                            }
-                        }
-                    }
-                }
-                xhr3.open("GET", "../GetAllEmployees.Servlet");
-                xhr3.send();
-            }
-        }
+
+}
+
+function sendNotification(from){
+    if (Notification.permission === "granted") {
+        var notification = new Notification('Snailsforce', {
+        body: 'New reimbursement request from '+ from,
+        icon: '../resources/icons/info_icon.png'});
+        setTimeout(notification.close.bind(notification), 4000);
     }
-    xhr2.open("GET", "../Session.Servlet");
-    xhr2.send();
-
-
 }
 
 

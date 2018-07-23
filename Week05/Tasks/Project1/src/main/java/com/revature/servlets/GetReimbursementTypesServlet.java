@@ -27,7 +27,7 @@ public class GetReimbursementTypesServlet extends HttpServlet {
         try{
             index = Integer.parseInt(eventTypeIndex);
         }catch(NumberFormatException e){LogWrapper.log(this.getClass(), e);}
-        String json = ReimbursementService.retrieveEventType(++index);  //convert from 0-based(html) to 1-based(database)
+        String json = ReimbursementService.retrieveEventTypeJSON(++index);  //convert from 0-based(html) to 1-based(database)
         resp.setContentType("text");
         PrintWriter out = resp.getWriter();
         out.println(json);

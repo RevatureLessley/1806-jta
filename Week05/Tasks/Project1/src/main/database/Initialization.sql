@@ -36,6 +36,7 @@ CREATE TABLE Reimbursement_Requests (
     event_type number(1) NOT NULL,
     status number(1) NOT NULL,
     optional_file clob,
+    file_name varchar2(100),
     CONSTRAINT fk_employee_id FOREIGN KEY (employee_id) REFERENCES Employees (employee_id),
     CONSTRAINT fk_event_type FOREIGN KEY (event_type) REFERENCES Reimbursement_Types (reimbursement_id)
 );
@@ -138,6 +139,14 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE TRIGGER On_Delete_Reimb
+BEFORE DELETE ON Reimbursement_Requests
+FOR EACH ROW
+BEGIN
+    DELETE FROM Pending_Notifications WHERE request_id = Pending_Notifications.request_id;
+END;
+/
+
 CREATE OR REPLACE PROCEDURE Delete_Employee(in_id IN number)
 IS
 BEGIN
@@ -157,11 +166,12 @@ CREATE OR REPLACE PROCEDURE Insert_Reimbursement_Request(request_id IN number,
                                                          event_type IN number,
                                                          status IN number,
                                                          opt_file IN clob,
+                                                         file_name IN varchar,
                                                          notification_id IN number,
                                                          supervisor_id IN number)
 IS
 BEGIN
-    INSERT INTO Reimbursement_Requests VALUES (request_id, employee_id, date_request, location, description, amount, format, event_type, status, opt_file);
+    INSERT INTO Reimbursement_Requests VALUES (request_id, employee_id, date_request, location, description, amount, format, event_type, status, opt_file, file_name);
     INSERT INTO Pending_Notifications VALUES (notification_id, Reimbursement_Id_Inc.CURRVAL, supervisor_id, 1,0,0,0);
 END;
 /
@@ -179,9 +189,9 @@ INSERT INTO CLEARANCES VALUES(3, 3, 3, 2);
 INSERT INTO CLEARANCES VALUES(2, 1, 1, 1);
 INSERT INTO CLEARANCES VALUES(1, 1, 1, 1);
 
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1, '');
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0, '');
-INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0, '');
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(1, 4, to_date('03/14/2005', 'mm/dd/yyyy'), 'Virginia', 'Boss Training', 127.39, 'Format?', 5, 1, '', '');
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(2, 5, to_date('06/22/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Training', 89.24, 'Format?', 5, 0, '', '');
+INSERT INTO REIMBURSEMENT_REQUESTS VALUES(3, 5, to_date('08/15/2017', 'mm/dd/yyyy'), 'Texas', 'Employee Certification', 12.99, 'Format?', 4, 0, '', '');
 
 COMMIT;
 
@@ -190,7 +200,7 @@ COMMIT;
 --INSERT INTO PENDING_NOTIFICATIONS VALUES (2, 3, 4, 1, 0, 0) ;
 
 
-SELECT * FROM EMPLOYEES
+SELECT * FROM EMPLOYEES ;
 SELECT * FROM REIMBURSEMENT_REQUESTS ;
 SELECT * FROM CLEARANCES ;
 SELECT * FROM Complete_Employee ;

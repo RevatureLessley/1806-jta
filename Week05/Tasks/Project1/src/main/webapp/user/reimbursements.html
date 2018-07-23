@@ -35,9 +35,9 @@
                             <li><b>State</b></li>
                             <li><input type="text" name="location"></li>
                             <li><b>Description</b></li>
-                            <li><input type="text" name="description"></li>
+                            <li><input type="text" name="description" size="46"></li>
                             <li style="white-space:pre"><b>Cost</b>                                   <b>Expected Return</b></li>
-                            <li><input type="number" onblur="return onTypeSelected(cost.value)" step="0.01" name="cost"> <input type="number" step="0.01" name="expected-return" id="expected-return" readonly></li>
+                            <li id="list-item-amounts"><input type="number" onblur="return onTypeSelected(cost.value)" step="0.01" name="cost"> <input type="number" step="0.01" name="expected-return" id="expected-return" readonly></li>
                             <li><b>Event Type</b></li>
                             <li><select name="type" id="type" onchange="return onTypeSelected(cost.value)" required>
                                 <!-- TODO: fill these dynamically -->
@@ -64,7 +64,7 @@
                                 <input type="button" value="Preview" onclick="displayModal(file.files[0])">
                             </li>
                             <li><br/></li>
-                            <li><button type="button" onclick="return onSubmitClicked(date.value, location.value, description.value, cost.value, file.files[0])">Submit</button>
+                            <li><button type="button" onclick="return onSubmitClicked(date.value, location.value, description.value, cost.value, file.files[0], file.value)">Submit</button>
                                 <input type="reset" value="Reset">
                             </li>
                         </ul>
