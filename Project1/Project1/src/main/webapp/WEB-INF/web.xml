@@ -78,4 +78,14 @@
     <servlet-name>CreateReqServlet</servlet-name>
     <url-pattern>/CreateReqServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveServlet</display-name>
+    <servlet-name>ApproveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveServlet</servlet-name>
+    <url-pattern>/ApproveServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

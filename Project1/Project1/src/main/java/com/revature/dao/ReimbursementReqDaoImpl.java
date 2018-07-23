@@ -263,7 +263,7 @@ public class ReimbursementReqDaoImpl {
 	{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM reimbursement WHERE req_id = ?";
+		String sql = "SELECT * FROM reimbursement WHERE reimbursement_id = ?";
 		
 		try(Connection conn = Connections.getConnection())
 		{

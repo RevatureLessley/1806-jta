@@ -48,7 +48,7 @@ function getReqs()
 				let But = document.createElement('button');
 				let btn = document.createTextNode("Approve");
 				But.addEventListener("click", function(){
-					approve(data[index]["eventId"]);
+					approve(data[index]["reimbursementId"]);
 				});
 				But.appendChild(btn);
 				td5.appendChild(But);
@@ -64,6 +64,13 @@ function getReqs()
 	xhr.send();
 }
 
-function approve()
+function approve(id)
 {
+	let xhr = new XMLHttpRequest();
+	//Use the servlet url mapping for your url
+	//when hitting it with AJAX.
+	let url = "ApproveServlet";
+	xhr.open("POST", url) //Or GET
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("param1=" + id);
 	}
