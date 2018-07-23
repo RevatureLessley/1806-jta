@@ -101,7 +101,12 @@ begin
     end loop;
 end;
 /
-
+select * from project_1_role;
+select role_name from (select * from project_1_role inner join project_1_role_relationship on employee_role = role_number);
+exec insertAdmin('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
+exec insertSupervisor('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
+exec insertDepartmentHead('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
+exec insertBenefitsCoordinator('80d60e04-bcd0-42be-a5d8-b9a4ff4d12c4');
 select * from project_1_reimbursement_form;
 select * from project_1_user;
 alter table project_1_user modify email varchar2(100);

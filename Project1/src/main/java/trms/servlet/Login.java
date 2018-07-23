@@ -2,6 +2,7 @@ package trms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import trms.beans.User;
 import trms.dao.UserDAO;
@@ -53,6 +56,11 @@ public class Login extends HttpServlet {
 			response.addCookie(new Cookie("name", isLoggedIn.getFirstName()));
 			response.addCookie(new Cookie("last", isLoggedIn.getLastName()));
 			response.addCookie(new Cookie("email", isLoggedIn.getEmail()));
+			
+			List<String> roles = userDAO.getRolesUserHas(user.getUuid());
+			for (String role : roles) {
+				response.addCookie(new Cookie(role.replaceAll(" ", ""), user.getUuid()));
+			}
 			
 			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
 			rs.forward(request, response);

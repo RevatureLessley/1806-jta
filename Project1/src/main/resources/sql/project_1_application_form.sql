@@ -163,6 +163,38 @@ begin
     update project_1_reimbursement_form set supervisor_comments = supervisorComments where form_uuid = formUUID;
 end;
 /
+-- benco_comments
+create or replace procedure getBenCoComments(formUUID in varchar2,
+                                             benCoComments out varchar2)
+is
+begin
+    select benco_comments into benCoComments from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateBenCoComments(formUUID in varchar2,
+                                                benCoComments in varchar2)
+is
+begin
+    update project_1_reimbursement_form set benco_comments = benCoComments where form_uuid = formUUID;
+end;
+/
+-- department_head_comments
+create or replace procedure getDeptHeadComments(formUUID in varchar2,
+                                                deptHeadComments out varchar2)
+is
+begin
+    select department_head_comments into deptHeadComments from project_1_reimbursement_form where form_uuid = formUUID;
+end;
+/
+
+create or replace procedure updateDeptHeadComments(formUUID in varchar2,
+                                                   deptHeadComments in varchar2)
+is
+begin
+    update project_1_reimbursement_form set department_head_comments = deptHeadComments where form_uuid = formUUID;
+end;
+/
 
 -- formComments
 create or replace procedure getFormComments(formUUID in varchar2,

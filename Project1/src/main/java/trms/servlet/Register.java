@@ -2,6 +2,7 @@ package trms.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -64,7 +65,6 @@ public class Register extends HttpServlet {
 			response.addCookie(new Cookie("name", creationSuccess.getFirstName()));
 			response.addCookie(new Cookie("last", creationSuccess.getLastName()));
 			response.addCookie(new Cookie("email", creationSuccess.getEmail()));
-			
 			rs.forward(request, response);
 		} else {
 			out.println("An error occurred while creating the user account.");

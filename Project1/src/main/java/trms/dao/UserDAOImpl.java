@@ -251,4 +251,30 @@ public class UserDAOImpl extends Connection implements UserDAO {
 			return uuid;
 		}
 	}
+
+	@Override
+	public List<String> getRolesUserHas(String uuid) {
+		ArrayList<String> roles = new ArrayList<String>();
+		
+		java.sql.Connection connection = this.getConnection();
+		
+		try {
+			CallableStatement callableStatement = connection.prepareCall("call selectRolesUserHas(?,?)");
+			callableStatement.setString(1, uuid);
+			callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+			callableStatement.execute();
+			
+			ResultSet rs = (ResultSet) callableStatement.getObject(2);
+			
+			while(rs.next()) {
+				roles.add(rs.getString(1));
+			}
+			return roles;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			return null;
+		} finally {
+			close(connection);
+		}
+	}
 }

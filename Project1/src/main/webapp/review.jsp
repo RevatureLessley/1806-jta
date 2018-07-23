@@ -5,6 +5,37 @@
 <%@page import="trms.dao.ApplicationFormDAOImpl" %>
 <%@page import="trms.beans.ApplicationForm" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	  <% 
+	   Cookie[] cookies = request.getCookies();
+	   String name = "";
+	   boolean isAdmin = false;
+	   boolean isBenefitsCoordinator = false;
+	   boolean isDirectSupervisor = false;
+	   boolean isDepartmentHead = false;
+	   if (cookies != null) {
+		   for (Cookie cookie : cookies) {
+			   	String cookieName = cookie.getName();
+			   	switch (cookieName) {
+			   		case "name":
+			   			name = cookie.getValue();
+			   		break;
+			   		case "Admin":
+			   			isAdmin = true;
+			   		break;
+			   		case "BenefitsCoordinator":
+			   			isBenefitsCoordinator = true;
+			   		break;
+			   		case "Supervisor":
+			   			isDirectSupervisor = true;
+			   		break;
+			   		case "DepartmentHead":
+			   			isDepartmentHead = true;
+			   		break;
+			   		default:
+			   		break;
+			   	}
+		   }
+	   }%>
 	<form method="post" action="Review">
     <c:if test="${not empty selectedForm}">
 	<%  String formUUID = request.getParameter("form");
@@ -21,7 +52,7 @@
 	<textarea cols="90" rows="25" name="formComments" id="formComments"><%=formComments %></textarea><br/>
 	<% if (request.isUserInRole("Admin")) { %>
 	<% } %>
-	<% if (request.isUserInRole("Benefits Coordinator")) { %>
+	<% if (isBenefitsCoordinator) { %>
 	<textarea cols="90" rows="25" name="benCoComments" id="benCoComments"><%=benCoComments %></textarea><br/>
 	<label for="approve">approve</label>
 		<input type="radio" id="approve" name="benCoApproval" value="YES" /><br/>	
@@ -29,16 +60,16 @@
 		<input type="radio" id="deny" name="benCoApproval" value="NO" required/><br/>
 		<button>update decision</button>
 	<% } %>
-	<% if (request.isUserInRole("Department Head")) { %>
-	<textarea cols="90" rows="25" name="supervisorComments" id="supervisoComments"><%=supervisorComments %></textarea><br/>
+	<% if (isDepartmentHead) { %>
+	<textarea cols="90" rows="25" name="departmentHeadComments" id="supervisoComments"><%=supervisorComments %></textarea><br/>
 		<label for="approve">approve</label>
 		<input type="radio" id="approve" name="deptHeadApproval" value="YES" /><br/>	
 		<label for="deny">deny</label>
 		<input type="radio" id="deny" name="deptHeadApproval" value="NO" required/><br/>
 		<button>update decision</button>
 	<% } %>
-	<% if (request.isUserInRole("Direct Supervisor")) { %>
-	<textareacols="90" rows="25" name="departmenHeadComments" id="departmentHeadComments"><%=departmentHeadComments %></textarea><br/>
+	<% if (isDirectSupervisor) { %>
+	<textareacols="90" rows="25" name="supervisorComments" id="departmentHeadComments"><%=departmentHeadComments %></textarea><br/>
 		<label for="approve">approve</label>
 		<input type="radio" id="approve" name="supervisorApproval" value="YES" /><br/>	
 		<label for="deny">deny</label>

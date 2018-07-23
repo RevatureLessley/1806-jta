@@ -134,6 +134,14 @@ begin
 end;
 /
 
+create or replace procedure selectRolesUserHas (userUUID in varchar2,
+                                                returnCursor out sys_refcursor)
+as
+begin
+    open returnCursor for select role_name from (select * from project_1_role inner join project_1_role_relationship on employee_role = role_number where employee_uuid = userUUID);
+end;
+/
+
 create or replace procedure selectUserByUsername (userHandle in varchar2,
                                                   returnCursor out sys_refcursor)
 is

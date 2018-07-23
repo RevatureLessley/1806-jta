@@ -12,5 +12,6 @@ public interface UserDAO {
 	public User userLoginWithEmail(String email, String password);
 	public boolean updateUser(User user);
 	public boolean registerUser(User user);
+	public List<String> getRolesUserHas(String uuid);
 	public String getUserUUIDByUsername(String username);
 }

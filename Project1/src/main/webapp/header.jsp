@@ -18,6 +18,7 @@
 	  <% 
 	   Cookie[] cookies = request.getCookies();
 	   String name = "";
+	   boolean isAdmin = false;
 	   if (cookies != null) {
 		   for (Cookie cookie : cookies) {
 			   	String cookieName = cookie.getName();
@@ -25,6 +26,8 @@
 			   		case "name":
 			   			name = cookie.getValue();
 			   		break;
+			   		case "Admin":
+			   			isAdmin = true;
 			   		default:
 			   		break;
 			   	}
@@ -72,7 +75,7 @@
 	                     		  <li><%=name%></li>
 		                          <li><a href="Manage">Manage Profile</a></li>
 		                          <li><a href="Logout">Logout</a></li>
-		                          <% if (request.isUserInRole("Admin")) { %>
+		                          <% if (isAdmin) { %>
 		                          <li><a href="#">Modify user accounts</a></li>
 		                          <% } %>
 	                          <% } %>

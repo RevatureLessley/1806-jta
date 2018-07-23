@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
 
+import trms.dao.ApplicationFormDAO;
+import trms.dao.ApplicationFormDAOImpl;
+
 /**
  * Servlet implementation class Review
  */
@@ -43,7 +46,8 @@ public class Review extends HttpServlet {
 		Map params = request.getParameterMap();
 		Enumeration paramNames = request.getParameterNames();
 		List<FileItem> fileItems = null;
-		
+		String formUUID = String.valueOf(request.getParameter("formUUID"));
+		ApplicationFormDAO applicationFormDAO = new ApplicationFormDAOImpl();
 		String title = "Reading Data";
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n");
@@ -53,6 +57,32 @@ public class Review extends HttpServlet {
 		            "<body bgcolor = \"#f0f0f0\">\n" +
 		               "<h1 align = \"center\">" + title + "</h1>\n" +
 		               "<ul>\n");
+	    while (paramNames.hasMoreElements()) {
+	    	String name = (String) paramNames.nextElement();
+	    	String value = String.valueOf(request.getParameter(name));
+	    	
+	    	switch (name) {
+	    	case "benCoComments":
+	    		applicationFormDAO.updateBenefitsCoordinatorComments(formUUID, value);
+	    		break;
+	    	case "benCoApproval":
+	    		applicationFormDAO.updateBenefitsCoordinatorDecision(formUUID, value);
+	    		break;
+	    	case "departmentHeadComments":
+	    		applicationFormDAO.updateBenefitsCoordinatorComments(formUUID, value);
+	    		break;
+	    	case "deptHeadApproval":
+	    		applicationFormDAO.updateDepartmentHeadDecision(formUUID, value);
+	    		break;
+	    	case "supervisorComments":
+	    		applicationFormDAO.updateSupervisorComments(formUUID, value);
+	    		break;
+	    	case "supervisorApproval":
+	    		applicationFormDAO.updateSupervisorDecision(formUUID, value);
+	    		break;
+	    	}
+	    }
+	    
 	    while (paramNames.hasMoreElements()) {
 	    	String name = (String) paramNames.nextElement();
 	    	String value = String.valueOf(request.getParameter(name));

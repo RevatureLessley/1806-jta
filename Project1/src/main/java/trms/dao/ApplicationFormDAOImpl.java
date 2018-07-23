@@ -843,4 +843,36 @@ public class ApplicationFormDAOImpl extends Connection implements ApplicationFor
 			return forms;
 		}
 	}
+
+	@Override
+	public boolean updateBenefitsCoordinatorComments(String formUUID, String comments) {
+		java.sql.Connection connection = this.getConnection();
+		 try {
+			 CallableStatement callableStatement = connection.prepareCall("{call updateBenCoComments(?,?)}");
+			 callableStatement.setString(1, formUUID);
+			 callableStatement.setString(2, comments);
+			 callableStatement.execute();
+			 return true;
+		 } catch (SQLException sqle) {
+			 return false;
+		 } finally {
+				close(connection);
+			}
+	}
+
+	@Override
+	public boolean updateDepartmentHeadComments(String formUUID, String comments) {
+		java.sql.Connection connection = this.getConnection();
+		 try {
+			 CallableStatement callableStatement = connection.prepareCall("{call updateDeptHeadComments(?,?)}");
+			 callableStatement.setString(1, formUUID);
+			 callableStatement.setString(2, comments);
+			 callableStatement.execute();
+			 return true;
+		 } catch (SQLException sqle) {
+			 return false;
+		 } finally {
+				close(connection);
+			}
+	}
 }

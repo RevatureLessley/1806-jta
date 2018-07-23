@@ -43,4 +43,6 @@ public interface ApplicationFormDAO {
 	public boolean updateBenefitsCoordinatorDecision(String formUUID, String decision);
 	public boolean updateSupervisorDecision(String formUUID, String decision);
 	public boolean submitNewApplicationForm(String formUUID, String employeeUUID, String formComments);
+	public boolean updateBenefitsCoordinatorComments(String formUUID, String comments);
+	public boolean updateDepartmentHeadComments(String formUUID, String comments);
 }
