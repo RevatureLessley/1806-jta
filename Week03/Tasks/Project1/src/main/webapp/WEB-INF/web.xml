@@ -176,4 +176,34 @@
     <servlet-name>UserNotificationsServlet</servlet-name>
     <url-pattern>/user/UserNotificationsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchEventDocServlet</display-name>
+    <servlet-name>FetchEventDocServlet</servlet-name>
+    <servlet-class>com.revature.servlet.FetchEventDocServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchEventDocServlet</servlet-name>
+    <url-pattern>/FetchEventDocServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadEventDocServlet</display-name>
+    <servlet-name>DownloadEventDocServlet</servlet-name>
+    <servlet-class>com.revature.servlet.DownloadEventDocServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadEventDocServlet</servlet-name>
+    <url-pattern>/DownloadEventDocServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CalcReimbServlet</display-name>
+    <servlet-name>CalcReimbServlet</servlet-name>
+    <servlet-class>com.revature.servlet.CalcReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CalcReimbServlet</servlet-name>
+    <url-pattern>/CalcReimbServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

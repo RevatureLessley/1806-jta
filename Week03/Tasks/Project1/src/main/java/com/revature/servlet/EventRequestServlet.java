@@ -94,17 +94,7 @@ public class EventRequestServlet extends HttpServlet {
 			System.out.println(fileName);
 			InputStream fileContent = filePart.getInputStream();
 
-			// ... (do your job here)
-			// byte[] buffer = new byte[fileContent.available()];
-			// fileContent.read(buffer);
-			// System.out.println(buffer);
-			// File targetFile = new File(path + fileName);
-			// System.out.println(targetFile.getPath());
-			// OutputStream outStream = new FileOutputStream(targetFile);
-			// outStream.write(buffer);
-			// outStream.close();
-
-			//EventRequestService.submitImage(event, fileName, fileContent, 0);
+			EventRequestService.submitImage(event, fileName, fileContent, 0);
 		}
 		
 		response.sendRedirect("./requestSuccess.html");

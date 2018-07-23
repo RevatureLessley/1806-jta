@@ -1,7 +1,5 @@
 function fillEventData(data) {
 
-	console.log(data);
-
 	document.getElementById("eventName").innerHTML = data["name"];
 	document.getElementById("eventId").innerHTML = data["id"];
 	document.getElementById("eventStatus").innerHTML = data["status"];
@@ -17,10 +15,11 @@ function fillEventData(data) {
 	document.getElementById("description").innerHTML = data["event"]["description"];
 	document.getElementById("justification").innerHTML = data["event"]["justification"];
 
+	fetchDocuments(data["id"])
 }
 
 function fillEventManageData(data, empData) {
-	console.log(data["phase"]);
+
 	if (data["phase"] == "Approval")
 		fillApprovalPhaseData(data, empData);
 	if (data["status"] == "UnConfirmed") {
@@ -72,7 +71,6 @@ function fillConfirmationPhaseData(data, empData) {
 			&& empData["typeName"] == "Department Head") {
 		// show to department head
 		addFromTemplate("eventconfirm", "#container");
-		
 		document.getElementById("eventConfirm").setAttribute("action",
 				"eventConfirm.do?eventId=" + data["id"])
 	}
@@ -80,7 +78,6 @@ function fillConfirmationPhaseData(data, empData) {
 			&& empData["typeName"] == "Benefits Coordinator") {
 		// show to benco
 		addFromTemplate("eventconfirm", "#container");
-		
 		document.getElementById("eventConfirm").setAttribute("action",
 				"eventConfirm.do?eventId=" + data["id"])
 
@@ -115,7 +112,6 @@ function fillGrades(gradeScale) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			let data = JSON.parse(xhr.response);
-			console.log(data);
 
 			for (i in data) {
 				let t = document.createTextNode(data[i]["name"]);
@@ -132,4 +128,54 @@ function fillGrades(gradeScale) {
 	xhr.open("GET", url);
 	xhr.send();
 
+}
+
+function fetchDocuments(eventId) {
+	let gradeSelect = document.getElementById("gradeSelect");
+
+	let xhr = new XMLHttpRequest();
+	let url = `/Project1/FetchEventDocServlet?eventId=${eventId}`;
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let data = JSON.parse(xhr.response);
+			console.log(data);
+			fillDocuments(data);
+		}
+	}
+
+	xhr.open("GET", url);
+	xhr.send();
+}
+
+function fillDocuments(data) {
+	let documentsEl = document.getElementById("normalDocs");
+	let approveEl = document.getElementById("approvalDoc");
+
+	if (data.length > 0)
+		documentsEl.innerHTML = "";
+
+	for (d in data) {
+
+		let t = document.createTextNode(data[d]["name"]);
+		let a = document.createElement("a");
+		a.setAttribute("href",
+				`/Project1/DownloadEventDocServlet?evdocId=${data[d]["id"]}`)
+		a.setAttribute("download", data[d]["name"]);
+		
+		let dl = document.createElement("i");
+		dl.setAttribute("class", "material-icons mat_middle");
+		a.appendChild(dl);
+		dl.innerHTML = "file_download";
+
+		if (data[d]["docType"] == "preapproval") {
+			approveEl.appendChild(t);
+			approveEl.appendChild(a);
+		} else {
+			let el = document.createElement("li")
+			el.appendChild(t);
+			el.appendChild(a);
+			documentsEl.appendChild(el);
+		}
+	}
 }

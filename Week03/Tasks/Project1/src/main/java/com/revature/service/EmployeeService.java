@@ -39,10 +39,16 @@ public class EmployeeService {
 		return name;
 	}
 
-	public static String getEmployeeBalance(Integer userId) {
+//	public static String getEmployeeBalance(Integer userId) {
+//		EmployeeDao employeeDao = new EmployeeDao();
+//
+//		return StringManip.formatCurrency(employeeDao.selectById(userId).getBalance());
+//	}
+	
+	public static double getEmployeeReimbursemntAvailable(Integer userId) {
 		EmployeeDao employeeDao = new EmployeeDao();
 
-		return StringManip.formatCurrency(employeeDao.selectById(userId).getBalance());
+		return employeeDao.selectById(userId).getReimbursementAvailable();
 	}
 
 	public static String getEmployeeDisplay(Integer userId) {

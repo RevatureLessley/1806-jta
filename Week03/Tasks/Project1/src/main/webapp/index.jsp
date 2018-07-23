@@ -1,8 +1,12 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page import="com.revature.service.EventService"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -16,10 +20,8 @@
 <script src="./resources/js/forms.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<!-- Brand -->
-	<a class="navbar-brand" href="#">Logo</a>
-</nav>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> <!-- Brand -->
+	<a class="navbar-brand" href="#">Logo</a> </nav>
 	<br>
 
 	<div class="container-fluid">
@@ -27,6 +29,7 @@
 			<div class="col-sm-4 rsection">
 				<h3>Login</h3>
 				<form action='Login.do' method="post">
+					<div id="invalidDiv"></div>
 					<div class="form-group">
 						<label for="username">username</label> <input class="form-control"
 							type="text" name="username" required="required">
@@ -42,6 +45,21 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		let invalid =
+	<%String s = request.getParameter("eventId");
+			if (s != null)
+				out.print(1);
+			else
+				out.print(0);%>
+				
+		if (invalid) {
+			let div = document.getElementById("invalidDiv");
+			div.setAttribute("class", "alert alert-danger");
+			div.innerHTML = "invalid username or password";
+		}
+	</script>
 
 
 </body>
