@@ -15,3 +15,17 @@ SDLC -Software Development Life Cycle
 	--Circular Waterfall then deploy at the end
      -Agile
 	--Core Team{BA/SA, Devs, Test}, Scrum Master, {Product Owner(PO), Project Manager(PM)}
+	--Kickoff
+		---meet time
+		---get project overview
+	--Project Planning
+		---determine user stories in the backlog
+		----Epics are tasks that can be broken down into user stories.
+		----Features are smaller than epics but can still be be broken down.
+		----User stories are te simplest breakdown of tasks.
+	---scoring session scores the stories
+	---iteration planning
+	---code	--
+	---test	 |	iteration
+	---demo	--		-daily standup/scrum
+
