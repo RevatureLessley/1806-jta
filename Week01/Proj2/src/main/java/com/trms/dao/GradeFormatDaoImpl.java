@@ -14,8 +14,8 @@ public class GradeFormatDaoImpl extends GenericDaoImpl<GradeFormat> implements D
 	
 	Function<Object[], GradeFormat> objectReturnBehaviour =
 			item -> new GradeFormat(
-					(int)item[0],
-					(int)item[1]
+					Integer.parseInt(item[0].toString()),
+					Integer.parseInt(item[1].toString())
 					);
 
 	@Override

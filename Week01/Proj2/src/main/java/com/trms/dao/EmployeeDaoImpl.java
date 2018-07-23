@@ -13,16 +13,23 @@ public class EmployeeDaoImpl extends GenericDaoImpl<Employee> implements Dao<Emp
     supervisorID number(6),
     title varchar2(50),*/
 	final String tName = "Employee", idField = "employeeID";
-	final Integer col = 2;
+	final Integer col = 3;
 	SqlBuilder<Integer> sb = new SqlBuilder<>();
 	Function<Object[], Employee> objectReturnBehaviour = 
 			item -> new Employee(
 					Integer.parseInt(item[0].toString()),
 					Integer.parseInt(item[1].toString()),
-					Integer.parseInt(item[2].toString()),
+					getInteger(item[2]),
 					item[3].toString()
 					);
 
+	private Integer getInteger(Object o) {
+		try { return Integer.parseInt(o.toString()); }
+		catch(NullPointerException e) {
+			System.out.println("Integer conversion failed/No supervisor");
+			return null;
+		}
+	}
 	@Override
 	public List<Employee> selectAll() {
 		return select(sb.sAll(tName), objectReturnBehaviour);
@@ -33,6 +40,10 @@ public class EmployeeDaoImpl extends GenericDaoImpl<Employee> implements Dao<Emp
 		return select(sb.sWhere(tName, idField, id), objectReturnBehaviour).get(0);
 	}
 
+	public Employee selectByUserInfoID(Integer userInfoID) {
+		return select(sb.sWhere(tName, "UserInfoID", userInfoID), objectReturnBehaviour).get(0);
+	}
+	
 	Function<Employee, List<Object>> loadingBehaviour = 
 			item -> Arrays.asList(
 					item.getUserInfoID(),

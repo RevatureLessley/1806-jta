@@ -14,16 +14,21 @@ public class UserInfoDaoImpl extends GenericDaoImpl<UserInfo> implements Dao<Use
 	SqlBuilder<Integer> sb = new SqlBuilder<>();
 	Function<Object[], UserInfo> objectReturnBehaviour = 
 			(item) -> new UserInfo(
-					(int)item[0], 
-					(int)item[1],
+					Integer.valueOf(item[0].toString()), 
+					item[1].toString(),
 					item[2].toString(),
 					item[3].toString(),
-					item[4].toString(),
-					item[5].toString(),
-					Date.valueOf(item[6].toString()),
-					Date.valueOf(item[7].toString())
+					dateValue(item[4]),
+					dateValue(item[5]),
+					item[6].toString(),
+					Integer.valueOf(item[7].toString())
 					);
-	
+	private Date dateValue(Object o) {
+		System.out.println(o.toString());
+		System.out.println(o.toString().substring(0, 10));
+		try{ return Date.valueOf(o.toString().substring(0, 10));}
+		catch(IllegalArgumentException e) { e.printStackTrace(); return null; }
+	}
 	@Override
 	public List<UserInfo> selectAll() {
 		return select(sb.sAll(tName), objectReturnBehaviour);
@@ -47,7 +52,13 @@ public class UserInfoDaoImpl extends GenericDaoImpl<UserInfo> implements Dao<Use
 	
 	@Override
 	public Boolean insertNew(UserInfo t) {
-		return callProcedure(t, sb.callInsert(tName, col), loadingBehaviour);
+		Boolean b = callProcedure(t, sb.callInsert(tName, col), loadingBehaviour);
+		System.out.println("UserInfoDaoImpl:insertNew:result: " + b);
+		return b;
+	}
+	
+	public UserInfo selectByUsername(String username) {
+		return select("SELECT * FROM UserInfo WHERE LOWER(username)=LOWER('" + username +"')", objectReturnBehaviour).get(0);
 	}
 
 	@Override

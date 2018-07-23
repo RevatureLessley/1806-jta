@@ -19,9 +19,20 @@ public class UserInfo {
 	public UserInfo() {
 		super();
 	}
-
-	public UserInfo(int iD, int postalCode, String username, String fName, String lName, String address, Date birthDate,
-			Date hireDate) {
+	public UserInfo(String username, String fName, String lName,  Date birthDate,
+			Date hireDate, String address, int postalCode) {
+		super();
+		this.username = username;
+		this.fName = fName;
+		this.lName = lName;
+		this.birthDate = birthDate;
+		this.hireDate = hireDate;
+		this.address = address;
+		this.postalCode = postalCode;
+	}
+	
+	public UserInfo(int iD, String username, String fName, String lName, Date birthDate,
+			Date hireDate, String address, int postalCode) {
 		super();
 		ID = iD;
 		this.postalCode = postalCode;

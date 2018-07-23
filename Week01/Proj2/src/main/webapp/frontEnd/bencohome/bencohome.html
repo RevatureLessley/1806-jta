@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Benco Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script >
+    window.onload = function() {
+    	getRequests();
+    	getUsers();
+    	getHistory();
+    }
+    function getRequests() {
+    	let xhr = new XMLHttpRequest();
+    	let table = $("tbodyReq");
+    	table.innerHTML = "";
+    	// Use the servlet url mapping for your url
+    	// when hitting it with AJAX.
+    	let url = "RecordLoadingServlet";
+
+    	xhr.onreadystatechange = function() {
+    		if (xhr.readyState == 4) {
+    			// Converts a JSON string into a JSON object.
+    			let data = JSON.parse(xhr.response);
+
+    			// To convert to a JSON string, for java use, we use:
+    			// JSON.stringify()
+    			console.log(data);
+    			if (data != "") {
+    				for (index in data) {
+    					let row = document.createElement('tr');
+    					let td1 = document.createElement('td');
+    					let td2 = document.createElement('td');
+    					let td3 = document.createElement('td');
+    					let td4 = document.createElement('td');
+    					let td5 = document.createElement('td');
+    					let td6 = document.createElement('td');
+    					let td1t = document
+    							.createTextNode(data[index]["requestID"]);
+    					let td2t = document.createTextNode(data[index]["requestorID"]);
+    					let td3t = document
+    							.createTextNode(data[index]["statusID"]);
+    					let td4t = document
+    							.createTextNode(data[index]["eventID"]);
+    					let td5t = document
+    					.createTextNode(data[index]["requestDate"]);					
+    					let td6t = document
+    					.createTextNode(data[index]["cost"]);
+    					td1.appendChild(td1t);
+    					td2.appendChild(td2t);
+    					td3.appendChild(td3t);
+    					td4.appendChild(td4t);
+    					td5.appendChild(td5t);
+    					td6.appendChild(td6t);
+    					row.appendChild(td1);
+    					row.appendChild(td2);
+    					row.appendChild(td3);
+    					row.appendChild(td4);
+    					row.appendChild(td5);
+    					row.appendChild(td6);
+    					table.appendChild(row);
+    				}
+    			}
+
+    		}
+    	}    
+    	xhr.open("POST", url);
+    	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	xhr.send("type=request");
+ 
+
+    	/*
+    	 * If you want to use POST, you probably want to pass parameters from the
+    	 * clientside. To do this, use the following line: xhr.open("POST", url)
+    	 * //Or GET xhr.setRequestHeader("Content-type",
+    	 * "application/x-www-form-urlencoded");
+    	 * xhr.send("param1=value1&param2=value2&etc");
+    	 * 
+    	 * THEN, on the servlet, you have access to request.getParameter("param1,
+    	 * etc");
+    	 * 
+    	 * 
+    	 */
+    }
+    function getUsers() {
+    	let xhr = new XMLHttpRequest();
+    	let table = $("tbodyUsers");
+    	table.innerHTML = "";
+    	// Use the servlet url mapping for your url
+    	// when hitting it with AJAX.
+    	let url = "RecordLoadingServlet";
+
+    	xhr.onreadystatechange = function() {
+    		if (xhr.readyState == 4) {
+    			// Converts a JSON string into a JSON object.
+    			let data = JSON.parse(xhr.response);
+
+    			// To convert to a JSON string, for java use, we use:
+    			// JSON.stringify()
+    			console.log(data);
+
+    			for (index in data) {
+    				let row = document.createElement('tr');
+    				let td1 = document.createElement('td');
+    				let td2 = document.createElement('td');
+    				let td3 = document.createElement('td');
+    				let td4 = document.createElement('td');
+    				let td5 = document.createElement('td');
+    				let td6 = document.createElement('td');
+    				let td7 = document.createElement('td');
+    				let td8 = document.createElement('td');
+    				let td1t = document.createTextNode(data[index]["ID"]);
+    				let td2t = document.createTextNode(data[index]["username"]);
+    				let td3t = document.createTextNode(data[index]["fName"]);
+    				let td4t = document.createTextNode(data[index]["lName"]);
+    				let td5t = document.createTextNode(data[index]["birthDate"]);
+    				let td6t = document.createTextNode(data[index]["hireDate"]);
+    				let td7t = document.createTextNode(data[index]["address"]);
+    				let td8t = document.createTextNode(data[index]["postalCode"]);
+    				td1.appendChild(td1t);
+    				td2.appendChild(td2t);
+    				td3.appendChild(td3t);
+    				td4.appendChild(td4t);
+    				td5.appendChild(td5t);
+    				td6.appendChild(td6t);
+    				td7.appendChild(td7t);
+    				td8.appendChild(td8t);
+    				row.appendChild(td1);
+    				row.appendChild(td2);
+    				row.appendChild(td3);
+    				row.appendChild(td4);
+    				row.appendChild(td5);
+    				row.appendChild(td6);
+    				row.appendChild(td7);
+    				row.appendChild(td8);
+    				table.appendChild(row);
+    			}
+
+    		}
+    	}
+    	xhr.open("GET", url);
+    	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	xhr.send("type=user");
+    }
+
+    function getHistory() {
+    	let xhr = new XMLHttpRequest();
+    	let table = $("tbodyHist");
+    	table.innerHTML = "";
+    	// Use the servlet url mapping for your url
+    	// when hitting it with AJAX.
+    	let url = "RecordLoadingServlet";
+
+    	xhr.onreadystatechange = function() {
+    		if (xhr.readyState == 4) {
+    			// Converts a JSON string into a JSON object.
+    			let data = JSON.parse(xhr.response);
+
+    			console.log(data);
+
+    			for (index in data) {
+    				let row = document.createElement('tr');
+    				let td1 = document.createElement('td');
+    				let td2 = document.createElement('td');
+    				let td1t = document.createTextNode(data[index]["historyID"]);
+    				let td2t = document.createTextNode(data[index]["content"]);
+    				td1.appendChild(td1t);
+    				td2.appendChild(td2t);
+    				row.appendChild(td1);
+    				row.appendChild(td2);
+    				table.appendChild(row);
+    			}
+
+    		}
+    	}
+    	xhr.open("GET", url);
+    	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    	xhr.send("type=history");
+    }
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid" style="background:#818692">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            Hello,
+                            <span id="accountName">AccountName</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Account</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Reimbursements Requested</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Requester ID</th>
+                            <th>Status Code</th>
+                            <th>Event</th>
+                            <th>Date Requested</th>
+                            <th>Amount Requested</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyReq">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <h2>Users</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Birth Date</th>
+                            <th>Hire Date</th>
+                            <th>Address</th>
+                            <th>Postal Code</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyUsers">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <h2>Event History</h2>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyHist">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="btn-group" id="btngReq">
+                    <button class="btn btn-md btn-primary" type="button" id="btnAddReq">Add</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnEditReq">Edit</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnDeleteReq">Delete</button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="btn-group" id="btngHist">
+                    <button class="btn btn-md btn-primary" type="button" id="btnAddHist">Add</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnEditHist">Edit</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnDeleteHist">Delete</button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="btn-group" id="btngHist">
+                    <button class="btn btn-md btn-primary" type="button" id="btnAddHist">Add</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnEditHist">Edit</button>
+                    <button class="btn btn-md btn-primary" type="button" id="btnDeleteHist">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="background:#484c55">
+            <div class="col-lg-4">
+                <h5>
+                    <u>Follow Us On</u>
+                </h5>
+                <a href="#">Facebook</a>
+                <br />
+                <a href="#">Twitter</a>
+                <br />
+                <a href="#">Instagram</a>
+                <br />
+            </div>
+            <div class="col-lg-4">
+                <h5>
+                    <u>Learn About Us</u>
+                </h5>
+                <a href="#">Our Story</a>
+                <br />
+                <a href="#">Career Opportunities</a>
+                <br />
+                <a href="#">Check out our Staff</a>
+                <br />
+            </div>
+            <div class="col-lg-4">
+                <h5>
+                    <u>Contact Us</u>
+                </h5>
+                <a href="#">Locations</a>
+                <br />
+                <a href="#">Email Us</a>
+                <br />
+                <a href="#">Contact our Support Staff</a>
+                <br />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,7 +1,6 @@
 package com.trms.util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+//import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,14 +14,19 @@ public class Connections {
 	public static Connection getConnection() {
 		try {
 			prop = new Properties();
-			prop.load(new FileInputStream(FILE_NAME));
+			//prop.load(new FileInputStream(FILE_NAME));
 
-			Class.forName(prop.getProperty("class"));
+//			Class.forName(prop.getProperty("class"));
+//			conn = DriverManager.getConnection(
+//					prop.getProperty("url"),
+//					prop.getProperty("username"),
+//					prop.getProperty("password"));
+			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(
-					prop.getProperty("url"),
-					prop.getProperty("username"),
-					prop.getProperty("password"));
-
+					"jdbc:oracle:thin:@localhost:1521:xe",
+					"fantasy_futon",
+					"tacos");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,8 +34,8 @@ public class Connections {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("ORACLE DRIVER CLASS NOT FOUND.");
-		} catch (IOException e){
-			e.printStackTrace();
+//		} catch (IOException e){
+//			e.printStackTrace();
 		}
 		return conn;
 	}

@@ -17,7 +17,7 @@ public class EventDaoImpl extends GenericDaoImpl<Event> implements Dao<Event, In
 			item -> new Event(
 					Integer.parseInt(item[0].toString()),
 				    item[1].toString(),
-				    Date.valueOf(item[2].toString()),
+				    Date.valueOf(item[2].toString().substring(0, 9)),
 				    item[3].toString(),
 				    item[4].toString(),
 				    item[5].toString()

@@ -2,7 +2,6 @@ package com.trms.unittests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,5 +40,5 @@ public class UserPassDaoTest {
 	public void e_testSelectById() { assertNotNull("UserPass select by id test failed.", dao.selectByID("Test0")); }
 
 	@Test
-	public void f_testDeleteUserPass() { for(int i=0; i<doX; i++) { assertTrue("UserPass deletion test failed.", dao.deleteByID("Test" + i));} }	
+	public void f_testDeleteUserPass() { for(int i=0; i<doX; i++) { assertFalse("UserPass deletion test failed.", dao.deleteByID("Test" + i));} }	
 }

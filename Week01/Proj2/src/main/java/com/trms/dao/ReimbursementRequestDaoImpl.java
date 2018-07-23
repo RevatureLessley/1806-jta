@@ -16,13 +16,13 @@ public class ReimbursementRequestDaoImpl extends GenericDaoImpl<ReimbursementReq
 	
 	Function<Object[], ReimbursementRequest> objectReturnBehaviour =
 			item -> new ReimbursementRequest(
-					(int)item[0], 
-					(int)item[1], 
-					(int)item[2], 
-					(int)item[3], 
-					(int)item[4],
-					Date.valueOf(item[5].toString()),
-					(float)item[6]
+					Integer.parseInt(item[0].toString()), 
+					Integer.parseInt(item[1].toString()), 
+					Integer.parseInt(item[2].toString()), 
+					Integer.parseInt(item[3].toString()),
+					Integer.parseInt(item[4].toString()),
+					Date.valueOf(item[5].toString().substring(0, 9)),
+					Float.parseFloat(item[6].toString())
 					);
 	
 	@Override

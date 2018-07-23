@@ -24,6 +24,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 		List<T> ts = new ArrayList<>();
 		try(Connection conn = Connections.getConnection()){
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			System.out.println("GenericDaoImpl:select:sql statement: " + sql); 
 			ResultSetIterator.iterable(stmt.executeQuery(sql)).forEach(item -> ts.add(objectReturnBehaviour.apply(item)));
 			System.out.println("GenericDaoImpl:select: " + ts);
 			return ts;

@@ -17,8 +17,8 @@ public class DataFileDaoImpl extends GenericDaoImpl<DataFile> implements Dao<Dat
 	
 	Function<Object[], DataFile> objectReturnBehaviour = 
 			item -> new DataFile(
-					(int) item[0], //    fileID number(6),
-					(int) item[1], //    requestID number(6),
+					Integer.parseInt(item[0].toString()), //    fileID number(6),
+					Integer.parseInt(item[1].toString()), //    requestID number(6),
 					item[3].toString(), //    fileType varchar2(15),
 					item[4].toString(), //    filePath varchar2(1024),
 					blobToBytes(item[5])//    data Blob,

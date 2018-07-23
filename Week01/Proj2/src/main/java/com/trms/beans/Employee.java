@@ -6,14 +6,43 @@ public class Employee {
 //    supervisorID number(6),
 //    title varchar2(50),
 
-	private int employeeID, userInfoID, supervisorID;
+	private Integer employeeID, userInfoID, supervisorID;
 	private String title;
+	private UserInfo userInfo = null;
+	private Employee  supervisor = null;
+
+	
+	
+	public Employee(Integer employeeID, String title, UserInfo userInfo) {
+		super();
+		this.employeeID = employeeID;
+		this.title = title;
+		this.userInfo = userInfo;
+		this.userInfoID = userInfo.getID();
+	}
+
+	public Employee(Integer employeeID, String title, UserInfo userInfo, Employee supervisor) {
+		super();
+		this.employeeID = employeeID;
+		this.title = title;
+		this.userInfo = userInfo;
+		this.supervisor = supervisor;
+		this.userInfoID = userInfo.getID();
+		this.supervisorID = supervisor.getEmployeeID();
+	}
 
 	public Employee() {
 		super();
 	}
-
-	public Employee(int employeeID, int userInfoID, int supervisorID, String title) {
+	
+	public Employee(Integer userInfoID, Integer supervisorID, String title) {
+		super();
+		this.userInfoID = userInfoID;
+		this.supervisorID = supervisorID;
+		this.title = title;
+	}
+	
+	public Employee(Integer employeeID, Integer userInfoID, Integer supervisorID, String title) {
 		super();
 		this.employeeID = employeeID;
 		this.userInfoID = userInfoID;
@@ -21,27 +50,27 @@ public class Employee {
 		this.title = title;
 	}
 
-	public int getEmployeeID() {
+	public Integer getEmployeeID() {
 		return employeeID;
 	}
 
-	public void setEmployeeID(int employeeID) {
+	public void setEmployeeID(Integer employeeID) {
 		this.employeeID = employeeID;
 	}
 
-	public int getUserInfoID() {
+	public Integer getUserInfoID() {
 		return userInfoID;
 	}
 
-	public void setUserInfoID(int userInfoID) {
+	public void setUserInfoID(Integer userInfoID) {
 		this.userInfoID = userInfoID;
 	}
 
-	public int getSupervisorID() {
+	public Integer getSupervisorID() {
 		return supervisorID;
 	}
 
-	public void setSupervisorID(int supervisorID) {
+	public void setSupervisorID(Integer supervisorID) {
 		this.supervisorID = supervisorID;
 	}
 
@@ -51,6 +80,22 @@ public class Employee {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public Employee getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Employee supervisor) {
+		this.supervisor = supervisor;
 	}
 
 	@Override
