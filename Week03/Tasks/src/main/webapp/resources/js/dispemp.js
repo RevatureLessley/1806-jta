@@ -91,28 +91,6 @@ function getReimb(){
 					fu.appendChild(in2);
 					
 					list.appendChild(fu);
-				}else{
-					let fu = document.createElement('form');
-					fu.setAttribute("action","Download.do");
-					fu.setAttribute("method","post");
-					
-					
-					let rfid = document.createElement('input');
-					rfid.setAttribute("name","rformidFUpload");
-					rfid.setAttribute("id","rformidFUpload");
-					rfid.style.visibility = 'hidden';
-					rfid.value = data[index]["filekey"];
-					rfid.appendChild(document.createTextNode(data[index]["filekey"]));
-					fu.appendChild(rfid);
-					
-					let in2 = document.createElement('input');
-					in2.setAttribute("type","submit");
-					in2.setAttribute("value","Download");
-					
-					
-					fu.appendChild(in2);
-					
-					list.appendChild(fu);
 				}
 				
 				list.appendChild(l1);
@@ -171,7 +149,29 @@ function rformDetails(jsonobj){
 	}else{
 		applvl = "Pending";
 	}
-
+	if(jsonobj["filekey"] != null){
+		let fu = document.createElement('form');
+		fu.setAttribute("action","Download.do");
+		fu.setAttribute("method","post");
+		
+		
+		let rfid = document.createElement('input');
+		rfid.setAttribute("name","rformidFUpload");
+		rfid.setAttribute("id","rformidFUpload");
+		rfid.style.visibility = 'hidden';
+		rfid.value = jsonobj["filekey"];
+		rfid.appendChild(document.createTextNode(jsonobj["filekey"]));
+		fu.appendChild(rfid);
+		
+		let in2 = document.createElement('input');
+		in2.setAttribute("type","submit");
+		in2.setAttribute("value","Download");
+		
+		
+		fu.appendChild(in2);
+		
+		ul1.appendChild(fu);
+	}
 	let l2 = document.createElement('li');
 	l2.appendChild(document.createTextNode(applvl));
 	ul1.appendChild(l2);
