@@ -50,6 +50,12 @@ public class EmployeeService {
 		return employee;
 	}
 
+	public static Employee getEmpById(int id) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		Employee employee = empDao.selectEmployeeById(id);
+		return employee;
+	}
+	
 	public static String getEmpInfoJSON(String usern,String passw){
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		Employee employee;
@@ -106,6 +112,7 @@ public class EmployeeService {
 	public static String getSupRFormsJSON(int supid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformBySupId(supid);
+		rforms = empDao.selectRformPresentation(supid, rforms);
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
@@ -126,6 +133,7 @@ public class EmployeeService {
 	public static String getHeadRFormsJSON(int headid,int depid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformHead(headid,depid);
+		rforms = empDao.selectRformPresentation(headid, rforms);
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
@@ -147,6 +155,7 @@ public class EmployeeService {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformBen(benid);
 		rforms = empDao.selectRformGraded(benid, rforms);
+		rforms = empDao.selectRformPresentation(benid, rforms);
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
@@ -168,6 +177,7 @@ public class EmployeeService {
 	public static String getBenHeadRFormsJSON(int benid) {
 		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
 		List<RForm> rforms = empDao.selectRformBenHead(benid);
+		rforms = empDao.selectRformPresentation(benid, rforms);
 		for (RForm form: rforms) {
 			form.setEventTypeName(EventTypeService.eventtypes.getEventTypeNameMap()
 					.get(form.getEventTypeId()));
@@ -198,5 +208,10 @@ public class EmployeeService {
 		return false;
 	}
 	
+	public static boolean updateAwardedReim(double amount,int empid) {
+		EmployeeDaoImpl empDao = new EmployeeDaoImpl();
+		if(empDao.updateAwardedReim(amount, empid)) return true;
+		return false;
+	}
 	
 }

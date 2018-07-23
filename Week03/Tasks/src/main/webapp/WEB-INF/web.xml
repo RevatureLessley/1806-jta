@@ -152,4 +152,24 @@
     <servlet-name>GetSupervisorsServlet</servlet-name>
     <url-pattern>/GetSupervisors.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitGradeServlet</display-name>
+    <servlet-name>SubmitGradeServlet</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitGradeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitGradeServlet</servlet-name>
+    <url-pattern>/SubmitGrade.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DownloadServlet</display-name>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>com.revature.servlets.DownloadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/Download.do</url-pattern>
+  </servlet-mapping>
 </web-app>

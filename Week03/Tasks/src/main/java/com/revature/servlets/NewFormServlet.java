@@ -55,24 +55,28 @@ public class NewFormServlet extends HttpServlet {
 		String justification = request.getParameter("justification");
 		int timemissed = Integer.parseInt(request.getParameter("timemissed"));
 		int gradeformat =  Integer.parseInt(request.getParameter("gradeformat"));
-		int cutoff = Integer.parseInt(request.getParameter("cutoff"));
+		int cutoff;
+		if(request.getParameter("cutoff") == "") {
+			cutoff = 0;
+		}else{
+			cutoff = Integer.parseInt(request.getParameter("cutoff"));
+		}
 		int eventtype =  Integer.parseInt(request.getParameter("eventtype"));
 		double eventcost =  Double.parseDouble(request.getParameter("eventcost"));
 		int empid = employee.getEmpid();
 		int supid = employee.getDirSupId();
+		String eventtypename = EventTypeService.eventtypes.getEventTypeNameMap().get(eventtype);
 		String eventname = request.getParameter("eventname");
+		int finalperc = EventTypeService.eventtypes.getEventTypeMap().get(eventtypename).get(1);
+		
 		if(RFormService.registerRForm(empid, date, place, info, propreim, justification,
 										timemissed, gradeformat, cutoff, eventtype,
-										eventcost,supid,eventname,employee.getDepId())){
-			String eventtypename = EventTypeService.eventtypes.getEventTypeNameMap().get(eventtype);
+										eventcost,supid,eventname,employee.getDepId(),finalperc)){
 			employee.setPending(employee.getPending()
 					+ (0.01*eventcost)*EventTypeService.eventtypes.getEventTypeMap().get(eventtypename).get(1));
 			employee.setAvailable(employee.getAvailable()
 					- employee.getPending()
 					- employee.getAwarded());
-			if(employee.getAvailable() < 0) {
-				employee.setAvailable(0);
-			}
 			session.setAttribute("employee", employee);
 			EmployeeService.updatePendingReim(employee.getPending(),empid);
 			EmployeeService.updateAvailableReim(employee.getAvailable(), empid);

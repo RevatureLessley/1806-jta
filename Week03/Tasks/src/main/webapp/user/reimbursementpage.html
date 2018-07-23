@@ -12,6 +12,7 @@
 <title>Reimbursements Page</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 <title>New Reimbursement</title>
+<script src="./resources/js/reimjs.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -33,49 +34,56 @@
 					<form action="NewForm.do" method="POST">
 					<div class="form-group">
 							<label for="eventname">Event Name:</label> <input type="text"
-								class="form-control" id="eventname" name="eventname">
+								class="form-control" id="eventname" name="eventname" required>
 						</div>
 						<div class="form-group">
 							<label for="date">Event Date:</label> <input type="date"
-								class="form-control" id="date" name="date">
+								class="form-control" id="date" name="date" required>
 						</div>
 						<div class="form-group">
 							<label for="place">Event Location:</label> <input type="text"
-								class="form-control" id="place" name="place">
+								class="form-control" id="place" name="place" required>
 						</div>
 						<div class="form-group">
 							<label for="info">Event Info:</label> <input type="text"
-								class="form-control" id="info" name="info">
+								class="form-control" id="info" name="info" required>
 						</div>
 						<div class="form-group">
 							<label for="propreim">Proposed Reimbursement Percentage:</label> <input type="number"
-								min="0" max="100" class="form-control" id="propreim" name="propreim">
+								min="0" max="100" class="form-control" id="propreim" name="propreim" required>
 						</div>
 						<div class="form-group">
 							<label for="justification">Justification:</label> <input type="text"
-								class="form-control" id="justification" name="justification">
+								class="form-control" id="justification" name="justification" required>
 						</div>
 						<div class="form-group">
 							<label for="timemissed">Work Hours Missed:</label> <input type="number"
-								class="form-control" id="timemissed" name="timemissed">
+								class="form-control" id="timemissed" name="timemissed"required>
 						</div>
 						<div class="form-group">
-							<label for="gradeformat">Grade Format:</label> <input type="number"
-								class="form-control" id="gradeformat" name="gradeformat">
+							<select class="form-control" id="gradeformat" name="gradeformat" onchange="toggleC()">
+								<option value="1">Grade</option>
+								<option value="0">Presentation</option>
+							</select>
 						</div>
 						<div class="form-group">
-							<label for="cutoff">Cutoff Grade:</label> <input type="number"
-								class="form-control" id="cutoff" name="cutoff">
+							<label for="cutoff" id="cutoffh">Cutoff Grade:</label> <input type="number"
+								class="form-control" id="cutoff" name="cutoff" type="hidden">
 						</div>
 						<div class="form-group">
-							<label for="eventtype">Event Type:</label> <input type="number"
-								class="form-control" id="eventtype" name="eventtype">
+							<select class="form-control" id="eventtype" name="eventtype">
+								<option value="0">University Course</option>
+								<option value="1">Seminar</option>
+								<option value="2">Certification Preparation Class</option>
+								<option value="3">Certification</option>
+								<option value="4">Technical Training</option>
+								<option value="5">Other</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="eventcost">Event Cost:</label> <input type="number"
-								class="form-control" id="eventcost" name="eventcost">
+								class="form-control" id="eventcost" name="eventcost" required>
 						</div>
-						
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>

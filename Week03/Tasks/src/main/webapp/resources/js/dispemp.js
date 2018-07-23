@@ -17,7 +17,7 @@ function getReimb(){
 				let applvl = data[index]["appLvl"];
 				let gformat = "";
 				if (applvl == 4) {
-					if(data[index]["gradeFormat"] == 0){
+					if(data[index]["gradeFormat"] == 1){
 						applvl = "Approved, pending grade";
 					}else{
 						applvl = "Approved, pending presentation";
@@ -25,6 +25,8 @@ function getReimb(){
 				}else if (applvl == 9){
 					applvl = "Denied";
 				}else if (applvl == 5){
+					applvl = "Grade Submitted, pending approval";
+				}else if(applvl == 6){
 					applvl = "Reimbursed";
 				}else{
 					applvl = "Pending";
@@ -35,11 +37,84 @@ function getReimb(){
 				l1.appendChild(document.createTextNode(data[index]["empName"]
 				+ ": " + data[index]["eventName"]	+ ": "
 				+ applvl + urgent));
+				
 				let b1 = document.createElement('button');
+				b1.setAttribute("class","btn btn-primary");
 				let jsonobj = JSON.stringify(data[index]);
 				b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
 				b1.appendChild(document.createTextNode("+"));
 				l1.appendChild(b1);
+				
+				if(applvl == "Approved, pending grade"){
+					let f1 = document.createElement('form');
+					f1.setAttribute("id",data[index]["rFormId"] + "gradelist");
+					f1.setAttribute("onsubmit","submitGrade(" + data[index]["rFormId"] + ")")
+					let l2 = document.createElement('li');
+					let i1 = document.createElement('input');
+					i1.setAttribute("type","number");
+					i1.setAttribute("min","0");
+					i1.setAttribute("max","100");
+					i1.setAttribute("id",data[index]["rFormId"] + "grade");
+					i1.required = true;
+					let b2 = document.createElement('button');
+					b2.setAttribute("class","btn btn-primary");
+					b2.setAttribute("onclick","submit");
+
+					b2.appendChild(document.createTextNode("Submit Grade"));
+					l2.appendChild(i1);
+					l2.appendChild(b2);
+					f1.appendChild(l2);
+					list.appendChild(f1);
+				}
+				if(data[index]["filekey"] == null){
+					let fu = document.createElement('form');
+					fu.setAttribute("action","Upload.do");
+					fu.setAttribute("method","post");
+					fu.setAttribute("enctype","multipart/form-data");
+					
+					let rfid = document.createElement('input');
+					rfid.setAttribute("name","rformidFUpload");
+					rfid.setAttribute("id","rformidFUpload");
+					rfid.style.visibility = 'hidden';
+					rfid.value = data[index]["rFormId"];
+					rfid.appendChild(document.createTextNode(data[index]["rFormId"]));
+					fu.appendChild(rfid);
+					
+					let in1 = document.createElement('input');
+					in1.setAttribute("type","file");
+					in1.setAttribute("name","file");
+					
+					let in2 = document.createElement('input');
+					in2.setAttribute("type","submit");
+					
+					fu.appendChild(in1);
+					fu.appendChild(in2);
+					
+					list.appendChild(fu);
+				}else{
+					let fu = document.createElement('form');
+					fu.setAttribute("action","Download.do");
+					fu.setAttribute("method","post");
+					
+					
+					let rfid = document.createElement('input');
+					rfid.setAttribute("name","rformidFUpload");
+					rfid.setAttribute("id","rformidFUpload");
+					rfid.style.visibility = 'hidden';
+					rfid.value = data[index]["filekey"];
+					rfid.appendChild(document.createTextNode(data[index]["filekey"]));
+					fu.appendChild(rfid);
+					
+					let in2 = document.createElement('input');
+					in2.setAttribute("type","submit");
+					in2.setAttribute("value","Download");
+					
+					
+					fu.appendChild(in2);
+					
+					list.appendChild(fu);
+				}
+				
 				list.appendChild(l1);
 				
 			}
@@ -50,12 +125,27 @@ function getReimb(){
 	xhr.send();
 }
 
+function submitGrade(rformid){
+	let grade = document.getElementById(rformid + "grade").value;
+	$.ajax({
+	    url: 'SubmitGrade.do',
+	    data: {
+	    	currFormId: rformid,
+	    	currGrade: grade
+	        
+	    },
+	    type: 'POST'});
+	document.getElementById(rformid + "gradelist").remove();
+}
+
+
 function rformDetails(jsonobj){
 	let l = document.getElementById(jsonobj["rFormId"]);
 	l.innerHTML = "";
 	let b1 = document.createElement('button');
 	let jsonobj2 = JSON.stringify(jsonobj);
 	b1.setAttribute("onclick","delRFormDetails(" + jsonobj2 + ")");
+	b1.setAttribute("class","btn btn-primary");
 	b1.appendChild(document.createTextNode("-"));
 	l.appendChild(b1);
 	
@@ -67,7 +157,7 @@ function rformDetails(jsonobj){
 	
 	let applvl = jsonobj["appLvl"];
 	if (applvl == 4) {
-		if(jsonobj["gradeFormat"] == 0){
+		if(jsonobj["gradeFormat"] == 1){
 			applvl = "Approved, pending grade";
 		}else{
 			applvl = "Approved, pending presentation";
@@ -75,10 +165,13 @@ function rformDetails(jsonobj){
 	}else if (applvl == 9){
 		applvl = "Denied";
 	}else if (applvl == 5){
+		applvl = "Grade Submitted, pending approval";
+	}else if(applvl == 6){
 		applvl = "Reimbursed";
 	}else{
 		applvl = "Pending";
 	}
+
 	let l2 = document.createElement('li');
 	l2.appendChild(document.createTextNode(applvl));
 	ul1.appendChild(l2);
@@ -94,6 +187,10 @@ function rformDetails(jsonobj){
 	let l5 = document.createElement('li');
 	l5.appendChild(document.createTextNode("Event Cost: " + jsonobj["eventCost"]));
 	ul1.appendChild(l5);
+	
+	let l13 = document.createElement('li');
+	l13.appendChild(document.createTextNode("Actual Reimbursement Percentage: " + jsonobj["finalperc"]));
+	ul1.appendChild(l13);
 	
 	let l6 = document.createElement('li');
 	l6.appendChild(document.createTextNode("Proposed Reimbursement Percentage: " + jsonobj["propReim"]));
@@ -129,14 +226,24 @@ function rformDetails(jsonobj){
 	l12.appendChild(document.createTextNode("Justification: " + jsonobj["justification"]));
 	ul1.appendChild(l12);
 	
+	
 	if(jsonobj["isSup"] == 1){
 		let b2 = document.createElement('button');
-		b2.setAttribute("onclick","approveRForm(" + jsonobj["rFormId"] +"," + jsonobj["appLvl"] + ")");
+		b2.setAttribute("class","btn btn-primary");
+		b2.setAttribute("onclick","approveRForm(" + jsonobj["rFormId"] 
+						+"," + jsonobj["appLvl"] 
+						+"," + jsonobj["empid"] 
+						+"," + jsonobj["finalperc"] 
+						+"," + jsonobj["eventCost"] + ")");
 		b2.appendChild(document.createTextNode("Approve"));
 		ul1.appendChild(b2);
 		
 		let b3 = document.createElement('button');
-		b3.setAttribute("onclick","denyRForm(" + jsonobj["rFormId"] + ")");
+		b3.setAttribute("class","btn btn-primary");
+		b3.setAttribute("onclick","denyRForm(" + jsonobj["rFormId"] 
+						+"," + jsonobj["empid"] 
+						+"," + jsonobj["finalperc"] 
+						+"," + jsonobj["eventCost"] + ")");
 		b3.appendChild(document.createTextNode("Deny"));
 		ul1.appendChild(b3);
 	}
@@ -145,12 +252,14 @@ function rformDetails(jsonobj){
 	
 	
 }
+
 function delRFormDetails(jsonobj){
 	let l = document.getElementById(jsonobj["rFormId"]);
 	l.innerHTML = "";
 	l.appendChild(document.createTextNode(jsonobj["empName"]
 	+ ": " + jsonobj["eventName"]	+ "   "));
 	let b1 = document.createElement('button');
+	b1.setAttribute("class","btn btn-primary");
 	let jsonobj2 = JSON.stringify(jsonobj);
 	b1.setAttribute("onclick","rformDetails(" + jsonobj2 + ")");
 	b1.appendChild(document.createTextNode("+"));
@@ -181,11 +290,15 @@ function getEmp(){
 				+ data["depName"] + "</li>";
 			list.innerHTML += "<li>Pending Reimbursements Total: "
 				+ data["pending"] + "</li>";
+			let avail = data["available"];
+			if (avail < 0){
+				avail = 0;
+			}
 			list.innerHTML += "<li>Available Reimbursements Total: "
-				+ data["available"] + "</li>";
+				+ avail + "</li>";
 			list.innerHTML += "<li>Awarded Reimbursements Total: "
 				+ data["awarded"] + "</li>";
-			if(data["empType"] > 0){
+			if(data["empType"] > 0 || data["depId"] == 1){
 				dispSupRForms();
 			}
 		}
@@ -207,7 +320,7 @@ function dispSupRForms(){
 				if(data[index]["isSup"] == 1){
 					let applvl = data[index]["appLvl"];
 					if (applvl == 4) {
-						if(data[index]["gradeFormat"] == 0){
+						if(data[index]["gradeFormat"] == 1){
 							applvl = "Approved, pending grade";
 						}else{
 							applvl = "Approved, pending presentation";
@@ -215,8 +328,11 @@ function dispSupRForms(){
 					}else if (applvl == 9){
 						applvl = "Denied";
 					}else if (applvl == 5){
+						applvl = "Grade Submitted, pending approval";
+					}else if(applvl == 6){
 						applvl = "Reimbursed";
-					}else{
+					}
+					else{
 						applvl = "Pending";
 					}
 
@@ -228,6 +344,7 @@ function dispSupRForms(){
 							+ ": " + data[index]["eventName"]	+ ": "
 							+ applvl + "    "));
 					let b1 = document.createElement('button');
+					b1.setAttribute("class","btn btn-primary");
 					let jsonobj = JSON.stringify(data[index]);
 					b1.setAttribute("onclick","rformDetails(" + jsonobj + ")");
 					b1.appendChild(document.createTextNode("+"));
@@ -242,24 +359,29 @@ function dispSupRForms(){
 	xhr.open("GET", url);
 	xhr.send();
 }
-function approveRForm(rformid,applvl){
+function approveRForm(rformid,applvl,empid,finalperc,eventcost){
 	$.ajax({
 	    url: 'ApproveRForm.do',
 	    data: {
 	    	currFormId: rformid,
-	        currapplvl: applvl
+	        currapplvl: applvl,
+	        currempid: empid,
+	        currfinalperc: finalperc,
+	        curreventcost: eventcost
 	        
 	    },
 	    type: 'POST'});
 	document.getElementById(rformid).remove();
 
 }
-function denyRForm(rformid){
+function denyRForm(rformid,empid,finalperc,eventcost){
 	$.ajax({
 	    url: 'DenyRForm.do',
 	    data: {
-	    	currFormId: rformid
-	        
+	    	currFormId: rformid,
+	        currempid: empid,
+	        currfinalperc: finalperc,
+	        curreventcost: eventcost
 	    },
 	    type: 'POST'});
 	document.getElementById(rformid).remove();

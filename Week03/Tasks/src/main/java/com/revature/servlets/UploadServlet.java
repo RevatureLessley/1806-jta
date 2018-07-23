@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,6 +25,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.revature.beans.Employee;
+import com.revature.services.RFormService;
 
 /**
  * Servlet implementation class UploadServlet
@@ -56,22 +60,35 @@ public class UploadServlet extends HttpServlet {
                 .withCredentials(new EnvironmentVariableCredentialsProvider())
                 .build();
 		String bucketname = "revature-tuition-reimbusement";
-		//s3client.createBucket(bucketname);
+		response.setContentType("text");
+		String rformid = "";
+		int rfid = 0;
 		try {
 			List<FileItem> files = sf.parseRequest(request);
 			for(FileItem item: files) {
-				InputStream is = item.getInputStream();
-				s3client.putObject(new PutObjectRequest(bucketname, item.getName(),is,new ObjectMetadata())
-										.withCannedAcl(CannedAccessControlList.PublicRead));
-				
+				if (item.isFormField()) {
+					String fieldname = item.getFieldName();
+			        String fieldvalue = item.getString();
+			        if(fieldname.equals("rformidFUpload")) {
+			        	rformid = fieldvalue;
+			        	rfid = Integer.parseInt(fieldvalue);
+			        }
+
+				}
+				if(rformid != null && item.getName() != "null" && item.getName() != null) {
+					RFormService.setFileKeyRForm(rfid, rformid+item.getName());
+					InputStream is = item.getInputStream();
+					s3client.putObject(new PutObjectRequest(bucketname, rformid+item.getName(),is,new ObjectMetadata())
+											.withCannedAcl(CannedAccessControlList.PublicRead));
+					is.close();
+				}
 				//For downloading file from as3
-//				is.close();
+				
 //				String home = System.getProperty("user.home");
 //				String directory = home+"/Downloads/";
 //				File dest = new File(directory + item.getName());
 //				s3client.getObject(new GetObjectRequest(bucketname,item.getName()),dest);
 			}
-			System.out.println("file uploaded");
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,6 +96,9 @@ public class UploadServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
+		rd.forward(request, response);
 	}
 
 }

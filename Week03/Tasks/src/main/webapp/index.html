@@ -25,11 +25,11 @@
 				<form action="Login.do" method="POST">
 					<div class="form-group">
 						<label for="username">Username:</label> <input type="text"
-							class="form-control" id="username" name="username">
+							class="form-control" id="username" name="username" required>
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label> <input type="password"
-							class="form-control" id="password" name="password">
+							class="form-control" id="password" name="password" required>
 					</div>
 					<div class="form-group">
 						<p style="color:red;" id="invalidpass"></p>
@@ -43,24 +43,24 @@
 					<form action="Register.do" method="POST">
 						<div class="form-group">
 						<label for="username1">Username:</label> <input type="text"
-							class="form-control" id="username1" name="username1">
+							class="form-control" id="username1" name="username1" required>
 					</div>
 					<div class="form-group">
 						<label for="password1">Password:</label> <input type="password"
-							class="form-control" id="password1" name="password1">
+							class="form-control" id="password1" name="password1" required>
 					</div>
 					<div class="form-group">
 						<label for="password2">Password:</label> <input type="password"
-							class="form-control" id="password2" name="password2">
+							class="form-control" id="password2" name="password2" required>
 					</div>
 					<hr>
 					<div class="form-group">
 						<label for="fname">First Name:</label> <input type="text"
-							class="form-control" id="fname" name="fname">
+							class="form-control" id="fname" name="fname" required>
 					</div>
 					<div class="form-group">
 						<label for="lname">Last Name:</label> <input type="text"
-							class="form-control" id="lname" name="lname">
+							class="form-control" id="lname" name="lname" required>
 					</div>
 					<div class="form-group">
 						<label for="dep">Department:</label> 
@@ -84,18 +84,20 @@
 								<option value="1">Supervisor</option>
 							</select>
 					</div>
+					<div class="form-group">
+						<p style="color:red;" id="unmatchedpass"></p>
+					</div>
+					<div class="form-group">
+						<p style="color:red;" id="invalidentry"></p>
+					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
+					
 				</div>
 			</div>
 	</div>	
 </div>
-<!--  Testing File upload
-<h1>asdf</h1>
-<form action="upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" />
-</form>
--->
+
+
 </body>
 </html>

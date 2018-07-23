@@ -15,4 +15,5 @@ public interface EmployeeDao {
 	public List<RForm> selectRformHead(int id,int depid);
 	public Boolean updateAvailableReim(double amount,int empid);
 	public List<Employee> selectEmployeeByDep(int dep);
+	public Boolean updateAwardedReim(double amount,int empid);
 }

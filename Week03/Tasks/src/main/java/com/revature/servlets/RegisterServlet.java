@@ -42,6 +42,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username1");
 		String password = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
 		int dirsup = Integer.parseInt(request.getParameter("dirsup"));
@@ -54,9 +55,13 @@ public class RegisterServlet extends HttpServlet {
 		DepartmentService.getDepartments();
 		EmployeeTypeService.getEmployeeTypes();
 		EventTypeService.getEventTypes();
-		
+
 		HttpSession session = null;
-		if(EmployeeService.registerEmployee(username, password, fname, lname, dirsup, dep, pos)){
+		if (!password.equals(password2)) {
+			request.getRequestDispatcher("index.html").include(request, response);
+			out.println("<script>document.getElementById('unmatchedpass')"
+					+ ".innerHTML='Invalid username or password'; </script>");
+		}else if(EmployeeService.registerEmployee(username, password, fname, lname, dirsup, dep, pos)){
 			session = request.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("password", password);
@@ -64,7 +69,9 @@ public class RegisterServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("user/emphome.html");
 			rd.forward(request, response);
 		}else{
-			response.sendError(418);
+			request.getRequestDispatcher("index.html").include(request, response);
+			out.println("<script>document.getElementById('invalidentry')"
+					+ ".innerHTML='Invalid username or password'; </script>");
 		}
 	}
 

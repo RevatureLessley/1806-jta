@@ -61,6 +61,8 @@ CREATE TABLE RForm (
     dir_sup_id number(6),
     dep_id number(3),
     more_info number(1),
+    final_perc number(3),
+    grade number(3),
     
     CONSTRAINT fk_emp_id FOREIGN KEY (emp_id) REFERENCES Employee (emp_id),
     CONSTRAINT fk_event_type_id FOREIGN KEY (event_type_id) REFERENCES EventType(event_type_id)
@@ -111,7 +113,7 @@ CREATE SEQUENCE appid_seq
 
 --Employee types table
 INSERT INTO EmployeeType (emp_type_id,emp_type)
-VALUES(0,'Regular');
+VALUES(0,'Standard');
 INSERT INTO EmployeeType (emp_type_id,emp_type)
 VALUES(1,'Supervisor');
 INSERT INTO EmployeeType (emp_type_id,emp_type)
@@ -193,34 +195,27 @@ CREATE OR REPLACE PROCEDURE insertNewRForm(empId IN number,
                                         eventC IN number,
                                         supId IN number,
                                         eventname IN varchar2,
-                                        depId IN number)
+                                        depId IN number,
+                                        finalperc IN number)
 IS
 rformid number;
 emptype number;
 dirsup number;
 dirsuptype number;
 
-cursor c1 is SELECT emp_type_id FROM Employee WHERE emp_id = empId;
-cursor c2 is SELECT emp_type_id FROM Employee WHERE emp_id = dirsup;
 BEGIN
     INSERT INTO RForm (emp_id,rform_date,place,info,prop_reim,
                         justification,time_missed,form_closed,app_lvl,
                         grade_format,cutoff_grade,event_type_id,event_cost,
-                        dir_sup_id,event_name,more_info)
+                        dir_sup_id,event_name,more_info,dep_id,final_perc)
     VALUES(empId,rformD,pl,inf,propR,just,timeM,0,0,gradeF,cutoffG,
-                        eventT_Id,eventC,supId,eventname,0);
+                        eventT_Id,eventC,supId,eventname,0,depId,finalperc);
 
     SELECT rformid_seq.CURRVAL INTO rformid from dual;
-    --open c1;
-    --fetch c1 into emptype;
-    --close c1;
     SELECT emp_type_id INTO emptype FROM Employee WHERE emp_id = empId;
     SELECT dir_sup_id INTO dirsup FROM Employee WHERE emp_id = empId;
-    --open c2;
-    --fetch c2 into dirsuptype;
-    --close c2;
-    --dbms_output.put_line(emptype);
     SELECT emp_type_id INTO dirsuptype FROM Employee WHERE emp_id = dirsup;
+    
     IF emptype >= 2 THEN
         UPDATE RForm SET app_lvl = 2 WHERE rform_id = rformid;
     ELSIF dirsuptype >= 2 THEN

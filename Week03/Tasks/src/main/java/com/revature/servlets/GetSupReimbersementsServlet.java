@@ -36,12 +36,12 @@ public class GetSupReimbersementsServlet extends HttpServlet {
 		Employee employee = (Employee)session.getAttribute("employee");
 		if(employee.getEmpid() == 1) {
 			out.println(EmployeeService.getBenHeadRFormsJSON(employee.getEmpid()));
-		}else if(((Employee)session.getAttribute("employee")).getDepId() == 1){
+		}else if(employee.getDepId() == 1){
 			out.println(EmployeeService.getBenRFormsJSON(employee.getEmpid()));
 		}else if(employee.getEmpType() >= 2){
 			out.println(EmployeeService.getHeadRFormsJSON(employee.getEmpid(),
 					employee.getDepId()));
-		}else if(((Employee)session.getAttribute("employee")).getEmpType() >= 1) {
+		}else if(employee.getEmpType() >= 1) {
 			out.println(EmployeeService.getSupRFormsJSON(employee.getEmpid()));
 		}
 	}

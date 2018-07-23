@@ -22,11 +22,13 @@ public class RForm {
 	private String empName;
 	private int isSup;
 	private int depid;
+	private int finalperc;
 	
 	
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info, int propReim, String justification,
 			String filekey, int timeMissed, int formClosed, int appLvl, int gradeFormat, int cutoffGrade,
-			int eventTypeId, double eventCost, String eventName,int supid,int depid) {
+			int eventTypeId, double eventCost, String eventName,int supid,int depid,int moreinfo,int finalperc,
+			int grade) {
 		super();
 		this.rFormId = rFormId;
 		this.empid = empid;
@@ -46,6 +48,7 @@ public class RForm {
 		this.eventName = eventName;
 		this.supid = supid;
 		this.depid = depid;
+		this.finalperc = finalperc;
 	}
 	public RForm(int rFormId, int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, String filekey, int timeMissed, int formClosed, int appLvl) {
@@ -64,7 +67,8 @@ public class RForm {
 	}
 	public RForm(int empid, Date rFormDate, String place, String info,
 			int propReim, String justification, int timeMissed, int gradeFormat,
-			int cutoffGrade, int eventTypeId, double eventCost, int supid,String eventName,int depid) {
+			int cutoffGrade, int eventTypeId, double eventCost, int supid,
+			String eventName,int depid, int finalperc) {
 		super();
 		this.empid = empid;
 		this.rFormDate = rFormDate;
@@ -80,8 +84,21 @@ public class RForm {
 		this.supid = supid;
 		this.eventName = eventName;
 		this.depid = depid;
+		this.finalperc = finalperc;
 	}
 	
+	/**
+	 * @return the finalperc
+	 */
+	public int getFinalperc() {
+		return finalperc;
+	}
+	/**
+	 * @param finalperc the finalperc to set
+	 */
+	public void setFinalperc(int finalperc) {
+		this.finalperc = finalperc;
+	}
 	/**
 	 * @return the depid
 	 */

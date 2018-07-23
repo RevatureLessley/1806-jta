@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Employee;
+import com.revature.services.EmployeeService;
 import com.revature.services.RFormService;
 
 /**
@@ -31,8 +32,23 @@ public class ApproveRFormServlet extends HttpServlet {
 		response.setContentType("text");
 		int currFormId = Integer.parseInt(request.getParameter("currFormId"));
 		int currapplvl = Integer.parseInt(request.getParameter("currapplvl"));
+		int currempid = Integer.parseInt(request.getParameter("currempid"));
+		int currfinalperc = Integer.parseInt(request.getParameter("currfinalperc"));
+		int curreventcost = Integer.parseInt(request.getParameter("curreventcost"));
 		HttpSession session = request.getSession(false);
-		if(((Employee)session.getAttribute("employee")).getDepId() == 1) {
+		Employee employee = (Employee)session.getAttribute("employee");
+		if(currapplvl >= 4) {
+			RFormService.approveRForm(6, currFormId);
+			Employee emp = EmployeeService.getEmpById(currempid);
+			System.out.println(emp.getPending());
+			System.out.println(currfinalperc);
+			System.out.println(curreventcost);
+			emp.setPending(emp.getPending() - 0.01*currfinalperc*curreventcost);
+			emp.setAwarded(emp.getAwarded() + 0.01*currfinalperc*curreventcost);
+			EmployeeService.updatePendingReim(emp.getPending(),currempid);
+			EmployeeService.updateAwardedReim(emp.getAwarded(), currempid);
+			
+		}else if(employee.getDepId() == 1) {
 			RFormService.approveRForm(4, currFormId);
 		}else {
 			RFormService.approveRForm(currapplvl + 1, currFormId);
