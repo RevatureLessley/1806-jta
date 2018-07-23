@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import project01Services.RequestService;
 
@@ -33,6 +34,8 @@ public class UploadServlet extends HttpServlet {
 	   private Map<String,String> map = new HashMap<String,String>();
 	   private String fileName;
 	   private RequestService reqSer = new RequestService();
+	   final static Logger logger = Logger.getLogger(UploadServlet.class);
+
 
 	
 	
@@ -65,6 +68,7 @@ public class UploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      // Check that we have a file upload request
+		  logger.info("Uploading a request");
 	      isMultipart = ServletFileUpload.isMultipartContent(request);
 	      response.setContentType("text/html");
 	      java.io.PrintWriter out = response.getWriter( );
@@ -83,7 +87,7 @@ public class UploadServlet extends HttpServlet {
 	   
 	      // maximum file size to be uploaded.
 	      upload.setSizeMax( maxFileSize );
-	      
+	      logger.info("Attempting to upload");
 	      try { 
 	          // Parse the request to get file items.
 	          List fileItems = upload.parseRequest(request);
@@ -106,7 +110,7 @@ public class UploadServlet extends HttpServlet {
 	                String fieldName = fi.getFieldName();
 	                if (fi.getName()=="") {
 	                	fileName = "No file given";
-		                out.println("Request made no file given!");
+		                out.println("<p>Request made no file given!</p><br><a href=\"RedirectServlet\">Return to Login</a>");
 
 	                }
 	                else {
@@ -119,6 +123,8 @@ public class UploadServlet extends HttpServlet {
 		                // Write the file
 		                file = new File( "c:\\temp\\" + fileName) ;
 		                fi.write( file ) ;
+		                out.println("<p>Request made!</p><br><a href=\"RedirectServlet\">Return to Login</a>");
+
 	                }
 
 	             }
@@ -127,7 +133,7 @@ public class UploadServlet extends HttpServlet {
 	          out.println("</body>");
 	          out.println("</html>");
 	          } catch(Exception ex) {
-	             System.out.println(ex);
+	             ex.printStackTrace();
 	          }
 	      
 	      

@@ -4,7 +4,6 @@
 
 function getFiles(){
 	let x = document.getElementById("form2");
-	alert(x.elements[0].value);
 	let x2 = x.elements[0].value;
 	
 	
@@ -30,7 +29,7 @@ function getFiles(){
 				//JSON.stringify()
 
 				for(index in data){
-					if(data[index]=="No file given"){alert("Uh Oh");}
+					if(data[index]=="No file given"){alert("Processing. . .");}
 					else{
 						alert(data[index]);
 						let td1  = document.createElement('option');
@@ -46,7 +45,7 @@ function getFiles(){
 					table.appendChild(form1);
 				}
 			}
-	    else{alert(this.status + this.readyState);}
+	    else{alert("Pending . . .");}
 	  };
 	  xhttp.open("POST", "fileNamesServlet",false);
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

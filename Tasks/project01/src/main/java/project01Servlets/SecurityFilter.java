@@ -38,12 +38,10 @@ public class SecurityFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		HttpSession session = req.getSession(false);
-		System.out.println("===========FILTER============");
-		System.out.println((session == null));
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
-		if(session==null) {System.out.println("SEND REDIRECT");res.sendRedirect("../index.html");}
-		else {System.out.println("I HIT THE ELSE");chain.doFilter(request, response);}
+
+		if(session==null) {res.sendRedirect("../index.html");}
+		else {chain.doFilter(request, response);}
 	}
 
 	/**

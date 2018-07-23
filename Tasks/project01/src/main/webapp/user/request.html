@@ -2,12 +2,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/project01/resources/css/main.css">
 <title>Request Form</title>
 <script src="./resources/js/main.js"></script>
 
 </head>
 <body>
 
+<div id="RequestBox">
 <form action = "UploadServlet" method = "post" enctype = "multipart/form-data" id="request">
   First name:<br>
   <input type="text" name="firstname"><br>
@@ -23,17 +27,28 @@
   <input type="radio" name="gradeformat" value="other"> Other<br>
   Cost:<br>
   <input type="text" name="cost"><br>
+  Event Type:<br>
+  <input type="radio" name="event" value="University Course" checked>University Course<br>
+  <input type="radio" name="event" value="Seminar" checked>Seminar<br>
+  <input type="radio" name="event" value="CPC" checked>Certification Preparation Class<br>
+  <input type="radio" name="event" value="Certification" checked>Certification<br>
+  <input type="radio" name="event" value="tech" checked>Technical Training<br>
+  <input type="radio" name="event" value="other" checked>Other<br>
   
   <input type = "file" name = "file" size = "50" />
   <br />
-  <input type = "submit" value = "Upload File" />
+  <input type = "submit" class="btn btn-dark" value = "Submit Request" />
 </form>
-<textarea name="description" form="request" rows="4" cols="50">Enter a description here</textarea>
-<textarea name="event" form="request" rows="4" cols="50">What kind of event was it?</textarea>
+<div id="TextForms">
+<p>Description</p>
+<textarea name="description" form="request" rows="4" cols="50">Enter a description here</textarea><br>
+<p>Justification</p>
 <textarea name="justification" form="request" rows="4" cols="50">Justification for reimbursement</textarea>
-<br><a href="/project01/index.html">Link to index</a>
+</div>
+</div>
+
 <br><br>
-	<div id="requestBox">
+	<div id="OrderTable">
 			<table id="requestTable" border=2px;>
 				<tr>
 					<th>Username</th>
@@ -49,18 +64,21 @@
 			</table>
 		
 	</div>
-	<button onclick="getRequests()">Get info</button>
+	<button onclick="getRequests()" class="btn btn-dark" id="GetInfo">Get info</button>
 	<br><br>
 	
-	
+
+<div id="ViewFiles">
 <form action = "AdditionalFilesServlet" method = "POST" enctype = "multipart/form-data" id="addRequest">
   <input type="text" name="arglblargl" form="addRequest"><br>
   <input type = "file" name = "file" size = "50" />
   <br />
-  <input type = "submit" value = "Upload File" />
+  <input type = "submit" class="btn btn-dark" value = "Upload Additional File" />
 </form>
+</div>
 
-<form action="/project01/LogoutUtil"><input type="submit" value="Logout"></form>
+<br>
+<form action="/project01/LogoutUtil"><input type="submit" class="btn btn-dark" value="Logout"></form>
 
 
 

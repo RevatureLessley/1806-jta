@@ -237,7 +237,7 @@ function getRequests(){
 				let td7t = document.createTextNode(data[index]["event"]);
 				let td8t = document.createTextNode(data[index]["justify"]);
 				let td9t = document.createTextNode(data[index]["cost"]);
-				let td10t = document.createTextNode("False");
+				let td10t = document.createTextNode("Pending");
 				
 				td1.appendChild(td1t);
 				td2.appendChild(td2t);
@@ -275,9 +275,13 @@ function approveRequest(id){
 	  var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
-	      alert("Approved!");
+			//Converts a JSON string into a JSON object.
+			let data = JSON.parse(xhttp.response);
+			
+			if(data){alert("Approved!");}
+			else{alert("Not enought funding!");}
 	    }
-	    else{alert(this.status + this.readyState);}
+	    else{alert("Pending. . .");}
 	  };
 	  xhttp.open("POST", "DirectSupervisorApproval",false);
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -431,7 +435,7 @@ function approveRequestDS(id){
 	    if (this.readyState == 4 && this.status == 200) {
 	      alert("Approved!");
 	    }
-	    else{alert(this.status + this.readyState);}
+	    else{alert("Pending. . .");}
 	  };
 	  xhttp.open("POST", "DepartmentHeadApproval",false);
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -585,7 +589,7 @@ function approveRequestBC(id){
 	    if (this.readyState == 4 && this.status == 200) {
 	      alert("Approved!");
 	    }
-	    else{alert(this.status + this.readyState);}
+	    else{alert("Pending. . .");}
 	  };
 	  xhttp.open("POST", "BCApproval",false);
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -1,6 +1,7 @@
 package project01Servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,9 @@ public class DirectSupervisorApproval extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		InfoService info = new InfoService();
-		info.directSuperApproval(request.getParameter("reqId"));
+		PrintWriter out = response.getWriter();
+		System.out.println(info.directSuperApproval(request.getParameter("reqId")));
+		out.println(info.directSuperApproval(request.getParameter("reqId")));
 	}
 
 	/**

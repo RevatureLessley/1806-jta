@@ -5,12 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import project01util.*;
 
 
 public class UsernameAndPasswordDaoImpl implements UsernameAndPasswordDao{
+	final static Logger logger = Logger.getLogger(UsernameAndPasswordDaoImpl.class);
+
 
 	public Boolean checkPassword(String username, String password) {
+		logger.info("Checking password connecting to DB");
 		PreparedStatement stmt = null; 
 		try(Connection conn = Connections.getConnection())
 		{
@@ -23,12 +28,12 @@ public class UsernameAndPasswordDaoImpl implements UsernameAndPasswordDao{
 			return rs.getString(1).equals(password);
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.out.println("Something went wrong with connecting");
+			logger.error("Can't connect to database");
 		}finally{
 			try {stmt.close();} 
 			catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Couldn't Close the Connection");
+				logger.error("Can't close connection");
 			}
 		}
 		return false;
@@ -86,6 +91,7 @@ public class UsernameAndPasswordDaoImpl implements UsernameAndPasswordDao{
 	
 	@Override
 	public Boolean checkExistence(String username, String password) {
+		logger.info("Checks existence connecting to db");
 		PreparedStatement stmt = null; 
 		try(Connection conn = Connections.getConnection())
 		{
@@ -98,12 +104,12 @@ public class UsernameAndPasswordDaoImpl implements UsernameAndPasswordDao{
 			return rs.next();
 		}catch(SQLException e){
 			e.printStackTrace();
-			System.out.println("Something went wrong with connecting");
+			logger.error("Couldn't connect to DB");
 		}finally{
 			try {stmt.close();} 
 			catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println("Couldn't Close the Connection");
+				logger.error("Couldn't close the connection");
 			}
 		}
 		

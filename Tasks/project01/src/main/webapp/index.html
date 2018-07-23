@@ -2,17 +2,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
 <title>Login</title>
 </head>
 <body>
+<div id="RegisterBox">
+<h1>REGISTER</h1>
 <form action="UsernameAndPasswordServvlet" method="POST">
   Username:<br>
   <input type="text" name="username" value="username"><br>
   Password:<br>
   <input type="text" name="password" value="password"><br><br>
-  <input type="submit" value="Submit">
+  <input type="submit" class="btn btn-dark" value="Submit">
 </form>
+</div>
 
+
+<div id="LoginBox">
 <h1>LOGIN</h1>
 
 <form action="UsernameAndPasswordLoginServlet" method="POST">
@@ -20,9 +28,9 @@
   <input type="text" name="username" value="username"><br>
   Password:<br>
   <input type="text" name="password" value="password"><br><br>
-  <input type="submit" value="Submit">
+  <input type="submit" class="btn btn-dark" value="Submit">
 </form>
-
+</div>
 
 </body>
 </html>

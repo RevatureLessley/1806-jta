@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import project01Services.InfoService;
 import project01Services.UsernameAndPasswordService;
 
 /**
@@ -15,6 +18,7 @@ import project01Services.UsernameAndPasswordService;
  */
 public class UsernameAndPasswordLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(UsernameAndPasswordLoginServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,17 +32,20 @@ public class UsernameAndPasswordLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("Entered Login");
 		HttpSession session = request.getSession();
 		UsernameAndPasswordService servicer = new UsernameAndPasswordService();
 		String username = null;
 		String password = null;
 
 		if(session.isNew()) {
+			logger.info("Session is new");
 			session.setAttribute("username", request.getParameter("username"));
 			session.setAttribute("password", request.getParameter("password"));
 			username = request.getParameter("username");
 			password = request.getParameter("password");}
 		else {
+			logger.info("Session is not new");
 			username = (String)session.getAttribute("username");
 			password = (String)session.getAttribute("password");
 		}
@@ -48,6 +55,7 @@ public class UsernameAndPasswordLoginServlet extends HttpServlet {
 		RequestDispatcher rd;
 
 		if(username == null | password == null){
+			logger.info("redirecting to logout");
 			 rd = request.getRequestDispatcher("LogoutUtil");
 			 rd.forward(request, response); 
 		}
@@ -55,32 +63,39 @@ public class UsernameAndPasswordLoginServlet extends HttpServlet {
 
 		
 		if(servicer.loginToAccount(username, password)){
+			logger.info("Redirecting");
 			switch(servicer.getRole(username)) {
-			case 0: session.setAttribute("username", request.getParameter("username"));
+			case 0: logger.info("Case 0");
+					session.setAttribute("username", request.getParameter("username"));
 					rd = request.getRequestDispatcher("user/request.html");  
 	                rd.forward(request, response); 
 	                break;
 	                
-			case 1:	session.setAttribute("username", request.getParameter("username"));
+			case 1:	logger.info("Case 1");
+					session.setAttribute("username", request.getParameter("username"));
 					rd = request.getRequestDispatcher("user/DirectSupervisor.html");  
                     rd.forward(request, response); 
                     break;
                     
-			case 2:	session.setAttribute("username", request.getParameter("username"));
+			case 2:	logger.info("Case 2");
+					session.setAttribute("username", request.getParameter("username"));
 					rd = request.getRequestDispatcher("user/DepartmentHead.html");  
                     rd.forward(request, response); 
                     break;
                     
-			case 3: session.setAttribute("username", request.getParameter("username"));
+			case 3: logger.info("Case 3");
+					session.setAttribute("username", request.getParameter("username"));
 					rd = request.getRequestDispatcher("user/BenefitsCoordinator.html");  
             		rd.forward(request, response); 
             		break;
             		
-			case -1: rd = request.getRequestDispatcher("../LogoutUtil");  
+			case -1: logger.error("No role given");
+					 rd = request.getRequestDispatcher("../LogoutUtil");  
 					 rd.forward(request, response); 
 					 break;
 			}
 		}else{
+			 logger.info("Sending to logout");
 			 rd = request.getRequestDispatcher("LogoutUtil");
 			 rd.forward(request, response); 
 		}

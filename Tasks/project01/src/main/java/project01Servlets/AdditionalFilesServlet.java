@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import project01Dao.RequestDaoImpl;
 import project01Services.RequestService;
@@ -34,6 +35,8 @@ public class AdditionalFilesServlet extends HttpServlet {
 	   private Map<String,String> map = new HashMap<String,String>();
 	   private String fileName;
 	   private RequestService reqSer = new RequestService();
+	   final static Logger logger = Logger.getLogger(AdditionalFilesServlet.class);
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -55,7 +58,7 @@ public class AdditionalFilesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   
+		   logger.info("Uploading an addtional file");
 	      // Check that we have a file upload request
 	      isMultipart = ServletFileUpload.isMultipartContent(request);
 	      response.setContentType("text/html");
@@ -77,7 +80,7 @@ public class AdditionalFilesServlet extends HttpServlet {
 	      // maximum file size to be uploaded.
 	      upload.setSizeMax( maxFileSize );
 	      
-	      
+	      logger.info("Attempting to upload. .");
 	      try { 
 	          // Parse the request to get file items.
 	          List fileItems = upload.parseRequest(request);
@@ -115,7 +118,7 @@ public class AdditionalFilesServlet extends HttpServlet {
 	          out.println("</body>");
 	          out.println("</html>");
 	          } catch(Exception ex) {
-	             System.out.println(ex);
+	             logger.error("Unable to upload");
 	          }
 	}
 

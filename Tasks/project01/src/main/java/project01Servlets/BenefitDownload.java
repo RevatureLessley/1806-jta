@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class BenefitDownload
  */
 public class BenefitDownload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(BenefitDownload.class);
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,8 +32,7 @@ public class BenefitDownload extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("AHHHHHHHH-sd=-fa=sd-f");
-		System.out.println(request.getParameter("file"));
+		logger.info("Getting list of files associated with request");
  		File file = new File("C:\\temp\\"+request.getParameter("file"));
 		FileInputStream fileIn = new FileInputStream(file);
 		ServletOutputStream out = response.getOutputStream();
@@ -42,6 +45,7 @@ public class BenefitDownload extends HttpServlet {
 		}
 		fileIn.close();
 		out.flush();
+		logger.info("Closing file stream");
 		out.close();  
 
 }

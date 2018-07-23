@@ -1,0 +1,89 @@
+#RegisterBox{
+	background: #898989;
+	width: 500px;
+	color: white;
+	position: absolute;
+	left: 55%;
+	top: 30%;
+	text-align:center;
+	border-style: solid;
+    border-width: 5px;
+    border-color: #B21F00;
+    
+}
+
+#LoginBox{
+	background: #898989; 
+	width: 500px;
+	color: white; 
+	position: absolute;
+	left: 10%;
+	top: 30%;
+	text-align:center;
+	border-style: solid;
+    border-width: 5px;
+    border-color: #B21F00;
+}
+
+#RequestBox{
+	background: #898989; 
+	width: 750px;
+	color: white; 
+	border-style: solid;
+    border-width: 5px;
+    border-color: #B21F00;
+}
+
+#TextForms{
+	position: absolute;
+	bottom: 60%;
+	left: 20%;
+}
+
+#OrderTable{
+ 	position:absolute;
+ 	left: 50%;
+ 	top: 0%
+}
+
+#requestTable{
+	background: #898989; 
+	width: 755px;
+	color: white; 
+	border-style: solid;
+    border-width: 5px;
+    border-color: #B21F00;
+}
+
+#infoBox{
+	background: #898989; 
+	width: 755px;
+	color: white; 
+	border-style: solid;
+    border-width: 5px;
+    border-color: #B21F00;
+}
+
+#GetInfo{
+	position:absolute;
+	bottom: 40%;
+	left: 20%;
+}
+
+#ViewFiles{
+	position:absolute;
+	top: 50%;
+	left: 30%;
+}
+
+th,td{
+	border-color: black;
+	    border-width: 2px;
+	
+}
+
+
+body{
+	color:white;
+	background:black;
+}

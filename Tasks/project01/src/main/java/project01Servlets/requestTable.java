@@ -31,7 +31,6 @@ public class requestTable extends HttpServlet {
 		response.setContentType("text");
 		PrintWriter out = response.getWriter();
 		InfoService ns = new InfoService();
-		
 		out.println(ns.getAllRequests());
 	}
 

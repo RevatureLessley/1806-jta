@@ -20,6 +20,7 @@ public interface RequestDao {
 	
 	public int getNumberOf();
 	public void updateNumberof(int id);
+	public void updateFunds(String username,float amount);
 	public void approvalTable(int id, Date date);
 	public List<Request> getListOfRequests();
 	public List<Request> getListOfRequestsDS();
@@ -31,5 +32,10 @@ public interface RequestDao {
 	public void departmentHeadApproval(String id);
 	public void bCApproval(String id);
 	public void createAdditionalFiles(String id, String fileName);
+	
+	public String getEvent(String id);
+	public String getUsername(String id);
+	public Float getFund(String id);
+	public Float getCost(String id);
 
 }
