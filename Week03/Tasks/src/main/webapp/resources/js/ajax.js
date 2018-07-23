@@ -147,8 +147,13 @@ function getAttachment(servlet, r, f) {
 				let reader = new FileReader();
 			      // Closure to capture the file information.
 			      reader.onload = (function(theFile) {
-			    	 
-			        return function(e) {
+			    	let div = document.getElementById("downloadLink");
+			    	div.href = window.URL.createObjectURL(theFile);
+			    	div.target = '_blank';
+			    	div.download = theFile.name;
+			    	div.innerHTML = "Download";
+			        
+			    	return function(e) {
 			        	document.getElementById('fileDisplay').innerHTML = 
 			        		['<object width=100% height=100% data="', e.target.result,
 			                '" title="', escape(theFile.name), '"/>'].join('');
