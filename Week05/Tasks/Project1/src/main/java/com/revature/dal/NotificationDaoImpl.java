@@ -40,7 +40,8 @@ public class NotificationDaoImpl implements NotificationDao{
                         rs.getInt("is_at_supervisor") != 0,
                         rs.getInt("is_at_dept_head") != 0,
                         rs.getInt("is_at_ben_co") != 0,
-                        rs.getInt("approval_count")
+                        rs.getInt("approval_count"),
+                        rs.getString("information")
                 );
                 LogWrapper.log(this.getClass(), "Retrieve Notification (Proxy) Successful", LogWrapper.Severity.DEBUG);
                 beanList.add(bean);
@@ -63,7 +64,7 @@ public class NotificationDaoImpl implements NotificationDao{
      * @return A proxy for the Notification Bean. (Similar to Hibernate's Lazy Fetch) Will be fulfilled in the BLL
      */
     @Override
-    public NotificationBeanProxy retrieveNotificationsById(int id) {
+    public NotificationBeanProxy retrieveNotificationById(int id) {
         PreparedStatement statement = null;
         ResultSet rs = null;
 
@@ -82,7 +83,8 @@ public class NotificationDaoImpl implements NotificationDao{
                         rs.getInt("is_at_supervisor") != 0,
                         rs.getInt("is_at_dept_head") != 0,
                         rs.getInt("is_at_ben_co") != 0,
-                        rs.getInt("approval_count")
+                        rs.getInt("approval_count"),
+                        rs.getString("information")
                 );
                 LogWrapper.log(this.getClass(), "Retrieve Notification (Proxy) Successful", LogWrapper.Severity.DEBUG);
                 return bean;
@@ -107,7 +109,7 @@ public class NotificationDaoImpl implements NotificationDao{
         PreparedStatement statement = null;
 
         try (Connection conn = DatabaseConnection.getConnection()){
-            String sql = "INSERT INTO Pending_Notifications VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO Pending_Notifications VALUES (?,?,?,?,?,?,?)";
 
             statement = conn.prepareStatement(sql);
             if (bean.getId() > 0) statement.setInt(1, bean.getId());
@@ -117,6 +119,7 @@ public class NotificationDaoImpl implements NotificationDao{
             statement.setInt(4, bean.isAtSupervisor() ? 1 : 0);
             statement.setInt(5, bean.isAtDeptHead() ? 1 : 0);
             statement.setInt(6, bean.isAtBenCo() ? 1 : 0);
+            statement.setString(7, bean.getAdditionalInfo());
             statement.execute();
             LogWrapper.log(this.getClass(), "Insert Notification Successful", LogWrapper.Severity.DEBUG);
             return true;
@@ -139,7 +142,7 @@ public class NotificationDaoImpl implements NotificationDao{
         PreparedStatement statement = null;
 
         try(Connection conn = DatabaseConnection.getConnection()){
-            String sql = "UPDATE Pending_Notifications SET employee_id=?, is_at_supervisor=?, is_at_dept_head=?, is_at_ben_co=?, approval_count=? WHERE notification_id=?";
+            String sql = "UPDATE Pending_Notifications SET employee_id=?, is_at_supervisor=?, is_at_dept_head=?, is_at_ben_co=?, approval_count=?, information=? WHERE notification_id=?";
 
             statement = conn.prepareStatement(sql);
             statement.setInt(1, bean.getNotifiee().getId());
@@ -147,7 +150,9 @@ public class NotificationDaoImpl implements NotificationDao{
             statement.setInt(3, bean.isAtDeptHead() ? 1 : 0);
             statement.setInt(4, bean.isAtBenCo() ? 1 : 0);
             statement.setInt(5, bean.getApprovalCount()+1);
-            statement.setInt(6, bean.getId());
+            statement.setString(6, bean.getAdditionalInfo());
+            statement.setInt(7, bean.getId());
+
             statement.execute();
             LogWrapper.log(this.getClass(), "Update Notification Successful.", LogWrapper.Severity.DEBUG);
             return true;

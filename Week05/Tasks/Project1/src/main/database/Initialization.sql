@@ -57,6 +57,7 @@ CREATE TABLE Pending_Notifications(
     is_at_dept_head number(1) NOT NULL,
     is_at_ben_co number(1) NOT NULL,
     approval_count number(1) NOT NULL,
+    information varchar2(1000),
     CONSTRAINT fk_request_id FOREIGN KEY (request_id) REFERENCES Reimbursement_Requests (request_id),
     CONSTRAINT fk3_employee_id FOREIGN KEY (employee_id) REFERENCES Employees (employee_id)
 );
@@ -166,13 +167,14 @@ CREATE OR REPLACE PROCEDURE Insert_Reimbursement_Request(request_id IN number,
                                                          event_type IN number,
                                                          status IN number,
                                                          opt_file IN clob,
-                                                         file_name IN varchar,
+                                                         file_name IN varchar2,
                                                          notification_id IN number,
-                                                         supervisor_id IN number)
+                                                         supervisor_id IN number,
+                                                         information IN varchar2)
 IS
 BEGIN
     INSERT INTO Reimbursement_Requests VALUES (request_id, employee_id, date_request, location, description, amount, format, event_type, status, opt_file, file_name);
-    INSERT INTO Pending_Notifications VALUES (notification_id, Reimbursement_Id_Inc.CURRVAL, supervisor_id, 1,0,0,0);
+    INSERT INTO Pending_Notifications VALUES (notification_id, Reimbursement_Id_Inc.CURRVAL, supervisor_id, 1,0,0,0, information);
 END;
 /
 

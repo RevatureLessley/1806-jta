@@ -30,7 +30,9 @@ public class FrontController extends HttpServlet {
             "Notification",
             "ApprovalRequest",
             "DenialRequest",
-            "GetEmployee"
+            "GetEmployee",
+            "RequestMoreInfo",
+            "SubmitAdditionalInfo"
     };
 
     public FrontController() {

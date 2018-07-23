@@ -55,7 +55,7 @@ public class ReimbursementService {
                 type, 0, url, fileName
         );
         boolean success = true;
-        if (!rdao.insertReimbursementForm(rbean, ebean.getSupervisorId())) success = false;
+        if (!rdao.insertReimbursementForm(rbean, ebean.getSupervisorId(), "")) success = false;
         if (!edao.updateReimbursementValues(ebean)) success = false;
         return success;
     }

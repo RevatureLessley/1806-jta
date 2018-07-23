@@ -24,17 +24,17 @@
         <form action="Employment.Servlet" id="registerForm" method="post" onsubmit="return checkValidation()">
             <ul style="list-style-type:none">
                 <li><b>First Name</b></li>
-                <li><input type="text" name="firstname" required></li>
+                <li><input type="text" name="firstname" size="50" required></li>
                 <li><b>Last Name</b></li>
-                <li><input type="text" name="lastname" required></li>
+                <li><input type="text" name="lastname" size="50" required></li>
                 <li><b>Email</b></li>
-                <li id="list-item-email"><input type="email" name="email" id="email" onblur="return checkEmail()" required></li>
+                <li id="list-item-email"><input type="email" size="50" name="email" id="email" onblur="return checkEmail()" required></li>
                 <li><b>Phone #</b></li>
-                <li><input type="number" name="phone" required></li>
+                <li><input type="number" name="phone" size="50" required></li>
                 <li><b>Password</b></li>
-                <li id="list-item-password1"><input type="password" name="password" id="password1"required></li>
+                <li id="list-item-password1"><input type="password" size="50" name="password" id="password1"required></li>
                 <li><b>Confirm Password</b></li>
-                <li><input type="password" name="confirmPassword" id="password2" onblur="return checkPasswords()" required></li>
+                <li><input type="password" name="confirmPassword" size="50" id="password2" onblur="return checkPasswords()" required></li>
 
 
 

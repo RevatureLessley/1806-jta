@@ -88,7 +88,7 @@ function sendNotification(from){
     if (Notification.permission === "granted") {
         var notification = new Notification('Snailsforce', {
         body: 'New reimbursement request from '+ from,
-        icon: '../resources/icons/info_icon.png'});
+        icon: '../resources/images/info_icon.png'});
         setTimeout(notification.close.bind(notification), 4000);
     }
 }

@@ -13,7 +13,7 @@ public class ReimbursementDaoImplTest {
     private static LocalDate date = LocalDate.now();
     private static EmployeeBean ebean = new EmployeeBean(100, "Test", "Dude", "pass", 1111111111L, "testemail@test.email",
             0,0, 200, 300, 400);
-    private  ReimbursementBean rbean = new ReimbursementBean(100, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, 0, "");
+    private  ReimbursementBean rbean = new ReimbursementBean(100, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, 0, "", "");
     private static ReimbursementDaoImpl rdao = new ReimbursementDaoImpl();
     private static EmployeeDaoImpl edao = new EmployeeDaoImpl();
 
@@ -50,7 +50,7 @@ public class ReimbursementDaoImplTest {
     @Test
     public void insertReimbursementForm() {
         if (abort) fail();
-        ReimbursementBean bean = new ReimbursementBean(101, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, 0, "");
+        ReimbursementBean bean = new ReimbursementBean(101, ebean, date, "TestLocation", "TestDescription", 175.00, "Format?", 1, 0, "", "");
 
         assertTrue(rdao.insertReimbursementForm(bean, bean.getEmployee().getId()));
         bean = rdao.retrieveReimbursementsByEmployee(bean.getEmployee().getId()).get(0);    //Since the Database reassigns an ID to the request, 101 is not valid

@@ -9,13 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet that handles the updating of a Notification if a user denies a reimbursement request
- */
-public class DenialRequestServlet extends HttpServlet {
+public class RequestMoreInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        boolean result = NotificationService.updateNotification(Integer.parseInt(req.getParameter("notificationId")), 2, null);
-        LogWrapper.log(this.getClass(), "Updated of Notification: Denial returned: " + result, LogWrapper.Severity.DEBUG);
+        boolean result = NotificationService.updateNotification(Integer.parseInt(req.getParameter("notificationId")), 3, req.getParameter("information"));
+        LogWrapper.log(this.getClass(), "Updating of Notification returned: " + result, LogWrapper.Severity.DEBUG);
     }
 }

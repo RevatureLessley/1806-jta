@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public interface NotificationDao {
     ArrayList<NotificationBeanProxy> retrieveNotificationsByEmployeeId(int id);
-    NotificationBeanProxy retrieveNotificationsById(int id);
+    NotificationBeanProxy retrieveNotificationById(int id);
     boolean insertNotification(NotificationBean bean);
     boolean updateNotifiee(NotificationBean bean);
     boolean deleteNotificationById(int id);

@@ -144,11 +144,11 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
      * @return true if insertion was successful, false otherwise
      */
     @Override
-    public boolean insertReimbursementForm(ReimbursementBean bean, int supervisorId) {
+    public boolean insertReimbursementForm(ReimbursementBean bean, int supervisorId, String information) {
         CallableStatement statement = null;
 
         try(Connection conn = DatabaseConnection.getConnection()){
-            String sql = "{call Insert_Reimbursement_Request(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            String sql = "{call Insert_Reimbursement_Request(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
             statement = conn.prepareCall(sql);
             statement.setNull(1, Types.INTEGER);
             statement.setInt(2, bean.getEmployee().getId());
@@ -163,6 +163,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
             statement.setString(11, bean.getFileName());
             statement.setNull(12, Types.INTEGER);
             statement.setInt(13, supervisorId);
+            statement.setString(14, information);
             statement.execute();
             LogWrapper.log(this.getClass(), "Insert Reimbursement Request Successful", LogWrapper.Severity.DEBUG);
             return true;
@@ -179,7 +180,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
     /**
      * Accesses the database and Updates the Reimbursement with the new Status information
      * @param id the Reimbursement's ID
-     * @param status The Status. 0 = Pending, 1 = Approved, 2 = Denied
+     * @param status The Status. 0 = Pending, 1 = Approved, 2 = Denied, 3 = Sent Back
      * @return true if update was successful, false otherwise
      */
     @Override

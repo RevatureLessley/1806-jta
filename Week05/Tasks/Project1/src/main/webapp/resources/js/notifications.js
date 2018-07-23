@@ -80,9 +80,79 @@ function populateTable(){
                 but2.setAttribute('onclick', 'denyButton('+record+')');
                 but2.setAttribute("style", "margin:5px");
                 but2.innerHTML = "Deny";
-                td2.appendChild(but1);
 
-                td2.appendChild(but2);
+                let divDrop = document.createElement('div');
+                divDrop.setAttribute('class', 'add-drop');
+                let but3 = document.createElement('button');
+                but3.setAttribute('class', 'add-drop-button');
+                but3.setAttribute('onclick', 'showDrop(true)');
+                but3.setAttribute('id', 'button'+record+'C');
+                but3.innerHTML = "More Info";
+                let dropDiv = document.createElement('div');
+                dropDiv.setAttribute('class', 'add-dropdown-content');
+                dropDiv.setAttribute('id', 'add-dropdown-content');
+                let textArea = document.createElement('textarea');
+                textArea.setAttribute('id', 'textArea');
+                textArea.setAttribute('rows', 4);
+                textArea.setAttribute('cols', 40);
+                let but4 = document.createElement('button');
+                but4.setAttribute('type', 'button');
+                if (jsonObject[record].atSupervisor || jsonObject[record].atDeptHead || jsonObject[record].atBenCo) but4.setAttribute('onclick', "requestMoreInfo(false, jsonObject[record], textArea.value)");
+                else but4.setAttribute('onclick', "requestMoreInfo(true, jsonObject[record], textArea2.value)");
+                but4.setAttribute('style', 'margin:5px');
+                but4.setAttribute('id', 'button'+record+'E');
+                but4.innerHTML = "Submit";
+                let but5 = document.createElement('button');
+                but5.setAttribute('type', 'button');
+                but5.setAttribute('onclick', 'showDrop(false)');
+                but5.setAttribute('id', 'button'+record+'F');
+                but5.innerHTML = "Cancel";
+                dropDiv.appendChild(textArea);
+                dropDiv.appendChild(but4);
+                dropDiv.appendChild(but5);
+                divDrop.appendChild(but3);
+                divDrop.appendChild(dropDiv);
+
+                let divDrop2 = document.createElement('div');
+                divDrop2.setAttribute('class', 'add-drop');
+                let but6 = document.createElement('button');
+                but6.setAttribute('class', 'add-drop-button');
+                but6.setAttribute('onclick', 'showDrop2(true)');
+                but6.setAttribute('id', 'button'+record+'D');
+                but6.innerHTML = "See Details";
+                let dropDiv2 = document.createElement('div');
+                dropDiv2.setAttribute('class', 'add-dropdown-content');
+                dropDiv2.setAttribute('id', 'add-dropdown-content2');
+                let textArea1Copy = document.createElement('textarea');
+                textArea1Copy.setAttribute('id', 'textArea1Copy');
+                textArea1Copy.setAttribute('rows', 4);
+                textArea1Copy.setAttribute('cols', 40);
+                textArea1Copy.setAttribute('readonly', true);
+                textArea1Copy.setAttribute('style', "background-color:lightgray");
+                textArea1Copy.value = jsonObject[record].additionalInfo;
+                let textArea2 = document.createElement('textarea');
+                textArea2.setAttribute('id', 'textArea2');
+                textArea2.setAttribute('rows', 4);
+                textArea2.setAttribute('cols', 40);
+                console.log(jsonObject[record]);
+                dropDiv2.appendChild(textArea1Copy);
+                dropDiv2.appendChild(textArea2);
+                divDrop2.appendChild(but6);
+                divDrop2.appendChild(dropDiv2);
+
+                if (jsonObject[record].atSupervisor || jsonObject[record].atDeptHead || jsonObject[record].atBenCo) {
+                    dropDiv.appendChild(but4);
+                    dropDiv.appendChild(but5);
+                    td2.appendChild(but1);
+                    td2.appendChild(but2);
+                    td2.appendChild(divDrop);
+                }
+                else {
+                    dropDiv2.appendChild(but4);
+                    dropDiv2.appendChild(but5);
+                    td2.appendChild(but6);
+                    td2.appendChild(divDrop2);
+                }
                 tr.appendChild(td2);
                 table.appendChild(tr);
                 }
@@ -93,13 +163,62 @@ function populateTable(){
     //Cross-check
 }
 
-function approveButton(record){
+function showDrop(show){
+    let div = document.getElementById('add-dropdown-content');
+    if (show) div.setAttribute('style', 'display: block');
+    else div.setAttribute('style', 'display: none');
+}
+
+function showDrop2(show){
+    let div = document.getElementById('add-dropdown-content2');
+    if (show)div.setAttribute('style', 'display: block');
+    else div.setAttribute('style', 'display: none');
+}
+
+function disableButtons(record){
+    console.out.println(record);
     let button1 = document.getElementById('button'+record+'A');
     let button2 = document.getElementById('button'+record+'B');
-    button1.setAttribute("disabled", true);
-    button2.setAttribute("disabled", true);
+    let button3 = document.getElementById('button'+record+'C');
+    let button4 = document.getElementById('button'+record+'D');
+    let button5 = document.getElementById('button'+record+'E');
+    if (button1) button1.setAttribute("disabled", true);
+    if (button2) button2.setAttribute("disabled", true);
+    if (button3) button3.setAttribute("disabled", true);
+    if (button4) button4.setAttribute("disabled", true);
+    if (button5) button5.setAttribute("disabled", true);
+
+}
+
+function requestMoreInfo(isResponse, record, text){
+    if (!isResponse) showDrop(false);
+    else showDrop2(false);
+    disableButtons(record);
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState == 4){
+            if (Notification.permission === "granted") {
+                let message = "";
+
+                if (!isResponse) message = record.notifiee.firstName + ' ' + record.notifiee.lastName + ' has asked you to supply more information on one of your reimbursement requests.';
+                else  message = record.notifiee.firstName + ' ' + record.notifiee.lastName + ' has updated their reimbursement request.';
+                var notification = new Notification('Snailsforce', {
+                body: message,
+                icon: '../resources/images/info_icon.png'});
+                setTimeout(notification.close.bind(notification), 4000);
+            }
+        }
+    }
+    if(!isResponse) xhr.open("POST", "../RequestMoreInfo.Servlet");
+    else xhr.open("POST", "../SubmitAdditionalInfo.Servlet");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('information='+text+'&notificationId='+record.id);
+}
+
+function approveButton(record){
+    disableButtons(record);
     var approves = jsonObject[record].approvalCount;
-    var iconImg = (approves < 2) ? '../resources/icons/info_icon.png' : '../resources/icons/approved_icon.png'
+    var iconImg = (approves < 2) ? '../resources/images/info_icon.png' : '../resources/images/approved_icon.png'
     var message = (approves < 2)
         ? 'New reimbursement request from '+ jsonObject[record].reimbursement.employee.firstName + ' ' + jsonObject[record].reimbursement.employee.lastName + '\n' +
           '(' + jsonObject[record].notifiee.firstName + ' ' + jsonObject[record].notifiee.lastName + ' just gave their approval)'
@@ -119,12 +238,9 @@ function approveButton(record){
 }
 
 function denyButton(record){
-    let button1 = document.getElementById('button'+record+'A');
-    let button2 = document.getElementById('button'+record+'B');
-    button1.setAttribute("disabled", true);
-    button2.setAttribute("disabled", true);
+    disableButtons(record);
     var notification = new Notification('Snailsforce', { body: 'Reimbursement request denied by '+ jsonObject[record].notifiee.firstName + ' ' + jsonObject[record].notifiee.lastName,
-        icon: '../resources/icons/denied_icon.png'});
+        icon: '../resources/images/denied_icon.png'});
     setTimeout(notification.close.bind(notification), 8000);
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){

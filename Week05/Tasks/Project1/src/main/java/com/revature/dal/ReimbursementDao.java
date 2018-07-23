@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface ReimbursementDao {
     ArrayList<ReimbursementBean> retrieveReimbursementsByEmployee(int employeeId);
     ReimbursementBean retrieveReimbursementFormById(int id);
-    boolean insertReimbursementForm(ReimbursementBean bean, int supervisorId);
+    boolean insertReimbursementForm(ReimbursementBean bean, int supervisorId, String information);
     boolean updateReimbursementStatus(int id, int status);
     boolean deleteReimbursementFormById(int id);
 }

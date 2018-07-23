@@ -1,9 +1,6 @@
 package com.revature.bll;
 
-import com.revature.beans.EmployeeBean;
-import com.revature.beans.EventTypeBean;
-import com.revature.beans.NotificationBean;
-import com.revature.beans.NotificationBeanProxy;
+import com.revature.beans.*;
 import com.revature.dal.EmployeeDaoImpl;
 import com.revature.dal.NotificationDaoImpl;
 import com.revature.dal.ReimbursementDaoImpl;
@@ -22,18 +19,19 @@ public class NotificationService {
     /**
      * Updates the current Notification with the new approval status
      * @param notificationId the unique ID of the Notification
-     * @param status the approval status of the Notification. 0 = Pending, 1 = Approved, 2 = Denied
+     * @param status the approval status of the Notification. 0 = Pending, 1 = Approved, 2 = Denied, 3 = Sent Back
      * @return true if the update is successful, false if otherwise
      */
-    public static boolean updateNotification(int notificationId, int status){
-        NotificationBeanProxy beanProxy = new NotificationDaoImpl().retrieveNotificationsById(notificationId);
+    public static boolean updateNotification(int notificationId, int status, String text){
+        NotificationBeanProxy beanProxy = new NotificationDaoImpl().retrieveNotificationById(notificationId);
         NotificationBean bean = new NotificationBean(beanProxy.getId(),
                 new ReimbursementDaoImpl().retrieveReimbursementFormById(beanProxy.getReimbursementId()),
                 new EmployeeDaoImpl().retrieveEmployeeById(beanProxy.getNotifieeId()),
                 beanProxy.isAtSupervisor(),
                 beanProxy.isAtDeptHead(),
                 beanProxy.isAtBenCo(),
-                beanProxy.getApprovalCount());
+                beanProxy.getApprovalCount(),
+                beanProxy.getAdditionalInfo());
         boolean decline = false;
         if (status == 2){
             //Hacks the system so that the notification gets deleted and the status updated to denied.
@@ -41,6 +39,15 @@ public class NotificationService {
             bean.setAtDeptHead(false);
             bean.setAtSupervisor(false);
             decline = true;
+        }
+        else if (status == 3){
+            bean.setAtSupervisor(false);
+            bean.setAtDeptHead(false);
+            bean.setAtBenCo(false);
+            bean.setNotifiee(bean.getReimbursement().getEmployee());
+            bean.setApprovalCount(-1);  //will become 0 prior to insertion
+            bean.setAdditionalInfo(text);
+            return new NotificationDaoImpl().updateNotifiee(bean);
         }
 
         if (bean.isAtSupervisor()) {
@@ -69,8 +76,17 @@ public class NotificationService {
             return success;
 
         }
-        LogWrapper.log(NotificationService.class, "Something fishy happened.", LogWrapper.Severity.WARN); //TODO: Edit this log.
-        return false;
+        else{
+            System.out.println("Checkpoint");
+            bean.setAtSupervisor(true);
+            bean.setAtDeptHead(false);
+            bean.setAtBenCo(false);
+            bean.setAdditionalInfo(text);
+            EmployeeBean supervisor = null;
+            if ((supervisor = new EmployeeDaoImpl().retrieveEmployeeById(bean.getReimbursement().getEmployee().getSupervisorId())) == null) return false;
+            bean.setNotifiee(supervisor);
+            return new NotificationDaoImpl().updateNotifiee(bean);
+        }
 
     }
 
@@ -90,7 +106,8 @@ public class NotificationService {
                     proxy.isAtSupervisor(),
                     proxy.isAtDeptHead(),
                     proxy.isAtBenCo(),
-                    proxy.getApprovalCount()
+                    proxy.getApprovalCount(),
+                    proxy.getAdditionalInfo()
             ));
         }
         return beanList;
@@ -140,6 +157,28 @@ public class NotificationService {
         sb.append("}");
 
         return sb.toString();
+    }
+
+    /**
+     * Calls the DAL to retrieve a Notification from the database
+     * @param id the ID of the requested Notification
+     * @return the Notification of the ID
+     */
+    public static NotificationBean getNotificationById(int id){
+        NotificationBeanProxy proxy = new NotificationDaoImpl().retrieveNotificationById(id);
+        if (proxy == null) return null;
+        ReimbursementBean rbean = new ReimbursementDaoImpl().retrieveReimbursementFormById(proxy.getReimbursementId());
+        EmployeeBean ebean = new EmployeeDaoImpl().retrieveEmployeeById(proxy.getNotifieeId());
+        NotificationBean bean = new NotificationBean(
+                proxy.getId(),
+                rbean,
+                ebean,
+                proxy.isAtSupervisor(),
+                proxy.isAtDeptHead(),
+                proxy.isAtBenCo(),
+                proxy.getApprovalCount(),
+                proxy.getAdditionalInfo());
+        return bean;
     }
 
 }
