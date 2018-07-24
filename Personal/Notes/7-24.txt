@@ -1,0 +1,73 @@
+UST Global
+	-Banking/financial, healthcare, retail, technology/media
+	-$600 billion <- Anthem
+	-1998 IT company
+		-24 countries
+
+Sujesh Sukumaran
+	-solution director of healthcare
+	-digital transformation
+	-records system
+		-database
+	-engagement system
+		-customer interaction
+	-insight system
+	-Human-centered design, implementation follows from user interface
+
+Healthcare
+	-insurance care
+	-provider care
+	-customer care
+	-Pharmacy Benefits Management System (PBMS)
+
+Employee Qualities
+	-understand business problem
+	-understand technology trends
+	-understand/analyze data
+
+Anthem
+	-cloud enablement
+
+Robert
+Walter
+Chris
+Eric
+
+Project 2
+---------
+-Team Name	-OverKnight
+-Project Name	-QuickByte
+-Team Lead	-Eric
+-Guidelines
+-Requirements
+	--More than 2 user roles
+	--Users interact with each other.
+	--Core Technologies
+		---Java
+		---Angular2+
+		---RDS(Oracle),
+		---EC2
+		---Jenkins
+		---Selenium
+		---JUnit
+		---Logging
+		---hibernate
+
+GitHub
+------
+Serverside
+FrontEnd
+
+Food
+	Upload receipies/pictures
+	comments
+	notification
+	rating
+	Search
+
+Roles
+	Free
+	Premium
+	Administrator
+
+Paladin Knights
