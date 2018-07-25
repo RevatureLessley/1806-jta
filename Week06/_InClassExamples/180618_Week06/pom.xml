@@ -16,12 +16,12 @@
 			<artifactId>selenium-java</artifactId>
 			<version>3.13.0</version>
 		</dependency>
-	</dependencies>
+
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.14.2</version>
+			<version>6.14.3</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -64,5 +64,5 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
+	</dependencies>
 </project>
