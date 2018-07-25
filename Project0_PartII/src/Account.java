@@ -75,6 +75,11 @@ public class Account implements Serializable
         return accountBalance;
     }
 
+    public void setAccountBalance(double balance)
+    {
+        this.accountBalance = balance;
+    }
+
     public void withdraw(double amount)
     {
         this.accountBalance -= amount;

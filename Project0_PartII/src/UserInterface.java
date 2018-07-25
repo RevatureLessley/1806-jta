@@ -11,19 +11,17 @@ public class UserInterface
     public boolean validInput = false;
 
     Account currentAccount;
-    RecordsManager_old recordsManagerOld;
     AccountsRecord accountsRecord;
     StatusLogger statusLogger;
-    RecordsManager_new recordsManager;
+    RecordsManager recordsManager;
 
     public UserInterface()
     {
         statusLogger = new StatusLogger();
-        recordsManagerOld = new RecordsManager_old();
 //        accountsRecord = recordsManagerOld.getFile();
 
         accountsRecord = new AccountsRecord();
-        recordsManager = new RecordsManager_new(accountsRecord);
+        recordsManager = new RecordsManager(accountsRecord);
     }
 
     public void userInputInt(Hashtable<Integer, Runnable> commands)
@@ -285,6 +283,7 @@ public class UserInterface
             @Override
             public void run() {
                 accountsRecord.approveAllAccounts();
+                recordsManager.updateApprovalStatus();
                 System.out.println("All pending user accounts approved");
                 adminMenu();
             }
@@ -416,10 +415,7 @@ public class UserInterface
     public void logout()
     {
         statusLogger.logMessage(currentAccount.getUsername() + " has logged out");
-        recordsManagerOld.saveFile(accountsRecord);
         statusLogger.logMessage("Saving accounts and writing file");
-
-
 
         currentAccount = null;
         System.out.println("You have logged out.");

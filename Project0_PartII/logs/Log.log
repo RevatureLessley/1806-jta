@@ -146,3 +146,85 @@
 2018-07-02 00:19:57 INFO  root:9 - user1 withdrew $1.0
 2018-07-02 00:20:06 INFO  root:9 - user1 has logged out
 2018-07-02 00:20:06 INFO  root:9 - Saving accounts and writing file
+2018-07-02 21:27:00 INFO  root:9 - SuperUser has taken command
+2018-07-02 21:27:09 INFO  root:9 - superuser has logged out
+2018-07-02 21:27:09 INFO  root:9 - Saving accounts and writing file
+2018-07-02 21:27:15 INFO  root:9 - admin1has logged in
+2018-07-02 21:27:31 INFO  root:9 - admin1 has logged out
+2018-07-02 21:27:31 INFO  root:9 - Saving accounts and writing file
+2018-07-03 06:38:30 INFO  root:9 - user1has logged in
+2018-07-03 06:38:41 INFO  root:9 - user1 withdrew $0.0
+2018-07-03 06:47:45 INFO  root:9 - user1has logged in
+2018-07-03 06:47:49 INFO  root:9 - user1has deposited $10.0
+2018-07-03 06:59:36 INFO  root:9 - user1has logged in
+2018-07-03 06:59:39 INFO  root:9 - user1has deposited $10.0
+2018-07-03 07:12:26 INFO  root:9 - user1has registered, waiting approval
+2018-07-03 07:12:37 INFO  root:9 - SuperUser has taken command
+2018-07-03 07:12:51 INFO  root:9 - superuser has logged out
+2018-07-03 07:12:51 INFO  root:9 - Saving accounts and writing file
+2018-07-03 07:13:10 INFO  root:9 - admin1has logged in
+2018-07-03 07:13:19 INFO  root:9 - admin1 has logged out
+2018-07-03 07:13:19 INFO  root:9 - Saving accounts and writing file
+2018-07-03 07:13:29 INFO  root:9 - user1has logged in
+2018-07-03 07:13:32 INFO  root:9 - user1has deposited $10.0
+2018-07-03 07:24:55 INFO  root:9 - user1has logged in
+2018-07-03 07:25:00 INFO  root:9 - user1 withdrew $9.0
+2018-07-03 07:25:11 INFO  root:9 - user1has deposited $5.0
+2018-07-03 07:25:13 INFO  root:9 - user1 has logged out
+2018-07-03 07:25:13 INFO  root:9 - Saving accounts and writing file
+2018-07-03 07:25:59 INFO  root:9 - user1has logged in
+2018-07-03 07:26:05 INFO  root:9 - user1 withdrew $0.0
+2018-07-03 07:26:07 INFO  root:9 - user1 has logged out
+2018-07-03 07:26:07 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:03:17 INFO  root:9 - user2has registered, waiting approval
+2018-07-03 09:03:52 INFO  root:9 - user2has logged in
+2018-07-03 09:08:39 INFO  root:9 - user1has registered, waiting approval
+2018-07-03 09:08:52 INFO  root:9 - SuperUser has taken command
+2018-07-03 09:09:03 INFO  root:9 - superuser has logged out
+2018-07-03 09:09:03 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:09:14 INFO  root:9 - admin1has logged in
+2018-07-03 09:09:30 INFO  root:9 - admin1 has logged out
+2018-07-03 09:09:30 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:09:37 INFO  root:9 - user1has logged in
+2018-07-03 09:09:41 INFO  root:9 - user1has deposited $10.0
+2018-07-03 09:09:46 INFO  root:9 - user1 withdrew $1.0
+2018-07-03 09:09:51 INFO  root:9 - user1has deposited $0.0
+2018-07-03 09:09:54 INFO  root:9 - user1 has logged out
+2018-07-03 09:09:54 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:13:21 INFO  root:9 - user1has logged in
+2018-07-03 09:13:25 INFO  root:9 - user1 withdrew $0.0
+2018-07-03 09:13:27 INFO  root:9 - user1 has logged out
+2018-07-03 09:13:27 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:15:28 INFO  root:9 - user1has logged in
+2018-07-03 09:15:37 INFO  root:9 - user1 withdrew $1.0
+2018-07-03 09:15:52 INFO  root:9 - user1has deposited $0.0
+2018-07-03 09:16:11 INFO  root:9 - user1has deposited $0.0
+2018-07-03 09:16:14 INFO  root:9 - user1has deposited $0.0
+2018-07-03 09:16:17 INFO  root:9 - user1 has logged out
+2018-07-03 09:16:17 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:20:06 INFO  root:9 - user2has registered, waiting approval
+2018-07-03 09:20:45 INFO  root:9 - SuperUser has taken command
+2018-07-03 09:21:27 INFO  root:9 - superuser has logged out
+2018-07-03 09:21:27 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:21:56 INFO  root:9 - admin2has logged in
+2018-07-03 09:22:46 INFO  root:9 - admin2 has logged out
+2018-07-03 09:22:46 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:22:52 INFO  root:9 - user2has logged in
+2018-07-03 09:23:21 INFO  root:9 - user2 withdrew $0.0
+2018-07-03 09:23:26 INFO  root:9 - user2has deposited $100.0
+2018-07-03 09:23:35 INFO  root:9 - user2 withdrew $1.0
+2018-07-03 09:23:44 INFO  root:9 - user2 has logged out
+2018-07-03 09:23:44 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:24:18 INFO  root:9 - user2has logged in
+2018-07-03 09:24:27 INFO  root:9 - user2has deposited $0.0
+2018-07-03 09:24:30 INFO  root:9 - user2 has logged out
+2018-07-03 09:24:30 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:41:38 INFO  root:9 - user1has logged in
+2018-07-03 09:41:46 INFO  root:9 - user1has deposited $1.0
+2018-07-03 09:41:55 INFO  root:9 - user1 has logged out
+2018-07-03 09:41:55 INFO  root:9 - Saving accounts and writing file
+2018-07-03 09:45:55 INFO  root:9 - user3has registered, waiting approval
+2018-07-03 09:46:20 INFO  root:9 - user3has logged in
+2018-07-03 09:46:26 INFO  root:9 - user3has deposited $10.0
+2018-07-03 09:51:59 INFO  root:9 - user3 has logged out
+2018-07-03 09:51:59 INFO  root:9 - Saving accounts and writing file

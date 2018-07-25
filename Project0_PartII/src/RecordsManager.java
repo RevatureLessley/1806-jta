@@ -1,12 +1,13 @@
 import java.sql.*;
 
-public class RecordsManager_new
+public class RecordsManager
 {
-    public RecordsManager_new(AccountsRecord accountsRecord)
+    public RecordsManager(AccountsRecord accountsRecord)
     {
         //Setup database connection
         //Initialize AccountRecord with accounts
 
+        Statement statement;
         ResultSet rs = null; //Object that holds query results
         accountsRecord.clearRecords();
 
@@ -14,11 +15,13 @@ public class RecordsManager_new
         {
             String sql = "SELECT * FROM Accounts";
 
-            rs = connection.createStatement().executeQuery(sql);
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
             Account newAccount;
             String username, fName, lName, password, address;
             boolean role, approvalStatus;
-            while(rs.next()){
+            while(rs.next())
+            {
                 username = rs.getString(1);
 //                String fName = rs.getString(2);
 //                String lName = rs.getString(3);
@@ -27,8 +30,18 @@ public class RecordsManager_new
                 role = (rs.getInt(6) == 0? false: true);
                 approvalStatus = (rs.getInt(7) == 0? false: true);
 
-                System.out.println(String.format("%s %s %b %b", username, password, role, approvalStatus));
                 newAccount = new Account(username, password, role, approvalStatus);
+
+                String query = "{? = call getBalance(?)}";
+
+                CallableStatement callstatement = connection.prepareCall(query);
+                callstatement.registerOutParameter(1, Types.NUMERIC);
+                callstatement.setString(2, username);
+                callstatement.execute();
+                double balance = callstatement.getInt(1);
+
+                newAccount.setAccountBalance(balance);
+
                 accountsRecord.addAccount(newAccount);
             }
 
@@ -58,6 +71,13 @@ public class RecordsManager_new
 
             statement.executeQuery(sql);
 
+            sql = "INSERT INTO AccountBalance (username, balance)" +
+                    "VALUES ('" + account.getUsername() + "', "
+                                + account.getAccountBalance() + ")";
+
+            statement.executeQuery(sql);
+
+
             connection.close();
 
         }
@@ -69,42 +89,61 @@ public class RecordsManager_new
 
     public void updateBalance(Account account)
     {
-        Statement statement = null; //Object that holds query results
+//        Statement statement = null; //Object that holds query results
         ResultSet rs;
 
         try(Connection connection = Database_Connection.getConnection())
         {
-            String sql;
-            statement = connection.createStatement();
+//            String sql;
+
+            String query = "{? = call checkIfExists(?)}";
+            String username = account.getUsername();
+
+            CallableStatement statement = connection.prepareCall(query);
+            statement.registerOutParameter(1, Types.NUMERIC);
+            statement.setString(2, username);
+            statement.execute();
+            int colCount = statement.getInt(1);
+
 
             //Check if account exists
 
-            sql = "SELECT COUNT(*) from AccountBalance WHERE username = '" + account.getUsername() + "'";
-            rs = statement.executeQuery(sql);
-
-            rs.next();
-            int colCount = rs.getInt(1);
-
             if(colCount > 0) //It exists
             {
-                System.out.println("It exists in the table");
-                sql = "UPDATE AccountBalance " +
+//                System.out.println("It exists in the table");
+                query = "UPDATE AccountBalance " +
                         "SET balance = " + (int)account.getAccountBalance() +
                         " WHERE username = '" + account.getUsername() + "'";
             }
             else        //It doesn't exist, insert
             {
-                System.out.println("Inserting!");
-                sql = "INSERT INTO AccountBalance (username, balance)" +
+//                System.out.println("Inserting!");
+                query = "INSERT INTO AccountBalance (username, balance)" +
                         "VALUES ('" + account.getUsername() + "', "
                         + (int)account.getAccountBalance() + ")";
             }
-            statement.executeQuery(sql);
+            statement.executeQuery(query);
 
             connection.close();
 
         }
         catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateApprovalStatus()
+    {
+
+        try(Connection connection = Database_Connection.getConnection())
+        {
+            String query = "{call updateApprovalStatus}";
+            CallableStatement statement = connection.prepareCall(query);
+            statement.execute();
+
+        }
+        catch(Exception e)
         {
             e.printStackTrace();
         }
