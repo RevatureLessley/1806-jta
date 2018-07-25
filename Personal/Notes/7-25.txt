@@ -109,3 +109,13 @@ Selenium is a test automation framework
 	-Selenium Web Driver: a driver for automating a browser
 	-Selenium Grid: allows for scripts to run concurrently on different browsers, good for compatability testing.
 	-RC + Web Driver -> Selenium2 -> Selenium3 -> Selenium4
+
+ChromeDriver.quit() kills background processes.
+
+@AfterGroup
+@BeforeGroup
+
+TestNG allows for options than JUnit. Other classes in the test file uses @Before/AfterClass. Multiple test classes within the same class file produces a suite, triggering @Before/AfterTest. Multiple suites triggers @Before/AfterSuite. Custom group tags apply to groups of methods, triggering. @Before/AfterGroup.
+
+ChromeDriver.quit().sendKeys() simulates typing.
+ChromeDriver.quit().click() simulates clicking.
