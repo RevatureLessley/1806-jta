@@ -1,22 +1,46 @@
---RYAN's DATABASE BUILDER SCRIPT
+/*
+    DATABASE BUILD SCRIPT
+    -----------------------
+    This script should be run to build the full database that gets used
+    in my example scripts.
+    Any script should work properly if this script is ran once.
+    Be sure to remember what user you are logged in as, since this script
+    does not create a custom user.
+
+    This script makes tables based around Npcs (People) and shops owned by them.
+*/
+
+--CASCADE CONSTRAINTS so there are no worries for referential integrity breaking.
 DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE item CASCADE CONSTRAINTS;
 DROP TABLE shop CASCADE CONSTRAINTS;
 DROP TABLE npc CASCADE CONSTRAINTS;
 DROP TABLE shop_2_item CASCADE CONSTRAINTS;
 DROP TABLE job_class CASCADE CONSTRAINTS;
+DROP SEQUENCE npc_seq;
+DROP TRIGGER npc_seq_trigger;
+DROP PROCEDURE hello_world_procedure;
+DROP PROCEDURE insertIntoNpc(npcName IN VARCHAR2, 
+DROP PROCEDURE insertIntoUser(npcId IN NUMBER, 
+DROP PROCEDURE get_class(npcId IN NUMBER, className OUT VARCHAR2)
+DROP PROCEDURE get_currency(npcID IN OUT NUMBER)
+DROP PROCEDURE get_all_npc(cursorParam OUT SYS_REFCURSOR)
+/
+---------------------------------------------------------------------
+--RUN UP TO THIS POINT TO WIPE THE DATABASE CLEAN OF THESE EXAMPLES--
+---------------------------------------------------------------------
 
 CREATE TABLE job_class (
-    job_id number(6) PRIMARY KEY,
-    job_name varchar2(100) NOT NULL
+    job_id NUMBER(6) PRIMARY KEY,
+    job_name VARCHAR2(100) NOT NULL
 );
 
 CREATE TABLE npc (
-    npc_id number(6) primary key,
-    npc_name varchar(100),
-    npc_lvl number(3) DEFAULT 3,
-    currency number(6) NOT NULL,
-    job_id number(6) NOT NULL CHECK (job_id > 0),
+    npc_id NUMBER(6) PRIMARY KEY,
+    npc_name VARCHAR(100),
+    npc_lvl NUMBER(3) DEFAULT 3,
+    currency NUMBER(6) NOT NULL,
+    job_id NUMBER(6) NOT NULL CHECK (job_id > 0),
     CONSTRAINT fk_job_id FOREIGN KEY (job_id) REFERENCES job_class (job_id)
     ,CONSTRAINT unique_name UNIQUE (npc_name)
 );
@@ -24,30 +48,30 @@ CREATE TABLE npc (
 CREATE TABLE shop (
     shop_id NUMBER(6),
     shop_name VARCHAR2(100) NOT NULL,
-    owner_id number(6) NOT NULL,
-    CONSTRAINT pk_shop_id PRIMARY KEY (shop_id), --adds shop_id as a primary key
+    owner_id NUMBER(6) NOT NULL,
+    CONSTRAINT pk_shop_id PRIMARY KEY (shop_id), --adds shop_id as a PRIMARY KEY
     CONSTRAINT fk_owner_id FOREIGN KEY (owner_id) 
         REFERENCES npc (npc_id)
 );
 
 CREATE TABLE item (
-    item_id number(6) primary key,
-    item_name varchar(100) NOT NULL,
-    item_price number(6) NOT NULL
+    item_id NUMBER(6) PRIMARY KEY,
+    item_name VARCHAR(100) NOT NULL,
+    item_price NUMBER(6) NOT NULL
 );
 
 CREATE TABLE shop_2_item(
-    shop_id number(6),
-    item_id number(6),
+    shop_id NUMBER(6),
+    item_id NUMBER(6),
     CONSTRAINT fk_shop_id FOREIGN KEY (shop_id) REFERENCES shop (shop_id),
     CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES item (item_id)
 );
 
 CREATE TABLE users(
-    npc_id number(6) primary key,
-    username varchar2(100) unique,
-    password varchar2(100),
-    constraint fk_npc_id foreign key (npc_id) REFERENCES npc(npc_id)
+    npc_id NUMBER(6) PRIMARY KEY,
+    username VARCHAR2(100) unique,
+    password VARCHAR2(100),
+    CONSTRAINT fk_npc_id FOREIGN KEY (npc_id) REFERENCES npc(npc_id)
 );
 
 
@@ -83,7 +107,6 @@ INSERT INTO shop_2_item VALUES (3,5);
 INSERT INTO shop_2_item VALUES (3,1);
 
 --PL SQL
-DROP SEQUENCE npc_seq;
 CREATE SEQUENCE npc_seq
     START WITH 100
     INCREMENT BY 1;
@@ -142,7 +165,7 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE get_currency(npcID IN OUT number)
+CREATE OR REPLACE PROCEDURE get_currency(npcID IN OUT NUMBER)
 IS
 BEGIN
     SELECT currency INTO npcID FROM npc WHERE npc_id = npcID;
@@ -157,6 +180,4 @@ BEGIN
 END;
 /
 
-commit;
-
-select * from npc;
+COMMIT;

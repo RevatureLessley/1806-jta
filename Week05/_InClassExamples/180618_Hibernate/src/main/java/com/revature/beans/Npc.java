@@ -15,6 +15,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @NamedQueries({
 			@NamedQuery(name="getAllNpcs", query="FROM Npc"),
 			@NamedQuery(name="getNpc", query="FROM Npc WHERE id = :grapes")
@@ -36,6 +39,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="npc")
 public class Npc {
 	
 	@Id
