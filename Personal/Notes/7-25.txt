@@ -15,6 +15,7 @@ Functional Testing does actions/results/responses of application in reaction to 
 		--End to End Testing
 			---application from start to finish.
 			---does not cover all functionality, just a use case.
+		--Regression Testing performs past tests again after new functionality are introduced to ensure new features didn't break old ones. 
 
 	-BA/SA	
 		--User Acceptance Testing aims to see if direct requirements and user stories are met.
@@ -48,3 +49,63 @@ Positive Testing
 Negative Testing
 	-does applicaton handle erroneous input properly
 	-try to break application
+
+Test Automation
+	-automated scripts perform test cases
+	-should document passes/failures and proof like screenshots.
+
+Retesting repeats a test that detected a bug to ensure resolution.
+Sanity/Smoke Testing does the bare minimum of the application to see if the deployment was correct.
+
+Defects are anomolies that causes a test to fail.
+	-bugs are code errors that prevents anticipated results.
+	-errors
+		--explicit misunderstanding of the requirements.
+		--coded correctly but with the wrong functionality.
+
+Defect Lifecycle: found defect -> open defect -> assign to dev -> is defect?
+									No -> close defect
+									Yes -> fix defect ->r retest -> fixed?
+														No -> is defect?
+														Yes -> close defect
+Software Testing Lifecycle
+	-Requirements: gather all requirements and user stories to test around
+	-Test Deign: create tests
+	-Test Execution
+	-Test Closure: document/summarize results
+
+Cyclematic Complexity
+	-score based on application complexity.
+	-aim to at least to have unit tests in the score
+	-score=nodes-edges+2
+	-score should be less than 10
+
+Testing Beauracratics
+	-Entry Criteria: all necessary documentation and environment setups finished to begin phase.
+	-Exit Criteria: necessary conditions to officially complete a phase.
+
+Test Strategy Document 
+	-details how the team tackles non/functional tests.
+	-details entry/exit criteria.
+	-overall testing document.
+
+Test Plan Document
+	-details how the team will test the current project.
+	-minumum number of tests
+	-specific entry/exit criterias.
+
+Test Case Document
+	-outlines all tests and their steps.
+		--each step has expected/actual results.
+		--some require a verification point (VP)
+			---screenshots
+			---test/suite name
+
+Requirements Traceabililty Matrix (RTM) that maps every single requirement/story to its related test case and shows whether it passed or failed.
+
+Selenium is a test automation framework
+	-Selenium IDE: a browser IDE for generating scripts through mouse/key recordings.
+	-Selenium RC: remote control that allows for remote connections that allows scripts to be run from other machines.
+	-Selenium Web Driver: a driver for automating a browser
+	-Selenium Grid: allows for scripts to run concurrently on different browsers, good for compatability testing.
+	-RC + Web Driver -> Selenium2 -> Selenium3 -> Selenium4
