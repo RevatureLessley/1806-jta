@@ -1,0 +1,50 @@
+guru99
+
+Functional Testing does actions/results/responses of application in reaction to input/interaction.
+	-Developer
+		--Unit Test
+			---most micro level of testing.
+			---aims to test indiviual methods.
+
+		--Integration Testing
+			---aims to test components.
+			---multiple methods that rely on each other.
+
+	-Devloper and Tester
+		--System Testing does entire application as a whole.
+		--End to End Testing
+			---application from start to finish.
+			---does not cover all functionality, just a use case.
+
+	-BA/SA	
+		--User Acceptance Testing aims to see if direct requirements and user stories are met.
+		--2 levels:
+			---Alpha Testing is done in house using people on staff, not the actual developers/testers.
+			---Beta Testing is done offsite, typically by end users or a pool of non-tech people.
+
+	-Exhaustive Testing does every single aspect of the application.
+	-Boundary Testing does min, max, before min, after max.
+	-Black Box Testing does not have access to application code.
+		--UAT, E2E, Usability
+	-White Box Testing is based around the application code.
+		--Unit, Integration, System
+	-Equivalence Partitioning sections off test range.
+
+Non-Functional Testing 
+	-does application states and vulnerabilities as well as subjective use.
+	-benchmarks
+	-Penetration Testing
+	-Usability Testing
+	-Performance Testing
+		--Spike Testing
+		--Ramp Up/Down Testing
+		--Load Testing
+		--Stress Testing does passed expected user count
+
+Positive Testing
+	-when inputing proper actions, receive expected results
+	-the happy path
+
+Negative Testing
+	-does applicaton handle erroneous input properly
+	-try to break application
