@@ -2,10 +2,19 @@ package com.revature.testng;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.File;
+import java.io.FileInputStream;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.revature.pages.MercuryFlightFinder;
@@ -60,5 +69,54 @@ public class NewAndImprovedMecuryDriver {
 		Thread.sleep(1000);
 		findFlights.submitData();
 		assertEquals(driver.getTitle(), "Select a Flight: Mercury Tours");
+	}
+	
+	@Test(dependsOnMethods={"findFlights"}, dataProvider="mercData")
+	public void doEverything(String username,
+			String password,
+			double tripType,
+			double classType){
+		driver.findElement(By.xpath("//a[text()='Home']")).click();
+		
+		assertEquals(driver.getTitle(), "Welcome: Mercury Tours");
+		MercuryLogin mc = new MercuryLogin(driver);
+		mc.loginToMercury(username, password);
+		assertEquals(driver.getTitle(), "Find a Flight: Mercury Tours:");
+		MercuryFlightFinder mff = new MercuryFlightFinder(driver);
+		mff.selectClassType((int)classType);
+		mff.selectTripType((int)tripType);
+		mff.submitData();
+		assertEquals(driver.getTitle(), "Select a Flight: Mercury Tours");
+		
+	}
+	
+	
+	@DataProvider(name="mercData")
+	public Object[][] provideAccountDetailsDynamic() throws Exception{
+		Object[][] data = null;
+		File file = new File("src/test/resources/mercuryData.xlsx");
+		FileInputStream fis = new FileInputStream(file);
+		
+		try(Workbook workbook = new XSSFWorkbook(fis)){
+			Sheet sheet = workbook.getSheet("Sheet1");
+			int rowcount = sheet.getLastRowNum();
+			data = new Object[rowcount][4];
+			
+			for(int i = 1; i <= rowcount; i++){
+				Row row = sheet.getRow(i);
+				data[i-1] = new Object[]{
+						row.getCell(0).getStringCellValue(),
+						row.getCell(1).getStringCellValue(),
+						row.getCell(2).getNumericCellValue(),
+						row.getCell(3).getNumericCellValue()
+				};
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return data;
 	}
 }
