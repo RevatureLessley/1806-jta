@@ -1,0 +1,15 @@
+Implicit waits are default. Explicit waits are for specific time points and are executed once.
+
+findElement finds an element on the page. It takes By which represents the element selector. Selenium offers several selectors:
+	-Name
+	-Id
+	-LinkText
+	-PartialLinkText
+	-TagName
+	-ClassName
+	-Xpath
+	-CssSelector
+
+Explicit wait polls the availability of an element every 500 ms. fluentWait customizes the polling.
+
+sriver.getWindowHandles() gets unique ids for all open tabs.
