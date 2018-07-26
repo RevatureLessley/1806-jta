@@ -27,3 +27,5 @@ Data Driven Framework
 Keyword Driven Framework actions script performs determined by a data source
 
 Hybrid Framework combines Data with Keyword Driven.
+
+Exploratory Testing performs without any requirements.
