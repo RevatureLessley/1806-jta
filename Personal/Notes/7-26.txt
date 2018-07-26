@@ -13,3 +13,9 @@ findElement finds an element on the page. It takes By which represents the eleme
 Explicit wait polls the availability of an element every 500 ms. fluentWait customizes the polling.
 
 sriver.getWindowHandles() gets unique ids for all open tabs.
+
+Page Object Model is a design pattern that creates a class representing all possible pages for an application. Page elements are references through its class. Every interactive we element is a variable, transforming it into an Object Repository.
+
+PageFactory aids in implementing Page Object Model. It injetcs proper instances of web elements upon instantiation of a class.
+
+One way to order test execution is  to use the priority attribute of the annotation. Another way is to employ dependencies between tests. Proporitized test failures will still run other tests. Dependant tests will atumatically fail.
