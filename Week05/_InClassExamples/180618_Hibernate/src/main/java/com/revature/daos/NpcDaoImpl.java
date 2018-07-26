@@ -155,13 +155,13 @@ public class NpcDaoImpl {
 		
 		try {
 			tx = session.beginTransaction();
-			
-			npc= (Npc)session.get(Npc.class, id);
+
+			npc = (Npc)session.get(Npc.class, id);
 			
 			tx.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			if(tx!=null) {
+			if(tx!=null){
 				tx.rollback();
 			}
 		}finally {

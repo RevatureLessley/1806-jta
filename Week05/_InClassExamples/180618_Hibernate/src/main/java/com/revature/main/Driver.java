@@ -45,8 +45,8 @@ public class Driver {
 		
 		System.out.println("=====L2 CACHE=====");
 		
-		System.out.println(ndi.selectNpc(3).getName());
-		System.out.println(ndi.selectNpc(3).getName());
+		System.out.println(ndi.selectNpc(5).getName());
+		System.out.println(ndi.selectNpc(5).getName());
 		
 		System.out.println("=====Terminating App=====");
 		System.exit(0);
