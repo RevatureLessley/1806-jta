@@ -13,17 +13,6 @@ import cucumber.api.java.en.When;
 
 public class MercuryLoginGlue {
 	public static MercuryLogin lp;
-<<<<<<< HEAD
-
-	@Given("^a user is at the login screen for mercury tours\\.$")
-	public void a_user_is_at_the_login_screen_for_mercury_tours() throws Throwable {
-		assertEquals("Welcome: Mercury Tours", driver.getTitle());
-	}
-	
-	@When("^a user shall input a username and a password and click submit\\.$")
-	public void a_user_shall_input_a_username_and_a_password_and_click_submit(DataTable data) throws Throwable {
-		Keywords.preformAction(driver, data);
-=======
 	
 	@Given("^a user is at the login screen for mercury tours\\.$")
 	public void a_user_is_at_the_login_screen_for_mercury_tours() throws Throwable {
@@ -33,15 +22,10 @@ public class MercuryLoginGlue {
 	@When("^a user shall input a username and a password and click submit\\.$")
 	public void a_user_shall_input_a_username_and_a_password_and_click_submit(DataTable data) throws Throwable {
 	    Keywords.performAction(driver, data);
->>>>>>> 748d8c1495f57f0f0c20192f003183437416677c
 	}
 
 	@Then("^a user shall be redirected to the find flights page\\.$")
 	public void a_user_shall_be_redirected_to_the_find_flights_page() throws Throwable {
-<<<<<<< HEAD
-		assertEquals("Find a Flight: Mercury Tours:", driver.getTitle());
-=======
 	    assertEquals("Find a Flight: Mercury Tours:", driver.getTitle());
->>>>>>> 748d8c1495f57f0f0c20192f003183437416677c
 	}
 }
