@@ -31,7 +31,7 @@ public class NewTest {
   public void f() {
 	  System.out.println("TESTf");
   }
-  @Test
+  @Test(enabled = false) //SKIP A TEST
   public void g() {
 	  System.out.println("TESTg");
   }

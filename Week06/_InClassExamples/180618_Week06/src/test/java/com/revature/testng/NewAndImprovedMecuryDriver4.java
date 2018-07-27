@@ -20,20 +20,20 @@ import org.testng.annotations.Test;
 import com.revature.pages.MercuryFlightFinder;
 import com.revature.pages.MercuryLogin;
 
-public class NewAndImprovedMecuryDriver {
+public class NewAndImprovedMecuryDriver4 {
 	public static WebDriver driver;
 	public final String url = "http://newtours.demoaut.com/";
 	public MercuryLogin loginPage;
 	public MercuryFlightFinder findFlights;
 	
-	@BeforeTest(groups={"setup"})
+	@BeforeTest
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(url);
 	}
 
-	@AfterTest(groups={"teardown"})
+	@AfterTest
 	public void tearDown() throws InterruptedException {
 		Thread.sleep(2500);
 		driver.quit();
@@ -46,13 +46,13 @@ public class NewAndImprovedMecuryDriver {
 	 * dependencies, test2 automatically fails if test1 fails.
 	 */
 	
-	@Test(groups={"everything", "firstTest"})
+	@Test
 	public void confirmHomePage(){
 		assertEquals(driver.getTitle(), "Welcome: Mercury Tours");
 	}
 	
 	//@Test(priority = 1)
-	@Test (dependsOnMethods = {"confirmHomePage"},groups={"everything", "firstTest"})
+	@Test (dependsOnMethods = {"confirmHomePage"})
 	public void logInToMercury() {
 		loginPage = new MercuryLogin(driver);
 		loginPage.loginToMercury("bobbert", "bobbert");
@@ -60,7 +60,7 @@ public class NewAndImprovedMecuryDriver {
 	}
 	
 	//@Test(priority = 2)
-	@Test(dependsOnMethods = {"logInToMercury"},groups={"everything", "firstTest"})
+	@Test(dependsOnMethods = {"logInToMercury"})
 	public void findFlights() throws InterruptedException{
 		findFlights = new MercuryFlightFinder(driver);
 		findFlights.selectOneWay();
@@ -71,7 +71,7 @@ public class NewAndImprovedMecuryDriver {
 		assertEquals(driver.getTitle(), "Select a Flight: Mercury Tours");
 	}
 	
-	@Test(dependsOnMethods={"findFlights"}, dataProvider="mercData",groups={"everything"})
+	@Test(dependsOnMethods={"findFlights"}, dataProvider="mercData")
 	public void doEverything(String username,
 			String password,
 			double tripType,
