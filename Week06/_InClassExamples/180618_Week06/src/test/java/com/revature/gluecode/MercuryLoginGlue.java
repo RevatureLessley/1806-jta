@@ -3,9 +3,10 @@ package com.revature.gluecode;
 import static com.revature.gluecode.MercuryDriverUtility.driver;
 import static org.junit.Assert.assertEquals;
 
+import com.revature.keywordframework.Keywords;
 import com.revature.pages.MercuryLogin;
 
-import cucumber.api.PendingException;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,10 +19,9 @@ public class MercuryLoginGlue {
 	    assertEquals("Welcome: Mercury Tours", driver.getTitle());
 	}
 
-	@When("^a user shall input a \"([^\"]*)\" and a \"([^\"]*)\" and click submit\\.$")
-	public void a_user_shall_input_a_and_a_and_click_submit(String username, String password) throws Throwable {
-	    lp = new MercuryLogin(driver);
-	    lp.loginToMercury(username, password);
+	@When("^a user shall input a username and a password and click submit\\.$")
+	public void a_user_shall_input_a_username_and_a_password_and_click_submit(DataTable data) throws Throwable {
+	    Keywords.performAction(driver, data);
 	}
 
 	@Then("^a user shall be redirected to the find flights page\\.$")
