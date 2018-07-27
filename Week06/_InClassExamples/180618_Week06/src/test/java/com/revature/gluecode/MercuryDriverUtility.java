@@ -20,7 +20,7 @@ public class MercuryDriverUtility {
 	}
 	
 	@After
-	public void teardown(){
+	public void teardown() throws InterruptedException{
 		if(driver!=null){
 			driver.quit();
 		}
