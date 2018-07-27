@@ -1,0 +1,12 @@
+--base-href=/appName/
+
+Angular app.module.ts
+providers:[{provide: APP_BASE_HREF, useValue:'appName'}]
+
+dist/Appname
+
+import APP_BASE_HREF from @angular/common
+
+output path application.json
+
+@Test(enabled=false) skips a test.
