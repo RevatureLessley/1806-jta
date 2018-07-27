@@ -28,4 +28,18 @@ Cucumber
 
 Feature is the first keyword of a feature file. Scenarios designates tests. 
 
-Test runners setup Cucumber suites. CucumberOptions sets up specific details. feature point to each feature file, glue points to stop implementations. All glue code files will be run.
+Test runners setup Cucumber suites. CucumberOptions sets up specific details. feature point to each feature file, glue points to stop implementations. All glue code files will be run. Whitespace doesn't matter in examples tables. These tables need Scenario Outline, gicing is Data Driven Frameworks.
+
+Keywords
+	-And splits a given statement into two versions
+	-But splits a given statement into two versions
+		--difference is human interpretation
+	-Background replaces Scenario for creating a test
+		-runs once for each scenario, acts like a setup.
+
+@ applies a customtag to ay element in a feature file, equivalent to groups of testNG.
+
+Choosing tags in Cucumber options
+	Excluding tags: tag={"~@tagname"}
+	All tags: tags={"@tag1", "@tag2"}
+	Either tag: tags={"@tag1, @tag2"}
