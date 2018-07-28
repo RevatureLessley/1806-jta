@@ -31,6 +31,9 @@ public class MercuryLogin {
 	public void inputUsername(String username){
 		driver.findElement(this.username).sendKeys(username);
 	}
+	public String getUsername(){
+		return driver.findElement(this.username).getText();
+	}
 	public void inputPassword(String password){
 		driver.findElement(this.password).sendKeys(password);
 	}

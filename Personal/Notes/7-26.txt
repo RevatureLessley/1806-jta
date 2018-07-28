@@ -1,0 +1,31 @@
+Implicit waits are default. Explicit waits are for specific time points and are executed once.
+
+findElement finds an element on the page. It takes By which represents the element selector. Selenium offers several selectors:
+	-Name
+	-Id
+	-LinkText
+	-PartialLinkText
+	-TagName
+	-ClassName
+	-Xpath
+	-CssSelector
+
+Explicit wait polls the availability of an element every 500 ms. fluentWait customizes the polling.
+
+sriver.getWindowHandles() gets unique ids for all open tabs.
+
+Page Object Model is a design pattern that creates a class representing all possible pages for an application. Page elements are references through its class. Every interactive we element is a variable, transforming it into an Object Repository.
+
+PageFactory aids in implementing Page Object Model. It injetcs proper instances of web elements upon instantiation of a class.
+
+One way to order test execution is  to use the priority attribute of the annotation. Another way is to employ dependencies between tests. Proporitized test failures will still run other tests. Dependant tests will atumatically fail.
+
+Data Driven Framework
+	-scripts built to be configured to run with different data
+	-scripts can take multiple rows of data and is repeated for the amount given.
+
+Keyword Driven Framework actions script performs determined by a data source
+
+Hybrid Framework combines Data with Keyword Driven.
+
+Exploratory Testing performs without any requirements.
