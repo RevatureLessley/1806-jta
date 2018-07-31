@@ -1,0 +1,9 @@
+First_Last_V1
+-------------
+Job Title: Software Development Engineer In Test
+Industry Equivalencies
+Required: Java, SQL, an Automation Framework
+About Me: 
+	-2 to 4 sentences starting.
+	-do not say name
+	-use bullet point formatter to add at least 13 bullet points summarizing expertise.
