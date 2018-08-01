@@ -1,0 +1,56 @@
+Webservices
+	-a piece of software that makes itself available over the web and uses standardized XML messaging systems.
+	-self-contained, modular, distributed, dynamic application that can be described, published, located, invoked over a network to create products, processes, supply chains.
+	-serice available over the internet.
+	-uses XML messaging systems.
+	-not tied to an OS so its platform independent.
+	-self-describing and discoverable.
+
+Service Oriented Architecture (SOA)
+	-a design pattern so that independent services are provided application components through a network protocol.
+	-basic principles are independent of applications and can be accessed remotely.
+	-logically represents a business activity or outcome.
+	-self-contained black box
+
+Webservice Goals
+	-have a unit of work exposed over a network for other applications to use
+	-achieve interoperability, allow apps to communicate indepedent of environment.
+	-standarized protocols, typically HTTP since its cheap, easy, fast
+
+AppA <--> WebService <--> AppB
+
+Webservice Protocol Stack
+	-Service Transport
+		--transports messages between applications
+		--HTTP, SMTP, FTP
+	-XML Messaging, encodes data
+	-Service Description
+		--describes provided services
+		--usually done via a WSDL
+	-Service Discovery
+
+REST
+	-REpresentational State Transfer
+	-every component is a resource via URI/URL
+	-resources should be accessible via HTTP
+	-resources typically represented by a media type
+		--text
+		--JSON
+		--XML
+	-cacheable and stateless
+
+Safety means the database contains the same data. Idempotent means the database is in the same state. Safety implies idempotency.
+
+		Safe	Idempotent
+GET		Yes	Yes
+POST		No	No
+PUT		No	Yes
+DELETE		No	Yes
+OPTIONS		Yes	Yes
+HEAD		Yes	Yes
+TRACE		Yes	Yes
+PATCH		No	No
+
+A BOM is a bundling of like dependencies that allows you to specify a consistent version to use for each one. Typically, we indicate which version to use then label dependencies while omitting the version number.
+
+@Path denotes what URL will be used to access a class's REST methods. It typically includes the IP and port for the server. Afterwards you provide the project name in artifactID of the POM file or <build><finalName>Project Name</finalName></build>, folloed by the URL pattern in the web.xml under the dipatcher servlet. Conventions distcates something to separate rest endpoints from actual server URLs.
