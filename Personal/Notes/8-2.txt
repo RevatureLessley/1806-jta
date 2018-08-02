@@ -35,4 +35,25 @@ SOAP Message
 			<fault> --exception handling and holds error information
 			</fault>
 		</body>
-	</envelope>	
+	</envelope>
+
+Jax-ws is the API for SOAP  web services. REST uses Jax-rs.
+Apache Crossfire (cxf) is a SOAP framework whereas Jersey is a REST framework.
+
+SOAP vs REST
+	-SOAP
+		--more overhead due to heavy configuration and provided features
+		--more secure, offering WS-Security.
+		--HTTP and SMTP protocols
+		--restricted to XML encoding.
+	-REST
+		--less overhead but all features must be manually implemented.
+		--programmer implements security.
+		--HTTP only
+		--encodable with text, JSON, XML, etc...
+
+Testing Webservices
+	-REST
+		--Postman
+		--RestAssured
+	-SOAP tested by SOAP_UI, can also test REST but all features not free
