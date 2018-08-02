@@ -1,0 +1,38 @@
+SOAP -Simple Object Access Protocol
+     -communication protocol between applications
+     -format for sending messages
+     -platform and langauge indepedent
+     -capable of bypassing firewalls.
+
+WSDL -Web Service Description Language
+     -Ruleset for soap.
+     -Details what data can be exchanged and what methods are discoverable.
+     -<definition>
+	<types> --data types used in WSDL
+	</types>
+	<message> --stores details about the response
+	</message>
+	<portType> --describes what operations can be invoked
+	<portType>
+	<binding> --describes data and format for each portType
+	</binding>
+	<service> --describes which ports are supported
+		<port> --a specific port
+		</port>
+	</service>
+      </definition>
+
+Contract First SOAP writes WSDL then generate Java methods. Contract Last SOAP writes Java then generate WSDL.
+
+SOAP Message
+	-XML encoded data.
+	-all data sent and received is done through a SOAP message.
+	-the container passed back and forth.
+	-<envelope> --root tag
+		<header> --key/value meta-data
+		</header>
+		<body> --specific data send back/forth
+			<fault> --exception handling and holds error information
+			</fault>
+		</body>
+	</envelope>	
