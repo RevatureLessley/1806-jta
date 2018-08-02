@@ -13,7 +13,7 @@ Feature: Mercury Tours Login
 		|login		|					|click	|
 		|fromPort	|Frankfurt|weblist|
 		|toMonth	|11				|weblist|
-
+		And a user inputs a password and click submit
 		Then a user shall be redirected to the find flights page. 
 		
 	#Examples table must be formatted like below. whitespace doesn't matter
@@ -24,3 +24,9 @@ Feature: Mercury Tours Login
 #	|goodbye	|hello	  |
 	#Example tables provide us the opportunity for data driven frameworks.
 	#The test will rerun for each record of data.
+
+	#OTHER KEYWORDS WORTH NOTING
+	#AND split a given statement into two versions of it.
+	#BUT split a given statement into two versions of it.
+	#Functionally, these two aren't different, the difference lies within
+	#the interpretation of the gherkin.
