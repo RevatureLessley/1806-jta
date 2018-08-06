@@ -1,0 +1,21 @@
+TrackForce
+-tracks associates in staging and when placed.
+-need to know:
+	--track: JTA/Java/.NET
+	--company
+	--data on all clients like number of associates mapped
+-per associate:
+	--opens new interview.
+	--provide confirmation of 24 hour notice. (marketer may create interview)
+	--marketing should provide interview details for associates.
+-roles:
+	--admin
+	--staging
+	--marketing
+	--associate
+		---start date
+		---interview topics/goals
+		---company name
+		---post interview associate writes how interview went
+			----how well they did
+			----what questions were asked
