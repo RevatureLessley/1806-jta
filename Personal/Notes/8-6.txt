@@ -19,3 +19,21 @@ TrackForce
 		---post interview associate writes how interview went
 			----how well they did
 			----what questions were asked
+
+Karma.js
+--------
+-Testrunner tool developed by AngularJS for running unit tests on Angular applications.
+-Has extra selectors for hitting Angular directives and waiting for proper injections.
+-Launches a server that builds and tests each component as a stand-alone entity.
+
+Jasmine
+-------
+-Writes unit test for Angular applications.
+-BDD tool
+
+Protractor
+----------
+-Builds end-to-end tests for Angular using Selenium under the hood with functionality for executing Angular applications
+
+Describe determines a test suite. FormsModule tests individual components' ngModule binding. CUSTOM-ELEMENTS_SCHEMA avoids errors in the custom tags of HTML. it() is our test method. tick() waits for promises to be resolved. Chrome comes with a headless option.
+-Hits application directly.
