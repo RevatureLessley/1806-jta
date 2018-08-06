@@ -25,7 +25,29 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false
+    /*
+      Should you want to run your tests as headless, you would need
+      to configure a cusotm browser.
+      Chrome, as it were, coems with a headless browser option,
+      how convenient.
+      To configure such a set goes as follows:
+    */
+   customLauncher: {
+     ChromeHeadless: {
+       base: 'Chrome',
+       flags: [
+         '--headless--',
+         '--disable-gpu',
+          '--no-sandbox',
+          '--remote-debugging-port-9222'
+       ]
+     }
+   },
+   //USE BELOW CONFIG FOR NORMAL TESTING WIHT BROWSERS OPENING
+   // browsers: ['Chrome'],
+   // singleRun: false
+   //USE BELOW CONFIG FOR HEADLESS TESTING
+   browsers: ['ChromeHeadless'],
+   singleRun: true
   });
 };
