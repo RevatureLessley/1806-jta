@@ -13,7 +13,7 @@
     <p style="color:darksalmon">What does the asterisk(*) entail in front of the ngIf? 
       (Asked Ryan's class unaminously)</p>
     <input type="button" (click)="toggleAnswer()" [value]="buttonValue">
-    <p *ngIf="visible;else someTemplate">
+    <p id=hiddenAnswer *ngIf="visible;else someTemplate">
       <span style="color:crimson">Ryan:</span>Any directive that has an asterisk(*) 
       means that it is a structural directive. This means the directive is capable 
       of changing the actual structure of the HTML itself. IE, it can add/remove elements
