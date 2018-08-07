@@ -1,0 +1,15 @@
+GitHub
+	-master (never touch)
+		--dev1806
+			---servlet
+				----feature1
+				----feature2
+			---backend
+
+Jasmine - afterAll, beforeAll, afterEach, beforeEach  
+
+Protractor
+----------
+Made for Angular using Selenium.
+
+A po file is a page object file. It provides a repository of all needed objects and elements for testing.
