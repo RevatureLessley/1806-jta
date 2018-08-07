@@ -47,3 +47,39 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Bobbert\'s Exciting application PART 2');
   }));
 });
+/*
+  Your embedded jasmine cheat sheet!
+===================================================
+  Various matchers:
+
+    expect(array).toContain(member);
+    expect(fn).toThrow(string);
+    expect(fn).toThrowError(string);
+    expect(instance).toBe(instance);
+    expect(mixed).toBeDefined();
+    expect(mixed).toBeFalsy();
+    expect(mixed).toBeNull();
+    expect(mixed).toBeTruthy();
+    expect(mixed).toBeUndefined();
+    expect(mixed).toEqual(mixed);
+    expect(mixed).toMatch(pattern);
+    expect(number).toBeCloseTo(number, decimalPlaces);
+    expect(number).toBeGreaterThan(number);
+    expect(number).toBeLessThan(number);
+    expect(number).toBeNaN();
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(number);
+    expect(spy).toHaveBeenCalledWith(...arguments);
+===================================================
+
+  Different setup and teardown options:
+
+      -called once before all the ‘it’ methods are called
+    beforeAll
+    afterAll
+        -called once for each ‘it’ method.
+    beforeEach
+    afterEach
+
+
+*/
