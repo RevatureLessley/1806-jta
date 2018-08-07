@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InterpolationComponent } from './interpolation.component';
@@ -8,6 +9,7 @@ describe('InterpolationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [ InterpolationComponent ]
     })
     .compileComponents();

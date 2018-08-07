@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PokeapiComponent } from './pokeapi.component';
@@ -8,6 +10,7 @@ describe('PokeapiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [FormsModule, HttpClientModule],
       declarations: [ PokeapiComponent ]
     })
     .compileComponents();
